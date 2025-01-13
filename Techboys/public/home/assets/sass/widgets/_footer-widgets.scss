@@ -1,0 +1,157 @@
+.footer-widgets {
+	@include clearfix;
+	display: flex;
+	justify-content: space-between;
+	flex-wrap: wrap;
+
+	.widget {
+		.widget-title, .widgettitle {
+			text-transform: uppercase;
+			font-size: 1em;
+			line-height: 1.533em;
+			letter-spacing: -0.025em;
+			margin-bottom: 1.267em;
+		}
+
+		div > ul li,
+		> ul li {
+			margin: 0;
+			line-height: 2.267em;
+		}
+	}
+
+	// .columns:first-child .widget-title + ul,
+	// .columns:first-child .widgettitle + ul {
+	// 	-webkit-column-count: 2;
+	// 	-moz-column-count: 2;
+	// 	column-count: 2;
+	// }
+
+	// .widget-title + ul li,
+	// .widget-title + div ul li,
+	// .widgettitle + ul li {
+	// 	margin: 0;
+	// 	line-height: 2.267em;
+	// }
+
+	.columns:last-child {
+		border-left: 1px solid #bebebe;
+
+		.widget {
+			margin-left: 1.869em;
+		}
+	}
+
+	.columns {
+		@include media-breakpoint-up(md) {
+			@include make-col-ready;
+			@include make-col(2.8);
+		}
+	}
+
+	.widget_rss {
+		font-weight: 300;
+
+		li {
+			.rssSummary {
+				font-size: 14px;
+    			line-height: 22px;
+			}
+		}
+	}
+}
+
+.footer-widgets-block {
+	.widget_nav_menu,
+	.widget {
+		ul {
+			li {
+				padding: 0;
+
+				&::before {
+					display: none;
+				}
+
+				ul {
+					margin-left: 0;
+				}
+			}
+		}
+	}
+
+	.widget_archive ul li,
+	.widget_links ul li,
+	.widget_nav_menu ul li,
+	.widget_pages ul li,
+	.widget_recent_comments ul li,
+	.widget_recent_entries ul li,
+	.widget_meta ul li,
+	.widget_recent_comments ul li,
+	.widget_categories ul li {
+		color: #555353;
+		margin-bottom: 0;
+
+		a {
+			color: #626060;
+			font-weight: 400;
+			margin-bottom: 0;
+			display: inline-block;
+
+			&:hover {
+				color: #484747;
+			}
+		}
+	}
+
+	.widget_layered_nav, .widget_categories {
+
+		li {
+			border-bottom: 1px solid #ececec;
+
+			> a {
+				position: relative;
+				margin-left: 2.7em;
+
+
+				&:before {
+					font-size: 0.6em;
+					margin-left: -2.5em;
+					position: absolute;
+					font-family: "techmarket-icons" !important;
+					content: "\6e";
+				}
+			}
+
+			&:last-child {
+				border-bottom: none;
+			}
+		}
+	}
+
+	.widget_categories li > a {
+		margin-left: 1.35em;
+	}
+
+	.widget_tag_cloud {
+		.tagcloud {
+			a {
+				background: transparent;
+				border-color: #e4e5e7;
+				border-style: solid;
+				border-width: 1px;
+				color: #565656;
+				display: inline-block;
+				font-size: 1.000em !important;
+				line-height: 1;
+				margin: 0 0.457em 0.731em 0;
+				padding: 0.823em 0.788em;
+
+				&:hover,
+				&:focus {
+					text-decoration: none;
+					color: #fff;
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,44 @@
+/**
+ * Header Elements
+ */
+.woocommerce-active {
+	.site-header {
+		.col-full {
+			position: relative;
+		}
+	}
+}
+
+.site-header-cart {
+	.widget_shopping_cart_content {
+		.product_list_widget {
+			img {
+				margin-left: 1em;
+			}
+		}
+	}
+}
+
+.site-search {
+	font-size: ms(-1);
+	clear: both;
+
+	.widget_product_search {
+		input[type=text],
+		input[type=search] {
+			padding: ms(2) ms(3);
+			line-height: 1;
+		}
+
+		form {
+			&:before {
+				top: ms(2);
+				left: ms(3);
+			}
+		}
+
+		#searchsubmit {
+			@include screen-reader-text();
+		}
+	}
+}

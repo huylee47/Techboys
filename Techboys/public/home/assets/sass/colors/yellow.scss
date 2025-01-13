@@ -1,0 +1,13 @@
+/*===================================================================================*/
+/*  Yellow Color
+/*===================================================================================*/
+
+@import '../bs-variables';
+@import '../variables';
+@import '../mixins';
+
+$primary-color: #ffd40e;
+$primary-text-color: #3a3a3a;
+
+@import 'color';
+@import 'dark';

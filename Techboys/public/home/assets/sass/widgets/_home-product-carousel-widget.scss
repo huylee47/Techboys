@@ -1,0 +1,83 @@
+.widget_techmarket_products_carousel_widget {
+	.products {
+		.product {
+			@include media-breakpoint-up(md) {
+				border: none;
+			}
+
+			.woocommerce-LoopProduct-link {
+				text-decoration: none;
+			}
+
+			.price {
+				padding-top: 0.3em;
+				font-size: 1.333em;
+				line-height: 1.5em;
+				letter-spacing: -0.01em;
+
+				del {
+					color: #b8b8b8;
+					font-size: 0.875em;
+				}
+			}
+
+			h3,
+			h2.woocommerce-loop-product__title {
+				font-size: 1.143em;
+				line-height: 1.5em;
+				font-weight: 400;
+				color: #626060;
+				letter-spacing: -0.01em;
+			}
+
+			.hover-area,
+			.onsale,
+			.add_to_wishlist {
+				display: none;
+			}
+
+			&:hover {
+				border: none;
+			}
+		}
+
+		.landscape-product-widget {
+			padding: 1.224em 0.408em;
+
+			.media {
+				img {
+					margin-right: 1.250em;
+				}
+				.price {
+					font-size: 1.225em;
+					margin-bottom: 0.333em;
+
+					del {
+						font-size: .9em;
+					}
+				}
+
+				h3 {
+					font-size: 1.143em;
+				}
+
+				.techmarket-product-rating,
+				.star-rating {
+					display: none;
+				}
+			}
+		}
+	}
+
+	.slick-slide > div + div {
+		border-top: 1px solid #ebebeb;
+	}
+
+	.product > div + div {
+		border: none;
+	}
+
+	.slick-slide > div:first-child  .landscape-product-widget:first-child {
+		padding-top:0px;
+	}
+}

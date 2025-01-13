@@ -1,0 +1,79 @@
+button,
+.button,
+button:hover,
+.button:hover,
+.btn-primary,
+input[type=submit],
+input[type=submit]:hover,
+.btn-primary:hover,
+.return-to-shop .button,
+.return-to-shop .button:hover,
+.top-bar.top-bar-v4 a,
+.fullwidth-notice .message,
+#payment .place-order .button,
+.cart-collaterals .checkout-button,
+.banners-v2 .banner-action.button,
+.header-v1 .departments-menu button,
+.section-media-single-banner .button,
+.full-width-banner .banner-bg .button:focus,
+.full-width-banner .banner-bg .button:hover,
+.banners-v2.full-width-banner .banner-bg .button,
+.site-header.header-v10 .navbar-primary .nav>li>a,
+.site-header.header-v10 .primary-navigation .nav>li>a,
+.top-bar.top-bar-v4 .nav-item+.nav-item .nav-link::before,
+.top-bar.top-bar-v4 .nav-item+.nav-item>a::before,
+.top-bar.top-bar-v4 .nav>.menu-item+.menu-item .nav-link::before,
+.top-bar.top-bar-v4 .nav>.menu-item+.menu-item>a::before,
+.site-header.header-v4 .navbar-nav .nav-link,
+.site-header.header-v4 .site-header-cart .cart-contents,
+.site-header.header-v4 .header-cart-icon,
+.site-header.header-v4 .departments-menu button i,
+.site-header.header-v5 .departments-menu button i,
+.site-header.header-v5 .navbar-primary .nav>li>a,
+.site-header.header-v5 .primary-navigation .nav>li>a,
+.section-products-tabs .section-products-tabs-wrap>.button:hover,
+.site-header.header-v4 .site-header-cart .cart-contents .amount .price-label,
+.home-v9-full-banner.full-width-banner .banner-bg .caption .banner-action.button:hover,
+.col-2-full-width-banner .banner .banner-bg .caption .banner-action.button:hover{
+    color: $primary-text-color;
+}
+
+.slider-sm-btn:hover,
+.slider-sm-btn {
+    color: $primary-text-color !important;
+}
+
+.top-bar.top-bar-v4 {
+    border-bottom-color: lighten( $primary-text-color, 25% );
+}
+
+.site-header.header-v4 .site-header-cart .cart-contents .count {
+    background-color: lighten( $primary-text-color, 55% );
+}
+
+.site-header.header-v4 .navbar-search button,
+.site-header.header-v5 .navbar-search button {
+    background-color: $primary-text-color;
+}
+
+.site-header.header-v4 .navbar-search button:hover,
+.site-header.header-v5 .navbar-search button:hover {
+    background-color: darken( $primary-text-color, 10% );
+}
+
+.site-header.header-v4 .departments-menu button i,
+.site-header.header-v5 .departments-menu button i {
+    text-shadow: $primary-text-color 0 1px 0;
+}
+
+.site-header.header-v4 .site-branding .cls-1,
+.site-header.header-v4 .site-branding .cls-2,
+.site-header.header-v5 .site-branding .cls-1,
+.site-header.header-v5 .site-branding .cls-2 {
+    fill:$primary-text-color;
+}
+
+.site-header.header-v4 .site-branding .cls-3,
+.site-header.header-v5 .site-branding .cls-3 {
+    fill:lighten( $primary-text-color, 55% );
+}

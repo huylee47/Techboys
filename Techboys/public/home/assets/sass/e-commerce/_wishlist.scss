@@ -1,0 +1,35 @@
+.yith-wcwl-add-to-wishlist {
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1;
+
+    .add_to_wishlist {
+    	text-indent: -99999px;
+    	display: block;
+
+    	&::before {
+            content: "\6b";
+    		font-family: 'techmarket-icons';
+            position: absolute;
+            top: 8px;
+            right: 14px;
+            text-indent: 0;
+            color: #444;
+            font-size: 1.429em;
+
+            @media (max-width: 1169px) {
+                left: 14px;
+                right: auto;
+            }
+    	}
+    }
+}
+
+.yith-wcwl-add-to-wishlist{
+    display: none;
+}
+
+
+

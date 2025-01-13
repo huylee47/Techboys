@@ -1,0 +1,189 @@
+.primary-navigation,
+.navbar-primary {
+    .nav {
+        margin-left: 0;
+        flex-wrap: wrap;
+        display: block;
+
+        > li {
+            line-height: 1.933em;
+            padding: 0 1.6em;
+            display: inline-block;
+
+            > a {
+                color: #444;
+                text-transform: uppercase;
+                font-weight: 500;
+                position: relative;
+
+                &::after {
+                    position: absolute;
+                    top: -5px;
+                    right: -16px;
+                }
+
+            }
+
+            &:first-child {
+                padding-left: 0;
+            }
+
+            &:last-child {
+                padding: 0;
+                //width: 30px;
+            }
+        }
+
+        .sale-clr a{
+            color: #e14546;
+        }
+
+        .dropdown-menu {
+            font-size: 0.933em;
+            border-radius: 0;
+            border-top-width: 2px;
+
+            .menu-item {
+                > a {
+                    display: block;
+                    width: 100%;
+                    clear: both;
+                    font-weight: 400;
+                    line-height: 1.5;
+                    color: #373a3c;
+                    text-align: inherit;
+                    white-space: nowrap;
+                    background: 0 0;
+                    border: 0;
+                    padding: .471em 1.229em;
+                }
+            }
+
+            .show>.dropdown-menu {
+                left: 100%;
+                top: 0;
+            }
+        }
+
+        .techmarket-flex-more-menu-item {
+            position: relative;
+
+            .overflow-items {
+                top: 40px;
+                left: 50%;
+                transform: translate(-50%, -0%);
+            }
+
+            li {
+                position: relative;
+            }
+
+            .show>.dropdown-menu {
+                left: auto;
+                right: 100%;
+            }
+
+            .yamm-fw>.dropdown-menu {
+                left: auto;
+                width: 700px;
+                top: 0;
+                right: 100%;
+                padding: 0;
+
+                @include media-breakpoint-up(xl) {
+        	        @include media-breakpoint-down(xl) {
+        	            //margin-left: -44vw;
+        	        }
+        	    }
+
+                @media (min-width: 1024px) and (max-width: 1110px) {
+        	        margin-left: -27.5vw;
+                    padding: 0 20px;
+        	    }
+            }
+
+            &::before {
+                content: " ";
+                margin: 0 .5em;
+            }
+
+            > a {
+                position: relative;
+                display: inline-block;
+                transform: rotate(-90deg);
+                font-size: 20px;
+                font-weight: 500;
+                line-height: 1;
+
+                &::after {
+                    color: #fff;
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    line-height: 1;
+                    margin: 0;
+                    right: auto;
+                    transform: translate(-50%, -50%);
+                    padding: 7.5px 10.18px;
+                    border-radius: 50px;
+                    display: none;
+                }
+            }
+        }
+
+        .menu-item-has-children {
+    		> .dropdown-menu{
+                top: 50px;
+            }
+
+            .menu-item-has-children {
+                > a {
+                    &::after {
+                        font-family: 'FontAwesome';
+                        border-top: none;
+                        content: "\f105" #{"/*rtl:\"\f104\"*/"};
+                        float: right;
+                        border-left: none;
+                        border-right: none;
+                        width: auto;
+                        height: auto;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.site-header.header-v5 {
+    .navbar-primary .nav>li>a,
+    .primary-navigation .nav>li>a {
+        color: #fff;
+    }
+
+    .navbar-primary .nav >.menu-item-has-children>.dropdown-menu,
+    .primary-navigation .nav >.menu-item-has-children>.dropdown-menu {
+        top: 130%;
+    }
+
+    .navbar-primary .nav .techmarket-flex-more-menu-item>a::after,
+    .primary-navigation .nav .techmarket-flex-more-menu-item>a::after {
+        background-color: #000;
+    }
+}
+
+.site-header.header-v10 {
+    .navbar-primary .nav>li>a,
+    .primary-navigation .nav>li>a {
+        color: #fff;
+    }
+}
+
+
+@include media-breakpoint-up(xl) {
+    @include media-breakpoint-down(xl) {
+        .techmarket-sticky-wrap.stuck .navbar-primary .nav .techmarket-flex-more-menu-item .yamm-fw>.dropdown-menu,
+        .techmarket-sticky-wrap.stuck .primary-navigation .nav .techmarket-flex-more-menu-item .yamm-fw>.dropdown-menu {
+            margin-left: -43vw;
+        }
+    }
+}

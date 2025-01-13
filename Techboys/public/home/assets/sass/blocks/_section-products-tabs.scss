@@ -1,0 +1,160 @@
+.section-products-tabs {
+    .section-products-tabs-wrap {
+        display: flex;
+        flex-direction: column;
+
+        > .button {
+            margin: 40px auto 62px auto;
+            min-width: 290px;
+            text-align: center;
+            font-size: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #fff;
+            color: #818686;
+            border: 2px solid #ebebeb;
+            border-radius: 100px;
+            position: relative;
+            transition: all .25s ease 0s;
+
+            &:hover {
+                color: #fff;
+            }
+
+            i {
+                font-size: 18px;
+                padding-right: 11px;
+            }
+
+            &::after {
+                content: " ";
+                display: block;
+                width: 100vw;
+                height: 1px;
+                background-color: #ebebeb;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                z-index: -1;
+            }
+        }
+    }
+
+    .section-header {
+        margin-bottom: 1.313em;
+        text-align: center;
+
+        .section-title {
+            font-size: 2.125em;
+            line-height: .962em;
+            letter-spacing: -.01em;
+            color: #090909;
+            margin-bottom: 0;
+        }
+
+        .nav{
+			margin-bottom: 1.25em;
+			padding-top: 1.438em;
+            align-items: center;
+            border-bottom: 1px solid #ebebeb;
+
+			.nav-item {
+				margin-left: 0px;
+			}
+		}
+
+        .nav {
+            border-bottom: 1px solid #ebebeb;
+
+            @include media-breakpoint-down(xs) {
+                flex-direction: column;
+            }
+
+            .nav-link {
+                font-size: 1.125em;
+                line-height: 2.222em;
+                letter-spacing: -0.01em;
+                color: #737373;
+                padding: 0 0.889em;
+
+                &.active {
+                    color: #090909;
+                    font-weight: 500;
+
+                    &:after {
+                        content: ' ';
+                        display: block;
+                        border-bottom: 2px solid #cadbe3;
+                        width: 60%;
+                        margin: auto;
+                    }
+                }
+            }
+        }
+    }
+
+    .products {
+        .product {
+            & + .product {
+                &::after {
+                    content: " ";
+                    width: 1px;
+                    height: 214px;
+                    background-color: #ebebeb;
+                    display: block;
+                    position: absolute;
+                    left: -3px;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    height: 336px;
+
+                    @media (max-width: 550px) {
+                        display: none;
+                    }
+                }
+            }
+
+            &:hover::after {
+                opacity: 0;
+            }
+
+            &:nth-child(4n+1) {
+                &::after {
+                    opacity: 0;
+
+                    @include media-breakpoint-up(md) {
+                        @include media-breakpoint-down(lg) {
+                            opacity: 1;
+                        }
+                    }
+                }
+            }
+
+            .price {
+                font-size: 1.286em;
+            }
+
+            .button,
+            .added_to_cart {
+                @include media-breakpoint-up(xxl) {
+                    margin-left: 3.214em;
+                    margin-right: 3.214em;
+                }
+            }
+
+            .woocommerce-loop-product__title {
+                max-width: 300px;
+                margin-bottom: 9px;
+            }
+
+            .star-rating {
+                font-size: 1.143em;
+                letter-spacing: 3px;
+                width: 6em #{"/*rtl:6.2em */"};
+                margin: 0 .375em 1.5em auto;
+            }
+        }
+    }
+}

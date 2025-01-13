@@ -1,0 +1,87 @@
+.page .hentry.type-page .entry-header {
+	text-align: center;
+	border-bottom: 0;
+	margin-bottom: 4.438em !important;
+	position: relative;
+
+	.entry-title {
+		font-size: 2.750em;
+    	letter-spacing: -0.01em;
+    	margin-bottom: 0.227em;
+    	line-height: 1.045em;
+    	color: #090909;
+    	font-weight: 500;
+    	margin-bottom: 0.273em;
+    }
+
+    .entry-subtitle {
+		font-size: 1.000em;
+    	letter-spacing: -0.01em;
+    	line-height: 1.125em;
+    	color: #9f9f9f;
+    	font-weight: 400;
+	}
+
+	.page-featured-image {
+		@include stretch-full-width;
+	}
+
+	.page-featured-image + {
+		.page-header-caption {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%,-50%);
+
+			.entry-title {
+				margin-bottom: 0.7em;
+			}
+
+			.entry-subtitle {
+				font-size: 1.125em;
+				line-height: 1.333em;
+				color: #090909;
+				font-weight: 300;
+			}
+		}
+	}
+}
+
+.section-products-carousel,
+.deals-carousel-inner-block,
+.section-products-carousel-tabs,
+.section-landscape-products-carousel,
+.section-landscape-products-widget-carousel,
+.section-single-carousel-with-tab-product .section-single-carousel ,
+.featured-brands-block,
+.section-products-carousel-widget-with-tabs .section-brands,
+.section-categories-carousel {
+	.section-header,
+	.homepage-section-header {
+		border-bottom: 1px solid #ebebeb;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+}
+
+.custom-slick-nav {
+	@media (max-width: 450px) {
+		display: flex;
+	}
+	
+	a:first-child,
+	.slick-prev {
+		padding-right: 0.52em;
+	}
+
+	a,
+	.slick-arrow {
+		color: #c3c3c3;
+	}
+
+	a:hover,
+	.slick-arrow:hover {
+		color: #464646;
+	}
+}

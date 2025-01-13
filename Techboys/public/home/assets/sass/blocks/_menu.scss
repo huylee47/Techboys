@@ -1,0 +1,150 @@
+/**
+ * Main Naivgation
+ */
+
+/**
+ * General Menu Styles
+ */
+
+button.menu-toggle {
+	cursor: pointer;
+	text-align: left;
+	float: right;
+	position: relative;
+	border: 2px solid transparent;
+	box-shadow: none;
+	border-radius: 2px;
+	background-image: none;
+	padding: ms(-2) ms(-1) ms(-2) ms(5);
+	font-size: ms(-1);
+
+	&:hover {
+		background-image: none;
+	}
+
+	span:before {
+		// @include transition(all,ease,.2s);
+		-webkit-transition:all ease .2s;
+	    -o-transition:all ease .2s;
+	    transition:all ease .2s;
+	}
+
+	&:before,
+	&:after,
+	span:before {
+		content: "";
+		display: block;
+		height: 2px;
+		width: 14px;
+		position: absolute;
+		top: 50%;
+		left: 1em;
+		margin-top: -1px;
+		@include transition(all,ease,.2s);
+		border-radius: 3px;
+	}
+
+	&:before {
+		// @include transform(translateY(-4px));
+		-webkit-transform: translateY(-4px);
+    	-ms-transform: translateY(-4px);
+        transform: translateY(-4px);
+	}
+
+	&:after {
+		//@include transform(translateY(4px));
+		-webkit-transform: translateY(4px);
+    	-ms-transform: translateY(4px);
+        transform: translateY(4px);
+	}
+}
+
+.toggled {
+	button.menu-toggle {
+		&:before,
+		&:after {
+			// @include transform(translateY(0));
+			// @include transform(rotate(45deg));
+			-webkit-transform: translateY(0);
+	    	-ms-transform: translateY(0);
+	        transform: translateY(0);
+
+			-webkit-transform: rotate(45deg);
+	    	-ms-transform: rotate(45deg);
+	        transform: rotate(45deg);
+		}
+
+		&:after {
+			//@include transform(rotate(-45deg));
+			-webkit-transform: rotate(-45deg);
+	    	-ms-transform: rotate(-45deg);
+	        transform: rotate(-45deg);
+		}
+
+		span:before {
+			opacity: 0;
+		}
+	}
+}
+
+.main-navigation {
+	@include clearfix;
+
+	div.menu {
+		display: none; // Hide the default menu to stop both it and the handheld menu displaying, when no primary menu has been set...
+	}
+
+	div.menu:last-child {
+		display: block; // ... but display it if a handheld menu hasn't been set either.
+	}
+
+	.menu {
+		clear: both;
+	}
+}
+
+// .handheld-navigation,
+.nav-menu,
+.main-navigation div.menu > ul:not(.nav-menu) {
+	overflow: hidden;
+	max-height: 0; /* We have to use max-height because `height` isn't animatable */
+	@include transition(all,ease,.8s);
+}
+
+// .handheld-navigation {
+// 	clear: both;
+//
+// 	ul {
+// 		margin: 0;
+// 	}
+// }
+
+.main-navigation.toggled {
+	// .handheld-navigation,
+	.menu > ul:not(.nav-menu),
+	ul[aria-expanded=true] {
+		max-height: 1750px;
+	}
+}
+
+.main-navigation ul {
+	margin-left: 0;
+	list-style: none;
+	margin-bottom: 0;
+
+	ul {
+		display: block;
+		margin-left: ms(2);
+	}
+
+	li {
+		a {
+			padding: ms(-1) 0;
+			display: block;
+
+			&:hover {
+				color: #e6e6e6;
+			}
+		}
+	}
+}

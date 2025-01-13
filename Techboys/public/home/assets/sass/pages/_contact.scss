@@ -1,0 +1,160 @@
+.contact-page-title{
+	padding-bottom: 0.25em;
+	border-bottom: 1px solid #ebebeb;
+	//margin-top: 1.000em;
+	font-size: 1.500em;
+	font-weight: 400;
+	line-height: 1.917em;
+	color: #090909;
+	letter-spacing: -0.01em;
+	margin-bottom: 1.250em;
+	position: relative;
+
+	&:after {
+		content: ' ';
+		width: 4.560em;
+		display: block;
+		position: absolute;
+		bottom: -1px;
+		height: 2px;
+	}
+}
+
+.contact-info {
+	.left-col {
+		@media(min-width: 768px) { 
+			padding-right: 4.375em;
+		}
+	}
+}
+
+.store-info {
+	@media(min-width: 768px) { 
+		padding-left: 0;
+	}
+
+	h3 {
+		font-size: 1.125em;
+		font-weight: 500;
+		color: #555353;
+		padding-top: 1.7em;
+		padding-bottom: 0.5em;
+		margin-top: 0;
+	}
+
+	a {
+		text-decoration: underline;
+	}
+
+	.operation-hours {
+		margin-left: 0;
+		font-weight: 300;
+
+		@include media-breakpoint-up(lg) {
+			padding-right: 4.286em;
+		}
+	}
+
+	iframe {
+		-webkit-filter: grayscale(100%);
+        filter: grayscale(100%);
+
+		&:hover {
+			-webkit-filter: grayscale(0%);
+        	filter: grayscale(0%);
+		}
+	}
+
+	&.store-info-v2 {
+		padding-left: 15px;
+		padding-right: 15px;
+
+		@include media-breakpoint-up(xl) {
+			padding-left: 2.813em;
+			padding-right: 0;
+		}
+
+		.google-map {
+			margin-bottom: 2.188em;
+		}
+	}
+}
+
+.contact-form {
+
+	.form-group {
+		margin-bottom: 1.438em;
+
+		label {
+			color: #626060;
+		    font-weight: 400;
+		    letter-spacing: -0.01em;
+		    line-height: 1.5em;
+		    margin-bottom: 0.5em;
+		}
+
+		.required {
+		    text-decoration: none;
+		}
+
+		.input-text,
+		input[type="email"],
+		input[type="password"],
+		input[type="search"],
+		input[type="text"],
+		input[type="url"],
+		textarea {
+		 	width: 100%;
+		}
+
+		input[type="submit"],
+		input[type="button"] {
+			border-radius: 3px;
+			color: #fff;
+			font-size: 15px;
+		}
+
+		&.row {
+			@include media-breakpoint-down(sm) {
+				div:first-child {
+					margin-bottom: 1.438em;
+				}
+			}
+		}
+	}
+}
+
+.contact-form,
+.store-info {
+	ul li,p {
+		color: #555353;
+	}
+}
+
+.wpb_gmaps_widget .wpb_wrapper {
+	padding: 0 !important;
+}
+
+
+.stretch-full-width-map {
+	position: relative;
+	width: 100vw !important;
+	margin-left: -50vw !important;
+	left: 50%;
+	margin-bottom: 2.750em;
+
+	.kc_column_inner {
+		padding: 0;
+	}
+}
+
+.wpcf7 {
+	.user-details form .input-text,
+	input[type=email],
+	input[type=password],
+	input[type=search],
+	input[type=text],
+	input[type=url] {
+		width: 100%;
+	}
+}

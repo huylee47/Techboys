@@ -1,0 +1,227 @@
+.product-categories-list {
+	.section-header {
+		margin-bottom: 2.9em;
+    	padding-bottom: 0.45em;
+	    border-bottom: 1px solid #ebebeb;
+	}
+
+	.section-title {
+		font-size: 1.500em;
+		line-height: 1.917em;
+		color: #090909;
+		letter-spacing: -0.01em;
+		font-weight: 400;
+		margin-bottom: 0;
+	}
+
+	.categories {
+		list-style: outside none none;
+		margin-left: -0.938em;
+		margin-right: -0.938em;
+		padding-left: 0;
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: flex-start;
+		margin-bottom: 0.15em;
+
+		@include media-breakpoint-down(sm) {
+			flex-direction: column;
+		}
+
+
+		.category {
+			@include make-col-ready;
+			position: relative;
+			margin-bottom: 5.12em;
+
+			@include media-breakpoint-up(xl) {
+                @include media-breakpoint-down(xl) {
+                    @include make-col(3);
+                }
+            }
+
+			& + .category {
+				&:before {
+				    content: " ";
+	                width: 1px;
+	                height: 130px;
+	                background-color: #ebebeb;
+	                display: block;
+	                position: absolute;
+	                left: -3px;
+	                top: 50%;
+	                transform: translateY(-50%);
+				}
+			}
+
+			img {
+				width: 188px;
+				height: auto;
+
+				@include media-breakpoint-down(sm) {
+					width: 140px;
+				}
+			}
+
+			.media {
+				> a {
+					padding-right: 10px;
+				}
+			}
+
+			.media-body {
+				display: flex;
+				flex-direction: column;
+    			justify-content: space-between;
+
+				@include media-breakpoint-up(md) {
+					@include media-breakpoint-down(lg) {
+						min-height: 150px;
+					}
+				}
+
+				@include media-breakpoint-up(xxl) {
+					min-height: 150px;
+				}
+
+				h4 {
+					font-size: 1.125em;
+					letter-spacing: -0.01em;
+					font-weight: 500;
+					margin: 0 0 0.4em;
+
+					a {
+						color: #444444;
+
+						&:hover {
+	    					color: #000;
+	    				}
+					}
+				}
+
+				.sub-categories {
+					margin-left: 0;
+					margin-bottom: 14px;
+
+					li {
+						a {
+							font-size: 0.929em;
+		    				line-height: 1.615em;
+		    				color: #555353;
+		    				display: block;
+
+		    				&:hover {
+		    					color: #000;
+		    				}
+		    			}
+					}
+				}
+			}
+		}
+
+		.view-all {
+			display: block;
+			font-size: 0.875em;
+		    font-weight: 400;
+		    color: #090909;
+			letter-spacing: -0.01em;
+			bottom: 0;
+
+			&:before {
+				content:'+';
+				display: inline-block;
+				margin-right: 0.243em;
+			}
+
+			&:hover {
+				color: $color_links;
+			}
+		}
+	}
+
+	@include media-breakpoint-up(xl) {
+		@include media-breakpoint-down(xl) {
+			.categories .category {
+				margin-bottom: 4em;
+
+				.media {
+					flex-direction: column;
+					padding-right: 28px;
+
+					> a {
+						margin-bottom: 20px;
+					}
+				}
+
+				& +.category:before {
+					height: 250px;
+					left: -40px;
+				}
+
+				.media-body {
+					-ms-flex: 1 1 auto;
+				}
+			}
+		}
+	}
+}
+
+@include media-breakpoint-up(md) {
+	@include media-breakpoint-down(lg) {
+		.categories .category{
+			@include make-col(6);
+
+			&:nth-child(2n+1) {
+				&::before {
+					opacity: 0;
+				}
+			}
+		}
+	}
+}
+
+@include media-breakpoint-up(xl) {
+	@include media-breakpoint-down(xl) {
+		.categories .category {
+			.media {
+				flex-direction: column;
+			}
+
+			&::before {
+				height: 250px;
+			}
+
+			.media-body {
+				min-height: auto;
+			}
+		}
+	}
+}
+
+@include media-breakpoint-up(xl) {
+	.categories .category{
+		@include make-col(3);
+
+		&:nth-child(4n+1) {
+			&::before {
+				opacity: 0;
+			}
+		}
+
+		&:nth-child(3n+1) {
+			&::before {
+				opacity: 1;
+			}
+		}
+	}
+}
+
+@include media-breakpoint-down(sm) {
+	.categories .category{
+		@include make-col(12);
+
+		&::before {
+			opacity: 0;
+		}
+	}
+}

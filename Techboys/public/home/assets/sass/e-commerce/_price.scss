@@ -1,0 +1,22 @@
+/**
+ * Price
+ */
+.price {
+	font-weight: 500;
+	letter-spacing: -0.01em;
+	font-size: 1.143em;
+
+	del {
+		font-weight: 400;
+		color: #b8b8b8;
+		font-size: 0.875em;
+	}
+
+	ins {
+		font-weight: 500;
+
+		& + del {
+			margin-left: 0.214em;
+		}
+	}
+}

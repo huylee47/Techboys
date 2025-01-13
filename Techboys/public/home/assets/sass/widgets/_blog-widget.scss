@@ -1,0 +1,135 @@
+.sidebar-blog {
+	&.widget-area {
+		.widget {
+			margin: 0 0 5.5em;
+		}
+	}
+
+	.widget_search label{
+		display: block;
+	}
+}
+
+#secondary {
+	&.sidebar-blog {
+		.widget {
+			.widget-title,
+			.section-title {
+				font-size: 1.357em;
+				font-weight: 400;
+				margin-bottom: 1.842em;
+			    padding-bottom: 1.053em;
+			    position: relative;
+			    line-height: 1em;
+
+			    &:after {
+
+				    bottom: -1px;
+				    content: " ";
+				    display: block;
+				    position: absolute;
+				    width: 3.684em;
+				    height: 2px;
+			    }
+			}
+
+			.section-header {
+				display: flex;
+    			justify-content: space-between;
+    			margin-bottom: 1.842em;
+   			    border-bottom: 1px solid #ebebeb;
+
+				.section-title {
+				    margin-bottom: 0;
+					&:after {
+					    bottom: -1px;
+					    content: " ";
+					    display: block;
+					    position: absolute;
+					    width: 3.684em;
+					    height: 2px;
+					}
+				}
+			}
+		}
+
+		.widget_archive ul li,
+		.widget_links ul li,
+		.widget_nav_menu ul li,
+		.widget_pages ul li,
+		.widget_recent_comments ul li,
+		.widget_recent_entries ul li,
+		.widget_meta ul li,
+		.widget_recent_comments ul li,
+		.widget_categories ul li {
+			color: #555353;
+			margin-bottom: 0;
+
+			a {
+				color: #626060;
+				font-weight: 400;
+				padding: 0.3em 0;
+				margin-bottom: 0;
+				display: inline-block;
+
+				&:hover {
+					color: #484747;
+				}
+			}
+		}
+
+
+		.widget_layered_nav, .widget_categories {
+
+			li {
+				border-bottom: 1px solid #ececec;
+
+				> a {
+					position: relative;
+					margin-left: 2.7em;
+					padding: 0.5em 0 !important;
+
+
+					&:before {
+						font-size: 0.6em;
+					    margin-left: -2.5em;
+					    position: absolute;
+					    font-family: "techmarket-icons" !important;
+						content: "\6e";
+					}
+				}
+
+				&:last-child {
+					border-bottom: none;
+				}
+			}
+		}
+
+		.widget_categories li > a {
+		    margin-left: 1.35em;
+		}
+
+		.widget_tag_cloud {
+			.tagcloud {
+				a {
+					background: transparent;
+					border-color: #e4e5e7;
+				    border-style: solid;
+				    border-width: 1px;
+				    color: #565656;
+				    display: inline-block;
+				    font-size: 1.000em !important;
+				    line-height: 1;
+				    margin: 0 0.457em 0.731em 0;
+				    padding: 0.823em 0.788em;
+
+				    &:hover,
+				    &:focus {
+				    	text-decoration: none;
+				    	color: #fff;
+				    }
+				}
+			}
+		}
+	}
+}

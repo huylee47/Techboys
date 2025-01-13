@@ -1,0 +1,64 @@
+.techmarket_posts_carousel_widget {
+	.post-item {
+		.post-thumbnail {
+			padding-bottom: 1em;
+			display: block;
+
+			img {
+				width: 100%;
+			}
+		}
+
+		.post-content {
+			letter-spacing: -0.01em;
+
+			a {
+				text-decoration: none;
+			}
+
+			.post-category,
+			.post-date {
+				font-size: 0.857em;
+				font-weight: 400;
+				color: #959595;
+				line-height: 1.750em;
+
+				a {
+					color: #959595;
+					
+				}
+			}
+
+			.post-name {
+				display: block;
+				font-size: 1.071em;
+				font-weight: 500;
+				color: #3d3d3d;
+				//line-height: 2em;
+				padding-bottom: 0.4em;
+				
+			}
+
+			.comments-link {
+				display: block;
+				margin-bottom: 0;
+
+				a {
+					font-size: 0.857em;
+					font-weight: 400;
+					color: #878787;
+					line-height: 1.500em;
+					position: relative;
+
+					&:before {
+						font-family: FontAwesome;
+					    content: "\f0e5";
+					    font-size: 14px;
+    					margin-right: 5px;					   
+					}
+				}
+			}
+		}
+	}
+}
+

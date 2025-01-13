@@ -1,0 +1,60 @@
+.widget_techmarket_features_widget {
+	.features-list {
+		.features {
+			display: block;
+			padding: 2.857em 1.929em;
+
+
+			@media (max-width: 1025px) and (min-width: 600px) {
+				display: flex;
+    			flex-direction: column;
+			}
+
+			.feature {
+				margin: 0;
+				padding: 0 0 2.143em;
+				border-bottom: 1px solid #ddd;
+
+				& + .feature {
+					border-left: none;
+					padding-top: 2.143em;
+				}
+
+				&:last-child {
+					border-bottom: none;
+					padding-bottom: 0;
+				}
+
+				.feature-text {
+					strong {
+						display: block;
+					}
+				}
+
+				.media {
+					justify-content: initial;
+
+					.feature-icon {
+						font-size: 3.2em;
+						margin-right: 0.778em !important;
+						
+						@include media-breakpoint-up(xl) {
+							@include media-breakpoint-down(xl) {
+								margin-right: 1rem !important;
+							}
+						}
+					}
+
+					.media-body {
+						font-size: 1.071em;
+						line-height: 1.400em;
+						font-weight: 300;
+						strong {
+							font-weight: 500;
+						}
+					}
+				}
+			}
+		}
+	}
+}

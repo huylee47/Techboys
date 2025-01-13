@@ -1,0 +1,20 @@
+
+.woocommerce-order-received,
+.track-order,
+.woocommerce-view-order {
+    .woocommerce-order-details {
+        .shop_table {
+            @include make-table();
+        }
+    }
+
+    .woocommerce-thankyou-order-received {
+        @extend .woocommerce-message;
+        margin: 0;
+    }
+
+    .woocommerce-customer-details h2,.woocommerce-order-details__title,.woocommerce-column__title {
+        font-size: 1.6em;
+        font-weight: 500;
+    }
+}

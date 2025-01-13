@@ -1,0 +1,356 @@
+/**
+ * Strictly Layout Styles
+ */
+
+.col-full {
+	@include make-container();
+}
+
+@include media-breakpoint-up(xl) {
+	.col-full {
+		padding-left: 4.6875% !important;
+		padding-right: 4.6875% !important;
+	}
+}
+
+@media (min-width:2000px) {
+	.col-full {
+		width: 1920px;
+	}
+}
+
+.stretch-full-width {
+	@include stretch-full-width;
+}
+
+#content {
+	#primary {
+		@include make-col-ready;
+		@include media-breakpoint-up(uw) {
+			@include make-col(10);
+			order: 2;
+		}
+
+		@include media-breakpoint-up(xl) {
+            @include media-breakpoint-down(xxl) {
+                @include make-col(9.4);
+				order: 2;
+            }
+        }
+	}
+
+	#secondary {
+		z-index: 10;
+		order: 1;
+		@include make-col-ready;
+
+		@include media-breakpoint-up(uw) {
+			@include make-col(2);
+		}
+
+		@include media-breakpoint-up(xl) {
+            @include media-breakpoint-down(xxl) {
+                @include make-col(2.6);
+            }
+        }
+	}
+}
+
+.right-sidebar {
+	#content {
+		#primary {
+			order: 1;
+		}
+
+		#secondary {
+			order: 2;
+		}
+	}
+}
+
+.left-sidebar {
+	#content {
+		#primary {
+			@include media-breakpoint-up(lg) {
+				@include media-breakpoint-down(xl) {
+					order: 2;
+				}
+			}
+		}
+
+		#secondary {
+			@include media-breakpoint-up(lg) {
+				@include media-breakpoint-down(xl) {
+					order: 1;
+				}
+			}
+		}
+
+	}
+}
+
+
+.left-sidebar,
+.right-sidebar {
+	#content {
+		#primary {
+			@include media-breakpoint-up(xl) {
+				@include media-breakpoint-down(ni) {
+					@include make-col(9);
+				}
+			}
+
+			@include media-breakpoint-up(lg) {
+				@include media-breakpoint-down(lg) {
+					@include make-col(8.5);
+				}
+			}
+		}
+
+		#secondary {
+			@include media-breakpoint-up(xl) {
+				@include media-breakpoint-down(ni) {
+					@include make-col(3);
+				}
+			}
+
+			@include media-breakpoint-up(lg) {
+				@include media-breakpoint-down(lg) {
+					@include make-col(3.5);
+				}
+			}
+		}
+	}
+}
+
+.two-sidebar {
+	#content {
+		#primary {
+			@include make-col-ready;
+			@include media-breakpoint-up(lg) {
+				@include make-col(8);
+				order: 2;
+			}
+
+			@include media-breakpoint-up(xl) {
+				@include media-breakpoint-down(ni) {
+					@include make-col(7);
+				}
+			}
+		}
+
+		#secondary {
+			@include make-col-ready;
+			@include media-breakpoint-up(lg) {
+				@include make-col(2);
+				order: 1;
+				z-index: 10;
+			}
+
+			@include media-breakpoint-up(xl) {
+				@include media-breakpoint-down(ni) {
+					@include make-col(2.5);
+				}
+			}
+		}
+
+		#tertiary {
+			@include make-col-ready;
+			@include media-breakpoint-up(md) {
+				@include media-breakpoint-down(md) {
+					@include make-col(5);
+		  			@include make-col-offset(7);
+		  		}
+			}
+
+			@include media-breakpoint-up(lg) {
+				@include make-col(2);
+				order: 3;
+				z-index: 10;
+			}
+
+			@include media-breakpoint-up(xl) {
+				@include media-breakpoint-down(ni) {
+					@include make-col(2.5);
+				}
+			}
+		}
+	}
+}
+
+@media (min-width: 1025px) {
+	.desktop-only {
+		display: block;
+	}
+
+	.handheld-only {
+		display: none;
+	}
+}
+
+@media (max-width:1024px) {
+	.desktop-only {
+		display: none;
+	}
+
+	.handheld-only {
+		display: block;
+	}
+}
+
+.error404,
+.page-template-template-homepage-v1,
+.page-template-template-homepage-v2,
+.page-template-template-homepage-v3,
+.page-template-template-homepage-v4,
+.page-template-template-homepage-v7,
+.page-template-template-homepage-v8,
+.page-template-template-homepage-v9,
+.page-template-template-homepage-v10,
+.page-template-template-homepage-v11,
+.page-template-template-homepage-v12,
+.page-template-template-landingpage-v1,
+.page-template-template-landingpage-v2,
+.page-template-default,
+.full-width {
+	#content {
+		#primary {
+			order: 1;
+			@include media-breakpoint-up(md) {
+				@include make-col(12);
+				@include make-col-push(0);
+			}
+		}
+
+		#secondary { display: none; }
+	}
+}
+
+.page-template-template-page-centered-fullwidth {
+	#content {
+		#primary {
+			@include media-breakpoint-up(md) {
+				@include make-col(8);
+				@include make-col-push(0);
+				margin: 0 auto;
+			}
+		}
+
+		#sidebar { display: none; }
+	}
+}
+
+
+@include susy-media($desktop) {
+	table.shop_table_responsive {
+		tbody {
+			tr {
+				td,
+				th {
+					text-align: left;
+				}
+			}
+		}
+	}
+
+	.site-header {
+		padding-top: ms(5);
+		padding-bottom: 0;
+
+		.site-branding {
+			img {
+				max-width: 100%;
+				max-height: none;
+			}
+		}
+	}
+
+	.site-branding {
+		.site-description {
+			margin-bottom: 0;
+			display: block;
+		}
+	}
+
+	.site-header {
+		.subscribe-and-connect-connect {
+			float: right;
+			margin-bottom: 1em;
+
+			.icons {
+				list-style: none;
+				margin: 0;
+
+				a {
+					font-size: 1em !important;
+				}
+
+				li {
+					margin: 0 0 0 ms(-3) !important;
+					display: inline-block;
+				}
+			}
+		}
+	}
+
+	.content-area,
+	.widget-area {
+		margin-bottom: ms(5);
+	}
+
+
+	/**
+	 * Comments
+	 */
+
+
+	.comment-list {
+		@include clearfix;
+
+		.comment {
+			clear: both;
+		}
+
+		.comment-content {
+			padding-bottom: ms(6);
+			margin-bottom: ms(6);
+		}
+
+		.reply {
+			clear: both;
+			text-align: right;
+		}
+	}
+
+	#respond {
+		padding: ms(5);
+
+		.comment-form-author,
+		.comment-form-email,
+		.comment-form-url {
+			@include span(3 of 9);
+		}
+
+		.comment-form-url {
+			@include last;
+		}
+
+		.comment-form-comment {
+			clear: both;
+		}
+	}
+
+	/**
+	 * Content
+	 */
+	.hentry {
+		.entry-header {
+			margin-bottom: ms(5);
+		}
+	}
+
+	.hentry.type-post {
+		@include clearfix;
+
+	}
+}

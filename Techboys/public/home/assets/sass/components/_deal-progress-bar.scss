@@ -1,0 +1,37 @@
+.deal-progress {
+	@include clearfix;
+
+	.deal-stock {
+		@include clearfix;
+		font-size: 1em;
+		line-height: 1.2em;
+		margin-bottom: 0.867em;
+		display: flex;
+		justify-content: space-between;
+
+		.stock-sold {
+			order: 2;
+		}
+
+		strong {
+			font-weight: 500;
+			font-size: 0.934em;
+			color: #383838;
+		}
+	}
+
+	.progress {
+		border-radius: 1em;
+		background-color: #eee;
+		height: 1.667em;
+		margin-bottom: 1.875em;
+		overflow: hidden;
+	}
+
+	.progress-bar {
+		display: block;
+		text-indent: -99999px;
+		height: 100%;
+		border-radius: 1em;
+	}
+}

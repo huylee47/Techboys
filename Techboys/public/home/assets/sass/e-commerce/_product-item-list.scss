@@ -1,0 +1,319 @@
+/**
+ * Products List
+ */
+.products {
+    .list-view.product,
+    .list-view-large.product,
+    .list-view-small.product {
+        @include make-col(12);
+        border: none;
+        padding: 30px 15px;
+
+        @include media-breakpoint-down(sm) {
+            padding: 30px 0;
+        }
+
+        & + .list-view.product,
+        & + .list-view-large.product,
+        & + .list-view-small.product {
+            border-top: 1px solid #ebebeb;
+        }
+
+        img {
+            @include media-breakpoint-up(sm) {
+                margin-bottom: 0;
+            }
+        }
+
+        .woocommerce-product-details__short-description {
+            ul {
+                margin: 0 0 2em 0;
+                padding-left: 16px;
+                height: 108px;
+                overflow: hidden;
+            }
+        }
+
+
+        .yith-wcwl-add-to-wishlist {
+            @include media-breakpoint-up(xl) {
+                width: auto;
+                left: auto;
+                right: 0;
+            }
+        }
+
+        .yith-wcwl-add-to-wishlist .add_to_wishlist::before,
+        .yith-wcwl-add-to-wishlist .yith-wcwl-wishlistaddedbrowse a::before,
+        .yith-wcwl-add-to-wishlist .yith-wcwl-wishlistexistsbrowse a::before {
+            @include media-breakpoint-up(xs) {
+                @include media-breakpoint-down(xl) {
+                    top:2px;
+                    right:5px;
+                    left:auto;
+                }
+            }
+
+            @include media-breakpoint-up(md) {
+                @include media-breakpoint-down(lg) {
+                    top: -8px;
+                    right: auto;
+                    left: -21px;
+                }
+            }
+
+            @include media-breakpoint-up(xl) {
+                top: 0;
+                line-height: 1;
+                right: 28px;
+            }
+        }
+
+        .yith-wcwl-add-to-wishlist {
+            display: block;
+        }
+
+        .media {
+            align-items: stretch;
+
+            @include media-breakpoint-down(sm) {
+                flex-direction: column;
+            }
+        }
+
+        .media-body {
+            display: flex;
+
+            @include media-breakpoint-down(sm) {
+                flex-direction: column;
+            }
+
+            .product-info {
+                @include make-auto-col;
+                text-align: left;
+
+                @include media-breakpoint-up(sm) {
+                    padding: 0 20px;
+                }
+
+                position: relative;
+
+                .star-rating {
+                    margin: 0 0 20px 0;
+                }
+
+                .brand {
+                    img {
+                        margin: 0 0 20px 0;
+                        max-width: 100px;
+                    }
+                }
+
+                .woocommerce-loop-product__title {
+                    font-size: 1.5em;
+                    font-weight: 500;
+                    color: #444;
+                    margin-bottom: 6px;
+                    line-height: 1.2;
+                    margin-right: 40px;
+                    height: auto;
+                    margin-bottom: 16px;
+                    overflow: visible;
+
+                    @include media-breakpoint-down(lg) {
+                        height: auto;
+                        max-height: 100%;
+                    }
+                }
+            }
+
+            .product-actions {
+                margin: 14px 0;
+
+                @include media-breakpoint-up(xl) {
+                    @include make-col(3.04);
+                    border-left: 1px solid #ebebeb;
+                }
+
+                @include media-breakpoint-up(xl) {
+                    @include media-breakpoint-down(xl) {
+                        @include make-col(5);
+                    }
+                }
+
+                @include media-breakpoint-up(md) {
+                    @include media-breakpoint-down(lg) {
+                        @include make-col(5.5);
+                    }
+                }
+
+                @include media-breakpoint-up(lg) {
+                    padding-left: 30px;
+                }
+
+                @include media-breakpoint-up(sm) {
+                     @include media-breakpoint-down(lg) {
+                        padding-left: 20px;
+                    }
+                }
+
+                @include media-breakpoint-up(xs) {
+                    @include media-breakpoint-down(sm) {
+                        padding-right: 20px;
+                    }
+                }
+
+                .availability,.price {
+                    text-align: left;
+                }
+
+                .price {
+                    font-size: 1.857em;
+                    display: flex;
+                    margin-bottom: 0.76em;
+                    flex-wrap: wrap;
+                    align-items: center;
+
+                    @include media-breakpoint-up(sm) {
+                        @include media-breakpoint-down(md) {
+                            font-size: 1.429em;
+                        }
+                    }
+
+
+                    ins+del {
+                        margin-left: 0;
+                    }
+
+                    del {
+                        font-size: 0.577em;
+                    }
+
+                    ins {
+                        order: 2;
+                        margin: 0;
+                        line-height: 1;
+                        width: 100%;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.products {
+    .list-view.product {
+        .media {
+            > img {
+                height: 100%;
+
+                @include media-breakpoint-up(md) {
+                    @include make-col(1.892);
+                }
+            }
+        }
+
+        .media-body {
+            .product-info{
+                .woocommerce-loop-product__title {
+                    font-size: 1.286em;
+                    height: auto;
+                    margin-bottom: 16px;
+                    overflow: visible;
+                }
+            }
+        }
+
+        .woocommerce-product-details__short-description {
+            ul {
+                height: 88px;
+            }
+        }
+    }
+
+    .list-view-small.product {
+        .media {
+            > img {
+                @include media-breakpoint-up(md) {
+                    @include make-col(1.01);
+                }
+
+                height: 100%;
+            }
+        }
+
+        .woocommerce-product-details__short-description {
+            ul {
+                height: 44px;
+                margin-bottom: 10px;
+            }
+        }
+
+        .media-body {
+            .product-info{
+                @include media-breakpoint-up(xl) {
+                    margin-right: 20px;
+                }
+
+                .woocommerce-loop-product__title {
+                    font-size: 1.071em;
+                    height: auto;
+                    margin-bottom: 16px;
+                    overflow: visible;
+                }
+            }
+
+            .product-actions {
+                @include media-breakpoint-up(xl) {
+                    @include make-col(2);
+                    padding-left: 0;
+                    border-left: none;
+                }
+
+                @include media-breakpoint-up(xl) {
+                    @include media-breakpoint-down(xl) {
+                        @include make-col(3);
+                    }
+                }
+            }
+        }
+
+        .woocommerce-product-details__short-description {
+            @include media-breakpoint-up(xl) {
+                padding-right: 80px;
+            }
+        }
+    }
+
+    .list-view-large.product {
+        .media {
+            > img {
+                @include media-breakpoint-up(sm) {
+                    @include make-col(2.86);
+                    height: 100%;
+                }
+            }
+        }
+
+        .sku_wrapper {
+            color: #b3b2b2;
+        }
+    }
+}
+
+.columns-1,
+.columns-2,
+.columns-3,
+.columns-4,
+.columns-5,
+.columns-6,
+.columns-7,
+.columns-8 {
+    .products {
+        .list-view.product,
+        .list-view-large.product,
+        .list-view-small.product {
+            @include make-col(12);
+        }
+    }
+}
