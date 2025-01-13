@@ -1,0 +1,17 @@
+//from 543px to  upto 766px
+@media (min-width: 33.9em) and  (max-width: 47.9em){
+
+	.footer-newsletter {
+    	.newsletter-header {
+			margin-right: 1em;
+		}
+	}
+
+	.footer-social-icons {
+		.social-icons.nav {
+			.nav-item {
+				@include make-col(3);
+			}
+		}
+	}
+}

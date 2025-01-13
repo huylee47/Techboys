@@ -1,0 +1,241 @@
+.section-deals-carousel-and-products-carousel-tabs {
+	.section-products-carousel-tabs {
+		&.column-2 {
+			@include make-col-ready();
+			@include make-col(8.72);
+
+			@media (min-width: 1400px) {
+				padding-left: 2.188em !important;
+			}
+
+			@include media-breakpoint-down(md) {
+				@include make-col(12);
+			}
+
+			@media (min-width: 1024px) and (max-width: 1400px){
+				@include make-col(8);
+			}
+		}
+
+		@include media-breakpoint-down(lg) {
+			overflow: hidden;
+		}
+
+		.section-products-carousel-tabs-wrap {
+			@include media-breakpoint-down(sm) {
+				overflow: hidden;
+			}
+		}
+
+		.section-header {
+			padding-top: 0.8em;
+		}
+
+		.nav {
+			@include media-breakpoint-up(md) {
+				@include media-breakpoint-down(lg) {
+					.nav-item {
+						margin-left: 0;
+					}
+				}
+			}
+
+			.nav-link {
+				font-size: 1.250em;
+				line-height: 2.750em;
+				margin-left: 0;
+
+				@media (min-width: 480px) and (max-width: 1023px) {
+					font-size: 1em;
+				}
+
+				&.active {
+					font-size: 1.500em;
+					line-height: 2.292em;
+
+					@media (min-width: 480px) and (max-width: 1023px) {
+						font-size: 1.12em;
+					}
+
+					@include media-breakpoint-up(md) {
+						@include media-breakpoint-down(lg) {
+							line-height: 2.75em;
+						}
+					}
+
+					@media (min-width: 479px) {
+						&:after {
+							left: 50%;
+						    position: relative;
+						    transform: translate(-50%);
+						    width: 52px;
+						    margin-left: 0px;
+	    					margin-right: 0px;
+						}
+					}
+				}
+
+				&:after {
+					@include media-breakpoint-down(sm) {
+						padding-top: 0;
+					}
+				}
+			}
+		}
+
+		.slick-slide {
+			@include media-breakpoint-down(sm) {
+				> div {
+					display: flex;
+				}
+			}
+		}
+
+		@media (min-width: 479px) {
+			.nav-item {
+				& + .nav-item {
+					margin-left: 3.125em;
+				}
+			}
+		}
+
+		.slick-dots {
+			padding-bottom: 3.4em;
+		}
+
+		.products .slick-list {
+			padding-bottom: 0.438em;
+		}
+
+        .columns-5,.columns-6,.columns-7,.columns-8 {
+            &::before,&::after {display: none;}
+
+			.products {
+	            overflow: hidden;
+	        }
+        }
+	}
+
+}
+
+.section-landscape-full-product-cards-carousel {
+	background-color: #f6f6f6;
+    left: 50%;
+    margin-bottom: 4.25em;
+    margin-left: -50vw;
+    padding-top: 3.875em;
+    position: relative;
+    width: 100vw;
+
+	@include media-breakpoint-down(sm) {
+		height: 540px !important;
+	}
+
+	.section-header {
+		padding-top: 30px;
+	}
+
+    .section-title {
+    	font-weight: 300;
+    	font-size: 1.500em;
+    	line-height: 1.917em;
+    	color: #090909;
+    	letter-spacing: -0.01em;
+    	margin-bottom: 1em;
+
+		@include media-breakpoint-down(sm) {
+			line-height: 1.417em;
+		}
+
+    	strong {
+    		font-weight: 500;
+    	}
+
+    	&:before {
+    		border-top: 2px solid transparent;
+		    content: " ";
+		    display: block;
+		    width: 38px;
+		    padding-bottom: 0.292em;
+    	}
+    }
+
+	.products {
+		.product {
+			.woocommerce-loop-product__title {
+				margin-bottom: 14px;
+			}
+
+			.ribbon {
+				margin-bottom: 1.05em;
+			}
+		}
+	}
+
+	.landscape-full-product-cards-carousel {
+		@include make-col-ready;
+		@include make-col(8);
+
+		@include media-breakpoint-down(sm) {
+			@include make-col(12);
+			// height: 478px;
+			overflow: hidden;
+		}
+
+		@include media-breakpoint-up(xl) {
+			@include media-breakpoint-down(xl) {
+				@include make-col(9);
+			}
+		}
+
+		.products {
+			.landscape-product-card {
+				@include media-breakpoint-down(sm) {
+					.media  {
+						padding: 0.6em;
+
+						.ribbon,.techmarket-product-rating {
+							display: none;
+						}
+					}
+
+					img {
+						max-width: 100px;
+					}
+				}
+			}
+		}
+	}
+
+	.slick-dots {
+		padding: 0.625em 0 0.938em 0;
+	}
+}
+
+.product-carousel-with-banners {
+	@include clearfix;
+	background: #f9f9f9;
+	padding: 3.438em 0 0;
+	margin-bottom: 5.125em;
+}
+
+.page-template-template-homepage-v1 {
+	.side-banners .banner {
+	    border: 2px solid #ebebeb;
+    	border-radius: 4px;
+
+    	&.small-banner .title{
+   		    font-size: 1.375em;
+    	}
+	}
+
+	.section-categories-carousel {
+		&.section-top-categories {
+			padding-bottom: 1.250em;
+		}
+	}
+
+	.banners {
+    	margin-bottom: 3.5em;
+	}
+}

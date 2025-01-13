@@ -1,0 +1,214 @@
+.section-product-carousel-with-featured-product {
+    margin-bottom: 0.625em;
+
+	.tab-product-carousel-with-featured-product {
+		@include make-row();
+	}
+
+	.tab-carousel-products,
+	.tab-featured-product {
+		@include make-col-ready();
+	}
+
+	.tab-featured-product {
+		z-index: 10;
+
+        @include media-breakpoint-up(md) {
+            @include make-col(3.5);
+        }
+
+        @include media-breakpoint-up(md) {
+            @include media-breakpoint-down(lg) {
+                @include make-col(5);
+            }
+        }
+
+        @include media-breakpoint-down(sm) {
+            margin-bottom: 16px;
+        }
+	}
+
+	.tab-carousel-products {
+
+        @include media-breakpoint-up(md) {
+            @include make-col(8.5);
+        }
+
+        @include media-breakpoint-up(md) {
+            @include media-breakpoint-down(lg) {
+                @include make-col(7);
+                overflow: hidden;
+            }
+        }
+
+        @include media-breakpoint-down(sm) {
+            order: 2;
+        }
+
+        .products .slick-slide {
+            > div {
+                @include media-breakpoint-down(sm) {
+                    display: flex;
+                }
+            }
+        }
+	}
+
+	&.full-width {
+        .products {
+            overflow: hidden;
+
+            .slick-slide {
+                > div {
+                    @include media-breakpoint-down(sm) {
+                        display: flex;
+                    }
+                }
+            }
+        }
+
+        .columns-5,.columns-6,.columns-7,.columns-8 {
+            &::before,&::after {display: none;}
+        }
+
+		.tab-featured-product {
+			@include make-col(3);
+
+            @include media-breakpoint-up(md) {
+                @include media-breakpoint-down(lg) {
+                    @include make-col(5);
+                }
+            }
+
+            .products:not(.slick-slider) .product {
+                @include media-breakpoint-down(lg) {
+                    @include make-col(12);
+                }
+            }
+
+            @include media-breakpoint-down(sm) {
+                @include make-col(12);
+                margin-bottom: 16px;
+            }
+
+            @include media-breakpoint-up(ni) {
+                @include media-breakpoint-down(ni) {
+                    @include make-col(4);
+                }
+            }
+
+            @include media-breakpoint-up(xl) {
+                @include media-breakpoint-down(xl) {
+                    @include make-col(4.5);
+                }
+            }
+		}
+
+		.tab-carousel-products {
+			@include make-col(9);
+
+            @include media-breakpoint-up(md) {
+                @include media-breakpoint-down(lg) {
+                    @include make-col(7);
+                }
+            }
+
+            @include media-breakpoint-up(xl) {
+                @include media-breakpoint-down(xl) {
+                    @include make-col(7.5);
+                }
+            }
+
+            @include media-breakpoint-up(ni) {
+                @include media-breakpoint-down(ni) {
+                    @include make-col(8);
+                }
+            }
+
+            @include media-breakpoint-down(sm) {
+                @include make-col(12);
+                order: 2;
+            }
+		}
+	}
+
+	.tab-content {
+		.product-featured,
+		.tab-product-featured {
+
+			img {
+			    margin: 0 auto 0.571em;
+
+                @include media-breakpoint-up(uw) {
+                    min-width: 384px;
+                }
+			}
+
+			.star-rating {
+				font-size: 1.143em;
+				margin-bottom: 1.375em;
+				letter-spacing: 3px;
+				width: 6em #{"/*rtl:6.2em */"};
+			}
+
+			h2,
+			h3,
+			.woocommerce-loop-product__title {
+				font-size: 1.071em;
+				max-width: 320px;
+    			margin-bottom: 0.667em;
+			}
+
+			.price {
+				font-size: 1.286em;
+			}
+		}
+
+		.tab-product-featured {
+			border-color: transparent;
+		}
+	}
+
+	&.type-2 {
+		.section-header {
+			border-bottom: medium none;
+			display: block;
+			text-align: center;
+		}
+
+		.section-title {
+			line-height: 1.250em;
+			font-weight: 500;
+
+			&:before {
+	    		border-top: 2px solid transparent;
+			    content: " ";
+			    display: block;
+			    width: 38px;
+			    padding-bottom: 0.292em;
+			    padding-top: 0.417em;
+			    margin: 0 auto;
+	    	}
+		}
+
+		.nav {
+			border-bottom: 1px solid #ebebeb;
+		    padding-top: 1.5em;
+		}
+	}
+
+	&.featured-product-left {
+		.tab-carousel-products {
+			order: 2;
+		}
+
+		.tab-featured-product {
+			order: 1;
+			margin-bottom: 2.143em;
+		}
+
+		.slick-track .slick-active .product::after {
+			display: none;
+		}
+	}
+}

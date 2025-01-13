@@ -1,0 +1,391 @@
+/**
+ * Comments
+ */
+
+.comment-content a {
+	word-wrap: break-word;
+}
+
+.comments-title,
+.pings-title {
+
+	color: #090909;
+    font-size: 1.500em;
+    font-weight: 400;
+    border-bottom: 1px solid #ebebeb;
+    margin-bottom: 0.833em;
+    padding-bottom: 0.542em;
+    line-height: 1.208em;
+    position: relative;
+
+    &:after {
+    	bottom: -1px;
+	    content: " ";
+	    display: block;
+	    height: 2px;
+	    position: absolute;
+	    width: 3.684em;
+    }
+}
+
+
+.comment-reply-title {
+	font-size: 1.563em;
+	line-height: 1.600em;
+	position: relative;
+	letter-spacing: -0.01em;
+	font-weight: 400;
+	margin-bottom: 1.5em;
+	border-bottom: 1px solid #dddddd;
+	padding-bottom: 0.6em;
+	color: #090909;
+
+	padding-bottom: 0.48em;
+    font-size: 1.5em;
+
+	&:after {
+		bottom: -1px;
+		content: " ";
+		display: block;
+		position: absolute;
+		width: 3.684em;
+		height: 2px;
+	}
+}
+
+.commentlist,
+.pings-list {
+	list-style: none;
+	margin-left: 0;
+
+	li.comment {
+		padding: 37px 0;
+		list-style: none;
+		clear: both;
+		@include clearfix;
+		border-bottom: 1px solid #ebebeb;
+	}
+
+	li {
+		.comment_container {
+			> img {
+				display: none;
+			}
+
+			.comment-text {
+				@include media-breakpoint-up(md) {
+					display: flex;
+					flex-wrap: wrap;
+				}
+
+				.description {
+					font-weight: 300;
+					@include media-breakpoint-up(xs) {
+						@include media-breakpoint-down(xs) {
+							width: 100%;
+							margin-bottom: 1em;
+						}
+					}
+
+					@include media-breakpoint-up(sm) {
+						@include make-col(8);
+					}
+
+					p:last-of-type {
+						margin-bottom: 0;
+					}
+				}
+
+				.comment-content {
+					@include make-col(8);
+					@include media-breakpoint-down(xs) {
+						@include make-col(12);
+					}
+
+					.description {
+						@include make-col(12);
+					}
+
+					table {
+						@include make-table;
+					}
+
+					ul,ol {
+						margin-bottom: 1.4em;
+					}
+
+					blockquote {
+						border-left: 0 none;
+					    font-size: inherit;
+					    margin: 0 0 1.429em 2.714em;
+					    padding: 0;
+						font-style: italic;
+
+						&::before {
+							color: #a7a7a7;
+							content: "\f10d";
+							float: left;
+							font-family: FontAwesome;
+							font-size: 1.786em;
+							margin-left: -1.5em;
+							margin-top: -.4em;
+						}
+					}
+				}
+
+				.star-rating {
+					letter-spacing: 3px;
+					width: 6em #{"/*rtl:6.2em */"};
+				}
+			}
+
+			.star-rating {
+				order: 3;
+
+			}
+		}
+
+		&:last-child {
+			border-bottom: none;
+			padding-bottom: 0;
+		}
+
+		.avatar {
+			float: left;
+			width: ms(4);
+			height: auto;
+			margin-right: 1em;
+		}
+
+		p.meta,div.meta {
+			margin-bottom: 1em;
+			display: flex;
+			flex-direction: column;
+			@include make-col(4);
+			@include media-breakpoint-down(xs) {
+				@include make-col(12);
+				height: 50px;
+			}
+
+			.woocommerce-review__author {
+				font-size: 18px;
+				font-weight: normal;
+				color: #626060;
+				line-height: 1.2;
+			}
+
+			.woocommerce-review__published-date {
+				font-size: 14px;
+				color: #aeaeae;
+				font-weight: 400;
+			}
+
+			.woocommerce-review__dash {
+				display: none;
+			}
+		}
+
+		ol.children {
+			margin-top: 2.2em;
+			border-top: 1px solid #ebebeb;
+		}
+	}
+}
+
+.comments-area {
+	.commentlist li div.meta,
+	.commentlist li p.meta,
+	.pings-list li div.meta,
+	.pings-list li p.meta {
+		@include make-col(2.5);
+
+		@include media-breakpoint-down(xs) {
+			@include make-col(12);
+		}
+	}
+
+	.commentlist li .comment_container>img,
+	.pings-list li .comment_container>img {
+		display: block;
+	}
+
+	.commentlist li .avatar,
+	.pings-list li .avatar {
+		width: 3em;
+	}
+
+	.comment-navigation {
+		display: flex;
+		justify-content: space-between;
+		padding: 40px 0;
+	}
+
+	.commentlist li .comment_container .comment-text .comment-content,
+	.pings-list li .comment_container .comment-text .comment-content {
+		@include make-col(9.5);
+
+		@include media-breakpoint-down(xs) {
+			@include make-col(12);
+		}
+	}
+}
+
+.commentlist,
+.pings-list{
+	.comment,
+	.pingback {
+		.reply{
+			text-align: right;
+			padding-top: 1em;
+			font-size: 14px;
+
+			a {
+				&:hover,
+				&:focus {
+					text-decoration: none;
+				}
+			}
+
+			.comment-edit-link + .comment-reply-link {
+				&::before {
+					content: "/";
+					padding: 0 4px 0 2px;
+				}
+			}
+		}
+
+
+		#respond{
+			background: #f5f5f5;
+			padding: 1.438em;
+			margin-top: 1.250em;
+			margin-left: auto;
+			@include make-col(9.5);
+
+			.comment-reply-title {
+				font-size: 1.25em;
+
+				small {
+					float: right;
+					font-size: 0.750em;
+
+					a {
+						&:hover,
+						&:focus {
+							text-decoration: none;
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+
+#respond{
+	&.comment-respond {
+		padding: 0;
+
+		.comment-reply-title {
+			display: block;
+			font-size: 24px;
+			padding-bottom: .2em;
+			margin-bottom: 30px;
+		}
+
+		.comment-form {
+			display: flex;
+			flex-wrap: wrap;
+
+			label {
+				font-weight: normal;
+				color: #626060;
+				display: block;
+			}
+
+			.comment-notes,
+			.comment-form-rating,
+			.comment-form-comment,
+			.form-submit,
+			.comment-form-url {
+				@include make-col(12);
+			}
+
+			.comment-form-author,
+			.comment-form-email {
+				@include make-col(6);
+				margin-right: 0;
+
+				input {
+					width: 100%;
+				}
+			}
+
+			.comment-form-author {
+				order: 3;
+				padding-right: 15px;
+			}
+
+			.comment-form-email {
+				order: 4;
+				padding-left: 15px;
+			}
+
+			.comment-form-comment {
+				order: 6;
+				margin-bottom: 27px;
+			}
+
+			.comment-form-url {
+				order: 5;
+			}
+
+			.form-submit {
+				order: 7;
+
+				input[type=submit] {
+					background-color: transparent;
+					font-size: 14px;
+					border: 2px solid;
+					border-radius: 50px;
+					padding: 5px 40px;
+
+					&:hover {
+						color: #fff;
+					}
+				}
+			}
+
+			> p{
+				margin-bottom: 1.300em;
+
+				&.logged-in-as {
+					font-size: 14px;
+				}
+
+				label {
+					color: #626060;
+				    font-weight: 400;
+				    letter-spacing: -0.01em;
+				    line-height: 1.5em;
+				    margin-bottom: 0.5em;
+				}
+
+				input[type="submit"] {
+					border-radius: 1.438em;
+					color: #fff;
+				}
+
+				.input-text,
+				input[type="email"],
+				input[type="password"],
+				input[type="search"],
+				input[type="text"],
+				input[type="url"],
+				textarea {
+				 	width: 100%;
+				}
+			}
+		}
+	}
+}

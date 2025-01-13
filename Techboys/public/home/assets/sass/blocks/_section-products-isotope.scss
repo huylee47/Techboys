@@ -1,0 +1,251 @@
+.section-products-isotope,
+.section-products-isotope-alt {
+    background-color: #f6f7f7;
+    padding: 50px 0;
+
+    .isotope-products {
+    	.section-header {
+    		.pre-title {
+    			font-size: 1.125em;
+    			color: #090909;
+    			letter-spacing: -0.01em;
+    			font-weight: 300;
+                margin-bottom: 25px;
+
+                @include media-breakpoint-up(md) {
+                    @include media-breakpoint-down(xl) {
+                        font-size: 1em;
+                        margin-bottom: 18px;
+                    }
+                }
+    		}
+
+            @include media-breakpoint-down(sm) {
+				margin-bottom: 50px;
+			}
+
+    		.section-title {
+    			font-size: 1.875em;
+    			line-height: 1.267em;
+    			color: #090909;
+    			letter-spacing: -0.01em;
+    			font-weight: 300;
+                margin-bottom: 22px;
+
+                @include media-breakpoint-up(xl) {
+                    @include media-breakpoint-down(xl) {
+                        font-size: 1.3em;
+                    }
+                }
+
+                @include media-breakpoint-up(md) {
+                    @include media-breakpoint-down(md) {
+                        font-size: 1.3em;
+                    }
+                }
+
+    			strong {
+    				font-weight: 500;
+    				font-size: 1.200em;
+    				line-height: 1.056em;
+    			}
+    		}
+
+            .marketing-text {
+                font-size: 1.250em;
+                color: #090909;
+                font-weight: 100;
+                margin-bottom: 12px;
+
+                @include media-breakpoint-up(md) {
+                    @include media-breakpoint-down(xl) {
+                        font-size: 1em;
+                    }
+                }
+            }
+
+            .action {
+                font-size: 0.875em;
+                line-height: 1em;
+                padding: 0.929em 2.429em 0.643em;
+                border-radius: 32px;
+                font-weight: 500;
+            }
+    	}
+
+        .deal-countdown-timer {
+            margin-bottom: 1.938em;
+
+            @include media-breakpoint-up(xl) {
+                @include media-breakpoint-down(xl) {
+                    margin-bottom: 1.2em;
+                }
+            }
+
+            .deal-countdown {
+                display: flex;
+                text-align: center;
+                min-width: 230px;
+                //justify-content: space-between;
+
+                > span {
+                    //flex-wrap: wrap;
+                    display: flex;
+                    color: #383838;
+                    align-items: center;
+
+                    @include media-breakpoint-up(xl) {
+                        @include media-breakpoint-down(xl) {
+                            flex-wrap: wrap;
+                            justify-content: center;
+                            width: 50px;
+                        }
+                    }
+
+                    b {
+        				font-size: 0.625em;
+        				text-transform: uppercase;
+        				font-weight: 300;
+                        color: #383838;
+
+                        @include media-breakpoint-up(xl) {
+                            @include media-breakpoint-down(xl) {
+                                margin-left: 0px;
+                            }
+                        }
+
+        			}
+
+        			.value {
+        				font-size: 1.125em;
+        				background-color: #fff;
+                        border: 1px solid #cecece;
+                        border-radius: 50%;
+        				width: 50px;
+        				height: 50px;
+        				line-height: 2.556em;
+                        font-weight: 500;
+                        font-size: 20px;
+        			}
+                }
+        	}
+
+
+        }
+    }
+
+    .products {
+        margin: 0;
+
+        .clear {
+            display: none;
+        }
+
+        .product {
+            .onsale {
+                right: 25px;
+                top: 25px;
+                z-index: 1;
+            }
+
+            .clear,
+            .onsale {
+                & + .woocommerce-LoopProduct-link {
+                    @include media-breakpoint-up(md) {
+                        flex-grow: 1;
+                        display: flex;
+                        overflow: hidden;
+                    }
+                }
+            }
+        }
+
+        h3 {
+            max-width: 250px;
+        }
+    }
+
+    .row-1 {
+        .products {
+            -webkit-grid-auto-flow: column;
+            -ms-grid-auto-flow: column;
+                grid-auto-flow: column;
+
+            .product {
+                &:nth-child(3) {
+                    -webkit-grid-column: span 2;
+                    -ms-grid-column: span 2;
+                        grid-column: span 2;
+                    -webkit-grid-row: span 2;
+                    -ms-grid-row: span 2;
+                        grid-row: span 2;
+                }
+
+                &:nth-child(6) {
+                    -webkit-grid-column: span 1;
+                    -ms-grid-column: span 1;
+                        grid-column: span 1;
+                    -webkit-grid-row: span 2;
+                    -ms-grid-row: span 2;
+                        grid-row: span 2;
+
+                    @include media-breakpoint-up(md) {
+                        @include media-breakpoint-down(lg) {
+            				display: none;
+            			}
+            		}
+                }
+            }
+        }
+    }
+
+    .row-1,
+    .row-2,
+    .row-3 {
+        .products {
+            @include media-breakpoint-up(md) {
+                display: -ms-grid;
+                display: -webkit-grid;
+                display: grid;
+            }
+
+            @include media-breakpoint-down(sm) {
+                display: flex;
+            }
+
+            .product {
+                max-width: 100%;
+                border: none;
+
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+
+                @include media-breakpoint-down(sm) {
+					margin-bottom: 20px;
+				}
+
+                .woocommerce-LoopProduct-link {
+                    img {
+                        margin: auto;
+                    }
+
+                    & + .woocommerce-LoopProduct-link {
+                        margin-top: 12px;
+                    }
+
+                }
+
+                .hover-area {
+                    border: none;
+                    left: 0;
+                    right: 0;
+                }
+            }
+        }
+    }
+}
+
+.section-products-isotope {
+    padding: 3em 0;
+}

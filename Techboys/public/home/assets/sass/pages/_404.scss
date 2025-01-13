@@ -1,0 +1,63 @@
+/**
+ * 404 Styles
+ */
+.error404 {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	padding: 0 0 5em;
+
+	.title {
+		font-size: 12.500em;
+		line-height: 1em;
+		margin-bottom: 0;
+	}
+
+	.lead {
+		font-size: 1.875em;
+	}
+
+	.error-text {
+		margin-bottom: 0;
+	}
+
+	.search-form {
+		&:before {
+			display: none;
+		}
+		input[type=text] {
+			width: 50%;
+			padding: 9px;
+		}
+	}
+}
+
+.error-page {
+	#content {
+		#primary {
+			margin-bottom: 0;
+		}
+	}
+
+	.site-main {
+		margin-bottom: 0;
+	}
+}
+
+@include media-breakpoint-up(xs) {
+	@include media-breakpoint-down(md) {
+		.error404 {
+			padding: 3em 0;
+			
+			.title {
+				font-size: 5em;
+			}
+
+			.lead {
+				font-size: 1em;
+			}
+		}
+	}
+}

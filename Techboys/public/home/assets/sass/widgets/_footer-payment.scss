@@ -1,0 +1,50 @@
+.footer-payment-info {
+	.icon i {
+		margin-right: 0.476em;
+		color: #444;
+	}
+
+	.icon .tm {
+		font-size: 2.667em;
+	}
+
+	.footer-payment-info-title {
+		color: #1f1f1f;
+		text-transform: uppercase;
+		letter-spacing: -0.023em;
+		line-height: 1.533em;
+		font-weight: 500;
+		display: block;
+		margin-bottom: 1.200em;
+		margin-top: 0.333em;
+		font-size: 1em;
+	}
+
+	.footer-payment-icons {
+		margin-bottom: 2.333em;
+	}
+
+	.list-payment-icons {
+		margin-left: 0;
+
+		.nav-item + .nav-item {
+			margin-left: 1.533em;
+		}
+
+		.payment-icon-image {
+			max-height: 2em;
+			width: auto;
+		}
+	}
+
+	.footer-secure-by-info {
+		.footer-secured-by-title {
+			font-size: 1em;
+			line-height: 1.2em;
+			color: #626262;
+			letter-spacing: -0.015em;
+			margin: 0 0 1em 0;
+			font-weight: 400;
+		}
+	}
+}

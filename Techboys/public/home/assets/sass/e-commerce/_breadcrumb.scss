@@ -1,0 +1,40 @@
+/**
+ * Breadcrumbs
+ */
+.woocommerce-breadcrumb {
+    width: 100%;
+    padding-left: 1em;
+    margin-bottom: 3.333em;
+    font-size: 0.938em;
+    color: #444444;
+    font-weight: 300;
+    margin-top: 0.667em;
+
+    a {
+    	color: #444444;
+    }
+
+    .delimiter {
+    	margin: 0px 1.5em;
+   	    font-size: 10px #{"/*rtl:14px*/"};
+    }
+
+    span.delimiter+a {
+    	background-color: #f5f5f5;
+    	padding: 0.6em 1.067em;
+    	border-radius: 4px;
+
+        @include media-breakpoint-down(sm) {
+            margin-bottom: 5px;
+            display: inline-block;
+    	}
+
+    	&:hover {
+    		background-color: #e8e8e8;
+    	}
+    }
+
+    @include media-breakpoint-down(lg) {
+        display: none;
+    }
+}

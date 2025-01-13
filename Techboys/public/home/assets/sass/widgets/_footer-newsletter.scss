@@ -1,0 +1,71 @@
+.footer-newsletter {
+	.newsletter-title {
+		font-size: 1.400em;
+		line-height: 1.095em;
+		letter-spacing: -0.01em;
+		margin: 0 0 0.2em 0;
+	}
+
+	.newsletter-marketing-text {
+		font-size: 1em;
+		color: #626262;
+		line-height: 1.533em;
+		display: block;
+		letter-spacing: -0.01em;
+	}
+
+	.newsletter-header, .newsletter-body {
+		float: left;
+	}
+
+	.newsletter-header {
+		margin-right: 3.667em;
+	}
+
+	.footer-newsletter-icon {
+		font-size: 2.667em;
+		color: #1f1f1f;
+		margin-right: 0.550em;
+
+		&+.media-body {
+			flex:1 1 auto;
+		}
+	}
+
+	.newsletter-body {
+		form {
+			margin-bottom: 0;
+		}
+	}
+
+	input[type="text"] {
+		background-color: #fff;
+		box-shadow: none;
+		padding: 1.067em;
+		color: #939393;
+		font-size: 1em;
+		border: 2px solid #e7e7e7;
+		border-top-left-radius: 5px;
+		border-bottom-left-radius: 5px;
+		line-height: 1em;
+		width: 27.533em;
+	}
+
+	input[type="text"] + .button,
+	input[type="text"] + button,
+	input[type="text"] + input[type=button],
+	input[type="text"] + input[type=submit] {
+		margin-left: -0.333em;
+		padding-top: 1em;
+		padding-bottom: 1em;
+		border-top-right-radius: 5px;
+		border-bottom-right-radius: 5px;
+		border-bottom-left-radius: 0;
+		border-top-left-radius: 0;
+	}
+	
+	.newsletter-form .button {
+		padding-right: 41px;
+    	padding-left: 2.733em;
+    }
+}

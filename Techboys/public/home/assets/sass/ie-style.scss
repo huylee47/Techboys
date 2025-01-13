@@ -1,0 +1,36 @@
+.section-products-isotope {
+    .row-1 {
+        .products {
+            .product {
+                margin-right: 20px;
+
+                &:nth-child(4) {
+                    margin-bottom: 20px;
+                }
+            }
+        }
+    }
+}
+
+.section-products-isotope-alt {
+    .row-1,
+    .row-2 {
+        .products {
+            .product {
+                margin-right: 10px;
+            }
+        }
+    }
+
+    .row-1 {
+        .products {
+            .product {
+                &:nth-child(4),
+                &:nth-child(7),
+                &:nth-child(9) {
+                    margin-bottom: 10px;
+                }
+            }
+        }
+    }
+}

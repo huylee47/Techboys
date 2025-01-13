@@ -1,0 +1,203 @@
+.section-categories-filter {
+	background: #f5f5f5;
+	padding: 5.8em 0px 5.438em;
+	@include clearfix;
+	margin-top: 5.5em;
+	margin-bottom: 2.625em;
+
+	.section-header {
+		text-align: center;
+	}
+
+	.section-title {
+		font-size: 3.000em;
+		line-height: 0.958em;
+		color: #090909;
+		letter-spacing: -0.01em;
+
+		strong {
+			font-weight: 500;
+		}
+	}
+
+	.categories {
+		display: flex;
+		justify-content: center;
+		margin: 0 auto;
+
+		@include media-breakpoint-up(md) {
+			@include make-col(3);
+		}
+
+		.select-picker {
+			flex-grow: 1;
+			padding: 0;
+			border: 1px solid #ebebeb;
+			border-radius: 5px;
+			margin-bottom: 3.5em;
+
+			& + .select-picker {
+				margin-left: 1.250em;
+			}
+
+			select {
+		        max-width: 100%;
+				padding: 0 1.200em 0 1.333em;
+		        font-size: 1.125em;
+				color: #444444;
+				width: 100%;
+		        background: #fff;
+				background-color: #fff;
+		        background-repeat: no-repeat;
+		        background-position: right 1.2em center;
+		        background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAAECAYAAABCxiV9AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAHVJREFUeNpidHBwuPzt29ddfHz8xQxQAOTPYmfnsGX6////Nl5evsIPH95PB0kA6WWcnFwp//79W8zo4uLC8OfP70pmZpaWHz9+vOfg4BD8+/dPNgsL6wxmJSUlBiYm5iNAiY9sbGxu379/S+Hg4JwHMgUgwAD3NS8TSbhyqAAAAABJRU5ErkJggg==);
+
+		        &:focus {
+		            outline: none;
+		        }
+		    }
+		}
+	}
+
+
+	.categories-filter-products {
+		.columns-4 {
+			.products:not(.slick-slider) {
+				.product {
+					@include make-col(2.86);
+
+					@include media-breakpoint-up(md) {
+						@include media-breakpoint-down(lg) {
+							@include make-col(3.8);
+						}
+					}
+
+					@include media-breakpoint-down(sm) {
+						@include make-col(12);
+					}
+				}
+			}
+		}
+
+		.products {
+			display: flex;
+			flex-wrap: wrap;
+			margin: 0 -10px;
+			position: relative;
+
+			.product {
+				background: #fff none repeat scroll 0 0;
+			    padding: 1.786em 2.143em;
+			    text-align: center;
+				border: 2px solid transparent;
+
+				@include media-breakpoint-up(xxl) {
+					margin: 0 10px 20px;
+				}
+
+				@include media-breakpoint-up(md) {
+					@include media-breakpoint-down(lg) {
+						margin: 0 6px 10px;
+					}
+				}
+
+				@include media-breakpoint-up(xl) {
+		            @include media-breakpoint-down(xl) {
+						margin: 0 6px 10px;
+					}
+				}
+
+				@include media-breakpoint-down(sm) {
+					margin-bottom: 16px;
+				}
+
+			    .onsale {
+				    position: absolute;
+				    right: 0;
+				    background-color: #62ab00;
+				    color: #fff;
+				    font-size: 0.857em;
+				    line-height: 1.833em;
+				    border-radius: 4px;
+				    padding: 0 0.667em;
+				    display: none;
+				}
+
+				.woocommerce-LoopProduct-link {
+					display: block;
+
+					img {
+						margin: 0 auto 6px;
+						width: auto;
+					}
+				}
+
+				.price {
+					font-size: 1.286em;
+					line-height: 2.111em;
+					margin-bottom: 0;
+
+					del {
+						font-size: 0.833em;
+						line-height: 2.533em;
+					}
+				}
+
+				h3 {
+					font-size: 1.071em;
+					max-width: 240px;
+					font-weight: 400;
+					margin-bottom: 1.6em;
+				}
+
+				.hover-area {
+					display: block;
+					opacity: 1;
+					transform: none;
+					position: relative;
+					z-index: 1;
+					top: 0;
+					border: none;
+					padding: 0;
+				}
+
+				.techmarket-product-rating,
+				.star-rating {
+					display: none;
+				}
+
+				.star-rating + .button,
+				.woocommerce-LoopProduct-link + .button{
+					@include media-breakpoint-down(xl) {
+						margin-top: 16px;
+					}
+				}
+
+				.button {
+					margin-left: 1.4em;
+					margin-right: 1.4em;
+					margin-bottom: 0px;
+
+				    &:hover {
+					    color: #fff;
+				    }
+				}
+
+				&:hover {
+					border: 2px solid #ebebeb;
+				    box-shadow: 0 0 18px rgba(1, 1, 1, 0.2);
+				    position: relative;
+				    z-index: 9;
+
+				    .hover-area {
+				    	border: none;
+				    }
+				}
+			}
+		}
+	}
+}
+
+.page-template-template-landingpage-v2 .section-categories-filter .section-title {
+	font-weight: 300;
+}

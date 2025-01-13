@@ -1,0 +1,118 @@
+// Above 34em (544px)
+//from 320px to  upto 542px
+@media (max-width: 33.9em) {
+
+	//Blog
+
+	.post-author-info {
+		.media {
+			display: block;
+			text-align: center;
+
+			.media-left {
+				padding-right: 0;
+
+				a {
+					display: inline-block;
+				}
+
+			}
+		}
+	}
+
+	.commentlist,
+	.pings-list {
+	  	li {
+	  		div.meta,
+	  		p.meta {
+	  			display: block;
+	  			@include make-col(12);
+	  		}
+
+	  		.comment_container {
+	  			.comment-text {
+	  				.comment-content {
+	  					@include make-col(12);
+	  				}
+	  			}
+	  		}
+	  	}
+
+	  	.comment {
+	  		#respond {
+	  			@include make-col(12);
+	  		}
+	  	}
+	}
+
+	//FAQ
+
+	.faq-accordion-wrap {
+	 	.faq-accordion {
+	 		.kc_accordion_header {
+		 		font-size: 1.250em;
+		 	}
+	 	}
+	}
+
+
+	 //Cart
+
+	 table.cart {
+
+		td.actions {
+
+			div.coupon {
+				float: none !important;
+
+				.button[name="apply_coupon"]{
+					margin: 1.250em 0;
+
+				}
+
+				.button[name="apply_coupon"],
+				.input-text,
+				input[type="text"] {
+					width: 100%;
+				}
+			}
+
+			.button[name="update_cart"] {
+				width: 100%;
+			}
+		}
+	}
+
+
+	//Add to compare
+
+	.compare-empty h1 {
+		font-size: 2.5em;
+		line-height: 1.4em;
+	}
+
+	//Footer
+
+
+	.footer-newsletter {
+
+		.newsletter-header {
+			margin-right: 0;
+			text-align: center;
+		}
+
+		.newsletter-body {
+			form {
+				display: flex;
+			}
+		}
+	}
+
+
+	.site-info {
+		.col-full {
+			flex-direction: column;
+			align-items: flex-start;
+		}
+	}
+}

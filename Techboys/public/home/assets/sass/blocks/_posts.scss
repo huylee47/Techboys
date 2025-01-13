@@ -1,0 +1,342 @@
+.hentry {
+	.byline,
+	.updated:not(.published) {
+		display: none;
+	}
+}
+
+embed,
+iframe,
+object,
+video {
+	max-width: 100%;
+	border: none;
+}
+
+article,
+article.post {
+
+	.entry-content {
+
+		p{
+			margin-bottom: 2.143em;
+		}
+
+		p,
+		ol,
+		ul {
+			line-height: 1.714em;
+
+		}
+
+		p.highlight,
+		ul.highlight,
+		ol.highlight {
+			font-size: 1.143em;
+			font-weight: 500;
+		}
+
+		blockquote {
+			border-left: 0 none;
+		    font-size: inherit;
+		    margin: 0 0 1.429em 2.714em;
+		    padding: 0;
+
+		    &:before {
+		    	color: #a7a7a7;
+			    content: "\f10d";
+			    float: left;
+			    font-family: FontAwesome;
+			    font-size: 1.786em;
+			    margin-left: -1.5em;
+			    margin-top: -0.4em;
+		    }
+
+		    p {
+		    	font-style: italic;
+		    	font-size: 1.071em;
+		    }
+		}
+
+		figure,
+		.wp-caption {
+			img {
+				margin-bottom: 10px;
+				border-radius: 0;
+			}
+		}
+
+		.gallery {
+			figure.gallery-item {
+				display: inline-block;
+			}
+		}
+	}
+
+	.more-link {
+		@extend .button;
+		font-size: 14px;
+	}
+
+	table {
+		@include make-table;
+	}
+}
+
+figure.gallery-item {
+	position: relative;
+
+	.gallery-caption {
+		position: absolute;
+		background: #000;
+		background: rgba(0,0,0,.75);
+		color: #fff;
+		padding: .625rem 1.25rem;
+		opacity: 0;
+		-webkit-transition: all .6s ease;
+		-moz-transition: all .6s ease;
+		-o-transition: all .6s ease;
+		bottom: 0;
+		right: -30%;
+	}
+
+	&:hover {
+		.gallery-caption {
+			opacity: 1;
+		    right: 0;
+		}
+	}
+}
+
+.single-post {
+	article.post {
+		margin-bottom: 0;
+
+		.entry-header {
+			position: relative;
+
+			h1.entry-title {
+				.comments-link {
+				 float: right;
+
+				    a {
+				    	font-size: 0.560em;
+				    	display: inline-block;
+				    	vertical-align: middle;
+				    }
+				}
+			}
+
+		}
+	}
+}
+
+.post-author-info {
+	background: #f5f5f5;
+	padding: 1.357em 1.143em;
+	margin-bottom: 4.5em;
+	margin-top: 2.500em;
+
+	.media {
+		.media-left {
+			padding-right: 1.786em;
+		}
+
+		img {
+			max-width: none;
+		}
+
+		.media-body {
+			h4.media-heading {
+				font-size: 1.188em;
+				line-height: 1.474em;
+				margin-bottom: 1.071em;
+				margin-top: 0.526em;
+				font-weight: 400;
+
+				a {
+					color: #090909;
+				}
+			}
+
+			p{
+				color: #555353;
+				line-height: 1.714em;
+
+				&:last-child {
+					margin-bottom: 0;
+				}
+			}
+		}
+	}
+}
+
+.post-navigation {
+
+	.nav-links {
+		@include clearfix();
+
+		.nav-previous {
+			float: left;
+		}
+
+		.nav-next {
+			float: right;
+			text-align: right;
+		}
+
+		.nav-previous,
+		.nav-next {
+			width: 48%;
+			a {
+				color: #626060;
+
+
+				&:hover,
+				&:focus {
+					text-decoration: none;
+					color: #484747;
+					transform: none !important;
+				}
+			}
+		}
+	}
+}
+
+.site-main {
+	nav.navigation {
+		&.post-navigation {
+			margin-bottom: 4em;
+
+			.nav-next,
+			.nav-previous {
+				a {
+					padding: 0.618047em 0;
+
+					&:before,
+					&:after {
+						content: none;
+					}
+
+					&:hover {
+						transform: none;
+					}
+				}
+			}
+		}
+	}
+}
+
+/*grid*/
+.blog-grid {
+	.site-main {
+		@include media-breakpoint-up(md) {
+			margin-left: -15px;
+			margin-right: -15px;
+		}
+
+		 nav.navigation {
+		 	@include media-breakpoint-up(md) {
+				margin: 0 1em 1em;
+			}
+		 }
+	}
+
+	article.post {
+		margin-bottom: 3.750em;
+		@include make-col(12);
+
+		@include media-breakpoint-up(md) {
+			@include make-col(6);
+			@include make-col-ready;
+			float: left;
+		}
+
+		@include media-breakpoint-up(lg) {
+			@include make-col(4);
+			@include make-col-ready;
+			//float: left;
+
+			// &:nth-child(3n) {
+			//     padding-right: 0;
+			// }
+
+			&:nth-child(3n+1) {
+			    clear: both;
+			}
+		}
+
+		.entry-header {
+			h1.entry-title {
+				padding-bottom: 0.2em;
+				margin-bottom: 0.2em;
+			}
+		}
+
+		&.format-quote,
+		&.format-link {
+			margin-left: 15px;
+			margin-right: 15px;
+		}
+	}
+}
+
+/*list*/
+.blog-list {
+	article.post {
+		@include make-row();
+		margin-bottom: 4em;
+
+		@include media-breakpoint-up(lg) {
+			margin-bottom: 5.438em;
+		}
+
+		.media-attachment {
+			@include make-col(12);
+			@include make-col-ready;
+
+			@include media-breakpoint-up(md) {
+				@include make-col(4);
+
+				margin-bottom: 0;
+
+				img {
+					margin-bottom: 0;
+				}
+			}
+
+
+			width: 100%;
+
+
+		}
+
+		.content-body{
+			@include make-col(12);
+			@include make-col-ready;
+
+			@include media-breakpoint-up(md) {
+				@include make-col(8);
+			}
+
+		}
+
+		.entry-header {
+			h1.entry-title {
+				padding-bottom: 0.240em;
+				margin-bottom: 0.240em;
+			}
+		}
+
+		&.format-quote,
+		&.format-link {
+			margin-left: 0;
+			margin-right: 0;
+		}
+	}
+
+	article.format-status {
+		padding-left: 15px;
+		padding-right: 15px;
+	}
+}

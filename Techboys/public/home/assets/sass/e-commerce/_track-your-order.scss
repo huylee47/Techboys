@@ -1,0 +1,64 @@
+form.track_order {
+	@include make-row;
+
+	@include media-breakpoint-up(xxl) {
+		padding-left: 16.875em;
+		padding-right: 16.875em;
+	}
+
+	@include media-breakpoint-up(xl) {
+		@include media-breakpoint-down(ni) {
+			padding-left: 6em;
+			padding-right: 6em;
+		}
+	}
+
+	> p:not(.form-row) {
+		@include make-col-ready;
+		@include make-col(11);
+		margin: 0 auto;
+		text-align: center;
+		margin-bottom: 4em;
+	}
+
+	.clear { display: none; }
+
+	.form-row-first, .form-row-last {
+		@include media-breakpoint-up(md) {
+			@include make-col(5);
+		}
+	}
+
+	.clear + .form-row {
+		@include media-breakpoint-up(md) {
+			@include make-col(2);
+		    display: flex;
+	    	align-items: flex-end;
+	    }
+	}
+
+	input[type="submit"] {
+		display: block;
+		font-size: 0.938em;
+		border-radius: 1.667em;
+		width: 100%;
+		padding: 0.733em 1.333em;
+		line-height: 1.7;
+
+		@media (max-width: 767px){
+			padding-left: 3.333em;
+			padding-right: 3.333em;
+			width: initial;
+		}
+	}
+}
+
+.track-order {
+	.hentry.type-page .entry-header {
+	    margin-bottom: 0px !important;
+
+	    h1.entry-title {
+		    margin-bottom: 0.205em;
+	    }
+	}
+}

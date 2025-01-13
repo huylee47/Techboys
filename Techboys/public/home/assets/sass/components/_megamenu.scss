@@ -1,0 +1,289 @@
+.yamm {
+	// reset positions
+	.nav, .collapse, .dropup, ul.navbar-nav > li.dropdown, >.dropdown {
+		position: static;
+	}
+
+	li.menu-item-has-children {
+		position: relative;
+
+		&.yamm-fw,
+		&.yamm-tfw,
+		&.yamm-hw {
+			position: static;
+		}
+	}
+
+	// propagate menu position under container for fw navbars
+	.container {
+		position: relative;
+	}
+
+	// by default aligns menu to left
+	.dropdown-menu {
+		left: auto;
+	}
+
+	.no-yamm-content-padding {
+		.yamm-content {
+			padding: 0;
+		}
+	}
+
+	// Fullwidth menu
+	.dropdown.yamm-fw .dropdown-menu {
+		left: 0;
+		right: 0;
+		position: absolute;
+		padding: 0;
+		animation-duration:200ms;
+
+		.menu-item {
+			list-style: none;
+		}
+
+		.menu {
+			padding: 0;
+		}
+	}
+
+	.yamm-content {
+		padding: 1.143em;
+		@include clearfix;
+
+		.wpb_content_element {
+			margin: 0;
+		}
+
+		.bg-yamm-content {
+			position: absolute;
+			right: 0;
+			bottom: 0;
+			-webkit-clip-path: polygon(0% 10%, 0% 100%, 10000% 100%);
+            clip-path: polygon(0% 10%, 0% 100%, 10000% 100%);
+
+			.kc-col-container {
+				display: block;
+			}
+		}
+	}
+
+	h1, h2, h3, h4, h5, h6, .nav-title {
+        font-weight: 500;
+        font-size: 1em;
+        padding: .571em 0;
+        min-height: 2.667em;
+	}
+
+	.nav-divider {
+		height: 1px;
+		border-top: 1px solid #ddd;
+		margin: 0.5em 0;
+	}
+
+	.nav-text, .nav-subtext {
+		display: block;
+	}
+
+	.nav-subtext {
+		font-size: 0.8em;
+		color: #aaa;
+		line-height: 1;
+	}
+}
+
+.primary-navigation,
+.navbar-primary {
+	position: static !important;
+
+	.yamm-fw .dropdown-menu {
+		width: 100%;
+	}
+
+	.yamm-tfw .dropdown-menu {
+		width: 600px;
+	}
+
+	.yamm-hw .dropdown-menu {
+		width: 450px;
+	}
+
+	.yamm .yamm-fw {
+		> .dropdown-menu {
+			left: 0;
+		    right: 0;
+			padding: 0 90px;
+			border: none;
+			z-index: 99999999;
+			background-color: transparent;
+
+			> li {
+				border: 1px solid rgba(0,0,0,.15);
+				background-color: #fff;
+				border-top-width: 2px;
+				border-style: solid;
+
+				.widget_nav_menu {
+					ul li:before {
+						display: none;
+					}
+				}
+			}
+		}
+	}
+
+	.yamm .yamm-fw,
+	.yamm .yamm-tfw,
+	.yamm .yamm-hw {
+		> .dropdown-menu {
+			> li {
+				.nav-title a {
+					font-weight: 500;
+				}
+
+				a {
+					line-height: 1;
+				}
+			}
+		}
+	}
+}
+
+.navbar-primary {
+	.nav .menu-item-has-children>.dropdown-menu {
+		top: 110%;
+	}
+}
+
+.departments-menu {
+	.yamm .dropdown.yamm-fw .dropdown-menu {
+		left: 100%;
+	}
+
+	.yamm-fw .dropdown-menu > li {
+		width: 900px;
+	}
+
+	.yamm-tfw .dropdown-menu > li {
+		width: 600px;
+	}
+
+	.yamm-hw .dropdown-menu > li {
+		width: 450px;
+	}
+
+	.yamm-content {
+		.widget_nav_menu ul li {
+			margin-bottom: 0;
+		}
+	}
+
+	.menu-item-has-children {
+		> .dropdown-menu {
+			opacity: 0;
+			visibility: hidden;
+			left: 99%;
+			border-top-width: 2px;
+			border-top-style: solid;
+			width: 0;
+			min-width: 0;
+		}
+	}
+}
+
+.primary-nav .nav-inline .dropdown-menu .yamm-content,
+.navbar-primary .nav-inline .dropdown-menu .yamm-content,
+.departments-menu .dropdown-menu .yamm-content {
+
+	ul {
+		padding: 0;
+		list-style: none;
+		margin: 0;
+
+		& + ul {
+			margin-top: 1.143em;
+		}
+	}
+
+	ul > li > a {
+		padding: 0.35em 1.429em;
+		display: block;
+		padding-left: 0;
+		color: #444;
+		text-decoration: none;
+
+		&:hover {
+			background-color: transparent;
+			color: darken(#444, 30%);
+		}
+	}
+
+	h1, h2, h3, h4, h5, h6, .nav-title {
+		font-weight: 500;
+        font-size: 1em;
+        padding: .571em 0;
+        min-height: 2.667em;
+        margin-bottom: 0;
+	}
+
+	ul + h1, ul + h2, ul + h3, ul + h4, ul + h5, ul + h6, li + .nav-title, .menu-item + .nav-title {
+		margin-top: 1.143em;
+	}
+}
+
+.departments-menu {
+	.yamm-fw .dropdown-menu > li {
+		width: 900px;
+	}
+
+	.yamm-tfw .dropdown-menu > li {
+		width: 596px;
+	}
+
+	.yamm-hw .dropdown-menu > li {
+		width: 446px;
+	}
+}
+
+.animate-dropdown {
+	&.show > .dropdown-menu,
+    .show > .dropdown-menu,
+    .show > .dropdown-menu > .dropdown-submenu > .dropdown-menu {
+        animation-name: slidenavAnimation;
+        animation-duration: 200ms;
+        animation-iteration-count: 1;
+        animation-timing-function: ease-out;
+        animation-fill-mode: forwards;
+        -webkit-animation-name: slidenavAnimation;
+        -webkit-animation-duration: 200ms;
+        -webkit-animation-iteration-count: 1;
+        -webkit-animation-timing-function: ease-out;
+        -webkit-animation-fill-mode: forwards;
+        -moz-animation-name: slidenavAnimation;
+        -moz-animation-duration: 200ms;
+        -moz-animation-iteration-count: 1;
+        -moz-animation-timing-function: ease-out;
+        -moz-animation-fill-mode: forwards;
+    }
+}
+
+@keyframes slidenavAnimation {
+    from {
+        margin-top: -30px;
+        opacity: 0;
+    }
+    to {
+        margin-top: 0;
+        opacity: 1;
+    }
+}
+@-webkit-keyframes slidenavAnimation {
+    from {
+        margin-top: -30px;
+        opacity: 0;
+    }
+    to {
+        margin-top: 0;
+        opacity: 1;
+    }
+}

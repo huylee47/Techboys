@@ -1,0 +1,35 @@
+.products {
+	.product-featured {
+		@include media-breakpoint-up(md) {
+			border: none;
+		}
+
+		.media-body {
+			.price {
+				font-size: 1.286em;
+    			line-height: 2.500em;
+    			margin-bottom: 0px;
+			}
+
+			h3 {
+				font-size: 1.072em;
+    			line-height: 1;
+    			padding-bottom: 1.133em;
+			}
+
+			.star-rating {
+				font-size: 1.214em;
+				margin-bottom: 1.235em;
+			}
+		}
+
+		.button,.added_to_cart {
+			margin-left: 3.214em;
+   			margin-right: 3.214em;
+		}
+	}
+
+	.product-featured:hover {
+		border: none;
+	}
+}

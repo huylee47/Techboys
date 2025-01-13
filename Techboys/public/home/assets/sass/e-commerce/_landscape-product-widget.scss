@@ -1,0 +1,155 @@
+.products {
+	.landscape-product-widget {
+		border: none;
+		padding: 0 0 2.857em 0;
+
+		@include media-breakpoint-down(sm) {
+			min-height: auto;
+		}
+
+		.media {
+			img {
+				max-width: 124px;
+				margin-bottom: 0;
+				margin-right: .8em;
+				border-radius: 0;
+
+				@include media-breakpoint-up(lg) {
+					@include media-breakpoint-down(xl) {
+						max-width: 84px;
+					}
+				}
+			}
+		}
+
+		.media-body {
+			text-align: left;
+			margin-top: 0.571em;
+
+			@include media-breakpoint-up(lg) {
+				@include media-breakpoint-down(xl) {
+					margin-top: 0;
+				}
+			}
+		}
+
+		.price {
+			font-size: 1.143em;
+    		margin-bottom: 0.125em;
+
+			del {
+				font-size: 0.875em;
+			}
+		}
+
+		h2,
+		h3,
+		.woocommerce-loop-product__title  {
+			font-size: 1em;
+			margin-bottom: 0.429em;
+			max-width: 240px;
+			margin-left: 0;
+		}
+
+		.star-rating {
+			font-size: 1.143em;
+		    letter-spacing: 3px;
+		    width: 6em #{"/*rtl:6.2em */"};
+		    float: left;
+	        margin-right: 0.563em;
+		}
+	}
+}
+
+.section-landscape-products-widget-carousel {
+
+	.section-header {
+		margin-bottom: 2.7em;
+		padding-bottom: 0.688em;
+	}
+
+	.section-title {
+		font-size: 1.5em;
+		line-height: 1.292em;
+		letter-spacing: -0.01em;
+		color: #090909;
+		font-weight: 400;
+		margin: 0;
+
+		@include media-breakpoint-up(md) {
+            @include media-breakpoint-down(lg) {
+				font-size: 1.2em;
+			}
+		}
+
+		& + .custom-slick-nav {
+			flex-shrink: 0;
+		}
+	}
+
+	&.type-2 {
+		.section-header {
+			margin-bottom: 3.25em;
+		}
+
+		.products {
+			.landscape-product-widget {
+				padding: 0 0 2.143em 0;
+
+				.media {
+					img {
+						max-width: 100px;
+					}
+				}
+
+				.media-body {
+					margin-top: 0.786em;
+				}
+
+				.price {
+					font-size: 1.071em;
+					margin-bottom: 0.4em;
+				}
+
+				.techmarket-product-rating,
+				.star-rating {
+					display: none;
+				}
+
+				@include media-breakpoint-up(xxl) {
+					&.first {
+						padding-right: 0.714em;
+					}
+
+					&.last {
+						padding-left: 0.714em;
+					}
+		        }
+			}
+		}
+	}
+
+	&.type-3 {
+		.section-header {
+			position: relative;
+			display: block;
+			padding-bottom: 0;
+			margin-bottom: 4.2em;
+
+			&:after {
+				bottom: -1px;
+				content: "";
+				display: block;
+				position: absolute;
+				width: 40px;
+				height: 2px;
+			}
+
+		}
+
+		.section-title {
+			font-size: 1.438em;
+			line-height: 2.2em;
+		}
+	}
+}

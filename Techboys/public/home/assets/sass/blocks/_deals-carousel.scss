@@ -1,0 +1,123 @@
+.section-deals-carousel-and-products-carousel-tabs {
+	.deals-carousel  {
+		&.column-1{
+			@include make-col-ready();
+			@include make-col(3.28);
+
+			@include media-breakpoint-down(md) {
+				@include make-col(12);
+			}
+
+
+			@media (min-width: 1024px) and (max-width: 1400px){
+				@include make-col(4);
+			}
+		}
+
+		z-index: 10;
+
+	}
+
+	.deals-carousel-inner-block{
+		border-width: 2px;
+		border-style:solid;
+		border-radius: 5px;
+		text-align: left;
+		padding: 1.572em 1.875em 1.715em 1.875em;
+
+		@media (max-width: 1023px) {
+			margin-bottom: 1.4em;
+		}
+
+		@media (min-width: 1140px) {
+			margin-bottom: 5em;
+		}
+
+		@include media-breakpoint-down(xs) {
+			.container-fluid {
+				padding: 0;
+			}
+		}
+
+		@include media-breakpoint-down(md) {
+			padding: 1.572em 1em 1.715em 1em;
+		}
+
+		.section-header {
+		    margin-bottom: 1.875em;
+		    padding-bottom: 0.60em;
+		}
+
+	    .section-title {
+	    	color: #090909;
+		    font-size: 1.500em;
+		    font-weight: 300;
+		    letter-spacing: -0.01em;
+		    line-height: 1.1em;
+		    margin: 0;
+
+		    strong {
+		    	font-weight: 500;
+		    }
+	    }
+
+		.products {
+			.sale-product-with-timer {
+				border: none;
+				padding: 0;
+
+				@media (min-width: 768px) and (max-width: 1023px) {
+					padding: 20px;
+				}
+			}
+		}
+		.section-footer {
+			border-top: 1px solid #e0e0e0;
+		    margin-top: 1.750em;
+		    padding-top: 1.313em;
+
+		}
+	}
+}
+
+.deals-carousel,
+.home-5-deals-carousel {
+	 .custom-slick-pagination {
+    	display: flex;
+    	justify-content: center;
+    	font-size: 0.938em;
+    	line-height: 1.200em;
+    	letter-spacing: -0.01em;
+
+		.slider-prev ,
+		.slider-next {
+			i {
+				display: inline-block;
+				vertical-align: top;
+			}
+		}
+
+    	.slider-prev {
+    		i {
+    			padding-right: 0.625em;
+    		}
+    	}
+
+    	.slider-next {
+    		&:before {
+	    		color: #dedede;
+			    content: "|";
+			    display: inline-block;
+			    margin: 0 1.3em;
+
+			    @include media-breakpoint-down(sm) {
+			    	margin: 0 .8em;
+				}
+			}
+
+    		i {
+    			padding-left: 0.625em;
+    		}
+    	}
+    }
+}

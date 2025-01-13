@@ -1,0 +1,25 @@
+.footer-social-icons {
+	.social-icons.nav {
+		margin-left: 0;
+
+		.nav-item + .nav-item {
+			margin-left: 1.867em;
+		}
+	}
+
+	.sm-icon-label-link {
+		font-size: 1em;
+		color: #626262;
+		line-height: 1.533em;
+		padding: 0;
+
+		i {
+			margin-right: 0.389em;
+			font-size: 1.2em;
+			line-height: 1em;
+			float: left;
+			color: #000;
+			margin-top: 0.111em;
+		}
+	}
+}

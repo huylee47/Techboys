@@ -1,0 +1,122 @@
+#grid-extended {
+	.products {
+		margin-bottom: 2.813em;
+
+		.product {
+			@include media-breakpoint-up(md) {
+				border: 0;
+			}
+
+			h2.woocommerce-loop-product__title {
+				margin-bottom: 0.714em;
+			}
+
+			.sku_wrapper {
+			    color: #b3b2b2;
+			    font-size: 0.857em;
+			    margin-bottom: 1.083em;
+			    display: block;
+			}
+
+			@include media-breakpoint-down(sm) {
+				.button,.add-to-compare-link {
+					display: none;
+				}
+			}
+
+			.woocommerce-product-details__short-description {
+			    border-top: 1px solid #ebebeb;
+			    height: 105px;
+			    overflow: hidden;
+			    margin-bottom: 0.714em;
+
+			    @include media-breakpoint-down(sm) {
+			    	padding-top: 10px;
+			    }
+
+			    > ul {
+			    	list-style-type: none;
+				    margin: 0 auto;
+    				padding: 0 1.357em;
+				    font-weight: normal;
+			        text-align: left;
+
+				    li {
+			    	    border-bottom: 1px solid #ebebeb;
+		    	        padding: 0.5em 0px 0.286em;
+		    	        white-space: nowrap;
+		    	        overflow: hidden;
+		    	        text-overflow: ellipsis;
+				    }
+				}
+
+				> p {
+					line-height: 29px;
+					height: 95px;
+					overflow: hidden;
+					margin-top: 7px;
+					margin-bottom: 0;
+					border-bottom: 1px solid #ebebeb;
+				}
+			}
+
+			@include media-breakpoint-up(xl) {
+				.button {
+					margin-left: 1.286em;
+				    margin-right: 1.286em;
+				}
+			}
+
+			&:hover {
+				border: 0px;
+			}
+
+			@include media-breakpoint-up(md) {
+				&:not(.first) {
+					&::before {
+						content: " ";
+						height: 90%;
+						width: 1px;
+						background-color: #ebebeb;
+						position: absolute;
+						left: -1px;
+					}
+				}
+			}
+		}
+	}
+}
+
+#grid-extended .products .product,
+.products .list-view.product,
+.products .list-view-small.product,
+.products .list-view-large.product {
+	.star-rating {
+		font-size: 1.214em;
+		letter-spacing: 2.5px;
+		width: 6em #{"/*rtl:6.2em */"};
+		margin-bottom: 0.824em;
+
+		&:before {
+			content: "\f006\f006\f006\f006\f006";
+			font-family: FontAwesome;
+		}
+
+		span:before {
+			content: "\f005\f005\f005\f005\f005";
+			font-family: FontAwesome;
+		}
+	}
+}
+
+.shop-archive-header:after {
+    content: "";
+    clear: both;
+    display: block;
+}
+
+.shop-archive-header {
+	@include media-breakpoint-down (sm) {
+		display: none;
+	}
+}

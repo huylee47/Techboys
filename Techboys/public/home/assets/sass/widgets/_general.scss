@@ -1,0 +1,181 @@
+/**
+ * Widgets
+ */
+
+.widget {
+	margin: 0 0 ms(6);
+
+	select {
+		width: 100%;
+	}
+
+	.widget-search .search-submit {
+		@include screen-reader-text();
+	}
+
+	.widget-title,
+	.widgettitle {
+	}
+
+	ul {
+		margin-left: 0;
+		list-style: none;
+
+		ul {
+			margin-left: ms(3);
+		}
+	}
+}
+
+.widget-area {
+	.widget {
+		font-weight: 300;
+
+		a.button {
+			font-weight: 500;
+			color: #fff;
+
+			&:hover {
+				color: #fff;
+			}
+		}
+	}
+}
+
+.header-widget-region {
+	@include clearfix;
+
+	.widget {
+		margin: 0;
+		padding: 1em 0;
+		font-size: ms(-1);
+	}
+}
+
+.widget_search,
+.widget_product_search {
+	form {
+		position: relative;
+
+		&:before {
+    	    color: rgba(0,0,0,.3);
+	    }
+
+		input[type=text],
+		input[type=search] {
+			width: 100%;
+
+			&::-webkit-input-placeholder,
+    		&::-moz-placeholder {
+    			font-weight: 300;
+    		}
+		}
+
+		input[type=submit] {
+			@include screen-reader-text();
+			top: 0;
+			left: 0;
+		}
+	}
+}
+
+.widget_recent_entries,
+.widget_pages,
+.widget_categories,
+.widget_archive,
+.widget_recent_comments,
+.widget_nav_menu,
+.widget_links {
+	ul {
+		margin: 0;
+
+		li {
+			list-style: none;
+			margin-bottom: ms(-2);
+
+			&:before {
+				font-family: "FontAwesome";
+				margin-right: ms(-3);
+				display: inline-block;
+				opacity: 0.35;
+			}
+		}
+	}
+}
+
+.widget-area,
+.footer-widgets {
+	#wp-calendar {
+		th,
+		td {
+			padding: .236em;
+			text-align: center;
+		}
+	}
+}
+
+// .widget_recent_entries,
+// .widget_pages {
+// 	ul {
+// 		ul.children {
+// 			margin: ms(-2) 0 0 ms(2);
+// 		}
+// 	}
+// }
+
+.widget_rating_filter {
+	.wc-layered-nav-rating  {
+		margin-bottom: ms(-2);
+
+		a {
+			text-decoration: none !important;
+		}
+
+		.star-rating {
+			display: inline-block;
+		}
+	}
+}
+
+.widget-area {
+	.widget {
+		font-size: ms(-1);
+
+		h1.widget-title {
+			font-size: ms(2);
+		}
+	}
+}
+
+.widget.widget_tag_cloud {
+	.tagcloud {
+		a {
+			background: transparent;
+			border-color: #e4e5e7;
+			border-style: solid;
+			border-width: 1px;
+			color: #565656;
+			display: inline-block;
+			font-size: 1.000em !important;
+			line-height: 1;
+			margin: 0 0.457em 0.731em 0;
+			padding: 0.823em 0.788em;
+
+			&:hover,
+			&:focus {
+				text-decoration: none;
+				color: #fff;
+			}
+		}
+	}
+}
+
+.widget.widget_meta {
+	ul li a {
+		color: #626060;
+		font-weight: 400;
+		padding: .3em 0;
+		margin-bottom: 0;
+		display: inline-block;
+	}
+}

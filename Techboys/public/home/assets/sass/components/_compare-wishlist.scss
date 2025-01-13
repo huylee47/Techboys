@@ -1,0 +1,51 @@
+.header-compare,
+.header-wishlist {
+    i {
+        font-size: 1.733em;
+    }
+
+    a {
+        display: flex;
+        align-items: flex-start;
+        color: #444;
+
+        &:hover,&:focus,&:active {
+            color: #444;
+        }
+    }
+
+    .value {
+        padding-left: 0.667em;
+        @include media-breakpoint-down(lg) {
+            display: none;
+        }
+    }
+}
+
+ul.header-compare.nav,
+ul.header-wishlist.nav {
+    @include media-breakpoint-up(xxl) {
+        margin-left: 3.333em;
+    }
+
+    @include media-breakpoint-up(xl) {
+        @include media-breakpoint-down(ni) {
+            margin-left: 1.333em;
+        }
+    }
+
+    @include media-breakpoint-up(md) {
+        @include media-breakpoint-down(lg) {
+            margin-left: 1.2em;
+            margin-bottom: 20px;
+        }
+    }
+}
+
+ul.header-wishlist.nav {
+    @include media-breakpoint-up(md) {
+        @include media-breakpoint-down(lg) {
+            margin-left: 1.7em;
+        }
+    }
+}
