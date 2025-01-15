@@ -1,0 +1,36 @@
+/* Đảm bảo menu collapse chỉ ảnh hưởng trên màn hình nhỏ */
+@media (max-width: 768px) {
+    .navbar-collapse {
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: 60%;
+        /* Chiều rộng của menu collapse */
+        height: 100%;
+        /* Chiều cao của menu collapse */
+        background-color: white;
+        /* Màu nền cho menu collapse */
+        transform: translateX(100%);
+        /* Ẩn menu bằng transform */
+        transition: transform 0.3s ease-in-out;
+        /* Hiệu ứng chuyển động */
+        z-index: 1050;
+    }
+
+    .navbar-collapse.in {
+        transform: translateX(0);
+        /* Hiển thị menu khi mở */
+    }
+
+    .navbar-toggle {
+        position: relative;
+        z-index: 1060;
+        /* Đảm bảo nút toggle luôn ở trên */
+    }
+
+    .navbar-collapse .nav>li>a {
+        font-size: 18px;
+        padding: 10px 15px;
+        color: black;
+    }
+}

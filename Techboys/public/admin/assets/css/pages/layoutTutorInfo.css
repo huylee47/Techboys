@@ -1,0 +1,139 @@
+/* Phần sideBar */
+.star-checked {
+    color: yellow;
+}
+
+/* top gs */
+.widget {
+    margin: 20px 0;
+}
+
+.widget-title {
+    font-weight: bold;
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.tutor-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Khoảng cách giữa các gia sư */
+}
+
+.tutor-item {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px dotted #ddd; /* Đường chấm dưới mỗi item */
+    padding: 10px 0;
+}
+
+.tutor-avatar {
+    width: 30px; /* Kích thước ảnh đại diện nhỏ */
+    height: 30px;
+    border-radius: 50%; /* Bo tròn ảnh đại diện */
+    object-fit: cover;
+    margin-right: 10px; /* Khoảng cách giữa ảnh và tên */
+}
+
+.tutor-name {
+    flex-grow: 1;
+    font-size: 14px;
+    color: #333;
+}
+
+.tutor-score {
+    background-color: #e2e6ea;
+    color: #333;
+    border-radius: 50%;
+    padding: 5px 10px;
+    font-size: 12px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 10px;
+}
+/* top gs */
+
+.tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.subject-tag {
+    padding: 5px 10px;
+    border: 1px solid #ddd; /* Bo viền */
+    border-radius: 35px; /* Bo góc */
+    background-color: #f8f9fa; /* Màu nền */
+    font-size: 14px;
+    color: #333;
+    text-align: center;
+    transition: background-color 0.3s ease;
+}
+
+.subject-tag:hover {
+    background-color: #e2e6ea; /* Hiệu ứng khi hover */
+}
+
+/* Phần sideBar */
+.textOverflow1Line {
+    white-space: nowrap; /* Không cho phép xuống dòng */
+    overflow: hidden; /* Ẩn phần văn bản vượt quá */
+    text-overflow: ellipsis; /* Thêm dấu "..." ở cuối */
+    margin-bottom: 2px;
+}
+
+.textOverflowManyLines {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden; /* Ẩn phần văn bản vượt quá */
+    text-overflow: ellipsis; /* Thêm dấu "..." ở cuối */
+}
+.teacher-item {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    /* width: 100%; */
+
+    border: 1px solid #ddd; /* Viền bao quanh */
+    border-radius: 10px; /* Bo góc */
+    overflow: hidden; /* Ẩn nội dung tràn */
+    background-color: #f8f9fa; /* Màu nền */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.teacher-item:hover {
+    transform: scale(1.05);
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.doctor-thumb:hover .descInfo {
+    display: flex;
+}
+
+.descInfo {
+    transition: opacity 0.3s ease;
+    opacity: 0;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.doctor-thumb:hover .descInfo {
+    opacity: 1;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.checkedteacher {
+    font-size: 1.5rem;
+    color: #4caf50;
+}
+
+.team-item .team-icon a {
+    transition: background-color 0.3s ease;
+}
+
+.team-item .team-icon a:hover {
+    background-color: #0062cc;
+}
