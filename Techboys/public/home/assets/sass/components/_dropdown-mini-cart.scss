@@ -1,0 +1,12 @@
+.site-header .site-header-cart {
+    @include media-breakpoint-up(xl) {
+        margin-bottom: 0;        
+    }
+
+    .dropdown-menu-mini-cart {
+		min-width: 260px;
+		right: 0;
+		left: auto;
+        top: 130%;
+    }
+}

@@ -1,0 +1,57 @@
+.site-header-cart {
+    font-size: 1em;
+    list-style-type: none;
+    margin-left: 1.333em;
+
+    .cart-contents {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        color: #444;
+
+        .count {
+            font-size: 0.933em;
+            padding: 0.5em 0;
+            width: 21px;
+            height: 21px;
+            flex-shrink: 0;
+            line-height: 0.72;
+            font-weight: normal;
+            text-align: center;
+            letter-spacing: -1px;
+            border-radius: 50px;
+            margin-left: 0.214em;
+            background-color: #e8eff4;
+        }
+
+        i {
+            font-size: 1.733em;
+        }
+
+        .amount {
+            font-weight: 500;
+            line-height: 1.24;
+            padding-left: 1.200em;
+
+            .price-label {
+                font-weight: normal;
+                display: block;
+                font-size: 0.867em;
+                color: #676767;
+            }
+        }
+
+        &::after {
+            display: none;
+        }
+
+        &:hover,&:focus,&:active {
+            color: #444;
+        }
+    }
+}
+
+.site-header .techmarket-sticky-wrap .site-header-cart .widget_shopping_cart_content .product_list_widget {
+    overflow-y: scroll;
+    max-height: 400px;
+}

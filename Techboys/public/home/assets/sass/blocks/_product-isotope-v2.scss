@@ -1,0 +1,307 @@
+.section-products-isotope-alt {
+    padding: 2.063em 0;
+
+    .isotope-products {
+        .section-header {
+            padding-top: 10px;
+            -ms-grid-column: 1;
+			-ms-grid-row: 1;
+
+            @include media-breakpoint-up(md) {
+                @include media-breakpoint-down(xl) {
+                    padding-top: 40px;
+                }
+            }
+
+            .section-title {
+                font-size: 1.548em;
+    			strong {
+                    font-size: 1em;
+                }
+            }
+        }
+
+		.deal-countdown {
+
+			> span {
+                flex-direction: column;
+
+				&:nth-child(n+2) {
+					margin-left: 0.5em;
+				}
+
+                .value {
+                    margin-bottom: 8px;
+                }
+			}
+		}
+	}
+
+    .row-1,
+    .row-2 {
+        .products {
+            -webkit-grid-columns: repeat(7, 240px);
+            -ms-grid-columns: 240px 240px 240px 240px 240px 240px 240px;
+                grid-template-columns: repeat(7, 240px);
+            -ms-grid-gap: 10px;
+            -webkit-gridgrid-gap: 10px;
+                grid-gap: 10px;
+
+            .product {
+                padding: 12px;
+                @include media-breakpoint-down(sm) {
+					padding: 14px;
+					width: 48%;
+					margin: 2px;
+				}
+
+                .hover-area {
+                    padding: 0 24px 15px;
+                }
+
+                .woocommerce-LoopProduct-link {
+                    img {
+                        @include media-breakpoint-up(md) {
+                            max-width: 216px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .row-1 {
+        margin-bottom: 10px;
+        .products {
+            -webkit-grid-rows: repeat(2, 293px);
+            -ms-grid-rows: 293px 293px;
+                grid-template-rows: repeat(2, 293px);
+
+            @include media-breakpoint-up(xl) {
+                @include media-breakpoint-down(uw) {
+                    -webkit-grid-columns: repeat(5, 20%);
+                    -ms-grid-columns: 20% 20% 20% 20% 20%;
+                        grid-template-columns: repeat(5, 20%);
+                    -webkit-grid-rows: repeat(2, 323px);
+                    -ms-grid-rows: 323px 323px;
+                        grid-template-rows: repeat(2, 323px);
+                }
+            }
+
+            @include media-breakpoint-up(lg) {
+                @include media-breakpoint-down(lg) {
+                    -webkit-grid-columns: repeat(4, 24.2%);
+                    -ms-grid-columns: 24.2% 24.2% 24.2% 24.2%;
+                        grid-template-columns: repeat(4, 24.2%);
+                    -webkit-grid-rows: repeat(2, 433px);
+                    -ms-grid-rows: 433px 433px;
+                        grid-template-rows: repeat(2, 433px);
+                }
+            }
+
+            @include media-breakpoint-up(md) {
+                @include media-breakpoint-down(md) {
+                    -webkit-grid-columns: repeat(3, auto);
+                    -ms-grid-columns: auto auto auto;
+                        grid-template-columns: repeat(3, auto);
+                    -webkit-grid-rows: repeat(2, 433px);
+                    -ms-grid-rows: 433px 433px;
+                        grid-template-rows: repeat(2, 433px);
+                }
+            }
+
+            .product {
+                &:nth-child(2) {
+					 -ms-grid-column: 1;
+					 -ms-grid-row: 2;
+				}
+
+				&:nth-child(3) {
+					-ms-grid-column: 2;
+					-ms-grid-column-span: 2;
+					-ms-grid-row: 1;
+					-ms-grid-row-span: 2;
+				}
+
+				&:nth-child(4) {
+					-ms-grid-column: 4;
+					-ms-grid-row: 1;
+				}
+
+				&:nth-child(5) {
+					-ms-grid-column: 4;
+					-ms-grid-row: 2;
+				}
+
+				&:nth-child(6) {
+					-ms-grid-column: 5;
+					-ms-grid-row: 1;
+					-ms-grid-row-span: 2;
+				}
+
+                &:nth-child(7) {
+					-ms-grid-column: 6;
+					-ms-grid-row: 1;
+				}
+
+                &:nth-child(8) {
+                    -ms-grid-column: 6;
+					-ms-grid-column-span: 2;
+                    -ms-grid-row: 2;
+				}
+
+                &:nth-child(9) {
+					-ms-grid-column: 7;
+					-ms-grid-row: 1;
+				}
+
+                &:nth-child(3) {
+                    .woocommerce-LoopProduct-link img {
+                        @include media-breakpoint-up(md) {
+                            max-width: 466px;
+                        }
+                    }
+
+                    .hover-area {
+						padding: 0 60px 15px;
+					}
+                }
+
+                &:nth-child(8) {
+                    -webkit-grid-column: span 2;
+                    -ms-grid-column: span 2;
+                        grid-column: span 2;
+                    -webkit-grid-row: span 1;
+                    -ms-grid-row: span 1;
+                        grid-row: span 1;
+                }
+
+                &:nth-child(n+7) {
+                    @include media-breakpoint-up(xl) {
+        	            @include media-breakpoint-down(uw) {
+                            display: none;
+                        }
+                    }
+                }
+
+                &:nth-child(n+6) {
+                    @include media-breakpoint-up(lg) {
+        	            @include media-breakpoint-down(lg) {
+                            display: none;
+                        }
+                    }
+                }
+
+                &:nth-child(n+4) {
+                    @include media-breakpoint-up(md) {
+        	            @include media-breakpoint-down(md) {
+                            display: none;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .row-2 {
+        .products {
+            -webkit-grid-rows: repeat(1, 293px);
+            -ms-grid-rows: 293px;
+                grid-template-rows: repeat(1, 293px);
+
+            @include media-breakpoint-up(xl) {
+                @include media-breakpoint-down(uw) {
+                    -webkit-grid-columns: repeat(5, 20%);
+                    -ms-grid-columns: 20% 20% 20% 20% 20%;
+                        grid-template-columns: repeat(5, 20%);
+                    -webkit-grid-rows: repeat(1, 323px);
+                    -ms-grid-rows: 323px;
+                        grid-template-rows: repeat(1, 323px);
+                }
+            }
+
+            @include media-breakpoint-up(lg) {
+                @include media-breakpoint-down(lg) {
+                    -webkit-grid-columns: repeat(4, 24.2%);
+                    -ms-grid-columns: 24.2% 24.2% 24.2% 24.2%;
+                        grid-template-columns: repeat(4, 24.2%);
+                    -webkit-grid-rows: repeat(1, 433px);
+                    -ms-grid-rows: 433px;
+                        grid-template-rows: repeat(1, 433px);
+                }
+            }
+
+            @include media-breakpoint-up(md) {
+                @include media-breakpoint-down(md) {
+                    -webkit-grid-columns: repeat(3, auto);
+                    -ms-grid-columns: auto auto auto;
+                        grid-template-columns: repeat(3, auto);
+                    -webkit-grid-rows: repeat(1, 433px);
+                    -ms-grid-rows: 433px;
+                        grid-template-rows: repeat(1, 433px);
+                }
+            }
+
+            .product {
+                &:nth-child(4) {
+                    -webkit-grid-column: span 2;
+                    -ms-grid-column: span 2;
+                        grid-column: span 2;
+
+                    .hover-area {
+						padding: 0 60px 15px;
+					}
+                }
+
+                &:nth-child(n+5) {
+                    @include media-breakpoint-up(lg) {
+        	            @include media-breakpoint-down(xxl) {
+                            display: none;
+                        }
+                    }
+                }
+
+                &:nth-child(n+4) {
+                    @include media-breakpoint-up(md) {
+        	            @include media-breakpoint-down(md) {
+                            display: none;
+                        }
+                    }
+                }
+
+                &:nth-child(2) {
+                    @include media-breakpoint-up(lg) {
+        	            @include media-breakpoint-down(lg) {
+                            display: none;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@supports (-ms-accelerator:true) {
+    .section-products-isotope-alt {
+        .row-1,
+        .row-2 {
+            .products {
+                .product {
+                    margin-right: 10px;
+                }
+            }
+        }
+
+        .row-1 {
+            .products {
+                .product {
+                    &:nth-child(4),
+                    &:nth-child(7),
+                    &:nth-child(9) {
+                        margin-bottom: 10px;
+                    }
+                }
+            }
+        }
+    }
+}

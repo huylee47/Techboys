@@ -1,0 +1,158 @@
+.products {
+    .landscape-product-card-featured {
+        border: none;
+        padding: 0;
+        background: transparent;
+        margin-bottom: 1.429em;
+
+        .price {
+            font-size: 1.5em;
+            margin-bottom: 0.429em;
+            line-height: 1.429em;
+
+            del span {
+                font-size: 0.871em;
+            }
+        }
+
+        .star-rating {
+            font-size: 1.143em;
+            letter-spacing: 3px;
+            width: 6em #{"/*rtl:6.2em */"};
+            margin: 0 .385em 1.5em 0;
+        }
+
+        h3,
+        h2,
+        .woocommerce-loop-product__title {
+            font-size: 1.143em;
+            color: #555353;
+            margin-bottom: 1.063em;
+            height: 46px;
+            line-height: 1.4em;
+        }
+
+        .ribbon {
+            margin-bottom: 1.143em;
+        }
+
+        div[itemprop=description],
+        .woocommerce-product-details__short-description {
+            color: #777;
+            line-height: 1.74;
+            margin-bottom: 1.786em;
+            max-height: 70px;
+            overflow: hidden;
+        }
+
+        .techmarket-wc-product-gallery__wrapper {
+            // width: 458px;
+            max-height: 440px;
+
+            @include media-breakpoint-up(xl) {
+            @include media-breakpoint-down(xl) {
+                    width: 285px;
+                }
+            }
+
+            @include media-breakpoint-up(sm) {
+                @include media-breakpoint-down(md) {
+                    width: 339px;
+
+                    .techmarket-wc-product-gallery__image img {
+                        max-width: 100%;
+                    }
+                }
+            }
+        }
+
+        .techmarket-wc-product-gallery-thumbnails__wrapper {
+            //width: 60px;
+            max-height: 440px;
+
+            @include media-breakpoint-down(sm) {
+                display: flex;
+            }
+
+            .slick-arrow {
+                @include media-breakpoint-down(sm) {
+                    display: flex;
+                    align-items: center;
+                    transform: rotate(-90deg);
+                    padding-right: 15px;
+                    padding-left: 15px;
+                }
+            }
+
+            &>.slick-list {
+                overflow: hidden;
+            }
+        }
+
+        img {
+            margin-bottom: 0;
+            max-width: 446px;
+            margin: 0px;
+        }
+
+        .media {
+            margin: 0 0.714em;
+            background: #fff;
+            padding: 0.429em 0 0 0;
+
+            .images,.media-body {
+                @include make-col-ready();
+            }
+
+            .images {
+                @include make-col(7.5);
+                display: flex;
+                padding-left: 1.143em;
+
+                .techmarket-wc-product-gallery-thumbnails__wrapper,
+                &.techmarket-wc-product-gallery figure,
+                ol li {
+                    img {
+                        max-width: 59px;
+                        // float: right;
+
+                        @include media-breakpoint-down(sm) {
+                            margin: auto;
+                        }
+                    }
+                }
+
+                .techmarket-wc-product-gallery-thumbnails__wrapper {
+                    height: 293px;
+                }
+
+                ol {
+                    padding-top: 2.429em;
+                }
+            }
+
+            .images.techmarket-wc-product-gallery + div.media-body{
+                padding-left: 1.643em;
+            }
+
+            .media-body {
+                @include make-auto-col;
+                margin-top: 3.286em;
+                padding-right: 3.071em;
+                padding-left: 0.571em;
+
+                @include media-breakpoint-up(xl) {
+                    @include media-breakpoint-down(xl) {
+                        margin-top: 1.286em;
+                        padding-right: 2.071em;
+                    }
+                }
+
+                .woocommerce-LoopProduct-link,
+                div[itemprop=description] {
+                    text-align: left;
+                }
+            }
+        }
+    }
+}

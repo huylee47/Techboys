@@ -1,0 +1,149 @@
+/*===================================================================================*/
+/*  YITH Wishlist
+/*===================================================================================*/
+
+.wishlist-title {
+	padding: 40px 0;
+
+	h2 {
+		font-size: 2.500em;
+		line-height: 1.250em;
+		color: #090909;
+	}
+}
+
+.wishlist-in-stock {
+    color: #1eb41e;
+}
+
+.yith-wcwl-share {
+
+	.yith-wcwl-share-title {
+		margin: 0;
+	}
+
+	> ul {
+		margin-left: 0 !important;
+	}
+}
+
+
+.yith-wcwl-share{
+	margin-top: 10px;
+
+    h4{
+        line-height: 1.500em;
+        padding-bottom: 0.611em;
+		font-weight: 500;
+	    font-size: 1.125em;
+    }
+
+    ul > li > a{
+        line-height: 1;
+        font-family: FontAwesome;
+        font-style: normal;
+    }
+
+	ul > li {
+		padding-right: 10px;
+
+	}
+
+    .facebook{
+        &:before{
+            content: "\f09a";
+			color: #3b5998;
+        }
+    }
+
+    .twitter{
+        &:before{
+            content: "\f099";
+			color: #00aced;
+        }
+    }
+
+    .pinterest{
+        &:before{
+            content: "\f0d2";
+			color: #cb2027;
+        }
+    }
+
+    .googleplus{
+        &:before{
+            content: "\f0d5";
+			color: #dd4b39;
+        }
+    }
+
+    .email{
+        &:before{
+            content: "\f0e0";
+			color: $color-body;
+        }
+    }
+}
+
+table.cart {
+    &.wishlist_table {
+        td.product-add-to-cart {
+            .button {
+                @include media-breakpoint-up(md) {
+                    @include media-breakpoint-down(lg) {
+                        text-align: center;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.woocommerce-wishlist {
+    table.cart {
+        .product-remove {
+            display: block;
+            position: relative;
+            padding-top: 0px;
+
+            a.remove {
+                position: absolute;
+                top: 60px;
+
+                @media (max-width: 1200px) and (min-width: 768px) {
+                    top: 0px;
+                    left: 0px;
+                }
+            }
+        }
+
+        .product-thumbnail {
+            display: block;
+            border-top: 0px;
+
+            img {
+                max-width: 107px;
+                margin: 0 auto;
+            }
+        }
+
+        .product-price del {
+            font-weight: 400;
+            color: #b8b8b8;
+            font-size: .875em;
+            margin-left: .214em;
+        }
+
+        .product-add-to-cart a.button {
+            @media (max-width: 1200px) and (min-width: 768px) {
+                font-size: 14px;
+            }
+        }
+
+        td.product-name {
+            @media (max-width: 1023px) and (min-width: 768px) {
+                width: 180px;
+            }
+        }
+    }
+}

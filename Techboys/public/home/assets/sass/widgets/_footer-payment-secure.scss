@@ -1,0 +1,21 @@
+.footer-secure-by-info {
+	.footer-secured-by-icons {
+        margin-left: 0;
+        display: -webkit-flex;
+        display: -moz-flex;
+        display: -ms-flex;
+        display: -o-flex;
+        display: flex;
+        align-items: center;
+        list-style: none;
+
+		.nav-item + .nav-item {
+			margin-left: 1.8em;
+		}
+
+		.secure-icons-image {
+            max-height: 46px;
+            width: 86px;
+		}
+	}
+}

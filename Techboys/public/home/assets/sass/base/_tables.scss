@@ -1,0 +1,45 @@
+/**
+ * Tables
+ */
+table {
+	border-spacing: 0;
+	width: 100%;
+	border-collapse: separate;
+
+	caption {
+		padding: 1em 0;
+		font-weight: 500;
+	}
+
+	td,
+	th {
+		padding: 1em ms(2);
+		text-align: left;
+		vertical-align: top;
+
+		p:last-child {
+			margin-bottom: 0;
+		}
+	}
+
+	thead {
+		th {
+			text-transform: uppercase;
+			padding: ms(2);
+			vertical-align: middle;
+			font-weight: 500;
+		}
+	}
+
+	tbody {
+		h2 {
+			font-size: 1em;
+			letter-spacing: normal;
+			font-weight: normal;
+
+			a {
+				font-weight: normal;
+			}
+		}
+	}
+}

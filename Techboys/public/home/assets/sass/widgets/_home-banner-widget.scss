@@ -1,0 +1,128 @@
+.widget_techmarket_banner_widget {
+
+	.banner {
+		border: 1px solid #ebebeb;
+		border-radius: 4px;
+		overflow: hidden;
+
+		.banner-bg {
+			justify-content: flex-start;
+
+			.caption {
+				padding-left: 1.46em;
+				color: #282828;
+
+				h3 {
+					font-size: 1.500em;
+					line-height: 1.238em;
+					font-weight: 300;
+					letter-spacing: -0.025em;
+					margin: 0 0 1em;
+
+					strong {
+						font-weight: 500;
+					}
+
+					span {
+						display: block;
+						font-size: 0.714em;
+						line-height: 1.400em;
+					}
+				}
+
+				h4 {
+					font-size: 1.072em;
+				}
+
+				.price {
+					display: block;
+					font-size: 1.500em;
+					font-weight: 300;
+					letter-spacing: -0.035em;
+					padding-bottom: 0.7em;
+				}
+
+				.banner-action {
+					&.button {
+						font-size: 0.786em;
+						line-height: 1.000em;
+						padding: .46em 1.95em;
+						font-weight: 500;
+					}
+				}
+			}
+		}
+
+		a:not(.button) {
+			text-decoration: none;
+		}
+	}
+
+	&.widget {
+		margin-bottom: 1.786em !important;
+
+		&:last-child {
+			margin-bottom: 0;
+		}
+	}
+}
+
+.widget_techmarket_poster_widget {
+	.poster-bg {
+	    border: 1px solid #ebebeb;
+		border-radius: 4px;
+	    text-align: center;
+
+		.caption {
+			padding: 3.714em 0px 2.071em;
+			display: flex;
+		    height: 100%;
+		    justify-content: space-between;
+		    flex-direction: column;
+
+			h3 {
+				font-size: 1.5em;
+			    line-height: 1.286em;
+			    font-weight: 300;
+			    letter-spacing: -.025em;
+			    margin: 0 0 0.762em;
+
+			    strong {
+			    	font-weight: 500;
+			    }
+			}
+
+			.price {
+				font-size: 2.571em;
+			    line-height: .83em;
+			    display: flex;
+			    flex-direction: column;
+			    font-weight: 300;
+
+				span {
+					font-size: 0.389em;
+				}
+			}
+
+			.button {
+				font-size: 0.929em;
+				border: 2px solid;
+			    color: #fff;
+			    border-radius: 2.286em;
+			    line-height: 1em;
+			    padding: 0.769em 2.154em;
+		        margin-bottom: 2.462em;
+
+			    &:hover {
+					background: transparent;
+				}
+			}
+
+			.condition {
+				display: block;
+				font-size: 0.929em;
+				line-height: 1.231em;
+			}
+		}
+	}
+}

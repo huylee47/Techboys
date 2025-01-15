@@ -1,0 +1,76 @@
+/**
+ * WooCommerce
+ */
+
+/**
+ * Imports
+ */
+// @import 'bourbon';
+// @import 'node_modules/susy/sass/susy';
+// @import '../../../assets/sass/bs-variables';
+// @import '../../../assets/sass/variables';
+// @import '../../../assets/sass/mixins';
+// @import '../../../assets/sass/vendors/font-awesome/variables';
+// @import '../../../assets/sass/vendors/font-awesome/mixins';
+// @import '../../../assets/sass/vendors/modular-scale';
+// @import '../../../assets/sass/base/base';
+
+// // Star font, FontAwesome doesn't work :(
+// @font-face {
+// 	font-family: 'star';
+// 	src: url('../../../../../plugins/woocommerce/assets/fonts/star.eot');
+// 	src: url('../../../../../plugins/woocommerce/assets/fonts/star.eot?#iefix') format('embedded-opentype'),
+// 		url('../../../../../plugins/woocommerce/assets/fonts/star.woff') format('woff'),
+// 		url('../../../../../plugins/woocommerce/assets/fonts/star.ttf') format('truetype'),
+// 		url('../../../../../plugins/woocommerce/assets/fonts/star.svg#star') format('svg');
+// 	font-weight: normal;
+// 	font-style: normal;
+// }
+
+// @font-face {
+// 	font-family: 'WooCommerce';
+// 	src: url('../../../../../plugins/woocommerce/assets/fonts/WooCommerce.eot');
+// 	src: url('../../../../../plugins/woocommerce/assets/fonts/WooCommerce.eot?#iefix') format('embedded-opentype'),
+// 		url('../../../../../plugins/woocommerce/assets/fonts/WooCommerce.woff') format('woff'),
+// 		url('../../../../../plugins/woocommerce/assets/fonts/WooCommerce.ttf') format('truetype'),
+// 		url('../../../../../plugins/woocommerce/assets/fonts/WooCommerce.svg#WooCommerce') format('svg');
+// 	font-weight: normal;
+// 	font-style: normal;
+// }
+
+@import 'header';
+@import 'shop-tables';
+@import 'single-product';
+@import 'reviews';
+@import 'widgets';
+@import 'cart';
+@import 'checkout';
+@import 'password-strength-meter';
+@import 'price';
+@import 'myaccount';
+@import 'myaccount-login-register';
+@import 'general-components';
+@import 'homepage';
+@import 'responsive';
+@import 'product-item';
+@import 'product-item-list';
+@import 'sale-product-item-with-timer';
+@import 'product-category';
+@import 'products-carousel-with-bg';
+@import 'landscape-product';
+@import 'landscape-product-card';
+@import 'landscape-product-widget';
+@import 'products-carousel';
+@import 'products-6-1-6';
+@import 'landscape-product-card-featured';
+@import 'product-featured';
+@import 'landscape-product-card-with-gallery';
+@import 'track-your-order';
+@import 'product-carousel-with-featured-product';
+@import 'products-carousel-with-vertical-tabs';
+@import 'landscape-products-carousel';
+@import 'products-carousel-tabs';
+@import 'order-received';
+@import 'compare';
+@import 'wishlist';
+@import 'breadcrumb';

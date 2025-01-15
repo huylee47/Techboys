@@ -1,0 +1,40 @@
+.section-landscape-products-carousel {
+    margin-bottom: 3.750em;
+
+	.section-header {
+		margin-bottom: 2.875em;
+		padding-bottom: 0.813em;
+	}
+
+	.section-title {
+		margin-bottom: 0;
+	}
+
+	.products-carousel {
+		.woocommerce {
+			overflow: hidden;
+		}
+
+        @include media-breakpoint-down(sm) {
+            .landscape-product {
+                padding: 15px 13px;
+                border: 2px solid transparent;
+            }
+        }
+	}
+
+	.slick-list {
+		margin-bottom: 1.625em;
+	}
+}
+
+.section-landscape-full-product-cards-carousel,
+.section-landscape-products-carousel {
+    .products-carousel {
+        @include media-breakpoint-down(sm) {
+            .container-fluid {
+    			padding: 0;
+    		}
+        }
+    }
+}

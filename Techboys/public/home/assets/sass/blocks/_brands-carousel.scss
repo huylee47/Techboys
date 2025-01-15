@@ -1,0 +1,89 @@
+.brands-carousel {
+	border: 2px solid #ebebeb;
+	border-radius: 4px;
+	margin-bottom: 4.125em;
+
+	.slick-prev,
+	.slick-next {
+		top: 49%;
+
+		&:before {
+			font-family: "techmarket-icons" !important;
+			color: #c3c3c3;
+			font-size: 22px;
+		}
+
+		&:hover {
+			&:before {
+				color: #000;
+			}
+		}
+	}
+
+	.col-full {
+		@include media-breakpoint-down(lg) {
+			padding-right: 25px;
+			padding-left: 25px;
+		}
+
+		@media (min-width: 2000px) {
+			width: 100%;
+		}
+	}
+
+	.slick-prev{
+		&:before {
+			content: "\66";
+			[dir="rtl"] & {
+				content: "\6e";
+			}
+		}
+	}
+
+	.slick-next {
+		&:before {
+			content: "\6e";
+			[dir="rtl"] & {
+				content: "\66";
+			}
+		}
+	}
+
+	.slick-slider {
+		overflow: visible;
+	}
+
+	.slick-list {
+		padding: 3.313em 0px;
+		overflow: hidden;
+	}
+
+	.text-overlay {
+		display: none;
+	}
+
+	img {
+		margin: 0 auto;
+		opacity: 0.5;
+
+		&:hover {
+			opacity: 1;
+		}
+	}
+
+	@include media-breakpoint-down(xl) {
+		width: 100vw;
+		position: relative;
+		margin-left: -50vw;
+		left: 50%;
+		border-left: 0;
+		border-right: 0;
+		border-radius: 0;
+	}
+}
+
+.page-template .brands-carousel {
+	@include media-breakpoint-down(xl) {
+		margin-bottom: 0;
+	}
+}

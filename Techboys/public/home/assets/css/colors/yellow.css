@@ -1,0 +1,419 @@
+/*===================================================================================*/
+/*  Yellow Color
+/*===================================================================================*/
+button,
+input[type="button"],
+input[type="reset"],
+input[type="submit"],
+.button,
+#scrollUp,
+.added_to_cart,
+.btn-primary,
+.fullwidth-notice,
+.top-bar.top-bar-v4,
+.site-header.header-v4,
+.site-header.header-v5,
+.navbar-search .btn-secondary,
+.header-v1 .departments-menu button,
+.widget_shopping_cart .buttons a:first-child,
+.widget_shopping_cart_content .buttons a:first-child,
+.section-landscape-products-widget-carousel.type-3 .section-header:after,
+.home-v1-slider .custom.tp-bullets .tp-bullet.selected,
+.home-v2-slider .custom.tp-bullets .tp-bullet.selected,
+.home-v3-slider .custom.tp-bullets .tp-bullet.selected,
+.home-v4-slider .custom.tp-bullets .tp-bullet.selected,
+.home-v5-slider .custom.tp-bullets .tp-bullet.selected,
+.home-v6-slider .custom.tp-bullets .tp-bullet.selected,
+.section-categories-filter .products .product-type-simple .button:hover,
+#respond.comment-respond .comment-form .form-submit input[type=submit]:hover,
+.contact-page-title:after,
+.comment-reply-title:after,
+article .more-link,
+article.post .more-link,
+.slick-dots li.slick-active button:before,
+.products .product .added_to_cart:hover,
+.products .product .button:hover,
+.banner-action.button:hover,
+.deal-progress .progress-bar,
+.section-products-tabs .section-products-tabs-wrap > .button:hover,
+#secondary.sidebar-blog .widget .widget-title:after,
+#secondary.sidebar-blog .widget_tag_cloud .tagcloud a:hover,
+.comments-title:after, .pings-title:after,
+.navbar-primary .nav .techmarket-flex-more-menu-item > a::after,
+.primary-navigation .nav .techmarket-flex-more-menu-item > a::after,
+.secondary-navigation .nav .techmarket-flex-more-menu-item > a::after,
+.header-v4 .sticky-wrapper .techmarket-sticky-wrap.stuck,
+.header-v5 .sticky-wrapper .techmarket-sticky-wrap.stuck,
+article .post-readmore .btn-primary:hover,
+article.post .post-readmore .btn-primary:hover,
+.table-compare tbody tr td .button:hover,
+.return-to-shop .button:hover,
+.contact-form .form-group input[type=button],
+.contact-form .form-group input[type=submit],
+.cart-collaterals .checkout-button,
+#payment .place-order .button,
+.single-product .single_add_to_cart_button:hover,
+.single-product .accessories .accessories-product-total-price .accessories-add-all-to-cart .button:hover,
+.single-product .accessories .accessories-product-total-price .accessories-add-all-to-cart .button:focus,
+.contact-form .form-group input[type=button],
+.contact-form .form-group input[type=submit],
+.home-v3-banner-with-products-carousel .banner .banner-action.button,
+.section-media-single-banner .button,
+.woocommerce-wishlist table.cart .product-add-to-cart a.button,
+table.cart td.actions div.coupon .button,
+.site-header.header-v10 .stretched-row,
+.site-header .handheld-header .handheld-header-cart-link .count,
+.products .product-carousel-with-timer-gallery .button,
+.banners-v2 .banner-action.button,
+.pace .pace-progress,
+input[type="submit"].dokan-btn-danger, a.dokan-btn-danger, .dokan-btn-danger,
+input[type="submit"].dokan-btn-danger:hover,
+a.dokan-btn-danger:hover,
+.dokan-btn-danger:hover,
+input[type="submit"].dokan-btn-danger:focus,
+a.dokan-btn-danger:focus,
+.dokan-btn-danger:focus,
+.widget.widget_tag_cloud .tagcloud a:focus,
+.widget.widget_tag_cloud .tagcloud a:hover,
+.wcmp_main_page .wcmp_main_menu ul li.hasmenu ul.submenu li.active a,
+.wcmp_main_page .wcmp_main_holder .wcmp_headding1 button,
+.wcmp_main_page .wcmp_main_menu ul li ul li a.active2,
+input[type="submit"].dokan-btn-theme, a.dokan-btn-theme, .dokan-btn-theme,
+input[type="submit"].dokan-btn-theme:hover, a.dokan-btn-theme:hover, .dokan-btn-theme:hover,
+input[type="submit"].dokan-btn-theme:focus, a.dokan-btn-theme:focus, .dokan-btn-theme:focus,
+#secondary.sidebar-blog .widget .section-header .section-title:after,
+.dokan-dashboard .dokan-dash-sidebar ul.dokan-dashboard-menu li.active,
+.dokan-dashboard .dokan-dash-sidebar ul.dokan-dashboard-menu li:hover,
+.dokan-dashboard .dokan-dash-sidebar ul.dokan-dashboard-menu li.dokan-common-links a:hover,
+.wcmp_regi_main .register p.woocomerce-FormRow input,
+.wcv-header-container ~ h3 a:hover,
+.site-content .home-v1-slider .slider-1 .button:hover,
+.site-content .home-v2-slider .slider-1 .button:hover,
+.site-content .home-v3-slider .slider-1 .button:hover,
+.site-content .home-v4-slider .slider-1 .button:hover,
+.site-content .home-v5-slider .slider-1 .button:hover,
+.site-content .home-v6-slider .slider-1 .button:hover,
+.site-content .home-v7-slider .slider-1 .button:hover,
+.site-content .home-v8-slider .slider-1 .button:hover,
+.site-content .home-v9-slider .slider-1 .button:hover,
+.site-content .home-v11-slider .slider-1 .button:hover,
+.site-content .home-v12-slider .slider-1 .button:hover,
+.site-content .landing-v1-slider .slider-1 .button:hover,
+.site-content .landing-v2-slider .slider-1 .button:hover,
+.about-accordion .card .card-header h5 > a:not(.collapsed) i {
+  background-color: #ffd40e; }
+
+.primary-navigation .nav .dropdown-menu,
+.secondary-navigation .nav .dropdown-menu,
+.navbar-primary .nav .dropdown-menu,
+.primary-navigation .nav .yamm-fw > .dropdown-menu > li,
+.navbar-primary .nav .yamm-fw > .dropdown-menu > li,
+.top-bar .nav .show > .dropdown-menu {
+  border-top-color: #ffd40e; }
+
+.widget_shopping_cart .buttons a:first-child:hover,
+.widget_shopping_cart_content .buttons a:first-child:hover,
+.navbar-primary .nav .techmarket-flex-more-menu-item > a:hover::after,
+.primary-navigation .nav .techmarket-flex-more-menu-item > a:hover::after,
+.secondary-navigation .nav .techmarket-flex-more-menu-item > a:hover::after,
+.cart-collaterals .checkout-button:hover,
+#payment .place-order .button:hover,
+.contact-form .form-group input[type=button]:hover,
+.contact-form .form-group input[type=submit]:hover,
+.section-media-single-banner .button:hover,
+.woocommerce-wishlist table.cart .product-add-to-cart a.button:hover,
+.products .product-carousel-with-timer-gallery .button:hover,
+table.cart td.actions div.coupon .button:hover,
+.banners-v2 .banner-action.button:hover,
+.wcmp_main_page .wcmp_main_holder .wcmp_headding1 button:hover,
+.btn-primary:hover,
+.navbar-search button:hover {
+  background-color: #f9cc00; }
+
+.home-v3-banner-with-products-carousel .banner .banner-action.button:hover {
+  background-color: #dab300; }
+
+.cart-collaterals .checkout-button:hover,
+#payment .place-order .button:hover,
+.contact-form .form-group input[type=button]:hover,
+.contact-form .form-group input[type=submit]:hover,
+.section-media-single-banner .button:hover,
+.products .product-carousel-with-timer-gallery .button:hover,
+.woocommerce-wishlist table.cart .product-add-to-cart a.button:hover,
+table.cart td.actions div.coupon .button:hover,
+.btn-primary:hover {
+  border-color: #f9cc00; }
+
+.home-v3-banner-with-products-carousel .banner .banner-action.button:hover {
+  border-color: #dab300; }
+
+.top-bar.top-bar-v4 {
+  border-bottom-color: #ffd92d; }
+
+.price,
+.features-list .feature i,
+.wcv-header-container ~ h3 a,
+.section-recent-posts-with-categories .post-items .post-item .post-info .btn-more,
+.section-products-with-image .load-more-button,
+.single-product .woocommerce-tabs .wc-tabs li.active a,
+.single-product .techmarket-tabs .tm-tabs li.active a,
+#respond.comment-respond .comment-form .form-submit input[type=submit],
+#respond.comment-respond .comment-form > p.logged-in-as a,
+.banner-action.button,
+.commentlist .comment .reply a,
+.pings-list .comment .reply a,
+.products .product .added_to_cart,
+.products .product .button,
+.full-width-banner .banner-bg .button,
+article.post.category-more-tag a[target=_blank],
+.commentlist .comment #respond .comment-reply-title small a,
+.commentlist .pingback #respond .comment-reply-title small a,
+.pings-list .comment #respond .comment-reply-title small a,
+.pings-list .pingback #respond .comment-reply-title small a,
+article.post.format-link .entry-content p a,
+article .post-readmore .btn-primary,
+article.post .post-readmore .btn-primary,
+.table-compare tbody tr td .button,
+.return-to-shop .button,
+.wcmp_main_page .wcmp_main_menu ul li a.active,
+.wcmp_main_page .wcmp_main_menu ul li a:hover,
+.wcmp_main_page .wcmp_displaybox2 h3,
+.wcmp_main_page .wcmp_displaybox3 h3,
+.widget_techmarket_poster_widget .poster-bg .caption .button:hover,
+.single-product .accessories .products .product .accessory-checkbox label input,
+.cart-collaterals .shop-features li i,
+.single-product .single_add_to_cart_button,
+.banners .banner .banner-bg .caption .price,
+.features-list .features .feature .media .feature-icon,
+.section-recent-posts-with-categories .nav .nav-link,
+#secondary.sidebar-blog .widget_recent_comments ul li.recentcomments a,
+.footer-widgets.sidebar-blog .widget_recent_comments ul li.recentcomments a,
+.widget_techmarket_banner_widget .banner .banner-bg .caption .price,
+#secondary .widget.widget_rss li .rsswidget,
+.footer-widgets .widget.widget_rss li .rsswidget,
+.single-product .accessories .accessories-product-total-price .accessories-add-all-to-cart .button,
+.wcmp_main_page .wcmp_main_holder .wcmp_dashboard_display_box h3,
+.site-content .home-v9-slider .slider-1 .button,
+.single-product .woocommerce-tabs .wc-tabs li a.active,
+.single-product .techmarket-tabs .tm-tabs li a.active,
+.home-v1-slider .slider-1 .button,
+.home-v2-slider .slider-1 .button,
+.home-v3-slider .slider-1 .button,
+.home-v4-slider .slider-1 .button,
+.home-v5-slider .slider-1 .button,
+.home-v6-slider .slider-1 .button,
+.home-v9-slider .slider-1 .button,
+.home-v11-slider .slider-1 .button,
+.home-v12-slider .slider-1 .button,
+.landing-v1-slider .slider-1 .button,
+.landing-v2-slider .slider-1 .button,
+.site-content .home-v6-slider .slider-1 .caption .offer-price {
+  color: #ffd40e; }
+
+#secondary.sidebar-blog .widget_recent_comments ul li.recentcomments a:hover,
+.footer-widgets.sidebar-blog .widget_recent_comments ul li.recentcomments a:hover,
+#secondary .widget.widget_rss li .rsswidget:hover,
+.footer-widgets .widget.widget_rss li .rsswidget:hover {
+  color: #dab300; }
+
+.top-bar.top-bar-v4 .nav-item + .nav-item .nav-link::before,
+.top-bar.top-bar-v4 .nav-item + .nav-item > a::before,
+.top-bar.top-bar-v4 .nav > .menu-item + .menu-item .nav-link::before,
+.top-bar.top-bar-v4 .nav > .menu-item + .menu-item > a::before,
+#respond.comment-respond .comment-form > p.logged-in-as a:hover,
+#respond.comment-respond .comment-form > p.logged-in-as a:focus,
+#comments .comment-list .reply a:hover,
+#comments .comment-list .reply a:focus,
+.comment-list #respond .comment-reply-title small:hover,
+.pings-list #respond .comment-reply-title small:hover,
+.comment-list #respond .comment-reply-title small a:focus,
+.pings-list #respond .comment-reply-title small a:focus {
+  color: #ffdd41; }
+
+.top-bar.top-bar-v4 a,
+.site-header.header-v4 .site-header-cart .cart-contents .amount .price-label {
+  color: #fffcee; }
+
+.site-header.header-v4 .navbar-search button,
+.site-header.header-v5 .navbar-search button,
+.widget_shopping_cart .product_list_widget .mini_cart_item .remove,
+.widget_shopping_cart_content .product_list_widget .mini_cart_item .remove,
+.site-header.header-v4 .site-header-cart .cart-contents .count {
+  background-color: #ffdb37; }
+
+.section-landscape-products-widget-carousel.product-widgets .section-header:after {
+  border-bottom-color: #ffd40e; }
+
+.site-header.header-v4 .site-branding .cls-3,
+.site-header.header-v5 .site-branding .cls-3 {
+  fill: #fff5c6; }
+
+.btn-primary,
+.wcmp_main_page .wcmp_ass_btn,
+.wcv-header-container ~ h3 a,
+.wcv-header-container ~ h3 a:hover,
+.header-v4 .departments-menu > .dropdown-menu > li,
+.header-v4 .departments-menu > .dropdown-menu .menu-item-has-children > .dropdown-menu,
+.section-categories-filter .products .product-type-simple .button:hover,
+.contact-page-title:after,
+.navbar-search .btn-secondary,
+.products .product .added_to_cart,
+.products .product .button,
+.products .product .added_to_cart:hover,
+.products .product .button:hover,
+.section-products-carousel-tabs .nav-link.active::after,
+.full-width-banner .banner-bg .button,
+.banner-action.button,
+.section-products-tabs .section-products-tabs-wrap > .button:hover,
+.section-3-2-3-product-cards-tabs-with-featured-product .nav .nav-link.active:after,
+.section-product-cards-carousel-tabs .nav .nav-link.active:after,
+.section-products-carousel-with-vertical-tabs .section-title:before,
+#respond.comment-respond .comment-form .form-submit input[type=submit],
+.section-categories-filter .products .product-type-simple .button:hover,
+.home-v9-full-banner.full-width-banner .banner-bg .caption .banner-action.button:hover,
+.section-deals-carousel-and-products-carousel-tabs .deals-carousel-inner-block,
+article .post-readmore .btn-primary,
+article.post .post-readmore .btn-primary,
+.table-compare tbody tr td .button,
+.table-compare tbody tr td .button:hover,
+.return-to-shop .button,
+.col-2-full-width-banner .banner .banner-bg .caption .banner-action.button:hover,
+.return-to-shop .button:hover,
+.select2-container .select2-drop-active,
+.contact-form .form-group input[type=button],
+.contact-form .form-group input[type=submit],
+.widget_techmarket_poster_widget .poster-bg .caption .button,
+.cart-collaterals .checkout-button,
+.section-6-1-6-products-tabs ul.nav .nav-link.active:after,
+#payment .place-order .button,
+.products .sale-product-with-timer,
+.products .sale-product-with-timer:hover,
+.single-product .single_add_to_cart_button,
+.single-product .accessories .accessories-product-total-price .accessories-add-all-to-cart .button:hover,
+.single-product .accessories .accessories-product-total-price .accessories-add-all-to-cart .button:focus,
+.contact-form .form-group input[type=button],
+.contact-form .form-group input[type=submit],
+.about-accordion .kc-section-active .kc_accordion_header.ui-state-active a i,
+.about-accordion .vc_tta-panels .vc_tta-panel.vc_active .vc_tta-panel-title i,
+.section-landscape-full-product-cards-carousel .section-title::before,
+.section-media-single-banner .button,
+.woocommerce-wishlist table.cart .product-add-to-cart a.button,
+.widget_techmarket_poster_widget .poster-bg .caption .button,
+table.cart td.actions div.coupon .button,
+.header-v1 .departments-menu button,
+input[type="submit"].dokan-btn-danger,
+a.dokan-btn-danger,
+.dokan-btn-danger,
+input[type="submit"].dokan-btn-danger:hover,
+a.dokan-btn-danger:hover,
+.dokan-btn-danger:hover,
+input[type="submit"].dokan-btn-danger:focus,
+a.dokan-btn-danger:focus,
+.dokan-btn-danger:focus,
+input[type="submit"].dokan-btn-theme, a.dokan-btn-theme, .dokan-btn-theme,
+input[type="submit"].dokan-btn-theme:hover, a.dokan-btn-theme:hover, .dokan-btn-theme:hover,
+input[type="submit"].dokan-btn-theme:focus, a.dokan-btn-theme:focus, .dokan-btn-theme:focus,
+.section-product-carousel-with-featured-product.type-2 .section-title::before,
+.wcvendors-pro-dashboard-wrapper .wcv-grid nav.wcv-navigation ul li.active a:after,
+.about-accordion .card .card-header h5 > a:not(.collapsed) i,
+.site-content .home-v9-slider .slider-1 .button,
+.site-content .home-v1-slider .slider-1 .button:hover,
+.site-content .home-v2-slider .slider-1 .button:hover,
+.site-content .home-v3-slider .slider-1 .button:hover,
+.site-content .home-v4-slider .slider-1 .button:hover,
+.site-content .home-v5-slider .slider-1 .button:hover,
+.site-content .home-v6-slider .slider-1 .button:hover,
+.site-content .home-v7-slider .slider-1 .button:hover,
+.site-content .home-v8-slider .slider-1 .button:hover,
+.site-content .home-v9-slider .slider-1 .button:hover,
+.site-content .home-v11-slider .slider-1 .button:hover,
+.site-content .home-v12-slider .slider-1 .button:hover,
+.site-content .landing-v1-slider .slider-1 .button:hover,
+.site-content .landing-v2-slider .slider-1 .button:hover {
+  border-color: #ffd40e; }
+
+.slider-sm-btn,
+.slider-sm-btn:hover {
+  border-color: #ffd40e !important; }
+
+.slider-sm-btn {
+  color: #ffd40e !important; }
+
+.slider-sm-btn:hover,
+.wcmp_main_page .wcmp_main_holder .wcmp_vendor_dashboard_content .action_div .wcmp_orange_btn {
+  background-color: #ffd40e !important; }
+
+@media (max-width: 1023px) {
+  .shop-control-bar {
+    background-color: #ffd40e; } }
+
+button,
+.button,
+button:hover,
+.button:hover,
+.btn-primary,
+input[type=submit],
+input[type=submit]:hover,
+.btn-primary:hover,
+.return-to-shop .button,
+.return-to-shop .button:hover,
+.top-bar.top-bar-v4 a,
+.fullwidth-notice .message,
+#payment .place-order .button,
+.cart-collaterals .checkout-button,
+.banners-v2 .banner-action.button,
+.header-v1 .departments-menu button,
+.section-media-single-banner .button,
+.full-width-banner .banner-bg .button:focus,
+.full-width-banner .banner-bg .button:hover,
+.banners-v2.full-width-banner .banner-bg .button,
+.site-header.header-v10 .navbar-primary .nav > li > a,
+.site-header.header-v10 .primary-navigation .nav > li > a,
+.top-bar.top-bar-v4 .nav-item + .nav-item .nav-link::before,
+.top-bar.top-bar-v4 .nav-item + .nav-item > a::before,
+.top-bar.top-bar-v4 .nav > .menu-item + .menu-item .nav-link::before,
+.top-bar.top-bar-v4 .nav > .menu-item + .menu-item > a::before,
+.site-header.header-v4 .navbar-nav .nav-link,
+.site-header.header-v4 .site-header-cart .cart-contents,
+.site-header.header-v4 .header-cart-icon,
+.site-header.header-v4 .departments-menu button i,
+.site-header.header-v5 .departments-menu button i,
+.site-header.header-v5 .navbar-primary .nav > li > a,
+.site-header.header-v5 .primary-navigation .nav > li > a,
+.section-products-tabs .section-products-tabs-wrap > .button:hover,
+.site-header.header-v4 .site-header-cart .cart-contents .amount .price-label,
+.home-v9-full-banner.full-width-banner .banner-bg .caption .banner-action.button:hover,
+.col-2-full-width-banner .banner .banner-bg .caption .banner-action.button:hover {
+  color: #3a3a3a; }
+
+.slider-sm-btn:hover,
+.slider-sm-btn {
+  color: #3a3a3a !important; }
+
+.top-bar.top-bar-v4 {
+  border-bottom-color: #7a7a7a; }
+
+.site-header.header-v4 .site-header-cart .cart-contents .count {
+  background-color: #c6c6c6; }
+
+.site-header.header-v4 .navbar-search button,
+.site-header.header-v5 .navbar-search button {
+  background-color: #3a3a3a; }
+
+.site-header.header-v4 .navbar-search button:hover,
+.site-header.header-v5 .navbar-search button:hover {
+  background-color: #212020; }
+
+.site-header.header-v4 .departments-menu button i,
+.site-header.header-v5 .departments-menu button i {
+  text-shadow: #3a3a3a 0 1px 0; }
+
+.site-header.header-v4 .site-branding .cls-1,
+.site-header.header-v4 .site-branding .cls-2,
+.site-header.header-v5 .site-branding .cls-1,
+.site-header.header-v5 .site-branding .cls-2 {
+  fill: #3a3a3a; }
+
+.site-header.header-v4 .site-branding .cls-3,
+.site-header.header-v5 .site-branding .cls-3 {
+  fill: #c6c6c6; }

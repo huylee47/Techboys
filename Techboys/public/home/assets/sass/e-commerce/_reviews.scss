@@ -1,0 +1,159 @@
+/**
+ * Reviews
+ */
+#reviews {
+	#comments {
+		padding-top: 0;
+
+		.commentlist {
+			li {
+				border-top: 1px solid #ebebeb;
+				border-bottom: none;
+			}
+		}
+
+		ul.children {
+			@include span(last 5 of 6);
+			margin-bottom: 0;
+			padding-top: ms(3);
+
+			li {
+				margin-bottom: ms(3);
+
+				&:last-child {
+					margin-bottom: 0;
+				}
+			}
+		}
+	}
+
+	.comment-form-rating {
+		clear: both;
+
+		label {
+			display: block;
+		}
+	}
+
+	.advanced-review {
+		.advanced-review-rating {
+			@include make-col(12);
+
+			@include media-breakpoint-up(sm) {
+				@include make-col(12);
+				margin-bottom: 20px;
+			}
+
+			@include media-breakpoint-up(xl) {
+				@include make-col(4);
+			}
+
+		    padding-left: 15px;
+			padding-right: 15px;
+
+			h2.based-title {
+				font-weight: 500;
+			    margin-bottom: 1.375em;
+			    font-size: 1.5em;
+			    border-bottom: 1px solid #ebebeb;
+			    padding-bottom: 0.542em;
+			}
+
+			.star-rating {
+				&:before {
+					content: "\f006\f006\f006\f006\f006";
+	    			font-family: FontAwesome;
+				}
+
+				span:before {
+					content: "\f005\f005\f005\f005\f005";
+	    			font-family: FontAwesome;
+				}
+			}
+		}
+
+		.advanced-review-comment {
+			@include make-col(12);
+
+			@include media-breakpoint-down(xs) {
+				margin-top: 20px;
+			}
+
+			@include media-breakpoint-up(sm) {
+				@include make-col(12);
+			}
+
+			@include media-breakpoint-up(xl) {
+				@include make-col(8);
+			}
+		    padding-left: 15px;
+			padding-right: 15px;
+		}
+	}
+
+	#respond {
+		padding: 0px;
+	}
+
+	.avg-rating {
+		display: flex;
+		align-items: center;
+		margin-bottom: 2.813em;
+
+		.avg-rating-number {
+		    font-size: 2.750em;
+		    display: inline-block;
+		    line-height: 1;
+		    font-weight: 300;
+		    margin-right: 0.659em;
+		}
+
+		.star-rating {
+			display: inline-block;
+			font-size: 1.438em;
+			width: 6em #{"/*rtl:6.2em */"};
+    		letter-spacing: 2px;
+		}
+	}
+
+	.rating-histogram {
+	    width: 368px;
+
+		@include media-breakpoint-down(sm) {
+			width: 100%;
+		}
+
+		.rating-bar{
+			display: flex;
+			align-items: center;
+			margin-bottom: 1em;
+			justify-content: space-between;
+
+			.star-rating {
+			    letter-spacing: 2px;
+			}
+
+			.rating-percentage-bar {
+				@include media-breakpoint-up(xs) {
+			    	@include media-breakpoint-down(sm) {
+			    		width: 10em;
+			    	}
+			    }
+
+				width: 12.250em;
+			    height: 0.625em;
+			    border-radius: 0.313em;
+			    background-color: #f3f3f3;
+
+
+
+			    .rating-percentage {
+			    	height: 100%;
+				    background-color: #d8d8d8;
+				    display: block;
+				    border-radius: .313em;
+			    }
+			}
+		}
+	}
+}

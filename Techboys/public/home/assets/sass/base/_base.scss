@@ -1,0 +1,121 @@
+/**
+ * Global styles applied to all non-woocommerce theme components. Includes styles for;
+ *
+ * Typography
+ * Header
+ * Footer
+ * Main content area
+ * Accessiblity helper classes
+ * 404
+ * Comments
+ * Content (posts etc)
+ * Forms
+ * Media
+ * Menus
+ * pagination
+ * Post formats
+ * Widgets
+ */
+
+/**
+ * Global styles
+ */
+* {
+	box-sizing: border-box;
+	 
+}
+
+body {
+	background-color: $body-background;
+	overflow-x: hidden;
+	color: #444;
+
+	// @include media-breakpoint-up(xl) {
+	// 	@include media-breakpoint-down(xl) {
+	// 		font-size: 15px;
+	// 	}
+	// }
+}
+
+// .site {
+// 	overflow-x: hidden;
+// }
+
+.site-content,
+.header-widget-region {
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+.dropdown-toggle {
+	&:after {
+		border: none;
+		width: auto;
+		height: auto;
+		margin-left: .6em;
+		content: '\f107';
+    	font-family: FontAwesome;
+	}
+}
+
+ul.nav {
+	margin-left: 0;
+}
+
+.related,
+.up-sells,
+.section-products-carousel,
+.deals-carousel-inner-block,
+.section-products-carousel-tabs,
+.section-landscape-products-carousel,
+.section-landscape-products-widget-carousel,
+.section-single-carousel-with-tab-product .section-single-carousel,
+.section-single-carousel-with-tab-product .section-double-carousel,
+.featured-brands-block,
+.section-products-carousel-widget-with-tabs .section-brands,
+.section-categories-carousel {
+	.section-header{
+		border-bottom: 1px solid #ebebeb;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+}
+
+.custom-slick-nav a:first-child,.slick-prev {
+	padding-right: 0.52em;
+}
+
+.custom-slick-nav a,.slick-arrow {
+	color: #c3c3c3;
+}
+
+.custom-slick-nav a:hover,.slick-arrow:hover {
+	color: #464646;
+}
+
+@include  media-breakpoint-down(sm) {
+	ul:not(.slick-dots)[role="tablist"] {
+		flex-direction: row;
+		overflow: scroll;
+		justify-content: unset !important;
+		width: 100%;
+		padding-bottom: 0;
+
+		li {
+			width: 50%;
+			flex-shrink: 0;
+			text-align: center;
+		}
+
+		.nav-link {
+			padding: 0 !important;
+
+			&::after {
+				//display: none;
+				bottom: 0;
+			}
+		}
+	}
+}
+
+

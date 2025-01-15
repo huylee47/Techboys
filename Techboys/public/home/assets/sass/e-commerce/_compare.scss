@@ -1,0 +1,15 @@
+.add-to-compare-link {
+	font-size: 1em;
+	line-height: 0.786em;
+	color: #626060;
+
+	@include hover-focus() {
+		color: darken(#626060, 10%);
+	}
+
+	&:before {
+		content:'+';
+		display: inline-block;
+   	 	margin-right: 0.243em;
+	}
+}

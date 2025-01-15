@@ -1,0 +1,50 @@
+.products-carousel-with-bg {
+    .products {
+        overflow: hidden;
+        .product {
+            border: none;
+
+            @include hover-focus() {
+                .hover-area {
+                    bottom: auto;
+                    border: none;
+                    top: 96%;
+                    border-color: transparent;
+                }
+            }
+
+            h3 {
+                margin-bottom: 0;
+                line-height: 1.2;
+                overflow: hidden;
+                max-height: 32px;
+            }
+
+            img {
+                margin-bottom: 6px;
+
+                & + h3 {
+                    margin-top: 35px;
+                }
+            }
+
+            .hover-area {
+                margin-left: 2px;
+                margin-right: 2px;
+                padding: 0 13px 10px;
+            }
+
+            .button {
+                margin: .3em 0;
+            }
+        }
+
+        &:not(.slick-dotted) .slick-list {
+            padding-bottom: 70px;
+        }
+    }
+
+    .slick-dots {
+        padding: 20px 0 23px 0;
+    }
+}

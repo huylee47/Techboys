@@ -1,0 +1,162 @@
+/**
+ * Handheld-Header
+ */
+
+@media (max-width:1024px) {
+    .site-header .handheld-header {
+        .site-branding,
+        .handheld-header-links {
+            @include make-col(6);
+        }
+
+        .custom-logo-link svg,
+        .site-logo-anchor svg,
+        .site-logo-link svg {
+            max-width: 140px;
+            height: 100%;
+        }
+
+        .sticky-wrapper .row {
+            align-items: center;
+            flex-wrap: nowrap;
+        }
+
+        .handheld-navigation,.site-search,.handheld-header-cart-link {
+            @include make-col-ready;
+        }
+
+        .handheld-navigation,.handheld-header-cart-link {
+            max-width: 50px;
+        }
+
+        .site-search {
+            @include make-auto-col;
+
+            &.active {
+                position: relative;
+                height: 40px;
+
+                .widget_product_search,
+                .widget_search {
+                    width: 97vw;
+                    position: absolute;
+                    top: 0;
+                    left: 50%;
+                    transform: translate(-50%, -0%);
+                    z-index: 9;
+                }
+            }
+
+            .widget_search {
+                .search-form label {
+                    width: 100%;
+                    margin-bottom: 0;
+                }
+            }
+        }
+
+        .handheld-navigation {
+            padding-right: 0;
+            text-align: center;
+            .btn,button {
+                background-color: transparent;
+                padding: 0;
+                span {display: none;}
+
+                &::after {display: none;}
+
+                @include hover-focus{
+                    color: #43454b;
+                }
+            }
+        }
+
+        .woocommerce-product-search,
+        .search-form {
+            margin-bottom: 0;
+        }
+
+        .handheld-header-links {
+            ul {
+                margin: 0;
+                list-style: none;
+                flex-direction: row-reverse;
+                display: flex;
+                padding-right: 15px;
+
+                li + li {
+                    padding-right: 25px;
+                }
+
+                li {
+                    i {
+                        font-size: 18px;
+                    }
+
+                    a {color: #444;}
+                }
+
+                .count {
+                    display: none;
+                    position: absolute;
+                    top: -6px;
+                    line-height: 1;
+                    padding: 3px 5px;
+                    background: #000;
+                    font-size: 11px;
+                    opacity: 0.5;
+                    color: #fff;
+                    border-radius: 50px;
+                    right: 12px;
+                }
+            }
+        }
+
+        .handheld-header-cart-link {
+            padding-left: 0;
+            text-align: center;
+            position: relative;
+
+            i {
+                font-size: 20px;
+            }
+
+            .count {
+                text-indent: 0;
+                display: block;
+                width: 1.5em;
+                height: 1.5em;
+                line-height: 1.5;
+                color: #fff;
+                box-sizing: content-box;
+                font-size: .75em;
+                position: absolute;
+                top: 50%;
+                left: 0;
+                border-radius: 100%;
+                font-weight: bold;
+            }
+        }
+
+        .site-search .widget_product_search {
+            input[type=search] {
+                padding: .4em 1em .4em 2.4em;
+                height: 40px;
+            }
+
+            form:before {
+                top: 13px;
+                left: 12px;
+            }
+        }
+    }
+
+    .header-v5.site-header .handheld-header .handheld-header-links ul li a,
+    .header-v4.site-header .handheld-header .handheld-header-links ul li a {
+        color: #fff;
+    }
+
+    .site-header .handheld-header .row {
+        flex-wrap: nowrap;
+    }
+}

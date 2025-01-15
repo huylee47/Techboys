@@ -1,0 +1,121 @@
+/**
+ * Pagination
+ */
+
+.site-main nav.navigation {
+	margin: 0 0 ms(1);
+	@include clearfix;
+
+	.nav-previous,
+	.nav-next {
+		a {
+			display: inline-block;
+			@include transition(all,ease,.3s);
+			padding: ms(-2) 1em;
+			border-radius: 3px;
+		}
+	}
+
+	.nav-previous {
+		float: left;
+		width: 50%;
+
+		a {
+			&:hover {
+				//@include transform(translate(-1em));
+				-webkit-transform: translate(-1em);
+		    	-ms-transform: translate(-1em);
+		        transform: translate(-1em);
+			}
+		}
+	}
+
+	.nav-next {
+		float: right;
+		text-align: right;
+		width: 50%;
+
+		a {
+			&:hover {
+				//@include transform(translate(1em));
+				-webkit-transform: translate(-1em);
+		    	-ms-transform: translate(-1em);
+		        transform: translate(-1em);
+			}
+		}
+	}
+
+}
+
+/**
+ * Pagination
+ */
+.pagination,
+.woocommerce-pagination {
+	padding: 1em 0;
+	border-width: 1px 0;
+	text-align: center;
+	clear: both;
+
+	.page-numbers {
+		margin: 0;
+		@include clearfix;
+
+		li {
+			display: inline-block;
+
+			.page-numbers {
+				font-size: 1em;
+				display: inline-block;
+				padding: 0.667em 1.133em;
+				color: #444444;
+				font-weight: 500;
+				line-height: 1.543em;
+
+				&.current {
+					background-color: $primary_color;
+					color: #fff;
+					padding: 0.733em 1.4em;
+					border-radius: 5px;
+				}
+
+				&.next,
+				&.prev {
+					font-size: 0px;
+					vertical-align: middle;
+
+					&:after {
+						font-family: techmarket-icons;
+					    font-size: 31px;
+	    				opacity: 0.5;
+	    				margin: 0px 5px;
+    				    line-height: 1;
+	    			}
+				}
+
+				&.next:after {
+					content: "\74";
+				}
+				&.prev:after {
+					content: "\75";
+				}
+			}
+
+			a.page-numbers {
+				&:hover {
+					opacity: 0.8;
+				}
+			}
+		}
+	}
+}
+
+.rtl {
+	.pagination,
+	.woocommerce-pagination {
+		a.next,
+		a.prev {
+			transform: rotateY(180deg);
+		}
+	}
+}

@@ -1,0 +1,307 @@
+.shop-control-bar {
+	display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    font-size: 0.938em;
+    border-bottom: 1px solid #ebebeb;
+    padding-bottom: 0.2em;
+    margin-bottom: 10px;
+	flex-wrap: wrap;
+
+    @media (max-width: 500px) {
+    	flex-direction: column;
+
+		.woocommerce-products-header__title {
+			padding: 4px 0 16px 0;
+		}
+    }
+
+	@media (max-width: 1023px) {
+		width: 100vw;
+		position: relative;
+		margin-left: -50vw;
+		left: 50%;
+		background-color: #fe830a;
+	}
+
+	@include  media-breakpoint-down(sm) {
+		margin-bottom: 30px;
+	}
+
+	.handheld-sidebar-toggle {
+		display: none;
+	}
+
+	.handheld-sidebar-toggle button {
+		background: transparent;
+
+		span {
+			padding-left: 10px;
+			font-size: 14px;
+		}
+	}
+
+	@include media-breakpoint-up(md) {
+		@include media-breakpoint-down(lg) {
+			padding-bottom: 14px;
+		}
+	}
+
+    .woocommerce-products-header__title {
+		font-size: 1.5em;
+	    color: #444444;
+	    margin: 0px;
+	    flex-grow: 1;
+	}
+
+	.techmarket-advanced-pagination {
+    	display: flex;
+    	align-items: center;
+   	    word-spacing: 4px;
+        font-weight: normal;
+		
+		@include media-breakpoint-down(ni) {
+			display: none;
+		}
+
+    	form {
+   		    margin-right: 0.733em;
+    	}
+
+		input.form-control {
+			line-height: 1.800em;
+
+			@include media-breakpoint-down(sm) {
+				text-align: center;
+    			width: 48px;
+	        }
+		}
+
+		a.page-numbers {
+			font-size: 31px;
+			opacity: .5;
+
+			&.next {
+				margin-left: 8px;
+
+				@include media-breakpoint-up(sm) {
+					margin-left: 16px;
+				}
+			}
+
+			&.prev {
+				margin-right: 16px;
+			}
+
+		}
+    }
+
+	.woocommerce-products-header__title{
+		@include media-breakpoint-down(lg) {
+			@include make-auto-col;
+		}
+
+		@include media-breakpoint-down(sm) {
+			text-align: center;
+		}
+	}
+
+	.form-techmarket-wc-ppp {
+		@include media-breakpoint-up(md) {
+			@include media-breakpoint-down(lg) {
+				@include make-col(2);
+				display: none;
+			}
+		}
+	}
+
+	.techmarket-advanced-pagination {
+		@include media-breakpoint-up(md) {
+			@include media-breakpoint-down(lg) {
+				@include make-col(2.5);
+				justify-content: flex-end;
+				display: none;
+			}
+		}
+	}
+
+    ul.nav {
+   	    border: 0px;
+
+   	    @include media-breakpoint-up(lg) {
+        	margin-right: 0.6em;
+        }
+
+   	    .nav-item {
+   	    	.nav-link {
+   	    		color: #bcbcbc;
+   	    		border: 0px;
+   		        padding: 0px 0.421em;
+    			font-size: 1.267em;
+
+   	    		&.active,
+   	    		&:hover {
+	   	    		border: 0px;
+	   	    		color: #444444;
+	   	    	}
+	   	    }
+   	    }
+    }
+
+    form {
+		margin: 0px;
+	    //margin-right: 2.133em;
+
+		@include media-breakpoint-up(xl) {
+			& + .techmarket-advanced-pagination {
+				margin-left: 2.133em;
+			}
+
+			&.form-techmarket-wc-ppp {
+			    margin-right: 0.867em;
+			}
+		}
+
+		select,
+		input {
+			font-size: 1em;
+			border-radius: 4px;
+			font-weight: normal;
+		}
+
+		select.orderby {
+		    line-height: 2.067em;
+		}
+
+		input.form-control {
+			line-height: 1.800em;
+		}
+    }
+
+	@media (max-width: 1023px) {
+		padding: 10px 0;
+
+		ul.nav,
+		.form-techmarket-wc-ppp,
+		.techmarket-advanced-pagination {
+			display: none;
+		}
+
+		.handheld-sidebar-toggle {
+			display: block;
+
+			button {
+				color: #fff;
+			}
+		}
+
+		.woocommerce-products-header__title {
+			color: #fff;
+		}
+
+		form select.orderby {
+			border: none;
+    		line-height: 1;
+			color: #fff;
+			font-size: 14px;
+			background: transparent;
+			background-color: transparent;
+	        background-repeat: no-repeat;
+	        background-position: right 1.6em center;
+			background-size: 11px;
+			background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAAVCAYAAABLy77vAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAANBJREFUeNpi+P//PwMSNgDiCWhi2PBjIF6CLMbEgAoEgNiAAT8oAGIxII5GVsvEQBoAaewH4stAPBWIN0AtJ8kgAajGQiD+AsRrgPgCEC8g1SAHqMYJSGIJQKwAwiwkGLQBipHBB1g4kRpGOMGoQaMGUdMgbDleAZYhSTHoADTfoGfQBFINCoBmRhUofwI0H00g1iAWJBeBNFUA8T+oVxVICiTk4vLDx4/vP3/5AmT+TyFQ1B4AYgecRe2Lly+Pf/r06RmQeYaI4vYCsgBAgAEAh8+QV9QkJZ0AAAAASUVORK5CYII=);
+
+			&::after {
+				content: "\f0ec";
+				font-family: "FontAwesome";
+
+			}
+		}
+    }
+}
+
+@media (max-width: 1023px) {
+	.full-width .shop-control-bar .handheld-sidebar-toggle {
+		display: none;
+
+		& + .woocommerce-products-header__title{
+			text-align: left;
+		}
+	}
+}
+
+@media (min-width:500px) and (max-width: 1023px) {
+	.full-width .shop-control-bar .handheld-sidebar-toggle {
+		& + .woocommerce-products-header__title{
+		    padding-left: 20px;
+		}
+	}
+}
+
+.shop-control-bar-bottom {
+	display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    font-size: 0.938em;
+    font-weight: normal;
+    border-top: 1px solid #ebebeb;
+    padding-top: 1.467em;
+
+    @include media-breakpoint-down(sm) {
+    	flex-direction: column;
+		border-top: none;
+    }
+
+    @include media-breakpoint-up(sm) {
+	    @include media-breakpoint-down(lg) {
+	    	flex-flow: row wrap;
+	    	justify-content: space-between;
+	    }
+	}
+
+    form {
+		margin: 0px;
+
+		@include media-breakpoint-down(sm) {
+			margin-bottom: 1.333em;
+		}
+
+		color: #444444;
+    }
+
+    p {
+    	padding: .327em 1.533em;
+    }
+
+    .woocommerce-pagination {
+    	justify-content: flex-end;
+	    display: flex;
+	    flex-grow: 1;
+    }
+}
+
+.shop-control-bar,
+.shop-control-bar-bottom {
+	form {
+		@include media-breakpoint-up(lg) {
+        	margin-right: 0.6em;
+        }
+
+		.techmarket-wc-wppp-select {
+			border: none;
+		}
+
+		select {
+			color: #444444;
+			-moz-appearance: none;
+			-webkit-appearance: none;
+	        line-height: 1.733em;
+	        height: auto;
+	        background: transparent;
+			background-color: transparent;
+	        background-repeat: no-repeat;
+	        background-position: right 1.6em center;
+	        background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAAECAYAAABCxiV9AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAHVJREFUeNpidHBwuPzt29ddfHz8xQxQAOTPYmfnsGX6////Nl5evsIPH95PB0kA6WWcnFwp//79W8zo4uLC8OfP70pmZpaWHz9+vOfg4BD8+/dPNgsL6wxmJSUlBiYm5iNAiY9sbGxu379/S+Hg4JwHMgUgwAD3NS8TSbhyqAAAAABJRU5ErkJggg==);
+		}
+    }
+}

@@ -1,0 +1,69 @@
+/**
+ * Main content area
+ */
+.site-main {
+	margin-bottom: ms(5);
+}
+
+.site-content {
+	outline: none;
+}
+
+.page-template-template-homepage {
+	.site-main {
+		padding-top: ms(7);
+	}
+}
+
+/**
+ * Content
+ */
+.hentry {
+	margin: 0 0 ms(7);
+
+	.wp-post-image,
+	.media-attachment img {
+		margin-bottom: ms(3);
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	.entry-header {
+		margin-bottom: 1em;
+		border-bottom: 1px solid $color_border;
+
+		.posted-on,
+		.byline {
+			font-size: ms(-1);
+
+			a {
+				@include underlinedLink();
+			}
+		}
+	}
+
+	.entry-meta {
+		font-weight: 300;
+	}
+}
+
+.byline,
+.updated:not(.published) {
+	display: none;
+}
+.single, .group-blog {
+	.byline {
+		display: inline;
+	}
+}
+.page-links {
+	clear: both;
+	margin: 0 0 ms(1);
+}
+
+.author {
+	.avatar {
+		width: 64px;
+		margin-bottom: 1em;
+	}
+}

@@ -1,0 +1,13 @@
+/**
+ * Homepage
+ */
+.techmarket-product-section {
+	.section-title {
+		text-align: center;
+		margin-bottom: ms(3);
+	}
+
+	&:last-child {
+		border-bottom: 0;
+	}
+}

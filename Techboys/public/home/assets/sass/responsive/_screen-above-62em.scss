@@ -1,0 +1,27 @@
+// Small devices (phones, tablets less than 48em)
+@media (min-width: 47.95em) and (max-width: 62em) {
+	.site-footer {
+		.before-footer-wrap {
+			.col-full {
+				flex-direction: column;
+			    align-items: center;
+			}
+		}
+	}
+
+	.footer-newsletter {
+		margin-bottom: 2em;
+
+		.media-body > div {
+		    display: flex;
+		}
+
+		.newsletter-header {
+		    margin-right: 2em;
+		}
+
+		input[type="text"] {
+			width: 13em;
+		}
+	}
+}

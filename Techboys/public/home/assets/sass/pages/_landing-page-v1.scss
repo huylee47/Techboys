@@ -1,0 +1,423 @@
+.page-template-template-landingpage-v1 .site-main {
+    margin-bottom: 1.438em;
+}
+
+.landing-v1-slider {
+	margin-bottom: 5.875em;
+}
+
+.section-recent-posts-with-categories {
+	@include make-row();
+	padding-bottom: 6.250em;
+	flex-direction: column;
+
+	.center-block {
+		margin: 0 auto;
+		@include make-col-ready;
+		margin-bottom: 8.438em;
+
+        @include media-breakpoint-up(xl) {
+            @include make-col(8);
+            flex: 0 0 auto;
+        }
+
+        @include media-breakpoint-up(md) {
+            @include media-breakpoint-down(lg) {
+                @include make-col(11);
+            }
+        }
+	}
+
+	.section-title {
+		text-align: center;
+		margin-bottom: 0.659em;
+	}
+
+	.description {
+		font-size: 1.000em;
+		line-height: 1.500em;
+		color: #090909;
+		font-weight: 300;
+		letter-spacing: -0.01em;
+		text-align: center;
+		margin-bottom: 1.875em;
+	}
+
+	.nav {
+		display: flex;
+   		justify-content: center;
+        flex-wrap: wrap;
+
+        @media (max-width: 500px) {
+            flex-direction: column;
+        }
+
+   		.nav-link {
+   			display: inline-block;
+   			font-size: 1.000em;
+			line-height: 1.500em;
+			font-weight: 500;
+			letter-spacing: -0.01em;
+
+   			&:before {
+   				content: "\65";
+            	font-family: "techmarket-icons";
+            	color: #282828;
+            	padding-right: 0.75em;
+            	font-size: 0.625em;
+            	vertical-align: top;
+   			}
+   		}
+
+   		.nav-item {
+   			& + .nav-item {
+   				margin-left: 1.563em;
+
+                @media (max-width: 500px) {
+                    margin-left: 0;
+                }
+   			}
+   		}
+	}
+
+	.post-items-wrap {
+		margin-left: auto;
+		margin-right: auto;
+		padding: 0 0.938em;
+	}
+
+	.post-items {
+		display: flex;
+		flex-wrap: wrap;
+		overflow: hidden;
+		margin: 0 -0.938em;
+
+
+		.post-item {
+			display: flex;
+			justify-content: flex-start;
+			align-items: center;
+			@include make-col-ready;
+			margin-bottom: 5.625em;
+
+            @include media-breakpoint-up(xxl) {
+                @include make-col(4);
+            }
+
+            @include media-breakpoint-down(sm) {
+                flex-direction: column;
+            }
+
+            @include media-breakpoint-up(md) {
+                @include media-breakpoint-down(lg) {
+                    @include make-col(12);
+                }
+            }
+
+            @include media-breakpoint-up(xl) {
+                @include media-breakpoint-down(xl) {
+                    @include make-col(6);
+                }
+            }
+
+			.post-thumbnail {
+				padding-right: 1.875em;
+
+                @include media-breakpoint-down(sm) {
+                    padding-right: 0;
+                    margin-bottom: 40px;
+                }
+
+				img {
+					max-width: 227px;
+					border-radius: 50%;
+				}
+			}
+
+			.post-info {
+				letter-spacing: -0.01em;
+				padding-right: 1em;
+
+                @include media-breakpoint-down(sm) {
+                    padding-right: 0;
+                }
+
+				h3 {
+					font-size: 1.125em;
+					line-height: 1.333em;
+					font-weight: 500;
+					margin-bottom: 0.8em;
+
+					a {
+						color: #444444;
+					}
+				}
+
+				p {
+					font-size: 1.000em;
+					line-height: 1.500em;
+					color: #555353;
+					font-weight: 300;
+					margin-bottom: 1.1em;
+				}
+
+				.btn-more {
+					display: block;
+					font-size: 0.875em;
+					font-weight: 400;
+
+					&:before {
+						content:'+';
+						display: inline-block;
+						margin-right: 0.243em;
+					}
+				}
+			}
+		}
+	}
+}
+
+.section-products-with-image,
+.section-recent-posts-with-categories {
+	.section-title {
+		font-size: 2.750em;
+		line-height: 1.045em;
+		color: #090909;
+		font-weight: 500;
+		letter-spacing: -0.01em;
+	}
+}
+
+.section-products-with-image {
+	.section-header {
+		@include clearfix;
+		@include stretch-full-width;
+		background: #eff5f5;
+		//padding: 6.250em 0;
+		margin-bottom: 7em;
+
+		&:after {
+			background-color: #eff5f5;
+		    border: 2px solid #eff5f5;
+		    border-radius: 4px;
+		    content: "";
+		    height: 56px;
+		    left: 5%;
+		    position: absolute;
+		    bottom: -19px;
+		    transform: rotate(45deg);
+		    width: 56px;
+		    z-index: 1;
+		}
+
+        @include media-breakpoint-up(sm) {
+            .row {
+                flex-direction: column;
+            }
+        }
+	}
+
+    .columns-7 .products:not(.slick-slider) .product {
+        @include media-breakpoint-up(xl) {
+            @include media-breakpoint-down(xl) {
+                @include make-col(2);
+            }
+        }
+    }
+
+	.section-title {
+		margin-bottom: 0.909em;
+
+	}
+
+	.description {
+		font-size: 1.000em;
+		line-height: 1.500em;
+		color: #555353;
+		font-weight: 300;
+		letter-spacing: -0.01em;
+		padding-right: 2.438em;
+
+	}
+
+	.product-info,
+	.product-image {
+		@include make-col-ready;
+	}
+
+	.product-info {
+		@include make-col(7.3);
+		padding: 6.250em 0.938em;
+		flex: 0 0 auto;
+
+        @include media-breakpoint-down(lg) {
+            padding: 4em 2em;
+        }
+
+        @include media-breakpoint-down(sm) {
+            @include make-col(12);
+        }
+	}
+
+	.product-image {
+		@include make-col(4.7);
+
+        @include media-breakpoint-up(xxl) {
+            right: -26px;
+    		top: -19%;
+        }
+
+        @include media-breakpoint-up(md) {
+            position: absolute;
+        }
+
+        @include media-breakpoint-up(md) {
+            @include media-breakpoint-down(xl) {
+                transform: translate(0%, -50%);
+                top: 50%;
+                right: 0;
+            }
+        }
+
+        @include media-breakpoint-down(sm) {
+            @include make-col(12);
+
+            z-index: 9;
+            margin-bottom: 30px;
+        }
+	}
+
+	.products {
+		padding-bottom: 1.813em;
+
+		.product .star-rating {
+			font-size: 1.143em;
+
+            @include media-breakpoint-down(lg) {
+                margin-bottom: 16px;
+            }
+		}
+
+        .product {
+            .woocommerce-loop-product__title, h2, h3 {
+                margin-bottom: .8em;
+            }
+        }
+	}
+
+	.product {
+
+        .woocommerce-LoopProduct-link + .hover-area {
+            @include media-breakpoint-down(lg) {
+                margin-top: 46px;
+            }
+        }
+
+		& + .product {
+			&::before {
+                @include media-breakpoint-up(md) {
+                    content: " ";
+    				width: 1px;
+    				height: 214px;
+    				background-color: #ebebeb;
+    				display: block;
+    				position: absolute;
+    				left: -3px;
+    				top: 50%;
+    				transform: translateY(-50%);
+                }
+			}
+
+			&:hover {
+				&::before {
+					opacity: 0;
+				}
+			}
+		}
+	}
+
+	.columns-2 .product {
+		&:nth-child(3)::before {
+			opacity: 0;
+		}
+	}
+
+	.columns-3 .product {
+		&:nth-child(4)::before {
+			opacity: 0;
+		}
+	}
+
+	.columns-4 .product {
+		&:nth-child(5)::before {
+			opacity: 0;
+		}
+	}
+
+	.columns-5 .product {
+        @include media-breakpoint-up(xl) {
+            &:nth-child(6)::before {
+    			opacity: 0;
+    		}
+        }
+
+		& + .product {
+			&::before {
+				height: 300px;
+			}
+		}
+	}
+
+	.columns-6 .product {
+		&:nth-child(7)::before {
+			opacity: 0;
+		}
+	}
+
+	.columns-7 .product {
+		&:nth-child(8)::before {
+			opacity: 0;
+		}
+
+        @include media-breakpoint-up(xl) {
+            @include media-breakpoint-down(xl) {
+                &:nth-child(n+7) {
+                    display: none;
+                }
+            }
+        }
+
+        @include media-breakpoint-up(md) {
+            @include media-breakpoint-down(lg) {
+                &:nth-child(n+5) {
+                    display: none;
+                }
+            }
+        }
+	}
+
+	.columns-8 .product {
+		&:nth-child(9)::before {
+			opacity: 0;
+		}
+	}
+
+	.load-more-button {
+		display: block;
+	    text-align: center;
+	    border-top: 1px solid #ebebeb;
+	    padding: 1.786em 0 4.286em;
+	    font-size: 0.875em;
+	    letter-spacing: -0.01em;
+
+	    &:before {
+			content:'+';
+			display: inline-block;
+			margin-right: 0.243em;
+		}
+	}
+
+	&:last-child .load-more-button {
+		padding-bottom: 0px;
+	}
+}

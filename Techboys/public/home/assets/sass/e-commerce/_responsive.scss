@@ -1,0 +1,166 @@
+@include susy-media($desktop) {
+	.demo_store {
+		bottom: 0;
+
+		a {
+			background: rgba(#000,.1);
+			float: right;
+			display: inline-block;
+			margin: -1em -1.41575em -1em 0;
+			padding: 1em ms(2);
+		}
+	}
+
+	/**
+	 * Responsive tables
+	 */
+	table.shop_table_responsive {
+		thead {
+			display: table-header-group;
+		}
+
+		tbody {
+			th {
+				display: table-cell;
+			}
+		}
+
+		tr {
+			td {
+				display: table-cell;
+
+				&:before {
+					display: none;
+				}
+			}
+		}
+	}
+
+	/**
+	 * Header Elements
+	 */
+	.site-search {
+		form {
+			margin: 0;
+		}
+	}
+
+	.woocommerce .page-description {
+		margin-bottom: ms(3);
+	}
+
+	.techmarket-sorting {
+		@include clearfix;
+		margin-bottom: ms(5);
+
+		select {
+			width: auto;
+		}
+	}
+
+	.woocommerce-result-count {
+		float: left;
+		position: relative;
+		margin-bottom: 0;
+		padding: .327em 0;
+	}
+
+	.woocommerce-ordering {
+		float: left;
+		margin-right: 1em;
+		margin-bottom: 0;
+		padding: .327em 0;
+	}
+
+	.woocommerce-pagination {
+		float: right;
+		border: 0;
+		clear: none;
+		padding: 0;
+		margin-bottom: 0;
+	}
+
+
+	/**
+	 * My Account
+	 */
+	table + .addresses {
+		margin-top: ms(3);
+	}
+
+
+	.left-sidebar:not(.page-template-template-fullwidth-php) {
+		.woocommerce-MyAccount-navigation {
+			@include span( last 2 of 9 );
+		}
+
+		.woocommerce-MyAccount-content {
+			@include span( 7 of 9 );
+		}
+	}
+
+	table.my_account_orders {
+		font-size: ms(-1);
+	}
+
+	.page-template-template-fullwidth-php {
+
+		.woocommerce-MyAccount-navigation {
+			@include span( 3 of 12 );
+		}
+
+		.woocommerce-MyAccount-content {
+			@include span( last 9 of 12 );
+
+			.form-row-first {
+				@include span( 4 of 8 );
+			}
+
+			.form-row-last {
+				@include span( last 4 of 8 );
+			}
+		}
+	}
+
+	/**
+	 * General WooCommerce Components
+	 */
+	.form-row {
+		margin-bottom: 1.438em;
+		@include make-col-ready();
+		@include make-col(12);
+	}
+
+	.form-row-first {
+		clear: both;
+		@include make-col(6);
+	}
+
+	.form-row-last {
+		@include make-col(6);
+	}
+
+	.form-row-wide {
+		@include make-col-ready();
+		@include make-col(12);
+	}
+}
+
+@media (min-width: $handheld) and (max-width: $container-width) {
+	.woocommerce-breadcrumb {
+		margin-left: -2.618rem;
+		margin-right: -2.618rem;
+		padding-left: 2.618rem;
+		padding-right: 2.618rem;
+	}
+}
+
+@include media-breakpoint-up(xl) {
+	.woocommerce-MyAccount-navigation {
+		@include span( 2 of 9 );
+	}
+
+	.woocommerce-MyAccount-content {
+		@include span(last 7 of 9 );
+	}
+}
