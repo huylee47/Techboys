@@ -6,6 +6,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::get('blog', function () {
-    return view('client.wish-list.wish');
+    return view('admin.tag.edit');
 }); 
 
