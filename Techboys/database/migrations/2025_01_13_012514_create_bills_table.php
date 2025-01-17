@@ -13,8 +13,7 @@ return new class extends Migration
     {
         Schema::create('bills', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id');
-            $table->integer('guest_id')->nullable();
+            $table->foreignId('user_id')->nullable();;
             $table->string('full_name');
             $table->string('phone');
             $table->decimal('total',10,2);
