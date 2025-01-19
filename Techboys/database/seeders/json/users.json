@@ -1,0 +1,58 @@
+[
+    {
+        "name": "Vũ Ngọc Minh Vương",
+        "email": "vuongvu@gmail.com",
+        "email_verified_at": "2025-01-16T12:00:00",
+        "username": "vungocminhvuong",
+        "password": "$2y$12$59stw4IJz7ECXtrU7f/JTucs75mtaa6Oiqa9NwhpkPBseLPIuph/K",
+        "phone": "0901234567",
+        "wallet": 1000,
+        "address": "123 Đường ABC, TP.Hải Phòng",
+        "gender": true,
+        "dob": "1990-05-10",
+        "status": 1,
+        "role_id": 1
+    },
+    {
+        "name": "Lê Khánh Huy",
+        "email": "khanhhuy@gmail.com",
+        "email_verified_at": "2025-01-16T12:00:00",
+        "username": "lekhanhhuy",
+        "password": "$2y$12$59stw4IJz7ECXtrU7f/JTucs75mtaa6Oiqa9NwhpkPBseLPIuph/K",
+        "phone": "0901234567",
+        "wallet": 1000,
+        "address": "123 Đường ABC, TP.Hải Phòng",
+        "gender": true,
+        "dob": "1990-05-10",
+        "status": 1,
+        "role_id": 1
+    },
+    {
+        "name": "Vũ Đình Minh",
+        "email": "dinhminh@gmail.com",
+        "email_verified_at": "2025-01-16T12:00:00",
+        "username": "vudinhminh",
+        "password": "$2y$12$59stw4IJz7ECXtrU7f/JTucs75mtaa6Oiqa9NwhpkPBseLPIuph/K",
+        "phone": "0901234567",
+        "wallet": 1000,
+        "address": "123 Đường ABC, TP.Hải Phòng",
+        "gender": true,
+        "dob": "1990-05-10",
+        "status": 1,
+        "role_id": 1
+    },
+    {
+        "name": "Trần Văn Tài",
+        "email": "vantai@gmail.com",
+        "email_verified_at": "2025-01-16T12:00:00",
+        "username": "tranvantai",
+        "password": "$2y$12$59stw4IJz7ECXtrU7f/JTucs75mtaa6Oiqa9NwhpkPBseLPIuph/K",
+        "phone": "0901234567",
+        "wallet": 1000,
+        "address": "123 Đường ABC, TP.Hải Phòng",
+        "gender": true,
+        "dob": "1990-05-10",
+        "status": 1,
+        "role_id": 1
+    }
+]

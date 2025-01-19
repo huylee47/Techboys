@@ -1,0 +1,72 @@
+[
+    {
+        "product_id": 1,
+        "color": "Đen",
+        "model": "iPhone 13 128GB",
+        "price": 10000.0,
+        "stock": 50
+    },
+    {
+        "product_id": 1,
+        "color": "Trắng",
+        "model": "iPhone 13 256GB",
+        "price": 12000.0,
+        "stock": 30
+    },
+    {
+        "product_id": 2,
+        "color": "Xanh",
+        "model": "Galaxy S21 128GB",
+        "price": 9500.0,
+        "stock": 40
+    },
+    {
+        "product_id": 2,
+        "color": "Vàng",
+        "model": "Galaxy S21 256GB",
+        "price": 11000.0,
+        "stock": 20
+    },
+    {
+        "product_id": 3,
+        "color": "Đen",
+        "model": "Xiaomi Mi 11 128GB",
+        "price": 9500.0,
+        "stock": 35
+    },
+    {
+        "product_id": 3,
+        "color": "Trắng",
+        "model": "Xiaomi Mi 11 256GB",
+        "price": 11000.0,
+        "stock": 25
+    },
+    {
+        "product_id": 4,
+        "color": "Đỏ",
+        "model": "iPhone 12 128GB",
+        "price": 8500.0,
+        "stock": 40
+    },
+    {
+        "product_id": 4,
+        "color": "Xám",
+        "model": "iPhone 12 256GB",
+        "price": 9500.0,
+        "stock": 30
+    },
+    {
+        "product_id": 5,
+        "color": "Bạc",
+        "model": "Oppo F19 Pro 128GB",
+        "price": 8500.0,
+        "stock": 20
+    },
+    {
+        "product_id": 5,
+        "color": "Vàng",
+        "model": "Oppo F19 Pro 256GB",
+        "price": 10000.0,
+        "stock": 10
+    }
+]

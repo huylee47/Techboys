@@ -1,0 +1,42 @@
+[
+    {
+        "user_id": 1,
+        "product_id": 1,
+        "content": "Sản phẩm rất tốt, tôi rất thích!",
+        "rate": 4.5,
+        "file_id": 1,
+        "status_id": 1
+    },
+    {
+        "user_id": 2,
+        "product_id": 2,
+        "content": "Chất lượng sản phẩm không như kỳ vọng.",
+        "rate": 2.0,
+        "file_id": 2,
+        "status_id": 2
+    },
+    {
+        "user_id": 3,
+        "product_id": 3,
+        "content": "Giá cả hợp lý, chất lượng tốt.",
+        "rate": 4.0,
+        "file_id": 3,
+        "status_id": 1
+    },
+    {
+        "user_id": 4,
+        "product_id": 4,
+        "content": "Rất tiếc, sản phẩm bị lỗi, cần cải thiện.",
+        "rate": 1.5,
+        "file_id": 4,
+        "status_id": 3
+    },
+    {
+        "user_id": 5,
+        "product_id": 5,
+        "content": "Mua tặng bạn bè, họ rất thích!",
+        "rate": 5.0,
+        "file_id": 5,
+        "status_id": 1
+    }
+]

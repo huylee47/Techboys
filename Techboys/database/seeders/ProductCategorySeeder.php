@@ -4,24 +4,28 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 
 class ProductCategorySeeder extends Seeder
 {
     /**
      * Run the database seeds.
+     *
+     * @return void
      */
-    public function run(): void
+    public function run()
     {
-        DB::table('product_categories')->insert([
-            ['name' => 'Điện thoại', 'created_at' => now(), 'updated_at' => now()],
-            ['name' => 'Laptop', 'created_at' => now(), 'updated_at' => now()],
-            ['name' => 'Máy tính bảng', 'created_at' => now(), 'updated_at' => now()],
-            ['name' => 'Phụ kiện', 'created_at' => now(), 'updated_at' => now()],
-            ['name' => 'Tai nghe', 'created_at' => now(), 'updated_at' => now()],
-            ['name' => 'Smartwatch', 'created_at' => now(), 'updated_at' => now()],
-            ['name' => 'Tivi', 'created_at' => now(), 'updated_at' => now()],
-            ['name' => 'Máy ảnh', 'created_at' => now(), 'updated_at' => now()],
-            ['name' => 'Giới thiệu', 'created_at' => now(), 'updated_at' => now()],
-        ]);
+        // Đọc dữ liệu từ file JSON
+        $json = File::get(database_path('seeders/json/product_categories.json'));
+        $categories = json_decode($json, true);
+
+        // Thêm dữ liệu vào bảng
+        foreach ($categories as $category) {
+            DB::table('product_categories')->insert([
+                'name' => $category['name'],
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+        }
     }
 }

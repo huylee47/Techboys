@@ -1,0 +1,22 @@
+[
+    {
+        "title": "Giảm giá mùa hè",
+        "banners": "banner1.jpg"
+    },
+    {
+        "title": "Khuyến mãi 10% cho đơn hàng đầu tiên",
+        "banners": "banner2.jpg"
+    },
+    {
+        "title": "Mua sắm thoải mái, miễn phí giao hàng",
+        "banners": "banner3.jpg"
+    },
+    {
+        "title": "Giảm giá 50% cho sản phẩm Apple",
+        "banners": "banner4.jpg"
+    },
+    {
+        "title": "Ưu đãi đặc biệt cho khách hàng VIP",
+        "banners": "banner5.jpg"
+    }
+]
