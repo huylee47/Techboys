@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('comments', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id');
+            $table->foreignId('user_id')->nullable();;
             $table->foreignId('product_id');
             $table->text('content');
             $table->decimal('rate',10,2);

@@ -18,4 +18,10 @@ class ProductVariant extends Model
     public function images(){
         return $this->hasMany(Images::class);
     }
+    public function billDetails(){
+        return $this->hasMany(BillDetails::class);
+    }  
+    public function cartDetails(){
+        return $this->hasMany(CartDetail::class);
+    }
 }
