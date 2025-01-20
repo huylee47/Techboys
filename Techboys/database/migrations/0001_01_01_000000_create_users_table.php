@@ -23,7 +23,7 @@ return new class extends Migration
             $table->text('address')->nullable();
             $table->boolean('gender')->nullable();
             $table->date('dob')->nullable();
-            $table->foreignId('status_id');
+            $table->boolean('status');
             $table->foreignId('role_id');
             $table->rememberToken();
             $table->timestamps();
