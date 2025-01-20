@@ -25,7 +25,7 @@ return new class extends Migration
             $table->date('dob')->nullable();
             $table->tinyInteger('status');
             $table->tinyInteger('role_id');
-            $table->rememberToken();
+            $table->rememberToken()->nullable();
             $table->timestamps();
         });
 

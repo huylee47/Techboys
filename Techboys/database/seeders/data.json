@@ -1,0 +1,900 @@
+{
+    "banners": [
+        {
+            "title": "Giảm giá mùa hè",
+            "banners": "banner1.jpg"
+        },
+        {
+            "title": "Khuyến mãi 10% cho đơn hàng đầu tiên",
+            "banners": "banner2.jpg"
+        },
+        {
+            "title": "Mua sắm thoải mái, miễn phí giao hàng",
+            "banners": "banner3.jpg"
+        },
+        {
+            "title": "Giảm giá 50% cho sản phẩm Apple",
+            "banners": "banner4.jpg"
+        },
+        {
+            "title": "Ưu đãi đặc biệt cho khách hàng VIP",
+            "banners": "banner5.jpg"
+        }
+    ],
+    "bills": [
+        {
+            "user_id": 1,
+            "guest_id": null,
+            "full_name": "Nguyễn Văn A",
+            "phone": "0901234567",
+            "total": 1200000.0,
+            "address": "123 Đường ABC, TP.HCM",
+            "email": "nguyenvana@gmail.com",
+            "payment_method": 1,
+            "status_id": 1,
+            "voucher_code": 1
+        },
+        {
+            "user_id": 2,
+            "guest_id": 101,
+            "full_name": "Lê Thị B",
+            "phone": "0907654321",
+            "total": 1500000.0,
+            "address": "456 Đường XYZ, TP.HN",
+            "email": "lethib@gmail.com",
+            "payment_method": 2,
+            "status_id": 2,
+            "voucher_code": 2
+        },
+        {
+            "user_id": 3,
+            "guest_id": null,
+            "full_name": "Trần Văn C",
+            "phone": "0912345678",
+            "total": 800000.0,
+            "address": "789 Đường LMN, TP.ĐN",
+            "email": "tranvanc@gmail.com",
+            "payment_method": 1,
+            "status_id": 3,
+            "voucher_code": null
+        },
+        {
+            "user_id": 4,
+            "guest_id": 102,
+            "full_name": "Phạm Thị D",
+            "phone": "0901122334",
+            "total": 2000000.0,
+            "address": "101 Đường PQR, TP.CN",
+            "email": "phamthid@gmail.com",
+            "payment_method": 2,
+            "status_id": 1,
+            "voucher_code": 3
+        },
+        {
+            "user_id": 5,
+            "guest_id": null,
+            "full_name": "Vũ Ngọc E",
+            "phone": "0911122334",
+            "total": 950000.0,
+            "address": "112 Đường STU, TP.HCM",
+            "email": "vungoce@gmail.com",
+            "payment_method": 1,
+            "status_id": 2,
+            "voucher_code": 1
+        }
+    ],
+    "bill_details": [
+        {
+            "bill_id": 1,
+            "product_id": 1,
+            "variant_id": 2,
+            "quantity": 2,
+            "price": 600000.0,
+            "slug": "iphone-13-pro-max"
+        },
+        {
+            "bill_id": 1,
+            "product_id": 2,
+            "variant_id": 4,
+            "quantity": 1,
+            "price": 300000.0,
+            "slug": "samsung-galaxy-s22"
+        },
+        {
+            "bill_id": 2,
+            "product_id": 3,
+            "variant_id": 6,
+            "quantity": 3,
+            "price": 450000.0,
+            "slug": "xiaomi-mi-11"
+        },
+        {
+            "bill_id": 2,
+            "product_id": 4,
+            "variant_id": 8,
+            "quantity": 1,
+            "price": 650000.0,
+            "slug": "oppo-reno-6"
+        },
+        {
+            "bill_id": 3,
+            "product_id": 5,
+            "variant_id": 10,
+            "quantity": 5,
+            "price": 100000.0,
+            "slug": "realme-gt"
+        }
+    ],
+    "blogs": [
+        {
+            "title": "10 mẹo sử dụng smartphone hiệu quả",
+            "content": "Chia sẻ 10 mẹo đơn giản nhưng cực kỳ hiệu quả giúp bạn sử dụng smartphone tốt hơn.",
+            "slug": "meo-su-dung-smartphone-hieu-qua",
+            "user_id": 1
+        },
+        {
+            "title": "Tương lai của công nghệ AI",
+            "content": "AI sẽ thay đổi hoàn toàn cách chúng ta làm việc và sống trong tương lai gần.",
+            "slug": "tuong-lai-cua-cong-nghe-ai",
+            "user_id": 2
+        },
+        {
+            "title": "Top 5 điện thoại đáng mua trong năm 2025",
+            "content": "Điện thoại nào sẽ lên ngôi trong năm 2025? Hãy cùng điểm qua 5 mẫu smartphone đáng chú ý.",
+            "slug": "top-5-dien-thoai-dang-mua-nam-2025",
+            "user_id": 1
+        },
+        {
+            "title": "Xu hướng mua sắm trực tuyến trong thời đại số",
+            "content": "Mua sắm trực tuyến đang trở thành xu hướng, hãy cùng tìm hiểu về sự phát triển của ngành này.",
+            "slug": "xu-huong-mua-sam-truc-tuyen",
+            "user_id": 3
+        },
+        {
+            "title": "Ứng dụng di động đang thay đổi thế giới",
+            "content": "Ứng dụng di động không chỉ giúp chúng ta trong công việc, mà còn thay đổi cách chúng ta giải trí và kết nối.",
+            "slug": "ung-dung-di-dong-thay-doi-the-gioi",
+            "user_id": 2
+        }
+    ],
+    "brand": [
+        {
+            "name": "Apple"
+        },
+        {
+            "name": "Samsung"
+        },
+        {
+            "name": "Sony"
+        },
+        {
+            "name": "Xiaomi"
+        },
+        {
+            "name": "Oppo"
+        },
+        {
+            "name": "Vivo"
+        },
+        {
+            "name": "Realme"
+        },
+        {
+            "name": "Huawei"
+        },
+        {
+            "name": "LG"
+        },
+        {
+            "name": "OnePlus"
+        }
+    ],
+    "cart": [
+        {
+            "user_id": 1,
+            "guest_id": null,
+            "cart_id": "cart_1",
+            "variant_id": 2,
+            "quantity": 3
+        },
+        {
+            "user_id": 2,
+            "guest_id": null,
+            "cart_id": "cart_2",
+            "variant_id": 3,
+            "quantity": 2
+        },
+        {
+            "user_id": 3,
+            "guest_id": null,
+            "cart_id": "cart_3",
+            "variant_id": 1,
+            "quantity": 1
+        },
+        {
+            "user_id": 4,
+            "guest_id": 101,
+            "cart_id": "cart_4",
+            "variant_id": 2,
+            "quantity": 5
+        },
+        {
+            "user_id": 1,
+            "guest_id": 102,
+            "cart_id": "cart_5",
+            "variant_id": 4,
+            "quantity": 3
+        }
+    ],
+    "chats": [
+        {
+            "customer_id": 1,
+            "staff_id": 2,
+            "guest_id": null,
+            "status_id": 1,
+            "created_at": "2025-01-19 10:00:00",
+            "updated_at": "2025-01-19 10:00:00"
+        },
+        {
+            "customer_id": 3,
+            "staff_id": 4,
+            "guest_id": null,
+            "status_id": 2,
+            "created_at": "2025-01-19 11:30:00",
+            "updated_at": "2025-01-19 11:30:00"
+        },
+        {
+            "customer_id": 2,
+            "staff_id": 5,
+            "guest_id": null,
+            "status_id": 3,
+            "created_at": "2025-01-19 12:15:00",
+            "updated_at": "2025-01-19 12:15:00"
+        },
+        {
+            "customer_id": 5,
+            "staff_id": 3,
+            "guest_id": 101,
+            "status_id": 1,
+            "created_at": "2025-01-19 13:00:00",
+            "updated_at": "2025-01-19 13:00:00"
+        },
+        {
+            "customer_id": 4,
+            "staff_id": 2,
+            "guest_id": null,
+            "status_id": 2,
+            "created_at": "2025-01-19 14:00:00",
+            "updated_at": "2025-01-19 14:00:00"
+        }
+    ],
+    "checklog": [
+        {
+            "user_id": 1,
+            "created_at": "2025-01-19 10:00:00",
+            "updated_at": "2025-01-19 10:00:00"
+        },
+        {
+            "user_id": 2,
+            "created_at": "2025-01-19 11:00:00",
+            "updated_at": "2025-01-19 11:00:00"
+        },
+        {
+            "user_id": 3,
+            "created_at": "2025-01-19 12:00:00",
+            "updated_at": "2025-01-19 12:00:00"
+        }
+    ],
+    "comments": [
+        {
+            "user_id": 1,
+            "product_id": 1,
+            "content": "Sản phẩm rất tốt, tôi rất thích!",
+            "rate": 4.5,
+            "file_id": 1,
+            "status_id": 1
+        },
+        {
+            "user_id": 2,
+            "product_id": 2,
+            "content": "Chất lượng sản phẩm không như kỳ vọng.",
+            "rate": 2.0,
+            "file_id": 2,
+            "status_id": 2
+        },
+        {
+            "user_id": 3,
+            "product_id": 3,
+            "content": "Giá cả hợp lý, chất lượng tốt.",
+            "rate": 4.0,
+            "file_id": 3,
+            "status_id": 1
+        },
+        {
+            "user_id": 4,
+            "product_id": 4,
+            "content": "Rất tiếc, sản phẩm bị lỗi, cần cải thiện.",
+            "rate": 1.5,
+            "file_id": 4,
+            "status_id": 3
+        },
+        {
+            "user_id": 5,
+            "product_id": 5,
+            "content": "Mua tặng bạn bè, họ rất thích!",
+            "rate": 5.0,
+            "file_id": 5,
+            "status_id": 1
+        }
+    ],
+    "config": [
+        {
+            "favicon": "favicon.ico",
+            "logo": "logo.png",
+            "title": "Techboys - Shop điện thoại uy tín",
+            "address": "123 Đường ABC, TP.Hải Phòng, Việt Nam",
+            "map": "<iframe src='https://www.google.com/maps/embed?pb=...' width='600' height='450' frameborder='0' style='border:0' allowfullscreen></iframe>",
+            "hotline": "0901234567",
+            "facebook": "https://facebook.com/techboys",
+            "created_at": "2025-01-19 12:00:00",
+            "updated_at": "2025-01-19 12:00:00"
+        }
+    ],
+    "contacts": [
+        {
+            "name": "Nguyễn Văn A",
+            "email": "nguyenvana@example.com",
+            "phone": "0901234567",
+            "message": "Mình muốn biết thêm thông tin về sản phẩm iPhone 13."
+        },
+        {
+            "name": "Trần Thị B",
+            "email": "tranthib@example.com",
+            "phone": "0912345678",
+            "message": "Mình cần hỗ trợ về cách thanh toán."
+        },
+        {
+            "name": "Lê Minh C",
+            "email": "leminhc@example.com",
+            "phone": "0923456789",
+            "message": "Tôi gặp vấn đề khi đăng nhập vào tài khoản."
+        },
+        {
+            "name": "Phạm Quang D",
+            "email": "phamquangd@example.com",
+            "phone": "0934567890",
+            "message": "Tôi muốn được tư vấn về các sản phẩm laptop."
+        },
+        {
+            "name": "Đỗ Thị E",
+            "email": "dothie@example.com",
+            "phone": "0945678901",
+            "message": "Mình muốn hỏi về chính sách bảo hành sản phẩm."
+        }
+    ],
+    "images": [
+        {
+            "image": "image1.jpg",
+            "variant_id": 1,
+            "created_at": "2025-01-19 12:00:00",
+            "updated_at": "2025-01-19 12:00:00"
+        },
+        {
+            "image": "image2.jpg",
+            "variant_id": 1,
+            "created_at": "2025-01-19 12:00:00",
+            "updated_at": "2025-01-19 12:00:00"
+        },
+        {
+            "image": "image3.jpg",
+            "variant_id": 2,
+            "created_at": "2025-01-19 12:00:00",
+            "updated_at": "2025-01-19 12:00:00"
+        },
+        {
+            "image": "image4.jpg",
+            "variant_id": 2,
+            "created_at": "2025-01-19 12:00:00",
+            "updated_at": "2025-01-19 12:00:00"
+        }
+    ],
+    "message": [
+        {
+            "chat_id": 1,
+            "sender_id": 1,
+            "message": "Hello! How are you?",
+            "created_at": "2025-01-19 12:00:00",
+            "updated_at": "2025-01-19 12:00:00"
+        },
+        {
+            "chat_id": 1,
+            "sender_id": 2,
+            "message": "I'm good, thanks! How about you?",
+            "created_at": "2025-01-19 12:05:00",
+            "updated_at": "2025-01-19 12:05:00"
+        },
+        {
+            "chat_id": 2,
+            "sender_id": 3,
+            "message": "Hey, I need help with my order.",
+            "created_at": "2025-01-19 13:00:00",
+            "updated_at": "2025-01-19 13:00:00"
+        },
+        {
+            "chat_id": 2,
+            "sender_id": 1,
+            "message": "Sure, how can I assist you?",
+            "created_at": "2025-01-19 13:05:00",
+            "updated_at": "2025-01-19 13:05:00"
+        }
+    ],
+    "products": [
+        {
+            "brand_id": 1,
+            "category_id": 1,
+            "purchases": 100,
+            "name": "iPhone 13",
+            "img": "iphone-13.jpg",
+            "slug": "iphone-13",
+            "rate_average": 4.5,
+            "description": "Điện thoại thông minh của Apple."
+        },
+        {
+            "brand_id": 2,
+            "category_id": 1,
+            "purchases": 150,
+            "name": "Samsung Galaxy S21",
+            "img": "s21.jpg",
+            "slug": "samsung-galaxy-s21",
+            "rate_average": 4.7,
+            "description": "Điện thoại thông minh của Samsung."
+        },
+        {
+            "brand_id": 3,
+            "category_id": 1,
+            "purchases": 200,
+            "name": "Xiaomi Mi 11",
+            "img": "xiaomi-mi11.jpg",
+            "slug": "xiaomi-mi-11",
+            "rate_average": 4.6,
+            "description": "Điện thoại thông minh của Xiaomi."
+        },
+        {
+            "brand_id": 1,
+            "category_id": 1,
+            "purchases": 120,
+            "name": "iPhone 12",
+            "img": "iphone-12.jpg",
+            "slug": "iphone-12",
+            "rate_average": 4.3,
+            "description": "Điện thoại thông minh của Apple."
+        },
+        {
+            "brand_id": 4,
+            "category_id": 1,
+            "purchases": 100,
+            "name": "Oppo F19 Pro",
+            "img": "oppo-f19-pro.jpg",
+            "slug": "oppo-f19-pro",
+            "rate_average": 4.2,
+            "description": "Điện thoại thông minh của Oppo."
+        },
+        {
+            "brand_id": 5,
+            "category_id": 1,
+            "purchases": 80,
+            "name": "Realme 8 Pro",
+            "img": "realme-8-pro.jpg",
+            "slug": "realme-8-pro",
+            "rate_average": 4.4,
+            "description": "Điện thoại thông minh của Realme."
+        },
+        {
+            "brand_id": 6,
+            "category_id": 1,
+            "purchases": 95,
+            "name": "Vivo V21",
+            "img": "vivo-v21.jpg",
+            "slug": "vivo-v21",
+            "rate_average": 4.1,
+            "description": "Điện thoại thông minh của Vivo."
+        },
+        {
+            "brand_id": 7,
+            "category_id": 2,
+            "purchases": 180,
+            "name": "MacBook Pro 13",
+            "img": "macbook-pro-13.jpg",
+            "slug": "macbook-pro-13",
+            "rate_average": 4.8,
+            "description": "Máy tính xách tay cao cấp của Apple."
+        },
+        {
+            "brand_id": 8,
+            "category_id": 2,
+            "purchases": 200,
+            "name": "Dell XPS 13",
+            "img": "dell-xps-13.jpg",
+            "slug": "dell-xps-13",
+            "rate_average": 4.6,
+            "description": "Máy tính xách tay của Dell."
+        },
+        {
+            "brand_id": 9,
+            "category_id": 2,
+            "purchases": 150,
+            "name": "HP Spectre x360",
+            "img": "hp-spectre-x360.jpg",
+            "slug": "hp-spectre-x360",
+            "rate_average": 4.4,
+            "description": "Máy tính xách tay của HP."
+        },
+        {
+            "brand_id": 10,
+            "category_id": 2,
+            "purchases": 130,
+            "name": "Asus ZenBook 13",
+            "img": "asus-zenbook-13.jpg",
+            "slug": "asus-zenbook-13",
+            "rate_average": 4.2,
+            "description": "Máy tính xách tay của Asus."
+        },
+        {
+            "brand_id": 1,
+            "category_id": 3,
+            "purchases": 90,
+            "name": "iPad Pro 12.9",
+            "img": "ipad-pro-12-9.jpg",
+            "slug": "ipad-pro-12-9",
+            "rate_average": 4.7,
+            "description": "Máy tính bảng cao cấp của Apple."
+        },
+        {
+            "brand_id": 2,
+            "category_id": 3,
+            "purchases": 110,
+            "name": "Samsung Galaxy Tab S7",
+            "img": "galaxy-tab-s7.jpg",
+            "slug": "galaxy-tab-s7",
+            "rate_average": 4.5,
+            "description": "Máy tính bảng của Samsung."
+        },
+        {
+            "brand_id": 3,
+            "category_id": 3,
+            "purchases": 100,
+            "name": "Xiaomi Pad 5",
+            "img": "xiaomi-pad-5.jpg",
+            "slug": "xiaomi-pad-5",
+            "rate_average": 4.3,
+            "description": "Máy tính bảng của Xiaomi."
+        },
+        {
+            "brand_id": 1,
+            "category_id": 3,
+            "purchases": 80,
+            "name": "iPad Air 4",
+            "img": "ipad-air-4.jpg",
+            "slug": "ipad-air-4",
+            "rate_average": 4.4,
+            "description": "Máy tính bảng của Apple."
+        },
+        {
+            "brand_id": 5,
+            "category_id": 4,
+            "purchases": 70,
+            "name": "Sạc không dây Realme",
+            "img": "realme-wireless-charger.jpg",
+            "slug": "realme-wireless-charger",
+            "rate_average": 4.1,
+            "description": "Sạc không dây của Realme."
+        },
+        {
+            "brand_id": 6,
+            "category_id": 4,
+            "purchases": 60,
+            "name": "Tai nghe Vivo TWS",
+            "img": "vivo-tws.jpg",
+            "slug": "vivo-tws",
+            "rate_average": 4.3,
+            "description": "Tai nghe TWS của Vivo."
+        }
+    ],
+    "product_categories": [
+        { "name": "Điện thoại" },
+        { "name": "Laptop" },
+        { "name": "Máy tính bảng" },
+        { "name": "Phụ kiện" },
+        { "name": "Tai nghe" },
+        { "name": "Smartwatch" },
+        { "name": "Tivi" },
+        { "name": "Máy ảnh" },
+        { "name": "Giới thiệu" }
+    ],
+    "product_variants": [
+        {
+            "product_id": 1,
+            "color": "Đen",
+            "model": "iPhone 13 128GB",
+            "price": 10000.0,
+            "stock": 50
+        },
+        {
+            "product_id": 1,
+            "color": "Trắng",
+            "model": "iPhone 13 256GB",
+            "price": 12000.0,
+            "stock": 30
+        },
+        {
+            "product_id": 2,
+            "color": "Xanh",
+            "model": "Galaxy S21 128GB",
+            "price": 9500.0,
+            "stock": 40
+        },
+        {
+            "product_id": 2,
+            "color": "Vàng",
+            "model": "Galaxy S21 256GB",
+            "price": 11000.0,
+            "stock": 20
+        },
+        {
+            "product_id": 3,
+            "color": "Đen",
+            "model": "Xiaomi Mi 11 128GB",
+            "price": 9500.0,
+            "stock": 35
+        },
+        {
+            "product_id": 3,
+            "color": "Trắng",
+            "model": "Xiaomi Mi 11 256GB",
+            "price": 11000.0,
+            "stock": 25
+        },
+        {
+            "product_id": 4,
+            "color": "Đỏ",
+            "model": "iPhone 12 128GB",
+            "price": 8500.0,
+            "stock": 40
+        },
+        {
+            "product_id": 4,
+            "color": "Xám",
+            "model": "iPhone 12 256GB",
+            "price": 9500.0,
+            "stock": 30
+        },
+        {
+            "product_id": 5,
+            "color": "Bạc",
+            "model": "Oppo F19 Pro 128GB",
+            "price": 8500.0,
+            "stock": 20
+        },
+        {
+            "product_id": 5,
+            "color": "Vàng",
+            "model": "Oppo F19 Pro 256GB",
+            "price": 10000.0,
+            "stock": 10
+        }
+    ],
+    "promotion": [
+        {
+            "name": "Black Friday Sale",
+            "status_id": 1,
+            "product_id": 1,
+            "discount_percent": 30,
+            "discount_amount": null,
+            "created_at": "2025-01-19 10:00:00",
+            "updated_at": "2025-01-19 10:00:00"
+        },
+        {
+            "name": "Christmas Discount",
+            "status_id": 2,
+            "product_id": 2,
+            "discount_percent": null,
+            "discount_amount": 50000,
+            "created_at": "2025-01-19 11:00:00",
+            "updated_at": "2025-01-19 11:00:00"
+        },
+        {
+            "name": "Summer Sale",
+            "status_id": 1,
+            "product_id": 3,
+            "discount_percent": 15,
+            "discount_amount": null,
+            "created_at": "2025-01-19 12:00:00",
+            "updated_at": "2025-01-19 12:00:00"
+        }
+    ],
+    "refund": [
+        {
+            "bill_id": 1,
+            "status_id": 2,
+            "reason": "The product was defective.",
+            "file_id": "file_1",
+            "created_at": "2025-01-19 12:00:00",
+            "updated_at": "2025-01-19 12:00:00"
+        },
+        {
+            "bill_id": 2,
+            "status_id": 3,
+            "reason": "The customer changed their mind.",
+            "file_id": "file_2",
+            "created_at": "2025-01-19 13:00:00",
+            "updated_at": "2025-01-19 13:00:00"
+        },
+        {
+            "bill_id": 3,
+            "status_id": 2,
+            "reason": "Received wrong item.",
+            "file_id": "file_3",
+            "created_at": "2025-01-19 14:00:00",
+            "updated_at": "2025-01-19 14:00:00"
+        }
+    ],
+    "role": [
+        {
+            "name": "Admin",
+            "created_at": "2025-01-19 12:00:00",
+            "updated_at": "2025-01-19 12:00:00"
+        },
+        {
+            "name": "Manager",
+            "created_at": "2025-01-19 12:00:00",
+            "updated_at": "2025-01-19 12:00:00"
+        },
+        {
+            "name": "User",
+            "created_at": "2025-01-19 12:00:00",
+            "updated_at": "2025-01-19 12:00:00"
+        }
+    ],
+    "status": [
+        {
+            "name": "Đang chờ xử lý"
+        },
+        {
+            "name": "Đang giao hàng"
+        },
+        {
+            "name": "Đã giao"
+        },
+        {
+            "name": "Đã hủy"
+        },
+        {
+            "name": "Hoàn tiền"
+        },
+        {
+            "name": "Đang hoàn tiền"
+        }
+    ],
+    "storage": [
+        {
+            "file": "file1.jpg"
+        },
+        {
+            "file": "file2.pdf"
+        },
+        {
+            "file": "file3.png"
+        },
+        {
+            "file": "file4.zip"
+        },
+        {
+            "file": "file5.mp3"
+        }
+    ],
+    "user": [
+        {
+            "name": "Vũ Ngọc Minh Vương",
+            "email": "vuongvu@gmail.com",
+            "email_verified_at": "2025-01-16T12:00:00",
+            "username": "vungocminhvuong",
+            "password": "password123",
+            "phone": "0901234567",
+            "wallet": 100.5,
+            "address": "123 Đường ABC, TP.Hải Phòng",
+            "gender": true,
+            "dob": "1990-05-10",
+            "status": 1,
+            "role_id": 1
+        },
+        {
+            "name": "Lê Khánh Huy",
+            "email": "khanhhuy@gmail.com",
+            "email_verified_at": "2025-01-16T12:00:00",
+            "username": "lekhanhhuy",
+            "password": "password123",
+            "phone": "0901234567",
+            "wallet": 100.5,
+            "address": "123 Đường ABC, TP.Hải Phòng",
+            "gender": true,
+            "dob": "1990-05-10",
+            "status": 1,
+            "role_id": 1
+        },
+        {
+            "name": "Vũ Đình Minh",
+            "email": "dinhminh@gmail.com",
+            "email_verified_at": "2025-01-16T12:00:00",
+            "username": "vudinhminh",
+            "password": "password123",
+            "phone": "0901234567",
+            "wallet": 100.5,
+            "address": "123 Đường ABC, TP.Hải Phòng",
+            "gender": true,
+            "dob": "1990-05-10",
+            "status": 1,
+            "role_id": 1
+        },
+        {
+            "name": "Trần Văn Tài",
+            "email": "vantai@gmail.com",
+            "email_verified_at": "2025-01-16T12:00:00",
+            "username": "tranvantai",
+            "password": "password123",
+            "phone": "0901234567",
+            "wallet": 100.5,
+            "address": "123 Đường ABC, TP.Hải Phòng",
+            "gender": true,
+            "dob": "1990-05-10",
+            "status": 1,
+            "role_id": 1
+        }
+    ],
+    "vouchers": [
+        {
+            "name": "Giảm giá 10%",
+            "code": "DISCOUNT10",
+            "discount_percent": 10,
+            "discount_amount": null,
+            "quantity": 100,
+            "min_price": 500000,
+            "max_price": 5000000
+        },
+        {
+            "name": "Giảm 100k cho đơn hàng từ 500k",
+            "code": "DISCOUNT100K",
+            "discount_percent": null,
+            "discount_amount": 100000,
+            "quantity": 50,
+            "min_price": 500000,
+            "max_price": 10000000
+        },
+        {
+            "name": "Giảm giá 20% cho đơn hàng từ 1 triệu",
+            "code": "DISCOUNT20",
+            "discount_percent": 20,
+            "discount_amount": null,
+            "quantity": 200,
+            "min_price": 1000000,
+            "max_price": 20000000
+        },
+        {
+            "name": "Giảm 200k cho tất cả sản phẩm",
+            "code": "DISCOUNT200K",
+            "discount_percent": null,
+            "discount_amount": 200000,
+            "quantity": 30,
+            "min_price": 100000,
+            "max_price": 50000000
+        },
+        {
+            "name": "Giảm giá 5% cho tất cả sản phẩm",
+            "code": "DISCOUNT5",
+            "discount_percent": 5,
+            "discount_amount": null,
+            "quantity": 150,
+            "min_price": 100000,
+            "max_price": 50000000
+        }
+    ]
+}
