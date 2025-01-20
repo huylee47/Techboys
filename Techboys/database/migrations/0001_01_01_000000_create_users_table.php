@@ -23,8 +23,8 @@ return new class extends Migration
             $table->text('address')->nullable();
             $table->boolean('gender')->nullable();
             $table->date('dob')->nullable();
-            $table->tinyInteger('status');
-            $table->tinyInteger('role_id');
+            $table->foreignId('status_id');
+            $table->foreignId('role_id');
             $table->rememberToken();
             $table->timestamps();
         });
