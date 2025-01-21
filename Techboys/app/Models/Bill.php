@@ -9,7 +9,7 @@ class Bill extends Model
 {
     use HasFactory ;
     protected $table = 'bills';
-    protected $fillable = [ 'user_id', 'guest_id','full_name','phone','total','address','email','payment_method','status_id','voucher_code'];
+    protected $fillable = [ 'user_id','full_name','phone','total','address','email','payment_method','status_id','voucher_code'];
     public function user(){
         return $this->belongsTo(User::class);
     }

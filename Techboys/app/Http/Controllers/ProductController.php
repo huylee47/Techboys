@@ -4,15 +4,22 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use Illuminate\Http\Request;
+use App\Service\ProductService;
 
 class ProductController extends Controller
 {
+    private $productService;
+    public function __construct(ProductService $productService){
+        $this->productService = $productService;
+    }
+    // ADMIN CTRL
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        $products = $this->productService->getAllProducts();
+        return view('admin.product.index', compact('products'));
     }
 
     /**

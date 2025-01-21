@@ -24,7 +24,6 @@
     "bills": [
         {
             "user_id": 1,
-            "guest_id": null,
             "full_name": "Nguyễn Văn A",
             "phone": "0901234567",
             "total": 1200000.0,
@@ -36,7 +35,6 @@
         },
         {
             "user_id": 2,
-            "guest_id": 101,
             "full_name": "Lê Thị B",
             "phone": "0907654321",
             "total": 1500000.0,
@@ -48,7 +46,6 @@
         },
         {
             "user_id": 3,
-            "guest_id": null,
             "full_name": "Trần Văn C",
             "phone": "0912345678",
             "total": 800000.0,
@@ -60,7 +57,6 @@
         },
         {
             "user_id": 4,
-            "guest_id": 102,
             "full_name": "Phạm Thị D",
             "phone": "0901122334",
             "total": 2000000.0,
@@ -72,7 +68,6 @@
         },
         {
             "user_id": 5,
-            "guest_id": null,
             "full_name": "Vũ Ngọc E",
             "phone": "0911122334",
             "total": 950000.0,
@@ -192,35 +187,30 @@
     "cart": [
         {
             "user_id": 1,
-            "guest_id": null,
             "cart_id": "cart_1",
             "variant_id": 2,
             "quantity": 3
         },
         {
             "user_id": 2,
-            "guest_id": null,
             "cart_id": "cart_2",
             "variant_id": 3,
             "quantity": 2
         },
         {
             "user_id": 3,
-            "guest_id": null,
             "cart_id": "cart_3",
             "variant_id": 1,
             "quantity": 1
         },
         {
             "user_id": 4,
-            "guest_id": 101,
             "cart_id": "cart_4",
             "variant_id": 2,
             "quantity": 5
         },
         {
             "user_id": 1,
-            "guest_id": 102,
             "cart_id": "cart_5",
             "variant_id": 4,
             "quantity": 3
@@ -230,7 +220,6 @@
         {
             "customer_id": 1,
             "staff_id": 2,
-            "guest_id": null,
             "status_id": 1,
             "created_at": "2025-01-19 10:00:00",
             "updated_at": "2025-01-19 10:00:00"
@@ -238,7 +227,6 @@
         {
             "customer_id": 3,
             "staff_id": 4,
-            "guest_id": null,
             "status_id": 2,
             "created_at": "2025-01-19 11:30:00",
             "updated_at": "2025-01-19 11:30:00"
@@ -246,7 +234,6 @@
         {
             "customer_id": 2,
             "staff_id": 5,
-            "guest_id": null,
             "status_id": 3,
             "created_at": "2025-01-19 12:15:00",
             "updated_at": "2025-01-19 12:15:00"
@@ -254,7 +241,6 @@
         {
             "customer_id": 5,
             "staff_id": 3,
-            "guest_id": 101,
             "status_id": 1,
             "created_at": "2025-01-19 13:00:00",
             "updated_at": "2025-01-19 13:00:00"
@@ -262,7 +248,6 @@
         {
             "customer_id": 4,
             "staff_id": 2,
-            "guest_id": null,
             "status_id": 2,
             "created_at": "2025-01-19 14:00:00",
             "updated_at": "2025-01-19 14:00:00"
