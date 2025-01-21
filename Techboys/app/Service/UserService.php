@@ -2,6 +2,28 @@
 
 namespace App\Service;
 
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+
 class UserService{
-    
+    public function login($request){
+        $username = $request->input('username');
+        $password = $request->input('password');
+        $account = User::where('username', $username)->first();
+        
+        if (!$account) {
+           return redirect()->back()->with('error','không tìm thấy tài khoản ');
+        }
+        
+        if (!Hash::check($password, $account->password)) {
+            return redirect()->back()->with('error','mật khẩu không đúng');
+        }
+        Auth::login($account);
+        $user = Auth::user();   
+        if($user->role == 1 && $user->role == 2){
+            return redirect('/admin')->with('sucess','đăng nhập thành công');
+        }
+        return redirect('/index')->with('sucess','đăng nhập thành công');
+    }
 }
