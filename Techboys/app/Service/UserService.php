@@ -1,13 +1,16 @@
 <?php
 
 namespace App\Service;
-
 use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
-class UserService{
-    public function login($request){
+class UserService {
+    public function index(){
+        return view('login');
+    }
+    public function login(Request $request){
         $username = $request->input('username');
         $password = $request->input('password');
         $account = User::where('username', $username)->first();
@@ -20,10 +23,11 @@ class UserService{
             return redirect()->back()->with('error','mật khẩu không đúng');
         }
         Auth::login($account);
-        $user = Auth::user();   
-        if($user->role == 1 && $user->role == 2){
-            return redirect('/admin')->with('sucess','đăng nhập thành công');
-        }
-        return redirect('/index')->with('sucess','đăng nhập thành công');
+        // $user = Auth::user();   
+        return redirect('/admin')->with('sucess','đăng nhập thành công');
+    }
+    public function logout(){
+        Auth::logout();
+        return redirect('/login')->with('success','đăng xuất thành công');
     }
 }
