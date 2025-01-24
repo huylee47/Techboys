@@ -75,7 +75,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="end-time">Ngày hết hạn (Định dạng: Năm/Tháng/Ngày)</label>
-                                    <input type="datetime"   class="form-control" id="end_date" aria-describedby=""
+                                    <input type="date"   class="form-control" id="end_date" aria-describedby=""
                                         name="end_date" placeholder="Ngày kết thúc" value="{{ old('end_date', now()->format('Y-m-d')) }}">
                                 </div>
                                 <div class="form-group">

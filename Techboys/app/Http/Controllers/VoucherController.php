@@ -31,12 +31,11 @@ class VoucherController extends Controller
      */
     public function store(Request $request)
     {
-        // thêm unique vào name , k cho nhập số âm , thiếu validate min , max price và percent 
         $request->validate([
             'code' => 'required|max:255',
             'name' => 'required|max:255',
             'min_price' => 'required|nullable|numeric|min:0',
-            'max_price' => 'required|nullable|numeric|min:0|after:min_price',
+            'max_price' => 'required|nullable|numeric|min:0',
             'start_date' => 'required|date',
             'end_date' => 'required|date|after:start_date',
             'quantity' => 'required|numeric|min:1',
@@ -62,6 +61,7 @@ class VoucherController extends Controller
             'quantity.numeric' => 'Số lượng phải là số.',
             'quantity.min' => 'Số lượng phải ít nhất là 1.',
             'discount_percent.min' => 'Giảm(%) phải là một số dương.',
+            'discount_percent.max' => 'Giảm(%) phải là nhỏ hơn 100.',
             'discount_amount.min' => 'Giảm(Đ) phải là một số dương.'
         ]);
 
@@ -74,6 +74,11 @@ class VoucherController extends Controller
         if (!empty($request->discount_percent) && !empty($request->discount_amount)) {
             return redirect()->back()
                 ->withErrors(['error' => 'Bạn chỉ được điền một trong hai trường: giảm(%) hoặc giảm(Đ)'])
+                ->withInput();
+        }
+        if(($request->min_price) > ($request->max_price)){
+            return redirect()->back()
+                ->withErrors(['error' => 'Giá tối thiểu phải nhỏ hơn giá tối đa.'])
                 ->withInput();
         }
 
@@ -121,7 +126,7 @@ class VoucherController extends Controller
             'code' => 'required|max:255',
             'name' => 'required|max:255',
             'min_price' => 'required|nullable|numeric|min:0',
-            'max_price' => 'required|nullable|numeric|min:0|after:min_price',
+            'max_price' => 'required|nullable|numeric|min:0',
             'start_date' => 'required|date',
             'end_date' => 'required|date|after:start_date',
             'quantity' => 'required|numeric|min:1',
@@ -147,6 +152,7 @@ class VoucherController extends Controller
             'quantity.numeric' => 'Số lượng phải là số.',
             'quantity.min' => 'Số lượng phải ít nhất là 1.',
             'discount_percent.min' => 'Giảm(%) phải là một số dương.',
+            'discount_percent.max' => 'Giảm(%) phải là nhỏ hơn 100.',
             'discount_amount.min' => 'Giảm(Đ) phải là một số dương.'
         ]);
 
@@ -161,13 +167,18 @@ class VoucherController extends Controller
                 ->withErrors(['error' => 'Bạn chỉ được điền một trong hai trường: giảm(%) hoặc giảm(Đ)'])
                 ->withInput();
         }
+        if(($request->min_price) > ($request->max_price)){
+            return redirect()->back()
+                ->withErrors(['error' => 'Giá tối thiểu phải nhỏ hơn giá tối đa.'])
+                ->withInput();
+        }
         Voucher::find($request->id)->update([
             'code' => $request->code,
             'name' => $request->name,
             'discount_percent' => $request->discount_percent,
             'discount_amount' => $request->discount_amount,
-            'min_price' => $request->min_price,
             'max_price' => $request->max_price,
+            'min_price' => $request->min_price,
             'start_date' => $request->start_date,
             'end_date' => $request->end_date,
             'quantity' => $request->quantity
