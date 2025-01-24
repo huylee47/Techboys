@@ -33,8 +33,8 @@ class VoucherController extends Controller
     {
         // thêm unique vào name , k cho nhập số âm , thiếu validate min , max price và percent 
         $request->validate([
-            'code' => 'required|max:255|unique:your_table_name',
-            'name' => 'required|max:255|unique:your_table_name',
+            'code' => 'required|max:255',
+            'name' => 'required|max:255',
             'min_price' => 'required|nullable|numeric|min:0',
             'max_price' => 'required|nullable|numeric|min:0|after:min_price',
             'start_date' => 'required|date',
