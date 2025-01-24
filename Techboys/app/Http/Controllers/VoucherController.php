@@ -33,20 +33,26 @@ class VoucherController extends Controller
     {
         // thêm unique vào name , k cho nhập số âm , thiếu validate min , max price và percent 
         $request->validate([
-            'code' => 'required|max:255',
-            'name' => 'required|max:255',
-            'min_price' => 'nullable|numeric',
-            'max_price' => 'nullable|numeric',
+            'code' => 'required|max:255|unique:your_table_name',
+            'name' => 'required|max:255|unique:your_table_name',
+            'min_price' => 'required|nullable|numeric|min:0',
+            'max_price' => 'required|nullable|numeric|min:0|after:min_price',
             'start_date' => 'required|date',
             'end_date' => 'required|date|after:start_date',
-            'quantity' => 'required|numeric|min:1'
+            'quantity' => 'required|numeric|min:1',
+            'discount_percent' => 'nullable|numeric|min:0|max:100',
+            'discount_amount' => 'nullable|numeric|min:0',
         ], [
-            'code.required' => 'Vui lòng nhập code .',
-            'code.max' => 'code không được vượt quá 255 ký tự.',
+            'code.required' => 'Vui lòng nhập code.',
+            'code.max' => 'Code không được vượt quá 255 ký tự.',
+            'code.unique' => 'Code này đã tồn tại. Vui lòng nhập code khác.',
             'name.required' => 'Vui lòng nhập tên.',
             'name.max' => 'Tên không được vượt quá 255 ký tự.',
-            'min_price.numeric' => 'Giá trị tối thiểu phải là số.',
-            'max_price.numeric' => 'Giá trị tối đa phải là số.',
+            'min_price.min' => 'Giá tối thiểu phải là một số dương.',
+            'min_price.required' => 'Vui lòng nhập giá tối thiểu.',
+            'max_price.min' => 'Giá tối đa phải là một số dương.',
+            'max_price.required' => 'Vui lòng nhập giá tối đa.',
+            'max_price.after' => 'Giá tối đa phải lớn hơn hoặc bằng giá tối thiểu.',
             'start_date.required' => 'Vui lòng chọn ngày bắt đầu.',
             'start_date.date' => 'Ngày bắt đầu phải là ngày hợp lệ.',
             'end_date.required' => 'Vui lòng chọn ngày kết thúc.',
@@ -54,12 +60,23 @@ class VoucherController extends Controller
             'end_date.after' => 'Ngày kết thúc phải sau ngày bắt đầu.',
             'quantity.required' => 'Vui lòng nhập số lượng.',
             'quantity.numeric' => 'Số lượng phải là số.',
-            'quantity.min' => 'Số lượng phải ít nhất là 1.'
+            'quantity.min' => 'Số lượng phải ít nhất là 1.',
+            'discount_percent.min' => 'Giảm(%) phải là một số dương.',
+            'discount_amount.min' => 'Giảm(Đ) phải là một số dương.'
         ]);
-        
+
         if (empty($request->discount_percent) && empty($request->discount_amount)) {
-            return redirect()->back()->withErrors(['error' => 'Bạn phải điền ít nhất một trong hai trường: giảm(%) hoặc giảm(Đ)']);
+            return redirect()->back()
+                ->withErrors(['error' => 'Bạn phải điền ít nhất một trong hai trường: giảm(%) hoặc giảm(Đ)'])
+                ->withInput();
         }
+
+        if (!empty($request->discount_percent) && !empty($request->discount_amount)) {
+            return redirect()->back()
+                ->withErrors(['error' => 'Bạn chỉ được điền một trong hai trường: giảm(%) hoặc giảm(Đ)'])
+                ->withInput();
+        }
+
         Voucher::create([
             'code' => $request->code,
             'name' => $request->name,
@@ -124,7 +141,7 @@ class VoucherController extends Controller
             'quantity.numeric' => 'Số lượng phải là số.',
             'quantity.min' => 'Số lượng phải ít nhất là 1.'
         ]);
-        
+
         if (empty($request->discount_percent) && empty($request->discount_amount)) {
             return redirect()->back()->withErrors(['error' => 'Bạn phải điền ít nhất một trong hai trường: giảm(%) hoặc giảm(Đ)']);
         }
