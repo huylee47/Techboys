@@ -69,8 +69,9 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="start_date">Ngày bắt đầu (Định dạng: Năm/Tháng/Ngày)</label>
-                                    <input type="datetime"  class="form-control" id="start_date" aria-describedby=""
-                                        name="start_date" placeholder="Ngày kết thúc" value="{{ old('start_date', now()->format('Y-m-d')) }}">
+                                    <input type="datetime-local" class="form-control" id="start_date" 
+                                    name="start_date" placeholder="Ngày và giờ bắt đầu" 
+                                    value="{{ old('start_date', now()->format('Y-m-d\TH:i:s')) }}">                             
                                 </div>
                                 <div class="form-group">
                                     <label for="end-time">Ngày hết hạn (Định dạng: Năm/Tháng/Ngày)</label>
