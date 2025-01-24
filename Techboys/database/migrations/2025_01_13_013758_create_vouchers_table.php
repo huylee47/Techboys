@@ -20,6 +20,9 @@ return new class extends Migration
             $table->integer('quantity')->nullable();
             $table->integer('min_price');
             $table->integer('max_price');
+            $table->timestamp('start_date');
+            $table->timestamp('end_date')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }
