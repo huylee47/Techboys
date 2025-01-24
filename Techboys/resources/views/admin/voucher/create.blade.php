@@ -53,9 +53,9 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="min_price">Giảm(Đ)</label>
+                                    <label for="min_price">Giảm(VNĐ)</label>
                                     <input type="number"  class="form-control" id="discount_amount"
-                                        aria-describedby="" name="discount_amount" placeholder="Nhập giá giảm theo Đ" value="{{ old('discount_amount')  }}">
+                                        aria-describedby="" name="discount_amount" placeholder="Nhập giá giảm theo VNĐ" value="{{ old('discount_amount')  }}">
                                 </div>
                                 <div class="mb-3">
                                     <label for="description">Giá tối thiểu để áp dụng voucher</label>

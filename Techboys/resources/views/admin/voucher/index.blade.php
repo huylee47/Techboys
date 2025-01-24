@@ -43,7 +43,7 @@
                                 <th class="col-1">Code</th>
                                 <th class="col-1">Tên</th>
                                 <th class="col-1">Giảm(%)</th>
-                                <th class="col-1">Giảm(Đ)</th>
+                                <th class="col-1">Giảm(VNĐ)</th>
                                 <th class="col-1">Giá tối thiểu để áp dụng voucher</th>
                                 <th class="col-1">Giá tối đa để áp dụng voucher</th>
                                 {{-- <th class="col-1">Ngày hiệu lực</th>
@@ -58,7 +58,7 @@
                                 <th class="col-1">Code</th>
                                 <th class="col-1">Tên</th>
                                 <th class="col-1">Giảm(%)</th>
-                                <th class="col-1">Giảm(Đ)</th>
+                                <th class="col-1">Giảm(VNĐ)</th>
                                 <th class="col-1">Giá tổi thiểu để áp dụng voucher</th>
                                 <th class="col-1">Giá tổi đa để áp dụng voucher</th>
                                 {{-- <th class="col-1">Ngày hiệu lực</th>

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tài Lộc Property</title>
+    <title>Techboys Property</title>
 
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
@@ -31,12 +31,12 @@
                 <div class="sidebar-header">
                     <div class="d-flex justify-content-between">
                         <div class="logo">
-                            <a href="#"><img src="{{ url('') }}/admin/cassets/img/logo.png"
-                                    alt="Logo" srcset=""></a>
+                            <a href="#"><img src="{{ url('') }}/admin/cassets/img/logo.png" alt="Logo"
+                                    srcset=""></a>
                         </div>
                         {{-- <div class="toggler">
                             <a href="#" class="sidebar-hide d-xl-none d-block"><i
-                                    class="bi bi-x bi-middle"></i> Tài Lộc</a>
+                                    class="bi bi-x bi-middle"></i> Techboys</a>
                         </div> --}}
                     </div>
                 </div>
@@ -44,36 +44,35 @@
                     <ul class="menu">
                         <li class="sidebar-title">Menu</li>
 
-                        <li class="sidebar-item  {{-- {{ request()->routeIs('index') ? 'active' : '' }}--}}"> 
+                        <li class="sidebar-item  {{-- {{ request()->routeIs('index') ? 'active' : '' }} --}}">
                             <a href="" class='sidebar-link'>
-                            <i class="bi bi-grid-fill"></i>
-                            <span>Chức năng</span>
+                                <i class="bi bi-grid-fill"></i>
+                                <span>Chức năng</span>
                             </a>
                         </li>
 
-                        <li class="sidebar-item {{--{{ request()->routeIs('admin.project.index') ? 'active' : '' }}--}}">
+                        <li class="sidebar-item {{-- {{ request()->routeIs('admin.project.index') ? 'active' : '' }} --}}">
                             <a href="" class='sidebar-link'>
                                 <i class="bi bi-file-earmark-spreadsheet-fill"></i>
                                 <span>Dự án</span>
                             </a>
                         </li>
 
-                        <li class="sidebar-item {{--{{ request()->routeIs('admin.property.index') ? 'active' : '' }}--}}">
+                        <li class="sidebar-item {{-- {{ request()->routeIs('admin.property.index') ? 'active' : '' }} --}}">
                             <a href="" class='sidebar-link'>
                                 <i class="bi bi-file-earmark-spreadsheet-fill"></i>
                                 <span>Bất động sản</span>
                             </a>
                         </li>
 
-                        <li class="sidebar-item {{-- {{ request()->routeIs('admin.contact.index') ? 'active' : '' }}--}}">
+                        <li class="sidebar-item {{-- {{ request()->routeIs('admin.contact.index') ? 'active' : '' }} --}}">
                             <a href="" class='sidebar-link'>
                                 <i class="bi bi-file-earmark-spreadsheet-fill"></i>
                                 <span>Liên hệ</span>
                             </a>
                         </li>
 
-                        <li
-                            class="sidebar-item {{-- {{ request()->routeIs('admin.property-request.index') ? 'active' : '' }}--}}">
+                        <li class="sidebar-item {{-- {{ request()->routeIs('admin.property-request.index') ? 'active' : '' }} --}}">
                             <a href="" class='sidebar-link'>
                                 <i class="bi bi-file-earmark-spreadsheet-fill"></i>
                                 <span>Yêu cầu</span>
