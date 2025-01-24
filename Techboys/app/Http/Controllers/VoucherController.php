@@ -12,7 +12,7 @@ class VoucherController extends Controller
      */
     public function index()
     {
-        //
+        //123
         $loadAll = Voucher::all();
         return view('admin.voucher.index', compact('loadAll'));
     }
