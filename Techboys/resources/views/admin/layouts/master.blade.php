@@ -106,7 +106,6 @@
     <script src="{{ url('') }}/admin/assets/vendors/jquery/jquery.min.js"></script>
     <script src="{{ url('') }}/admin/assets/vendors/simple-datatables/simple-datatables.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/choices.js/public/admin/assets/scripts/choices.min.js"></script>
 
     <script>
         // Simple Datatable
