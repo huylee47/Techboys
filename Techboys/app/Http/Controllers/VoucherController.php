@@ -31,7 +31,7 @@ class VoucherController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // thêm unique vào name , k cho nhập số âm , thiếu validate min , max price và percent 
         $request->validate([
             'code' => 'required|max:255',
             'name' => 'required|max:255',
