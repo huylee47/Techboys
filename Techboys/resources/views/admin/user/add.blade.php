@@ -46,10 +46,24 @@
                                 <form action="" method="POST">
                                     @csrf
                                     <div class="mb-3">
-                                        <label for="name" class="form-label">Tên Thẻ</label>
-                                        <input type="text" class="form-control" id="name" name="name"
-                                            value="" required>
+                                        <label for="voucherCodeField">Tên</label>
+                                        <input maxlength="255"  type="text" class="form-control"
+                                            id="name" aria-describedby="" name="name"
+                                            placeholder="Nhập mã " value="{{ old('name')  }}">
                                     </div>
+                                    <div class="mb-3">
+                                        <label for="voucherCodeField">Email</label>
+                                        <input maxlength="255"  type="text" class="form-control"
+                                            id="email" aria-describedby="" name="email"
+                                            placeholder="Nhập mã " value="{{ old('email')  }}">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="voucherCodeField">Email</label>
+                                        <input maxlength="255"  type="text" class="form-control"
+                                            id="email" aria-describedby="" name="email"
+                                            placeholder="Nhập mã " value="{{ old('email')  }}">
+                                    </div>
+
 
                                     <button type="submit" class="btn btn-primary">Thêm Thẻ</button>
                                 </form>
