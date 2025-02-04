@@ -13,6 +13,8 @@ class ProductCategoryController extends Controller
     public function index()
     {
         //
+        $loadAll = ProductCategory::all();
+        return view('admin.category.index', compact('loadAll'));
     }
 
     /**
@@ -20,7 +22,9 @@ class ProductCategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.category.create');
+
+
     }
 
     /**
@@ -29,6 +33,16 @@ class ProductCategoryController extends Controller
     public function store(Request $request)
     {
         //
+        $request->validate([
+            'name' => 'required|max:255',
+        ], [
+            'name.required' => 'Vui lòng nhập tên.',
+            'name.max' => 'Tên không được vượt quá 255 ký tự.',
+        ]);
+        ProductCategory::create([         
+            'name' => $request->name,
+        ]);
+        return redirect()->route('admin.category.index')->with('success', 'Tạo thành công');
     }
 
     /**
@@ -42,9 +56,11 @@ class ProductCategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(ProductCategory $productCategory)
+    public function edit(Request $request)
     {
         //
+        $show = ProductCategory::find($request->id);
+        return view('admin.category.edit', compact('show'));
     }
 
     /**
@@ -53,13 +69,25 @@ class ProductCategoryController extends Controller
     public function update(Request $request, ProductCategory $productCategory)
     {
         //
+        $request->validate([
+            'name' => 'required|max:255',
+        ], [
+            'name.required' => 'Vui lòng nhập tên.',
+            'name.max' => 'Tên không được vượt quá 255 ký tự.',
+        ]);
+        ProductCategory::find($request->id)->update([        
+            'name' => $request->name,
+        ]);
+        return redirect()->route('admin.category.index')->with('success', 'Sửa thành công');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(ProductCategory $productCategory)
+    public function destroy(Request $request)
     {
         //
+        ProductCategory::find($request->id)->delete();
+        return redirect()->route('admin.category.index')->with('success', 'Xóa thành công');
     }
 }

@@ -84,7 +84,7 @@
                                     <td class="text-center">
                                         <a href="{{ route('admin.voucher.edit',['id'=>$voucher['id']]) }}" class="btn btn-warning">Sửa</a>
                                         <a href="{{ route('admin.voucher.show',['id'=>$voucher['id']]) }}" class="btn btn-warning">chi tiết</a>
-                                        <a href="{{ route('admin.voucher.destroy',['id'=>$voucher['id']]) }}" class="btn btn-info">Xóa</a>
+                                        <a href="{{ route('admin.voucher.destroy',['id'=>$voucher['id']]) }}" onclick="return confirm('Bạn có chắc chắn muốn xóa?')" class="btn btn-info">Xóa</a>
                                     </td>
                                 </tr>
 
