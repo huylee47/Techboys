@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BlogController;
 use App\Http\Controllers\VoucherController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProductCategoryController;
@@ -13,6 +14,19 @@ Route::get('blog', function () {
     return view('admin.tag.edit');
 });
 
+Route::prefix('/blogs')->group(function () {
+    Route::get('/', [BlogController::class, 'index'])->name('admin.blogs.index');
+    Route::get('/create', [BlogController::class, 'create'])->name('admin.blogs.create');
+    route::post('/store', [BlogController::class, 'store'])->name('admin.blogs.store');
+    route::get('/edit', [BlogController::class, 'edit'])->name('admin.blogs.edit');   
+    route::put('/update/{id}', [BlogController::class, 'update'])->name('admin.blogs.update');
+    route::get('/destroy/{id}', [BlogController::class, 'destroy'])->name('admin.blogs.destroy');
+
+
+
+
+    
+});
 Route::prefix('/category')->group(function () {
     Route::get('/', [ProductCategoryController::class, 'index'])->name('admin.category.index');
     Route::get('/create', [ProductCategoryController::class, 'create'])->name('admin.category.create');

@@ -125,31 +125,41 @@
             "title": "10 mẹo sử dụng smartphone hiệu quả",
             "content": "Chia sẻ 10 mẹo đơn giản nhưng cực kỳ hiệu quả giúp bạn sử dụng smartphone tốt hơn.",
             "slug": "meo-su-dung-smartphone-hieu-qua",
-            "user_id": 1
+            "user_id": 1,
+            "image":"image1.jpg",
+            "published_at":"2025-01-19"
         },
         {
             "title": "Tương lai của công nghệ AI",
             "content": "AI sẽ thay đổi hoàn toàn cách chúng ta làm việc và sống trong tương lai gần.",
             "slug": "tuong-lai-cua-cong-nghe-ai",
-            "user_id": 2
+            "user_id": 2,
+            "image":"image5.jpg",
+            "published_at":"2025-01-19"
         },
         {
             "title": "Top 5 điện thoại đáng mua trong năm 2025",
             "content": "Điện thoại nào sẽ lên ngôi trong năm 2025? Hãy cùng điểm qua 5 mẫu smartphone đáng chú ý.",
             "slug": "top-5-dien-thoai-dang-mua-nam-2025",
-            "user_id": 1
+            "user_id": 1,
+            "image":"image2.jpg",
+            "published_at":"2025-01-19"
         },
         {
             "title": "Xu hướng mua sắm trực tuyến trong thời đại số",
             "content": "Mua sắm trực tuyến đang trở thành xu hướng, hãy cùng tìm hiểu về sự phát triển của ngành này.",
             "slug": "xu-huong-mua-sam-truc-tuyen",
-            "user_id": 3
+            "user_id": 3,
+            "image":"image3.jpg",
+            "published_at":"2025-01-19"
         },
         {
             "title": "Ứng dụng di động đang thay đổi thế giới",
             "content": "Ứng dụng di động không chỉ giúp chúng ta trong công việc, mà còn thay đổi cách chúng ta giải trí và kết nối.",
             "slug": "ung-dung-di-dong-thay-doi-the-gioi",
-            "user_id": 2
+            "user_id": 2,
+            "image":"image4.jpg",
+            "published_at":"2025-01-19"
         }
     ],
     "brand": [
