@@ -16,8 +16,8 @@ Route::get('test', function () {
 Route::get('blog', function () {
     return view('admin.tag.edit');
 }); 
-    Route::get('/login/admin', function () {return view('admin.log.login');})->name('login.view');
-    Route::post('/login/auth',[UserController::class,'login'])->name('login');
+    Route::get('/login/admin', function () {return view('admin.log.login');})->name('login');
+    Route::post('/login/auth',[UserController::class,'login'])->name('login.auth');
 
 
 Route::prefix('/user')->group(function () {

@@ -14,7 +14,7 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware) {
         return [
-            'auth' => \App\Http\Middleware\Authentication::class,
+            'checkRole' => App\Http\Middleware\CheckRole::class,
             'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         ];
     })
