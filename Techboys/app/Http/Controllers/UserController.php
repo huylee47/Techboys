@@ -35,5 +35,11 @@ class UserController extends Controller
         return redirect()->route('admin.index')->with('success', 'Đăng nhập thành công.');
     }
     
+    public function index()
+    {
+        //123
+        $loadAll = User::all();
+        return view('admin.user.index', compact('loadAll'));
+    }
 
 }
