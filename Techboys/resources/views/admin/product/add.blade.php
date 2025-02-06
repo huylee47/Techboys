@@ -16,13 +16,15 @@
             <div class="page-title">
                 <div class="row">
                     <div class="col-12 col-md-6 order-md-1 order-last">
-                        <h3>Thêm Dự Án</h3>
+                        <h3>Thêm Sản Phẩm</h3>
                     </div>
                     <div class="col-12 col-md-6 order-md-2 order-first">
                         <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="">Dashboard</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Thêm Dự Án</li>
+                                <li class="breadcrumb-item active" aria-current="page"><a href="{{route('admin.product.index')}}">Danh sách Sản Phẩm</a></li>
+
+                                <li class="breadcrumb-item active" aria-current="page">Thêm Sản Phẩm</li>
                             </ol>
                         </nav>
                     </div>
@@ -33,11 +35,11 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title">Thông Tin Dự Án</h4>
+                                <h4 class="card-title">Thông Tin Sản Phẩm</h4>
                             </div>
                             <div class="card-body">
                                 {{-- Hiển thị thông báo lỗi --}}
-                                @if ($errors->any())
+                                {{-- @if ($errors->any())
                                     <div class="alert alert-danger">
                                         <ul>
                                             @foreach ($errors->all() as $error)
@@ -45,56 +47,139 @@
                                             @endforeach
                                         </ul>
                                     </div>
-                                @endif
+                                @endif --}}
 
-                                {{-- Form thêm dự án --}}
-                                <form action="" method="POST"
+                                {{-- Form thêm Sản Phẩm --}}
+                                <form action="{{ route('admin.product.store') }}" method="POST"
                                     enctype="multipart/form-data">
                                     @csrf
-                                    <div class="mb-3">
-                                        <label for="name" class="form-label">Tên Dự Án</label>
-                                        <input type="text" class="form-control" id="name" name="name"
-                                            value="" required>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="location" class="form-label">Địa Điểm</label>
-                                        <input type="text" class="form-control" id="location" name="location"
-                                            value="" required>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="handover_date" class="form-label">Ngày Bàn Giao</label>
-                                        <input type="date" class="form-control" id="handover_date" name="handover_date"
-                                            value="">
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="status" class="form-label">Tình Trạng</label>
-                                        <select class="form-select" id="status" name="status">
-                                            <option value="ongoing" >Đang
-                                                tiến hành</option>
-                                            <option value="completed" >
-                                                Đã hoàn thành</option>
-                                        </select>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="description" class="form-label">Mô Tả</label>
-                                        <textarea class="form-control" id="description" name="description" rows="3"></textarea>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="image" class="form-label">Ảnh dự án</label>
-                                        <input class="form-control" type="file" id="image" name="image"
-                                            accept="image/*" required>
-                                        <div id="image-preview-container" class="mt-3"
-                                            style="display:none; text-align: center;">
-                                            <img id="image-preview" src="" alt="Image preview"
-                                                style="max-width: 100%; max-height: 500px; display: block; margin: 0 auto; object-fit: contain;">
+                                    <div class="row">
+                                        <div class="col-md-6 mb-3">
+                                            <label for="category_id" class="form-label">Danh mục sản phẩm</label>
+                                            <select class="form-select" id="category_id" name="category_id">
+                                                <option value="" selected disabled>Chọn danh mục</option>
+                                                @foreach ($categories as $category)
+                                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                                @endforeach
+                                            </select>
+                                            @if ($errors->has('category_id'))
+                                                <p class="text-danger small ">
+                                                    <i>{{ $errors->first('category_id') }}</i>
+                                                </p>
+                                            @endif
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label for="brand" class="form-label">Hãng</label>
+                                            <select class="form-select" id="brand_id" name="brand_id">
+                                                <option value="" selected disabled>Chọn hãng</option>
+                                                @foreach ($brands as $brand)
+                                                    <option value="{{ $brand->id }}">{{ $brand->name }}</option>
+                                                @endforeach
+                                            </select>
+                                            @if ($errors->has('brand_id'))
+                                                <p class="text-danger small ">
+                                                    <i>{{ $errors->first('brand_id') }}</i>
+                                                </p>
+                                            @endif
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label for="name" class="form-label">Tên Sản Phẩm</label>
+                                            <input type="text" class="form-control" id="name" name="name"
+                                                value="{{ old('name') }}">
+                                            @if ($errors->has('name'))
+                                                <p class="text-danger small ">
+                                                    <i>{{ $errors->first('name') }}</i>
+                                                </p>
+                                            @endif
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label for="images" class="form-label">Ảnh Sản Phẩm</label>
+                                            <input class="form-control" type="file" id="images" name="img"
+                                                accept="image/*" >
+                                            <div id="image-preview-container" class="mt-3"
+                                                style="display: flex; gap: 10px; flex-wrap: wrap;"></div>
+                                            @if ($errors->has('img'))
+                                                <p class="text-danger small ">
+                                                    <i>{{ $errors->first('img') }}</i>
+                                                </p>
+                                            @endif
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="description" class="form-label">Mô tả</label>
+                                            <div id="summernote" class="form-control" name="description"></div>
+                                        </div>
+                                        <input type="hidden" name="description" id="description"
+                                            value="{{ old('description') }}">
+                                        <div>
+                                            <h4 class="card-title">Thông Tin Biến Thể</h4>
+                                            <div id="variant-container">
+                                                <div class="variant-row row">
+                                                    <div class="col-md-6 mb-3">
+                                                        <label for="color" class="form-label">Màu</label>
+                                                        <select class="form-select" name="color_id[]">
+                                                            <option value="" selected disabled>Chọn màu</option>
+                                                            @foreach ($colors as $color)
+                                                                <option value="{{ $color->id }}">{{ $color->name }}
+                                                                </option>
+                                                            @endforeach
+                                                        </select>
+                                                        @if ($errors->has('color_id'))
+                                                            <p class="text-danger small ">
+                                                                <i>{{ $errors->first('color_id') }}</i>
+                                                            </p>
+                                                        @endif
+                                                    </div>
+                                                    <div class="col-md-6 mb-3">
+                                                        <label for="model" class="form-label">Dung lượng</label>
+                                                        <select class="form-select" name="model_id[]">
+                                                            <option value="" selected disabled>Chọn dung lượng
+                                                            </option>
+                                                            @foreach ($P_Models as $P_Model)
+                                                                <option value="{{ $P_Model->id }}">{{ $P_Model->name }}
+                                                                </option>
+                                                            @endforeach
+                                                        </select>
+                                                        @if ($errors->has('model_id'))
+                                                            <p class="text-danger small ">
+                                                                <i>{{ $errors->first('model_id') }}</i>
+                                                            </p>
+                                                        @endif
+                                                    </div>
+                                                    <div class="col-md-6 mb-3">
+                                                        <label for="price" class="form-label">Giá bán</label>
+                                                        <input type="number" class="form-control" name="price[]"
+                                                            >
+                                                        @if ($errors->has('price'))
+                                                            <p class="text-danger small ">
+                                                                <i>{{ $errors->first('price') }}</i>
+                                                            </p>
+                                                        @endif
+                                                    </div>
+                                                    <div class="col-md-6 mb-3">
+                                                        <label for="stock" class="form-label">Số lượng</label>
+                                                        <input type="number" class="form-control" name="stock[]"
+                                                            >
+                                                        @if ($errors->has('stock'))
+                                                            <p class="text-danger small ">
+                                                                <i>{{ $errors->first('stock') }}</i>
+                                                            </p>
+                                                        @endif
+                                                    </div>
+                                                    <div class="col-md-12 text-end">
+                                                        <button type="button"
+                                                            class="btn btn-danger remove-variant">Xóa</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <button type="button" id="add-variant" class="btn btn-success mt-2">Thêm
+                                                Biến Thể</button>
+
                                         </div>
                                     </div>
-                                    <div class="mb-3">
-                                        <label for="content" class="form-label">Nội Dung Chi Tiết</label>
-                                        <div id="summernote" class="form-control" name="content"></div>
-                                    </div>
-                                    <input type="hidden" name="content" id="content">
-                                    <button type="submit" class="btn btn-primary">Thêm Dự Án</button>
+                                    <br>
+                                    <button type="submit" class="btn btn-primary">Thêm Sản Phẩm</button>
                                 </form>
                             </div>
                         </div>
@@ -110,19 +195,17 @@
             $('#summernote').summernote({
                 tabsize: 2,
                 height: 300,
-                placeholder: 'Nhập nội dung chi tiết của dự án...',
+                placeholder: 'Nhập nội dung chi tiết của Sản Phẩm...',
                 callbacks: {
-                    onChange: function(contents, $editable) {
-                        // Cập nhật giá trị của trường ẩn mỗi khi có thay đổi
-                        $('#content').val(contents);
+                    onChange: function(descriptions, $editable) {
+                        $('#description').val(descriptions);
                     }
                 }
             });
 
-            // Trước khi submit form, đảm bảo nội dung Summernote được lưu vào trường ẩn
             $('form').on('submit', function() {
-                var content = $('#summernote').summernote('code'); // Lấy nội dung HTML từ Summernote
-                $('#content').val(content); // Gán nội dung vào trường ẩn
+                var description = $('#summernote').summernote('code');
+                $('#description').val(description);
             });
 
             document.getElementById('image').addEventListener('change', function(event) {
@@ -134,14 +217,68 @@
                     const reader = new FileReader();
 
                     reader.onload = function(e) {
-                        previewImage.src = e.target.result; // Cập nhật src của ảnh
-                        previewContainer.style.display = 'block'; // Hiển thị khu vực xem trước
+                        previewImage.src = e.target.result;
+                        previewContainer.style.display = 'block';
                     };
 
-                    reader.readAsDataURL(file); // Đọc tệp ảnh và chuyển đổi thành URL để hiển thị
+                    reader.readAsDataURL(file);
                 } else {
-                    previewContainer.style.display = 'none'; // Ẩn khu vực xem trước nếu không có tệp ảnh
+                    previewContainer.style.display = 'none';
                 }
             });
+        </script>
+        <script>
+            document.getElementById('images').addEventListener('change', function(event) {
+                let previewContainer = document.getElementById('image-preview-container');
+                previewContainer.innerHTML = '';
+
+                Array.from(event.target.files).forEach(file => {
+                    let reader = new FileReader();
+                    reader.onload = function(e) {
+                        let img = document.createElement('img');
+                        img.src = e.target.result;
+                        img.style.width = '100px';
+                        img.style.height = '100px';
+                        img.style.objectFit = 'cover';
+                        img.style.borderRadius = '5px';
+                        previewContainer.appendChild(img);
+                    };
+                    reader.readAsDataURL(file);
+                });
+            });
+        </script>
+        <script>
+            document.getElementById('add-variant').addEventListener('click', function() {
+                let variantContainer = document.getElementById('variant-container');
+                let newVariant = document.querySelector('.variant-row').cloneNode(true);
+
+                newVariant.querySelectorAll('input, select').forEach(input => {
+                    input.value = '';
+                });
+
+                variantContainer.appendChild(newVariant);
+
+                updateRemoveButtons();
+            });
+
+            document.addEventListener('click', function(event) {
+                if (event.target.classList.contains('remove-variant')) {
+                    event.target.closest('.variant-row').remove();
+                    updateRemoveButtons();
+                }
+            });
+
+            function updateRemoveButtons() {
+                let variants = document.querySelectorAll('.variant-row');
+                let removeButtons = document.querySelectorAll('.remove-variant');
+
+                if (variants.length === 1) {
+                    removeButtons.forEach(btn => btn.style.display = 'none');
+                } else {
+                    removeButtons.forEach(btn => btn.style.display = 'inline-block');
+                }
+            }
+
+            updateRemoveButtons();
         </script>
     @endsection
