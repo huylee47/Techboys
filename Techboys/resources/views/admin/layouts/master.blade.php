@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Techboys Property</title>
+    <title>Techboys | Trang quản trị</title>
 
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
@@ -51,10 +51,10 @@
                             </a>
                         </li>
 
-                        <li class="sidebar-item {{-- {{ request()->routeIs('admin.project.index') ? 'active' : '' }} --}}">
-                            <a href="" class='sidebar-link'>
-                                <i class="bi bi-file-earmark-spreadsheet-fill"></i>
-                                <span>Dự án</span>
+                        <li class="sidebar-item {{ request()->routeIs('admin.product*') ? 'active' : '' }}">
+                            <a href="{{route('admin.product.index')}}" class='sidebar-link'>
+                                <i class="bi bi-phone"></i>
+                                <span>Sản phẩm</span>
                             </a>
                         </li>
 

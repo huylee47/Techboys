@@ -86,7 +86,8 @@
                         <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Danh sách ảnh dự án</li>
+                                <li class="breadcrumb-item"><a href="index.html">{{$productDetails->name}}</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Danh sách ảnh </li>
                             </ol>
                         </nav>
                     </div>
@@ -109,23 +110,24 @@
                         <div class="d-flex justify-content-end mb-3">
                             <button class="btn btn-primary me-2" data-bs-toggle="modal"
                                 data-bs-target="#addImagesModal">Thêm Ảnh</button>
-                            <button class="btn btn-danger" data-bs-toggle="modal"
-                                data-bs-target="#confirmDeleteAllModal">Xóa tất cả</button>
+                            {{-- <button class="btn btn-danger" data-bs-toggle="modal"
+                                data-bs-target="#confirmDeleteAllModal">Xóa tất cả</button> --}}
                         </div>
 
                         <div class="row row-image">
-                          
-                                <div class="thumbnail-container">
-                                    <img src="" class="thumbnail-img" alt="Tên ảnh"
+                          @foreach ($images as $image)
+                                    <div class="thumbnail-container">
+                                    <img src="{{ url('') }}/admin/assets/images/product/{{$image->image}}" class="thumbnail-img" alt="Tên ảnh"
                                         data-bs-toggle="modal" data-bs-target="#imageModal"
                                         data-bs-image="">
-                                    {{-- <div class="thumbnail-caption">{{ basename($image->image_path) }}</div> --}}
                                     <div>
                                         <button class="delete-btn" data-bs-toggle="modal"
-                                            data-bs-target="#confirmDeleteModal" data-project-id=""
-                                            data-image-id="">Xóa</button>
+                                            data-bs-target="#confirmDeleteModal" data-product-id="{{$productDetails->id}}"
+                                            data-image-id="{{$image->id}}">Xóa</button>
                                     </div>
                                 </div>
+                          @endforeach
+
                        
                         </div>
 
@@ -139,14 +141,13 @@
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Close"></button>
                                     </div>
-                                    <form action="" method="POST"
+                                    <form action="{{route('admin.product.imageStore',['productId'=> $productDetails->id])}}" method="POST"
                                         enctype="multipart/form-data">
                                         @csrf
                                         <div class="modal-body">
                                             <div class="mb-3">
-                                                <label for="images" class="form-label">Chọn ảnh</label>
-                                                <input type="file" class="form-control" id="images" name="images[]"
-                                                    multiple>
+                                                <label for="image" class="form-label">Chọn ảnh</label>
+                                                <input type="file" class="form-control" id="image" name="image" accept="image/*">
                                             </div>
                                         </div>
                                         <div class="modal-footer">
@@ -181,28 +182,6 @@
                             </div>
                         </div>
 
-                        <!-- Modal xác nhận xóa tất cả -->
-                        <div class="modal fade" id="confirmDeleteAllModal" tabindex="-1"
-                            aria-labelledby="confirmDeleteAllModalLabel" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="confirmDeleteAllModalLabel">Xác nhận xóa tất cả</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                            aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        Bạn có chắc chắn muốn xóa tất cả ảnh không?
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary"
-                                            data-bs-dismiss="modal">Hủy</button>
-                                        <a href=""
-                                            class="btn btn-danger">Xóa tất cả</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
 
                         <!-- Modal phóng to ảnh -->
                         <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel"
@@ -239,11 +218,10 @@
 
             confirmDeleteModal.addEventListener('show.bs.modal', function(event) {
                 var button = event.relatedTarget; // Nút vừa được nhấn
-                var projectId = button.getAttribute('data-project-id'); // Lấy projectId
+                var productId = button.getAttribute('data-product-id'); // Lấy productId
                 var imageId = button.getAttribute('data-image-id'); // Lấy imageId
 
-                // Gán đường dẫn xóa ảnh vào modal (có cả projectId và imageId)
-                var deleteUrl = `/admin/project/${projectId}/images/delete/${imageId}`;
+                var deleteUrl = `/admin/product/image/${productId}/destroy/${imageId}`;
                 confirmDeleteModal.querySelector('.btn-danger').setAttribute('href', deleteUrl);
             });
         </script>
