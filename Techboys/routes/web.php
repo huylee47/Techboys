@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BillController;
 use App\Http\Controllers\VoucherController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProductController;
@@ -12,12 +13,14 @@ Route::get('/', function () {
 });
 Route::get('test', function () {
     return view('admin.product.imageIndex');
-}); 
+});
 Route::get('blog', function () {
     return view('admin.tag.edit');
-}); 
-    Route::get('/login/admin', function () {return view('admin.log.login');})->name('login');
-    Route::post('/login/auth',[UserController::class,'login'])->name('login.auth');
+});
+Route::get('/login/admin', function () {
+    return view('admin.log.login');
+})->name('login');
+Route::post('/login/auth', [UserController::class, 'login'])->name('login.auth');
 
 
 Route::prefix('/user')->group(function () {
@@ -39,15 +42,15 @@ Route::middleware(['auth'])->group(function () {
             route::put('/update/{id}', [VoucherController::class, 'update'])->name('admin.voucher.update');
             route::get('/destroy/{id}', [VoucherController::class, 'destroy'])->name('admin.voucher.destroy');
         });
-        
+
         Route::prefix('/product')->group(function () {
             Route::get('/', [ProductController::class, 'index'])->name('admin.product.index');
-            Route::get('/create',[ProductController::class, 'create'])->name('admin.product.create');
-            route::post('/store',[ProductController::class, 'store'])->name('admin.product.store');
-            Route::get('/show',[ProductController::class, 'show'])->name('admin.product.show');  
-            route::get('/edit/{id}',[ProductController::class,'edit'])->name('admin.product.edit');
-            route::post('/update/{id}',[ProductController::class,'update'])->name('admin.product.update');
-            route::get('/destroy/{id}',[ProductController::class,'destroy'])->name('admin.product.destroy');
+            Route::get('/create', [ProductController::class, 'create'])->name('admin.product.create');
+            route::post('/store', [ProductController::class, 'store'])->name('admin.product.store');
+            Route::get('/show', [ProductController::class, 'show'])->name('admin.product.show');
+            route::get('/edit/{id}', [ProductController::class, 'edit'])->name('admin.product.edit');
+            route::post('/update/{id}', [ProductController::class, 'update'])->name('admin.product.update');
+            route::get('/destroy/{id}', [ProductController::class, 'destroy'])->name('admin.product.destroy');
             Route::get('/hide/{id}', [ProductController::class, 'hide'])->name('admin.product.hide');
             Route::get('/restore/{id}', [ProductController::class, 'restore'])->name('admin.product.restore');
             Route::get('/image/{productId}', [ProductController::class, 'imageIndex'])->name('admin.product.imageIndex');
@@ -63,6 +66,12 @@ Route::middleware(['auth'])->group(function () {
             route::put('/update/{id}', [ProductCategoryController::class, 'update'])->name('admin.category.update');
             route::get('/destroy/{id}', [ProductCategoryController::class, 'destroy'])->name('admin.category.destroy');
         });
-        
+
+        Route::prefix('/bill')->group(function () {
+            Route::get('/', [BillController::class, 'index'])->name('admin.bill.index');
+            Route::get('/hide/{id}', [BillController::class, 'hide'])->name('admin.bill.hide');
+            Route::get('/restore/{id}', [BillController::class, 'restore'])->name('admin.bill.restore');
+            Route::get('/download.invoice/{id}', [BillController::class, 'download'])->name('admin.bill.download');
+        });
     });
 });

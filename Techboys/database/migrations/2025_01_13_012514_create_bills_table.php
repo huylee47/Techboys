@@ -13,15 +13,15 @@ return new class extends Migration
     {
         Schema::create('bills', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->nullable();;
+            $table->foreignId('user_id')->nullable();
             $table->string('full_name');
             $table->string('phone');
-            $table->decimal('total',10,2);
+            $table->decimal('total', 10, 2);
             $table->text('address');
             $table->string('email');
             $table->tinyInteger('payment_method');
             $table->tinyInteger('status_id');
-            $table->foreignId('voucher_code')->nullable();
+            $table->foreignId('voucher_code');
             $table->timestamps();
         });
     }
