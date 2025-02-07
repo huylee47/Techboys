@@ -77,7 +77,7 @@
                             </a>
                         </li>
                         <li class="sidebar-item {{-- {{ request()->routeIs('admin.property-request.index') ? 'active' : '' }} --}}">
-                            <a href="" class='sidebar-link'>
+                            <a href="{{route('admin.user.index')}}" class='sidebar-link'>
                                 <i class="bi bi-person"></i>
                                 <span>Tài khoản người dùng</span>
                             </a>
