@@ -61,9 +61,10 @@
                                 </div>
                                 <div class="mb-3">
                                     <label for="content" class="form-label">Nội Dung</label>
-                                    <div id="summernote" required name="content" class="form-control">{!! old('content', $show->content) !!}</div>
+                                    <textarea name="content" id="summernote" > {{ old('content',$show->content) }}</textarea>
+                                    {{-- <div id="summernote" required name="content" class="form-control">{!! old('content', $show->content) !!}</div> --}}
                                 </div>
-                                <input type="hidden" required  id="content" name="content" value="">
+                                {{-- <input type="hidden"  id="content" name="content" value=""> --}}
                                 <div class="mb-3">
                                     <label for="published_at" class="form-label">Ngày đăng bài</label>
                                     <input type="datetime-local" required class="form-control" id="published_at"

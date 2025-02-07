@@ -8,8 +8,8 @@
         max-width: 300px;
         max-height: 200px;
     }
-
-
+      
+   
 </style>
 @endsection
 
@@ -64,22 +64,25 @@
                                     <input type="text" class="form-control" id="title" name="title"
                                         value="{{ old('title') }}" required>
                                 </div>
-
                                 <div class="mb-3">
                                     <label for="content" class="form-label">Nội Dung</label>
-                                    <div id="summernote" required name="content" class="form-control">{!! old('content') !!}</div>                             
+                                    <textarea name="content"  id="summernote" required > {{ old('content') }}</textarea>
+
+                                    {{-- <div id="summernote" name="content" class="form-control">{!! old('content') !!}
+                                    </div> --}}
                                 </div>
-                                <input type="hidden" id="content" required name="content" value="">  
+                                {{-- <input type="hidden" id="content" name="content" value=""> --}}
                                 <div class="mb-3">
                                     <label for="published_at" class="form-label">Ngày đăng bài</label>
-                                    <input type="datetime-local" class="form-control" id="published_at" name="published_at"
-                                        value="{{ old('published_at') }}" required>
+                                    <input type="datetime-local" class="form-control" id="published_at"
+                                        name="published_at" value="{{ old('published_at') }}" required>
                                 </div>
                                 <div class="mb-3">
                                     <label for="image">Hình ảnh</label>
                                     <div class="custom-file">
                                         <input type="file" class="custom-file-input" id="image" name="image"
-                                            onchange="displayImage(event)" value="{{ old('image') }}" required> 
+                                            onchange="displayImage(event)" value="{{ old('image') }}" required>
+                                            
                                     </div>
                                 </div>
                                 <div id="image-preview"></div>
@@ -112,7 +115,7 @@
             reader.readAsDataURL(file);
         }
     </script>
-     <script>
+    <script>
         $('#summernote').summernote({
             tabsize: 2,
             height: 300,

@@ -109,8 +109,6 @@ class BlogController extends Controller
             'image.image' => 'Tệp phải là một ảnh.',
             'image.mimes' => 'Ảnh phải có định dạng jpeg, png, jpg, gif, hoặc svg.',
             'image.max' => 'Ảnh không được vượt quá 2MB.',
-           
-
         ]);
         if ($request->hasFile('image')) {
             $image = time() . '_' . $request->image->getClientOriginalName();
