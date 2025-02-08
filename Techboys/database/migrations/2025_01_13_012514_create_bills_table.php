@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('email');
             $table->tinyInteger('payment_method');
             $table->tinyInteger('status_id');
-            $table->foreignId('voucher_code');
+            $table->string('voucher_code')->nullable();
             $table->timestamps();
         });
     }
