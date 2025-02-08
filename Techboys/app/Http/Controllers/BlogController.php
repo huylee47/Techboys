@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Blog;
 use Illuminate\Http\Request;
@@ -36,14 +36,11 @@ class BlogController extends Controller
         $request->validate([
             'title' => 'required|string|max:255',
             'content' => 'required|string',
-            'published_at' => 'required|nullable|date',
             'image' => 'required|nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ], [
             'title.required' => 'Vui lòng nhập tiêu đề.',
             'title.max' => 'Tiêu đề không được vượt quá 255 ký tự.',
             'content.required' => 'Vui lòng nhập nội dung.',
-            'published_at.date' => 'Ngày xuất bản phải là ngày hợp lệ.',
-            'published_at.required' => 'Vui lòng chọn ngày xuất bản.',
             'image.image' => 'Tệp phải là một ảnh.',
             'image.mimes' => 'Ảnh phải có định dạng jpeg, png, jpg, gif, hoặc svg.',
             'image.max' => 'Ảnh không được vượt quá 2MB.',
@@ -64,7 +61,7 @@ class BlogController extends Controller
             'title' => $request->title,
             'content' => $request->content,
             'slug' => $slug,
-            'published_at' => $request->published_at,
+            'published_at' => Carbon::now(),
             'image' => isset($image) ? $image : null // Sử dụng tên ảnh đã lưu
         ]);
 
@@ -75,11 +72,7 @@ class BlogController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Blog $blog)
-    {
-        //
-    }
-
+    
     /**
      * Show the form for editing the specified resource.
      */
@@ -98,14 +91,11 @@ class BlogController extends Controller
         $request->validate([
             'title' => 'required|string|max:255',
             'content' => 'required|string',
-            'published_at' => 'required|nullable|date',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ], [
             'title.required' => 'Vui lòng nhập tiêu đề.',
             'title.max' => 'Tiêu đề không được vượt quá 255 ký tự.',
             'content.required' => 'Vui lòng nhập nội dung.',
-            'published_at.date' => 'Ngày xuất bản phải là ngày hợp lệ.',
-            'published_at.required' => 'Vui lòng chọn ngày xuất bản.',
             'image.image' => 'Tệp phải là một ảnh.',
             'image.mimes' => 'Ảnh phải có định dạng jpeg, png, jpg, gif, hoặc svg.',
             'image.max' => 'Ảnh không được vượt quá 2MB.',
@@ -123,7 +113,6 @@ class BlogController extends Controller
             'title' => $request->title,
             'content' => $request->content,
             'slug' => $slug,
-            'published_at' => $request->published_at,
             'image' => $imagePath
         ]);
 
