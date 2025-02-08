@@ -34,8 +34,7 @@
 
                             {{-- Form thêm dự án --}}
                             <form action="{{ route('admin.category.update',['id'=>$show->id]) }}" method="POST">
-                                @csrf
-                                @method('PUT')
+                                @csrf                          
                                 <input type="hidden" class="form-control" name="id" value="{{$show->id}}">
 
                             

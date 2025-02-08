@@ -6,7 +6,7 @@
 
 @section('main')
 <div id="main">
-    <header class="mb-3">
+    <header class="col-md-6 mb-3">
         <a href="#" class="burger-btn d-block d-xl-none">
             <i class="bi bi-justify fs-3"></i>
         </a>
@@ -35,62 +35,64 @@
                             {{-- Form thêm dự án --}}
                             <form action="{{ route('admin.voucher.store') }}" method="POST">
                                 @csrf
-                                <div class="mb-3">
+                                <div class="row">
+                                <div class="col-md-6 mb-3">
                                     <label for="voucherCodeField">VOUCHER CODE</label>
                                     <input maxlength="255" required type="text" class="form-control" id="code"
                                         aria-describedby="" name="code" placeholder="Nhập mã " value="{{ $show->code }}"
                                         disabled>
                                 </div>
-                                <div class="mb-3">
+                                <div class="col-md-6 mb-3">
                                     <label for="description">Tên</label>
                                     <input type="text" required class="form-control" id="name" aria-describedby=""
                                         name="name" placeholder="Nhập Tên" value="{{ $show->name }}" disabled>
                                 </div>
-                                <div class="mb-3">
+                                <div class="col-md-6 mb-3">
                                     <label for="discount_amount">giảm(%)</label>
                                     <input type="number" required class="form-control" id="discount_percent"
                                         aria-describedby="" name="discount_percent" placeholder="Nhập giá giảm theo %"
                                         disabled value="{{ $show->discount_percent }}">
                                 </div>
 
-                                <div class="form-group">
+                                <div class="col-md-6 mb-3">
                                     <label for="min_price">Giảm(Đ)</label>
                                     <input type="number" required class="form-control" id="discount_amount"
                                         aria-describedby="" name="discount_amount" placeholder="Nhập giá giảm theo Đ"
                                         disabled value="{{ $show->discount_amount }}">
                                 </div>
-                                <div class="mb-3">
+                                <div class="col-md-6 mb-3">
                                     <label for="description">Giá tối thiểu để áp dụng voucher</label>
                                     <input type="number" required class="form-control" id="min_price"
                                         aria-describedby="" name="min_price" placeholder="Nhập giá"
                                         value="{{ $show->min_price }}" disabled>
                                 </div>
-                                <div class="mb-3">
+                                <div class="col-md-6 mb-3">
                                     <label for="description">Giá tối đa để áp dụng voucher</label>
                                     <input type="number" required class="form-control" id="max_price"
                                         aria-describedby="" name="max_price" placeholder="Nhập giá"
                                         value="{{ $show->max_price }}" disabled>
                                 </div>
-                                <div class="form-group">
+                                <div class="col-md-6 mb-3">
                                     <label for="start_datetime">Ngày giờ bắt đầu (Định dạng: Năm/Tháng/Ngày
                                         Giờ:Phút)</label>
                                     <input type="datetime-local" required class="form-control" id="start_datetime"
                                         aria-describedby="" name="start_date" placeholder="Ngày giờ bắt đầu"
                                         value="{{ $show->start_date }}" disabled>
                                 </div>
-                                <div class="form-group">
+                                <div class="col-md-6 mb-3">
                                     <label for="end_datetime">Ngày giờ kết thúc (Định dạng: Năm/Tháng/Ngày
                                         Giờ:Phút)</label>
                                     <input type="datetime-local" required class="form-control" id="end_datetime"
                                         aria-describedby="" name="end_date" placeholder="Ngày giờ kết thúc"
                                         value="{{ $show->end_date }}" disabled>
                                 </div>
-                                <div class="form-group">
+                                <div class="col-md-6 mb-3">
                                     <label for="min_price">Số lượng</label>
                                     <input type="number" required class="form-control" id="quantity" aria-describedby=""
                                         name="quantity" placeholder="Nhập số lượng" value="{{ $show->quantity }}"
                                         disabled>
                                 </div>
+                            </div>
                                 <a class="btn btn-primary" href="{{ route('admin.voucher.index') }}">Quay lại</a>
                             </form>
 
