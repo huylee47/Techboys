@@ -35,42 +35,54 @@
                                 {{ session('error') }}
                             </div>
                         @endif
-                        <a href="" class="btn btn-primary">Thêm dự án</a>
+                        <a href="{{route('admin.product.create')}}" class="btn btn-primary">Thêm sản phẩm</a>
                         <table class="table table-striped table-bordered" id="table1">
                             <thead>
                                 <tr>
+                                    <th class="col-1">STT</th>
+                                    <th class="col-2">Ảnh hiển thị</th>
                                     <th class="col-1">Tên</th>
-                                    <th class="col-1">Địa điểm</th>
-                                    <th class="col-6">Mô tả</th>
-                                    <th class="col-1">Ngày bàn giao</th>
-                                    <th class="col-1">Tình trạng</th>
-                                    <th class="col-2">Hành động</th>
+                                    <th class="col-1">Hãng</th>
+                                    <th class="col-1">Danh mục</th>
+                                    <th class="col-1">Đánh giá</th>
+                                    <th class="col-1">Trạng thái</th>
+                                    <th class="col-4">Chức năng</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                              
+                                 <p class="visually-hidden">{{$index=1}}</p>
+                                <tbody>
+                                @foreach ($products as $product)
+
                                     <tr>
-                                        <td>dasd</td>
-                                        <td>sadad</td>
-                                        <td>ada</td>
-                                        <td>asda</td>
+                                        <td>{{$index++}}</td>
                                         <td>
-                                            {{-- <span
-                                                class="badge
-                                                @if ($project->status == 'completed') bg-success
-                                                @elseif($project->status == 'ongoing') bg-primary @endif">
-                                                {{ ucfirst($project->status) }}
-                                            </span> --}}
+                                            <img src="{{ url('') }}/admin/assets/images/product/{{$product->img}}" alt="{{$product->name}}" class="img-fluid" style="max-width: 100px; height: auto;">
+                                        </td>                                        
+                                        <td>{{$product->name}}</td>
+                                        <td>{{$product->brand->name}}</td>
+                                        <td>{{$product->category->name}}</td>
+                                        <td>{{$product->rate_average}}/5</td>
+                                        <td class="text-center">
+                                            @if ($product->deleted_at)
+                                                <span class="badge bg-danger">Đã ẩn</span>
+                                            @else
+                                                <span class="badge bg-success">Đang bán</span>
+                                            @endif
                                         </td>
                                         <td class="text-center">
-                                            <a href="" class="btn btn-info">Ẩn</a>
-                                            <a href=""
+                                            <a href="{{ $product->deleted_at ? route('admin.product.restore', $product->id) : route('admin.product.hide', $product->id) }}"
+                                                class="btn {{ $product->deleted_at ? 'btn-success' : 'btn-danger' }}">
+                                                 {{ $product->deleted_at ? 'Hiện' : 'Ẩn' }}
+                                             </a>
+                                            <a href="{{ route('admin.product.edit',['id' =>$product->id]) }}"
                                                 class="btn btn-warning">Sửa</a>
-                                            <a href=""
+                                            <a href="{{route('admin.product.imageIndex',['productId' =>$product->id])}}"
                                                 class="btn btn-info">Kho ảnh</a>
+                                            <a href="{{route('admin.product.destroy',['id' =>$product->id])}}"
+                                              onclick="alert('Bạn có chắc chắn xoá sản phẩm {{ $product->name }} Không ? ')"  class="btn btn-danger">Xoá</a>
                                         </td>
                                     </tr>
-                                {{-- @endforeach --}}
+                                @endforeach
 
                             </tbody>
                         </table>

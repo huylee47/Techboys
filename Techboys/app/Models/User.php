@@ -28,7 +28,7 @@ class User extends Authenticatable
         'gender',
         'dob',
         'role_id',
-        'status_id',
+        'status',
     ];
 
     /**

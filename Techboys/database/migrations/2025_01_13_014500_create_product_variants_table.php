@@ -14,10 +14,11 @@ return new class extends Migration
         Schema::create('product_variants', function (Blueprint $table) {
             $table->id();
             $table->foreignId('product_id');
-            $table->string('color');
-            $table->string('model');
+            $table->foreignId('color_id');
+            $table->foreignId('model_id');
             $table->decimal('price',10,2);
             $table->integer('stock');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

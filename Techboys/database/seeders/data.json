@@ -370,25 +370,25 @@
     "images": [
         {
             "image": "image1.jpg",
-            "variant_id": 1,
+            "product_id": 1,
             "created_at": "2025-01-19 12:00:00",
             "updated_at": "2025-01-19 12:00:00"
         },
         {
             "image": "image2.jpg",
-            "variant_id": 1,
+            "product_id": 1,
             "created_at": "2025-01-19 12:00:00",
             "updated_at": "2025-01-19 12:00:00"
         },
         {
             "image": "image3.jpg",
-            "variant_id": 2,
+            "product_id": 2,
             "created_at": "2025-01-19 12:00:00",
             "updated_at": "2025-01-19 12:00:00"
         },
         {
             "image": "image4.jpg",
-            "variant_id": 2,
+            "product_id": 2,
             "created_at": "2025-01-19 12:00:00",
             "updated_at": "2025-01-19 12:00:00"
         }
@@ -508,9 +508,9 @@
             "brand_id": 3,
             "category_id": 1,
             "purchases": 100,
-            "name": "Xiaomi Redmi Note 10",
+            "name": "Xiaomi Redmi Note 11",
             "img": "xiaomi-redmi-note-10.jpg",
-            "slug": "xiaomi-redmi-note-10",
+            "slug": "xiaomi-redmi-note-11",
             "rate_average": 4.2,
             "description": "Điện thoại thông minh của Xiaomi."
         },
@@ -788,9 +788,9 @@
             "brand_id": 2,
             "category_id": 1,
             "purchases": 180,
-            "name": "Samsung Galaxy A52",
-            "img": "samsung-galaxy-a52.jpg",
-            "slug": "samsung-galaxy-a52",
+            "name": "Samsung Galaxy A50",
+            "img": "samsung-galaxy-0.jpg",
+            "slug": "samsung-galaxy-a50",
             "rate_average": 4.5,
             "description": "Điện thoại thông minh tầm trung của Samsung."
         },
@@ -810,7 +810,7 @@
             "purchases": 150,
             "name": "Xiaomi Redmi Note 10",
             "img": "xiaomi-redmi-note-10.jpg",
-            "slug": "xiaomi-redmi-note-10",
+            "slug": "xiaomi-redmi-note-11",
             "rate_average": 4.4,
             "description": "Điện thoại thông minh với màn hình AMOLED của Xiaomi."
         },
@@ -818,9 +818,9 @@
             "brand_id": 4,
             "category_id": 1,
             "purchases": 140,
-            "name": "Oppo Reno5",
-            "img": "oppo-reno5.jpg",
-            "slug": "oppo-reno5",
+            "name": "Oppo Reno6",
+            "img": "oppo-reno6.jpg",
+            "slug": "oppo-reno6",
             "rate_average": 4.3,
             "description": "Điện thoại thông minh với camera ấn tượng của Oppo."
         },
@@ -828,9 +828,9 @@
             "brand_id": 5,
             "category_id": 1,
             "purchases": 130,
-            "name": "Realme X7 Pro",
-            "img": "realme-x7-pro.jpg",
-            "slug": "realme-x7-pro",
+            "name": "Realme X8 Pro",
+            "img": "realme-X8-pro.jpg",
+            "slug": "realme-X8-pro",
             "rate_average": 4.6,
             "description": "Điện thoại với hiệu năng mạnh mẽ và sạc nhanh của Realme."
         },
@@ -868,9 +868,9 @@
             "brand_id": 3,
             "category_id": 1,
             "purchases": 180,
-            "name": "Xiaomi Mi 10T Pro",
-            "img": "xiaomi-mi-10t-pro.jpg",
-            "slug": "xiaomi-mi-10t-pro",
+            "name": "Xiaomi Mi 11T Pro",
+            "img": "xiaomi-mi-11t-pro.jpg",
+            "slug": "xiaomi-mi-11t-pro",
             "rate_average": 4.6,
             "description": "Điện thoại flagship của Xiaomi với hiệu suất cao."
         },
@@ -988,9 +988,9 @@
             "brand_id": 3,
             "category_id": 1,
             "purchases": 160,
-            "name": "Xiaomi Redmi Note 9 Pro",
-            "img": "xiaomi-redmi-note-9-pro.jpg",
-            "slug": "xiaomi-redmi-note-9-pro",
+            "name": "Xiaomi Redmi Note 12 Pro",
+            "img": "xiaomi-redmi-note-12-pro.jpg",
+            "slug": "xiaomi-redmi-note-12-pro",
             "rate_average": 4.5,
             "description": "Điện thoại tầm trung của Xiaomi với camera 64MP."
         },
@@ -1008,9 +1008,9 @@
             "brand_id": 4,
             "category_id": 1,
             "purchases": 150,
-            "name": "Oppo A54",
-            "img": "oppo-a54.jpg",
-            "slug": "oppo-a54",
+            "name": "Oppo A55",
+            "img": "oppo-a55.jpg",
+            "slug": "oppo-a55",
             "rate_average": 4.3,
             "description": "Điện thoại giá rẻ với màn hình 6.5 inch của Oppo."
         },
@@ -1018,9 +1018,9 @@
             "brand_id": 5,
             "category_id": 1,
             "purchases": 110,
-            "name": "Realme Narzo 30 Pro",
-            "img": "realme-narzo-30-pro.jpg",
-            "slug": "realme-narzo-30-pro",
+            "name": "Realme Narzo 31 Pro",
+            "img": "realme-narzo-31-pro.jpg",
+            "slug": "realme-narzo-31-pro",
             "rate_average": 4.2,
             "description": "Điện thoại hiệu năng mạnh mẽ của Realme với màn hình 120Hz."
         },
@@ -1038,9 +1038,9 @@
             "brand_id": 1,
             "category_id": 1,
             "purchases": 160,
-            "name": "iPhone 11",
-            "img": "iphone-11.jpg",
-            "slug": "iphone-11",
+            "name": "iPhone 15",
+            "img": "iphone-15.jpg",
+            "slug": "iphone-15",
             "rate_average": 4.7,
             "description": "Điện thoại Apple với camera kép, hiệu suất mạnh mẽ."
         },
@@ -1058,9 +1058,9 @@
             "brand_id": 3,
             "category_id": 1,
             "purchases": 140,
-            "name": "Xiaomi Redmi K40",
-            "img": "xiaomi-redmi-k40.jpg",
-            "slug": "xiaomi-redmi-k40",
+            "name": "Xiaomi Redmi K43",
+            "img": "xiaomi-redmi-k43.jpg",
+            "slug": "xiaomi-redmi-k43",
             "rate_average": 4.5,
             "description": "Điện thoại flagship với Snapdragon 870 của Xiaomi."
         },
@@ -1088,9 +1088,9 @@
             "brand_id": 6,
             "category_id": 1,
             "purchases": 110,
-            "name": "Vivo V20",
-            "img": "vivo-v20.jpg",
-            "slug": "vivo-v20",
+            "name": "Vivo V2",
+            "img": "vivo-v2.jpg",
+            "slug": "vivo-v2",
             "rate_average": 4.3,
             "description": "Điện thoại Vivo với camera selfie 44MP."
         },
@@ -1098,9 +1098,9 @@
             "brand_id": 1,
             "category_id": 1,
             "purchases": 180,
-            "name": "iPhone XR",
-            "img": "iphone-xr.jpg",
-            "slug": "iphone-xr",
+            "name": "iPhone 16",
+            "img": "iphone-16.jpg",
+            "slug": "iphone-16",
             "rate_average": 4.4,
             "description": "Điện thoại của Apple với hiệu năng tuyệt vời và camera tốt."
         },
@@ -1138,9 +1138,9 @@
             "brand_id": 5,
             "category_id": 1,
             "purchases": 140,
-            "name": "Realme 7 Pro",
-            "img": "realme-7-pro.jpg",
-            "slug": "realme-7-pro",
+            "name": "Realme 11 Pro",
+            "img": "realme-11-pro.jpg",
+            "slug": "realme-11-pro",
             "rate_average": 4.5,
             "description": "Điện thoại Realme với sạc nhanh 65W."
         },
@@ -1189,74 +1189,87 @@
     "product_variants": [
         {
             "product_id": 1,
-            "color": "Đen",
-            "model": "iPhone 13 128GB",
+            "color_id": 1,
+            "model_id": 1,
             "price": 10000.0,
             "stock": 50
         },
         {
             "product_id": 1,
-            "color": "Trắng",
-            "model": "iPhone 13 256GB",
+            "color_id": 2,
+            "model_id": 2,
             "price": 12000.0,
             "stock": 30
         },
         {
             "product_id": 2,
-            "color": "Xanh",
-            "model": "Galaxy S21 128GB",
+            "color_id": 3,
+            "model_id": 3,
             "price": 9500.0,
             "stock": 40
         },
         {
             "product_id": 2,
-            "color": "Vàng",
-            "model": "Galaxy S21 256GB",
+            "color_id": 4,
+            "model_id": 2,
             "price": 11000.0,
             "stock": 20
         },
         {
             "product_id": 3,
-            "color": "Đen",
-            "model": "Xiaomi Mi 11 128GB",
+            "color_id": 5,
+            "model_id": 3,
             "price": 9500.0,
             "stock": 35
         },
         {
             "product_id": 3,
-            "color": "Trắng",
-            "model": "Xiaomi Mi 11 256GB",
+            "color_id": 6,
+            "model_id": 2,
             "price": 11000.0,
             "stock": 25
         },
         {
             "product_id": 4,
-            "color": "Đỏ",
-            "model": "iPhone 12 128GB",
+            "color_id": 5,
+            "model_id": 2,
             "price": 8500.0,
             "stock": 40
         },
         {
             "product_id": 4,
-            "color": "Xám",
-            "model": "iPhone 12 256GB",
+            "color_id": 4,
+            "model_id": 4,
             "price": 9500.0,
             "stock": 30
         },
         {
             "product_id": 5,
-            "color": "Bạc",
-            "model": "Oppo F19 Pro 128GB",
+            "color_id": 3,
+            "model_id": 2,
             "price": 8500.0,
             "stock": 20
         },
         {
             "product_id": 5,
-            "color": "Vàng",
-            "model": "Oppo F19 Pro 256GB",
+            "color_id": 2,
+            "model_id": 3,
             "price": 10000.0,
             "stock": 10
         }
+    ],
+    "colors": [
+        { "name": "Vàng" },
+        { "name": "Đen" },
+        { "name": "Trắng" },
+        { "name": "Xanh lá" },
+        { "name": "Hồng" },
+        { "name": "Xanh da trời" }
+    ],
+    "product_models": [
+        { "name": "64GB" },
+        { "name": "128GB" },
+        { "name": "512GB" }
     ],
     "promotion": [
         {
