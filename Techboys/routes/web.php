@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BillController;
 use App\Http\Controllers\VoucherController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProductController;
@@ -70,6 +71,12 @@ Route::middleware(['auth'])->group(function () {
             Route::put('/open/{id}', [UserController::class, 'open'])->name('admin.user.open');
             // Route::put('/user/{id}', [UserController::class, 'user'])->name('admin.user.user');
             // Route::put('/admin/{id}', [UserController::class, 'admin'])->name('admin.user.admin');
+        });
+        Route::prefix('/bill')->group(function () {
+            Route::get('/', [BillController::class, 'index'])->name('admin.bill.index');
+            Route::get('/hide/{id}', [BillController::class, 'hide'])->name('admin.bill.hide');
+            Route::get('/restore/{id}', [BillController::class, 'restore'])->name('admin.bill.restore');
+            Route::get('/download.invoice/{id}', [BillController::class, 'download'])->name('admin.bill.download');
         });
     });
 });
