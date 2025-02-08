@@ -52,33 +52,31 @@
                             <form action="{{ route('admin.blogs.update', ['id' => $show->id]) }}" method="POST"
                                 enctype="multipart/form-data">
                                 @csrf
-                                @method('PUT') {{-- Dùng PUT cho chỉnh sửa --}}
                                 <input type="hidden" class="form-control" name="id" value="{{$show->id}}">
-                                <div class="mb-3">
+                                <div class="col-md-6 mb-3">
                                     <label for="title" class="form-label">Tiêu đề</label>
                                     <input type="text" class="form-control" id="title" name="title"
-                                        value="{{ old('title', $show->title) }}" required>
+                                        value="{{ old('title', $show->title) }}">
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="image">Hình ảnh</label>
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input" id="image" name="image"
+                                            accept="image/*" onchange="previewImage(this)">
+                                    </div>
+                                    <img id="preview" src="{{ url('admin/assets/images/blog/' . $show->image) }}"
+                                        alt="Image" style="width: 100px; height: auto;" class="mt-2">
                                 </div>
                                 <div class="mb-3">
                                     <label for="content" class="form-label">Nội Dung</label>
-                                    <textarea name="content" id="summernote" > {{ old('content',$show->content) }}</textarea>
-                                    {{-- <div id="summernote" required name="content" class="form-control">{!! old('content', $show->content) !!}</div> --}}
+                                    <textarea name="content"
+                                        id="summernote"> {{ old('content', $show->content) }}</textarea>
+                                    {{-- <div id="summernote" name="content" class="form-control">{!!
+                                        old('content', $show->content) !!}</div> --}}
                                 </div>
-                                {{-- <input type="hidden"  id="content" name="content" value=""> --}}
-                                <div class="mb-3">
-                                    <label for="published_at" class="form-label">Ngày đăng bài</label>
-                                    <input type="datetime-local" required class="form-control" id="published_at"
-                                        name="published_at" value="{{ old('published_at', $show->published_at)}}">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="image">Hình ảnh</label>
-                                    <div class="custom-file">
-                                        <input type="file" class="custom-file-input" id="image" name="image" onchange="previewImage(this)">
-                                    </div>
-                                    <img id="preview" src="{{ url('admin/assets/images/blog/' . $show->image) }}" alt="Image"
-                                        style="width: 100px; height: auto;" class="mt-2">
-                                </div>
-                
+                                <input type="hidden" id="content" name="content" value="">
+
+
 
                                 <button type="submit" class="btn btn-primary">Cập nhật</button>
                                 <a class="btn btn-primary" href="{{ route('admin.blogs.index') }}">Quay lại</a>
@@ -96,14 +94,14 @@
     <script src="{{ url('') }}/admin/assets/vendors/summernote/summernote-lite.min.js"></script>
     <script>
         function previewImage(input) {
-    if (input.files && input.files[0]) {
-        var reader = new FileReader();
-        reader.onload = function (e) {
-            document.getElementById('preview').src = e.target.result;
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    document.getElementById('preview').src = e.target.result;
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
         }
-        reader.readAsDataURL(input.files[0]);
-    }
-}
     </script>
     <script>
         $('#summernote').summernote({

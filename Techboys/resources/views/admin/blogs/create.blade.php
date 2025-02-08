@@ -8,8 +8,6 @@
         max-width: 300px;
         max-height: 200px;
     }
-      
-   
 </style>
 @endsection
 
@@ -59,33 +57,29 @@
                             {{-- Form thêm dự án --}}
                             <form action="{{ route('admin.blogs.store') }}" method="POST" enctype="multipart/form-data">
                                 @csrf
-                                <div class="mb-3">
+                                <div class="col-md-6 mb-3">
                                     <label for="title" class="form-label">Tiêu đề</label>
                                     <input type="text" class="form-control" id="title" name="title"
-                                        value="{{ old('title') }}" required>
+                                        value="{{ old('title') }}">
                                 </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="image">Hình ảnh</label>
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input" id="image" name="image"
+                                            accept="image/*" onchange="displayImage(event)" value="{{ old('image') }}">
+
+                                    </div>
+                                </div>
+                                <div id="image-preview"></div>
                                 <div class="mb-3">
                                     <label for="content" class="form-label">Nội Dung</label>
-                                    <textarea name="content"  id="summernote" required > {{ old('content') }}</textarea>
+                                    <textarea name="content" id="summernote"> {{ old('content') }}</textarea>
 
                                     {{-- <div id="summernote" name="content" class="form-control">{!! old('content') !!}
                                     </div> --}}
                                 </div>
                                 {{-- <input type="hidden" id="content" name="content" value=""> --}}
-                                <div class="mb-3">
-                                    <label for="published_at" class="form-label">Ngày đăng bài</label>
-                                    <input type="datetime-local" class="form-control" id="published_at"
-                                        name="published_at" value="{{ old('published_at') }}" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="image">Hình ảnh</label>
-                                    <div class="custom-file">
-                                        <input type="file" class="custom-file-input" id="image" name="image"
-                                            onchange="displayImage(event)" value="{{ old('image') }}" required>
-                                            
-                                    </div>
-                                </div>
-                                <div id="image-preview"></div>
+
                                 <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
                                 <button type="submit" class="btn btn-primary">Thêm</button>
                                 <a class="btn btn-primary" href="{{ route('admin.blogs.index') }}">Quay lại</a>

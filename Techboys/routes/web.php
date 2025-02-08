@@ -19,7 +19,7 @@ Route::prefix('/blogs')->group(function () {
     Route::get('/create', [BlogController::class, 'create'])->name('admin.blogs.create');
     route::post('/store', [BlogController::class, 'store'])->name('admin.blogs.store');
     route::get('/edit', [BlogController::class, 'edit'])->name('admin.blogs.edit');   
-    route::put('/update/{id}', [BlogController::class, 'update'])->name('admin.blogs.update');
+    route::post('/update/{id}', [BlogController::class, 'update'])->name('admin.blogs.update');
     route::get('/destroy/{id}', [BlogController::class, 'destroy'])->name('admin.blogs.destroy');
 
 
