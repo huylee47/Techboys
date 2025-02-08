@@ -94,6 +94,12 @@
                                 <span>Phản hồi</span>
                             </a>
                         </li>
+                        <li class="sidebar-item ">
+                            <a href="{{route('admin.blogs.index')}}" class='sidebar-link'>
+                                <i class="bi bi-file-earmark-spreadsheet-fill"></i>
+                                <span>Blogs</span>
+                            </a>
+                        </li>
 
                     </ul>
                 </div>

@@ -57,26 +57,36 @@
                             {{-- Form thêm dự án --}}
                             <form action="{{ route('admin.blogs.store') }}" method="POST" enctype="multipart/form-data">
                                 @csrf
-                                <div class="col-md-6 mb-3">
-                                    <label for="title" class="form-label">Tiêu đề</label>
-                                    <input type="text" class="form-control" id="title" name="title"
-                                        value="{{ old('title') }}">
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <label for="image">Hình ảnh</label>
-                                    <div class="custom-file">
-                                        <input type="file" class="custom-file-input" id="image" name="image"
-                                            accept="image/*" onchange="displayImage(event)" value="{{ old('image') }}">
-
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="title" class="form-label">Tiêu đề</label>
+                                        <input type="text" class="form-control" id="title" name="title"
+                                            value="{{ old('title') }}">
                                     </div>
-                                </div>
-                                <div id="image-preview"></div>
-                                <div class="mb-3">
-                                    <label for="content" class="form-label">Nội Dung</label>
-                                    <textarea name="content" id="summernote"> {{ old('content') }}</textarea>
+                                    {{-- <div class="col-md-6 mb-3">
+                                        <label for="image">Hình ảnh</label>
+                                        <div class="custom-file">
+                                            <input type="file" class="custom-file-input" id="image" name="image"
+                                                accept="image/*" onchange="displayImage(event)"
+                                                value="{{ old('image') }}">
+                                        </div>
+                                    </div>
+                                    <div id="image-preview" style="float: right"></div> --}}
+                                    <div class="col-md-6 mb-3">
+                                        <label for="images" class="form-label">Ảnh </label>
+                                        <input class="form-control" type="file" id="images" name="image"
+                                            accept="image/*">
+                                        <div id="image-preview-container" class="mt-3"
+                                            style="display: flex; gap: 10px; flex-wrap: wrap;"></div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="content" class="form-label">Nội Dung</label>
+                                        <textarea name="content" id="summernote"> {{ old('content') }}</textarea>
 
-                                    {{-- <div id="summernote" name="content" class="form-control">{!! old('content') !!}
-                                    </div> --}}
+                                        {{-- <div id="summernote" name="content" class="form-control">{!! old('content')
+                                            !!}
+                                        </div> --}}
+                                    </div>
                                 </div>
                                 {{-- <input type="hidden" id="content" name="content" value=""> --}}
 
@@ -95,19 +105,24 @@
     @section('scripts')
     <script src="{{ url('') }}/admin/assets/vendors/summernote/summernote-lite.min.js"></script>
     <script>
-        function displayImage(event) {
-            const file = event.target.files[0];
-            const reader = new FileReader();
+        document.getElementById('images').addEventListener('change', function (event) {
+            let previewContainer = document.getElementById('image-preview-container');
+            previewContainer.innerHTML = '';
 
-            reader.onload = function (e) {
-                const imageElement = document.createElement('img');
-                imageElement.src = e.target.result;
-                document.getElementById('image-preview').innerHTML = '';
-                document.getElementById('image-preview').appendChild(imageElement);
-            };
-
-            reader.readAsDataURL(file);
-        }
+            Array.from(event.target.files).forEach(file => {
+                let reader = new FileReader();
+                reader.onload = function (e) {
+                    let img = document.createElement('img');
+                    img.src = e.target.result;
+                    img.style.width = '100px';
+                    img.style.height = '100px';
+                    img.style.objectFit = 'cover';
+                    img.style.borderRadius = '5px';
+                    previewContainer.appendChild(img);
+                };
+                reader.readAsDataURL(file);
+            });
+        });
     </script>
     <script>
         $('#summernote').summernote({

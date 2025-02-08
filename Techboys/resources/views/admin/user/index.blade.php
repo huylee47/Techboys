@@ -78,8 +78,7 @@
                                  
                                     <form action="{{ $user->status == 1 ? route('admin.user.block', ['id' => $user->id]) : route('admin.user.open', ['id' => $user->id]) }}"
                                           method="POST" style="display:inline;">
-                                        @csrf
-                                        @method('PUT')
+                                        @csrf                                    
                                         <input type="hidden" class="form-control" name="id" value="{{ $user->id }}">
                                         <button type="submit" class="btn btn-{{ $user->status == 1 ? 'danger' : 'success' }}">
                                             {{ $user->status == 1 ? 'Khóa' : 'Mở' }}

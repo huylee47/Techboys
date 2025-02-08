@@ -53,6 +53,7 @@
                                 enctype="multipart/form-data">
                                 @csrf
                                 <input type="hidden" class="form-control" name="id" value="{{$show->id}}">
+                                <div class="row"> 
                                 <div class="col-md-6 mb-3">
                                     <label for="title" class="form-label">Tiêu đề</label>
                                     <input type="text" class="form-control" id="title" name="title"
@@ -74,10 +75,8 @@
                                     {{-- <div id="summernote" name="content" class="form-control">{!!
                                         old('content', $show->content) !!}</div> --}}
                                 </div>
+                            </div>
                                 <input type="hidden" id="content" name="content" value="">
-
-
-
                                 <button type="submit" class="btn btn-primary">Cập nhật</button>
                                 <a class="btn btn-primary" href="{{ route('admin.blogs.index') }}">Quay lại</a>
 
