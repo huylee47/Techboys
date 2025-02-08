@@ -23,9 +23,8 @@ Route::get('/login/admin', function () {
 Route::post('/login/auth', [UserController::class, 'login'])->name('login.auth');
 
 
-Route::prefix('/user')->group(function () {
-    Route::get('/', [UserController::class, 'index'])->name('admin.user.index');
-});
+
+
 
 Route::middleware(['auth'])->group(function () {
     Route::prefix('admin')->group(function () {
@@ -66,7 +65,13 @@ Route::middleware(['auth'])->group(function () {
             route::put('/update/{id}', [ProductCategoryController::class, 'update'])->name('admin.category.update');
             route::get('/destroy/{id}', [ProductCategoryController::class, 'destroy'])->name('admin.category.destroy');
         });
-
+        Route::prefix('/user')->group(function () {
+            Route::get('/', [UserController::class, 'index'])->name('admin.user.index');
+            Route::put('/block/{id}', [UserController::class, 'block'])->name('admin.user.block');
+            Route::put('/open/{id}', [UserController::class, 'open'])->name('admin.user.open');
+            // Route::put('/user/{id}', [UserController::class, 'user'])->name('admin.user.user');
+            // Route::put('/admin/{id}', [UserController::class, 'admin'])->name('admin.user.admin');
+        });
         Route::prefix('/bill')->group(function () {
             Route::get('/', [BillController::class, 'index'])->name('admin.bill.index');
             Route::get('/hide/{id}', [BillController::class, 'hide'])->name('admin.bill.hide');
