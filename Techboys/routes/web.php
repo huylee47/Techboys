@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\BillController;
+use App\Http\Controllers\BillDetailsController;
 use App\Http\Controllers\VoucherController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProductController;
@@ -72,12 +73,13 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/hide/{id}', [BillController::class, 'hide'])->name('admin.bill.hide');
             Route::get('/restore/{id}', [BillController::class, 'restore'])->name('admin.bill.restore');
             Route::get('/download.invoice/{id}', [BillController::class, 'download'])->name('admin.bill.download');
+            Route::get('/bill-detail/{id}/show', [BillDetailsController::class, 'show'])->name('admin.bill.show');
         });
         Route::prefix('/blogs')->group(function () {
             Route::get('/', [BlogController::class, 'index'])->name('admin.blogs.index');
             Route::get('/create', [BlogController::class, 'create'])->name('admin.blogs.create');
             route::post('/store', [BlogController::class, 'store'])->name('admin.blogs.store');
-            route::get('/edit', [BlogController::class, 'edit'])->name('admin.blogs.edit');   
+            route::get('/edit', [BlogController::class, 'edit'])->name('admin.blogs.edit');
             route::post('/update/{id}', [BlogController::class, 'update'])->name('admin.blogs.update');
             route::get('/destroy/{id}', [BlogController::class, 'destroy'])->name('admin.blogs.destroy');
         });

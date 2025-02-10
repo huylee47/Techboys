@@ -66,6 +66,7 @@
                                     </td>
                                     <td class="text-center">
                                         <a href="{{ route('admin.bill.download', $bill->id) }}" class="btn btn-primary">Tải về</a>
+                                        <a href="{{ route('admin.bill.show', $bill->id) }}" class="btn btn-primary">Chi tiết</a>
                                     </td>
                                 </tr>
                             @endforeach
