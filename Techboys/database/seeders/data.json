@@ -1386,7 +1386,7 @@
             "email": "admin@gmail.com",
             "email_verified_at": "2025-01-16T12:00:00",
             "username": "admin",
-            "password": "1",
+            "password": "123456",
             "phone": "0901234567",
             "wallet": 10000,
             "address": "123 Đường ABC, TP.Hải Phòng",
@@ -1449,7 +1449,7 @@
             "gender": true,
             "dob": "1990-05-10",
             "status": 1,
-            "role_id": 1
+            "role_id": 2
         }
     ],
     "vouchers": [
