@@ -10,7 +10,7 @@ class ProductVariant extends Model
 {
     use HasFactory,SoftDeletes;
     protected $table = 'product_variants';
-    protected $fillable = ['product_id', 'color_id', 'price', 'stock','model_id','ram_id'];
+    protected $fillable = ['product_id', 'color_id', 'price', 'stock','model_id'];
 
     public function product(){
         return $this->belongsTo(Product::class);
