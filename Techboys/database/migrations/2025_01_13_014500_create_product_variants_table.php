@@ -17,7 +17,6 @@ return new class extends Migration
             $table->foreignId('color_id');
             $table->foreignId('model_id');
             $table->decimal('price',10,2);
-            $table->foreignId('ram_id');
             $table->integer('stock');
             $table->softDeletes();
             $table->timestamps();

@@ -13,10 +13,9 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
-        return [
-            'checkRole' => App\Http\Middleware\CheckRole::class,
-            'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
-        ];
+        $middleware->alias([
+            'auth.admin'=> CheckRole::class,
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //
