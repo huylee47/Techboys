@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('client.home.home');
-});
+})->name('home');
 Route::get('test', function () {
     return view('admin.product.imageIndex');
 });
@@ -30,7 +30,7 @@ Route::prefix('/register')->group(function () {
 route::get('/veryfy-account/{email}',[UserController::class, 'veryfy'])->name('admin.veryfy');
 Route::post('/login/auth', [UserController::class, 'login'])->name('login.auth');
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth','auth.admin'])->group(function () {
     Route::prefix('admin')->group(function () {
         Route::get('/home', [DashboardController::class, 'index'])->name('admin.index');
         Route::get('/blog', function () {
