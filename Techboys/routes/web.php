@@ -27,7 +27,7 @@ Route::prefix('/register')->group(function () {
     Route::get('/create', [UserController::class, 'create'])->name('admin.log.create');
     route::post('/store', [UserController::class, 'store'])->name('admin.log.store');
 });
-route::get('/veryfy-account/{email}',[UserController::class, 'veryfy'])->name('admin.veryfy');
+route::get('/veryfi-account/{email}',[UserController::class, 'veryfi'])->name('admin.veryfi');
 Route::post('/login/auth', [UserController::class, 'login'])->name('login.auth');
 
 Route::middleware(['auth','auth.admin'])->group(function () {
@@ -71,6 +71,8 @@ Route::middleware(['auth','auth.admin'])->group(function () {
         });
         Route::prefix('/user')->group(function () {
             Route::get('/', [UserController::class, 'index'])->name('admin.user.index');
+            Route::get('/create', [UserController::class, 'create_user'])->name('admin.user.create');
+            route::post('/store', [UserController::class, 'store_user'])->name('admin.user.store');
             Route::post('/block/{id}', [UserController::class, 'block'])->name('admin.user.block');
             Route::post('/open/{id}', [UserController::class, 'open'])->name('admin.user.open');
         });

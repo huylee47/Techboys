@@ -37,6 +37,7 @@
                         </div>
                     @endif
 
+                    <a href="{{ route('admin.user.create') }}" class="btn btn-primary">Thêm user</a>
 
                     {{-- Bảng danh sách thẻ --}}
                     <table class="table table-striped table-bordered" id="table1">
