@@ -15,10 +15,12 @@ class CheckRole
     {
         $user = Auth::user();
         
-        if (!$user || !in_array($user->role_id, $roles)) {
-            return redirect()->route('login')->with('error', 'Bạn không có quyền truy cập.');
+        if (!$user) {
+            return redirect()->route('login')->with('error', 'Vui lòng đăng nhập để tiếp tục.');
         }
-
+        if ($user->role_id!= 1){
+            return redirect()->route('login')->with('error', 'Bạn không có quyền truy cập vào trang quản trị.');
+        }
         return $next($request);
     }
 }
