@@ -59,6 +59,51 @@ class UserController extends Controller
         $user->update(['status' => 1]);
         return redirect()->route('admin.user.index')->with('success', 'Mở tài khoản thành công.');
     }
+    public function create_user()
+    {
+        return view('admin.user.create');
+    }
+    public function store_user(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'username' => 'required|string|max:255|unique:users,username',
+            'email' => 'required|string|email|max:255|unique:users,email',
+            'phone' => 'required|string|max:11',
+            'password' => 'required|string|min:8',
+            'confirm_Password' => 'required|string|same:password'
+        ], [
+            'name.required' => 'Vui lòng nhập họ tên.',
+            'name.max' => 'Họ tên không được vượt quá 255 ký tự.',
+            'username.required' => 'Vui lòng nhập tên đăng nhập.',
+            'username.max' => 'Tên đăng nhập không được vượt quá 255 ký tự.',
+            'username.unique' => 'Tên đăng nhập đã tồn tại.',
+            'email.required' => 'Vui lòng nhập email.',
+            'email.max' => 'Email không được vượt quá 255 ký tự.',
+            'email.email' => 'Email không đúng định dạng.',
+            'email.unique' => 'Email đã tồn tại.',
+            'phone.required' => 'Vui lòng nhập số điện thoại.',
+            'phone.max' => 'Số điện thoại không được vượt quá 11 ký tự.',
+            'password.required' => 'Vui lòng nhập mật khẩu.',
+            'password.min' => 'Mật khẩu phải có ít nhất 8 ký tự.',
+            'confirm_Password.required' => 'Vui lòng nhập mật khẩu xác nhận.',
+            'confirm_Password.same' => 'Mật khẩu xác nhận phải trùng với mật khẩu đã nhập.'
+        ]);
+
+        User::create([
+            'name' => $request->name,
+            'username' => $request->username,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'status' => 1,
+            'role_id' => 1,
+            'password' => Hash::make($request->password),
+        ]);
+
+
+        return redirect()->route('admin.user.index')->with('success', 'tạo tài khoản thành công.');
+    }
+
 
     //client
     public function create()
@@ -92,8 +137,8 @@ class UserController extends Controller
             'password-confirm.required' => 'Vui lòng nhập mật khẩu xác nhận.',
             'password-confirm.same' => 'Mật khẩu xác nhận phải trùng với mật khẩu đã nhập.'
         ]);
-        
-        $data =User::create([
+
+        $data = User::create([
             'name' => $request->name,
             'username' => $request->username,
             'email' => $request->email,
@@ -102,19 +147,18 @@ class UserController extends Controller
             'role_id' => 0,
             'password' => Hash::make($request->password),
         ]);
-        
-        if($acc = $data ){
-            Mail::to($acc->email)->send(new verifyAccount($acc)); 
+
+        if ($acc = $data) {
+            Mail::to($acc->email)->send(new verifyAccount($acc));
             return redirect()->route('login')->with('success', 'Đăng ký thành công, vui lòng check gmail của bạn');
         }
         return redirect()->back()->with('no', 'tạo không thành công vui lòng kiểm tra lại');
-       
     }
 
-    public function veryfy($email)
+    public function veryfi($email)
     {
-       User::where('email', $email)->whereNull('email_verified_at')->firstOrFail();
-        User::where('email', $email)->update(['email_verified_at'=> date('Y-m-d')]);
-        return redirect()->route('login')->with('success','xác minh thành công');
+        User::where('email', $email)->whereNull('email_verified_at')->firstOrFail();
+        User::where('email', $email)->update(['email_verified_at' => date('Y-m-d')]);
+        return redirect()->route('login')->with('success', 'xác minh thành công');
     }
 }
