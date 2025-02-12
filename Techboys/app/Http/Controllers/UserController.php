@@ -2,11 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\verifyAccount;
+use Illuminate\Auth\Notifications\VerifyEmail;
+use Mail;
 use App\Models\User;
 use App\Service\UserService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+
+use function Laravel\Prompts\alert;
 
 class UserController extends Controller
 {
@@ -69,7 +74,7 @@ class UserController extends Controller
             'email' => 'required|string|email|max:255|unique:users,email',
             'phone' => 'required|string|max:11',
             'password' => 'required|string|min:8',
-            'password1' => 'required|string|same:password'
+            'password-confirm' => 'required|string|same:password'
         ], [
             'name.required' => 'Vui lòng nhập họ tên.',
             'name.max' => 'Họ tên không được vượt quá 255 ký tự.',
@@ -84,10 +89,11 @@ class UserController extends Controller
             'phone.max' => 'Số điện thoại không được vượt quá 11 ký tự.',
             'password.required' => 'Vui lòng nhập mật khẩu.',
             'password.min' => 'Mật khẩu phải có ít nhất 8 ký tự.',
-            'password1.required' => 'Vui lòng nhập mật khẩu xác nhận.',
-            'password1.same' => 'Mật khẩu xác nhận phải trùng với mật khẩu đã nhập.'
+            'password-confirm.required' => 'Vui lòng nhập mật khẩu xác nhận.',
+            'password-confirm.same' => 'Mật khẩu xác nhận phải trùng với mật khẩu đã nhập.'
         ]);
-        User::create([
+        
+        $data =User::create([
             'name' => $request->name,
             'username' => $request->username,
             'email' => $request->email,
@@ -96,6 +102,19 @@ class UserController extends Controller
             'role_id' => 0,
             'password' => Hash::make($request->password),
         ]);
-        return redirect()->route('login')->with('success', 'Tạo thành công');
+        
+        if($acc = $data ){
+            Mail::to($acc->email)->send(new verifyAccount($acc)); 
+            return redirect()->route('login')->with('success', 'Đăng ký thành công, vui lòng check gmail của bạn');
+        }
+        return redirect()->back()->with('no', 'tạo không thành công vui lòng kiểm tra lại');
+       
+    }
+
+    public function veryfy($email)
+    {
+       User::where('email', $email)->whereNull('email_verified_at')->firstOrFail();
+        User::where('email', $email)->update(['email_verified_at'=> date('Y-m-d')]);
+        return redirect()->route('login')->with('success','xác minh thành công');
     }
 }
