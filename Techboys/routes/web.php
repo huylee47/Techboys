@@ -27,7 +27,7 @@ Route::prefix('/register')->group(function () {
     Route::get('/create', [UserController::class, 'create'])->name('admin.log.create');
     route::post('/store', [UserController::class, 'store'])->name('admin.log.store');
 });
-
+route::get('/veryfy-account/{email}',[UserController::class, 'veryfy'])->name('admin.veryfy');
 Route::post('/login/auth', [UserController::class, 'login'])->name('login.auth');
 
 Route::middleware(['auth'])->group(function () {
@@ -93,4 +93,6 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/', [UserController::class, 'index'])->name('admin.user.index');
         });
     });
+
 });
+
