@@ -21,7 +21,13 @@ Route::get('blog', function () {
 });
 Route::get('/login/admin', function () {
     return view('admin.log.login');
+    
 })->name('login');
+Route::prefix('/register')->group(function () {
+    Route::get('/create', [UserController::class, 'create'])->name('admin.log.create');
+    route::post('/store', [UserController::class, 'store'])->name('admin.log.store');
+});
+
 Route::post('/login/auth', [UserController::class, 'login'])->name('login.auth');
 
 Route::middleware(['auth'])->group(function () {
