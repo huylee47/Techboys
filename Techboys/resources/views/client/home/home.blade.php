@@ -1895,7 +1895,7 @@
                         <!-- .col-full -->
                     </div>
                     <!-- .fullwidth-notice -->
-                    <section class="section-top-categories section-categories-carousel" id="categories-carousel-1">
+                     <section class="section-top-categories section-categories-carousel" id="categories-carousel-1">
                         <header class="section-header">
                             <h4 class="pre-title">Featured</h4>
                             <h2 class="section-title">Top categories
@@ -3944,7 +3944,7 @@
                         <!-- /.row -->
                     </div>
                     <!-- /.banners -->
-                    <section class="section-landscape-products-carousel 4-column-landscape-carousel" id="landscape-products-carousel">
+                    {{--<section class="section-landscape-products-carousel 4-column-landscape-carousel" id="landscape-products-carousel">
                         <header class="section-header">
                             <h2 class="section-title">Video Cameras & Photography</h2>
                             <nav class="custom-slick-nav"></nav>
@@ -11285,7 +11285,7 @@
                             </div>
                         </div>
                         <!-- .col-full -->
-                    </section>
+                    </section> --}}
                     <!-- .brands-carousel -->
                 </main>
                 <!-- #main -->
