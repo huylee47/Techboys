@@ -25,16 +25,16 @@
                 <div class="col-full">
                     <ul id="menu-top-bar-left" class="nav justify-content-center">
                         <li class="menu-item animate-dropdown">
-                            <a title="TechMarket eCommerce - Always free delivery" href="contact-v1.html">TechMarket eCommerce &#8211; Always free delivery</a>
+                            <a title="Techboys - Always free delivery" href="contact-v1.html">Techboys  &#8211; Lựa chọn tối ưu</a>
                         </li>
                         <li class="menu-item animate-dropdown">
-                            <a title="Quality Guarantee of products" href="shop.html">Quality Guarantee of products</a>
+                            <a title="Sản phẩm chất lượng" href="shop.html">Sản phẩm chất lượng</a>
                         </li>
                         <li class="menu-item animate-dropdown">
-                            <a title="Fast returnings program" href="track-your-order.html">Fast returnings program</a>
+                            <a title="Hỗ trợ nhanh chóng" href="track-your-order.html">Hỗ trợ nhanh chóng</a>
                         </li>
                         <li class="menu-item animate-dropdown">
-                            <a title="No additional fees" href="contact-v2.html">No additional fees</a>
+                            <a title="Không thu phụ phí" href="contact-v2.html">Không thu phụ phí</a>
                         </li>
                     </ul>
                     <!-- .nav -->
@@ -111,198 +111,6 @@
                                         </ul>
                                         <!-- .dropdown-menu -->
                                     </li>
-                                    <li class="yamm-fw menu-item menu-item-has-children animate-dropdown dropdown">
-                                        <a title="Pages" data-toggle="dropdown" class="dropdown-toggle" aria-haspopup="true" href="#">Pages <span class="caret"></span></a>
-                                        <ul role="menu" class=" dropdown-menu">
-                                            <li class="menu-item menu-item-object-static_block animate-dropdown">
-                                                <div class="yamm-content">
-                                                    <div class="tm-mega-menu">
-                                                        <div class="widget widget_nav_menu">
-                                                            <ul class="menu">
-                                                                <li class="nav-title menu-item">
-                                                                    <a href="#">Home Pages</a>
-                                                                </li>
-                                                                <li class="menu-item">
-                                                                    <a href="home-v1.html">Home v1</a>
-                                                                </li>
-                                                                <li class="menu-item">
-                                                                    <a href="home-v2.html">Home v2</a>
-                                                                </li>
-                                                                <li class="menu-item">
-                                                                    <a href="home-v3.html">Home v3</a>
-                                                                </li>
-                                                                <li class="menu-item">
-                                                                    <a href="home-v4.html">Home v4</a>
-                                                                </li>
-                                                                <li class="menu-item">
-                                                                    <a href="home-v5.html">Home v5</a>
-                                                                </li>
-                                                                <li class="menu-item">
-                                                                    <a href="home-v6.html">Home v6</a>
-                                                                </li>
-                                                                <li class="menu-item">
-                                                                    <a href="home-v7.html">Home v7</a>
-                                                                </li>
-                                                                <li class="menu-item">
-                                                                    <a href="home-v8.html">Home v8</a>
-                                                                </li>
-                                                                <li class="menu-item">
-                                                                    <a href="home-v9.html">Home v9</a>
-                                                                </li>
-                                                                <li class="menu-item">
-                                                                    <a href="home-v10.html">Home v10</a>
-                                                                </li>
-                                                                <li class="menu-item">
-                                                                    <a href="home-v11.html">Home v11</a>
-                                                                </li>
-                                                                <li class="menu-item">
-                                                                    <a href="home-v12.html">Home v12</a>
-                                                                </li>
-                                                                <li class="menu-item">
-                                                                    <a href="home-v13.html">Home v13</a>
-                                                                </li>
-                                                                <li class="menu-item">
-                                                                    <a href="home-v14.html">Home v14</a>
-                                                                </li>
-                                                            </ul>
-                                                            <!-- .menu -->
-                                                        </div>
-                                                        <!-- .widget_nav_menu -->
-                                                        <div class="widget widget_nav_menu">
-                                                            <ul class="menu">
-                                                                <li class="nav-title menu-item">
-                                                                    <a href="#">Landing Pages</a>
-                                                                </li>
-                                                                <li class="menu-item">
-                                                                    <a href="landing-page-v1.html">Landing v1</a>
-                                                                </li>
-                                                                <li class="menu-item">
-                                                                    <a href="landing-page-v2.html">Landing v2</a>
-                                                                </li>
-                                                                <li class="nav-title menu-item">
-                                                                    <a href="#">Shop Pages</a>
-                                                                </li>
-                                                                <li class="menu-item">
-                                                                    <a href="shop.html">Shop</a>
-                                                                </li>
-                                                                <li class="menu-item">
-                                                                    <a href="shop-extended.html">Shop Extended</a>
-                                                                </li>
-                                                                <li class="menu-item">
-                                                                    <a href="shop-listing.html">Shop Listing</a>
-                                                                </li>
-                                                                <li class="menu-item">
-                                                                    <a href="shop-listing-large.html">Shop Listing Large</a>
-                                                                </li>
-                                                                <li class="menu-item">
-                                                                    <a href="shop-listing-with-product-sidebar.html">Shop Listing with Product Sidebar</a>
-                                                                </li>
-                                                                <li class="menu-item">
-                                                                    <a href="product-category.html">Categories</a>
-                                                                </li>
-                                                                <li class="menu-item">
-                                                                    <a href="shop-right-sidebar.html">Shop Right Sidebar</a>
-                                                                </li>
-                                                                <li class="menu-item">
-                                                                    <a href="shop-fullwidth.html">Shop Full Width</a>
-                                                                </li>
-                                                            </ul>
-                                                            <!-- .menu -->
-                                                        </div>
-                                                        <!-- .widget_nav_menu -->
-                                                        <div class="widget widget_nav_menu">
-                                                            <ul class="menu">
-                                                                <li class="nav-title menu-item">
-                                                                    <a href="#">Single Product Pages</a>
-                                                                </li>
-                                                                <li class="menu-item menu-item-object-product">
-                                                                    <a href="single-product-sidebar.html">Single Product Sidebar</a>
-                                                                </li>
-                                                                <li class="menu-item menu-item-object-product">
-                                                                    <a href="single-product-fullwidth.html">Single Product Fullwidth</a>
-                                                                </li>
-                                                                <li class="menu-item menu-item-object-product">
-                                                                    <a href="single-product-extended.html">Single Product Extended</a>
-                                                                </li>
-                                                                <li class="nav-title menu-item">
-                                                                    <a href="#">Ecommerce Pages</a>
-                                                                </li>
-                                                                <li class="menu-item">
-                                                                    <a href="cart.html">Cart</a>
-                                                                </li>
-                                                                <li class="menu-item">
-                                                                    <a href="checkout.html">Checkout</a>
-                                                                </li>
-                                                                <li class="menu-item">
-                                                                    <a href="login-and-register.html">My Account</a>
-                                                                </li>
-                                                                <li class="menu-item">
-                                                                    <a href="compare.html">Compare</a>
-                                                                </li>
-                                                                <li class="menu-item">
-                                                                    <a href="wishlist.html">Wishlist</a>
-                                                                </li>
-                                                                <li class="menu-item">
-                                                                    <a href="track-your-order.html">Track Order</a>
-                                                                </li>
-                                                                <li class="menu-item">
-                                                                    <a href="terms-and-conditions.html">Terms and Conditions</a>
-                                                                </li>
-                                                            </ul>
-                                                            <!-- .menu -->
-                                                        </div>
-                                                        <!-- .widget_nav_menu -->
-                                                        <div class="widget widget_nav_menu">
-                                                            <ul class="menu">
-                                                                <li class="nav-title menu-item">
-                                                                    <a href="#">Blog Pages</a>
-                                                                </li>
-                                                                <li class="menu-item">
-                                                                    <a href="blog-v1.html">Blog v1</a>
-                                                                </li>
-                                                                <li class="menu-item">
-                                                                    <a href="blog-v2.html">Blog v2</a>
-                                                                </li>
-                                                                <li class="menu-item">
-                                                                    <a href="blog-v3.html">Blog v3</a>
-                                                                </li>
-                                                                <li class="menu-item">
-                                                                    <a href="blog-fullwidth.html">Blog Full Width</a>
-                                                                </li>
-                                                                <li class="menu-item">
-                                                                    <a href="blog-single.html">Single Blog Post</a>
-                                                                </li>
-                                                                <li class="nav-title menu-item">
-                                                                    <a href="#">Other Pages</a>
-                                                                </li>
-                                                                <li class="menu-item">
-                                                                    <a href="about.html">About Us</a>
-                                                                </li>
-                                                                <li class="menu-item">
-                                                                    <a href="contact-v1.html">Contact v1</a>
-                                                                </li>
-                                                                <li class="menu-item">
-                                                                    <a href="contact-v2.html">Contact v2</a>
-                                                                </li>
-                                                                <li class="menu-item">
-                                                                    <a href="faq.html">FAQ</a>
-                                                                </li>
-                                                                <li class="menu-item">
-                                                                    <a href="404.html">404</a>
-                                                                </li>
-                                                            </ul>
-                                                            <!-- .menu -->
-                                                        </div>
-                                                        <!-- .widget_nav_menu -->
-                                                    </div>
-                                                    <!-- .tm-mega-menu -->
-                                                </div>
-                                                <!-- .yamm-content -->
-                                            </li>
-                                            <!-- .menu-item -->
-                                        </ul>
-                                        <!-- .dropdown-menu -->
-                                    </li>
                                     <li class="menu-item animate-dropdown">
                                         <a title="Logitech Sale" href="product-category.html">Logitech Sale</a>
                                     </li>
@@ -365,7 +173,7 @@
                         <div id="departments-menu" class="dropdown departments-menu">
                             <button class="btn dropdown-toggle btn-block" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="tm tm-departments-thin"></i>
-                                <span>All Departments</span>
+                                <span>Tất cả sản phẩm</span>
                             </button>
                             <ul id="menu-departments-menu" class="dropdown-menu yamm departments-menu-dropdown">
                                 <li class="highlight menu-item animate-dropdown">
