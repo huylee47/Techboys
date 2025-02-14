@@ -3,6 +3,7 @@
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\BillController;
 use App\Http\Controllers\BillDetailsController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\VoucherController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProductController;
@@ -94,3 +95,8 @@ Route::middleware(['auth'])->group(function () {
         });
     });
 });
+
+Route::get('/contact', function () {
+    return view('client.contact.contact');
+});
+Route::post('/contact', [ContactController::class, 'saveContact']);

@@ -9,7 +9,7 @@
                 <span class="delimiter">
                     <i class="tm tm-breadcrumbs-arrow-right"></i>
                 </span>
-                Contact V1
+                Contact
             </nav>
             <!-- .woocommerce-breadcrumb -->
             <div id="primary" class="content-area">
@@ -23,14 +23,14 @@
                             <div class="row contact-info">
                                 <div class="col-md-9 left-col">
                                     <div class="text-block">
-                                        <h2 class="contact-page-title">Leave us a Message</h2>
-                                        <p>Maecenas dolor elit, semper a sem sed, pulvinar molestie lacus. Aliquam dignissim, elit non mattis ultrices,
-                                            <br> neque odio ultricies tellus, eu porttitor nisl ipsum eu massa.</p>
+                                        <h2 class="contact-page-title">Để lại cho chúng tôi một tin nhắn</h2>
+                                        <p>Chúng tôi luôn sẵn lòng hỗ trợ bạn! Nếu bạn có bất kỳ câu hỏi nào hoặc cần tư vấn, đừng ngần ngại liên hệ với chúng tôi qua thông tin bên dưới. Đội ngũ của chúng tôi sẽ phản hồi bạn trong thời gian sớm nhất!</p>
                                     </div>
                                     <div class="contact-form">
                                         <div role="form" class="wpcf7" id="wpcf7-f425-o1" lang="en-US" dir="ltr">
                                             <div class="screen-reader-response"></div>
-                                            <form class="wpcf7-form" novalidate="novalidate">
+                                            <form class="wpcf7-form" novalidate="novalidate" action="" method="post">
+                                                @csrf
                                                 <div style="display: none;">
                                                     <input type="hidden" name="_wpcf7" value="425" />
                                                     <input type="hidden" name="_wpcf7_version" value="4.5.1" />
@@ -40,46 +40,46 @@
                                                 </div>
                                                 <div class="form-group row">
                                                     <div class="col-xs-12 col-md-6">
-                                                        <label>First name
+                                                        <label>Họ và tên
                                                             <abbr title="required" class="required">*</abbr>
                                                         </label>
                                                         <br>
                                                         <span class="wpcf7-form-control-wrap first-name">
-                                                            <input type="text" aria-invalid="false" aria-required="true" class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required input-text" size="40" value="" name="first-name">
+                                                            <input type="text" aria-invalid="false" aria-required="true" class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required input-text" size="40" value="" name="name">
                                                         </span>
                                                     </div>
                                                     <!-- .col -->
                                                     <div class="col-xs-12 col-md-6">
-                                                        <label>Last name
+                                                        <label>Số điện thoại
                                                             <abbr title="required" class="required">*</abbr>
                                                         </label>
                                                         <br>
                                                         <span class="wpcf7-form-control-wrap last-name">
-                                                            <input type="text" aria-invalid="false" aria-required="true" class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required input-text" size="40" value="" name="last-name">
+                                                            <input type="text" aria-invalid="false" aria-required="true" class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required input-text" size="40" value="" name="phone">
                                                         </span>
                                                     </div>
                                                     <!-- .col -->
                                                 </div>
                                                 <!-- .form-group -->
                                                 <div class="form-group">
-                                                    <label>Subject</label>
+                                                    <label>Email</label>
                                                     <br>
                                                     <span class="wpcf7-form-control-wrap subject">
-                                                        <input type="text" aria-invalid="false" class="wpcf7-form-control wpcf7-text input-text" size="40" value="" name="subject">
+                                                        <input type="email" aria-invalid="false" class="wpcf7-form-control wpcf7-text input-text" size="40" value="" name="email">
                                                     </span>
                                                 </div>
                                                 <!-- .form-group -->
                                                 <div class="form-group">
-                                                    <label>Your Message</label>
+                                                    <label>Tin nhắn của bạn</label>
                                                     <br>
                                                     <span class="wpcf7-form-control-wrap your-message">
-                                                        <textarea aria-invalid="false" class="wpcf7-form-control wpcf7-textarea" rows="10" cols="40" name="your-message"></textarea>
+                                                        <textarea aria-invalid="false" class="wpcf7-form-control wpcf7-textarea" rows="10" cols="40" name="message"></textarea>
                                                     </span>
                                                 </div>
                                                 <!-- .form-group-->
                                                 <div class="form-group clearfix">
                                                     <p>
-                                                        <input type="submit" value="Send Message" class="wpcf7-form-control wpcf7-submit" />
+                                                        <input type="submit" value="Gửi tin nhắn" class="wpcf7-form-control wpcf7-submit" />
                                                     </p>
                                                 </div>
                                                 <!-- .form-group-->
@@ -94,45 +94,45 @@
                                 <!-- .col -->
                                 <div class="col-md-3 store-info">
                                     <div class="text-block">
-                                        <h2 class="contact-page-title">Our Store</h2>
+                                        <h2 class="contact-page-title">Cửa hàng của chúng tôi</h2>
                                         <address>
                                             17 Princess Road
                                             <br> London, Greater London
                                             <br> NW1 8JR, UK
                                         </address>
-                                        <h3>Hours of Operation</h3>
+                                        <h3>Giờ mở cửa</h3>
                                         <ul class="list-unstyled operation-hours inner-right-md">
                                             <li class="clearfix">
-                                                <span class="day">Monday:</span>
+                                                <span class="day">Thứ Hai:</span>
                                                 <span class="pull-right flip hours">12-6 PM</span>
                                             </li>
                                             <li class="clearfix">
-                                                <span class="day">Tuesday:</span>
+                                                <span class="day">Thứ Ba:</span>
                                                 <span class="pull-right flip hours">12-6 PM</span>
                                             </li>
                                             <li class="clearfix">
-                                                <span class="day">Wednesday:</span>
+                                                <span class="day">Thứ Tư:</span>
                                                 <span class="pull-right flip hours">12-6 PM</span>
                                             </li>
                                             <li class="clearfix">
-                                                <span class="day">Thursday:</span>
+                                                <span class="day">Thứ Năm:</span>
                                                 <span class="pull-right flip hours">12-6 PM</span>
                                             </li>
                                             <li class="clearfix">
-                                                <span class="day">Friday:</span>
+                                                <span class="day">Thứ Sáu:</span>
                                                 <span class="pull-right flip hours">12-6 PM</span>
                                             </li>
                                             <li class="clearfix">
-                                                <span class="day">Saturday:</span>
+                                                <span class="day">Thứ Bảy:</span>
                                                 <span class="pull-right flip hours">12-6 PM</span>
                                             </li>
                                             <li class="clearfix">
-                                                <span class="day">Sunday</span>
-                                                <span class="pull-right flip hours">Closed</span>
+                                                <span class="day">Chủ Nhật</span>
+                                                <span class="pull-right flip hours">Đóng cửa</span>
                                             </li>
                                         </ul>
-                                        <h3>Careers</h3>
-                                        <p class="inner-right-md">If you’re interested in employment opportunities at Techmarket, please email us: <a href="mailto:contact@yourstore.com">contact@yourstore.com</a></p>
+                                        <h3>Cơ hội nghề nghiệp</h3>
+                                        <p class="inner-right-md">Nếu bạn quan tâm đến các cơ hội việc làm tại Techboys, vui lòng gửi email cho chúng tôi: <a href="techboyspoly@gmail.com">techboyspoly@gmail.com</a></p>
                                     </div>
                                     <!-- .text-block -->
                                 </div>
