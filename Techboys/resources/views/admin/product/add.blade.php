@@ -22,7 +22,8 @@
                         <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="">Dashboard</a></li>
-                                <li class="breadcrumb-item active" aria-current="page"><a href="{{route('admin.product.index')}}">Danh sách Sản Phẩm</a></li>
+                                <li class="breadcrumb-item active" aria-current="page"><a
+                                        href="{{ route('admin.product.index') }}">Danh sách Sản Phẩm</a></li>
 
                                 <li class="breadcrumb-item active" aria-current="page">Thêm Sản Phẩm</li>
                             </ol>
@@ -95,7 +96,7 @@
                                         <div class="col-md-6 mb-3">
                                             <label for="images" class="form-label">Ảnh Sản Phẩm</label>
                                             <input class="form-control" type="file" id="images" name="img"
-                                                accept="image/*" >
+                                                accept="image/*">
                                             <div id="image-preview-container" class="mt-3"
                                                 style="display: flex; gap: 10px; flex-wrap: wrap;"></div>
                                             @if ($errors->has('img'))
@@ -148,23 +149,21 @@
                                                     </div>
                                                     <div class="col-md-6 mb-3">
                                                         <label for="price" class="form-label">Giá bán</label>
-                                                        <input type="number" class="form-control" name="price[]"
-                                                            >
-                                                        @if ($errors->has('price'))
-                                                            <p class="text-danger small ">
-                                                                <i>{{ $errors->first('price') }}</i>
-                                                            </p>
-                                                        @endif
+                                                        <input type="number" class="form-control" name="price[]">
+                                                        @foreach (old('price', []) as $index => $value)
+                                                            @error("price.$index")
+                                                                <p class="text-danger small"><i>{{ $message }}</i></p>
+                                                            @enderror
+                                                        @endforeach
                                                     </div>
                                                     <div class="col-md-6 mb-3">
                                                         <label for="stock" class="form-label">Số lượng</label>
-                                                        <input type="number" class="form-control" name="stock[]"
-                                                            >
-                                                        @if ($errors->has('stock'))
-                                                            <p class="text-danger small ">
-                                                                <i>{{ $errors->first('stock') }}</i>
-                                                            </p>
-                                                        @endif
+                                                        <input type="number" class="form-control" name="stock[]">
+                                                        @foreach (old('stock', []) as $index => $value)
+                                                            @error("stock.$index")
+                                                                <p class="text-danger small"><i>{{ $message }}</i></p>
+                                                            @enderror
+                                                        @endforeach
                                                     </div>
                                                     <div class="col-md-12 text-end">
                                                         <button type="button"
@@ -246,39 +245,88 @@
                     reader.readAsDataURL(file);
                 });
             });
-        </script>
-        <script>
-            document.getElementById('add-variant').addEventListener('click', function() {
+            document.addEventListener('DOMContentLoaded', function() {
                 let variantContainer = document.getElementById('variant-container');
-                let newVariant = document.querySelector('.variant-row').cloneNode(true);
+                let addVariantButton = document.getElementById('add-variant');
+                let form = document.getElementById('product-form'); // Lấy form
 
-                newVariant.querySelectorAll('input, select').forEach(input => {
-                    input.value = '';
+                addVariantButton.addEventListener('click', function() {
+                    let firstVariant = document.querySelector('.variant-row');
+                    if (!firstVariant) return;
+
+                    let newVariant = firstVariant.cloneNode(true);
+
+                    newVariant.querySelectorAll('input, select').forEach(input => {
+                        input.value = '';
+                    });
+
+                    let removeButton = newVariant.querySelector('.remove-variant');
+                    if (removeButton) {
+                        removeButton.style.display = 'inline-block';
+                        removeButton.addEventListener('click', function() {
+                            newVariant.remove();
+                            updateRemoveButtons();
+                        });
+                    }
+
+                    variantContainer.appendChild(newVariant);
+                    updateRemoveButtons();
+                    updateValidation();
                 });
 
-                variantContainer.appendChild(newVariant);
+                function attachRemoveEvents() {
+                    document.querySelectorAll('.remove-variant').forEach(button => {
+                        button.style.display = 'inline-block';
+                        button.addEventListener('click', function() {
+                            this.closest('.variant-row').remove();
+                            updateRemoveButtons();
+                        });
+                    });
+                }
 
+                function updateRemoveButtons() {
+                    let variants = document.querySelectorAll('.variant-row');
+                    let removeButtons = document.querySelectorAll('.remove-variant');
+
+                    removeButtons.forEach(btn => {
+                        btn.style.display = variants.length > 1 ? 'inline-block' : 'none';
+                    });
+                }
+
+                function updateValidation() {
+                    document.querySelectorAll('.variant-row').forEach(variant => {
+                        let colorSelect = variant.querySelector('.color-select');
+                        let modelSelect = variant.querySelector('.model-select');
+
+                        colorSelect.addEventListener('change', checkDuplicate);
+                        modelSelect.addEventListener('change', checkDuplicate);
+                    });
+                }
+
+                function checkDuplicate() {
+                    let variants = document.querySelectorAll('.variant-row');
+                    let variantSet = new Set();
+
+                    for (let variant of variants) {
+                        let color = variant.querySelector('.color-select').value;
+                        let model = variant.querySelector('.model-select').value;
+                        let key = `${color}-${model}`;
+
+                        if (color && model && variantSet.has(key)) {
+                            alert('⚠️ Biến thể này đã tồn tại! Vui lòng chọn khác.');
+                            this.value = '';
+                            return false;
+                        }
+
+                        variantSet.add(key);
+                    }
+                    return true;
+                }
+
+
+                attachRemoveEvents();
                 updateRemoveButtons();
+                updateValidation();
             });
-
-            document.addEventListener('click', function(event) {
-                if (event.target.classList.contains('remove-variant')) {
-                    event.target.closest('.variant-row').remove();
-                    updateRemoveButtons();
-                }
-            });
-
-            function updateRemoveButtons() {
-                let variants = document.querySelectorAll('.variant-row');
-                let removeButtons = document.querySelectorAll('.remove-variant');
-
-                if (variants.length === 1) {
-                    removeButtons.forEach(btn => btn.style.display = 'none');
-                } else {
-                    removeButtons.forEach(btn => btn.style.display = 'inline-block');
-                }
-            }
-
-            updateRemoveButtons();
         </script>
     @endsection
