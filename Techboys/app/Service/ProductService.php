@@ -66,7 +66,6 @@ class ProductService{
                         'product_id' => $product->id,
                         'color_id' => $colorId,
                         'model_id' => $request->model_id[$key],
-
                         'price' => $request->price[$key],
                         'stock' => $request->stock[$key] ?? 0,
                     ]);
