@@ -4,14 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Techboys | Đăng nhập </title>
+    <title>Techboys | Đăng ký </title>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ url('') }}/admin/assets/css/bootstrap.css">
     <link rel="stylesheet" href="{{ url('') }}/admin/assets/vendors/bootstrap-icons/bootstrap-icons.css">
     <link rel="stylesheet" href="{{ url('') }}/admin/assets/css/app.css">
     <link rel="stylesheet" href="{{ url('') }}/admin/assets/css/pages/auth.css">
     <style>
-        .alert-success {
+          .alert-success {
             color: #155724;
             background-color: #d4edda;
             border-color: #c3e6cb;
@@ -21,7 +21,7 @@
             border-radius: 4px;
         }
         .alert-danger {
-            color: #721c24;
+            color: #000000;
             background-color: #f8d7da;
             border-color: #f5c6cb;
             padding: 15px;
@@ -39,8 +39,7 @@
             <div class="col-lg-5 col-12">
                 <div id="auth-left">
                     <div class="auth-logo">
-                    </div>
-                    <h1 class="auth-title">Đăng nhập</h1>
+                    </div> 
                     @if (session('success'))
                         <div class="alert alert-success">
                             {{ session('success') }}
@@ -50,26 +49,21 @@
                             {{ session('error') }}
                         </div>
                     @endif
-
+                    <h1 class="auth-title">Quên mật khẩu</h1>
+                  
                     {{-- <p class="auth-subtitle mb-5">Log in with your data that you entered during registration.</p>
                     --}}
 
-                    <form action="{{ route('login.auth') }}" method="POST">
+                    <form action="{{ route('admin.check_forgot_password') }}" method="POST">
                         @csrf
                         <div class="form-group position-relative has-icon-left mb-4">
-                            <input type="text" class="form-control form-control-xl" name="username"
-                                placeholder="nhập tài khoản">
+                            <input type="email" class="form-control form-control-xl" name="email"
+                                placeholder="nhập email" value="{{old('email')  }}">
                             <div class="form-control-icon">
-                                <i class="bi bi-person"></i>
+                                <i class="bi bi-envelope"></i>
                             </div>
                         </div>
-                        <div class="form-group position-relative has-icon-left mb-4">
-                            <input type="password" class="form-control form-control-xl" name="password"
-                                placeholder="Nhập mật khẩu">
-                            <div class="form-control-icon">
-                                <i class="bi bi-shield-lock"></i>
-                            </div>
-                        </div>
+                     
                         <div class="form-check form-check-lg d-flex align-items-end">
                             @if (session('error'))
                                 <p class="text-danger small ">
@@ -77,22 +71,9 @@
                                     </i>
                                 </p>
                             @endif
-                            {{-- <input class="form-check-input me-2" type="checkbox" value="" id="flexCheckDefault">
-                            --}}
-                            {{-- <label class="form-check-label text-gray-600" for="flexCheckDefault">
-                                Keep me logged in
-                            </label> --}}
                         </div>
-                        <button class="btn btn-primary btn-block btn-lg shadow-lg mt-5">Đăng nhập</button>
-                    </form>
-                    <div class="text-center mt-5 text-lg fs-4">
-                        <p class="text-gray-600">Bạn chưa có tài khoản? <a href="{{ route('admin.log.create') }}"
-                                class="font-bold">Đăng ký</a>.</p>
-                    </div>
-                    <div class="text-center mt-5 text-lg fs-4">
-                        <p class="text-gray-600"><a href="{{ route('admin.forgot-password') }}"
-                                class="font-bold">Quên mật khẩu</a>.</p>
-                    </div>
+                        <button class="btn btn-primary btn-block btn-lg shadow-lg mt-5">gửi</button>
+                    </form>                
                 </div>
             </div>
             <div class="col-lg-7 d-none d-lg-block">

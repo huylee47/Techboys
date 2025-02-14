@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ForgotPassword;
 use App\Mail\verifyAccount;
 use Illuminate\Auth\Notifications\VerifyEmail;
 use Mail;
 use App\Models\User;
+use App\Models\UserResetToken;
 use App\Service\UserService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -160,5 +162,64 @@ class UserController extends Controller
         User::where('email', $email)->whereNull('email_verified_at')->firstOrFail();
         User::where('email', $email)->update(['email_verified_at' => date('Y-m-d')]);
         return redirect()->route('login')->with('success', 'xác minh thành công');
+    }
+
+    public function forgot_password()
+    {
+        return view('admin.log.forgot');
+    }
+    public function check_forgot_password(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|string|email|max:255|exists:users,email',
+        ], [
+            'email.required' => 'Vui lòng nhập email.',
+            'email.max' => 'Email không được vượt quá 255 ký tự.',
+            'email.email' => 'Email không đúng định dạng.',
+            'email.exists' => 'Email không tồn tại.'
+        ]);
+        $user = User::where('email', $request->email)->first();
+
+        $token = \Str::random(20);
+        $tokenData = [
+            'email' => $request->email,
+            'token' => $token
+        ];
+        if (UserResetToken::create($tokenData)) {
+            Mail::to($request->email)->send(new ForgotPassword($user, $token));
+            return redirect()->back()->with('success', 'Vui lòng kiểm tra gmail của bạn');
+        }
+        return redirect()->back()->with('no', 'Xảy ra lỗi vui long kiểm tra lại');
+    }
+
+    public function reset_password($token, Request $request) {
+        $tokenRecord = UserResetToken::where('token', $token)->firstOrFail();
+        return view('admin.log.reset_password', ['token' => $token]);
+    }
+    
+
+    public function check_reset_password($token, Request $request)
+    {
+        $request->validate([
+            'password' => 'required|string|min:8',
+            'password-confirm' => 'required|string|same:password'
+        ], [
+            'password.required' => 'Vui lòng nhập mật khẩu.',
+            'password.min' => 'Mật khẩu phải có ít nhất 8 ký tự.',
+            'password-confirm.required' => 'Vui lòng nhập mật khẩu xác nhận.',
+            'password-confirm.same' => 'Mật khẩu xác nhận phải trùng với mật khẩu đã nhập.'
+        ]);
+
+        $tokenRecord = UserResetToken::where('token', $token)->firstOrFail();
+        $user = $tokenRecord->user;
+        $user->update([
+            'password' => Hash::make($request->password),
+        ]);
+
+        if ($user) {
+            return redirect()->route('login')->with('success', 'Đổi mật khẩu thành công');
+        }
+
+        return redirect()->back()->with('no', 'Đổi mật khẩu không thành công');
     }
 }
