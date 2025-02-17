@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreignId('category_id')->nullable();
             $table->integer('purchases')->nullable();
             $table->string('name')->unique();
-            $table->string('img');
+            $table->string('img')->nullable();
             $table->string('slug');
             $table->decimal('rate_average',10,2);
             $table->longText('description');
