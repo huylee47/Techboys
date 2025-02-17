@@ -31,6 +31,16 @@
                 </div>
             </div>
             <section class="section">
+                @if (isset($errors) && count($errors))
+     
+            There were {{count($errors->all())}} Error(s)
+                        <ul>
+                    @foreach($errors->all() as $error)
+                        <li>{{ $error }} </li>
+                    @endforeach
+                </ul>
+                
+        @endif
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
@@ -56,6 +66,11 @@
                                                     @endif
                                                 @endforeach
                                             </select>
+                                            @if ($errors->has('category_id'))
+                                            <p class="text-danger small ">
+                                                <i>{{ $errors->first('category_id') }}</i>
+                                            </p>
+                                        @endif
                                         </div>
 
                                         <div class="col-md-6 mb-3">
@@ -70,6 +85,11 @@
                                                     @endif
                                                 @endforeach
                                             </select>
+                                            @if ($errors->has('brand_id'))
+                                            <p class="text-danger small ">
+                                                <i>{{ $errors->first('brand_id') }}</i>
+                                            </p>
+                                        @endif
                                         </div>
 
                                         <div class="col-md-6 mb-3">
@@ -79,12 +99,19 @@
                                         </div>
                                         <div class="col-md-6 mb-3">
                                             <label for="images" class="form-label">Ảnh Sản Phẩm</label>
-                                            <input class="form-control" type="file" id="images" name="img"
-                                                accept="image/*" value="{{ $product->img }}">
-
-                                            <div id="image-preview-container" class="mt-3"
-                                                style="display: flex; gap: 10px; flex-wrap: wrap;"></div>
+                                            <input class="form-control" type="file" id="images" name="img" accept="image/*">
+                                            <div id="current-image-container" class="mt-2" style="display: {{ $product->img ? 'block' : 'none' }};">
+                                                <img src="{{ asset('admin/assets/images/product/' . $product->img) }}" alt="Product Image" style="max-width: 200px;">
+                                            </div>
+                                            <div id="image-preview-container" class="mt-3" style="display: flex; gap: 10px; flex-wrap: wrap;"></div>
+                                            @if ($errors->has('img'))
+                                            <p class="text-danger small ">
+                                                <i>{{ $errors->first('img') }}</i>
+                                            </p>
+                                        @endif
                                         </div>
+                                        
+                                        
 
                                         <div class="mb-3">
                                             <label for="description" class="form-label">Mô tả</label>
@@ -280,24 +307,29 @@
             });
         </script>
         <script>
-            document.getElementById('images').addEventListener('change', function(event) {
-                let previewContainer = document.getElementById('image-preview-container');
-                previewContainer.innerHTML = '';
+document.getElementById('images').addEventListener('change', function(event) {
+    let previewContainer = document.getElementById('image-preview-container');
+    let currentImageContainer = document.getElementById('current-image-container');
 
-                Array.from(event.target.files).forEach(file => {
-                    let reader = new FileReader();
-                    reader.onload = function(e) {
-                        let img = document.createElement('img');
-                        img.src = e.target.result;
-                        img.style.width = '100px';
-                        img.style.height = '100px';
-                        img.style.objectFit = 'cover';
-                        img.style.borderRadius = '5px';
-                        previewContainer.appendChild(img);
-                    };
-                    reader.readAsDataURL(file);
-                });
-            });
+    currentImageContainer.style.display = 'none';
+
+    previewContainer.innerHTML = '';
+
+    Array.from(event.target.files).forEach(file => {
+        let reader = new FileReader();
+        reader.onload = function(e) {
+            let img = document.createElement('img');
+            img.src = e.target.result;
+            img.style.width = '100px';
+            img.style.height = '100px';
+            img.style.objectFit = 'cover';
+            img.style.borderRadius = '5px';
+            previewContainer.appendChild(img);
+        };
+        reader.readAsDataURL(file);
+    });
+});
+
             document.addEventListener('DOMContentLoaded', function() {
                 let variantContainer = document.getElementById('variant-container');
                 let addVariantButton = document.getElementById('add-variant');

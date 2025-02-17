@@ -87,10 +87,11 @@ class ProductService{
     public function updateProduct($request, $id)
     {
         $product = Product::where('id',$id)->first();
-        $imageName = $product->img;
         if ($request->hasFile('img')) {
             $imageName = time() . '_' . uniqid() . '.' . $request->img->getClientOriginalExtension();
             $request->img->move(public_path('admin/assets/images/product'), $imageName);
+        }else{
+            $imageName = $product->img;
         }
 
         $image = Images::firstOrNew(['image' => $product->img]);
@@ -138,7 +139,7 @@ class ProductService{
             ProductVariant::whereIn('id', $variantsToDelete)->delete();
         }
     
-        return redirect()->route('admin.product.index')->with('success', 'Cập nhật sản phẩm thành công');
+        return redirect()->route('admin.product.index')->with('success', 'Sửa sản phẩm thành công');
     }
     public function destroyProduct($request) {
         $ids = is_array($request->id) ? $request->id : [$request->id];
