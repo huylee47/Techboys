@@ -45,7 +45,7 @@
                                                         </label>
                                                         <br>
                                                         <span class="wpcf7-form-control-wrap first-name">
-                                                            <input type="text" aria-invalid="false" aria-required="true" class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required input-text" size="40" value="" name="name">
+                                                            <input type="text" aria-invalid="false" aria-required="true" class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required input-text" size="40" value="" id="name" name="name">
                                                         </span>
                                                     </div>
                                                     <!-- .col -->
@@ -55,7 +55,7 @@
                                                         </label>
                                                         <br>
                                                         <span class="wpcf7-form-control-wrap last-name">
-                                                            <input type="text" aria-invalid="false" aria-required="true" class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required input-text" size="40" value="" name="phone">
+                                                            <input type="text" aria-invalid="false" aria-required="true" class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required input-text" size="40" value="" id="phone" name="phone">
                                                         </span>
                                                     </div>
                                                     <!-- .col -->
@@ -65,7 +65,7 @@
                                                     <label>Email</label>
                                                     <br>
                                                     <span class="wpcf7-form-control-wrap subject">
-                                                        <input type="email" aria-invalid="false" class="wpcf7-form-control wpcf7-text input-text" size="40" value="" name="email">
+                                                        <input type="email" aria-invalid="false" class="wpcf7-form-control wpcf7-text input-text" size="40" value=""id="email"  name="email">
                                                     </span>
                                                 </div>
                                                 <!-- .form-group -->
@@ -73,17 +73,74 @@
                                                     <label>Tin nhắn của bạn</label>
                                                     <br>
                                                     <span class="wpcf7-form-control-wrap your-message">
-                                                        <textarea aria-invalid="false" class="wpcf7-form-control wpcf7-textarea" rows="10" cols="40" name="message"></textarea>
+                                                        <textarea aria-invalid="false" class="wpcf7-form-control wpcf7-textarea" rows="10" cols="40" id="message" name="message"></textarea>
                                                     </span>
                                                 </div>
                                                 <!-- .form-group-->
                                                 <div class="form-group clearfix">
                                                     <p>
-                                                        <input type="submit" value="Gửi tin nhắn" class="wpcf7-form-control wpcf7-submit" />
+                                                        <input type="submit" value="Gửi phản hồi" class="wpcf7-form-control wpcf7-submit" id="submitBtn" onclick="disableSubmit()" />
                                                     </p>
+                                                    <div id="error-message" style="color: red; margin-top: 10px;"></div>
                                                 </div>
                                                 <!-- .form-group-->
                                                 <div class="wpcf7-response-output wpcf7-display-none"></div>
+                                                <script>
+                                                    function disableSubmit() {
+                                                        let btn = document.getElementById("submitBtn");
+                                                        btn.style.pointerEvents = "none";
+                                                        btn.style.opacity = "0.5";
+                                                        btn.value = "Đang gửi phản hồi...";
+
+                                                        setTimeout(function () {
+                                                            btn.style.pointerEvents = "auto";
+                                                            btn.style.opacity = "1";
+                                                            btn.value = "Gửi phản hồi";
+                                                        }, 5000);
+                                                    }
+                                                </script>
+                                                <script>
+                                                    document.querySelector('.wpcf7-form').addEventListener('submit', function(e) {
+                                                        e.preventDefault();  // Ngăn việc submit form mặc định
+                                                        let isValid = true;
+                                                        let errorMessage = '';
+                                                
+                                                        let name = document.querySelector('input[name="name"]').value;
+                                                        if (!name) {
+                                                            isValid = false;
+                                                            errorMessage += 'Tên không được để trống.<br>';
+                                                        }
+                                                
+                                                        let phone = document.querySelector('input[name="phone"]').value;
+                                                        if (!phone) {
+                                                            isValid = false;
+                                                            errorMessage += 'Số điện thoại không được để trống.<br>';
+                                                        }
+                                                
+                                                        let email = document.querySelector('input[name="email"]').value;
+                                                        if (!email || !validateEmail(email)) {
+                                                            isValid = false;
+                                                            errorMessage += 'Email không hợp lệ.<br>';
+                                                        }
+                                                
+                                                        let message = document.querySelector('textarea[name="message"]').value;
+                                                        if (!message) {
+                                                            isValid = false;
+                                                            errorMessage += 'Tin nhắn không được để trống.<br>';
+                                                        }
+                                                
+                                                        if (isValid) {
+                                                            this.submit();
+                                                        } else {
+                                                            document.getElementById('error-message').innerHTML = errorMessage;
+                                                        }
+                                                    });
+                                                
+                                                    function validateEmail(email) {
+                                                        const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                                                        return regex.test(email);
+                                                    }
+                                                </script>
                                             </form>
                                             <!-- .wpcf7-form -->
                                         </div>
