@@ -42,8 +42,8 @@
                                 <div class="media">
                                     <i class="feature-icon d-flex mr-3 tm tm-free-delivery"></i>
                                     <div class="media-body feature-text">
-                                        <h5 class="mt-0">Free Delivery</h5>
-                                        <span>from $50</span>
+                                        <h5 class="mt-0">Miễn phí vận chuyển</h5>
+                                        <span>tối đa 300km</span>
                                     </div>
                                 </div>
                             </div>
@@ -52,8 +52,8 @@
                                 <div class="media">
                                     <i class="feature-icon d-flex mr-3 tm tm-feedback"></i>
                                     <div class="media-body feature-text">
-                                        <h5 class="mt-0">99% Customer</h5>
-                                        <span>Feedbacks</span>
+                                        <h5 class="mt-0">99% Khách hàng</h5>
+                                        <span>Hài lòng</span>
                                     </div>
                                 </div>
                                 <!-- .media -->
@@ -63,8 +63,8 @@
                                 <div class="media">
                                     <i class="feature-icon d-flex mr-3 tm tm-free-return"></i>
                                     <div class="media-body feature-text">
-                                        <h5 class="mt-0">365 Days</h5>
-                                        <span>for free return</span>
+                                        <h5 class="mt-0">30 ngày</h5>
+                                        <span>Đổi trả hàng miễn phí</span>
                                     </div>
                                 </div>
                                 <!-- .media -->
@@ -74,8 +74,8 @@
                                 <div class="media">
                                     <i class="feature-icon d-flex mr-3 tm tm-safe-payments"></i>
                                     <div class="media-body feature-text">
-                                        <h5 class="mt-0">Payment</h5>
-                                        <span>Secure System</span>
+                                        <h5 class="mt-0">Hệ thống thanh toán</h5>
+                                        <span>An toàn , bảo mật</span>
                                     </div>
                                 </div>
                                 <!-- .media -->
@@ -85,8 +85,8 @@
                                 <div class="media">
                                     <i class="feature-icon d-flex mr-3 tm tm-best-brands"></i>
                                     <div class="media-body feature-text">
-                                        <h5 class="mt-0">Only Best</h5>
-                                        <span>Brands</span>
+                                        <h5 class="mt-0">Sản phẩm</h5>
+                                        <span>Giá tốt nhất</span>
                                     </div>
                                 </div>
                                 <!-- .media -->
