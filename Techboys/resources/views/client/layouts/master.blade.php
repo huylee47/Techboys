@@ -4,19 +4,19 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
         <title>@yield('title')</title>
-        <link rel="stylesheet" type="text/css" href="home/assets/css/bootstrap.min.css" media="all" />
-        <link rel="stylesheet" type="text/css" href="home/assets/css/font-awesome.min.css" media="all" />
-        <link rel="stylesheet" type="text/css" href="home/assets/css/bootstrap-grid.min.css" media="all" />
-        <link rel="stylesheet" type="text/css" href="home/assets/css/bootstrap-reboot.min.css" media="all" />
-        <link rel="stylesheet" type="text/css" href="home/assets/css/font-techmarket.css" media="all" />
-        <link rel="stylesheet" type="text/css" href="home/assets/css/slick.css" media="all" />
-        <link rel="stylesheet" type="text/css" href="home/assets/css/techmarket-font-awesome.css" media="all" />
-        <link rel="stylesheet" type="text/css" href="home/assets/css/slick-style.css" media="all" />
-        <link rel="stylesheet" type="text/css" href="home/assets/css/animate.min.css" media="all" />
-        <link rel="stylesheet" type="text/css" href="home/assets/css/style.css" media="all" />
-        <link rel="stylesheet" type="text/css" href="home/assets/css/colors/blue.css" media="all" />
+        <link rel="stylesheet" type="text/css" href="{{ url('') }}/home/assets/css/bootstrap.min.css" media="all" />
+        <link rel="stylesheet" type="text/css" href="{{ url('') }}/home/assets/css/font-awesome.min.css" media="all" />
+        <link rel="stylesheet" type="text/css" href="{{ url('') }}/home/assets/css/bootstrap-grid.min.css" media="all" />
+        <link rel="stylesheet" type="text/css" href="{{ url('') }}/home/assets/css/bootstrap-reboot.min.css" media="all" />
+        <link rel="stylesheet" type="text/css" href="{{ url('') }}/home/assets/css/font-techmarket.css" media="all" />
+        <link rel="stylesheet" type="text/css" href="{{ url('') }}/home/assets/css/slick.css" media="all" />
+        <link rel="stylesheet" type="text/css" href="{{ url('') }}/home/assets/css/techmarket-font-awesome.css" media="all" />
+        <link rel="stylesheet" type="text/css" href="{{ url('') }}/home/assets/css/slick-style.css" media="all" />
+        <link rel="stylesheet" type="text/css" href="{{ url('') }}/home/assets/css/animate.min.css" media="all" />
+        <link rel="stylesheet" type="text/css" href="{{ url('') }}/home/assets/css/style.css" media="all" />
+        <link rel="stylesheet" type="text/css" href="{{ url('') }}/home/assets/css/colors/blue.css" media="all" />
         <link href="https://fonts.googleapis.com/css?family=Rubik:300,400,500,900" rel="stylesheet">
-        <link rel="shortcut icon" href="home/assets/images/fav-icon.png">
+        <link rel="shortcut icon" href="{{ url('') }}/home/assets/images/fav-icon.png">
         @yield('styles')
     </head>
     <body class="page-template-default error-page">
@@ -1579,20 +1579,20 @@
             <!-- .site-footer -->
         </div>
         
-        <script type="text/javascript" src="home/assets/js/jquery.min.js"></script>
-        <script type="text/javascript" src="home/assets/js/tether.min.js"></script>
-        <script type="text/javascript" src="home/assets/js/bootstrap.min.js"></script>
-        <script type="text/javascript" src="home/assets/js/jquery-migrate.min.js"></script>
-        <script type="text/javascript" src="home/assets/js/hidemaxlistitem.min.js"></script>
-        <script type="text/javascript" src="home/assets/js/jquery-ui.min.js"></script>
-        <script type="text/javascript" src="home/assets/js/hidemaxlistitem.min.js"></script>
-        <script type="text/javascript" src="home/assets/js/jquery.easing.min.js"></script>
-        <script type="text/javascript" src="home/assets/js/scrollup.min.js"></script>
-        <script type="text/javascript" src="home/assets/js/jquery.waypoints.min.js"></script>
-        <script type="text/javascript" src="home/assets/js/waypoints-sticky.min.js"></script>
-        <script type="text/javascript" src="home/assets/js/pace.min.js"></script>
-        <script type="text/javascript" src="home/assets/js/slick.min.js"></script>
-        <script type="text/javascript" src="home/assets/js/scripts.js"></script>
+        <script type="text/javascript" src="{{ url('') }}/home/assets/js/jquery.min.js"></script>
+        <script type="text/javascript" src="{{ url('') }}/home/assets/js/tether.min.js"></script>
+        <script type="text/javascript" src="{{ url('') }}/home/assets/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="{{ url('') }}/home/assets/js/jquery-migrate.min.js"></script>
+        <script type="text/javascript" src="{{ url('') }}/home/assets/js/hidemaxlistitem.min.js"></script>
+        <script type="text/javascript" src="{{ url('') }}/home/assets/js/jquery-ui.min.js"></script>
+        <script type="text/javascript" src="{{ url('') }}/home/assets/js/hidemaxlistitem.min.js"></script>
+        <script type="text/javascript" src="{{ url('') }}/home/assets/js/jquery.easing.min.js"></script>
+        <script type="text/javascript" src="{{ url('') }}/home/assets/js/scrollup.min.js"></script>
+        <script type="text/javascript" src="{{ url('') }}/home/assets/js/jquery.waypoints.min.js"></script>
+        <script type="text/javascript" src="{{ url('') }}/home/assets/js/waypoints-sticky.min.js"></script>
+        <script type="text/javascript" src="{{ url('') }}/home/assets/js/pace.min.js"></script>
+        <script type="text/javascript" src="{{ url('') }}/home/assets/js/slick.min.js"></script>
+        <script type="text/javascript" src="{{ url('') }}/home/assets/js/scripts.js"></script>
         
     </body>
 </html>
