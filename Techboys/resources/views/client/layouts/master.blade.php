@@ -91,31 +91,13 @@
                             <nav id="primary-navigation" class="primary-navigation" aria-label="Primary Navigation" data-nav="flex-menu">
                                 <ul id="menu-primary-menu" class="nav yamm">
                                     <li class="sale-clr yamm-fw menu-item animate-dropdown">
-                                        <a title="Super deals" href="product-category.html">Super deals</a>
-                                    </li>
-                                    <li class="menu-item menu-item-has-children animate-dropdown dropdown">
-                                        <a title="Mother`s Day" data-toggle="dropdown" class="dropdown-toggle" aria-haspopup="true" href="#">Mother`s Day <span class="caret"></span></a>
-                                        <ul role="menu" class=" dropdown-menu">
-                                            <li class="menu-item animate-dropdown">
-                                                <a title="Wishlist" href="wishlist.html">Wishlist</a>
-                                            </li>
-                                            <li class="menu-item animate-dropdown">
-                                                <a title="Add to compare" href="compare.html">Add to compare</a>
-                                            </li>
-                                            <li class="menu-item animate-dropdown">
-                                                <a title="About Us" href="about.html">About Us</a>
-                                            </li>
-                                            <li class="menu-item animate-dropdown">
-                                                <a title="Track Order" href="track-your-order.html">Track Order</a>
-                                            </li>
-                                        </ul>
-                                        <!-- .dropdown-menu -->
+                                        <a title="Super deals" href="product-category.html">Sản phẩm hot</a>
                                     </li>
                                     <li class="menu-item animate-dropdown">
-                                        <a title="Logitech Sale" href="product-category.html">Logitech Sale</a>
+                                        <a title="about us" href="product-category.html">Về chúng tôi</a>
                                     </li>
                                     <li class="menu-item animate-dropdown">
-                                        <a title="Headphones Sale" href="product-category.html">Headphones Sale</a>
+                                        <a title="Headphones Sale" href="product-category.html">Liên hệ</a>
                                     </li>
                                     <li class="techmarket-flex-more-menu-item dropdown">
                                         <a title="..." href="#" data-toggle="dropdown" class="dropdown-toggle">...</a>
@@ -130,32 +112,11 @@
                                 <ul id="menu-secondary-menu" class="nav">
                                     <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2802 animate-dropdown">
                                         <a title="Track Your Order" href="track-your-order.html">
-                                            <i class="tm tm-order-tracking"></i>Track Your Order</a>
-                                    </li>
-                                    <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-487 animate-dropdown dropdown">
-                                        <a title="Dollar (US)" data-toggle="dropdown" class="dropdown-toggle" aria-haspopup="true" href="#">
-                                            <i class="tm tm-dollar"></i>Dollar (US)
-                                            <span class="caret"></span>
-                                        </a>
-                                        <ul role="menu" class=" dropdown-menu">
-                                            <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-489 animate-dropdown">
-                                                <a title="AUD" href="#">AUD</a>
-                                            </li>
-                                            <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-490 animate-dropdown">
-                                                <a title="INR" href="#">INR</a>
-                                            </li>
-                                            <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-491 animate-dropdown">
-                                                <a title="AED" href="#">AED</a>
-                                            </li>
-                                            <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-492 animate-dropdown">
-                                                <a title="SGD" href="#">SGD</a>
-                                            </li>
-                                        </ul>
-                                        <!-- .dropdown-menu -->
+                                            <i class="tm tm-order-tracking"></i>Theo dõi đơn hàng</a>
                                     </li>
                                     <li class="menu-item">
                                         <a title="My Account" href="login-and-register.html">
-                                            <i class="tm tm-login-register"></i>Register or Sign in</a>
+                                            <i class="tm tm-login-register"></i>Đăng nhập</a>
                                     </li>
                                     <li class="techmarket-flex-more-menu-item dropdown">
                                         <a title="..." href="#" data-toggle="dropdown" class="dropdown-toggle">...</a>
@@ -642,33 +603,15 @@
                         </div>
                         <!-- .departments-menu -->
                         <form class="navbar-search" method="get" action="home-v1.html">
-                            <label class="sr-only screen-reader-text" for="search">Search for:</label>
+                            <label class="sr-only screen-reader-text" for="search">Tìm kiếm:</label>
                             <div class="input-group">
-                                <input type="text" id="search" class="form-control search-field product-search-field" dir="ltr" value="" name="s" placeholder="Search for products" />
+                                <input type="text" id="search" class="form-control search-field product-search-field" dir="ltr" value="" name="s" placeholder="Nhập sản phẩm muốn tìm" />
                                 <div class="input-group-addon search-categories popover-header">
                                     <select name='product_cat' id='product_cat' class='postform resizeselect'>
-                                        <option value='0' selected='selected'>All Categories</option>
-                                        <option class="level-0" value="television">Televisions</option>
-                                        <option class="level-0" value="home-theater-audio">Home Theater &amp; Audio</option>
-                                        <option class="level-0" value="headphones">Headphones</option>
-                                        <option class="level-0" value="digital-cameras">Digital Cameras</option>
-                                        <option class="level-0" value="cells-tablets">Cells &amp; Tablets</option>
-                                        <option class="level-0" value="smartwatches">Smartwatches</option>
-                                        <option class="level-0" value="games-consoles">Games &amp; Consoles</option>
-                                        <option class="level-0" value="printer">Printer</option>
-                                        <option class="level-0" value="tv-video">TV &amp; Video</option>
-                                        <option class="level-0" value="home-entertainment">Home Entertainment</option>
-                                        <option class="level-0" value="tvs">TVs</option>
-                                        <option class="level-0" value="speakers">Speakers</option>
-                                        <option class="level-0" value="computers-laptops">Computers &amp; Laptops</option>
-                                        <option class="level-0" value="laptops">Laptops</option>
-                                        <option class="level-0" value="ultrabooks">Ultrabooks</option>
-                                        <option class="level-0" value="notebooks">Notebooks</option>
-                                        <option class="level-0" value="desktop-pcs">Desktop PCs</option>
-                                        <option class="level-0" value="mac-computers">Mac Computers</option>
-                                        <option class="level-0" value="all-in-one-pc">All in One PC</option>
-                                        <option class="level-0" value="audio-music">Audio &amp; Music</option>
-                                        <option class="level-0" value="pc-components">PC Components</option>
+                                        <option value='0' selected='selected'>Tất cả danh mục</option>
+                                        @foreach ($categories as $category)
+                                        <option class="level-0" value="television">{{$category->name}}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                                 <!-- .input-group-addon -->
@@ -676,7 +619,7 @@
                                     <input type="hidden" id="search-param" name="post_type" value="product" />
                                     <button type="submit" class="btn btn-primary">
                                         <i class="fa fa-search"></i>
-                                        <span class="search-btn">Search</span>
+                                        <span class="search-btn">Tìm kiếm</span>
                                     </button>
                                 </div>
                                 <!-- .input-group-btn -->
@@ -708,7 +651,7 @@
                                     <i class="tm tm-shopping-bag"></i>
                                     <span class="count">2</span>
                                     <span class="amount">
-                                        <span class="price-label">Your Cart</span>&#036;136.99</span>
+                                        <span class="price-label">Giỏ hàng</span>0 VNĐ</span>
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-mini-cart">
                                     <li>
@@ -1346,16 +1289,16 @@
                                     <div class="media-body">
                                         <div class="clearfix">
                                             <div class="newsletter-header">
-                                                <h5 class="newsletter-title">Sign up to Newsletter</h5>
-                                                <span class="newsletter-marketing-text">...and receive
-                                                    <strong>$20 coupon for first shopping</strong>
+                                                <h5 class="newsletter-title">Đăng ký </h5>
+                                                <span class="newsletter-marketing-text">... và nhận ngay
+                                                    <strong>Phiếu giảm giá 100k cho lần đầu mua hàng</strong>
                                                 </span>
                                             </div>
                                             <!-- .newsletter-header -->
                                             <div class="newsletter-body">
                                                 <form class="newsletter-form">
                                                     <input type="text" placeholder="Enter your email address">
-                                                    <button class="button" type="button">Sign up</button>
+                                                    <button class="button" type="button">Đăng ký ngay</button>
                                                 </form>
                                             </div>
                                             <!-- .newsletter body -->
@@ -1446,18 +1389,16 @@
                                                 <i class="tm tm-call-us-footer"></i>
                                             </span>
                                             <div class="media-body">
-                                                <span class="call-us-title">Got Questions ? Call us 24/7!</span>
-                                                <span class="call-us-text">(800) 8001-8588, (0600) 874 548</span>
-                                                <address class="footer-contact-address">17 Princess Road, London, Greater London NW1 8JR, UK</address>
-                                                <a href="#" class="footer-address-map-link">
-                                                    <i class="tm tm-map-marker"></i>Find us on map</a>
+                                                <span class="call-us-title">Liên hệ với chúng tôi</span>
+                                                <span class="call-us-text">{{$config->hotline}}</span>
+                                                <address class="footer-contact-address">{{$config->address}}</address>
                                             </div>
                                             <!-- .media-body -->
                                         </div>
                                         <!-- .media -->
                                     </div>
                                     <!-- .footer-contact-info -->
-                                    <div class="footer-payment-info">
+                                    {{-- <div class="footer-payment-info">
                                         <div class="media">
                                             <span class="media-left icon media-middle">
                                                 <i class="tm tm-safe-payments"></i>
@@ -1497,7 +1438,7 @@
                                             <!-- .media-body -->
                                         </div>
                                         <!-- .media -->
-                                    </div>
+                                    </div> --}}
                                     <!-- .footer-payment-info -->
                                 </div>
                                 <!-- .contact-payment-wrap -->
@@ -1507,7 +1448,7 @@
                                 <div class="columns">
                                     <aside class="widget clearfix">
                                         <div class="body">
-                                            <h4 class="widget-title">Find it Fast</h4>
+                                            <h4 class="widget-title">Các danh mục</h4>
                                             <div class="menu-footer-menu-1-container">
                                                 <ul id="menu-footer-menu-1" class="menu">
                                                     <li class="menu-item">
@@ -1573,8 +1514,11 @@
                                 <div class="columns">
                                     <aside class="widget clearfix">
                                         <div class="body">
-                                            <h4 class="widget-title">Customer Care</h4>
-                                            <div class="menu-footer-menu-3-container">
+                                            <h4 class="widget-title">                                                
+                                                <a href="#" class="footer-address-map-link">
+                                                <i class="tm tm-map-marker"> </i> Địa chỉ</a></h4>
+                                                {!!$config->map!!}
+                                            {{-- <div class="menu-footer-menu-3-container">
                                                 <ul id="menu-footer-menu-3" class="menu">
                                                     <li class="menu-item">
                                                         <a href="login-and-register.html">My Account</a>
@@ -1598,7 +1542,7 @@
                                                         <a href="faq.html">FAQs</a>
                                                     </li>
                                                 </ul>
-                                            </div>
+                                            </div> --}}
                                             <!-- .menu-footer-menu-3-container -->
                                         </div>
                                         <!-- .body -->
@@ -1614,10 +1558,10 @@
                     <!-- .footer-widgets-block -->
                     <div class="site-info">
                         <div class="col-full">
-                            <div class="copyright">Copyright &copy; 2017 <a href="home-v1.html">Techmarket</a> Theme. All rights reserved.</div>
+                            <div class="copyright">Copyright &copy; 2025 <a href="home-v1.html">Techboys</a> </div>
                             <!-- .copyright -->
-                            <div class="credit">Made with
-                                <i class="fa fa-heart"></i> by bcube.</div>
+                            <div class="credit">Thiết kế 
+                                <i class="fa fa-heart"></i> bởi WDK18.4 FPOLY.</div>
                             <!-- .credit -->
                         </div>
                         <!-- .col-full -->
