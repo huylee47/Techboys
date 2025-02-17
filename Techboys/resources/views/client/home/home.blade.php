@@ -405,7 +405,7 @@
                                                         @foreach ($newProduct as $np)
                                                         <div class="product">
                                                             <a href="single-product-fullwidth.html" class="woocommerce-LoopProduct-link">
-                                                                <img src="home/assets/images/products/3.jpg" width="224" height="197" class="wp-post-image" alt="">
+                                                                <img src="{{ url('') }}/admin/assets/images/product/{{$np->img}}" width="100%" class=""  style="max-width: 200px; max-height: 200px; width: auto; height: auto; display: block; margin: auto;"   alt="">
                                                                 <span class="price">
                                                                     <ins>
                                                                         <span class="amount"> </span>
