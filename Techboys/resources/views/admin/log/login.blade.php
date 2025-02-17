@@ -85,14 +85,8 @@
                         </div>
                         <button class="btn btn-primary btn-block btn-lg shadow-lg mt-5">Đăng nhập</button>
                     </form>
-                    <div class="text-center mt-5 text-lg fs-4">
-                        <p class="text-gray-600">Bạn chưa có tài khoản? <a href="{{ route('admin.log.create') }}"
-                                class="font-bold">Đăng ký</a>.</p>
-                    </div>
-                    <div class="text-center mt-5 text-lg fs-4">
-                        <p class="text-gray-600"><a href="{{ route('admin.forgot-password') }}"
-                                class="font-bold">Quên mật khẩu</a>.</p>
-                    </div>
+                  
+                 
                 </div>
             </div>
             <div class="col-lg-7 d-none d-lg-block">

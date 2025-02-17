@@ -15,9 +15,9 @@
         <link rel="stylesheet" type="text/css" href="home/assets/css/animate.min.css" media="all" />
         <link rel="stylesheet" type="text/css" href="home/assets/css/style.css" media="all" />
         <link rel="stylesheet" type="text/css" href="home/assets/css/colors/blue.css" media="all" />
-        
         <link href="https://fonts.googleapis.com/css?family=Rubik:300,400,500,900" rel="stylesheet">
         <link rel="shortcut icon" href="home/assets/images/fav-icon.png">
+        @yield('styles')
     </head>
     <body class="page-template-default error-page">
         <div id="page" class="hfeed site">
@@ -115,9 +115,15 @@
                                             <i class="tm tm-order-tracking"></i>Theo dõi đơn hàng</a>
                                     </li>
                                     <li class="menu-item">
-                                        <a title="My Account" href="login-and-register.html">
-                                            <i class="tm tm-login-register"></i>Đăng nhập</a>
+                                        @guest
+                                            <a title="My Account" href="{{ route('login.client') }}">
+                                                <i class="tm tm-login-register"></i>Đăng nhập</a>
+                                        @else
+                                            <a title="My Account" href="">
+                                                <i class="tm tm-login-register"></i>{{ Auth::user()->name }}</a>
+                                        @endguest
                                     </li>
+                                    
                                     <li class="techmarket-flex-more-menu-item dropdown">
                                         <a title="..." href="#" data-toggle="dropdown" class="dropdown-toggle">...</a>
                                         <ul class="overflow-items dropdown-menu"></ul>

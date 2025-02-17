@@ -44,7 +44,7 @@
                   
                     {{-- <p class="auth-subtitle mb-5">Log in with your data that you entered during registration.</p>
                     --}}
-                    <form action="{{ route('admin.check_reset_password', ['token' => $token]) }}" method="POST">                        @csrf
+                    <form action="{{ route('client.check_reset_password', ['token' => $token]) }}" method="POST">                        @csrf
 
                         <div class="form-group position-relative has-icon-left mb-4">
                             <input type="password" class="form-control form-control-xl" name="password"
