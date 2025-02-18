@@ -46,7 +46,7 @@ class ProductController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Product $product)
+    public function show(Request $request)
     {
         //
     }
@@ -101,5 +101,9 @@ class ProductController extends Controller
         }
 
         return redirect()->route('admin.product.imageIndex', $projectId)->with('success', 'Ảnh đã được xóa thành công.');
+    }
+    // CLIENT 
+    public function productDetails($request){
+        return $this->productService->getProductBySlug($request);
     }
 }
