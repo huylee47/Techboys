@@ -5,20 +5,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
     <title>Techmarket HTML</title>
-    <link rel="stylesheet" type="text/css" href="home/assets/css/bootstrap.min.css" media="all" />
-    <link rel="stylesheet" type="text/css" href="home/assets/css/font-awesome.min.css" media="all" />
-    <link rel="stylesheet" type="text/css" href="home/assets/css/bootstrap-grid.min.css" media="all" />
-    <link rel="stylesheet" type="text/css" href="home/assets/css/bootstrap-reboot.min.css" media="all" />
-    <link rel="stylesheet" type="text/css" href="home/assets/css/font-techmarket.css" media="all" />
-    <link rel="stylesheet" type="text/css" href="home/assets/css/slick.css" media="all" />
-    <link rel="stylesheet" type="text/css" href="home/assets/css/techmarket-font-awesome.css" media="all" />
-    <link rel="stylesheet" type="text/css" href="home/assets/css/slick-style.css" media="all" />
-    <link rel="stylesheet" type="text/css" href="home/assets/css/animate.min.css" media="all" />
-    <link rel="stylesheet" type="text/css" href="home/assets/css/style.css" media="all" />
-    <link rel="stylesheet" type="text/css" href="home/assets/css/colors/blue.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="{{ url('') }}/home/assets/css/bootstrap.min.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="{{ url('') }}/home/assets/css/font-awesome.min.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="{{ url('') }}/home/assets/css/bootstrap-grid.min.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="{{ url('') }}/home/assets/css/bootstrap-reboot.min.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="{{ url('') }}/home/assets/css/font-techmarket.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="{{ url('') }}/home/assets/css/slick.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="{{ url('') }}/home/assets/css/techmarket-font-awesome.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="{{ url('') }}/home/assets/css/slick-style.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="{{ url('') }}/home/assets/css/animate.min.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="{{ url('') }}/home/assets/css/style.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="{{ url('') }}/home/assets/css/colors/blue.css" media="all" />
 
     <link href="https://fonts.googleapis.com/css?family=Rubik:300,400,500,900" rel="stylesheet">
-    <link rel="shortcut icon" href="home/assets/images/fav-icon.png">
+    <link rel="shortcut icon" href="{{ url('') }}/home/assets/images/fav-icon.png">
 </head>
 
 <body class="woocommerce-active single-product full-width normal">
@@ -426,7 +426,7 @@
                                             <div class="bg-yamm-content bg-yamm-content-bottom bg-yamm-content-right">
                                                 <div class="kc-col-container">
                                                     <div class="kc_single_image">
-                                                        <img src="home/assets/images/megamenu.jpg" class=""
+                                                        <img src="{{ url('') }}/home/assets/images/megamenu.jpg" class=""
                                                             alt="" />
                                                     </div>
                                                     <!-- .kc_single_image -->
@@ -498,7 +498,7 @@
                                             <div class="bg-yamm-content bg-yamm-content-bottom bg-yamm-content-right">
                                                 <div class="kc-col-container">
                                                     <div class="kc_single_image">
-                                                        <img src="home/assets/images/megamenu-1.jpg" class=""
+                                                        <img src="{{ url('') }}/home/assets/images/megamenu-1.jpg" class=""
                                                             alt="" />
                                                     </div>
                                                     <!-- .kc_single_image -->
@@ -571,7 +571,7 @@
                                             <div class="bg-yamm-content bg-yamm-content-bottom bg-yamm-content-right">
                                                 <div class="kc-col-container">
                                                     <div class="kc_single_image">
-                                                        <img src="home/assets/images/megamenu.jpg" class=""
+                                                        <img src="{{ url('') }}/home/assets/images/megamenu.jpg" class=""
                                                             alt="" />
                                                     </div>
                                                     <!-- .kc_single_image -->
@@ -643,7 +643,7 @@
                                             <div class="bg-yamm-content bg-yamm-content-bottom bg-yamm-content-right">
                                                 <div class="kc-col-container">
                                                     <div class="kc_single_image">
-                                                        <img src="home/assets/images/megamenu-1.jpg" class=""
+                                                        <img src="{{ url('') }}/home/assets/images/megamenu-1.jpg" class=""
                                                             alt="" />
                                                     </div>
                                                     <!-- .kc_single_image -->
@@ -716,7 +716,7 @@
                                             <div class="bg-yamm-content bg-yamm-content-bottom bg-yamm-content-right">
                                                 <div class="kc-col-container">
                                                     <div class="kc_single_image">
-                                                        <img src="home/assets/images/megamenu.jpg" class=""
+                                                        <img src="{{ url('') }}/home/assets/images/megamenu.jpg" class=""
                                                             alt="" />
                                                     </div>
                                                     <!-- .kc_single_image -->
@@ -788,7 +788,7 @@
                                             <div class="bg-yamm-content bg-yamm-content-bottom bg-yamm-content-right">
                                                 <div class="kc-col-container">
                                                     <div class="kc_single_image">
-                                                        <img src="home/assets/images/megamenu-1.jpg" class=""
+                                                        <img src="{{ url('') }}/home/assets/images/megamenu-1.jpg" class=""
                                                             alt="" />
                                                     </div>
                                                     <!-- .kc_single_image -->
@@ -860,7 +860,7 @@
                                             <div class="bg-yamm-content bg-yamm-content-bottom bg-yamm-content-right">
                                                 <div class="kc-col-container">
                                                     <div class="kc_single_image">
-                                                        <img src="home/assets/images/megamenu.jpg" class=""
+                                                        <img src="{{ url('') }}/home/assets/images/megamenu.jpg" class=""
                                                             alt="" />
                                                     </div>
                                                     <!-- .kc_single_image -->
@@ -1013,7 +1013,7 @@
                                                     <a href="#" class="remove" aria-label="Remove this item"
                                                         data-product_id="65" data-product_sku="">×</a>
                                                     <a href="single-product-sidebar.html">
-                                                        <img src="home/assets/images/products/mini-cart1.jpg"
+                                                        <img src="{{ url('') }}/home/assets/images/products/mini-cart1.jpg"
                                                             class="attachment-shop_thumbnail size-shop_thumbnail wp-post-image"
                                                             alt="">XONE Wireless Controller&nbsp;
                                                     </a>
@@ -1027,7 +1027,7 @@
                                                     <a href="#" class="remove" aria-label="Remove this item"
                                                         data-product_id="27" data-product_sku="">×</a>
                                                     <a href="single-product-sidebar.html">
-                                                        <img src="home/assets/images/products/mini-cart2.jpg"
+                                                        <img src="{{ url('') }}/home/assets/images/products/mini-cart2.jpg"
                                                             class="attachment-shop_thumbnail size-shop_thumbnail wp-post-image"
                                                             alt="">Gear Virtual Reality 3D with Bluetooth
                                                         Glasses&nbsp;
@@ -1181,7 +1181,7 @@
                                                             class="bg-yamm-content bg-yamm-content-bottom bg-yamm-content-right">
                                                             <div class="kc-col-container">
                                                                 <div class="kc_single_image">
-                                                                    <img src="home/assets/images/megamenu.jpg"
+                                                                    <img src="{{ url('') }}/home/assets/images/megamenu.jpg"
                                                                         class="" alt="" />
                                                                 </div>
                                                                 <!-- .kc_single_image -->
@@ -1261,7 +1261,7 @@
                                                             class="bg-yamm-content bg-yamm-content-bottom bg-yamm-content-right">
                                                             <div class="kc-col-container">
                                                                 <div class="kc_single_image">
-                                                                    <img src="home/assets/images/megamenu-1.jpg"
+                                                                    <img src="{{ url('') }}/home/assets/images/megamenu-1.jpg"
                                                                         class="" alt="" />
                                                                 </div>
                                                                 <!-- .kc_single_image -->
@@ -1343,7 +1343,7 @@
                                                             class="bg-yamm-content bg-yamm-content-bottom bg-yamm-content-right">
                                                             <div class="kc-col-container">
                                                                 <div class="kc_single_image">
-                                                                    <img src="home/assets/images/megamenu.jpg"
+                                                                    <img src="{{ url('') }}/home/assets/images/megamenu.jpg"
                                                                         class="" alt="" />
                                                                 </div>
                                                                 <!-- .kc_single_image -->
@@ -1423,7 +1423,7 @@
                                                             class="bg-yamm-content bg-yamm-content-bottom bg-yamm-content-right">
                                                             <div class="kc-col-container">
                                                                 <div class="kc_single_image">
-                                                                    <img src="home/assets/images/megamenu-1.jpg"
+                                                                    <img src="{{ url('') }}/home/assets/images/megamenu-1.jpg"
                                                                         class="" alt="" />
                                                                 </div>
                                                                 <!-- .kc_single_image -->
@@ -1506,7 +1506,7 @@
                                                             class="bg-yamm-content bg-yamm-content-bottom bg-yamm-content-right">
                                                             <div class="kc-col-container">
                                                                 <div class="kc_single_image">
-                                                                    <img src="home/assets/images/megamenu.jpg"
+                                                                    <img src="{{ url('') }}/home/assets/images/megamenu.jpg"
                                                                         class="" alt="" />
                                                                 </div>
                                                                 <!-- .kc_single_image -->
@@ -1586,7 +1586,7 @@
                                                             class="bg-yamm-content bg-yamm-content-bottom bg-yamm-content-right">
                                                             <div class="kc-col-container">
                                                                 <div class="kc_single_image">
-                                                                    <img src="home/assets/images/megamenu-1.jpg"
+                                                                    <img src="{{ url('') }}/home/assets/images/megamenu-1.jpg"
                                                                         class="" alt="" />
                                                                 </div>
                                                                 <!-- .kc_single_image -->
@@ -1669,7 +1669,7 @@
                                                             class="bg-yamm-content bg-yamm-content-bottom bg-yamm-content-right">
                                                             <div class="kc-col-container">
                                                                 <div class="kc_single_image">
-                                                                    <img src="home/assets/images/megamenu.jpg"
+                                                                    <img src="{{ url('') }}/home/assets/images/megamenu.jpg"
                                                                         class="" alt="" />
                                                                 </div>
                                                                 <!-- .kc_single_image -->
@@ -1815,51 +1815,51 @@
                                                     <a href="#"
                                                         class="woocommerce-product-gallery__trigger">🔍</a>
                                                     <figure class="woocommerce-product-gallery__wrapper ">
-                                                        <div data-thumb="home/assets/images/products/sm-card-1.jpg"
+                                                        <div data-thumb="{{ url('') }}/home/assets/images/products/sm-card-1.jpg"
                                                             class="woocommerce-product-gallery__image">
-                                                            <a href="home/assets/images/products/big-card.jpg"
+                                                            <a href="{{ url('') }}/home/assets/images/products/big-card.jpg"
                                                                 tabindex="0">
                                                                 <img width="600" height="600"
-                                                                    src="home/assets/images/products/big-card.jpg"
+                                                                    src="{{ url('') }}/home/assets/images/products/big-card.jpg"
                                                                     class="attachment-shop_single size-shop_single wp-post-image"
                                                                     alt="">
                                                             </a>
                                                         </div>
-                                                        <div data-thumb="home/assets/images/products/sm-card-3.jpg"
+                                                        <div data-thumb="{{ url('') }}/home/assets/images/products/sm-card-3.jpg"
                                                             class="woocommerce-product-gallery__image">
-                                                            <a href="home/assets/images/products/big-card-2.jpg"
+                                                            <a href="{{ url('') }}/home/assets/images/products/big-card-2.jpg"
                                                                 tabindex="-1">
                                                                 <img width="600" height="600"
-                                                                    src="home/assets/images/products/big-card-2.jpg"
+                                                                    src="{{ url('') }}/home/assets/images/products/big-card-2.jpg"
                                                                     class="attachment-shop_single size-shop_single"
                                                                     alt="">
                                                             </a>
                                                         </div>
-                                                        <div data-thumb="home/assets/images/products/sm-card-2.jpg"
+                                                        <div data-thumb="{{ url('') }}/home/assets/images/products/sm-card-2.jpg"
                                                             class="woocommerce-product-gallery__image">
-                                                            <a href="home/assets/images/products/big-card-1.jpg"
+                                                            <a href="{{ url('') }}/home/assets/images/products/big-card-1.jpg"
                                                                 tabindex="-1">
                                                                 <img width="600" height="600"
-                                                                    src="home/assets/images/products/big-card-1.jpg"
+                                                                    src="{{ url('') }}/home/assets/images/products/big-card-1.jpg"
                                                                     class="attachment-shop_single size-shop_single"
                                                                     alt="">
                                                             </a>
                                                         </div>
-                                                        <div data-thumb="home/assets/images/products/deals-sm-5.jpg"
+                                                        <div data-thumb="{{ url('') }}/home/assets/images/products/deals-sm-5.jpg"
                                                             class="woocommerce-product-gallery__image">
-                                                            <a href="home/assets/images/products/big-4.jpg"
+                                                            <a href="{{ url('') }}/home/assets/images/products/big-4.jpg"
                                                                 tabindex="-1">
                                                                 <img width="600" height="600"
-                                                                    src="home/assets/images/products/big-4.jpg"
+                                                                    src="{{ url('') }}/home/assets/images/products/big-4.jpg"
                                                                     class="attachment-shop_single size-shop_single"
                                                                     alt=""> </a>
                                                         </div>
-                                                        <div data-thumb="home/assets/images/products/sm-card-2.jpg"
+                                                        <div data-thumb="{{ url('') }}/home/assets/images/products/sm-card-2.jpg"
                                                             class="woocommerce-product-gallery__image">
-                                                            <a href="home/assets/images/products/big-card-2.jpg"
+                                                            <a href="{{ url('') }}/home/assets/images/products/big-card-2.jpg"
                                                                 tabindex="-1">
                                                                 <img width="600" height="600"
-                                                                    src="home/assets/images/products/big-card-1.jpg"
+                                                                    src="{{ url('') }}/home/assets/images/products/big-card-1.jpg"
                                                                     class="attachment-shop_single size-shop_single"
                                                                     alt="">
                                                             </a>
@@ -1874,38 +1874,38 @@
                                                 data-wrap=".techmarket-single-product-gallery-thumbnails__wrapper"
                                                 data-slick="{&quot;infinite&quot;:false,&quot;slidesToShow&quot;:4,&quot;slidesToScroll&quot;:1,&quot;dots&quot;:false,&quot;arrows&quot;:true,&quot;vertical&quot;:true,&quot;verticalSwiping&quot;:true,&quot;focusOnSelect&quot;:true,&quot;touchMove&quot;:true,&quot;prevArrow&quot;:&quot;&lt;a href=\&quot;#\&quot;&gt;&lt;i class=\&quot;tm tm-arrow-up\&quot;&gt;&lt;\/i&gt;&lt;\/a&gt;&quot;,&quot;nextArrow&quot;:&quot;&lt;a href=\&quot;#\&quot;&gt;&lt;i class=\&quot;tm tm-arrow-down\&quot;&gt;&lt;\/i&gt;&lt;\/a&gt;&quot;,&quot;asNavFor&quot;:&quot;#techmarket-single-product-gallery .woocommerce-product-gallery__wrapper&quot;,&quot;responsive&quot;:[{&quot;breakpoint&quot;:765,&quot;settings&quot;:{&quot;vertical&quot;:false,&quot;horizontal&quot;:true,&quot;verticalSwiping&quot;:false,&quot;slidesToShow&quot;:4}}]}">
                                                 <figure class="techmarket-single-product-gallery-thumbnails__wrapper">
-                                                    <figure data-thumb="home/assets/images/products/sm-card-1.jpg"
+                                                    <figure data-thumb="{{ url('') }}/home/assets/images/products/sm-card-1.jpg"
                                                         class="techmarket-wc-product-gallery__image">
                                                         <img width="180" height="180"
-                                                            src="home/assets/images/products/sm-card-1.jpg"
+                                                            src="{{ url('') }}/home/assets/images/products/sm-card-1.jpg"
                                                             class="attachment-shop_thumbnail size-shop_thumbnail wp-post-image"
                                                             alt="">
                                                     </figure>
-                                                    <figure data-thumb="home/assets/images/products/sm-card-3.jpg"
+                                                    <figure data-thumb="{{ url('') }}/home/assets/images/products/sm-card-3.jpg"
                                                         class="techmarket-wc-product-gallery__image">
                                                         <img width="180" height="180"
-                                                            src="home/assets/images/products/sm-card-3.jpg"
+                                                            src="{{ url('') }}/home/assets/images/products/sm-card-3.jpg"
                                                             class="attachment-shop_thumbnail size-shop_thumbnail"
                                                             alt="">
                                                     </figure>
-                                                    <figure data-thumb="home/assets/images/products/sm-card-2.jpg"
+                                                    <figure data-thumb="{{ url('') }}/home/assets/images/products/sm-card-2.jpg"
                                                         class="techmarket-wc-product-gallery__image">
                                                         <img width="180" height="180"
-                                                            src="home/assets/images/products/sm-card-2.jpg"
+                                                            src="{{ url('') }}/home/assets/images/products/sm-card-2.jpg"
                                                             class="attachment-shop_thumbnail size-shop_thumbnail"
                                                             alt="">
                                                     </figure>
-                                                    <figure data-thumb="home/assets/images/products/big-4.jpg"
+                                                    <figure data-thumb="{{ url('') }}/home/assets/images/products/big-4.jpg"
                                                         class="techmarket-wc-product-gallery__image">
                                                         <img width="180" height="180"
-                                                            src="home/assets/images/products/big-4.jpg"
+                                                            src="{{ url('') }}/home/assets/images/products/big-4.jpg"
                                                             class="attachment-shop_thumbnail size-shop_thumbnail"
                                                             alt="">
                                                     </figure>
-                                                    <figure data-thumb="home/assets/images/products/sm-card-2.jpg"
+                                                    <figure data-thumb="{{ url('') }}/home/assets/images/products/sm-card-2.jpg"
                                                         class="techmarket-wc-product-gallery__image">
                                                         <img width="180" height="180"
-                                                            src="home/assets/images/products/sm-card-2.jpg"
+                                                            src="{{ url('') }}/home/assets/images/products/sm-card-2.jpg"
                                                             class="attachment-shop_thumbnail size-shop_thumbnail"
                                                             alt="">
                                                     </figure>
@@ -1927,7 +1927,7 @@
                                         <div class="single-product-meta">
                                             <div class="brand">
                                                 <a href="#">
-                                                    <img alt="galaxy" src="home/assets/images/brands/5.png">
+                                                    <img alt="galaxy" src="{{ url('') }}/home/assets/images/brands/5.png">
                                                 </a>
                                             </div>
                                             <div class="cat-and-sku">
@@ -2030,7 +2030,7 @@
                                                 </div>
                                                 <a href="single-product-fullwidth.html"
                                                     class="woocommerce-LoopProduct-link">
-                                                    <img src="home/assets/images/products/5.jpg" width="224"
+                                                    <img src="{{ url('') }}/home/assets/images/products/5.jpg" width="224"
                                                         height="197" class="wp-post-image" alt="">
                                                     <span class="price">
                                                         <ins>
@@ -2044,7 +2044,7 @@
                                                 </a>
                                                 <div class="hover-area">
                                                     <a class="button add_to_cart_button" href="cart.html"
-                                                        rel="nofollow">Thêm vào giỏ hàng</a>
+                                                        rel="nofollow">Add to cart</a>
                                                     <a class="add-to-compare-link" href="compare.html">Add to
                                                         compare</a>
                                                 </div>
@@ -2057,7 +2057,7 @@
                                                 </div>
                                                 <a href="single-product-fullwidth.html"
                                                     class="woocommerce-LoopProduct-link">
-                                                    <img src="home/assets/images/products/16.jpg" width="224"
+                                                    <img src="{{ url('') }}/home/assets/images/products/16.jpg" width="224"
                                                         height="197" class="wp-post-image" alt="">
                                                     <span class="price">
                                                         <ins>
@@ -2070,7 +2070,7 @@
                                                 </a>
                                                 <div class="hover-area">
                                                     <a class="button add_to_cart_button" href="cart.html"
-                                                        rel="nofollow">Thêm vào giỏ hàng</a>
+                                                        rel="nofollow">Add to cart</a>
                                                     <a class="add-to-compare-link" href="compare.html">Add to
                                                         compare</a>
                                                 </div>
@@ -2083,7 +2083,7 @@
                                                 </div>
                                                 <a href="single-product-fullwidth.html"
                                                     class="woocommerce-LoopProduct-link">
-                                                    <img src="home/assets/images/products/8.jpg" width="224"
+                                                    <img src="{{ url('') }}/home/assets/images/products/8.jpg" width="224"
                                                         height="197" class="wp-post-image" alt="">
                                                     <span class="price">
                                                         <ins>
@@ -2097,7 +2097,7 @@
                                                 </a>
                                                 <div class="hover-area">
                                                     <a class="button add_to_cart_button" href="cart.html"
-                                                        rel="nofollow">Thêm vào giỏ hàng</a>
+                                                        rel="nofollow">Add to cart</a>
                                                     <a class="add-to-compare-link" href="compare.html">Add to
                                                         compare</a>
                                                 </div>
@@ -2110,7 +2110,7 @@
                                                 </div>
                                                 <a href="single-product-fullwidth.html"
                                                     class="woocommerce-LoopProduct-link">
-                                                    <img src="home/assets/images/products/11.jpg" width="224"
+                                                    <img src="{{ url('') }}/home/assets/images/products/11.jpg" width="224"
                                                         height="197" class="wp-post-image" alt="">
                                                     <span class="price">
                                                         <ins>
@@ -2124,7 +2124,7 @@
                                                 </a>
                                                 <div class="hover-area">
                                                     <a class="button add_to_cart_button" href="cart.html"
-                                                        rel="nofollow">Thêm vào giỏ hàng</a>
+                                                        rel="nofollow">Add to cart</a>
                                                     <a class="add-to-compare-link" href="compare.html">Add to
                                                         compare</a>
                                                 </div>
@@ -2137,7 +2137,7 @@
                                                 </div>
                                                 <a href="single-product-fullwidth.html"
                                                     class="woocommerce-LoopProduct-link">
-                                                    <img src="home/assets/images/products/10.jpg" width="224"
+                                                    <img src="{{ url('') }}/home/assets/images/products/10.jpg" width="224"
                                                         height="197" class="wp-post-image" alt="">
                                                     <span class="price">
                                                         <ins>
@@ -2151,7 +2151,7 @@
                                                 </a>
                                                 <div class="hover-area">
                                                     <a class="button add_to_cart_button" href="cart.html"
-                                                        rel="nofollow">Thêm vào giỏ hàng</a>
+                                                        rel="nofollow">Add to cart</a>
                                                     <a class="add-to-compare-link" href="compare.html">Add to
                                                         compare</a>
                                                 </div>
@@ -2164,7 +2164,7 @@
                                                 </div>
                                                 <a href="single-product-fullwidth.html"
                                                     class="woocommerce-LoopProduct-link">
-                                                    <img src="home/assets/images/products/15.jpg" width="224"
+                                                    <img src="{{ url('') }}/home/assets/images/products/15.jpg" width="224"
                                                         height="197" class="wp-post-image" alt="">
                                                     <span class="price">
                                                         <ins>
@@ -2177,7 +2177,7 @@
                                                 </a>
                                                 <div class="hover-area">
                                                     <a class="button add_to_cart_button" href="cart.html"
-                                                        rel="nofollow">Thêm vào giỏ hàng</a>
+                                                        rel="nofollow">Add to cart</a>
                                                     <a class="add-to-compare-link" href="compare.html">Add to
                                                         compare</a>
                                                 </div>
@@ -2190,7 +2190,7 @@
                                                 </div>
                                                 <a href="single-product-fullwidth.html"
                                                     class="woocommerce-LoopProduct-link">
-                                                    <img src="home/assets/images/products/6.jpg" width="224"
+                                                    <img src="{{ url('') }}/home/assets/images/products/6.jpg" width="224"
                                                         height="197" class="wp-post-image" alt="">
                                                     <span class="price">
                                                         <ins>
@@ -2204,7 +2204,7 @@
                                                 </a>
                                                 <div class="hover-area">
                                                     <a class="button add_to_cart_button" href="cart.html"
-                                                        rel="nofollow">Thêm vào giỏ hàng</a>
+                                                        rel="nofollow">Add to cart</a>
                                                     <a class="add-to-compare-link" href="compare.html">Add to
                                                         compare</a>
                                                 </div>
@@ -2222,7 +2222,7 @@
                                                             <span
                                                                 class="woocommerce-Price-currencySymbol">$</span>150.04</span>
                                                     </span>
-                                                    <img src="home/assets/images/products/14.jpg" width="224"
+                                                    <img src="{{ url('') }}/home/assets/images/products/14.jpg" width="224"
                                                         height="197" class="wp-post-image" alt="">
                                                     <span class="price">
                                                         <ins>
@@ -2238,7 +2238,7 @@
                                                 </a>
                                                 <div class="hover-area">
                                                     <a class="button add_to_cart_button" href="cart.html"
-                                                        rel="nofollow">Thêm vào giỏ hàng</a>
+                                                        rel="nofollow">Add to cart</a>
                                                     <a class="add-to-compare-link" href="compare.html">Add to
                                                         compare</a>
                                                 </div>
@@ -2256,7 +2256,7 @@
                                                             <span
                                                                 class="woocommerce-Price-currencySymbol">$</span>150.04</span>
                                                     </span>
-                                                    <img src="home/assets/images/products/2.jpg" width="224"
+                                                    <img src="{{ url('') }}/home/assets/images/products/2.jpg" width="224"
                                                         height="197" class="wp-post-image" alt="">
                                                     <span class="price">
                                                         <ins>
@@ -2273,7 +2273,7 @@
                                                 </a>
                                                 <div class="hover-area">
                                                     <a class="button add_to_cart_button" href="cart.html"
-                                                        rel="nofollow">Thêm vào giỏ hàng</a>
+                                                        rel="nofollow">Add to cart</a>
                                                     <a class="add-to-compare-link" href="compare.html">Add to
                                                         compare</a>
                                                 </div>
@@ -2291,7 +2291,7 @@
                                                             <span
                                                                 class="woocommerce-Price-currencySymbol">$</span>150.04</span>
                                                     </span>
-                                                    <img src="home/assets/images/products/7.jpg" width="224"
+                                                    <img src="{{ url('') }}/home/assets/images/products/7.jpg" width="224"
                                                         height="197" class="wp-post-image" alt="">
                                                     <span class="price">
                                                         <ins>
@@ -2308,7 +2308,7 @@
                                                 </a>
                                                 <div class="hover-area">
                                                     <a class="button add_to_cart_button" href="cart.html"
-                                                        rel="nofollow">Thêm vào giỏ hàng</a>
+                                                        rel="nofollow">Add to cart</a>
                                                     <a class="add-to-compare-link" href="compare.html">Add to
                                                         compare</a>
                                                 </div>
@@ -2321,7 +2321,7 @@
                                                 </div>
                                                 <a href="single-product-fullwidth.html"
                                                     class="woocommerce-LoopProduct-link">
-                                                    <img src="home/assets/images/products/4.jpg" width="224"
+                                                    <img src="{{ url('') }}/home/assets/images/products/4.jpg" width="224"
                                                         height="197" class="wp-post-image" alt="">
                                                     <span class="price">
                                                         <ins>
@@ -2335,7 +2335,7 @@
                                                 </a>
                                                 <div class="hover-area">
                                                     <a class="button add_to_cart_button" href="cart.html"
-                                                        rel="nofollow">Thêm vào giỏ hàng</a>
+                                                        rel="nofollow">Add to cart</a>
                                                     <a class="add-to-compare-link" href="compare.html">Add to
                                                         compare</a>
                                                 </div>
@@ -2348,7 +2348,7 @@
                                                 </div>
                                                 <a href="single-product-fullwidth.html"
                                                     class="woocommerce-LoopProduct-link">
-                                                    <img src="home/assets/images/products/3.jpg" width="224"
+                                                    <img src="{{ url('') }}/home/assets/images/products/3.jpg" width="224"
                                                         height="197" class="wp-post-image" alt="">
                                                     <span class="price">
                                                         <ins>
@@ -2362,7 +2362,7 @@
                                                 </a>
                                                 <div class="hover-area">
                                                     <a class="button add_to_cart_button" href="cart.html"
-                                                        rel="nofollow">Thêm vào giỏ hàng</a>
+                                                        rel="nofollow">Add to cart</a>
                                                     <a class="add-to-compare-link" href="compare.html">Add to
                                                         compare</a>
                                                 </div>
@@ -2375,7 +2375,7 @@
                                                 </div>
                                                 <a href="single-product-fullwidth.html"
                                                     class="woocommerce-LoopProduct-link">
-                                                    <img src="home/assets/images/products/13.jpg" width="224"
+                                                    <img src="{{ url('') }}/home/assets/images/products/13.jpg" width="224"
                                                         height="197" class="wp-post-image" alt="">
                                                     <span class="price">
                                                         <ins>
@@ -2389,7 +2389,7 @@
                                                 </a>
                                                 <div class="hover-area">
                                                     <a class="button add_to_cart_button" href="cart.html"
-                                                        rel="nofollow">Thêm vào giỏ hàng</a>
+                                                        rel="nofollow">Add to cart</a>
                                                     <a class="add-to-compare-link" href="compare.html">Add to
                                                         compare</a>
                                                 </div>
@@ -2402,7 +2402,7 @@
                                                 </div>
                                                 <a href="single-product-fullwidth.html"
                                                     class="woocommerce-LoopProduct-link">
-                                                    <img src="home/assets/images/products/9.jpg" width="224"
+                                                    <img src="{{ url('') }}/home/assets/images/products/9.jpg" width="224"
                                                         height="197" class="wp-post-image" alt="">
                                                     <span class="price">
                                                         <ins>
@@ -2416,7 +2416,7 @@
                                                 </a>
                                                 <div class="hover-area">
                                                     <a class="button add_to_cart_button" href="cart.html"
-                                                        rel="nofollow">Thêm vào giỏ hàng</a>
+                                                        rel="nofollow">Add to cart</a>
                                                     <a class="add-to-compare-link" href="compare.html">Add to
                                                         compare</a>
                                                 </div>
@@ -2429,7 +2429,7 @@
                                                 </div>
                                                 <a href="single-product-fullwidth.html"
                                                     class="woocommerce-LoopProduct-link">
-                                                    <img src="home/assets/images/products/1.jpg" width="224"
+                                                    <img src="{{ url('') }}/home/assets/images/products/1.jpg" width="224"
                                                         height="197" class="wp-post-image" alt="">
                                                     <span class="price">
                                                         <ins>
@@ -2443,7 +2443,7 @@
                                                 </a>
                                                 <div class="hover-area">
                                                     <a class="button add_to_cart_button" href="cart.html"
-                                                        rel="nofollow">Thêm vào giỏ hàng</a>
+                                                        rel="nofollow">Add to cart</a>
                                                     <a class="add-to-compare-link" href="compare.html">Add to
                                                         compare</a>
                                                 </div>
@@ -2456,7 +2456,7 @@
                                                 </div>
                                                 <a href="single-product-fullwidth.html"
                                                     class="woocommerce-LoopProduct-link">
-                                                    <img src="home/assets/images/products/12.jpg" width="224"
+                                                    <img src="{{ url('') }}/home/assets/images/products/12.jpg" width="224"
                                                         height="197" class="wp-post-image" alt="">
                                                     <span class="price">
                                                         <ins>
@@ -2470,7 +2470,7 @@
                                                 </a>
                                                 <div class="hover-area">
                                                     <a class="button add_to_cart_button" href="cart.html"
-                                                        rel="nofollow">Thêm vào giỏ hàng</a>
+                                                        rel="nofollow">Add to cart</a>
                                                     <a class="add-to-compare-link" href="compare.html">Add to
                                                         compare</a>
                                                 </div>
@@ -2516,7 +2516,7 @@
                                                                     <img width="224" height="197"
                                                                         alt=""
                                                                         class="attachment-shop_catalog size-shop_catalog wp-post-image"
-                                                                        src="home/assets/images/products/8.jpg">
+                                                                        src="{{ url('') }}/home/assets/images/products/8.jpg">
                                                                     <span class="price">
                                                                         <del>
                                                                             <span
@@ -2551,7 +2551,7 @@
                                                                     <img width="224" height="197"
                                                                         alt=""
                                                                         class="attachment-shop_catalog size-shop_catalog wp-post-image"
-                                                                        src="home/assets/images/products/16.jpg">
+                                                                        src="{{ url('') }}/home/assets/images/products/16.jpg">
                                                                     <span class="price">
                                                                         <del>
                                                                             <span
@@ -2586,7 +2586,7 @@
                                                                     <img width="224" height="197"
                                                                         alt=""
                                                                         class="attachment-shop_catalog size-shop_catalog wp-post-image"
-                                                                        src="home/assets/images/products/14.jpg">
+                                                                        src="{{ url('') }}/home/assets/images/products/14.jpg">
                                                                     <span class="price">
                                                                         <del>
                                                                             <span
@@ -2621,7 +2621,7 @@
                                                                     <img width="224" height="197"
                                                                         alt=""
                                                                         class="attachment-shop_catalog size-shop_catalog wp-post-image"
-                                                                        src="home/assets/images/products/4.jpg">
+                                                                        src="{{ url('') }}/home/assets/images/products/4.jpg">
                                                                     <span class="price">
                                                                         <del>
                                                                             <span
@@ -2708,14 +2708,14 @@
                                                 </div>
                                                 <!-- .content-info -->
                                                 <div class="image-info">
-                                                    <img src="home/assets/images/products/des1.png" alt="">
+                                                    <img src="{{ url('') }}/home/assets/images/products/des1.png" alt="">
                                                 </div>
                                                 <!-- .image-info -->
                                             </div>
                                             <!-- .outer-wrap -->
                                             <div class="outer-wrap">
                                                 <div class="image-info">
-                                                    <img src="home/assets/images/products/des2.png"
+                                                    <img src="{{ url('') }}/home/assets/images/products/des2.png"
                                                         class="alignnone" alt="">
                                                 </div>
                                                 <!-- .image-info -->
@@ -3028,7 +3028,7 @@
                                                             href="single-product-fullwidth.html">
                                                             <div class="media">
                                                                 <img class="wp-post-image"
-                                                                    src="home/assets/images/products/card-6.jpg"
+                                                                    src="{{ url('') }}/home/assets/images/products/card-6.jpg"
                                                                     alt="">
                                                                 <div class="media-body">
                                                                     <span class="price">
@@ -3063,7 +3063,7 @@
                                                             href="single-product-fullwidth.html">
                                                             <div class="media">
                                                                 <img class="wp-post-image"
-                                                                    src="home/assets/images/products/card-3.jpg"
+                                                                    src="{{ url('') }}/home/assets/images/products/card-3.jpg"
                                                                     alt="">
                                                                 <div class="media-body">
                                                                     <span class="price">
@@ -3101,7 +3101,7 @@
                                                             href="single-product-fullwidth.html">
                                                             <div class="media">
                                                                 <img class="wp-post-image"
-                                                                    src="home/assets/images/products/card-4.jpg"
+                                                                    src="{{ url('') }}/home/assets/images/products/card-4.jpg"
                                                                     alt="">
                                                                 <div class="media-body">
                                                                     <span class="price">
@@ -3136,7 +3136,7 @@
                                                             href="single-product-fullwidth.html">
                                                             <div class="media">
                                                                 <img class="wp-post-image"
-                                                                    src="home/assets/images/products/card-5.jpg"
+                                                                    src="{{ url('') }}/home/assets/images/products/card-5.jpg"
                                                                     alt="">
                                                                 <div class="media-body">
                                                                     <span class="price">
@@ -3174,7 +3174,7 @@
                                                             href="single-product-fullwidth.html">
                                                             <div class="media">
                                                                 <img class="wp-post-image"
-                                                                    src="home/assets/images/products/card-3.jpg"
+                                                                    src="{{ url('') }}/home/assets/images/products/card-3.jpg"
                                                                     alt="">
                                                                 <div class="media-body">
                                                                     <span class="price">
@@ -3212,7 +3212,7 @@
                                                             href="single-product-fullwidth.html">
                                                             <div class="media">
                                                                 <img class="wp-post-image"
-                                                                    src="home/assets/images/products/card-2.jpg"
+                                                                    src="{{ url('') }}/home/assets/images/products/card-2.jpg"
                                                                     alt="">
                                                                 <div class="media-body">
                                                                     <span class="price">
@@ -3247,7 +3247,7 @@
                                                             href="single-product-fullwidth.html">
                                                             <div class="media">
                                                                 <img class="wp-post-image"
-                                                                    src="home/assets/images/products/card-4.jpg"
+                                                                    src="{{ url('') }}/home/assets/images/products/card-4.jpg"
                                                                     alt="">
                                                                 <div class="media-body">
                                                                     <span class="price">
@@ -3282,7 +3282,7 @@
                                                             href="single-product-fullwidth.html">
                                                             <div class="media">
                                                                 <img class="wp-post-image"
-                                                                    src="home/assets/images/products/card-1.jpg"
+                                                                    src="{{ url('') }}/home/assets/images/products/card-1.jpg"
                                                                     alt="">
                                                                 <div class="media-body">
                                                                     <span class="price">
@@ -3340,7 +3340,7 @@
                                                         </figcaption>
                                                         <img width="145" height="50"
                                                             class="img-responsive desaturate" alt="apple"
-                                                            src="home/assets/images/brands/1.png">
+                                                            src="{{ url('') }}/home/assets/images/brands/1.png">
                                                     </figure>
                                                 </a>
                                             </div>
@@ -3356,7 +3356,7 @@
                                                         </figcaption>
                                                         <img width="145" height="50"
                                                             class="img-responsive desaturate" alt="bosch"
-                                                            src="home/assets/images/brands/2.png">
+                                                            src="{{ url('') }}/home/assets/images/brands/2.png">
                                                     </figure>
                                                 </a>
                                             </div>
@@ -3372,7 +3372,7 @@
                                                         </figcaption>
                                                         <img width="145" height="50"
                                                             class="img-responsive desaturate" alt="cannon"
-                                                            src="home/assets/images/brands/3.png">
+                                                            src="{{ url('') }}/home/assets/images/brands/3.png">
                                                     </figure>
                                                 </a>
                                             </div>
@@ -3388,7 +3388,7 @@
                                                         </figcaption>
                                                         <img width="145" height="50"
                                                             class="img-responsive desaturate" alt="connect"
-                                                            src="home/assets/images/brands/4.png">
+                                                            src="{{ url('') }}/home/assets/images/brands/4.png">
                                                     </figure>
                                                 </a>
                                             </div>
@@ -3404,7 +3404,7 @@
                                                         </figcaption>
                                                         <img width="145" height="50"
                                                             class="img-responsive desaturate" alt="galaxy"
-                                                            src="home/assets/images/brands/5.png">
+                                                            src="{{ url('') }}/home/assets/images/brands/5.png">
                                                     </figure>
                                                 </a>
                                             </div>
@@ -3420,7 +3420,7 @@
                                                         </figcaption>
                                                         <img width="145" height="50"
                                                             class="img-responsive desaturate" alt="gopro"
-                                                            src="home/assets/images/brands/6.png">
+                                                            src="{{ url('') }}/home/assets/images/brands/6.png">
                                                     </figure>
                                                 </a>
                                             </div>
@@ -3436,7 +3436,7 @@
                                                         </figcaption>
                                                         <img width="145" height="50"
                                                             class="img-responsive desaturate" alt="handspot"
-                                                            src="home/assets/images/brands/7.png">
+                                                            src="{{ url('') }}/home/assets/images/brands/7.png">
                                                     </figure>
                                                 </a>
                                             </div>
@@ -3452,7 +3452,7 @@
                                                         </figcaption>
                                                         <img width="145" height="50"
                                                             class="img-responsive desaturate" alt="kinova"
-                                                            src="home/assets/images/brands/8.png">
+                                                            src="{{ url('') }}/home/assets/images/brands/8.png">
                                                     </figure>
                                                 </a>
                                             </div>
@@ -3468,7 +3468,7 @@
                                                         </figcaption>
                                                         <img width="145" height="50"
                                                             class="img-responsive desaturate" alt="nespresso"
-                                                            src="home/assets/images/brands/9.png">
+                                                            src="{{ url('') }}/home/assets/images/brands/9.png">
                                                     </figure>
                                                 </a>
                                             </div>
@@ -3484,7 +3484,7 @@
                                                         </figcaption>
                                                         <img width="145" height="50"
                                                             class="img-responsive desaturate" alt="samsung"
-                                                            src="home/assets/images/brands/10.png">
+                                                            src="{{ url('') }}/home/assets/images/brands/10.png">
                                                     </figure>
                                                 </a>
                                             </div>
@@ -3500,7 +3500,7 @@
                                                         </figcaption>
                                                         <img width="145" height="50"
                                                             class="img-responsive desaturate" alt="speedway"
-                                                            src="home/assets/images/brands/11.png">
+                                                            src="{{ url('') }}/home/assets/images/brands/11.png">
                                                     </figure>
                                                 </a>
                                             </div>
@@ -3516,7 +3516,7 @@
                                                         </figcaption>
                                                         <img width="145" height="50"
                                                             class="img-responsive desaturate" alt="yoko"
-                                                            src="home/assets/images/brands/12.png">
+                                                            src="{{ url('') }}/home/assets/images/brands/12.png">
                                                     </figure>
                                                 </a>
                                             </div>
@@ -3686,22 +3686,22 @@
                                                 <ul class="list-payment-icons nav">
                                                     <li class="nav-item">
                                                         <img class="payment-icon-image"
-                                                            src="home/assets/images/credit-cards/mastercard.svg"
+                                                            src="{{ url('') }}/home/assets/images/credit-cards/mastercard.svg"
                                                             alt="mastercard" />
                                                     </li>
                                                     <li class="nav-item">
                                                         <img class="payment-icon-image"
-                                                            src="home/assets/images/credit-cards/visa.svg"
+                                                            src="{{ url('') }}/home/assets/images/credit-cards/visa.svg"
                                                             alt="visa" />
                                                     </li>
                                                     <li class="nav-item">
                                                         <img class="payment-icon-image"
-                                                            src="home/assets/images/credit-cards/paypal.svg"
+                                                            src="{{ url('') }}/home/assets/images/credit-cards/paypal.svg"
                                                             alt="paypal" />
                                                     </li>
                                                     <li class="nav-item">
                                                         <img class="payment-icon-image"
-                                                            src="home/assets/images/credit-cards/maestro.svg"
+                                                            src="{{ url('') }}/home/assets/images/credit-cards/maestro.svg"
                                                             alt="maestro" />
                                                     </li>
                                                 </ul>
@@ -3712,12 +3712,12 @@
                                                 <ul class="footer-secured-by-icons">
                                                     <li class="nav-item">
                                                         <img class="secure-icons-image"
-                                                            src="home/assets/images/secured-by/norton.svg"
+                                                            src="{{ url('') }}/home/assets/images/secured-by/norton.svg"
                                                             alt="norton" />
                                                     </li>
                                                     <li class="nav-item">
                                                         <img class="secure-icons-image"
-                                                            src="home/assets/images/secured-by/mcafee.svg"
+                                                            src="{{ url('') }}/home/assets/images/secured-by/mcafee.svg"
                                                             alt="mcafee" />
                                                     </li>
                                                 </ul>
@@ -3861,20 +3861,24 @@
         <!-- .site-footer -->
     </div>
 
-    <script type="text/javascript" src="home/assets/js/jquery.min.js"></script>
-    <script type="text/javascript" src="home/assets/js/tether.min.js"></script>
-    <script type="text/javascript" src="home/assets/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="home/assets/js/jquery-migrate.min.js"></script>
-    <script type="text/javascript" src="home/assets/js/hidemaxlistitem.min.js"></script>
-    <script type="text/javascript" src="home/assets/js/jquery-ui.min.js"></script>
-    <script type="text/javascript" src="home/assets/js/hidemaxlistitem.min.js"></script>
-    <script type="text/javascript" src="home/assets/js/jquery.easing.min.js"></script>
-    <script type="text/javascript" src="home/assets/js/scrollup.min.js"></script>
-    <script type="text/javascript" src="home/assets/js/jquery.waypoints.min.js"></script>
-    <script type="text/javascript" src="home/assets/js/waypoints-sticky.min.js"></script>
-    <script type="text/javascript" src="home/assets/js/pace.min.js"></script>
-    <script type="text/javascript" src="home/assets/js/slick.min.js"></script>
-    <script type="text/javascript" src="home/assets/js/scripts.js"></script>
+    <script type="text/javascript" src="{{ url('') }}/home/assets/js/jquery.min.js"></script>
+    <script type="text/javascript" src="{{ url('') }}/home/assets/js/tether.min.js"></script>
+    <script type="text/javascript" src="{{ url('') }}/home/assets/js/bootstrap.min.js"></script>
+
+    <script type="text/javascript" src="{{ url('') }}/home/assets/js/jquery-migrate.min.js"></script>
+    <script type="text/javascript" src="{{ url('') }}/home/assets/js/hidemaxlistitem.min.js"></script>
+    <script type="text/javascript" src="{{ url('') }}/home/assets/js/jquery-ui.min.js"></script>
+
+    <script type="text/javascript" src="{{ url('') }}/home/assets/js/hidemaxlistitem.min.js"></script>
+    <script type="text/javascript" src="{{ url('') }}/home/assets/js/jquery.easing.min.js"></script>
+    <script type="text/javascript" src="{{ url('') }}/home/assets/js/scrollup.min.js"></script>
+
+    <script type="text/javascript" src="{{ url('') }}/home/assets/js/jquery.waypoints.min.js"></script>
+    <script type="text/javascript" src="{{ url('') }}/home/assets/js/waypoints-sticky.min.js"></script>
+    <script type="text/javascript" src="{{ url('') }}/home/assets/js/pace.min.js"></script>
+    
+    <script type="text/javascript" src="{{ url('') }}/home/assets/js/slick.min.js"></script>
+    <script type="text/javascript" src="{{ url('') }}/home/assets/js/scripts.js"></script>
 
 </body>
 

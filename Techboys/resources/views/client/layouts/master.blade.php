@@ -14,7 +14,7 @@
         <link rel="stylesheet" type="text/css" href="{{ url('') }}/home/assets/css/slick-style.css" media="all" />
         <link rel="stylesheet" type="text/css" href="{{ url('') }}/home/assets/css/animate.min.css" media="all" />
         <link rel="stylesheet" type="text/css" href="{{ url('') }}/home/assets/css/style.css" media="all" />
-        <link rel="stylesheet" type="text/css" href="{{ url('') }}/home/assets/css/colors/blue.css" media="all" />
+        <link rel="stylesheet" type="text/css" href="{{ url('') }}/home/assets/css/colors/blue.css" media="all" />    
         <link href="https://fonts.googleapis.com/css?family=Rubik:300,400,500,900" rel="stylesheet">
         <link rel="shortcut icon" href="{{ url('') }}/home/assets/images/fav-icon.png">
         @yield('styles')
@@ -116,7 +116,7 @@
                                     </li>
                                     <li class="menu-item">
                                         @guest
-                                            <a title="My Account" href="{{ route('login.client') }}">
+                                            {{-- <a title="My Account" href="{{ route('login.client') }}"> --}}
                                                 <i class="tm tm-login-register"></i>Đăng nhập</a>
                                         @else
                                             <a title="My Account" href="">
@@ -1582,15 +1582,19 @@
         <script type="text/javascript" src="{{ url('') }}/home/assets/js/jquery.min.js"></script>
         <script type="text/javascript" src="{{ url('') }}/home/assets/js/tether.min.js"></script>
         <script type="text/javascript" src="{{ url('') }}/home/assets/js/bootstrap.min.js"></script>
+
         <script type="text/javascript" src="{{ url('') }}/home/assets/js/jquery-migrate.min.js"></script>
         <script type="text/javascript" src="{{ url('') }}/home/assets/js/hidemaxlistitem.min.js"></script>
         <script type="text/javascript" src="{{ url('') }}/home/assets/js/jquery-ui.min.js"></script>
+
         <script type="text/javascript" src="{{ url('') }}/home/assets/js/hidemaxlistitem.min.js"></script>
         <script type="text/javascript" src="{{ url('') }}/home/assets/js/jquery.easing.min.js"></script>
         <script type="text/javascript" src="{{ url('') }}/home/assets/js/scrollup.min.js"></script>
+
         <script type="text/javascript" src="{{ url('') }}/home/assets/js/jquery.waypoints.min.js"></script>
         <script type="text/javascript" src="{{ url('') }}/home/assets/js/waypoints-sticky.min.js"></script>
         <script type="text/javascript" src="{{ url('') }}/home/assets/js/pace.min.js"></script>
+        
         <script type="text/javascript" src="{{ url('') }}/home/assets/js/slick.min.js"></script>
         <script type="text/javascript" src="{{ url('') }}/home/assets/js/scripts.js"></script>
         
