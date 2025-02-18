@@ -108,9 +108,27 @@ class UserController extends Controller
 
 
     //client
+    public function loginClient(Request $request)
+    {
+        $username = $request->input('username');
+        $password = $request->input('password');
+
+        $account = User::where('username', $username)->first();
+
+        if (!$account) {
+            return redirect()->back()->with('error', 'Không tìm thấy tài khoản.');
+        }
+
+        if (!Hash::check($password, $account->password)) {
+            return redirect()->back()->with('error', 'Mật khẩu không đúng.');
+        }
+        Auth::login($account);
+
+        return redirect()->route('home')->with('success', 'Đăng nhập thành công.');
+    }
     public function create()
     {
-        return view('admin.log.register');
+        return view('client.login.register');
     }
 
     public function store(Request $request)
@@ -152,7 +170,7 @@ class UserController extends Controller
 
         if ($acc = $data) {
             Mail::to($acc->email)->send(new verifyAccount($acc));
-            return redirect()->route('login')->with('success', 'Đăng ký thành công, vui lòng check gmail của bạn');
+            return redirect()->route('login.client')->with('success', 'Đăng ký thành công, vui lòng check gmail của bạn');
         }
         return redirect()->back()->with('no', 'tạo không thành công vui lòng kiểm tra lại');
     }
@@ -161,12 +179,12 @@ class UserController extends Controller
     {
         User::where('email', $email)->whereNull('email_verified_at')->firstOrFail();
         User::where('email', $email)->update(['email_verified_at' => date('Y-m-d')]);
-        return redirect()->route('login')->with('success', 'xác minh thành công');
+        return redirect()->route('login.client')->with('success', 'xác minh thành công');
     }
 
     public function forgot_password()
     {
-        return view('admin.log.forgot');
+        return view('client.login.forgot');
     }
     public function check_forgot_password(Request $request)
     {
@@ -194,10 +212,8 @@ class UserController extends Controller
 
     public function reset_password($token, Request $request) {
         $tokenRecord = UserResetToken::where('token', $token)->firstOrFail();
-        return view('admin.log.reset_password', ['token' => $token]);
+        return view('client.login.reset_password', ['token' => $token]);
     }
-    
-
     public function check_reset_password($token, Request $request)
     {
         $request->validate([
@@ -217,7 +233,7 @@ class UserController extends Controller
         ]);
 
         if ($user) {
-            return redirect()->route('login')->with('success', 'Đổi mật khẩu thành công');
+            return redirect()->route('login.client')->with('success', 'Đổi mật khẩu thành công');
         }
 
         return redirect()->back()->with('no', 'Đổi mật khẩu không thành công');

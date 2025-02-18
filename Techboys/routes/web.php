@@ -9,37 +9,37 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductCategoryController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
-
+//client
+Route::get('/blog', function () {
+    return view('client.login.reset_password');
+});
 Route::get('/', function () {
     return view('client.home.home');
 })->name('home');
-Route::get('test', function () {
-    return view('admin.product.imageIndex');
+Route::get('login', function () {
+    return view('client.login.index');
+})->name('login.client');
+Route::post('/login/Client', [UserController::class, 'loginClient'])->name('loginClient.auth');
+
+Route::prefix('/register')->group(function () {
+    Route::get('/', [UserController::class, 'create'])->name('client.log.create');
+    route::post('/store', [UserController::class, 'store'])->name('client.log.store');
 });
-Route::get('blog', function () {
-    return view('admin.tag.edit');
-});
+//veryfi email
+route::get('/veryfi-account/{email}',[UserController::class, 'veryfi'])->name('clinet.veryfi');
+//quên mật khẩu
+route::get('forgot-password',[UserController::class, 'forgot_password'])->name('client.forgot-password');
+route::post('/check-forgot-password', [UserController::class, 'check_forgot_password'])->name('client.check_forgot_password');
+
+route::get('/reset-password/{token}', [UserController::class, 'reset_password'])->name('client.reset_password');
+route::post('/check-reset-password/{token}', [UserController::class, 'check_reset_password'])->name('client.check_reset_password');
+
+//admin
 Route::get('/login/admin', function () {
     return view('admin.log.login');
     
 })->name('login');
-Route::prefix('/register')->group(function () {
-    Route::get('/create', [UserController::class, 'create'])->name('admin.log.create');
-    route::post('/store', [UserController::class, 'store'])->name('admin.log.store');
-});
-//veryfi email
-route::get('/veryfi-account/{email}',[UserController::class, 'veryfi'])->name('admin.veryfi');
-//quên mật khẩu
-route::get('forgot-password',[UserController::class, 'forgot_password'])->name('admin.forgot-password');
-route::post('/check-forgot-password', [UserController::class, 'check_forgot_password'])->name('admin.check_forgot_password');
-
-route::get('/reset-password/{token}', [UserController::class, 'reset_password'])->name('admin.reset_password');
-route::post('/check-reset-password/{token}', [UserController::class, 'check_reset_password'])->name('admin.check_reset_password');
-
 Route::post('/login/auth', [UserController::class, 'login'])->name('login.auth');
-
-
-
 Route::middleware(['auth','auth.admin'])->group(function () {
     Route::prefix('admin')->group(function () {
         Route::get('/home', [DashboardController::class, 'index'])->name('admin.index');
