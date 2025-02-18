@@ -1884,7 +1884,7 @@
                                                     </a>
                                                     <div class="hover-area">
                                                         <a class="button add_to_cart_button" href="cart.html"
-                                                            rel="nofollow">Add to cart</a>
+                                                            rel="nofollow">Thêm vào giỏ hàng</a>
                                                         <a class="add-to-compare-link" href="compare.html">Add to
                                                             compare</a>
                                                     </div>
@@ -1911,7 +1911,7 @@
                                                     </a>
                                                     <div class="hover-area">
                                                         <a class="button add_to_cart_button" href="cart.html"
-                                                            rel="nofollow">Add to cart</a>
+                                                            rel="nofollow">Thêm vào giỏ hàng</a>
                                                         <a class="add-to-compare-link" href="compare.html">Add to
                                                             compare</a>
                                                     </div>
@@ -1938,7 +1938,7 @@
                                                     </a>
                                                     <div class="hover-area">
                                                         <a class="button add_to_cart_button" href="cart.html"
-                                                            rel="nofollow">Add to cart</a>
+                                                            rel="nofollow">Thêm vào giỏ hàng</a>
                                                         <a class="add-to-compare-link" href="compare.html">Add to
                                                             compare</a>
                                                     </div>
@@ -1965,7 +1965,7 @@
                                                     </a>
                                                     <div class="hover-area">
                                                         <a class="button add_to_cart_button" href="cart.html"
-                                                            rel="nofollow">Add to cart</a>
+                                                            rel="nofollow">Thêm vào giỏ hàng</a>
                                                         <a class="add-to-compare-link" href="compare.html">Add to
                                                             compare</a>
                                                     </div>
@@ -2000,7 +2000,7 @@
                                                     </a>
                                                     <div class="hover-area">
                                                         <a class="button add_to_cart_button" href="cart.html"
-                                                            rel="nofollow">Add to cart</a>
+                                                            rel="nofollow">Thêm vào giỏ hàng</a>
                                                         <a class="add-to-compare-link" href="compare.html">Add to
                                                             compare</a>
                                                     </div>
@@ -2027,7 +2027,7 @@
                                                     </a>
                                                     <div class="hover-area">
                                                         <a class="button add_to_cart_button" href="cart.html"
-                                                            rel="nofollow">Add to cart</a>
+                                                            rel="nofollow">Thêm vào giỏ hàng</a>
                                                         <a class="add-to-compare-link" href="compare.html">Add to
                                                             compare</a>
                                                     </div>
@@ -2054,7 +2054,7 @@
                                                     </a>
                                                     <div class="hover-area">
                                                         <a class="button add_to_cart_button" href="cart.html"
-                                                            rel="nofollow">Add to cart</a>
+                                                            rel="nofollow">Thêm vào giỏ hàng</a>
                                                         <a class="add-to-compare-link" href="compare.html">Add to
                                                             compare</a>
                                                     </div>
@@ -2089,7 +2089,7 @@
                                                     </a>
                                                     <div class="hover-area">
                                                         <a class="button add_to_cart_button" href="cart.html"
-                                                            rel="nofollow">Add to cart</a>
+                                                            rel="nofollow">Thêm vào giỏ hàng</a>
                                                         <a class="add-to-compare-link" href="compare.html">Add to
                                                             compare</a>
                                                     </div>
@@ -2116,7 +2116,7 @@
                                                     </a>
                                                     <div class="hover-area">
                                                         <a class="button add_to_cart_button" href="cart.html"
-                                                            rel="nofollow">Add to cart</a>
+                                                            rel="nofollow">Thêm vào giỏ hàng</a>
                                                         <a class="add-to-compare-link" href="compare.html">Add to
                                                             compare</a>
                                                     </div>
@@ -2143,7 +2143,7 @@
                                                     </a>
                                                     <div class="hover-area">
                                                         <a class="button add_to_cart_button" href="cart.html"
-                                                            rel="nofollow">Add to cart</a>
+                                                            rel="nofollow">Thêm vào giỏ hàng</a>
                                                         <a class="add-to-compare-link" href="compare.html">Add to
                                                             compare</a>
                                                     </div>
@@ -2170,7 +2170,7 @@
                                                     </a>
                                                     <div class="hover-area">
                                                         <a class="button add_to_cart_button" href="cart.html"
-                                                            rel="nofollow">Add to cart</a>
+                                                            rel="nofollow">Thêm vào giỏ hàng</a>
                                                         <a class="add-to-compare-link" href="compare.html">Add to
                                                             compare</a>
                                                     </div>
@@ -2197,7 +2197,7 @@
                                                     </a>
                                                     <div class="hover-area">
                                                         <a class="button add_to_cart_button" href="cart.html"
-                                                            rel="nofollow">Add to cart</a>
+                                                            rel="nofollow">Thêm vào giỏ hàng</a>
                                                         <a class="add-to-compare-link" href="compare.html">Add to
                                                             compare</a>
                                                     </div>
@@ -2224,7 +2224,7 @@
                                                     </a>
                                                     <div class="hover-area">
                                                         <a class="button add_to_cart_button" href="cart.html"
-                                                            rel="nofollow">Add to cart</a>
+                                                            rel="nofollow">Thêm vào giỏ hàng</a>
                                                         <a class="add-to-compare-link" href="compare.html">Add to
                                                             compare</a>
                                                     </div>
@@ -2251,7 +2251,7 @@
                                                     </a>
                                                     <div class="hover-area">
                                                         <a class="button add_to_cart_button" href="cart.html"
-                                                            rel="nofollow">Add to cart</a>
+                                                            rel="nofollow">Thêm vào giỏ hàng</a>
                                                         <a class="add-to-compare-link" href="compare.html">Add to
                                                             compare</a>
                                                     </div>
@@ -2278,7 +2278,7 @@
                                                     </a>
                                                     <div class="hover-area">
                                                         <a class="button add_to_cart_button" href="cart.html"
-                                                            rel="nofollow">Add to cart</a>
+                                                            rel="nofollow">Thêm vào giỏ hàng</a>
                                                         <a class="add-to-compare-link" href="compare.html">Add to
                                                             compare</a>
                                                     </div>
@@ -2313,7 +2313,7 @@
                                                     </a>
                                                     <div class="hover-area">
                                                         <a class="button add_to_cart_button" href="cart.html"
-                                                            rel="nofollow">Add to cart</a>
+                                                            rel="nofollow">Thêm vào giỏ hàng</a>
                                                         <a class="add-to-compare-link" href="compare.html">Add to
                                                             compare</a>
                                                     </div>
@@ -2362,7 +2362,7 @@
                                                     </a>
                                                     <div class="hover-area">
                                                         <a class="button add_to_cart_button" href="cart.html"
-                                                            rel="nofollow">Add to cart</a>
+                                                            rel="nofollow">Thêm vào giỏ hàng</a>
                                                         <a class="add-to-compare-link" href="compare.html">Add to
                                                             compare</a>
                                                     </div>
@@ -2389,7 +2389,7 @@
                                                     </a>
                                                     <div class="hover-area">
                                                         <a class="button add_to_cart_button" href="cart.html"
-                                                            rel="nofollow">Add to cart</a>
+                                                            rel="nofollow">Thêm vào giỏ hàng</a>
                                                         <a class="add-to-compare-link" href="compare.html">Add to
                                                             compare</a>
                                                     </div>
@@ -2416,7 +2416,7 @@
                                                     </a>
                                                     <div class="hover-area">
                                                         <a class="button add_to_cart_button" href="cart.html"
-                                                            rel="nofollow">Add to cart</a>
+                                                            rel="nofollow">Thêm vào giỏ hàng</a>
                                                         <a class="add-to-compare-link" href="compare.html">Add to
                                                             compare</a>
                                                     </div>
@@ -2451,7 +2451,7 @@
                                                     </a>
                                                     <div class="hover-area">
                                                         <a class="button add_to_cart_button" href="cart.html"
-                                                            rel="nofollow">Add to cart</a>
+                                                            rel="nofollow">Thêm vào giỏ hàng</a>
                                                         <a class="add-to-compare-link" href="compare.html">Add to
                                                             compare</a>
                                                     </div>
@@ -2486,7 +2486,7 @@
                                                     </a>
                                                     <div class="hover-area">
                                                         <a class="button add_to_cart_button" href="cart.html"
-                                                            rel="nofollow">Add to cart</a>
+                                                            rel="nofollow">Thêm vào giỏ hàng</a>
                                                         <a class="add-to-compare-link" href="compare.html">Add to
                                                             compare</a>
                                                     </div>
@@ -2521,7 +2521,7 @@
                                                     </a>
                                                     <div class="hover-area">
                                                         <a class="button add_to_cart_button" href="cart.html"
-                                                            rel="nofollow">Add to cart</a>
+                                                            rel="nofollow">Thêm vào giỏ hàng</a>
                                                         <a class="add-to-compare-link" href="compare.html">Add to
                                                             compare</a>
                                                     </div>
@@ -2548,7 +2548,7 @@
                                                     </a>
                                                     <div class="hover-area">
                                                         <a class="button add_to_cart_button" href="cart.html"
-                                                            rel="nofollow">Add to cart</a>
+                                                            rel="nofollow">Thêm vào giỏ hàng</a>
                                                         <a class="add-to-compare-link" href="compare.html">Add to
                                                             compare</a>
                                                     </div>
@@ -2575,7 +2575,7 @@
                                                     </a>
                                                     <div class="hover-area">
                                                         <a class="button add_to_cart_button" href="cart.html"
-                                                            rel="nofollow">Add to cart</a>
+                                                            rel="nofollow">Thêm vào giỏ hàng</a>
                                                         <a class="add-to-compare-link" href="compare.html">Add to
                                                             compare</a>
                                                     </div>
@@ -2602,7 +2602,7 @@
                                                     </a>
                                                     <div class="hover-area">
                                                         <a class="button add_to_cart_button" href="cart.html"
-                                                            rel="nofollow">Add to cart</a>
+                                                            rel="nofollow">Thêm vào giỏ hàng</a>
                                                         <a class="add-to-compare-link" href="compare.html">Add to
                                                             compare</a>
                                                     </div>
@@ -2629,7 +2629,7 @@
                                                     </a>
                                                     <div class="hover-area">
                                                         <a class="button add_to_cart_button" href="cart.html"
-                                                            rel="nofollow">Add to cart</a>
+                                                            rel="nofollow">Thêm vào giỏ hàng</a>
                                                         <a class="add-to-compare-link" href="compare.html">Add to
                                                             compare</a>
                                                     </div>
@@ -2656,7 +2656,7 @@
                                                     </a>
                                                     <div class="hover-area">
                                                         <a class="button add_to_cart_button" href="cart.html"
-                                                            rel="nofollow">Add to cart</a>
+                                                            rel="nofollow">Thêm vào giỏ hàng</a>
                                                         <a class="add-to-compare-link" href="compare.html">Add to
                                                             compare</a>
                                                     </div>
@@ -2683,7 +2683,7 @@
                                                     </a>
                                                     <div class="hover-area">
                                                         <a class="button add_to_cart_button" href="cart.html"
-                                                            rel="nofollow">Add to cart</a>
+                                                            rel="nofollow">Thêm vào giỏ hàng</a>
                                                         <a class="add-to-compare-link" href="compare.html">Add to
                                                             compare</a>
                                                     </div>
@@ -2710,7 +2710,7 @@
                                                     </a>
                                                     <div class="hover-area">
                                                         <a class="button add_to_cart_button" href="cart.html"
-                                                            rel="nofollow">Add to cart</a>
+                                                            rel="nofollow">Thêm vào giỏ hàng</a>
                                                         <a class="add-to-compare-link" href="compare.html">Add to
                                                             compare</a>
                                                     </div>
@@ -2737,7 +2737,7 @@
                                                     </a>
                                                     <div class="hover-area">
                                                         <a class="button add_to_cart_button" href="cart.html"
-                                                            rel="nofollow">Add to cart</a>
+                                                            rel="nofollow">Thêm vào giỏ hàng</a>
                                                         <a class="add-to-compare-link" href="compare.html">Add to
                                                             compare</a>
                                                     </div>
@@ -2764,7 +2764,7 @@
                                                     </a>
                                                     <div class="hover-area">
                                                         <a class="button add_to_cart_button" href="cart.html"
-                                                            rel="nofollow">Add to cart</a>
+                                                            rel="nofollow">Thêm vào giỏ hàng</a>
                                                         <a class="add-to-compare-link" href="compare.html">Add to
                                                             compare</a>
                                                     </div>
@@ -2791,7 +2791,7 @@
                                                     </a>
                                                     <div class="hover-area">
                                                         <a class="button add_to_cart_button" href="cart.html"
-                                                            rel="nofollow">Add to cart</a>
+                                                            rel="nofollow">Thêm vào giỏ hàng</a>
                                                         <a class="add-to-compare-link" href="compare.html">Add to
                                                             compare</a>
                                                     </div>

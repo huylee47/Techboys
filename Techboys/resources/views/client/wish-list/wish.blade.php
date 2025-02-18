@@ -1860,7 +1860,7 @@
                                                     </td>
                                                     <td class="product-add-to-cart">
                                                         <a class="button add_to_cart_button button alt"
-                                                            href="cart.html"> Add to Cart</a>
+                                                            href="cart.html"> Thêm vào giỏ hàng</a>
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -1899,7 +1899,7 @@
                                                     </td>
                                                     <td class="product-add-to-cart">
                                                         <a class="button add_to_cart_button button alt"
-                                                            href="cart.html"> Add to Cart</a>
+                                                            href="cart.html"> Thêm vào giỏ hàng</a>
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -1938,7 +1938,7 @@
                                                     </td>
                                                     <td class="product-add-to-cart">
                                                         <a class="button add_to_cart_button button alt"
-                                                            href="cart.html"> Add to Cart</a>
+                                                            href="cart.html"> Thêm vào giỏ hàng</a>
                                                     </td>
                                                 </tr>
                                             </tbody>

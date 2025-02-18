@@ -1919,7 +1919,7 @@
                                                 </a>
                                                 <!-- .woocommerce-LoopProduct-link -->
                                                 <div class="hover-area">
-                                                    <a class="button" href="cart.html">Add to cart</a>
+                                                    <a class="button" href="cart.html">Thêm vào giỏ hàng</a>
                                                     <a class="add-to-compare-link" href="compare.html">Add to
                                                         compare</a>
                                                 </div>
@@ -1947,7 +1947,7 @@
                                                 </a>
                                                 <!-- .woocommerce-LoopProduct-link -->
                                                 <div class="hover-area">
-                                                    <a class="button" href="cart.html">Add to cart</a>
+                                                    <a class="button" href="cart.html">Thêm vào giỏ hàng</a>
                                                     <a class="add-to-compare-link" href="compare.html">Add to
                                                         compare</a>
                                                 </div>
@@ -1975,7 +1975,7 @@
                                                 </a>
                                                 <!-- .woocommerce-LoopProduct-link -->
                                                 <div class="hover-area">
-                                                    <a class="button" href="cart.html">Add to cart</a>
+                                                    <a class="button" href="cart.html">Thêm vào giỏ hàng</a>
                                                     <a class="add-to-compare-link" href="compare.html">Add to
                                                         compare</a>
                                                 </div>
@@ -2003,7 +2003,7 @@
                                                 </a>
                                                 <!-- .woocommerce-LoopProduct-link -->
                                                 <div class="hover-area">
-                                                    <a class="button" href="cart.html">Add to cart</a>
+                                                    <a class="button" href="cart.html">Thêm vào giỏ hàng</a>
                                                     <a class="add-to-compare-link" href="compare.html">Add to
                                                         compare</a>
                                                 </div>
@@ -2031,7 +2031,7 @@
                                                 </a>
                                                 <!-- .woocommerce-LoopProduct-link -->
                                                 <div class="hover-area">
-                                                    <a class="button" href="cart.html">Add to cart</a>
+                                                    <a class="button" href="cart.html">Thêm vào giỏ hàng</a>
                                                     <a class="add-to-compare-link" href="compare.html">Add to
                                                         compare</a>
                                                 </div>
@@ -2059,7 +2059,7 @@
                                                 </a>
                                                 <!-- .woocommerce-LoopProduct-link -->
                                                 <div class="hover-area">
-                                                    <a class="button" href="cart.html">Add to cart</a>
+                                                    <a class="button" href="cart.html">Thêm vào giỏ hàng</a>
                                                     <a class="add-to-compare-link" href="compare.html">Add to
                                                         compare</a>
                                                 </div>
@@ -2087,7 +2087,7 @@
                                                 </a>
                                                 <!-- .woocommerce-LoopProduct-link -->
                                                 <div class="hover-area">
-                                                    <a class="button" href="cart.html">Add to cart</a>
+                                                    <a class="button" href="cart.html">Thêm vào giỏ hàng</a>
                                                     <a class="add-to-compare-link" href="compare.html">Add to
                                                         compare</a>
                                                 </div>
@@ -2115,7 +2115,7 @@
                                                 </a>
                                                 <!-- .woocommerce-LoopProduct-link -->
                                                 <div class="hover-area">
-                                                    <a class="button" href="cart.html">Add to cart</a>
+                                                    <a class="button" href="cart.html">Thêm vào giỏ hàng</a>
                                                     <a class="add-to-compare-link" href="compare.html">Add to
                                                         compare</a>
                                                 </div>
@@ -2143,7 +2143,7 @@
                                                 </a>
                                                 <!-- .woocommerce-LoopProduct-link -->
                                                 <div class="hover-area">
-                                                    <a class="button" href="cart.html">Add to cart</a>
+                                                    <a class="button" href="cart.html">Thêm vào giỏ hàng</a>
                                                     <a class="add-to-compare-link" href="compare.html">Add to
                                                         compare</a>
                                                 </div>
@@ -2171,7 +2171,7 @@
                                                 </a>
                                                 <!-- .woocommerce-LoopProduct-link -->
                                                 <div class="hover-area">
-                                                    <a class="button" href="cart.html">Add to cart</a>
+                                                    <a class="button" href="cart.html">Thêm vào giỏ hàng</a>
                                                     <a class="add-to-compare-link" href="compare.html">Add to
                                                         compare</a>
                                                 </div>
@@ -2199,7 +2199,7 @@
                                                 </a>
                                                 <!-- .woocommerce-LoopProduct-link -->
                                                 <div class="hover-area">
-                                                    <a class="button" href="cart.html">Add to cart</a>
+                                                    <a class="button" href="cart.html">Thêm vào giỏ hàng</a>
                                                     <a class="add-to-compare-link" href="compare.html">Add to
                                                         compare</a>
                                                 </div>
@@ -2227,7 +2227,7 @@
                                                 </a>
                                                 <!-- .woocommerce-LoopProduct-link -->
                                                 <div class="hover-area">
-                                                    <a class="button" href="cart.html">Add to cart</a>
+                                                    <a class="button" href="cart.html">Thêm vào giỏ hàng</a>
                                                     <a class="add-to-compare-link" href="compare.html">Add to
                                                         compare</a>
                                                 </div>
@@ -2255,7 +2255,7 @@
                                                 </a>
                                                 <!-- .woocommerce-LoopProduct-link -->
                                                 <div class="hover-area">
-                                                    <a class="button" href="cart.html">Add to cart</a>
+                                                    <a class="button" href="cart.html">Thêm vào giỏ hàng</a>
                                                     <a class="add-to-compare-link" href="compare.html">Add to
                                                         compare</a>
                                                 </div>
@@ -2283,7 +2283,7 @@
                                                 </a>
                                                 <!-- .woocommerce-LoopProduct-link -->
                                                 <div class="hover-area">
-                                                    <a class="button" href="cart.html">Add to cart</a>
+                                                    <a class="button" href="cart.html">Thêm vào giỏ hàng</a>
                                                     <a class="add-to-compare-link" href="compare.html">Add to
                                                         compare</a>
                                                 </div>
@@ -2311,7 +2311,7 @@
                                                 </a>
                                                 <!-- .woocommerce-LoopProduct-link -->
                                                 <div class="hover-area">
-                                                    <a class="button" href="cart.html">Add to cart</a>
+                                                    <a class="button" href="cart.html">Thêm vào giỏ hàng</a>
                                                     <a class="add-to-compare-link" href="compare.html">Add to
                                                         compare</a>
                                                 </div>
@@ -2339,7 +2339,7 @@
                                                 </a>
                                                 <!-- .woocommerce-LoopProduct-link -->
                                                 <div class="hover-area">
-                                                    <a class="button" href="cart.html">Add to cart</a>
+                                                    <a class="button" href="cart.html">Thêm vào giỏ hàng</a>
                                                     <a class="add-to-compare-link" href="compare.html">Add to
                                                         compare</a>
                                                 </div>
@@ -2367,7 +2367,7 @@
                                                 </a>
                                                 <!-- .woocommerce-LoopProduct-link -->
                                                 <div class="hover-area">
-                                                    <a class="button" href="cart.html">Add to cart</a>
+                                                    <a class="button" href="cart.html">Thêm vào giỏ hàng</a>
                                                     <a class="add-to-compare-link" href="compare.html">Add to
                                                         compare</a>
                                                 </div>
@@ -2395,7 +2395,7 @@
                                                 </a>
                                                 <!-- .woocommerce-LoopProduct-link -->
                                                 <div class="hover-area">
-                                                    <a class="button" href="cart.html">Add to cart</a>
+                                                    <a class="button" href="cart.html">Thêm vào giỏ hàng</a>
                                                     <a class="add-to-compare-link" href="compare.html">Add to
                                                         compare</a>
                                                 </div>
@@ -2423,7 +2423,7 @@
                                                 </a>
                                                 <!-- .woocommerce-LoopProduct-link -->
                                                 <div class="hover-area">
-                                                    <a class="button" href="cart.html">Add to cart</a>
+                                                    <a class="button" href="cart.html">Thêm vào giỏ hàng</a>
                                                     <a class="add-to-compare-link" href="compare.html">Add to
                                                         compare</a>
                                                 </div>
@@ -2451,7 +2451,7 @@
                                                 </a>
                                                 <!-- .woocommerce-LoopProduct-link -->
                                                 <div class="hover-area">
-                                                    <a class="button" href="cart.html">Add to cart</a>
+                                                    <a class="button" href="cart.html">Thêm vào giỏ hàng</a>
                                                     <a class="add-to-compare-link" href="compare.html">Add to
                                                         compare</a>
                                                 </div>
@@ -2514,7 +2514,7 @@
                                                 </div>
                                                 <!-- .woocommerce-product-details__short-description -->
                                                 <a class="button product_type_simple add_to_cart_button"
-                                                    href="cart.html">Add to cart</a>
+                                                    href="cart.html">Thêm vào giỏ hàng</a>
                                                 <a class="add-to-compare-link" href="compare.html">Add to
                                                     compare</a>
                                             </div>
@@ -2566,7 +2566,7 @@
                                                 </div>
                                                 <!-- .woocommerce-product-details__short-description -->
                                                 <a class="button product_type_simple add_to_cart_button"
-                                                    href="cart.html">Add to cart</a>
+                                                    href="cart.html">Thêm vào giỏ hàng</a>
                                                 <a class="add-to-compare-link" href="compare.html">Add to
                                                     compare</a>
                                             </div>
@@ -2618,7 +2618,7 @@
                                                 </div>
                                                 <!-- .woocommerce-product-details__short-description -->
                                                 <a class="button product_type_simple add_to_cart_button"
-                                                    href="cart.html">Add to cart</a>
+                                                    href="cart.html">Thêm vào giỏ hàng</a>
                                                 <a class="add-to-compare-link" href="compare.html">Add to
                                                     compare</a>
                                             </div>
@@ -2670,7 +2670,7 @@
                                                 </div>
                                                 <!-- .woocommerce-product-details__short-description -->
                                                 <a class="button product_type_simple add_to_cart_button"
-                                                    href="cart.html">Add to cart</a>
+                                                    href="cart.html">Thêm vào giỏ hàng</a>
                                                 <a class="add-to-compare-link" href="compare.html">Add to
                                                     compare</a>
                                             </div>
@@ -2722,7 +2722,7 @@
                                                 </div>
                                                 <!-- .woocommerce-product-details__short-description -->
                                                 <a class="button product_type_simple add_to_cart_button"
-                                                    href="cart.html">Add to cart</a>
+                                                    href="cart.html">Thêm vào giỏ hàng</a>
                                                 <a class="add-to-compare-link" href="compare.html">Add to
                                                     compare</a>
                                             </div>
@@ -2774,7 +2774,7 @@
                                                 </div>
                                                 <!-- .woocommerce-product-details__short-description -->
                                                 <a class="button product_type_simple add_to_cart_button"
-                                                    href="cart.html">Add to cart</a>
+                                                    href="cart.html">Thêm vào giỏ hàng</a>
                                                 <a class="add-to-compare-link" href="compare.html">Add to
                                                     compare</a>
                                             </div>
@@ -2826,7 +2826,7 @@
                                                 </div>
                                                 <!-- .woocommerce-product-details__short-description -->
                                                 <a class="button product_type_simple add_to_cart_button"
-                                                    href="cart.html">Add to cart</a>
+                                                    href="cart.html">Thêm vào giỏ hàng</a>
                                                 <a class="add-to-compare-link" href="compare.html">Add to
                                                     compare</a>
                                             </div>
@@ -2878,7 +2878,7 @@
                                                 </div>
                                                 <!-- .woocommerce-product-details__short-description -->
                                                 <a class="button product_type_simple add_to_cart_button"
-                                                    href="cart.html">Add to cart</a>
+                                                    href="cart.html">Thêm vào giỏ hàng</a>
                                                 <a class="add-to-compare-link" href="compare.html">Add to
                                                     compare</a>
                                             </div>
@@ -2930,7 +2930,7 @@
                                                 </div>
                                                 <!-- .woocommerce-product-details__short-description -->
                                                 <a class="button product_type_simple add_to_cart_button"
-                                                    href="cart.html">Add to cart</a>
+                                                    href="cart.html">Thêm vào giỏ hàng</a>
                                                 <a class="add-to-compare-link" href="compare.html">Add to
                                                     compare</a>
                                             </div>
@@ -2982,7 +2982,7 @@
                                                 </div>
                                                 <!-- .woocommerce-product-details__short-description -->
                                                 <a class="button product_type_simple add_to_cart_button"
-                                                    href="cart.html">Add to cart</a>
+                                                    href="cart.html">Thêm vào giỏ hàng</a>
                                                 <a class="add-to-compare-link" href="compare.html">Add to
                                                     compare</a>
                                             </div>
@@ -3034,7 +3034,7 @@
                                                 </div>
                                                 <!-- .woocommerce-product-details__short-description -->
                                                 <a class="button product_type_simple add_to_cart_button"
-                                                    href="cart.html">Add to cart</a>
+                                                    href="cart.html">Thêm vào giỏ hàng</a>
                                                 <a class="add-to-compare-link" href="compare.html">Add to
                                                     compare</a>
                                             </div>
@@ -3086,7 +3086,7 @@
                                                 </div>
                                                 <!-- .woocommerce-product-details__short-description -->
                                                 <a class="button product_type_simple add_to_cart_button"
-                                                    href="cart.html">Add to cart</a>
+                                                    href="cart.html">Thêm vào giỏ hàng</a>
                                                 <a class="add-to-compare-link" href="compare.html">Add to
                                                     compare</a>
                                             </div>
@@ -3138,7 +3138,7 @@
                                                 </div>
                                                 <!-- .woocommerce-product-details__short-description -->
                                                 <a class="button product_type_simple add_to_cart_button"
-                                                    href="cart.html">Add to cart</a>
+                                                    href="cart.html">Thêm vào giỏ hàng</a>
                                                 <a class="add-to-compare-link" href="compare.html">Add to
                                                     compare</a>
                                             </div>
@@ -3190,7 +3190,7 @@
                                                 </div>
                                                 <!-- .woocommerce-product-details__short-description -->
                                                 <a class="button product_type_simple add_to_cart_button"
-                                                    href="cart.html">Add to cart</a>
+                                                    href="cart.html">Thêm vào giỏ hàng</a>
                                                 <a class="add-to-compare-link" href="compare.html">Add to
                                                     compare</a>
                                             </div>
@@ -3242,7 +3242,7 @@
                                                 </div>
                                                 <!-- .woocommerce-product-details__short-description -->
                                                 <a class="button product_type_simple add_to_cart_button"
-                                                    href="cart.html">Add to cart</a>
+                                                    href="cart.html">Thêm vào giỏ hàng</a>
                                                 <a class="add-to-compare-link" href="compare.html">Add to
                                                     compare</a>
                                             </div>
@@ -3294,7 +3294,7 @@
                                                 </div>
                                                 <!-- .woocommerce-product-details__short-description -->
                                                 <a class="button product_type_simple add_to_cart_button"
-                                                    href="cart.html">Add to cart</a>
+                                                    href="cart.html">Thêm vào giỏ hàng</a>
                                                 <a class="add-to-compare-link" href="compare.html">Add to
                                                     compare</a>
                                             </div>
@@ -3346,7 +3346,7 @@
                                                 </div>
                                                 <!-- .woocommerce-product-details__short-description -->
                                                 <a class="button product_type_simple add_to_cart_button"
-                                                    href="cart.html">Add to cart</a>
+                                                    href="cart.html">Thêm vào giỏ hàng</a>
                                                 <a class="add-to-compare-link" href="compare.html">Add to
                                                     compare</a>
                                             </div>
@@ -3398,7 +3398,7 @@
                                                 </div>
                                                 <!-- .woocommerce-product-details__short-description -->
                                                 <a class="button product_type_simple add_to_cart_button"
-                                                    href="cart.html">Add to cart</a>
+                                                    href="cart.html">Thêm vào giỏ hàng</a>
                                                 <a class="add-to-compare-link" href="compare.html">Add to
                                                     compare</a>
                                             </div>
@@ -3450,7 +3450,7 @@
                                                 </div>
                                                 <!-- .woocommerce-product-details__short-description -->
                                                 <a class="button product_type_simple add_to_cart_button"
-                                                    href="cart.html">Add to cart</a>
+                                                    href="cart.html">Thêm vào giỏ hàng</a>
                                                 <a class="add-to-compare-link" href="compare.html">Add to
                                                     compare</a>
                                             </div>
@@ -3502,7 +3502,7 @@
                                                 </div>
                                                 <!-- .woocommerce-product-details__short-description -->
                                                 <a class="button product_type_simple add_to_cart_button"
-                                                    href="cart.html">Add to cart</a>
+                                                    href="cart.html">Thêm vào giỏ hàng</a>
                                                 <a class="add-to-compare-link" href="compare.html">Add to
                                                     compare</a>
                                             </div>
@@ -3586,7 +3586,7 @@
                                                             </span>
                                                             <!-- .price -->
                                                             <a class="button add_to_cart_button"
-                                                                href="cart.html">Add to Cart</a>
+                                                                href="cart.html">Thêm vào giỏ hàng</a>
                                                             <a class="add-to-compare-link" href="compare.html">Add
                                                                 to compare</a>
                                                         </div>
@@ -3667,7 +3667,7 @@
                                                             </span>
                                                             <!-- .price -->
                                                             <a class="button add_to_cart_button"
-                                                                href="cart.html">Add to Cart</a>
+                                                                href="cart.html">Thêm vào giỏ hàng</a>
                                                             <a class="add-to-compare-link" href="compare.html">Add
                                                                 to compare</a>
                                                         </div>
@@ -3748,7 +3748,7 @@
                                                             </span>
                                                             <!-- .price -->
                                                             <a class="button add_to_cart_button"
-                                                                href="cart.html">Add to Cart</a>
+                                                                href="cart.html">Thêm vào giỏ hàng</a>
                                                             <a class="add-to-compare-link" href="compare.html">Add
                                                                 to compare</a>
                                                         </div>
@@ -3829,7 +3829,7 @@
                                                             </span>
                                                             <!-- .price -->
                                                             <a class="button add_to_cart_button"
-                                                                href="cart.html">Add to Cart</a>
+                                                                href="cart.html">Thêm vào giỏ hàng</a>
                                                             <a class="add-to-compare-link" href="compare.html">Add
                                                                 to compare</a>
                                                         </div>
@@ -3910,7 +3910,7 @@
                                                             </span>
                                                             <!-- .price -->
                                                             <a class="button add_to_cart_button"
-                                                                href="cart.html">Add to Cart</a>
+                                                                href="cart.html">Thêm vào giỏ hàng</a>
                                                             <a class="add-to-compare-link" href="compare.html">Add
                                                                 to compare</a>
                                                         </div>
@@ -3991,7 +3991,7 @@
                                                             </span>
                                                             <!-- .price -->
                                                             <a class="button add_to_cart_button"
-                                                                href="cart.html">Add to Cart</a>
+                                                                href="cart.html">Thêm vào giỏ hàng</a>
                                                             <a class="add-to-compare-link" href="compare.html">Add
                                                                 to compare</a>
                                                         </div>
@@ -4078,7 +4078,7 @@
                                                             </span>
                                                             <!-- .price -->
                                                             <a class="button add_to_cart_button"
-                                                                href="cart.html">Add to Cart</a>
+                                                                href="cart.html">Thêm vào giỏ hàng</a>
                                                             <a class="add-to-compare-link" href="compare.html">Add
                                                                 to compare</a>
                                                         </div>
@@ -4156,7 +4156,7 @@
                                                             </span>
                                                             <!-- .price -->
                                                             <a class="button add_to_cart_button"
-                                                                href="cart.html">Add to Cart</a>
+                                                                href="cart.html">Thêm vào giỏ hàng</a>
                                                             <a class="add-to-compare-link" href="compare.html">Add
                                                                 to compare</a>
                                                         </div>
@@ -4234,7 +4234,7 @@
                                                             </span>
                                                             <!-- .price -->
                                                             <a class="button add_to_cart_button"
-                                                                href="cart.html">Add to Cart</a>
+                                                                href="cart.html">Thêm vào giỏ hàng</a>
                                                             <a class="add-to-compare-link" href="compare.html">Add
                                                                 to compare</a>
                                                         </div>
@@ -4312,7 +4312,7 @@
                                                             </span>
                                                             <!-- .price -->
                                                             <a class="button add_to_cart_button"
-                                                                href="cart.html">Add to Cart</a>
+                                                                href="cart.html">Thêm vào giỏ hàng</a>
                                                             <a class="add-to-compare-link" href="compare.html">Add
                                                                 to compare</a>
                                                         </div>
@@ -4390,7 +4390,7 @@
                                                             </span>
                                                             <!-- .price -->
                                                             <a class="button add_to_cart_button"
-                                                                href="cart.html">Add to Cart</a>
+                                                                href="cart.html">Thêm vào giỏ hàng</a>
                                                             <a class="add-to-compare-link" href="compare.html">Add
                                                                 to compare</a>
                                                         </div>
@@ -4468,7 +4468,7 @@
                                                             </span>
                                                             <!-- .price -->
                                                             <a class="button add_to_cart_button"
-                                                                href="cart.html">Add to Cart</a>
+                                                                href="cart.html">Thêm vào giỏ hàng</a>
                                                             <a class="add-to-compare-link" href="compare.html">Add
                                                                 to compare</a>
                                                         </div>
@@ -4544,7 +4544,7 @@
                                                             </span>
                                                             <!-- .price -->
                                                             <a class="button add_to_cart_button"
-                                                                href="cart.html">Add to Cart</a>
+                                                                href="cart.html">Thêm vào giỏ hàng</a>
                                                             <a class="add-to-compare-link" href="compare.html">Add
                                                                 to compare</a>
                                                         </div>
@@ -4611,7 +4611,7 @@
                                                             </span>
                                                             <!-- .price -->
                                                             <a class="button add_to_cart_button"
-                                                                href="cart.html">Add to Cart</a>
+                                                                href="cart.html">Thêm vào giỏ hàng</a>
                                                             <a class="add-to-compare-link" href="compare.html">Add
                                                                 to compare</a>
                                                         </div>
@@ -4678,7 +4678,7 @@
                                                             </span>
                                                             <!-- .price -->
                                                             <a class="button add_to_cart_button"
-                                                                href="cart.html">Add to Cart</a>
+                                                                href="cart.html">Thêm vào giỏ hàng</a>
                                                             <a class="add-to-compare-link" href="compare.html">Add
                                                                 to compare</a>
                                                         </div>
@@ -4745,7 +4745,7 @@
                                                             </span>
                                                             <!-- .price -->
                                                             <a class="button add_to_cart_button"
-                                                                href="cart.html">Add to Cart</a>
+                                                                href="cart.html">Thêm vào giỏ hàng</a>
                                                             <a class="add-to-compare-link" href="compare.html">Add
                                                                 to compare</a>
                                                         </div>
@@ -4812,7 +4812,7 @@
                                                             </span>
                                                             <!-- .price -->
                                                             <a class="button add_to_cart_button"
-                                                                href="cart.html">Add to Cart</a>
+                                                                href="cart.html">Thêm vào giỏ hàng</a>
                                                             <a class="add-to-compare-link" href="compare.html">Add
                                                                 to compare</a>
                                                         </div>
@@ -4879,7 +4879,7 @@
                                                             </span>
                                                             <!-- .price -->
                                                             <a class="button add_to_cart_button"
-                                                                href="cart.html">Add to Cart</a>
+                                                                href="cart.html">Thêm vào giỏ hàng</a>
                                                             <a class="add-to-compare-link" href="compare.html">Add
                                                                 to compare</a>
                                                         </div>
@@ -4946,7 +4946,7 @@
                                                             </span>
                                                             <!-- .price -->
                                                             <a class="button add_to_cart_button"
-                                                                href="cart.html">Add to Cart</a>
+                                                                href="cart.html">Thêm vào giỏ hàng</a>
                                                             <a class="add-to-compare-link" href="compare.html">Add
                                                                 to compare</a>
                                                         </div>
@@ -5013,7 +5013,7 @@
                                                             </span>
                                                             <!-- .price -->
                                                             <a class="button add_to_cart_button"
-                                                                href="cart.html">Add to Cart</a>
+                                                                href="cart.html">Thêm vào giỏ hàng</a>
                                                             <a class="add-to-compare-link" href="compare.html">Add
                                                                 to compare</a>
                                                         </div>
@@ -5080,7 +5080,7 @@
                                                             </span>
                                                             <!-- .price -->
                                                             <a class="button add_to_cart_button"
-                                                                href="cart.html">Add to Cart</a>
+                                                                href="cart.html">Thêm vào giỏ hàng</a>
                                                             <a class="add-to-compare-link" href="compare.html">Add
                                                                 to compare</a>
                                                         </div>
