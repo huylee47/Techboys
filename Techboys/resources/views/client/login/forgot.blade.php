@@ -1,6 +1,6 @@
 @extends('client.layouts.master')
 
-<style>
+
     <style>
         .alert-success {
             color: #155724;
@@ -21,7 +21,7 @@
         border-radius: 4px;
     }
 </style>
-</style>
+
 @section('main')
     <div class="container">
         <h1>Quên mật khẩu</h1>
@@ -36,13 +36,12 @@
     @endif
     </div>
 
-
-    <form action="{{ route('client.check_forgot_password') }}" method="POST">
+    <form action="{{ route('client.check_forgot_password') }}" method="POST" onsubmit="return disableButton(this);">
         @csrf
         <div class="container"> 
             <div class="form-group position-relative has-icon-left mb-4">
                 <input type="email" class="form-control form-control-xl" name="email" placeholder="nhập email"
-                    value="{{old('email')  }}">
+                    value="{{old('email') }}">
                 <div class="form-control-icon">
                     <i class="bi bi-envelope"></i>
                 </div>
@@ -55,11 +54,19 @@
                     </p>
                 @endif
             </div>
-            <button class="btn btn-primary btn-block btn-lg shadow-lg mt-5">Gửi</button>
-        </div>
+            <button class="btn btn-primary btn-block btn-lg shadow-lg mt-5" id="submitButton">Gửi</button>      
+          </div>
     </form>
     <div class="text-center mt-5 text-lg fs-4">
         <p class="text-gray-600">Bạn đã có tài khoản? <a href="{{ route('login.client') }}" class="font-bold">Đăng nhập</a>.
         </p>
     </div>
 @endsection
+<script>
+    function disableButton(form) {
+        var button = form.querySelector('#submitButton');
+        button.disabled = true;
+        button.innerHTML = 'Đang xử lý...';
+        return true;
+    }
+</script>

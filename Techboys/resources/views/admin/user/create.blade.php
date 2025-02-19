@@ -64,7 +64,7 @@
                                 <div class="col-md-6 mb-3">
                                     <label for="description">SĐT</label>
                                     <input type="number"  class="form-control" id="phone" aria-describedby=""
-                                        name="phone" placeholder="Nhập Tên" value="{{ old('phone')  }}">
+                                        name="phone" placeholder="Nhập số điện thoại" value="{{ old('phone')  }}">
                                 </div>
                               
                              

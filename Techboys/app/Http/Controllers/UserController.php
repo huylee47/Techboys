@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
+
 use function Laravel\Prompts\alert;
 
 class UserController extends Controller
@@ -211,7 +212,7 @@ class UserController extends Controller
     }
 
     public function reset_password($token, Request $request) {
-        $tokenRecord = UserResetToken::where('token', $token)->firstOrFail();
+         UserResetToken::where('token', $token)->firstOrFail();
         return view('client.login.reset_password', ['token' => $token]);
     }
     public function check_reset_password($token, Request $request)
@@ -238,4 +239,73 @@ class UserController extends Controller
 
         return redirect()->back()->with('no', 'Đổi mật khẩu không thành công');
     }
+
+   
+    public function edit(Request $request)
+    {
+        $user = Auth::user();
+        return view('client.user.edit', compact('user'));
+    }
+    public function update(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',    
+        ], [
+            'name.required' => 'Vui lòng nhập họ tên.',
+            'name.max' => 'Họ tên không được vượt quá 255 ký tự.',
+        ]);
+        Auth::user();
+        User::find($request->id)->update([
+            'name' => $request->name,
+             'address' => $request->address,
+             'phone' => $request->phone,
+        ]);
+        return redirect()->route('client.edit')->with('success', 'Sửa thành công');
+    }
+    public function changePassword(Request $request)
+    {
+        $user = Auth::user();
+        return view('client.user.changePassword', compact('user'));
+    }
+    public function updatePassword(Request $request)
+    {
+        $request->validate([
+            'passwordOld' => 'required|string',
+            'password' => 'required|string|min:8|unique:users',
+            'password-confirm'=> 'required|string|same:password'
+        ], [
+            'passwordOld.required' => 'Vui lòng nhập mật khẩu cũ.',
+            'password.unique' => 'Mật khẩu mới giống mật khẩu cũ.',
+            'password.required' => 'Vui lòng nhập mật khẩu mới.',
+            'password.min' => 'Mật khẩu mới phải có ít nhất 8 ký tự.',
+            'password-confirm.required' => 'Vui lòng nhập mật khẩu xác nhận.',
+            'password-confirm.same' => 'Mật khẩu xác nhận phải trùng với mật khẩu đã nhập.'
+        ]);
+    
+        $user = Auth::user();
+    
+        if (!Hash::check($request->passwordOld, $user->password)) {
+            return redirect()->back()->with('error', 'Mật khẩu cũ không đúng.');
+        }
+        
+        if (Hash::check($request->password, $user->password)) {
+            return redirect()->back()->with('error', 'Mật khẩu mới trùng với mật khẩu cũ.');
+        }
+    
+        User::find($request->id)->update([
+            'password' => Hash::make($request->password),
+        ]);
+    
+        return redirect()->route('client.changePassword')->with('success', 'Đổi mật khẩu thành công');
+    }
+    
+        public function logout(Request $request)
+        {
+            Auth::logout();
+            $request->session()->invalidate();
+            $request->session()->regenerateToken();
+    
+            return redirect('/');
+        }
 }
+
