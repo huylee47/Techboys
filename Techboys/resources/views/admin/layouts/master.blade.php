@@ -19,7 +19,7 @@
     <link rel="shortcut icon" href="{{ url('') }}/admin/assets/images/favicon.svg" type="image/x-icon">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select/dist/css/bootstrap-select.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/admin/assets/styles/choices.min.css">
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag@3.1.0/dist/css/multi-select-tag.css">
     <!-- Thêm CSS từ section 'styles' nếu có -->
     @yield('styles')
 </head>
@@ -127,7 +127,7 @@
     <script src="{{ url('') }}/admin/assets/vendors/jquery/jquery.min.js"></script>
     <script src="{{ url('') }}/admin/assets/vendors/simple-datatables/simple-datatables.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
-
+    <script src="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag@3.1.0/dist/js/multi-select-tag.js"></script>
     <script>
         // Simple Datatable
         let table1 = document.querySelector('#table1');

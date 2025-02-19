@@ -19,7 +19,7 @@
         <link rel="shortcut icon" href="{{ url('') }}/home/assets/images/fav-icon.png">
         @yield('styles')
     </head>
-    <body class="page-template-default error-page">
+    <body class="page-template-default error-page woocommerce-active single-product full-width normal">
         <div id="page" class="hfeed site">
             <div class="top-bar top-bar-v1">
                 <div class="col-full">
