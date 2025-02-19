@@ -82,6 +82,6 @@
     </div>
     </form>
     <div class="text-center mt-5 text-lg fs-4">
-        <p class="text-gray-600">Bạn đã có tài khoản? <a href="{{ route('login.client') }}" class="font-bold">Đăng nhập</a>.</p>
+        <p class="text-gray-600">Bạn đã có tài khoản? <a href="{{ route('login.client') }}" style="color: blue" class="font-bold">Đăng nhập</a>.</p>
     </div>
 @endsection

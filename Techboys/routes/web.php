@@ -20,7 +20,7 @@ Route::get('login', function () {
     return view('client.login.index');
 })->name('login.client');
 Route::post('/login/Client', [UserController::class, 'loginClient'])->name('loginClient.auth');
-
+//đăng ký
 Route::prefix('/register')->group(function () {
     Route::get('/', [UserController::class, 'create'])->name('client.log.create');
     route::post('/store', [UserController::class, 'store'])->name('client.log.store');
