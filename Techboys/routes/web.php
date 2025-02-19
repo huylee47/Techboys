@@ -10,8 +10,8 @@ use App\Http\Controllers\ProductCategoryController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 //client
-Route::get('/blog', function () {
-    return view('client.login.reset_password');
+Route::get('/blogs', function () {
+    return view('client.user.index');
 });
 Route::get('/', function () {
     return view('client.home.home');
@@ -20,7 +20,7 @@ Route::get('login', function () {
     return view('client.login.index');
 })->name('login.client');
 Route::post('/login/Client', [UserController::class, 'loginClient'])->name('loginClient.auth');
-
+//đăng ký
 Route::prefix('/register')->group(function () {
     Route::get('/', [UserController::class, 'create'])->name('client.log.create');
     route::post('/store', [UserController::class, 'store'])->name('client.log.store');
@@ -33,6 +33,17 @@ route::post('/check-forgot-password', [UserController::class, 'check_forgot_pass
 
 route::get('/reset-password/{token}', [UserController::class, 'reset_password'])->name('client.reset_password');
 route::post('/check-reset-password/{token}', [UserController::class, 'check_reset_password'])->name('client.check_reset_password');
+
+//profile
+route::get('/profile',[UserController::class, 'edit'])->name('client.edit');
+route::post('/update/{id}', [UserController::class, 'update'])->name('client.update');
+
+//change password
+route::get('/profile/changePassword',[UserController::class, 'changePassword'])->name('client.changePassword');
+route::post('/updatePassword/{id}', [UserController::class, 'updatePassword'])->name('client.updatePassword');
+//logout
+Route::get('/logout', [UserController::class, 'logout'])->name('client.logout');
+
 
 //admin
 Route::get('/login/admin', function () {
