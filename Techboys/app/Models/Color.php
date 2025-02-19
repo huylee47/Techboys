@@ -9,7 +9,7 @@ class Color extends Model
 {
     use HasFactory;
     protected $table = 'colors';
-    protected $fillable = ['name'];
+    protected $fillable = ['name','color_hex'];
     public function product_variant(){
         return $this->hasMany(ProductVariant::class);
     }
