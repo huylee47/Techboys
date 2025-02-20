@@ -40,19 +40,19 @@ Route::post('/login/Client', [UserController::class, 'loginClient'])->name('logi
 
 // Đăng ký
 Route::prefix('/register')->group(function () {
-    Route::get('/create', [UserController::class, 'create'])->name('admin.log.create');
-    Route::post('/store', [UserController::class, 'store'])->name('admin.log.store');
+    Route::get('/create', [UserController::class, 'create'])->name('client.log.create');
+    Route::post('/store', [UserController::class, 'store'])->name('client.log.store');
 });
 
 // Xác thực email
-Route::get('/veryfi-account/{email}', [UserController::class, 'veryfi'])->name('admin.veryfi');
+Route::get('/veryfi-account/{email}', [UserController::class, 'veryfi'])->name('clinet.veryfi');
 
 // Quên mật khẩu
-Route::get('forgot-password', [UserController::class, 'forgot_password'])->name('admin.forgot-password');
-Route::post('/check-forgot-password', [UserController::class, 'check_forgot_password'])->name('admin.check_forgot_password');
+Route::get('forgot-password', [UserController::class, 'forgot_password'])->name('client.forgot-password');
+Route::post('/check-forgot-password', [UserController::class, 'check_forgot_password'])->name('client.check_forgot_password');
 
-Route::get('/reset-password/{token}', [UserController::class, 'reset_password'])->name('admin.reset_password');
-Route::post('/check-reset-password/{token}', [UserController::class, 'check_reset_password'])->name('admin.check_reset_password');
+Route::get('/reset-password/{token}', [UserController::class, 'reset_password'])->name('client.reset_password');
+Route::post('/check-reset-password/{token}', [UserController::class, 'check_reset_password'])->name('client.check_reset_password');
 
 // Profile
 Route::get('/profile', [UserController::class, 'edit'])->name('client.edit');
