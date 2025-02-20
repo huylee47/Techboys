@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en-US" itemscope="itemscope" itemtype="http://schema.org/WebPage">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
@@ -69,7 +68,7 @@
     @yield('styles')
 </head>
 
-<body class="page-template-default error-page">
+<body class="page-template-default error-page woocommerce-active single-product full-width normal">
     <div id="page" class="hfeed site">
         <div class="top-bar top-bar-v1">
             <div class="col-full">

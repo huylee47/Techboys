@@ -468,7 +468,7 @@
                                                         <div class="products">
                                                             @foreach ($newProduct as $np)
                                                                 <div class="product">
-                                                                    <a href="single-product-fullwidth.html"
+                                                                    <a href="{{route('client.product.show',['slug' => $np->slug])}}"
                                                                         class="woocommerce-LoopProduct-link">
                                                                         <img src="{{ url('') }}/admin/assets/images/product/{{ $np->img }}"
                                                                             width="100%" class="fixed-image"

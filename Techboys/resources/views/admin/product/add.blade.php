@@ -149,7 +149,7 @@
                                                     </div>
                                                     <div class="col-md-6 mb-3">
                                                         <label for="price" class="form-label">Giá bán</label>
-                                                        <input type="number" class="form-control" name="price[]">
+                                                        <input type="text" class="form-control" name="price[]">
                                                         @foreach (old('price', []) as $index => $value)
                                                             @error("price.$index")
                                                                 <p class="text-danger small"><i>{{ $message }}</i></p>
@@ -327,6 +327,27 @@
                 attachRemoveEvents();
                 updateRemoveButtons();
                 updateValidation();
+            });
+            document.addEventListener("DOMContentLoaded", function() {
+                let priceInputs = document.querySelectorAll('input[name="price[]"]');
+
+                priceInputs.forEach(input => {
+                    input.addEventListener('input', function(e) {
+                        let value = e.target.value;
+
+                        value = value.replace(/[^0-9]/g, '');
+
+                        value = new Intl.NumberFormat('vi-VN').format(value);
+
+                        e.target.value = value;
+                    });
+                });
+
+                document.querySelector("form").addEventListener("submit", function() {
+                    priceInputs.forEach(input => {
+                        input.value = input.value.replace(/\./g, '');
+                    });
+                });
             });
         </script>
     @endsection

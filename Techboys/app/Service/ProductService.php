@@ -183,5 +183,16 @@ class ProductService{
             return redirect()->route('admin.product.imageIndex', $productId)->with('error', 'Ảnh không tồn tại');
         }
     }
-
+// CLIENT
+    public function getProductBySlug($slug) {
+        $product = Product::where('slug', $slug)->first();
+        $images = Images::where('product_id', $product->id)->get();
+        $variants = ProductVariant::where('product_id', $product->id)->get();
+        if ($product) {
+            $relatedProducts = Product::where('category_id', $product->category_id)->where('id', '!=', $product->id)->take(10)->get();
+            return view('client.product.detail', compact('product','relatedProducts','images', 'variants'));
+        } else {
+            abort(404);
+        }
+    }
 }

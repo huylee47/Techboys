@@ -3,16 +3,22 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cart;
+use App\Service\CartService;
 use Illuminate\Http\Request;
 
 class CartController extends Controller
 {
+    private $cartService;
+    
+    public function __construct(CartService $cartService){
+        $this->cartService = $cartService;
+    } 
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        
     }
 
     /**
@@ -61,5 +67,14 @@ class CartController extends Controller
     public function destroy(Cart $cart)
     {
         //
+    }
+    // CLIENT
+    public function showCart(){
+        $cartItems = $this->cartService->getCartItems();
+        return view('client.cart.cart', compact('cartItems'));
+    }
+    public function addToCart(Request $request){
+        $this->cartService->addToCart($request);
+        return redirect()->route('client.cart.index')->with('success', 'Product added to cart successfully');
     }
 }

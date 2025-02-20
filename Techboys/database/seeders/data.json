@@ -369,6 +369,12 @@
     ],
     "images": [
         {
+            "image": "iphone-13.jpg",
+            "product_id": 1,
+            "created_at": "2025-02-18 12:00:00",
+            "updated_at": "2025-02-18 12:00:00"
+        },
+        {
             "image": "image1.jpg",
             "product_id": 1,
             "created_at": "2025-01-19 12:00:00",
@@ -381,6 +387,12 @@
             "updated_at": "2025-01-19 12:00:00"
         },
         {
+            "image": "s21.jpg",
+            "product_id": 2,
+            "created_at": "2025-02-18 12:00:00",
+            "updated_at": "2025-02-18 12:00:00"
+        },
+        {
             "image": "image3.jpg",
             "product_id": 2,
             "created_at": "2025-01-19 12:00:00",
@@ -391,8 +403,447 @@
             "product_id": 2,
             "created_at": "2025-01-19 12:00:00",
             "updated_at": "2025-01-19 12:00:00"
+        },
+        {
+            "image": "xiaomi-mi11.jpg",
+            "product_id": 3,
+            "created_at": "2025-02-18 12:00:00",
+            "updated_at": "2025-02-18 12:00:00"
+        },
+        {
+            "image": "iphone-12.jpg",
+            "product_id": 4,
+            "created_at": "2025-02-18 12:00:00",
+            "updated_at": "2025-02-18 12:00:00"
+        },
+        {
+            "image": "oppo-f19-pro.jpg",
+            "product_id": 5,
+            "created_at": "2025-02-18 12:00:00",
+            "updated_at": "2025-02-18 12:00:00"
+        },
+        {
+            "image": "realme-8-pro.jpg",
+            "product_id": 6,
+            "created_at": "2025-02-18 12:00:00",
+            "updated_at": "2025-02-18 12:00:00"
+        },
+        {
+            "image": "vivo-v21.jpg",
+            "product_id": 7,
+            "created_at": "2025-02-18 12:00:00",
+            "updated_at": "2025-02-18 12:00:00"
+        },
+        {
+            "image": "galaxy-a52.jpg",
+            "product_id": 8,
+            "created_at": "2025-02-18 12:00:00",
+            "updated_at": "2025-02-18 12:00:00"
+        },
+        {
+            "image": "xiaomi-redmi-note-10.jpg",
+            "product_id": 9,
+            "created_at": "2025-02-18 12:00:00",
+            "updated_at": "2025-02-18 12:00:00"
+        },
+        {
+            "image": "oppo-reno5.jpg",
+            "product_id": 10,
+            "created_at": "2025-02-18 12:00:00",
+            "updated_at": "2025-02-18 12:00:00"
+        },
+        {
+            "image": "realme-narzo-30-pro.jpg",
+            "product_id": 11,
+            "created_at": "2025-02-18 12:00:00",
+            "updated_at": "2025-02-18 12:00:00"
+        },
+        {
+            "image": "vivo-y20.jpg",
+            "product_id": 12,
+            "created_at": "2025-02-18 12:00:00",
+            "updated_at": "2025-02-18 12:00:00"
+        },
+        {
+            "image": "iphone-se-2020.jpg",
+            "product_id": 13,
+            "created_at": "2025-02-18 12:00:00",
+            "updated_at": "2025-02-18 12:00:00"
+        },
+        {
+            "image": "note-20.jpg",
+            "product_id": 14,
+            "created_at": "2025-02-18 12:00:00",
+            "updated_at": "2025-02-18 12:00:00"
+        },
+        {
+            "image": "xiaomi-mi-10t-pro.jpg",
+            "product_id": 15,
+            "created_at": "2025-02-18 12:00:00",
+            "updated_at": "2025-02-18 12:00:00"
+        },
+        {
+            "image": "oppo-a54.jpg",
+            "product_id": 16,
+            "created_at": "2025-02-18 12:00:00",
+            "updated_at": "2025-02-18 12:00:00"
+        },
+        {
+            "image": "realme-x7-pro.jpg",
+            "product_id": 17,
+            "created_at": "2025-02-18 12:00:00",
+            "updated_at": "2025-02-18 12:00:00"
+        },
+        {
+            "image": "iphone-11.jpg",
+            "product_id": 18,
+            "created_at": "2025-02-18 12:00:00",
+            "updated_at": "2025-02-18 12:00:00"
+        },
+        {
+            "image": "z-fold-2.jpg",
+            "product_id": 19,
+            "created_at": "2025-02-18 12:00:00",
+            "updated_at": "2025-02-18 12:00:00"
+        },
+        {
+            "image": "xiaomi-redmi-note-9-pro.jpg",
+            "product_id": 20,
+            "created_at": "2025-02-18 12:00:00",
+            "updated_at": "2025-02-18 12:00:00"
+        },
+        {
+            "image": "oppo-a74.jpg",
+            "product_id": 21,
+            "created_at": "2025-02-18 12:00:00",
+            "updated_at": "2025-02-18 12:00:00"
+        },
+        {
+            "image": "realme-7-pro.jpg",
+            "product_id": 22,
+            "created_at": "2025-02-18 12:00:00",
+            "updated_at": "2025-02-18 12:00:00"
+        },
+        {
+            "image": "vivo-y31.jpg",
+            "product_id": 23,
+            "created_at": "2025-02-18 12:00:00",
+            "updated_at": "2025-02-18 12:00:00"
+        },
+        {
+            "image": "iphone-xs-max.jpg",
+            "product_id": 24,
+            "created_at": "2025-02-18 12:00:00",
+            "updated_at": "2025-02-18 12:00:00"
+        },
+        {
+            "image": "galaxy-z-flip.jpg",
+            "product_id": 25,
+            "created_at": "2025-02-18 12:00:00",
+            "updated_at": "2025-02-18 12:00:00"
+        },
+        {
+            "image": "poco-x3-pro.jpg",
+            "product_id": 26,
+            "created_at": "2025-02-18 12:00:00",
+            "updated_at": "2025-02-18 12:00:00"
+        },
+        {
+            "image": "oppo-f19.jpg",
+            "product_id": 27,
+            "created_at": "2025-02-18 12:00:00",
+            "updated_at": "2025-02-18 12:00:00"
+        },
+        {
+            "image": "realme-gt.jpg",
+            "product_id": 28,
+            "created_at": "2025-02-18 12:00:00",
+            "updated_at": "2025-02-18 12:00:00"
+        },
+        {
+            "image": "vivo-v20.jpg",
+            "product_id": 29,
+            "created_at": "2025-02-18 12:00:00",
+            "updated_at": "2025-02-18 12:00:00"
+        },
+        {
+            "image": "iphone-xr.jpg",
+            "product_id": 30,
+            "created_at": "2025-02-18 12:00:00",
+            "updated_at": "2025-02-18 12:00:00"
+        },
+        {
+            "image": "samsung-galaxy-a72.jpg",
+            "product_id": 31,
+            "created_at": "2025-02-18 12:00:00",
+            "updated_at": "2025-02-18 12:00:00"
+        },
+        {
+            "image": "xiaomi-redmi-k40.jpg",
+            "product_id": 32,
+            "created_at": "2025-02-18 12:00:00",
+            "updated_at": "2025-02-18 12:00:00"
+        },
+        {
+            "image": "oppo-a53s.jpg",
+            "product_id": 33,
+            "created_at": "2025-02-18 12:00:00",
+            "updated_at": "2025-02-18 12:00:00"
+        },
+        {
+            "image": "realme-narzo-50.jpg",
+            "product_id": 34,
+            "created_at": "2025-02-18 12:00:00",
+            "updated_at": "2025-02-18 12:00:00"
+        },
+        {
+            "image": "vivo-y20s.jpg",
+            "product_id": 35,
+            "created_at": "2025-02-18 12:00:00",
+            "updated_at": "2025-02-18 12:00:00"
+        },
+        {
+            "image": "iphone-7.jpg",
+            "product_id": 36,
+            "created_at": "2025-02-18 12:00:00",
+            "updated_at": "2025-02-18 12:00:00"
+        },
+        {
+            "image": "samsung-galaxy-0.jpg",
+            "product_id": 37,
+            "created_at": "2025-02-18 12:00:00",
+            "updated_at": "2025-02-18 12:00:00"
+        },
+        {
+            "image": "iphone-8-plus.jpg",
+            "product_id": 38,
+            "created_at": "2025-02-18 12:00:00",
+            "updated_at": "2025-02-18 12:00:00"
+        },
+        {
+            "image": "xiaomi-redmi-note-10.jpg",
+            "product_id": 39,
+            "created_at": "2025-02-18 12:00:00",
+            "updated_at": "2025-02-18 12:00:00"
+        },
+        {
+            "image": "oppo-reno6.jpg",
+            "product_id": 40,
+            "created_at": "2025-02-18 12:00:00",
+            "updated_at": "2025-02-18 12:00:00"
+        },
+        {
+            "image": "realme-X8-pro.jpg",
+            "product_id": 41,
+            "created_at": "2025-02-18 12:00:00",
+            "updated_at": "2025-02-18 12:00:00"
+        },
+        {
+            "image": "vivo-v21e.jpg",
+            "product_id": 42,
+            "created_at": "2025-02-18 12:00:00",
+            "updated_at": "2025-02-18 12:00:00"
+        },
+        {
+            "image": "iphone-se-2021.jpg",
+            "product_id": 43,
+            "created_at": "2025-02-18 12:00:00",
+            "updated_at": "2025-02-18 12:00:00"
+        },
+        {
+            "image": "samsung-galaxy-m32.jpg",
+            "product_id": 44,
+            "created_at": "2025-02-18 12:00:00",
+            "updated_at": "2025-02-18 12:00:00"
+        },
+        {
+            "image": "xiaomi-mi-11t-pro.jpg",
+            "product_id": 45,
+            "created_at": "2025-02-18 12:00:00",
+            "updated_at": "2025-02-18 12:00:00"
+        },
+        {
+            "image": "oppo-find-x3-pro.jpg",
+            "product_id": 46,
+            "created_at": "2025-02-18 12:00:00",
+            "updated_at": "2025-02-18 12:00:00"
+        },
+        {
+            "image": "realme-8-5g.jpg",
+            "product_id": 47,
+            "created_at": "2025-02-18 12:00:00",
+            "updated_at": "2025-02-18 12:00:00"
+        },
+        {
+            "image": "vivo-x60-pro.jpg",
+            "product_id": 48,
+            "created_at": "2025-02-18 12:00:00",
+            "updated_at": "2025-02-18 12:00:00"
+        },
+        {
+            "image": "iphone-11-pro-max.jpg",
+            "product_id": 49,
+            "created_at": "2025-02-18 12:00:00",
+            "updated_at": "2025-02-18 12:00:00"
+        },
+        {
+            "image": "samsung-galaxy-a72-5g.jpg",
+            "product_id": 50,
+            "created_at": "2025-02-18 12:00:00",
+            "updated_at": "2025-02-18 12:00:00"
+        },
+        {
+            "image": "xiaomi-mi-11-lite-5g.jpg",
+            "product_id": 51,
+            "created_at": "2025-02-18 12:00:00",
+            "updated_at": "2025-02-18 12:00:00"
+        },
+        {
+            "image": "oppo-a94-5g.jpg",
+            "product_id": 52,
+            "created_at": "2025-02-18 12:00:00",
+            "updated_at": "2025-02-18 12:00:00"
+        },
+        {
+            "image": "realme-gt-5g.jpg",
+            "product_id": 53,
+            "created_at": "2025-02-18 12:00:00",
+            "updated_at": "2025-02-18 12:00:00"
+        },
+        {
+            "image": "vivo-v21-5g.jpg",
+            "product_id": 54,
+            "created_at": "2025-02-18 12:00:00",
+            "updated_at": "2025-02-18 12:00:00"
+        },
+        {
+            "image": "iphone-xs.jpg",
+            "product_id": 55,
+            "created_at": "2025-02-18 12:00:00",
+            "updated_at": "2025-02-18 12:00:00"
+        },
+        {
+            "image": "samsung-galaxy-a12.jpg",
+            "product_id": 56,
+            "created_at": "2025-02-18 12:00:00",
+            "updated_at": "2025-02-18 12:00:00"
+        },
+        {
+            "image": "xiaomi-redmi-note-12-pro.jpg",
+            "product_id": 57,
+            "created_at": "2025-02-18 12:00:00",
+            "updated_at": "2025-02-18 12:00:00"
+        },
+        {
+            "image": "iphone-12-mini.jpg",
+            "product_id": 58,
+            "created_at": "2025-02-18 12:00:00",
+            "updated_at": "2025-02-18 12:00:00"
+        },
+        {
+            "image": "oppo-a55.jpg",
+            "product_id": 59,
+            "created_at": "2025-02-18 12:00:00",
+            "updated_at": "2025-02-18 12:00:00"
+        },
+        {
+            "image": "realme-narzo-31-pro.jpg",
+            "product_id": 60,
+            "created_at": "2025-02-18 12:00:00",
+            "updated_at": "2025-02-18 12:00:00"
+        },
+        {
+            "image": "vivo-y73.jpg",
+            "product_id": 61,
+            "created_at": "2025-02-18 12:00:00",
+            "updated_at": "2025-02-18 12:00:00"
+        },
+        {
+            "image": "iphone-15.jpg",
+            "product_id": 62,
+            "created_at": "2025-02-18 12:00:00",
+            "updated_at": "2025-02-18 12:00:00"
+        },
+        {
+            "image": "samsung-galaxy-s20-fe.jpg",
+            "product_id": 63,
+            "created_at": "2025-02-18 12:00:00",
+            "updated_at": "2025-02-18 12:00:00"
+        },
+        {
+            "image": "xiaomi-redmi-k43.jpg",
+            "product_id": 64,
+            "created_at": "2025-02-18 12:00:00",
+            "updated_at": "2025-02-18 12:00:00"
+        },
+        {
+            "image": "oppo-a73.jpg",
+            "product_id": 65,
+            "created_at": "2025-02-18 12:00:00",
+            "updated_at": "2025-02-18 12:00:00"
+        },
+        {
+            "image": "realme-x50-pro.jpg",
+            "product_id": 66,
+            "created_at": "2025-02-18 12:00:00",
+            "updated_at": "2025-02-18 12:00:00"
+        },
+        {
+            "image": "vivo-v2.jpg",
+            "product_id": 67,
+            "created_at": "2025-02-18 12:00:00",
+            "updated_at": "2025-02-18 12:00:00"
+        },
+        {
+            "image": "iphone-16.jpg",
+            "product_id": 68,
+            "created_at": "2025-02-18 12:00:00",
+            "updated_at": "2025-02-18 12:00:00"
+        },
+        {
+            "image": "samsung-galaxy-m51.jpg",
+            "product_id": 69,
+            "created_at": "2025-02-18 12:00:00",
+            "updated_at": "2025-02-18 12:00:00"
+        },
+        {
+            "image": "xiaomi-mi-10.jpg",
+            "product_id": 70,
+            "created_at": "2025-02-18 12:00:00",
+            "updated_at": "2025-02-18 12:00:00"
+        },
+        {
+            "image": "oppo-reno4-pro.jpg",
+            "product_id": 71,
+            "created_at": "2025-02-18 12:00:00",
+            "updated_at": "2025-02-18 12:00:00"
+        },
+        {
+            "image": "realme-11-pro.jpg",
+            "product_id": 72,
+            "created_at": "2025-02-18 12:00:00",
+            "updated_at": "2025-02-18 12:00:00"
+        },
+        {
+            "image": "vivo-y51.jpg",
+            "product_id": 73,
+            "created_at": "2025-02-18 12:00:00",
+            "updated_at": "2025-02-18 12:00:00"
+        },
+        {
+            "image": "iphone-7-plus.jpg",
+            "product_id": 74,
+            "created_at": "2025-02-18 12:00:00",
+            "updated_at": "2025-02-18 12:00:00"
+        },
+        {
+            "image": "samsung-galaxy-note-10.jpg",
+            "product_id": 75,
+            "created_at": "2025-02-18 12:00:00",
+            "updated_at": "2025-02-18 12:00:00"
         }
     ],
+
     "message": [
         {
             "chat_id": 1,
@@ -1191,84 +1642,580 @@
             "product_id": 1,
             "color_id": 1,
             "model_id": 1,
-            "price": 10000.0,
+            "price": 12590000,
+            "stock": 50
+        },
+        {
+            "product_id": 1,
+            "color_id": 2,
+            "model_id": 1,
+            "price": 12590000,
             "stock": 50
         },
         {
             "product_id": 1,
             "color_id": 2,
             "model_id": 2,
-            "price": 12000.0,
+            "price": 13990000,
+            "stock": 30
+        },
+        {
+            "product_id": 1,
+            "color_id": 1,
+            "model_id": 2,
+            "price": 13990000,
             "stock": 30
         },
         {
             "product_id": 2,
             "color_id": 3,
             "model_id": 3,
-            "price": 9500.0,
+            "price": 10090000,
             "stock": 40
-        },
-        {
-            "product_id": 2,
-            "color_id": 4,
-            "model_id": 2,
-            "price": 11000.0,
-            "stock": 20
         },
         {
             "product_id": 3,
             "color_id": 5,
             "model_id": 3,
-            "price": 9500.0,
+            "price": 12590000,
             "stock": 35
         },
         {
-            "product_id": 3,
-            "color_id": 6,
-            "model_id": 2,
-            "price": 11000.0,
-            "stock": 25
-        },
-        {
             "product_id": 4,
             "color_id": 5,
             "model_id": 2,
-            "price": 8500.0,
+            "price": 10090000,
             "stock": 40
-        },
-        {
-            "product_id": 4,
-            "color_id": 4,
-            "model_id": 4,
-            "price": 9500.0,
-            "stock": 30
         },
         {
             "product_id": 5,
             "color_id": 3,
             "model_id": 2,
-            "price": 8500.0,
+            "price": 10090000,
             "stock": 20
         },
         {
-            "product_id": 5,
+            "product_id": 6,
             "color_id": 2,
             "model_id": 3,
-            "price": 10000.0,
-            "stock": 10
+            "price": 10090000,
+            "stock": 50
+        },
+        {
+            "product_id": 7,
+            "color_id": 2,
+            "model_id": 3,
+            "price": 10090000,
+            "stock": 50
+        },
+        {
+            "product_id": 8,
+            "color_id": 2,
+            "model_id": 3,
+            "price": 10090000,
+            "stock": 50
+        },
+        {
+            "product_id": 9,
+            "color_id": 2,
+            "model_id": 3,
+            "price": 10090000,
+            "stock": 50
+        },
+        {
+            "product_id": 10,
+            "color_id": 2,
+            "model_id": 3,
+            "price": 10090000,
+            "stock": 50
+        },
+        {
+            "product_id": 11,
+            "color_id": 2,
+            "model_id": 3,
+            "price": 10090000,
+            "stock": 50
+        },
+        {
+            "product_id": 12,
+            "color_id": 2,
+            "model_id": 3,
+            "price": 10090000,
+            "stock": 50
+        },
+        {
+            "product_id": 13,
+            "color_id": 2,
+            "model_id": 3,
+            "price": 10090000,
+            "stock": 50
+        },
+        {
+            "product_id": 14,
+            "color_id": 2,
+            "model_id": 3,
+            "price": 10090000,
+            "stock": 50
+        },
+        {
+            "product_id": 15,
+            "color_id": 2,
+            "model_id": 3,
+            "price": 10090000,
+            "stock": 50
+        },
+        {
+            "product_id": 16,
+            "color_id": 2,
+            "model_id": 3,
+            "price": 10090000,
+            "stock": 50
+        },
+        {
+            "product_id": 17,
+            "color_id": 2,
+            "model_id": 3,
+            "price": 10090000,
+            "stock": 50
+        },
+        {
+            "product_id": 18,
+            "color_id": 2,
+            "model_id": 3,
+            "price": 10090000,
+            "stock": 50
+        },
+        {
+            "product_id": 19,
+            "color_id": 2,
+            "model_id": 3,
+            "price": 10090000,
+            "stock": 50
+        },
+        {
+            "product_id": 20,
+            "color_id": 2,
+            "model_id": 3,
+            "price": 10090000,
+            "stock": 50
+        },
+        {
+            "product_id": 21,
+            "color_id": 2,
+            "model_id": 3,
+            "price": 10090000,
+            "stock": 50
+        },
+        {
+            "product_id": 22,
+            "color_id": 2,
+            "model_id": 3,
+            "price": 10090000,
+            "stock": 50
+        },
+        {
+            "product_id": 23,
+            "color_id": 2,
+            "model_id": 3,
+            "price": 10090000,
+            "stock": 50
+        },
+        {
+            "product_id": 24,
+            "color_id": 2,
+            "model_id": 3,
+            "price": 10090000,
+            "stock": 50
+        },
+        {
+            "product_id": 25,
+            "color_id": 2,
+            "model_id": 3,
+            "price": 10090000,
+            "stock": 50
+        },
+        {
+            "product_id": 26,
+            "color_id": 2,
+            "model_id": 3,
+            "price": 10090000,
+            "stock": 50
+        },
+        {
+            "product_id": 27,
+            "color_id": 2,
+            "model_id": 3,
+            "price": 10090000,
+            "stock": 50
+        },
+        {
+            "product_id": 28,
+            "color_id": 2,
+            "model_id": 3,
+            "price": 10090000,
+            "stock": 50
+        },
+        {
+            "product_id": 29,
+            "color_id": 2,
+            "model_id": 3,
+            "price": 10090000,
+            "stock": 50
+        },
+        {
+            "product_id": 30,
+            "color_id": 2,
+            "model_id": 3,
+            "price": 10090000,
+            "stock": 50
+        },
+        {
+            "product_id": 31,
+            "color_id": 2,
+            "model_id": 3,
+            "price": 10090000,
+            "stock": 50
+        },
+        {
+            "product_id": 32,
+            "color_id": 2,
+            "model_id": 3,
+            "price": 10090000,
+            "stock": 50
+        },
+        {
+            "product_id": 33,
+            "color_id": 2,
+            "model_id": 3,
+            "price": 10090000,
+            "stock": 50
+        },
+        {
+            "product_id": 34,
+            "color_id": 2,
+            "model_id": 3,
+            "price": 10090000,
+            "stock": 50
+        },
+        {
+            "product_id": 35,
+            "color_id": 2,
+            "model_id": 3,
+            "price": 10090000,
+            "stock": 50
+        },
+        {
+            "product_id": 36,
+            "color_id": 2,
+            "model_id": 3,
+            "price": 10090000,
+            "stock": 50
+        },
+        {
+            "product_id": 37,
+            "color_id": 2,
+            "model_id": 3,
+            "price": 10090000,
+            "stock": 50
+        },
+        {
+            "product_id": 38,
+            "color_id": 2,
+            "model_id": 3,
+            "price": 10090000,
+            "stock": 50
+        },
+        {
+            "product_id": 39,
+            "color_id": 2,
+            "model_id": 3,
+            "price": 10090000,
+            "stock": 50
+        },
+        {
+            "product_id": 40,
+            "color_id": 2,
+            "model_id": 3,
+            "price": 10090000,
+            "stock": 50
+        },
+        {
+            "product_id": 41,
+            "color_id": 2,
+            "model_id": 3,
+            "price": 10090000,
+            "stock": 50
+        },
+        {
+            "product_id": 42,
+            "color_id": 2,
+            "model_id": 3,
+            "price": 10090000,
+            "stock": 50
+        },
+        {
+            "product_id": 43,
+            "color_id": 2,
+            "model_id": 3,
+            "price": 10090000,
+            "stock": 50
+        },
+        {
+            "product_id": 44,
+            "color_id": 2,
+            "model_id": 3,
+            "price": 10090000,
+            "stock": 50
+        },
+        {
+            "product_id":45,
+            "color_id": 2,
+            "model_id": 3,
+            "price": 10090000,
+            "stock": 50
+        },
+        {
+            "product_id": 46,
+            "color_id": 2,
+            "model_id": 3,
+            "price": 10090000,
+            "stock": 50
+        },
+        {
+            "product_id": 47,
+            "color_id": 2,
+            "model_id": 3,
+            "price": 10090000,
+            "stock": 50
+        },
+        {
+            "product_id": 48,
+            "color_id": 2,
+            "model_id": 3,
+            "price": 10090000,
+            "stock": 50
+        },
+        {
+            "product_id": 49,
+            "color_id": 2,
+            "model_id": 3,
+            "price": 10090000,
+            "stock": 50
+        },
+        {
+            "product_id": 50,
+            "color_id": 2,
+            "model_id": 3,
+            "price": 10090000,
+            "stock": 50
+        },
+        {
+            "product_id": 51,
+            "color_id": 2,
+            "model_id": 3,
+            "price": 10090000,
+            "stock": 50
+        },
+        {
+            "product_id": 52,
+            "color_id": 2,
+            "model_id": 3,
+            "price": 10090000,
+            "stock": 50
+        },
+        {
+            "product_id": 53,
+            "color_id": 2,
+            "model_id": 3,
+            "price": 10090000,
+            "stock": 50
+        },
+        {
+            "product_id": 54,
+            "color_id": 2,
+            "model_id": 3,
+            "price": 10090000,
+            "stock": 50
+        },
+        {
+            "product_id": 55,
+            "color_id": 2,
+            "model_id": 3,
+            "price": 10090000,
+            "stock": 50
+        },
+        {
+            "product_id": 56,
+            "color_id": 2,
+            "model_id": 3,
+            "price": 10090000,
+            "stock": 50
+        },
+        {
+            "product_id": 57,
+            "color_id": 2,
+            "model_id": 3,
+            "price": 10090000,
+            "stock": 50
+        },
+        {
+            "product_id": 58,
+            "color_id": 2,
+            "model_id": 3,
+            "price": 10090000,
+            "stock": 50
+        },
+        {
+            "product_id": 59,
+            "color_id": 2,
+            "model_id": 3,
+            "price": 10090000,
+            "stock": 50
+        },
+        {
+            "product_id": 60,
+            "color_id": 2,
+            "model_id": 3,
+            "price": 10090000,
+            "stock": 50
+        },
+        {
+            "product_id": 61,
+            "color_id": 2,
+            "model_id": 3,
+            "price": 10090000,
+            "stock": 50
+        },
+        {
+            "product_id": 62,
+            "color_id": 2,
+            "model_id": 3,
+            "price": 10090000,
+            "stock": 50
+        },
+        {
+            "product_id": 63,
+            "color_id": 2,
+            "model_id": 3,
+            "price": 10090000,
+            "stock": 50
+        },
+        {
+            "product_id": 64,
+            "color_id": 2,
+            "model_id": 3,
+            "price": 10090000,
+            "stock": 50
+        },
+        {
+            "product_id": 65,
+            "color_id": 2,
+            "model_id": 3,
+            "price": 10090000,
+            "stock": 50
+        },
+        {
+            "product_id": 66,
+            "color_id": 2,
+            "model_id": 3,
+            "price": 10090000,
+            "stock": 50
+        },
+        {
+            "product_id": 67,
+            "color_id": 2,
+            "model_id": 3,
+            "price": 10090000,
+            "stock": 50
+        },
+        {
+            "product_id": 68,
+            "color_id": 2,
+            "model_id": 3,
+            "price": 10090000,
+            "stock": 50
+        },
+        {
+            "product_id": 69,
+            "color_id": 2,
+            "model_id": 3,
+            "price": 10090000,
+            "stock": 50
+        },
+        {
+            "product_id": 70,
+            "color_id": 2,
+            "model_id": 3,
+            "price": 10090000,
+            "stock": 50
+        },
+        {
+            "product_id": 71,
+            "color_id": 2,
+            "model_id": 3,
+            "price": 10090000,
+            "stock": 50
+        },
+        {
+            "product_id": 72,
+            "color_id": 2,
+            "model_id": 3,
+            "price": 10090000,
+            "stock": 50
+        },
+        {
+            "product_id": 73,
+            "color_id": 2,
+            "model_id": 3,
+            "price": 10090000,
+            "stock": 50
+        },
+        {
+            "product_id": 74,
+            "color_id": 2,
+            "model_id": 3,
+            "price": 10090000,
+            "stock": 50
+        },
+        {
+            "product_id": 75,
+            "color_id": 2,
+            "model_id": 3,
+            "price": 10090000,
+            "stock": 50
         }
     ],
     "colors": [
-        { "name": "Vàng" },
-        { "name": "Đen" },
-        { "name": "Trắng" },
-        { "name": "Xanh lá" },
-        { "name": "Hồng" },
-        { "name": "Xanh da trời" }
+        {"name":"Đỏ","color_hex":"#FF0000"},
+        {"name":"Xanh lá đậm","color_hex":"#2d3438"},
+        {"name":"Xanh lá","color_hex":"#008000"},
+        {"name":"Xanh dương","color_hex":"#0000FF"},
+        {"name":"Xanh dương đậm","color_hex":"#2d3d55"},
+        {"name":"Cam","color_hex":"#FFA500"},
+        {"name":"Tím","color_hex":"#800080"},
+        {"name":"Hồng","color_hex":"#FFC0CB"},
+        {"name":"Nâu","color_hex":"#956b48"},
+        {"name":"Đen","color_hex":"#000000"},
+        {"name":"Trắng","color_hex":"#FFFFFF"},
+        {"name":"Xám","color_hex":"#808080"},
+        {"name":"Bạc","color_hex":"#C0C0C0"},
+        {"name":"Be","color_hex":"#F5F5DC"},
+        {"name":"Đen melange","color_hex":"#555555"},
+        {"name":"Ghi","color_hex":"#7D7D7D"},
+        {"name":"Ghi đậm","color_hex":"#505050"},
+        {"name":"Vàng","color_hex":"#FFFF00"},
+        {"name":"Ghi sáng","color_hex":"#D3D3D3"},
+        {"name":"Cam đỏ","color_hex":"#FF4500"},
+        {"name":"Xanh dương nhạt","color_hex":"#679bab"},
+        {"name":"Xanh bạc hà","color_hex":"#98FF98"},
+        {"name":"Cam đậm","color_hex":"#FF8C00"},
+        {"name":"Trắng Kể","color_hex":"#F8F8FF"},
+        {"name":"Tím nhạt","color_hex":"#5a5672"}
     ],
     "product_models": [
         { "name": "64GB" },
         { "name": "128GB" },
+        { "name": "256GB" },
         { "name": "512GB" }
     ],
     "promotion": [
