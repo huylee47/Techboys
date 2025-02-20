@@ -26749,3 +26749,62 @@ form.track_order {
   display: block; 
   margin: auto;
 }
+.choice-group {
+    display: block;
+    width: 100%;
+    margin-bottom: 16px;
+  }
+  
+  .label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 8px;
+  }
+  
+  .choice-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    width: 100%;
+  }
+  
+  .choice {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 16px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    cursor: pointer;
+    position: relative;
+    font-size: 16px;
+    transition: all 0.3s ease-in-out;
+    background-color: white;
+  }
+  
+  .choice:hover {
+    border-color: #999;
+  }
+  
+  .choice.selected {
+    border-color: red;
+    position: relative;
+  }
+  
+  
+  
+  .color-choice {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 8px;
+  }
+  
+  .color-choice img {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    margin-bottom: 4px;
+    border-radius: 6px;
+  }
+  
