@@ -74,6 +74,7 @@ class CartController extends Controller
         return view('client.cart.cart', compact('cartItems'));
     }
     public function addToCart(Request $request){
+        
         $this->cartService->addToCart($request);
         return redirect()->route('client.cart.index')->with('success', 'Product added to cart successfully');
     }
