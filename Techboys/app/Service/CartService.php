@@ -38,7 +38,11 @@ class CartService{
                 session()->put('cart_id', $cartId);
             }
         }
-    
+        // dd([
+        //     'user_id' => $userId,
+        //     'cart_id' => $cartId,
+        //     'request_data' => $request->all()
+        // ]);
         $cartItem = Cart::where(function ($query) use ($userId, $cartId) {
                 if ($userId) {
                     $query->where('user_id', $userId);
