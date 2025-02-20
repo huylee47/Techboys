@@ -115,17 +115,17 @@
                                                         href="product-category.html">{{ $product->brand->name }}</a>
                                                 </span>
                                             </div>
-                                            <div class="product-label">
+                                            {{-- <div class="product-label">
                                                 <div class="ribbon label green-label">
                                                     <span>A+</span>
                                                 </div>
-                                            </div>
+                                            </div> --}}
                                         </div>
                                         <!-- .single-product-meta -->
                                         <div class="rating-and-sharing-wrapper">
                                             <div class="woocommerce-product-rating">
                                                 <div class="star-rating">
-                                                    <span style="width:100%">Rated
+                                                    <span style="width:100%">Đánh giá
                                                         <strong class="rating">3.00</strong> out of 5 based on
                                                         <span class="rating">1</span> customer rating</span>
                                                 </div>
@@ -141,9 +141,10 @@
                                             </ul>
                                         </div>
                                         <!-- .woocommerce-product-details__short-description -->
-                                        <div class="product-actions-wrapper">
-                                            <div class="product-actions">
-                                                <p class="price">
+                                        <form enctype="multipart/form-data" action="{{route('client.cart.add')}}" method="post" class="cart">
+
+                                            <div class="product-actions-wrapper">
+                                                <div class="product-actions">
                                                     {{-- <del>
                                                         <span class="woocommerce-Price-amount amount">
                                                             <span
@@ -154,56 +155,70 @@
                                                             <span
                                                                 class="woocommerce-Price-currencySymbol">$</span>997.00</span>
                                                     </ins> --}}
-                                                <div class="choice-group">
-                                                    <span class="label">Dung lượng</span>
-                                                    <div class="choice-buttons">
-                                                        @foreach ($variants as $variant)
-                                                            <div class="choice storage-choice"
-                                                                data-value="{{ $variant->model->name }}"
-                                                                data-price="{{ $variant->price }}">
-                                                                {{ $variant->model->name }}
-                                                            </div>
-                                                        @endforeach
+                                                    @php
+                                                        $defaultVariant = $variants->sortBy('model.value')->first();
+                                                    @endphp
+
+                                                    <div class="choice-group">
+                                                        <span class="label">Dung lượng</span>
+                                                        <div class="choice-buttons">
+                                                            @foreach ($variants->groupBy('model.name') as $modelName => $variantGroup)
+                                                                @php
+                                                                    $isActive =
+                                                                        $modelName == $defaultVariant->model->name
+                                                                            ? 'active'
+                                                                            : '';
+                                                                @endphp
+                                                                <div class="choice storage-choice {{ $isActive }}"
+                                                                    data-value="{{ $modelName }}"
+                                                                    data-price="{{ $variantGroup->first()->price }}"
+                                                                    data-model-value="{{ $variantGroup->first()->model->id }}">
+                                                                    {{ $modelName }}
+                                                                </div>
+                                                            @endforeach
+                                                        </div>
                                                     </div>
-                                                </div>
 
-                                                <div class="choice-group">
-                                                    <span class="label">Màu sắc</span>
-                                                    <div class="choice-buttons">
-                                                        @foreach ($variants as $variant)
-                                                            <div class="choice color-choice"
-                                                                data-value="{{ $variant->color->name }}"
-                                                                data-price="{{ $variant->price }}">
-                                                                <span>{{ $variant->color->name }}</span>
-                                                            </div>
-                                                        @endforeach
+                                                    <div class="choice-group">
+                                                        <span class="label">Màu sắc</span>
+                                                        <div class="choice-buttons">
+                                                            @foreach ($variants->sortBy('color.name') as $variant)
+                                                                <div class="choice color-choice"
+                                                                    data-value="{{ $variant->color->name }}"
+                                                                    data-model="{{ $variant->model->name }}"
+                                                                    data-price="{{ $variant->price }}">
+                                                                    <span>{{ $variant->color->name }}</span>
+                                                                </div>
+                                                            @endforeach
+                                                        </div>
                                                     </div>
-                                                </div>
 
-                                                <p class="price">
-                                                    <span class="woocommerce-Price-amount amount" id="productPrice">
-                                                        {{ number_format($product->variant[0]->price ?? $product->variant, 0, ',', '.') }}
-                                                        đ
-                                                    </span>
-                                                </p>
+                                                    <p class="price">
+                                                        <span class="woocommerce-Price-amount amount" id="productPrice">
+                                                            {{ number_format($defaultVariant->price, 0, ',', '.') }} đ
+                                                        </span>
+                                                    </p>
 
-                                                </p>
-                                                <!-- .single-product-header -->
-                                                <form enctype="multipart/form-data" method="post" class="cart">
+
+
+                                                    <!-- .single-product-header -->
                                                     <div class="quantity">
                                                         <label for="quantity-input">Số lượng</label>
                                                         <input type="number" size="4" class="input-text qty text"
                                                             title="Qty" value="1" name="quantity"
                                                             id="quantity-input">
                                                     </div>
+                                                    <input type="hidden" name="variant_id" id="variant_id" value="">
+
                                                     <!-- .quantity -->
                                                     <button class="single_add_to_cart_button button alt" value="185"
                                                         name="add-to-cart" type="submit">Thêm vào giỏ hàng</button>
-                                                </form>
-                                                <!-- .cart -->
+                                                    <!-- .cart -->
+                                                </div>
+                                                <!-- .product-actions -->
                                             </div>
-                                            <!-- .product-actions -->
-                                        </div>
+                                        </form>
+
                                         <!-- .product-actions-wrapper -->
                                     </div>
                                     <!-- .entry-summary -->
@@ -234,31 +249,31 @@
     </script>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
+            const variants = @json($variants);
             let selectedStorage = null;
             let selectedColor = null;
-            let variants = @json($variants);
+
+            const quantityInput = document.getElementById("quantity-input");
+            const productPriceElement = document.getElementById("productPrice");
 
             function updatePrice() {
                 if (selectedStorage && selectedColor) {
-                    let selectedVariant = variants.find(v =>
+                    const selectedVariant = variants.find(v =>
                         v.model.name === selectedStorage && v.color.name === selectedColor
                     );
                     if (selectedVariant) {
-                        document.getElementById("productPrice").innerText =
-                            new Intl.NumberFormat('vi-VN').format(selectedVariant.price) + "đ";
+                        productPriceElement.innerText = new Intl.NumberFormat('vi-VN').format(selectedVariant
+                            .price) + " đ";
+                        document.getElementById("variant_id").value = selectedVariant.id;
                     }
                 }
             }
 
-            document.querySelectorAll(".storage-choice").forEach(choice => {
-                choice.addEventListener("click", function() {
-                    selectedStorage = this.getAttribute("data-value");
-                    document.querySelectorAll(".storage-choice").forEach(c => c.classList.remove(
-                        "selected"));
-                    this.classList.add("selected");
-                    updatePrice();
+            function showColorsForModel(model) {
+                document.querySelectorAll(".color-choice").forEach(color => {
+                    color.style.display = color.getAttribute("data-model") === model ? "block" : "none";
                 });
-            });
+            }
 
             document.querySelectorAll(".color-choice").forEach(choice => {
                 choice.addEventListener("click", function() {
@@ -269,25 +284,43 @@
                     updatePrice();
                 });
             });
-        });
-        document.addEventListener("DOMContentLoaded", function() {
-            let quantityInput = document.getElementById("quantity-input");
+
+            document.querySelectorAll(".storage-choice").forEach(choice => {
+                choice.addEventListener("click", function() {
+                    selectedStorage = this.getAttribute("data-value");
+                    const selectedPrice = this.getAttribute("data-price");
+
+                    showColorsForModel(selectedStorage);
+                    productPriceElement.innerText = new Intl.NumberFormat('vi-VN').format(
+                        selectedPrice) + " đ";
+
+                    document.querySelectorAll(".storage-choice").forEach(item => item.classList
+                        .remove("active"));
+                    this.classList.add("active");
+                });
+            });
 
             quantityInput.addEventListener("input", function() {
                 let value = parseInt(this.value, 10);
-
                 if (isNaN(value) || value < 1) {
                     this.value = 1;
                 }
             });
 
-            quantityInput.addEventListener("blur", function() {
-                let value = parseInt(this.value, 10);
+            let minModelId = Math.min(...variants.map(v => v.model.id));
+            let defaultModelChoice = document.querySelector(`.storage-choice[data-model-value="${minModelId}"]`);
 
-                if (isNaN(value) || value < 1) {
-                    this.value = 1;
-                }
-            });
+            if (defaultModelChoice) {
+                defaultModelChoice.click();
+            }
+            const defaultModel = document.querySelector(".storage-choice.active");
+            if (defaultModel) {
+                selectedStorage = defaultModel.getAttribute("data-value");
+                const selectedPrice = defaultModel.getAttribute("data-price");
+
+                showColorsForModel(selectedStorage);
+                productPriceElement.innerText = new Intl.NumberFormat('vi-VN').format(selectedPrice) + " đ";
+            }
         });
     </script>
 @endsection
