@@ -3,6 +3,7 @@
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\BillController;
 use App\Http\Controllers\BillDetailsController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\VoucherController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProductController;
@@ -110,5 +111,15 @@ Route::middleware(['auth','auth.admin'])->group(function () {
 Route::prefix('products')->group(function () {
     Route::get('/', [ProductController::class, 'index'])->name('client.product.index');
     Route::get('/{slug}', [ProductController::class,'productDetails'])->name('client.product.show');
+});
+Route::prefix('cart')->group(function () {
+    Route::get('/', [CartController::class, 'showCart'])->name('client.cart.index');
+    Route::post('/add', [CartController::class, 'addToCart'])->name('client.cart.add');
+    Route::post('/remove', [CartController::class, 'removeFromCart'])->name('client.cart.remove');
+    Route::get('/reset', [CartController::class, 'resetCart'])->name('client.cart.reset');
+    Route::post('/updateQuantity', [CartController::class, 'updateQuantity'])->name('client.cart.updateQuantity');
+    Route::post('/applyVoucher', [CartController::class, 'applyVoucher'])->name('client.cart.applyVoucher');
+    Route::get('/getVoucherDiscount',[CartController::class,'getDiscount'])->name('client.cart.getDiscount');
+    Route::get('/getCount',[CartController::class,'getCartCount'])->name('client.cart.getCartCount');
 });
 
