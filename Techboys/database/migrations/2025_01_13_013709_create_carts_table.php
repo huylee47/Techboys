@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('carts', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id');
-            $table->string('cart_id');
+            $table->foreignId('user_id')->nullable();
+            $table->uuid('cart_id');
             $table->foreignId('variant_id');
             $table->integer('quantity');
             $table->timestamps();
