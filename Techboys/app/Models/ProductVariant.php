@@ -18,8 +18,8 @@ class ProductVariant extends Model
     public function billDetails(){
         return $this->hasMany(BillDetails::class);
     }  
-    public function cartDetails(){
-        return $this->hasMany(CartDetail::class);
+    public function cart(){
+        return $this->hasMany(Cart::class);
     }
     public function color(){
         return $this->belongsTo(Color::class);
