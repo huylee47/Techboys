@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Cart;
 use App\Service\CartService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
 {
@@ -69,12 +70,43 @@ class CartController extends Controller
         //
     }
     // CLIENT
-    public function showCart(){
+    public function showCart()
+    {
         $cartItems = $this->cartService->getCartItems();
-        return view('client.cart.cart', compact('cartItems'));
+    
+        $subtotal = $cartItems->sum(function ($cart) {
+            return $cart->variant->price * $cart->quantity;
+        });
+    
+        $total = $subtotal;
+    
+        return view('client.cart.cart', compact('cartItems', 'subtotal', 'total'));
     }
+    
     public function addToCart(Request $request){
+        
         $this->cartService->addToCart($request);
-        return redirect()->route('client.cart.index')->with('success', 'Product added to cart successfully');
+        return redirect()->route('client.cart.index')->with('success', 'Thêm thành công');
+    }
+    public function updateCart(Request $request)
+    {
+        $result = $this->cartService->updateCart($request);
+    
+        if (isset($result['error'])) {
+            return response()->json($result, 404);
+        }
+        $userId = Auth::id();
+        $cartItems = Cart::where('user_id', $userId)->get(); 
+        $subtotal = $cartItems->sum(function ($cart) {
+            return $cart->variant->price * $cart->quantity;
+        });
+        $total = $subtotal;
+    
+        return response()->json([
+            'success' => true,
+            'new_total_price' => number_format($result['total_price'], 0, ',', '.') . ' đ', 
+            'subtotal' => number_format($subtotal, 0, ',', '.') . ' đ',
+            'total' => number_format($total, 0, ',', '.') . ' đ', // 
+        ]);
     }
 }

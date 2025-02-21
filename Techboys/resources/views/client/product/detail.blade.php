@@ -142,7 +142,7 @@
                                         </div>
                                         <!-- .woocommerce-product-details__short-description -->
                                         <form enctype="multipart/form-data" action="{{route('client.cart.add')}}" method="post" class="cart">
-
+                                        @csrf
                                             <div class="product-actions-wrapper">
                                                 <div class="product-actions">
                                                     {{-- <del>
@@ -211,8 +211,8 @@
                                                     <input type="hidden" name="variant_id" id="variant_id" value="">
 
                                                     <!-- .quantity -->
-                                                    <button class="single_add_to_cart_button button alt" value="185"
-                                                        name="add-to-cart" type="submit">Thêm vào giỏ hàng</button>
+                                                    <button class="single_add_to_cart_button button alt" 
+                                                        type="submit">Thêm vào giỏ hàng</button>
                                                     <!-- .cart -->
                                                 </div>
                                                 <!-- .product-actions -->
