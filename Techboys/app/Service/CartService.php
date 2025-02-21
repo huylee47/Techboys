@@ -11,7 +11,10 @@ class CartService{
     public function getCartItems()
     {
         if (Auth::check()) {
-            $cartItems = Cart::where('user_id', Auth::id())->with('variant.product')->get();
+        $userId = Auth::id();
+        // $cartItems = Cart::where('user_id', $userId)->get();
+        $cartItems = Cart::where('user_id', $userId)->with('variant.product')->get();
+
         } else {
             $cartId = session()->get('cart_id');
     
@@ -22,7 +25,7 @@ class CartService{
             $cartItems = Cart::where('cart_id', $cartId)->with('variant.product')->get();
         }
     
-        return response()->json(['cart_items' => $cartItems]);
+        return  $cartItems;
     }
     
     public function addToCart($request) {
@@ -65,6 +68,23 @@ class CartService{
         }
     
         return response()->json(['message' => 'Thêm vào giỏ hàng thành công']);
+    }
+    public function updateCart($request)
+    {
+        $cart = Cart::find($request->id);
+    
+        if (!$cart) {
+            return ['error' => 'Không tìm thấy sản phẩm trong giỏ hàng'];
+        }
+    
+        $cart->quantity = $request->quantity;
+        $cart->save();
+    
+        $totalPrice = $cart->variant->price * $cart->quantity;
+    
+        return [
+            'total_price' => $totalPrice
+        ];
     }
     
 }
