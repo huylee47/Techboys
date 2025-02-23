@@ -16,14 +16,14 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('client.home.home');
 })->name('home');
+Route::get('/blog', function () {
+    return view('client.blog.blog');
+})->name('blog');
 
 Route::get('test', function () {
     return view('admin.product.imageIndex');
 });
 
-Route::get('blog', function () {
-    return view('admin.tag.edit');
-});
 
 Route::get('/login/admin', function () {
     return view('admin.log.login');

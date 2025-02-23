@@ -21,6 +21,8 @@
     <link href="https://fonts.googleapis.com/css?family=Rubik:300,400,500,900" rel="stylesheet">
     <link rel="shortcut icon" href="{{ url('') }}/home/assets/images/fav-icon.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="shortcut icon" href="{{ url('') }}/home/assets/images/fav-icon.png">
+
     <style>
         .user-menu {
             position: relative;
@@ -164,6 +166,9 @@
                                 </li>
                                 <li class="menu-item animate-dropdown">
                                     <a title="Headphones Sale" href="product-category.html">Liên hệ</a>
+                                </li>
+                                <li class="menu-item animate-dropdown">
+                                    <a title="Headphones Sale" href="{{ route('blog') }}">Blog</a>
                                 </li>
                                 <li class="techmarket-flex-more-menu-item dropdown">
                                     <a title="..." href="#" data-toggle="dropdown" class="dropdown-toggle">...</a>
