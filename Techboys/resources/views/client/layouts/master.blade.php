@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en-US" itemscope="itemscope" itemtype="http://schema.org/WebPage">
+
 <head>
     <meta charset="UTF-8">
     <meta name="csrf-token" content="{{ csrf_token() }}" />
@@ -43,7 +44,7 @@
 
         .dropdown-menu li {
             list-style-type: none;
-           
+
         }
 
         .dropdown-menu li a {
@@ -63,7 +64,7 @@
         .dropdown-menu li a p {
             margin: 0;
             padding: 5px;
-        
+
         }
     </style>
     @yield('styles')
@@ -189,10 +190,14 @@
                                         <a title="My Account" href="{{ route('login.client') }}">
                                             <i class="tm tm-login-register"></i>Đăng nhập</a>
                                     @else 
+
+
                                         <div class="user-menu">
                                             <a href="#" class="user-menu-toggle">
-                                                <i class="tm tm-login-register"></i><b style="margin-top: 5px">{{ Auth::user()->name }}</b>
-                                                <i class="fas fa-bars hamburger-icon" style="margin-left: 10px; margin-top: 5px"></i>
+                                                <i class="tm tm-login-register"></i><b
+                                                    style="margin-top: 5px">{{ Auth::user()->name }}</b>
+                                                <i class="fas fa-bars hamburger-icon"
+                                                    style="margin-left: 10px; margin-top: 5px"></i>
                                             </a>
                                             <ul class="dropdown-menu" id="userDropdownMenu">
                                                 <li>

@@ -6,39 +6,19 @@
             <div class="row">
                 <div id="primary" class="content-area">
                     <main id="main" class="site-main">
-                        <div class="home-v1-slider home-slider">
+                        <div class="home-v1-slider home-slider" >  
+                             @foreach ($loadBanner as  $banner)
                             <div class="slider-1"
-                                style="background-image: url(home/assets/images/slider/home-v1-background.jpg);">
-                                <img src="home/assets/images/slider/home-v1-img-1.png" alt="">
-                                <div class="caption">
-                                    <div class="title">Turn. Click. Expand. Smart modular design simplifies adding storage
-                                        for growing media.</div>
-                                    <div class="sub-title">Powerful Six Core processor, vibrant 4KUHD display output and
-                                        fast SSD elegantly cased in a soft alloy design.</div>
-                                    <div class="button">Get Yours now
+                                style=" height: 400px;background-size: 90% ;background-image:  url({{ asset('admin/assets/images/banner/' . $banner->image) }}); " >
+
+                                {{-- <div class="caption">
+                                    <div class="button" style="margin-top: 300px">Mua sắm ngay
                                         <i class="tm tm-long-arrow-right"></i>
                                     </div>
-                                    <div class="bottom-caption">Free shipping on US Terority</div>
-                                </div>
-                            </div>
-                            <!-- .slider-1 -->
-                            <div class="slider-1 slider-2"
-                                style="background-image: url(home/assets/images/slider/home-v1-background.jpg);">
-                                <img src="home/assets/images/slider/home-v1-img-2.png" alt="">
-                                <div class="caption">
-                                    <div class="title">The new-tech gift you
-                                        <br> are wishing for is
-                                        <br> right here
-                                    </div>
-                                    <div class="sub-title">Big screens in incredibly slim designs
-                                        <br>that in your hand.
-                                    </div>
-                                    <div class="button">Browse now
-                                        <i class="tm tm-long-arrow-right"></i>
-                                    </div>
-                                    <div class="bottom-caption">Free shipping on US Terority </div>
-                                </div>
-                            </div>
+                               
+                                </div> --}}
+                            </div>           
+                              @endforeach
                             <!-- .slider-2 -->
                         </div>
                         <!-- .home-v1-slider -->
@@ -2144,8 +2124,9 @@
                         </section>
                         <!-- .section-categories-carousel -->
                         <section
-                            style="background-size: cover; background-position: center center; background-image: url( home/assets/images/products/card-bg.jpg ); height: 853px;"
+                            style="background-size: cover; background-position: center center; background-image: url( admin/assets/images/banner/banner7.png ); height: 800px;"
                             class="section-landscape-full-product-cards-carousel">
+                            
                             <div class="col-full">
                                 <header class="section-header">
                                     <h2 class="section-title">
@@ -4140,9 +4121,9 @@
                             <div class="row">
                                 <div class="banner banner-long text-in-right">
                                     <a href="shop.html">
-                                        <div style="background-size: cover; background-position: center center; background-image: url( home/assets/images/banner/3-2.jpg ); height: 259px;"
+                                        <div style="background-size: cover; background-position: center center; background-image: url( admin/assets/images/banner/image.png ); height: 290px;"
                                             class="banner-bg">
-                                            <div class="caption">
+                                            {{-- <div class="caption">
                                                 <div class="banner-info">
                                                     <h3 class="title">
                                                         <strong>Shop now</strong> to find savings on everything you need
@@ -4151,7 +4132,7 @@
                                                 </div>
                                                 <!-- /.banner-info -->
                                                 <span class="banner-action button">Browse</span>
-                                            </div>
+                                            </div> --}}
                                             <!-- /.caption -->
                                         </div>
                                         <!-- /.banner-bg -->
@@ -4160,9 +4141,9 @@
                                 <!-- /.banner -->
                                 <div class="banner banner-short text-in-left">
                                     <a href="shop.html">
-                                        <div style="background-size: cover; background-position: center center; background-image: url( home/assets/images/banner/3-3.jpg ); height: 259px;"
+                                        <div style="background-size: cover; background-position: center center; background-image: url( admin/assets/images/banner/image1.png); height: 290px; width: 290px"
                                             class="banner-bg">
-                                            <div class="caption">
+                                            {{-- <div class="caption">
                                                 <div class="banner-info">
                                                     <h3 class="title">
                                                         <strong>1000 mAh</strong>
@@ -4172,7 +4153,7 @@
                                                 <!-- /.banner-info -->
                                                 <span class="price">$34.99</span>
                                                 <span class="banner-action button">Buy Now</span>
-                                            </div>
+                                            </div> --}}
                                             <!-- /.caption -->
                                         </div>
                                         <!-- /.banner-bg -->

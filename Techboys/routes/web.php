@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BannerController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\BillController;
 use App\Http\Controllers\BillDetailsController;
@@ -37,7 +38,8 @@ Route::get('login', function () {
 })->name('login.client');
 
 Route::post('/login/Client', [UserController::class, 'loginClient'])->name('loginClient.auth');
-
+//banner client
+Route::get('/', [BannerController::class, 'indexClient']);
 // Đăng ký
 Route::prefix('/register')->group(function () {
     Route::get('/create', [UserController::class, 'create'])->name('client.log.create');
@@ -132,6 +134,18 @@ Route::middleware(['auth', 'auth.admin'])->group(function () {
             Route::get('/edit', [BlogController::class, 'edit'])->name('admin.blogs.edit');
             Route::post('/update/{id}', [BlogController::class, 'update'])->name('admin.blogs.update');
             Route::get('/destroy/{id}', [BlogController::class, 'destroy'])->name('admin.blogs.destroy');
+        });
+        Route::prefix('/banner')->group(function () {
+            Route::get('/', [BannerController::class, 'index'])->name('admin.banner.index');
+            Route::get('/create', [BannerController::class, 'create'])->name('admin.banner.create');
+            Route::post('/store', [BannerController::class, 'store'])->name('admin.banner.store');
+            Route::get('/edit', [BannerController::class, 'edit'])->name('admin.banner.edit');
+            Route::post('/update/{id}', [BannerController::class, 'update'])->name('admin.banner.update');
+            Route::get('/destroy/{id}', [BannerController::class, 'destroy'])->name('admin.banner.destroy');
+
+
+
+          
         });
     });
 });
