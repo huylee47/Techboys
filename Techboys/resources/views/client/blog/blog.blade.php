@@ -27,17 +27,17 @@
             <div class="col-full">
                 <ul id="menu-top-bar-left" class="nav justify-content-center">
                     <li class="menu-item animate-dropdown">
-                        <a title="Techboys  - Always free delivery" href="contact-v1.html">Techboys &#8211; Always free
-                            delivery</a>
+                        <a title="Techboys - Always free delivery" href="contact-v1.html">Techboys &#8211; Lựa chọn tối
+                            ưu</a>
                     </li>
                     <li class="menu-item animate-dropdown">
-                        <a title="Quality Guarantee of products" href="shop.html">Quality Guarantee of products</a>
+                        <a title="Sản phẩm chất lượng" href="shop.html">Sản phẩm chất lượng</a>
                     </li>
                     <li class="menu-item animate-dropdown">
-                        <a title="Fast returnings program" href="track-your-order.html">Fast returnings program</a>
+                        <a title="Hỗ trợ nhanh chóng" href="track-your-order.html">Hỗ trợ nhanh chóng</a>
                     </li>
                     <li class="menu-item animate-dropdown">
-                        <a title="No additional fees" href="contact-v2.html">No additional fees</a>
+                        <a title="Không thu phụ phí" href="contact-v2.html">Không thu phụ phí</a>
                     </li>
                 </ul>
                 <!-- .nav -->
@@ -105,247 +105,29 @@
                         </div>
                         <!-- /.site-branding -->
                         <!-- ============================================================= End Header Logo ============================================================= -->
-                        <nav id="primary-navigation" class="primary-navigation" aria-label="Primary Navigation"
-                            data-nav="flex-menu">
-                            <ul id="menu-primary-menu" class="nav yamm">
-                                <li class="sale-clr yamm-fw menu-item animate-dropdown">
-                                    <a title="Super deals" href="product-category.html">Super deals</a>
-                                </li>
-                                <li class="menu-item menu-item-has-children animate-dropdown dropdown">
-                                    <a title="Mother`s Day" data-toggle="dropdown" class="dropdown-toggle"
-                                        aria-haspopup="true" href="#">Mother`s Day <span
-                                            class="caret"></span></a>
-                                    <ul role="menu" class=" dropdown-menu">
-                                        <li class="menu-item animate-dropdown">
-                                            <a title="Wishlist" href="wishlist.html">Wishlist</a>
-                                        </li>
-                                        <li class="menu-item animate-dropdown">
-                                            <a title="Add to compare" href="compare.html">Add to compare</a>
-                                        </li>
-                                        <li class="menu-item animate-dropdown">
-                                            <a title="About Us" href="about.html">About Us</a>
-                                        </li>
-                                        <li class="menu-item animate-dropdown">
-                                            <a title="Track Order" href="track-your-order.html">Track Order</a>
-                                        </li>
-                                    </ul>
-                                    <!-- .dropdown-menu -->
-                                </li>
-                                <li class="yamm-fw menu-item menu-item-has-children animate-dropdown dropdown">
-                                    <a title="Pages" data-toggle="dropdown" class="dropdown-toggle"
-                                        aria-haspopup="true" href="#">Pages <span class="caret"></span></a>
-                                    <ul role="menu" class=" dropdown-menu">
-                                        <li class="menu-item menu-item-object-static_block animate-dropdown">
-                                            <div class="yamm-content">
-                                                <div class="tm-mega-menu">
-                                                    <div class="widget widget_nav_menu">
-                                                        <ul class="menu">
-                                                            <li class="nav-title menu-item">
-                                                                <a href="#">Home Pages</a>
-                                                            </li>
-                                                            <li class="menu-item">
-                                                                <a href="home-v1.html">Home v1</a>
-                                                            </li>
-                                                            <li class="menu-item">
-                                                                <a href="home-v2.html">Home v2</a>
-                                                            </li>
-                                                            <li class="menu-item">
-                                                                <a href="home-v3.html">Home v3</a>
-                                                            </li>
-                                                            <li class="menu-item">
-                                                                <a href="home-v4.html">Home v4</a>
-                                                            </li>
-                                                            <li class="menu-item">
-                                                                <a href="home-v5.html">Home v5</a>
-                                                            </li>
-                                                            <li class="menu-item">
-                                                                <a href="home-v6.html">Home v6</a>
-                                                            </li>
-                                                            <li class="menu-item">
-                                                                <a href="home-v7.html">Home v7</a>
-                                                            </li>
-                                                            <li class="menu-item">
-                                                                <a href="home-v8.html">Home v8</a>
-                                                            </li>
-                                                            <li class="menu-item">
-                                                                <a href="home-v9.html">Home v9</a>
-                                                            </li>
-                                                            <li class="menu-item">
-                                                                <a href="home-v10.html">Home v10</a>
-                                                            </li>
-                                                            <li class="menu-item">
-                                                                <a href="home-v11.html">Home v11</a>
-                                                            </li>
-                                                            <li class="menu-item">
-                                                                <a href="home-v12.html">Home v12</a>
-                                                            </li>
-                                                            <li class="menu-item">
-                                                                <a href="home-v13.html">Home v13</a>
-                                                            </li>
-                                                            <li class="menu-item">
-                                                                <a href="home-v14.html">Home v14</a>
-                                                            </li>
-                                                        </ul>
-                                                        <!-- .menu -->
-                                                    </div>
-                                                    <!-- .widget_nav_menu -->
-                                                    <div class="widget widget_nav_menu">
-                                                        <ul class="menu">
-                                                            <li class="nav-title menu-item">
-                                                                <a href="#">Landing Pages</a>
-                                                            </li>
-                                                            <li class="menu-item">
-                                                                <a href="landing-page-v1.html">Landing v1</a>
-                                                            </li>
-                                                            <li class="menu-item">
-                                                                <a href="landing-page-v2.html">Landing v2</a>
-                                                            </li>
-                                                            <li class="nav-title menu-item">
-                                                                <a href="#">Shop Pages</a>
-                                                            </li>
-                                                            <li class="menu-item">
-                                                                <a href="shop.html">Shop</a>
-                                                            </li>
-                                                            <li class="menu-item">
-                                                                <a href="shop-extended.html">Shop Extended</a>
-                                                            </li>
-                                                            <li class="menu-item">
-                                                                <a href="shop-listing.html">Shop Listing</a>
-                                                            </li>
-                                                            <li class="menu-item">
-                                                                <a href="shop-listing-large.html">Shop Listing
-                                                                    Large</a>
-                                                            </li>
-                                                            <li class="menu-item">
-                                                                <a href="shop-listing-with-product-sidebar.html">Shop
-                                                                    Listing with Product Sidebar</a>
-                                                            </li>
-                                                            <li class="menu-item">
-                                                                <a href="product-category.html">Categories</a>
-                                                            </li>
-                                                            <li class="menu-item">
-                                                                <a href="shop-right-sidebar.html">Shop Right
-                                                                    Sidebar</a>
-                                                            </li>
-                                                            <li class="menu-item">
-                                                                <a href="shop-fullwidth.html">Shop Full Width</a>
-                                                            </li>
-                                                        </ul>
-                                                        <!-- .menu -->
-                                                    </div>
-                                                    <!-- .widget_nav_menu -->
-                                                    <div class="widget widget_nav_menu">
-                                                        <ul class="menu">
-                                                            <li class="nav-title menu-item">
-                                                                <a href="#">Single Product Pages</a>
-                                                            </li>
-                                                            <li class="menu-item menu-item-object-product">
-                                                                <a href="single-product-sidebar.html">Single Product
-                                                                    Sidebar</a>
-                                                            </li>
-                                                            <li class="menu-item menu-item-object-product">
-                                                                <a href="single-product-fullwidth.html">Single Product
-                                                                    Fullwidth</a>
-                                                            </li>
-                                                            <li class="menu-item menu-item-object-product">
-                                                                <a href="single-product-extended.html">Single Product
-                                                                    Extended</a>
-                                                            </li>
-                                                            <li class="nav-title menu-item">
-                                                                <a href="#">Ecommerce Pages</a>
-                                                            </li>
-                                                            <li class="menu-item">
-                                                                <a href="cart.html">Cart</a>
-                                                            </li>
-                                                            <li class="menu-item">
-                                                                <a href="checkout.html">Checkout</a>
-                                                            </li>
-                                                            <li class="menu-item">
-                                                                <a href="login-and-register.html">My Account</a>
-                                                            </li>
-                                                            <li class="menu-item">
-                                                                <a href="compare.html">Compare</a>
-                                                            </li>
-                                                            <li class="menu-item">
-                                                                <a href="wishlist.html">Wishlist</a>
-                                                            </li>
-                                                            <li class="menu-item">
-                                                                <a href="track-your-order.html">Track Order</a>
-                                                            </li>
-                                                            <li class="menu-item">
-                                                                <a href="terms-and-conditions.html">Terms and
-                                                                    Conditions</a>
-                                                            </li>
-                                                        </ul>
-                                                        <!-- .menu -->
-                                                    </div>
-                                                    <!-- .widget_nav_menu -->
-                                                    <div class="widget widget_nav_menu">
-                                                        <ul class="menu">
-                                                            <li class="nav-title menu-item">
-                                                                <a href="#">Blog Pages</a>
-                                                            </li>
-                                                            <li class="menu-item">
-                                                                <a href="blog-v1.html">Blog v1</a>
-                                                            </li>
-                                                            <li class="menu-item">
-                                                                <a href="blog-v2.html">Blog v2</a>
-                                                            </li>
-                                                            <li class="menu-item">
-                                                                <a href="blog-v3.html">Blog v3</a>
-                                                            </li>
-                                                            <li class="menu-item">
-                                                                <a href="blog-fullwidth.html">Blog Full Width</a>
-                                                            </li>
-                                                            <li class="menu-item">
-                                                                <a href="blog-single.html">Single Blog Post</a>
-                                                            </li>
-                                                            <li class="nav-title menu-item">
-                                                                <a href="#">Other Pages</a>
-                                                            </li>
-                                                            <li class="menu-item">
-                                                                <a href="about.html">About Us</a>
-                                                            </li>
-                                                            <li class="menu-item">
-                                                                <a href="contact-v1.html">Contact v1</a>
-                                                            </li>
-                                                            <li class="menu-item">
-                                                                <a href="contact-v2.html">Contact v2</a>
-                                                            </li>
-                                                            <li class="menu-item">
-                                                                <a href="faq.html">FAQ</a>
-                                                            </li>
-                                                            <li class="menu-item">
-                                                                <a href="404.html">404</a>
-                                                            </li>
-                                                        </ul>
-                                                        <!-- .menu -->
-                                                    </div>
-                                                    <!-- .widget_nav_menu -->
-                                                </div>
-                                                <!-- .tm-mega-menu -->
-                                            </div>
-                                            <!-- .yamm-content -->
-                                        </li>
-                                        <!-- .menu-item -->
-                                    </ul>
-                                    <!-- .dropdown-menu -->
-                                </li>
-                                <li class="menu-item animate-dropdown">
-                                    <a title="Logitech Sale" href="product-category.html">Logitech Sale</a>
-                                </li>
-                                <li class="menu-item animate-dropdown">
-                                    <a title="Headphones Sale" href="product-category.html">Headphones Sale</a>
-                                </li>
-                                <li class="techmarket-flex-more-menu-item dropdown">
-                                    <a title="..." href="#" data-toggle="dropdown"
-                                        class="dropdown-toggle">...</a>
-                                    <ul class="overflow-items dropdown-menu"></ul>
-                                    <!-- . -->
-                                </li>
-                            </ul>
-                            <!-- .nav -->
-                        </nav>
+                          <nav id="primary-navigation" class="primary-navigation" aria-label="Primary Navigation"
+                        data-nav="flex-menu">
+                        <ul id="menu-primary-menu" class="nav yamm">
+                            <li class="sale-clr yamm-fw menu-item animate-dropdown">
+                                <a title="Super deals" href="product-category.html">Sản phẩm hot</a>
+                            </li>
+                            <li class="menu-item animate-dropdown">
+                                <a title="about us" href="product-category.html">Về chúng tôi</a>
+                            </li>
+                            <li class="menu-item animate-dropdown">
+                                <a title="Headphones Sale" href="product-category.html">Liên hệ</a>
+                            </li>
+                            <li class="menu-item animate-dropdown">
+                                <a title="Headphones Sale" href="{{ route('blog') }}">Blog</a>
+                            </li>
+                            <li class="techmarket-flex-more-menu-item dropdown">
+                                <a title="..." href="#" data-toggle="dropdown" class="dropdown-toggle">...</a>
+                                <ul class="overflow-items dropdown-menu"></ul>
+                                <!-- . -->
+                            </li>
+                        </ul>
+                        <!-- .nav -->
+                    </nav>
                         <!-- .primary-navigation -->
                         <nav id="secondary-navigation" class="secondary-navigation" aria-label="Secondary Navigation"
                             data-nav="flex-menu">
@@ -353,43 +135,49 @@
                                 <li
                                     class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2802 animate-dropdown">
                                     <a title="Track Your Order" href="track-your-order.html">
-                                        <i class="tm tm-order-tracking"></i>Track Your Order</a>
-                                </li>
-                                <li
-                                    class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-487 animate-dropdown dropdown">
-                                    <a title="Dollar (US)" data-toggle="dropdown" class="dropdown-toggle"
-                                        aria-haspopup="true" href="#">
-                                        <i class="tm tm-dollar"></i>Dollar (US)
-                                        <span class="caret"></span>
-                                    </a>
-                                    <ul role="menu" class=" dropdown-menu">
-                                        <li
-                                            class="menu-item menu-item-type-custom menu-item-object-custom menu-item-489 animate-dropdown">
-                                            <a title="AUD" href="#">AUD</a>
-                                        </li>
-                                        <li
-                                            class="menu-item menu-item-type-custom menu-item-object-custom menu-item-490 animate-dropdown">
-                                            <a title="INR" href="#">INR</a>
-                                        </li>
-                                        <li
-                                            class="menu-item menu-item-type-custom menu-item-object-custom menu-item-491 animate-dropdown">
-                                            <a title="AED" href="#">AED</a>
-                                        </li>
-                                        <li
-                                            class="menu-item menu-item-type-custom menu-item-object-custom menu-item-492 animate-dropdown">
-                                            <a title="SGD" href="#">SGD</a>
-                                        </li>
-                                    </ul>
-                                    <!-- .dropdown-menu -->
+                                        <i class="tm tm-order-tracking"></i>Theo dõi đơn hàng</a>
                                 </li>
                                 <li class="menu-item">
-                                    <a title="My Account" href="login-and-register.html">
-                                        <i class="tm tm-login-register"></i>Register or Sign in</a>
-                                </li>
-                                <li class="techmarket-flex-more-menu-item dropdown">
-                                    <a title="..." href="#" data-toggle="dropdown"
-                                        class="dropdown-toggle">...</a>
-                                    <ul class="overflow-items dropdown-menu"></ul>
+                                    @php
+                                        $user = Auth::user();
+                                    @endphp
+                                    @guest
+                                        <a title="My Account" href="{{ route('login.client') }}">
+                                            <i class="tm tm-login-register"></i>Đăng nhập</a>
+                                    @else 
+
+
+                                        <div class="user-menu">
+                                            <a href="#" class="user-menu-toggle">
+                                                <i class="tm tm-login-register"></i><b
+                                                    style="margin-top: 5px">{{ Auth::user()->name }}</b>
+                                                <i class="fas fa-bars hamburger-icon"
+                                                    style="margin-left: 10px; margin-top: 5px"></i>
+                                            </a>
+                                            <ul class="dropdown-menu" id="userDropdownMenu">
+                                                <li>
+                                                    <a href="{{ route('client.edit') }}">
+                                                        <img src="{{ asset('home/assets/images/profile.png') }}">
+                                                        <p>Thông tin</p>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="{{ route('client.changePassword') }}">
+                                                        <img src="{{ asset('home/assets/images/setting.png') }}">
+                                                        <p>Đổi mật khẩu</p>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="{{ route('client.logout') }}">
+                                                        <img src="{{ asset('home/assets/images/logout.png') }}">
+                                                        <p>Đăng xuất</p>
+                                                    </a>
+                                                </li>
+                                            </ul>
+
+
+                                        </div>
+                                    @endguest
                                 </li>
                             </ul>
                             <!-- .nav -->
@@ -404,7 +192,7 @@
                         <button class="btn dropdown-toggle btn-block" type="button" data-toggle="dropdown"
                             aria-haspopup="true" aria-expanded="false">
                             <i class="tm tm-departments-thin"></i>
-                            <span>All Departments</span>
+                            <span>Tất cả sản phẩm</span>
                         </button>
                         <ul id="menu-departments-menu" class="dropdown-menu yamm departments-menu-dropdown">
                             <li class="highlight menu-item animate-dropdown">
@@ -426,8 +214,8 @@
                                             <div class="bg-yamm-content bg-yamm-content-bottom bg-yamm-content-right">
                                                 <div class="kc-col-container">
                                                     <div class="kc_single_image">
-                                                        <img src="home/assets/images/megamenu.jpg" class=""
-                                                            alt="" />
+                                                        <img src="{{asset('home/assets/images/megamenu.jpg')  }}"
+                                                            class="" alt="" />
                                                     </div>
                                                     <!-- .kc_single_image -->
                                                 </div>
@@ -453,7 +241,7 @@
                                                                 <li><a href="shop.html">Software</a></li>
                                                                 <li class="nav-divider"></li>
                                                                 <li>
-                                                                    <a href="#">
+                                                                    <a href="shop.html">
                                                                         <span class="nav-text">All Electronics</span>
                                                                         <span class="nav-subtext">Discover more
                                                                             products</span>
@@ -490,16 +278,15 @@
                             </li>
                             <li class="yamm-tfw menu-item menu-item-has-children animate-dropdown dropdown-submenu">
                                 <a title="Cameras &amp; Photo" data-toggle="dropdown" class="dropdown-toggle"
-                                    aria-haspopup="true" href="#">Cameras &#038; Photo <span
-                                        class="caret"></span></a>
+                                    aria-haspopup="true" href="#">Cameras &#038; Photo <span class="caret"></span></a>
                                 <ul role="menu" class=" dropdown-menu">
                                     <li class="menu-item menu-item-object-static_block animate-dropdown">
                                         <div class="yamm-content">
                                             <div class="bg-yamm-content bg-yamm-content-bottom bg-yamm-content-right">
                                                 <div class="kc-col-container">
                                                     <div class="kc_single_image">
-                                                        <img src="home/assets/images/megamenu-1.jpg" class=""
-                                                            alt="" />
+                                                        <img src="{{asset('home/assets/images/megamenu-1.jpg')  }}"
+                                                            class="" alt="" />
                                                     </div>
                                                     <!-- .kc_single_image -->
                                                 </div>
@@ -517,14 +304,12 @@
                                                                 <li><a href="shop.html">Point & Shoot Cameras</a></li>
                                                                 <li><a href="shop.html">Lenses</a></li>
                                                                 <li><a href="shop.html">Camera Accessories</a></li>
-                                                                <li><a href="shop.html">Security & Surveillance</a>
-                                                                </li>
-                                                                <li><a href="shop.html">Binoculars & Telescopes</a>
-                                                                </li>
+                                                                <li><a href="shop.html">Security & Surveillance</a></li>
+                                                                <li><a href="shop.html">Binoculars & Telescopes</a></li>
                                                                 <li><a href="shop.html">Camcorders</a></li>
                                                                 <li class="nav-divider"></li>
                                                                 <li>
-                                                                    <a href="#">
+                                                                    <a href="shop.html">
                                                                         <span class="nav-text">All Electronics</span>
                                                                         <span class="nav-subtext">Discover more
                                                                             products</span>
@@ -571,8 +356,8 @@
                                             <div class="bg-yamm-content bg-yamm-content-bottom bg-yamm-content-right">
                                                 <div class="kc-col-container">
                                                     <div class="kc_single_image">
-                                                        <img src="home/assets/images/megamenu.jpg" class=""
-                                                            alt="" />
+                                                        <img src="{{asset('home/assets/images/megamenu.jpg')  }}"
+                                                            class="" alt="" />
                                                     </div>
                                                     <!-- .kc_single_image -->
                                                 </div>
@@ -598,7 +383,7 @@
                                                                 <li><a href="shop.html">Software</a></li>
                                                                 <li class="nav-divider"></li>
                                                                 <li>
-                                                                    <a href="#">
+                                                                    <a href="shop.html">
                                                                         <span class="nav-text">All Electronics</span>
                                                                         <span class="nav-subtext">Discover more
                                                                             products</span>
@@ -643,8 +428,8 @@
                                             <div class="bg-yamm-content bg-yamm-content-bottom bg-yamm-content-right">
                                                 <div class="kc-col-container">
                                                     <div class="kc_single_image">
-                                                        <img src="home/assets/images/megamenu-1.jpg" class=""
-                                                            alt="" />
+                                                        <img src="{{asset('home/assets/images/megamenu-1.jpg')  }}"
+                                                            class="" alt="" />
                                                     </div>
                                                     <!-- .kc_single_image -->
                                                 </div>
@@ -662,14 +447,12 @@
                                                                 <li><a href="shop.html">Point & Shoot Cameras</a></li>
                                                                 <li><a href="shop.html">Lenses</a></li>
                                                                 <li><a href="shop.html">Camera Accessories</a></li>
-                                                                <li><a href="shop.html">Security & Surveillance</a>
-                                                                </li>
-                                                                <li><a href="shop.html">Binoculars & Telescopes</a>
-                                                                </li>
+                                                                <li><a href="shop.html">Security & Surveillance</a></li>
+                                                                <li><a href="shop.html">Binoculars & Telescopes</a></li>
                                                                 <li><a href="shop.html">Camcorders</a></li>
                                                                 <li class="nav-divider"></li>
                                                                 <li>
-                                                                    <a href="#">
+                                                                    <a href="shop.html">
                                                                         <span class="nav-text">All Electronics</span>
                                                                         <span class="nav-subtext">Discover more
                                                                             products</span>
@@ -708,16 +491,15 @@
                             </li>
                             <li class="yamm-tfw menu-item menu-item-has-children animate-dropdown dropdown-submenu">
                                 <a title="TV &amp; Audio" data-toggle="dropdown" class="dropdown-toggle"
-                                    aria-haspopup="true" href="#">TV &#038; Audio <span
-                                        class="caret"></span></a>
+                                    aria-haspopup="true" href="#">TV &#038; Audio <span class="caret"></span></a>
                                 <ul role="menu" class=" dropdown-menu">
                                     <li class="menu-item menu-item-object-static_block animate-dropdown">
                                         <div class="yamm-content">
                                             <div class="bg-yamm-content bg-yamm-content-bottom bg-yamm-content-right">
                                                 <div class="kc-col-container">
                                                     <div class="kc_single_image">
-                                                        <img src="home/assets/images/megamenu.jpg" class=""
-                                                            alt="" />
+                                                        <img src="{{asset('home/assets/images/megamenu.jpg')  }}"
+                                                            class="" alt="" />
                                                     </div>
                                                     <!-- .kc_single_image -->
                                                 </div>
@@ -743,7 +525,7 @@
                                                                 <li><a href="shop.html">Software</a></li>
                                                                 <li class="nav-divider"></li>
                                                                 <li>
-                                                                    <a href="#">
+                                                                    <a href="shop.html">
                                                                         <span class="nav-text">All Electronics</span>
                                                                         <span class="nav-subtext">Discover more
                                                                             products</span>
@@ -788,8 +570,8 @@
                                             <div class="bg-yamm-content bg-yamm-content-bottom bg-yamm-content-right">
                                                 <div class="kc-col-container">
                                                     <div class="kc_single_image">
-                                                        <img src="home/assets/images/megamenu-1.jpg" class=""
-                                                            alt="" />
+                                                        <img src="{{asset('home/assets/images/megamenu-1.jpg')  }}"
+                                                            class="" alt="" />
                                                     </div>
                                                     <!-- .kc_single_image -->
                                                 </div>
@@ -807,14 +589,12 @@
                                                                 <li><a href="shop.html">Point & Shoot Cameras</a></li>
                                                                 <li><a href="shop.html">Lenses</a></li>
                                                                 <li><a href="shop.html">Camera Accessories</a></li>
-                                                                <li><a href="shop.html">Security & Surveillance</a>
-                                                                </li>
-                                                                <li><a href="shop.html">Binoculars & Telescopes</a>
-                                                                </li>
+                                                                <li><a href="shop.html">Security & Surveillance</a></li>
+                                                                <li><a href="shop.html">Binoculars & Telescopes</a></li>
                                                                 <li><a href="shop.html">Camcorders</a></li>
                                                                 <li class="nav-divider"></li>
                                                                 <li>
-                                                                    <a href="#">
+                                                                    <a href="shop.html">
                                                                         <span class="nav-text">All Electronics</span>
                                                                         <span class="nav-subtext">Discover more
                                                                             products</span>
@@ -860,8 +640,8 @@
                                             <div class="bg-yamm-content bg-yamm-content-bottom bg-yamm-content-right">
                                                 <div class="kc-col-container">
                                                     <div class="kc_single_image">
-                                                        <img src="home/assets/images/megamenu.jpg" class=""
-                                                            alt="" />
+                                                        <img src="{{asset('home/assets/images/megamenu.jpg')  }}"
+                                                            class="" alt="" />
                                                     </div>
                                                     <!-- .kc_single_image -->
                                                 </div>
@@ -887,7 +667,7 @@
                                                                 <li><a href="shop.html">Software</a></li>
                                                                 <li class="nav-divider"></li>
                                                                 <li>
-                                                                    <a href="#">
+                                                                    <a href="shop.html">
                                                                         <span class="nav-text">All Electronics</span>
                                                                         <span class="nav-subtext">Discover more
                                                                             products</span>
@@ -932,36 +712,16 @@
                     </div>
                     <!-- .departments-menu -->
                     <form class="navbar-search" method="get" action="home-v1.html">
-                        <label class="sr-only screen-reader-text" for="search">Search for:</label>
+                        <label class="sr-only screen-reader-text" for="search">Tìm kiếm:</label>
                         <div class="input-group">
-                            <input type="text" id="search"
-                                class="form-control search-field product-search-field" dir="ltr" value=""
-                                name="s" placeholder="Search for products" />
+                            <input type="text" id="search" class="form-control search-field product-search-field"
+                                dir="ltr" value="" name="s" placeholder="Nhập sản phẩm muốn tìm" />
                             <div class="input-group-addon search-categories popover-header">
                                 <select name='product_cat' id='product_cat' class='postform resizeselect'>
-                                    <option value='0' selected='selected'>All Categories</option>
-                                    <option class="level-0" value="television">Televisions</option>
-                                    <option class="level-0" value="home-theater-audio">Home Theater &amp; Audio
-                                    </option>
-                                    <option class="level-0" value="headphones">Headphones</option>
-                                    <option class="level-0" value="digital-cameras">Digital Cameras</option>
-                                    <option class="level-0" value="cells-tablets">Cells &amp; Tablets</option>
-                                    <option class="level-0" value="smartwatches">Smartwatches</option>
-                                    <option class="level-0" value="games-consoles">Games &amp; Consoles</option>
-                                    <option class="level-0" value="printer">Printer</option>
-                                    <option class="level-0" value="tv-video">TV &amp; Video</option>
-                                    <option class="level-0" value="home-entertainment">Home Entertainment</option>
-                                    <option class="level-0" value="tvs">TVs</option>
-                                    <option class="level-0" value="speakers">Speakers</option>
-                                    <option class="level-0" value="computers-laptops">Computers &amp; Laptops</option>
-                                    <option class="level-0" value="laptops">Laptops</option>
-                                    <option class="level-0" value="ultrabooks">Ultrabooks</option>
-                                    <option class="level-0" value="notebooks">Notebooks</option>
-                                    <option class="level-0" value="desktop-pcs">Desktop PCs</option>
-                                    <option class="level-0" value="mac-computers">Mac Computers</option>
-                                    <option class="level-0" value="all-in-one-pc">All in One PC</option>
-                                    <option class="level-0" value="audio-music">Audio &amp; Music</option>
-                                    <option class="level-0" value="pc-components">PC Components</option>
+                                    <option value='0' selected='selected'>Tất cả danh mục</option>
+                                    @foreach ($categories as $category)
+                                        <option class="level-0" value="television">{{$category->name}}</option>
+                                    @endforeach
                                 </select>
                             </div>
                             <!-- .input-group-addon -->
@@ -969,7 +729,7 @@
                                 <input type="hidden" id="search-param" name="post_type" value="product" />
                                 <button type="submit" class="btn btn-primary">
                                     <i class="fa fa-search"></i>
-                                    <span class="search-btn">Search</span>
+                                    <span class="search-btn">Tìm kiếm</span>
                                 </button>
                             </div>
                             <!-- .input-group-btn -->
@@ -1002,7 +762,7 @@
                                 <i class="tm tm-shopping-bag"></i>
                                 <span class="count">2</span>
                                 <span class="amount">
-                                    <span class="price-label">Your Cart</span>&#036;136.99</span>
+                                    <span class="price-label">Giỏ hàng</span>0 VNĐ</span>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-mini-cart">
                                 <li>
@@ -1013,7 +773,7 @@
                                                     <a href="#" class="remove" aria-label="Remove this item"
                                                         data-product_id="65" data-product_sku="">×</a>
                                                     <a href="single-product-sidebar.html">
-                                                        <img src="home/assets/images/products/mini-cart1.jpg"
+                                                        <img src="{{asset('home/assets/images/products/mini-cart1.jpg')  }}"
                                                             class="attachment-shop_thumbnail size-shop_thumbnail wp-post-image"
                                                             alt="">XONE Wireless Controller&nbsp;
                                                     </a>
@@ -1027,10 +787,9 @@
                                                     <a href="#" class="remove" aria-label="Remove this item"
                                                         data-product_id="27" data-product_sku="">×</a>
                                                     <a href="single-product-sidebar.html">
-                                                        <img src="home/assets/images/products/mini-cart2.jpg"
+                                                        <img src="{{asset('home/assets/images/products/mini-cart2.jpg')  }}"
                                                             class="attachment-shop_thumbnail size-shop_thumbnail wp-post-image"
-                                                            alt="">Gear Virtual Reality 3D with Bluetooth
-                                                        Glasses&nbsp;
+                                                            alt="">Gear Virtual Reality 3D with Bluetooth Glasses&nbsp;
                                                     </a>
                                                     <span class="quantity">1 ×
                                                         <span class="woocommerce-Price-amount amount">
@@ -1043,13 +802,11 @@
                                             <p class="woocommerce-mini-cart__total total">
                                                 <strong>Subtotal:</strong>
                                                 <span class="woocommerce-Price-amount amount">
-                                                    <span
-                                                        class="woocommerce-Price-currencySymbol">$</span>136.99</span>
+                                                    <span class="woocommerce-Price-currencySymbol">$</span>136.99</span>
                                             </p>
                                             <p class="woocommerce-mini-cart__buttons buttons">
                                                 <a href="cart.html" class="button wc-forward">View cart</a>
-                                                <a href="checkout.html"
-                                                    class="button checkout wc-forward">Checkout</a>
+                                                <a href="checkout.html" class="button checkout wc-forward">Checkout</a>
                                             </p>
                                         </div>
                                         <!-- .widget_shopping_cart_content -->
@@ -2117,29 +1874,7 @@
                                 <!-- .content-body -->
                             </article>
                             <!-- .post -->
-                            <article class="post format-quote">
-                                <div class="entry-content">
-                                    <blockquote>
-                                        <p>Quisque a commodo lectus. Nunc vel dolor sed libero venenatis egestas. Cras
-                                            non volutpat enim. Cras molestie purus id lorem sodales, in facilisis erat
-                                            tristique. Aliquam luctus orci aliquet augue eleifend.</p>
-                                        <cite> Steve Kowalsky</cite>
-                                    </blockquote>
-                                </div>
-                                <!-- .entry-content -->
-                            </article>
-                            <!-- .post -->
-                            <article class="post format-link">
-                                <div class="entry-content">
-                                    <p>If you are looking for a developer on ThemeForest &ndash; check out the link</p>
-                                    <p>
-                                        <a target="_blank" href="http://wwww.transvelo.com">
-                                            <span>http://wwww.transvelo.com</span>
-                                        </a>
-                                    </p>
-                                </div>
-                                <!-- .entry-content -->
-                            </article>
+                            
                             <!-- .post -->
                             <nav class="navigation pagination" id="post-navigation">
                                 <span class="screen-reader-text">Posts navigation</span>
@@ -2155,6 +1890,7 @@
                                 </div>
                                 <!-- .nav-links -->
                             </nav>
+                           
                             <!-- .navigation -->
                         </main>
                         <!-- #main -->
@@ -2320,7 +2056,7 @@
                             <!-- .section-posts-carousel -->
                         </div>
                         <!-- .techmarket_posts_carousel_widget -->
-                        <div class="widget widget_tag_cloud">
+                        {{-- <div class="widget widget_tag_cloud">
                             <span class="gamma widget-title">Tags Clouds</span>
                             <div class="tagcloud">
                                 <a style="font-size: 22pt;" class="tag-cloud-link" href="#">amazon like</a>
@@ -2336,7 +2072,7 @@
                                 <a style="font-size: 22pt;" class="tag-cloud-link" href="#">wordpress</a>
                             </div>
                             <!-- .tagcloud -->
-                        </div>
+                        </div> --}}
                         <!-- .widget_tag_cloud -->
                     </div>
                     <!-- .sidebar-blog -->
@@ -2350,22 +2086,22 @@
             <div class="col-full">
                 <div class="before-footer-wrap">
                     <div class="col-full">
-                        <div class="footer-newsletter">
+                        {{-- <div class="footer-newsletter">
                             <div class="media">
                                 <i class="footer-newsletter-icon tm tm-newsletter"></i>
                                 <div class="media-body">
                                     <div class="clearfix">
                                         <div class="newsletter-header">
-                                            <h5 class="newsletter-title">Sign up to Newsletter</h5>
-                                            <span class="newsletter-marketing-text">...and receive
-                                                <strong>$20 coupon for first shopping</strong>
+                                            <h5 class="newsletter-title">Đăng ký </h5>
+                                            <span class="newsletter-marketing-text">... và nhận ngay
+                                                <strong>Phiếu giảm giá 100k cho lần đầu mua hàng</strong>
                                             </span>
                                         </div>
                                         <!-- .newsletter-header -->
                                         <div class="newsletter-body">
                                             <form class="newsletter-form">
                                                 <input type="text" placeholder="Enter your email address">
-                                                <button class="button" type="button">Sign up</button>
+                                                <button class="button" type="button">Đăng ký ngay</button>
                                             </form>
                                         </div>
                                         <!-- .newsletter body -->
@@ -2375,9 +2111,9 @@
                                 <!-- .media-body -->
                             </div>
                             <!-- .media -->
-                        </div>
+                        </div> --}}
                         <!-- .footer-newsletter -->
-                        <div class="footer-social-icons">
+                        {{-- <div class="footer-social-icons">
                             <ul class="social-icons nav">
                                 <li class="nav-item">
                                     <a class="sm-icon-label-link nav-link" href="#">
@@ -2400,19 +2136,20 @@
                                         <i class="fa fa-rss"></i> RSS</a>
                                 </li>
                             </ul>
-                        </div>
+                        </div> --}}
                         <!-- .footer-social-icons -->
-                    </div>
+                        {{--
+                    </div> --}}
                     <!-- .col-full -->
-                </div>
+                    {{--
+                </div> --}}
                 <!-- .before-footer-wrap -->
                 <div class="footer-widgets-block">
                     <div class="row">
                         <div class="footer-contact">
                             <div class="footer-logo">
                                 <a href="home-v1.html" class="custom-logo-link" rel="home">
-                                    <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg"
-                                        viewBox="0 0 176 28">
+                                    <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 176 28">
                                         <defs>
                                             <style>
                                                 .cls-1,
@@ -2446,8 +2183,7 @@
                                             points="132.04 2.09 127.09 7.88 130.78 7.88 130.78 8.69 126.4 8.69 124.42 11 123.29 11 132.65 0 133.04 0 133.04 11 132.04 11 132.04 2.09" />
                                         <polygon class="cls-1"
                                             points="120.97 2.04 116.98 6.15 116.98 6.19 116.97 6.17 116.95 6.19 116.95 6.15 112.97 2.04 112.97 11 112 11 112 0 112.32 0 116.97 4.8 121.62 0 121.94 0 121.94 11 120.97 11 120.97 2.04" />
-                                        <ellipse class="cls-3" cx="116.3" cy="22.81" rx="5.15"
-                                            ry="5.18" />
+                                        <ellipse class="cls-3" cx="116.3" cy="22.81" rx="5.15" ry="5.18" />
                                         <rect class="cls-2" x="99.13" y="0.44" width="5.87" height="27.12" />
                                         <polygon class="cls-1"
                                             points="85.94 27.56 79.92 27.56 79.92 0.44 85.94 0.44 85.94 16.86 96.35 16.86 96.35 21.84 85.94 21.84 85.94 27.56" />
@@ -2471,19 +2207,16 @@
                                             <i class="tm tm-call-us-footer"></i>
                                         </span>
                                         <div class="media-body">
-                                            <span class="call-us-title">Got Questions ? Call us 24/7!</span>
-                                            <span class="call-us-text">(800) 8001-8588, (0600) 874 548</span>
-                                            <address class="footer-contact-address">17 Princess Road, London, Greater
-                                                London NW1 8JR, UK</address>
-                                            <a href="#" class="footer-address-map-link">
-                                                <i class="tm tm-map-marker"></i>Find us on map</a>
+                                            <span class="call-us-title">Liên hệ với chúng tôi</span>
+                                            <span class="call-us-text">{{$config->hotline}}</span>
+                                            <address class="footer-contact-address">{{$config->address}}</address>
                                         </div>
                                         <!-- .media-body -->
                                     </div>
                                     <!-- .media -->
                                 </div>
                                 <!-- .footer-contact-info -->
-                                <div class="footer-payment-info">
+                                {{-- <div class="footer-payment-info">
                                     <div class="media">
                                         <span class="media-left icon media-middle">
                                             <i class="tm tm-safe-payments"></i>
@@ -2494,22 +2227,22 @@
                                                 <ul class="list-payment-icons nav">
                                                     <li class="nav-item">
                                                         <img class="payment-icon-image"
-                                                            src="home/assets/images/credit-cards/mastercard.svg"
+                                                            src="{{asset('home/assets/images/credit-cards/mastercard.svg')  }}"
                                                             alt="mastercard" />
                                                     </li>
                                                     <li class="nav-item">
                                                         <img class="payment-icon-image"
-                                                            src="home/assets/images/credit-cards/visa.svg"
+                                                            src="{{asset('home/assets/images/credit-cards/visa.svg')  }}"
                                                             alt="visa" />
                                                     </li>
                                                     <li class="nav-item">
                                                         <img class="payment-icon-image"
-                                                            src="home/assets/images/credit-cards/paypal.svg"
+                                                            src="{{asset('home/assets/images/credit-cards/paypal.svg')  }}"
                                                             alt="paypal" />
                                                     </li>
                                                     <li class="nav-item">
                                                         <img class="payment-icon-image"
-                                                            src="home/assets/images/credit-cards/maestro.svg"
+                                                            src="{{asset('home/assets/images/credit-cards/maestro.svg')  }}"
                                                             alt="maestro" />
                                                     </li>
                                                 </ul>
@@ -2520,12 +2253,12 @@
                                                 <ul class="footer-secured-by-icons">
                                                     <li class="nav-item">
                                                         <img class="secure-icons-image"
-                                                            src="home/assets/images/secured-by/norton.svg"
+                                                            src="{{asset('home/assets/images/secured-by/norton.svg')  }}"
                                                             alt="norton" />
                                                     </li>
                                                     <li class="nav-item">
                                                         <img class="secure-icons-image"
-                                                            src="home/assets/images/secured-by/mcafee.svg"
+                                                            src="{{asset('home/assets/images/secured-by/mcafee.svg')  }}"
                                                             alt="mcafee" />
                                                     </li>
                                                 </ul>
@@ -2535,7 +2268,7 @@
                                         <!-- .media-body -->
                                     </div>
                                     <!-- .media -->
-                                </div>
+                                </div> --}}
                                 <!-- .footer-payment-info -->
                             </div>
                             <!-- .contact-payment-wrap -->
@@ -2545,7 +2278,7 @@
                             <div class="columns">
                                 <aside class="widget clearfix">
                                     <div class="body">
-                                        <h4 class="widget-title">Find it Fast</h4>
+                                        <h4 class="widget-title">Các danh mục</h4>
                                         <div class="menu-footer-menu-1-container">
                                             <ul id="menu-footer-menu-1" class="menu">
                                                 <li class="menu-item">
@@ -2611,8 +2344,12 @@
                             <div class="columns">
                                 <aside class="widget clearfix">
                                     <div class="body">
-                                        <h4 class="widget-title">Customer Care</h4>
-                                        <div class="menu-footer-menu-3-container">
+                                        <h4 class="widget-title">
+                                            <a href="#" class="footer-address-map-link">
+                                                <i class="tm tm-map-marker"> </i> Địa chỉ</a>
+                                        </h4>
+                                        {!!$config->map!!}
+                                        {{-- <div class="menu-footer-menu-3-container">
                                             <ul id="menu-footer-menu-3" class="menu">
                                                 <li class="menu-item">
                                                     <a href="login-and-register.html">My Account</a>
@@ -2636,7 +2373,7 @@
                                                     <a href="faq.html">FAQs</a>
                                                 </li>
                                             </ul>
-                                        </div>
+                                        </div> --}}
                                         <!-- .menu-footer-menu-3-container -->
                                     </div>
                                     <!-- .body -->
@@ -2650,18 +2387,17 @@
                     <!-- .row -->
                 </div>
                 <!-- .footer-widgets-block -->
-                <div class="site-info">
+                {{-- <div class="site-info">
                     <div class="col-full">
-                        <div class="copyright">Copyright &copy; 2017 <a href="home-v1.html">Techboys</a> Theme.
-                            All rights reserved.</div>
+                        <div class="copyright">Copyright &copy; 2025 <a href="home-v1.html">Techboys</a> </div>
                         <!-- .copyright -->
-                        <div class="credit">Made with
-                            <i class="fa fa-heart"></i> by bcube.
+                        <div class="credit">Thiết kế
+                            <i class="fa fa-heart"></i> bởi WDK18.4 FPOLY.
                         </div>
                         <!-- .credit -->
                     </div>
                     <!-- .col-full -->
-                </div>
+                </div> --}}
                 <!-- .site-info -->
             </div>
             <!-- .col-full -->
