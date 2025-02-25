@@ -85,8 +85,7 @@
                                         points="132.04 2.09 127.09 7.88 130.78 7.88 130.78 8.69 126.4 8.69 124.42 11 123.29 11 132.65 0 133.04 0 133.04 11 132.04 11 132.04 2.09" />
                                     <polygon class="cls-1"
                                         points="120.97 2.04 116.98 6.15 116.98 6.19 116.97 6.17 116.95 6.19 116.95 6.15 112.97 2.04 112.97 11 112 11 112 0 112.32 0 116.97 4.8 121.62 0 121.94 0 121.94 11 120.97 11 120.97 2.04" />
-                                    <ellipse class="cls-3" cx="116.3" cy="22.81" rx="5.15"
-                                        ry="5.18" />
+                                    <ellipse class="cls-3" cx="116.3" cy="22.81" rx="5.15" ry="5.18" />
                                     <rect class="cls-2" x="99.13" y="0.44" width="5.87" height="27.12" />
                                     <polygon class="cls-1"
                                         points="85.94 27.56 79.92 27.56 79.92 0.44 85.94 0.44 85.94 16.86 96.35 16.86 96.35 21.84 85.94 21.84 85.94 27.56" />
@@ -105,29 +104,29 @@
                         </div>
                         <!-- /.site-branding -->
                         <!-- ============================================================= End Header Logo ============================================================= -->
-                          <nav id="primary-navigation" class="primary-navigation" aria-label="Primary Navigation"
-                        data-nav="flex-menu">
-                        <ul id="menu-primary-menu" class="nav yamm">
-                            <li class="sale-clr yamm-fw menu-item animate-dropdown">
-                                <a title="Super deals" href="product-category.html">Sản phẩm hot</a>
-                            </li>
-                            <li class="menu-item animate-dropdown">
-                                <a title="about us" href="product-category.html">Về chúng tôi</a>
-                            </li>
-                            <li class="menu-item animate-dropdown">
-                                <a title="Headphones Sale" href="product-category.html">Liên hệ</a>
-                            </li>
-                            <li class="menu-item animate-dropdown">
-                                <a title="Headphones Sale" href="{{ route('blog') }}">Blog</a>
-                            </li>
-                            <li class="techmarket-flex-more-menu-item dropdown">
-                                <a title="..." href="#" data-toggle="dropdown" class="dropdown-toggle">...</a>
-                                <ul class="overflow-items dropdown-menu"></ul>
-                                <!-- . -->
-                            </li>
-                        </ul>
-                        <!-- .nav -->
-                    </nav>
+                        <nav id="primary-navigation" class="primary-navigation" aria-label="Primary Navigation"
+                            data-nav="flex-menu">
+                            <ul id="menu-primary-menu" class="nav yamm">
+                                <li class="sale-clr yamm-fw menu-item animate-dropdown">
+                                    <a title="Super deals" href="product-category.html">Sản phẩm hot</a>
+                                </li>
+                                <li class="menu-item animate-dropdown">
+                                    <a title="about us" href="product-category.html">Về chúng tôi</a>
+                                </li>
+                                <li class="menu-item animate-dropdown">
+                                    <a title="Headphones Sale" href="product-category.html">Liên hệ</a>
+                                </li>
+                                <li class="menu-item animate-dropdown">
+                                    <a title="Headphones Sale" href="{{ route('blog') }}">Blog</a>
+                                </li>
+                                <li class="techmarket-flex-more-menu-item dropdown">
+                                    <a title="..." href="#" data-toggle="dropdown" class="dropdown-toggle">...</a>
+                                    <ul class="overflow-items dropdown-menu"></ul>
+                                    <!-- . -->
+                                </li>
+                            </ul>
+                            <!-- .nav -->
+                        </nav>
                         <!-- .primary-navigation -->
                         <nav id="secondary-navigation" class="secondary-navigation" aria-label="Secondary Navigation"
                             data-nav="flex-menu">
@@ -145,6 +144,11 @@
                                         <a title="My Account" href="{{ route('login.client') }}">
                                             <i class="tm tm-login-register"></i>Đăng nhập</a>
                                     @else 
+
+
+
+
+
 
 
                                         <div class="user-menu">
@@ -861,8 +865,7 @@
                                         points="132.04 2.09 127.09 7.88 130.78 7.88 130.78 8.69 126.4 8.69 124.42 11 123.29 11 132.65 0 133.04 0 133.04 11 132.04 11 132.04 2.09" />
                                     <polygon class="cls-1"
                                         points="120.97 2.04 116.98 6.15 116.98 6.19 116.97 6.17 116.95 6.19 116.95 6.15 112.97 2.04 112.97 11 112 11 112 0 112.32 0 116.97 4.8 121.62 0 121.94 0 121.94 11 120.97 11 120.97 2.04" />
-                                    <ellipse class="cls-3" cx="116.3" cy="22.81" rx="5.15"
-                                        ry="5.18" />
+                                    <ellipse class="cls-3" cx="116.3" cy="22.81" rx="5.15" ry="5.18" />
                                     <rect class="cls-2" x="99.13" y="0.44" width="5.87" height="27.12" />
                                     <polygon class="cls-1"
                                         points="85.94 27.56 79.92 27.56 79.92 0.44 85.94 0.44 85.94 16.86 96.35 16.86 96.35 21.84 85.94 21.84 85.94 27.56" />
@@ -908,8 +911,7 @@
                     <!-- /.row -->
                     <div class="techmarket-sticky-wrap">
                         <div class="row">
-                            <nav id="handheld-navigation" class="handheld-navigation"
-                                aria-label="Handheld Navigation">
+                            <nav id="handheld-navigation" class="handheld-navigation" aria-label="Handheld Navigation">
                                 <button class="btn navbar-toggler" type="button">
                                     <i class="tm tm-departments-thin"></i>
                                     <span>Menu</span>
@@ -938,8 +940,8 @@
                                                             class="bg-yamm-content bg-yamm-content-bottom bg-yamm-content-right">
                                                             <div class="kc-col-container">
                                                                 <div class="kc_single_image">
-                                                                    <img src="home/assets/images/megamenu.jpg"
-                                                                        class="" alt="" />
+                                                                    <img src="home/assets/images/megamenu.jpg" class=""
+                                                                        alt="" />
                                                                 </div>
                                                                 <!-- .kc_single_image -->
                                                             </div>
@@ -1100,8 +1102,8 @@
                                                             class="bg-yamm-content bg-yamm-content-bottom bg-yamm-content-right">
                                                             <div class="kc-col-container">
                                                                 <div class="kc_single_image">
-                                                                    <img src="home/assets/images/megamenu.jpg"
-                                                                        class="" alt="" />
+                                                                    <img src="home/assets/images/megamenu.jpg" class=""
+                                                                        alt="" />
                                                                 </div>
                                                                 <!-- .kc_single_image -->
                                                             </div>
@@ -1253,8 +1255,8 @@
                                         </li>
                                         <li
                                             class="yamm-tfw menu-item menu-item-has-children animate-dropdown dropdown-submenu">
-                                            <a title="TV &amp; Audio" data-toggle="dropdown"
-                                                class="dropdown-toggle" aria-haspopup="true" href="#">TV
+                                            <a title="TV &amp; Audio" data-toggle="dropdown" class="dropdown-toggle"
+                                                aria-haspopup="true" href="#">TV
                                                 &#038; Audio <span class="caret"></span></a>
                                             <ul role="menu" class=" dropdown-menu">
                                                 <li class="menu-item menu-item-object-static_block animate-dropdown">
@@ -1263,8 +1265,8 @@
                                                             class="bg-yamm-content bg-yamm-content-bottom bg-yamm-content-right">
                                                             <div class="kc-col-container">
                                                                 <div class="kc_single_image">
-                                                                    <img src="home/assets/images/megamenu.jpg"
-                                                                        class="" alt="" />
+                                                                    <img src="home/assets/images/megamenu.jpg" class=""
+                                                                        alt="" />
                                                                 </div>
                                                                 <!-- .kc_single_image -->
                                                             </div>
@@ -1417,8 +1419,7 @@
                                         <li
                                             class="yamm-tfw menu-item menu-item-has-children animate-dropdown dropdown-submenu">
                                             <a title="Accesories" data-toggle="dropdown" class="dropdown-toggle"
-                                                aria-haspopup="true" href="#">Accesories <span
-                                                    class="caret"></span></a>
+                                                aria-haspopup="true" href="#">Accesories <span class="caret"></span></a>
                                             <ul role="menu" class=" dropdown-menu">
                                                 <li class="menu-item menu-item-object-static_block animate-dropdown">
                                                     <div class="yamm-content">
@@ -1426,8 +1427,8 @@
                                                             class="bg-yamm-content bg-yamm-content-bottom bg-yamm-content-right">
                                                             <div class="kc-col-container">
                                                                 <div class="kc_single_image">
-                                                                    <img src="home/assets/images/megamenu.jpg"
-                                                                        class="" alt="" />
+                                                                    <img src="home/assets/images/megamenu.jpg" class=""
+                                                                        alt="" />
                                                                 </div>
                                                                 <!-- .kc_single_image -->
                                                             </div>
@@ -1512,8 +1513,8 @@
                                         <label class="screen-reader-text"
                                             for="woocommerce-product-search-field-0">Search for:</label>
                                         <input type="search" id="woocommerce-product-search-field-0"
-                                            class="search-field" placeholder="Search products&hellip;"
-                                            value="" name="s" />
+                                            class="search-field" placeholder="Search products&hellip;" value=""
+                                            name="s" />
                                         <input type="submit" value="Search" />
                                         <input type="hidden" name="post_type" value="product" />
                                     </form>
@@ -1550,332 +1551,58 @@
                     <!-- .woocommerce-breadcrumb -->
                     <div id="primary" class="content-area">
                         <main id="main" class="site-main">
-                            <article class="post format-image hentry">
-                                <div class="media-attachment">
-                                    <div class="post-thumbnail">
-                                        <a href="blog-single.html">
-                                            <img width="460" height="244" alt=""
-                                                class="wp-post-image" src="home/assets/images/blog/1-1.jpg">
-                                        </a>
-                                    </div>
-                                </div>
-                                <!-- .media-attachment -->
-                                <div class="content-body">
-                                    <header class="entry-header">
-                                        <h1 class="entry-title">
-                                            <a rel="bookmark" href="blog-single.html">Tech Terms you should know
-                                                before your adventure</a>
-                                        </h1>
-                                        <div class="entry-meta">
-                                            <span class="cat-links">
-                                                <a rel="category tag" href="blog-single.html">Laptops</a>
-                                            </span>
-                                            <!-- .cat-links -->
-                                            <span class="posted-on">
-                                                <a rel="bookmark" href="blog-single.html">
-                                                    <time datetime="2017-03-23T08:06:09+00:00"
-                                                        class="entry-date published">March 23, 2017</time>
-                                                </a>
-                                            </span>
-                                            <!-- .posted-on -->
-                                            <span class="author">
-                                                <a rel="author" title="Posts by Jane Smith" href="#">Jane
-                                                    Smith</a>
-                                            </span>
-                                            <!-- .author -->
-                                        </div>
-                                        <!-- .entry-meta -->
-                                    </header>
-                                    <!-- .entry-header -->
-                                    <div class="entry-content">
-                                        <p>A desktop computer is a computer that is designed to stay in a single
-                                            location. It may be a tower or an all-in-one PC.</p>
-                                    </div>
-                                    <!-- .entry-content -->
-                                    <div class="post-readmore">
-                                        <a class="btn btn-primary" href="blog-single.html">Read More</a>
-                                    </div>
-                                    <!-- .post-readmore -->
-                                    <span class="comments-link">
-                                        <a href="blog-single#comments.html">Leave a comment</a>
-                                    </span>
-                                    <!-- .comments-link -->
-                                </div>
-                                <!-- .content-body -->
-                            </article>
-                            <!-- .post -->
-                            <article class="post format-image hentry">
-                                <div class="media-attachment">
-                                    <div class="post-thumbnail">
-                                        <a href="blog-single.html">
-                                            <img width="460" height="244" alt=""
-                                                class="wp-post-image" src="home/assets/images/blog/1-2.jpg">
-                                        </a>
-                                    </div>
-                                </div>
-                                <!-- .media-attachment -->
-                                <div class="content-body">
-                                    <header class="entry-header">
-                                        <h1 class="entry-title">
-                                            <a rel="bookmark" href="blog-single.html">How to build your first 4k
-                                                ready Desktop PC</a>
-                                        </h1>
-                                        <div class="entry-meta">
-                                            <span class="cat-links">
-                                                <a rel="category tag" href="blog-single.html">Laptops</a>
-                                            </span>
-                                            <!-- .cat-links -->
-                                            <span class="posted-on">
-                                                <a rel="bookmark" href="blog-single.html">
-                                                    <time datetime="2017-03-23T08:06:09+00:00"
-                                                        class="entry-date published">March 23, 2017</time>
-                                                </a>
-                                            </span>
-                                            <!-- .posted-on -->
-                                            <span class="author">
-                                                <a rel="author" title="Posts by Jane Smith" href="#">Jane
-                                                    Smith</a>
-                                            </span>
-                                            <!-- .author -->
-                                        </div>
-                                        <!-- .entry-meta -->
-                                    </header>
-                                    <!-- .entry-header -->
-                                    <div class="entry-content">
-                                        <p>A desktop computer is a computer that is designed to stay in a single
-                                            location. It may be a tower or an all-in-one PC.</p>
-                                    </div>
-                                    <!-- .entry-content -->
-                                    <div class="post-readmore">
-                                        <a class="btn btn-primary" href="blog-single.html">Read More</a>
-                                    </div>
-                                    <!-- .post-readmore -->
-                                    <span class="comments-link">
-                                        <a href="blog-single#comments.html">Leave a comment</a>
-                                    </span>
-                                    <!-- .comments-link -->
-                                </div>
-                                <!-- .content-body -->
-                            </article>
-                            <!-- .post -->
-                            <article class="post format-image hentry">
-                                <div class="media-attachment">
-                                    <div class="post-thumbnail">
-                                        <a href="blog-single.html">
-                                            <img width="460" height="244" alt=""
-                                                class="wp-post-image" src="home/assets/images/blog/1-3.jpg">
-                                        </a>
-                                    </div>
-                                </div>
-                                <!-- .media-attachment -->
-                                <div class="content-body">
-                                    <header class="entry-header">
-                                        <h1 class="entry-title">
-                                            <a rel="bookmark" href="blog-single.html">Top 10 Best Graphical Games
-                                                for testing your Hardware</a>
-                                        </h1>
-                                        <div class="entry-meta">
-                                            <span class="cat-links">
-                                                <a rel="category tag" href="blog-single.html">Laptops</a>
-                                            </span>
-                                            <!-- .cat-links -->
-                                            <span class="posted-on">
-                                                <a rel="bookmark" href="blog-single.html">
-                                                    <time datetime="2017-03-23T08:06:09+00:00"
-                                                        class="entry-date published">March 23, 2017</time>
-                                                </a>
-                                            </span>
-                                            <!-- .posted-on -->
-                                            <span class="author">
-                                                <a rel="author" title="Posts by Jane Smith" href="#">Jane
-                                                    Smith</a>
-                                            </span>
-                                            <!-- .author -->
-                                        </div>
-                                        <!-- .entry-meta -->
-                                    </header>
-                                    <!-- .entry-header -->
-                                    <div class="entry-content">
-                                        <p>A desktop computer is a computer that is designed to stay in a single
-                                            location. It may be a tower or an all-in-one PC.</p>
-                                    </div>
-                                    <!-- .entry-content -->
-                                    <div class="post-readmore">
-                                        <a class="btn btn-primary" href="blog-single.html">Read More</a>
-                                    </div>
-                                    <!-- .post-readmore -->
-                                    <span class="comments-link">
-                                        <a href="blog-single#comments.html">Leave a comment</a>
-                                    </span>
-                                    <!-- .comments-link -->
-                                </div>
-                                <!-- .content-body -->
-                            </article>
-                            <!-- .post -->
-                            <article class="post format-image hentry">
-                                <div class="media-attachment">
-                                    <div class="post-thumbnail">
-                                        <a href="blog-single.html">
-                                            <img width="460" height="244" alt=""
-                                                class="wp-post-image" src="home/assets/images/blog/1-4.png">
-                                        </a>
-                                    </div>
-                                </div>
-                                <!-- .media-attachment -->
-                                <div class="content-body">
-                                    <header class="entry-header">
-                                        <h1 class="entry-title">
-                                            <a rel="bookmark" href="blog-single.html">5 Tips to how find a place for
-                                                your Wide screen Monitor</a>
-                                        </h1>
-                                        <div class="entry-meta">
-                                            <span class="cat-links">
-                                                <a rel="category tag" href="blog-single.html">Laptops</a>
-                                            </span>
-                                            <!-- .cat-links -->
-                                            <span class="posted-on">
-                                                <a rel="bookmark" href="blog-single.html">
-                                                    <time datetime="2017-03-23T08:06:09+00:00"
-                                                        class="entry-date published">March 23, 2017</time>
-                                                </a>
-                                            </span>
-                                            <!-- .posted-on -->
-                                            <span class="author">
-                                                <a rel="author" title="Posts by Jane Smith" href="#">Jane
-                                                    Smith</a>
-                                            </span>
-                                            <!-- .author -->
-                                        </div>
-                                        <!-- .entry-meta -->
-                                    </header>
-                                    <!-- .entry-header -->
-                                    <div class="entry-content">
-                                        <p>A desktop computer is a computer that is designed to stay in a single
-                                            location. It may be a tower or an all-in-one PC.</p>
-                                    </div>
-                                    <!-- .entry-content -->
-                                    <div class="post-readmore">
-                                        <a class="btn btn-primary" href="blog-single.html">Read More</a>
-                                    </div>
-                                    <!-- .post-readmore -->
-                                    <span class="comments-link">
-                                        <a href="blog-single#comments.html">Leave a comment</a>
-                                    </span>
-                                    <!-- .comments-link -->
-                                </div>
-                                <!-- .content-body -->
-                            </article>
-                            <!-- .post -->
-                            <article class="post format-image hentry">
-                                <div class="media-attachment">
-                                    <div class="post-thumbnail">
-                                        <a href="blog-single.html">
-                                            <img width="460" height="244" alt=""
-                                                class="wp-post-image" src="home/assets/images/blog/1-4.jpg">
-                                        </a>
-                                    </div>
-                                </div>
-                                <!-- .media-attachment -->
-                                <div class="content-body">
-                                    <header class="entry-header">
-                                        <h1 class="entry-title">
-                                            <a rel="bookmark" href="blog-single.html">Why you should choose
-                                                dedicated Desktop PC Computer</a>
-                                        </h1>
-                                        <div class="entry-meta">
-                                            <span class="cat-links">
-                                                <a rel="category tag" href="blog-single.html">Laptops</a>
-                                            </span>
-                                            <!-- .cat-links -->
-                                            <span class="posted-on">
-                                                <a rel="bookmark" href="blog-single.html">
-                                                    <time datetime="2017-03-23T08:06:09+00:00"
-                                                        class="entry-date published">March 23, 2017</time>
-                                                </a>
-                                            </span>
-                                            <!-- .posted-on -->
-                                            <span class="author">
-                                                <a rel="author" title="Posts by Jane Smith" href="#">Jane
-                                                    Smith</a>
-                                            </span>
-                                            <!-- .author -->
-                                        </div>
-                                        <!-- .entry-meta -->
-                                    </header>
-                                    <!-- .entry-header -->
-                                    <div class="entry-content">
-                                        <p>A desktop computer is a computer that is designed to stay in a single
-                                            location. It may be a tower or an all-in-one PC.</p>
-                                    </div>
-                                    <!-- .entry-content -->
-                                    <div class="post-readmore">
-                                        <a class="btn btn-primary" href="blog-single.html">Read More</a>
-                                    </div>
-                                    <!-- .post-readmore -->
-                                    <span class="comments-link">
-                                        <a href="blog-single#comments.html">Leave a comment</a>
-                                    </span>
-                                    <!-- .comments-link -->
-                                </div>
-                                <!-- .content-body -->
-                            </article>
-                            <!-- .post -->
-                            <article class="post format-image hentry">
-                                <div class="media-attachment">
-                                    <div class="post-thumbnail">
-                                        <a href="blog-single.html">
-                                            <img width="460" height="244" alt=""
-                                                class="wp-post-image" src="home/assets/images/blog/1-5.jpg">
-                                        </a>
-                                    </div>
-                                </div>
-                                <!-- .media-attachment -->
-                                <div class="content-body">
-                                    <header class="entry-header">
-                                        <h1 class="entry-title">
-                                            <a rel="bookmark" href="blog-single.html">Most comfortable Gaming Seats
-                                                for Playing Station</a>
-                                        </h1>
-                                        <div class="entry-meta">
-                                            <span class="cat-links">
-                                                <a rel="category tag" href="blog-single.html">Laptops</a>
-                                            </span>
-                                            <!-- .cat-links -->
-                                            <span class="posted-on">
-                                                <a rel="bookmark" href="blog-single.html">
-                                                    <time datetime="2017-03-23T08:06:09+00:00"
-                                                        class="entry-date published">March 23, 2017</time>
-                                                </a>
-                                            </span>
-                                            <!-- .posted-on -->
-                                            <span class="author">
-                                                <a rel="author" title="Posts by Jane Smith" href="#">Jane
-                                                    Smith</a>
-                                            </span>
-                                            <!-- .author -->
-                                        </div>
-                                        <!-- .entry-meta -->
-                                    </header>
-                                    <!-- .entry-header -->
-                                    <div class="entry-content">
-                                        <p>A desktop computer is a computer that is designed to stay in a single
-                                            location. It may be a tower or an all-in-one PC.</p>
-                                    </div>
-                                    <!-- .entry-content -->
-                                    <div class="post-readmore">
-                                        <a class="btn btn-primary" href="blog-single.html">Read More</a>
-                                    </div>
-                                    <!-- .post-readmore -->
-                                    <span class="comments-link">
-                                        <a href="blog-single#comments.html">Leave a comment</a>
-                                    </span>
-                                    <!-- .comments-link -->
-                                </div>
-                                <!-- .content-body -->
-                            </article>
-                            <!-- .post -->
-                            
-                            <!-- .post -->
+                            @foreach ($loadAll as $blog)
+                                <article class="post format-image hentry">
+                                                            <div class="media-attachment">
+                                                                <div class="post-thumbnail">
+                                                                    <a href="blog-single.html">
+                                                                        <img width="460" height="244" alt="" class="wp-post-image"
+                                                                            src="{{ url('admin/assets/images/blog') . '/' . $blog->image }}">
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                            <!-- .media-attachment -->
+                                                            <div class="content-body">
+                                                                <header class="entry-header">
+                                                                    <h1 class="entry-title">
+                                                                        <a rel="bookmark" href="blog-single.html">{{$blog->title  }}</a>
+                                                                    </h1>
+                                                                    <div class="entry-meta">
+                                                                        <span class="posted-on">
+                                                                            <a rel="bookmark" href="blog-single.html">
+                                                                                <time datetime="2017-03-23T08:06:09+00:00"
+                                                                                    class="entry-date published">{{$blog->published_at }}</time>
+                                                                            </a>
+                                                                        </span>
+                                                                        <span class="author">
+                                                                            <a rel="author" title="Posts by Jane Smith"
+                                                                                href="#">{{ $blog->user->name }}
+                                                                            </a>
+                                                                        </span>
+                                                                        <!-- .author -->
+                                                                    </div>
+                                                                    <!-- .entry-meta -->
+                                                                </header>
+                                                                <!-- .entry-header -->
+                                                                <div class="entry-content">
+                                                                    <?php
+                                $content = strip_tags(html_entity_decode($blog->content, ENT_QUOTES, 'UTF-8'));
+                                $shortContent = mb_substr($content, 0, 100, 'UTF-8') . (mb_strlen($content, 'UTF-8') > 50 ? '...' : '');
+                                                                                                                                                        ?>
+                                                                    <p>{{ $shortContent }}</p>
+                                                                </div>
+                                                                <!-- .entry-content -->
+                                                                <div class="post-readmore">
+                                                                    <a class="btn btn-primary" href="{{ route('DetailBlog', $blog->slug) }}">Đọc
+                                                                        thêm</a>
+                                                                </div>
+                                                                <!-- .post-readmore -->
+
+                                                                <!-- .comments-link -->
+                                                            </div>
+                                                            <!-- .content-body -->
+                                                        </article>
+                            @endforeach
                             <nav class="navigation pagination" id="post-navigation">
                                 <span class="screen-reader-text">Posts navigation</span>
                                 <div class="nav-links">
@@ -1890,191 +1617,13 @@
                                 </div>
                                 <!-- .nav-links -->
                             </nav>
-                           
+
                             <!-- .navigation -->
                         </main>
                         <!-- #main -->
                     </div>
                     <!-- #primary -->
-                    <div id="secondary" class="sidebar-blog widget-area" role="complementary">
-                        <div class="widget widget_search" id="search-2">
-                            <form action="#" class="search-form" method="get" role="search">
-                                <label>
-                                    <span class="screen-reader-text">Search for:</span>
-                                    <input type="search" name="s" value="" placeholder="Search …"
-                                        class="search-field">
-                                </label>
-                                <input type="submit" value="Search" class="search-submit">
-                            </form>
-                            <!-- .search-form -->
-                        </div>
-                        <!-- .widget_search -->
-                        <div class="widget widget_text" id="text-2">
-                            <span class="gamma widget-title">About</span>
-                            <div class="textwidget">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tincidunt, erat in
-                                    malesuada aliquam, est erat faucibus purus, eget viverra nulla sem vitae neque.
-                                    Quisque id sodales libero.</p>
-                            </div>
-                            <!-- .textwidget -->
-                        </div>
-                        <!-- .widget_text -->
-                        <div class="widget widget_categories" id="categories-2">
-                            <span class="gamma widget-title">Categories</span>
-                            <ul>
-                                <li class="cat-item cat-item-53">
-                                    <a href="product-category.html">Accessories</a>
-                                </li>
-                                <li class="cat-item cat-item-101">
-                                    <a href="product-category.html">Design</a>
-                                </li>
-                                <li class="cat-item cat-item-51">
-                                    <a href="product-category.html">Desktop PCs</a>
-                                </li>
-                                <li class="cat-item cat-item-96">
-                                    <a href="product-category.html">Events</a>
-                                </li>
-                                <li class="cat-item cat-item-52">
-                                    <a href="product-category.html">Laptops</a>
-                                </li>
-                                <li class="cat-item cat-item-93">
-                                    <a href="product-category.html">Links &amp; Quotes</a>
-                                </li>
-                                <li class="cat-item cat-item-88">
-                                    <a href="product-category.html">News</a>
-                                </li>
-                                <li class="cat-item cat-item-54">
-                                    <a href="product-category.html">PC Components</a>
-                                </li>
-                                <li class="cat-item cat-item-89">
-                                    <a href="product-category.html">Social</a>
-                                </li>
-                                <li class="cat-item cat-item-102">
-                                    <a href="product-category.html">Technology</a>
-                                </li>
-                                <li class="cat-item cat-item-1">
-                                    <a href="product-category.html">Uncategorized</a>
-                                </li>
-                                <li class="cat-item cat-item-99">
-                                    <a href="product-category.html">Videos</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <!-- .widget_categories -->
-                        <div class="widget techmarket_posts_carousel_widget">
-                            <section class="section-posts-carousel" id="sidebar-posts-carousel">
-                                <header class="section-header">
-                                    <h2 class="section-title">Recent Posts</h2>
-                                    <div class="custom-slick-nav"></div>
-                                    <!-- .custom-slick-nav -->
-                                </header>
-                                <!-- .post-items -->
-                                <div class="post-item-carousel" data-ride="tm-slick-carousel" data-wrap=".posts"
-                                    data-slick="{&quot;slidesToShow&quot;:1,&quot;slidesToScroll&quot;:1,&quot;dots&quot;:false,&quot;arrows&quot;:true,&quot;prevArrow&quot;:&quot;&lt;a href=\&quot;#\&quot;&gt;&lt;i class=\&quot;tm tm-arrow-left\&quot;&gt;&lt;\/i&gt;&lt;\/a&gt;&quot;,&quot;nextArrow&quot;:&quot;&lt;a href=\&quot;#\&quot;&gt;&lt;i class=\&quot;tm tm-arrow-right\&quot;&gt;&lt;\/i&gt;&lt;\/a&gt;&quot;,&quot;appendArrows&quot;:&quot;#sidebar-posts-carousel .custom-slick-nav&quot;}">
-                                    <div class="posts">
-                                        <div class="post-item">
-                                            <a href="blog-single.html" class="post-thumbnail">
-                                                <div class="post-thumbnail">
-                                                    <img width="270" height="270" alt=""
-                                                        class="attachment-techmarket-blog-carousel wp-post-image"
-                                                        src="home/assets/images/blog/sm-4.jpg">
-                                                </div>
-                                            </a>
-                                            <!-- .post-thumbnail -->
-                                            <div class="post-content">
-                                                <a href="blog-single.html" class="post-name" tabindex="-1">Why
-                                                    you should choose dedicated Desktop PC Computer</a>
-                                                <span class="comments-link">
-                                                    <a href="#">Leave a comment</a>
-                                                </span>
-                                            </div>
-                                            <!-- .post-content -->
-                                        </div>
-                                        <!-- .post-items -->
-                                        <div class="post-item">
-                                            <a href="blog-single.html" class="post-thumbnail">
-                                                <div class="post-thumbnail">
-                                                    <img width="270" height="270" alt=""
-                                                        class="attachment-techmarket-blog-carousel wp-post-image"
-                                                        src="home/assets/images/blog/sm-1.jpg">
-                                                </div>
-                                            </a>
-                                            <!-- .post-thumbnail -->
-                                            <div class="post-content">
-                                                <a href="blog-single.html" class="post-name" tabindex="-1">Tech
-                                                    Terms you should know before your adventure</a>
-                                                <span class="comments-link">
-                                                    <a href="#">Leave a comment</a>
-                                                </span>
-                                            </div>
-                                            <!-- .post-content -->
-                                        </div>
-                                        <!-- .post-items -->
-                                        <div class="post-item">
-                                            <a href="blog-single.html" class="post-thumbnail">
-                                                <div class="post-thumbnail">
-                                                    <img width="270" height="270" alt=""
-                                                        class="attachment-techmarket-blog-carousel wp-post-image"
-                                                        src="home/assets/images/blog/sm-2.jpg">
-                                                </div>
-                                            </a>
-                                            <!-- .post-thumbnail -->
-                                            <div class="post-content">
-                                                <a href="blog-single.html" class="post-name" tabindex="-1">How to
-                                                    build your first 4k ready Desktop PC</a>
-                                                <span class="comments-link">
-                                                    <a href="#">Leave a comment</a>
-                                                </span>
-                                            </div>
-                                            <!-- .post-content -->
-                                        </div>
-                                        <!-- .post-items -->
-                                        <div class="post-item">
-                                            <a href="blog-single.html" class="post-thumbnail">
-                                                <div class="post-thumbnail">
-                                                    <img width="270" height="270" alt=""
-                                                        class="attachment-techmarket-blog-carousel wp-post-image"
-                                                        src="home/assets/images/blog/sm-3.jpg">
-                                                </div>
-                                            </a>
-                                            <!-- .post-thumbnail -->
-                                            <div class="post-content">
-                                                <a href="blog-single.html" class="post-name" tabindex="-1">Top 10
-                                                    Best Graphical Games for testing your Hardware</a>
-                                                <span class="comments-link">
-                                                    <a href="#">Leave a comment</a>
-                                                </span>
-                                            </div>
-                                            <!-- .post-content -->
-                                        </div>
-                                        <!-- .post-items -->
-                                    </div>
-                                    <!-- .posts-->
-                                </div>
-                                <!-- .post-item-carousel -->
-                            </section>
-                            <!-- .section-posts-carousel -->
-                        </div>
-                        <!-- .techmarket_posts_carousel_widget -->
-                        {{-- <div class="widget widget_tag_cloud">
-                            <span class="gamma widget-title">Tags Clouds</span>
-                            <div class="tagcloud">
-                                <a style="font-size: 22pt;" class="tag-cloud-link" href="#">amazon like</a>
-                                <a style="font-size: 22pt;" class="tag-cloud-link" href="#">Awesome</a>
-                                <a style="font-size: 22pt;" class="tag-cloud-link" href="#">bootstrap</a>
-                                <a style="font-size: 22pt;" class="tag-cloud-link" href="#">buy it</a>
-                                <a style="font-size: 22pt;" class="tag-cloud-link" href="#">clean design</a>
-                                <a style="font-size: 8pt;" class="tag-cloud-link" href="#">electronics</a>
-                                <a style="font-size: 22pt;" class="tag-cloud-link" href="#">theme</a>
-                                <a style="font-size: 8pt;" class="tag-cloud-link" href="#">video post
-                                    format</a>
-                                <a style="font-size: 22pt;" class="tag-cloud-link" href="#">woocommerce</a>
-                                <a style="font-size: 22pt;" class="tag-cloud-link" href="#">wordpress</a>
-                            </div>
-                            <!-- .tagcloud -->
-                        </div> --}}
-                        <!-- .widget_tag_cloud -->
-                    </div>
+                    
                     <!-- .sidebar-blog -->
                 </div>
                 <!-- .row -->
