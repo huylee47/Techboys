@@ -10,6 +10,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductCategoryController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ContactController;
 use Illuminate\Support\Facades\Route;
 
 // Client routes
@@ -40,6 +41,12 @@ Route::get('login', function () {
 Route::post('/login/Client', [UserController::class, 'loginClient'])->name('loginClient.auth');
 //banner client
 Route::get('/', [BannerController::class, 'indexClient']);
+//contact client
+Route::get('/contact', function () {
+    return view('client.contact.contact');
+});
+Route::post('/contact', [ContactController::class, 'saveContact']);
+
 // Đăng ký
 Route::prefix('/register')->group(function () {
     Route::get('/create', [UserController::class, 'create'])->name('client.log.create');
