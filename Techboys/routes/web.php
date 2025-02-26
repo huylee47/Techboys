@@ -4,6 +4,7 @@ use App\Http\Controllers\BlogController;
 use App\Http\Controllers\BillController;
 use App\Http\Controllers\BillDetailsController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\VoucherController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProductController;
@@ -148,6 +149,13 @@ Route::prefix('cart')->group(function () {
     Route::get('/reset', [CartController::class, 'resetCart'])->name('client.cart.reset');
     Route::post('/cart/update', [CartController::class, 'updateCart'])->name('client.cart.update');
     Route::post('/applyVoucher', [CartController::class, 'applyVoucher'])->name('client.cart.applyVoucher');
-    Route::get('/getVoucherDiscount', [CartController::class, 'getDiscount'])->name('client.cart.getDiscount');
-    Route::get('/getCount', [CartController::class, 'getCartCount'])->name('client.cart.getCartCount');
+    // Route::get('/getVoucherDiscount', [CartController::class, 'getDiscount'])->name('client.cart.getDiscount');
+    // Route::get('/getCount', [CartController::class, 'getCartCount'])->name('client.cart.getCartCount');
+});
+
+Route::prefix('checkout')->group(function () {
+    Route::get('/', [CheckoutController::class, 'index'])->name('client.checkout.index');
+    Route::get('/get-districts/{province_id}', [CheckoutController::class, 'getDistricts']);
+    Route::get('/get-wards/{district_id}', [CheckoutController::class, 'getWards']);
+    Route::post('/store', [CheckoutController::class, 'storeBill'])->name('client.checkout.store');
 });
