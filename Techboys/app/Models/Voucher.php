@@ -16,4 +16,7 @@ class Voucher extends Model
     {
         return $this->hasMany(Bill::class);
     }
+    public function cart(){
+        return $this->hasMany(Cart::class);
+    }
 }
