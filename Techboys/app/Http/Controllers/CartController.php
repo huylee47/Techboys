@@ -74,6 +74,14 @@ class CartController extends Controller
     {
         $cartItems = $this->cartService->getCartItems();
     
+        if ($cartItems instanceof \Illuminate\Http\JsonResponse) {
+            return view('client.cart.cart', [
+                'cartItems' => collect([]),
+                'subtotal' => 0,
+                'total' => 0
+            ]);
+        }
+    
         $subtotal = $cartItems->sum(function ($cart) {
             return $cart->variant->price * $cart->quantity;
         });
