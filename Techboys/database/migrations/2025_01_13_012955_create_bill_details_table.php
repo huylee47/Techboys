@@ -18,7 +18,6 @@ return new class extends Migration
             $table->foreignId('variant_id');
             $table->integer('quantity');
             $table->decimal('price', 10, 2);
-            $table->string('slug');
             $table->timestamps();
         });
     }
