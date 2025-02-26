@@ -17,6 +17,7 @@ return new class extends Migration
             $table->uuid('cart_id')->nullable();
             $table->foreignId('variant_id');
             $table->integer('quantity');
+            $table->string('voucher_code')->nullable();
             $table->timestamps();
         });
     }
