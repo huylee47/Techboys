@@ -64,7 +64,6 @@ class CartService{
                 'cart_id' => $cartId,
                 'variant_id' => $request->variant_id,
                 'quantity' => $request->quantity,
-                'voucher_code'=> $request->voucher_code ??  null ,
             ]);
         }
     
