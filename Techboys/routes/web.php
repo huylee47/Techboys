@@ -41,7 +41,7 @@ Route::get('login', function () {
 
 Route::post('/login/Client', [UserController::class, 'loginClient'])->name('loginClient.auth');
 //banner client
-Route::get('/', [BannerController::class, 'indexClient']);
+// Route::get('/', [BannerController::class, 'indexClient']);
 //contact client
 Route::get('/contact', function () {
     return view('client.contact.contact');
