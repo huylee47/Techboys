@@ -20,8 +20,13 @@ class CheckoutController extends Controller
     {
         $checkout = $this->checkoutService->getCheckout();
         $provinces = $this->addressService->getProvinces();
+        
+        if (!$checkout || empty($checkout['cartItems'])) {
+            return redirect()->back()->with('error', 'Không có dữ liệu giỏ hàng để thanh toán!');
+        }
         return view('client.check-out.check', compact('checkout', 'provinces'));
     }
+    
     public function getDistricts($province_id)
     {
         $districts = District::where('province_id', $province_id)->get();
