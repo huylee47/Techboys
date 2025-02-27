@@ -10,7 +10,7 @@ class Voucher extends Model
 {
     use HasFactory, SoftDeletes;
     protected $table = 'vouchers';
-    protected $fillable = ['code', 'name', 'discount_percent', 'discount_amount', 'min_price', 'max_price','start_date','end_date', 'quantity'];
+    protected $fillable = ['code', 'name', 'discount_percent', 'discount_amount', 'min_price', 'max_discount','start_date','end_date', 'quantity'];
 
     public function bill()
     {

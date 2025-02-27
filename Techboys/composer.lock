@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a00cf6f5b262c69ca59d986ea29e6319",
+    "content-hash": "40c20979d9b1e99229c66b6f9ecd64d5",
     "packages": [
         {
             "name": "barryvdh/laravel-dompdf",
@@ -1427,6 +1427,54 @@
                 }
             ],
             "time": "2023-12-03T19:50:20+00:00"
+        },
+        {
+            "name": "kjmtrue/vietnam-zone",
+            "version": "v1.0.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/kjmtrue/vietnam-zone.git",
+                "reference": "d93594801da279961502064f8f6feb07241f449e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/kjmtrue/vietnam-zone/zipball/d93594801da279961502064f8f6feb07241f449e",
+                "reference": "d93594801da279961502064f8f6feb07241f449e",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/guzzle": "^6.3.1|^7.0|^8",
+                "maatwebsite/excel": "^3"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Kjmtrue\\VietnamZone\\ServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Kjmtrue\\VietnamZone\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "KimTrien",
+                    "email": "kimtrien@gmail.com"
+                }
+            ],
+            "description": "VietNam Zone",
+            "support": {
+                "issues": "https://github.com/kjmtrue/vietnam-zone/issues",
+                "source": "https://github.com/kjmtrue/vietnam-zone/tree/v1.0.5"
+            },
+            "time": "2022-04-11T10:34:01+00:00"
         },
         {
             "name": "laravel/framework",
@@ -9016,12 +9064,12 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {},
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
         "php": "^8.2"
     },
-    "platform-dev": [],
+    "platform-dev": {},
     "plugin-api-version": "2.6.0"
 }

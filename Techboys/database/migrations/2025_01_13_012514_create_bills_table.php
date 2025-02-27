@@ -18,10 +18,12 @@ return new class extends Migration
             $table->string('phone');
             $table->decimal('total', 10, 2);
             $table->text('address');
+            $table->foreignId('province_id');
+            $table->foreignId('district_id');
+            $table->foreignId('ward_id');
             $table->string('email');
             $table->tinyInteger('payment_method');
-            $table->tinyInteger('status_id');
-            $table->string('voucher_code')->nullable();
+            $table->tinyInteger('status_id')->default(1);
             $table->timestamps();
         });
     }

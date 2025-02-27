@@ -63,7 +63,7 @@ class CartService{
                 'user_id' => $userId,
                 'cart_id' => $cartId,
                 'variant_id' => $request->variant_id,
-                'quantity' => $request->quantity
+                'quantity' => $request->quantity,
             ]);
         }
     

@@ -19,7 +19,7 @@ return new class extends Migration
             $table->integer('discount_amount')->nullable();
             $table->integer('quantity')->nullable();
             $table->decimal('min_price', 30, 0); 
-            $table->decimal('max_price', 30, 0);
+            $table->decimal('max_discount', 30, 0);
             $table->timestamp('start_date');
             $table->timestamp('end_date')->nullable();
             $table->softDeletes();

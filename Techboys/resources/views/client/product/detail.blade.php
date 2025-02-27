@@ -140,9 +140,11 @@
                                                 {!! $product->description !!}
                                             </ul>
                                         </div>
+
                                         <!-- .woocommerce-product-details__short-description -->
-                                        <form enctype="multipart/form-data" action="{{route('client.cart.add')}}" method="post" class="cart">
-                                        @csrf
+                                        <form enctype="multipart/form-data" action="{{ route('client.cart.add') }}"
+                                            method="post" class="cart">
+                                            @csrf
                                             <div class="product-actions-wrapper">
                                                 <div class="product-actions">
                                                     {{-- <del>
@@ -192,6 +194,8 @@
                                                             @endforeach
                                                         </div>
                                                     </div>
+                                                    <p>Số lượng tồn kho: <span
+                                                            id="stockQuantity">{{ $defaultVariant->stock }}</span></p>
 
                                                     <p class="price">
                                                         <span class="woocommerce-Price-amount amount" id="productPrice">
@@ -208,10 +212,11 @@
                                                             title="Qty" value="1" name="quantity"
                                                             id="quantity-input">
                                                     </div>
-                                                    <input type="hidden" name="variant_id" id="variant_id" value="">
+                                                    <input type="hidden" name="variant_id" id="variant_id"
+                                                        value="">
 
                                                     <!-- .quantity -->
-                                                    <button class="single_add_to_cart_button button alt" 
+                                                    <button class="single_add_to_cart_button button alt"
                                                         type="submit">Thêm vào giỏ hàng</button>
                                                     <!-- .cart -->
                                                 </div>
@@ -248,79 +253,103 @@
         });
     </script>
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const variants = @json($variants);
-            let selectedStorage = null;
-            let selectedColor = null;
+document.addEventListener("DOMContentLoaded", function() {
+    const variants = @json($variants);
+    let selectedStorage = null;
+    let selectedColor = null;
 
-            const quantityInput = document.getElementById("quantity-input");
-            const productPriceElement = document.getElementById("productPrice");
+    const quantityInput = document.getElementById("quantity-input");
+    const productPriceElement = document.getElementById("productPrice");
+    const variantIdInput = document.getElementById("variant_id");
+    const stockQuantityElement = document.getElementById("stockQuantity");
 
-            function updatePrice() {
-                if (selectedStorage && selectedColor) {
-                    const selectedVariant = variants.find(v =>
-                        v.model.name === selectedStorage && v.color.name === selectedColor
-                    );
-                    if (selectedVariant) {
-                        productPriceElement.innerText = new Intl.NumberFormat('vi-VN').format(selectedVariant
-                            .price) + " đ";
-                        document.getElementById("variant_id").value = selectedVariant.id;
-                    }
+    function updatePriceAndVariantId() {
+        if (selectedStorage && selectedColor) {
+            const selectedVariant = variants.find(v =>
+                v.model.name === selectedStorage && v.color.name === selectedColor
+            );
+            if (selectedVariant) {
+                productPriceElement.innerText = new Intl.NumberFormat('vi-VN').format(selectedVariant.price) + " đ";
+                variantIdInput.value = selectedVariant.id;
+                stockQuantityElement.innerText = selectedVariant.stock;
+
+                // Kiểm tra số lượng nhập vào khi biến thể thay đổi
+                checkQuantityInput(selectedVariant.stock);
+            }
+        }
+    }
+
+    function showColorsForModel(model) {
+        let firstColorSelected = false;
+        document.querySelectorAll(".color-choice").forEach(color => {
+            if (color.getAttribute("data-model") === model) {
+                color.style.display = "block";
+                if (!firstColorSelected) {
+                    color.classList.add("selected");
+                    selectedColor = color.getAttribute("data-value");
+                    firstColorSelected = true;
                 }
-            }
-
-            function showColorsForModel(model) {
-                document.querySelectorAll(".color-choice").forEach(color => {
-                    color.style.display = color.getAttribute("data-model") === model ? "block" : "none";
-                });
-            }
-
-            document.querySelectorAll(".color-choice").forEach(choice => {
-                choice.addEventListener("click", function() {
-                    selectedColor = this.getAttribute("data-value");
-                    document.querySelectorAll(".color-choice").forEach(c => c.classList.remove(
-                        "selected"));
-                    this.classList.add("selected");
-                    updatePrice();
-                });
-            });
-
-            document.querySelectorAll(".storage-choice").forEach(choice => {
-                choice.addEventListener("click", function() {
-                    selectedStorage = this.getAttribute("data-value");
-                    const selectedPrice = this.getAttribute("data-price");
-
-                    showColorsForModel(selectedStorage);
-                    productPriceElement.innerText = new Intl.NumberFormat('vi-VN').format(
-                        selectedPrice) + " đ";
-
-                    document.querySelectorAll(".storage-choice").forEach(item => item.classList
-                        .remove("active"));
-                    this.classList.add("active");
-                });
-            });
-
-            quantityInput.addEventListener("input", function() {
-                let value = parseInt(this.value, 10);
-                if (isNaN(value) || value < 1) {
-                    this.value = 1;
-                }
-            });
-
-            let minModelId = Math.min(...variants.map(v => v.model.id));
-            let defaultModelChoice = document.querySelector(`.storage-choice[data-model-value="${minModelId}"]`);
-
-            if (defaultModelChoice) {
-                defaultModelChoice.click();
-            }
-            const defaultModel = document.querySelector(".storage-choice.active");
-            if (defaultModel) {
-                selectedStorage = defaultModel.getAttribute("data-value");
-                const selectedPrice = defaultModel.getAttribute("data-price");
-
-                showColorsForModel(selectedStorage);
-                productPriceElement.innerText = new Intl.NumberFormat('vi-VN').format(selectedPrice) + " đ";
+            } else {
+                color.style.display = "none";
+                color.classList.remove("selected");
             }
         });
+    }
+
+    function checkQuantityInput(maxStock) {
+        let value = parseInt(quantityInput.value, 10);
+        if (isNaN(value) || value < 1) {
+            quantityInput.value = 1;
+        } else if (value > maxStock) {
+            alert("Số lượng bạn nhập vượt quá số lượng tồn kho. Số lượng tối đa là " + maxStock + ".");
+            quantityInput.value = maxStock;
+        }
+    }
+
+    document.querySelectorAll(".color-choice").forEach(choice => {
+        choice.addEventListener("click", function() {
+            selectedColor = this.getAttribute("data-value");
+            document.querySelectorAll(".color-choice").forEach(c => c.classList.remove("selected"));
+            this.classList.add("selected");
+            updatePriceAndVariantId();
+        });
+    });
+
+    document.querySelectorAll(".storage-choice").forEach(choice => {
+        choice.addEventListener("click", function() {
+            selectedStorage = this.getAttribute("data-value");
+            const selectedPrice = this.getAttribute("data-price");
+
+            showColorsForModel(selectedStorage);
+            productPriceElement.innerText = new Intl.NumberFormat('vi-VN').format(selectedPrice) + " đ";
+
+            document.querySelectorAll(".storage-choice").forEach(item => item.classList.remove("active"));
+            this.classList.add("active");
+
+            updatePriceAndVariantId();
+        });
+    });
+
+    quantityInput.addEventListener("input", function() {
+        const maxStock = parseInt(stockQuantityElement.innerText, 10);
+        checkQuantityInput(maxStock);
+    });
+
+    let minModelId = Math.min(...variants.map(v => v.model.id));
+    let defaultModelChoice = document.querySelector(`.storage-choice[data-model-value="${minModelId}"]`);
+
+    if (defaultModelChoice) {
+        defaultModelChoice.click();
+    }
+    const defaultModel = document.querySelector(".storage-choice.active");
+    if (defaultModel) {
+        selectedStorage = defaultModel.getAttribute("data-value");
+        const selectedPrice = defaultModel.getAttribute("data-price");
+
+        showColorsForModel(selectedStorage);
+        productPriceElement.innerText = new Intl.NumberFormat('vi-VN').format(selectedPrice) + " đ";
+        updatePriceAndVariantId();
+    }
+});
     </script>
 @endsection
