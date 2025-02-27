@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en-US" itemscope="itemscope" itemtype="http://schema.org/WebPage">
+
 <head>
     <meta charset="UTF-8">
     <meta name="csrf-token" content="{{ csrf_token() }}" />
@@ -20,6 +21,8 @@
     <link href="https://fonts.googleapis.com/css?family=Rubik:300,400,500,900" rel="stylesheet">
     <link rel="shortcut icon" href="{{ url('') }}/home/assets/images/fav-icon.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="shortcut icon" href="{{ url('') }}/home/assets/images/fav-icon.png">
+
     <style>
         .user-menu {
             position: relative;
@@ -43,7 +46,7 @@
 
         .dropdown-menu li {
             list-style-type: none;
-           
+
         }
 
         .dropdown-menu li a {
@@ -63,7 +66,7 @@
         .dropdown-menu li a p {
             margin: 0;
             padding: 5px;
-        
+
         }
     </style>
     @yield('styles')
@@ -164,6 +167,9 @@
                                 <li class="menu-item animate-dropdown">
                                     <a title="Headphones Sale" href="product-category.html">Liên hệ</a>
                                 </li>
+                                <li class="menu-item animate-dropdown">
+                                    <a title="Headphones Sale" href="{{ route('blog') }}">Blog</a>
+                                </li>
                                 <li class="techmarket-flex-more-menu-item dropdown">
                                     <a title="..." href="#" data-toggle="dropdown" class="dropdown-toggle">...</a>
                                     <ul class="overflow-items dropdown-menu"></ul>
@@ -189,10 +195,14 @@
                                         <a title="My Account" href="{{ route('login.client') }}">
                                             <i class="tm tm-login-register"></i>Đăng nhập</a>
                                     @else 
+
+
                                         <div class="user-menu">
                                             <a href="#" class="user-menu-toggle">
-                                                <i class="tm tm-login-register"></i><b style="margin-top: 5px">{{ Auth::user()->name }}</b>
-                                                <i class="fas fa-bars hamburger-icon" style="margin-left: 10px; margin-top: 5px"></i>
+                                                <i class="tm tm-login-register"></i><b
+                                                    style="margin-top: 5px">{{ Auth::user()->name }}</b>
+                                                <i class="fas fa-bars hamburger-icon"
+                                                    style="margin-left: 10px; margin-top: 5px"></i>
                                             </a>
                                             <ul class="dropdown-menu" id="userDropdownMenu">
                                                 <li>

@@ -128,4 +128,18 @@ class BlogController extends Controller
         Blog::find($request->id)->delete();
         return redirect()->route('admin.blogs.index')->with('success', 'Xóa thành công');
     }
+
+//client
+    public function indexClient()
+    {
+        $loadAll = Blog::all();
+        return view('client.blog.blog', compact('loadAll'));
+    }
+    public function DetailBlog($slug)
+    {
+        $detailBlog = Blog::where('slug', $slug)->firstOrFail();
+        return view('client.blog.detail', compact('detailBlog'));
+    }
+    
+
 }

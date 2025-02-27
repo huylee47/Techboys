@@ -100,6 +100,12 @@
                                 <span>Blogs</span>
                             </a>
                         </li>
+                        <li class="sidebar-item ">
+                            <a href="{{route('admin.banner.index')}}" class='sidebar-link'>
+                                <i class="bi bi-file-earmark-spreadsheet-fill"></i>
+                                <span>banner</span>
+                            </a>
+                        </li>
 
                     </ul>
                 </div>

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BannerController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\BillController;
 use App\Http\Controllers\BillDetailsController;
@@ -10,6 +11,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductCategoryController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ContactController;
 use Illuminate\Support\Facades\Route;
 
 // Client routes
@@ -17,27 +19,35 @@ Route::get('/', function () {
     return view('client.home.home');
 })->name('home');
 
+
+
+Route::get('/blog', [BlogController::class, 'indexClient'])->name('blog');
+Route::get('blog/{slug}', [BlogController::class, 'DetailBlog'])->name('DetailBlog');
+
+
+
 Route::get('test', function () {
     return view('admin.product.imageIndex');
 });
 
-Route::get('blog', function () {
-    return view('admin.tag.edit');
-});
 
 Route::get('/login/admin', function () {
     return view('admin.log.login');
 })->name('login');
 
-Route::get('/blogs', function () {
-    return view('client.user.index');
-});
 
 Route::get('login', function () {
     return view('client.login.index');
 })->name('login.client');
 
 Route::post('/login/Client', [UserController::class, 'loginClient'])->name('loginClient.auth');
+//banner client
+// Route::get('/', [BannerController::class, 'indexClient']);
+//contact client
+Route::get('/contact', function () {
+    return view('client.contact.contact');
+});
+Route::post('/contact', [ContactController::class, 'saveContact']);
 
 // Đăng ký
 Route::prefix('/register')->group(function () {
@@ -133,6 +143,18 @@ Route::middleware(['auth', 'auth.admin'])->group(function () {
             Route::get('/edit', [BlogController::class, 'edit'])->name('admin.blogs.edit');
             Route::post('/update/{id}', [BlogController::class, 'update'])->name('admin.blogs.update');
             Route::get('/destroy/{id}', [BlogController::class, 'destroy'])->name('admin.blogs.destroy');
+        });
+        Route::prefix('/banner')->group(function () {
+            Route::get('/', [BannerController::class, 'index'])->name('admin.banner.index');
+            Route::get('/create', [BannerController::class, 'create'])->name('admin.banner.create');
+            Route::post('/store', [BannerController::class, 'store'])->name('admin.banner.store');
+            Route::get('/edit', [BannerController::class, 'edit'])->name('admin.banner.edit');
+            Route::post('/update/{id}', [BannerController::class, 'update'])->name('admin.banner.update');
+            Route::get('/destroy/{id}', [BannerController::class, 'destroy'])->name('admin.banner.destroy');
+
+
+
+          
         });
     });
 });

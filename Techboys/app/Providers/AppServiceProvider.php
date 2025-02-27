@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Banner;
 use App\Models\Config;
 use App\Models\Product;
 use App\Models\ProductCategory;
@@ -31,10 +32,12 @@ class AppServiceProvider extends ServiceProvider
         $categories = ProductCategory::get();
         $hotproducts = Product::orderBy('purchases','desc')->take(16)->get();
         $newProduct = Product::orderBy('created_at', 'desc')->take(20)->get();
+        $loadBanner = Banner::all();
 
         View::share('config', $config);
         View::share('categories', $categories);
         View::share('newProduct', $newProduct);
         View::share('hotproducts', $hotproducts);
+        View::share('loadBanner', $loadBanner);
     }
 }
