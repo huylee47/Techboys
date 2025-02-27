@@ -12,10 +12,10 @@ class ProductController extends Controller
 {
     private $productService;
     private $photoService;
-    public function __construct(ProductService $productService , PhotoService $photoService){
+    public function __construct(ProductService $productService, PhotoService $photoService)
+    {
         $this->productService = $productService;
         $this->photoService = $photoService;
-
     }
     // ADMIN CTRL
     /**
@@ -74,18 +74,22 @@ class ProductController extends Controller
     {
         return $this->productService->destroyProduct($request);
     }
-    public function hide($request){
+    public function hide($request)
+    {
         return $this->productService->hide($request);
     }
-    public function restore($request){
+    public function restore($request)
+    {
         return $this->productService->restore($request);
     }
-    public function imageIndex($request){
+    public function imageIndex($request)
+    {
         return $this->productService->imageIndex($request);
     }
-    public function imageStore(Request $request,$productId){
+    public function imageStore(Request $request, $productId)
+    {
         try {
-                $this->photoService->addPhoto($request ,$productId );
+            $this->photoService->addPhoto($request, $productId);
         } catch (\Throwable $th) {
             return redirect()->back()->with('error', 'Lỗi trong quá trình lưu ảnh');
         }
@@ -102,8 +106,26 @@ class ProductController extends Controller
 
         return redirect()->route('admin.product.imageIndex', $projectId)->with('success', 'Ảnh đã được xóa thành công.');
     }
+
     // CLIENT 
-    public function productDetails($request){
+    public function productDetails($request)
+    {
         return $this->productService->getProductBySlug($request);
     }
+
+    public function productList()
+    {
+        $products = Product::all();
+
+        // Trả về view với dữ liệu sản phẩm
+        return view('client.product.list', compact('products'));
+    }
+
+    // public function productDetails($slug)
+    // {
+    //     // Lấy sản phẩm theo slug
+    //     $product = Product::where('slug', $slug)->firstOrFail();
+
+    //     return view('client.product.detail', compact('product'));
+    // }
 }
