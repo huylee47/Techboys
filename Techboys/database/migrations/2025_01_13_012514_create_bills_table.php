@@ -24,7 +24,6 @@ return new class extends Migration
             $table->string('email');
             $table->tinyInteger('payment_method');
             $table->tinyInteger('status_id')->default(1);
-            $table->string('voucher_code')->nullable();
             $table->timestamps();
         });
     }
