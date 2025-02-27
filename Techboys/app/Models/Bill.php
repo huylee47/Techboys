@@ -14,7 +14,7 @@ class Bill extends Model
 
     protected $table = 'bills';
 
-    protected $fillable = ['user_id', 'full_name', 'phone', 'total', 'address', 'email', 'payment_method', 'status_id', 'voucher_code','province_id', 'district_id', 'ward_id'];
+    protected $fillable = ['user_id', 'full_name', 'phone', 'total', 'address', 'email', 'payment_method', 'status_id','province_id', 'district_id', 'ward_id'];
 
     public function user()
     {
@@ -26,10 +26,6 @@ class Bill extends Model
         return $this->belongsTo(Status::class);
     }
 
-    public function voucher_code()
-    {
-        return $this->belongsTo(Voucher::class, 'voucher_code', 'Id'); 
-    }
     public function province()
     {
         return $this->belongsTo(Province::class, 'province_id');
