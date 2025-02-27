@@ -5,6 +5,8 @@ namespace App\Providers;
 use App\Models\Config;
 use App\Models\Product;
 use App\Models\ProductCategory;
+use App\Service\VoucherService;
+use App\Service\CartPriceService;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
 
@@ -15,7 +17,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        $this->app->bind(CartPriceService::class, function ($app) {
+            return new CartPriceService($app->make(VoucherService::class));
+        });
     }
 
     /**
