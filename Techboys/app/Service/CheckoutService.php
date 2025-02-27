@@ -8,14 +8,18 @@ use App\Models\Cart;
 use App\Models\ProductVariant;
 use App\Models\Voucher;
 use App\Service\CartService;
+use App\Service\CartPriceService;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class CheckoutService
 {
     private $cartService;
-    public function __construct(CartService $cartService)
+    private $cartPriceService;
+    public function __construct(CartService $cartService , CartPriceService $cartPriceService)
     {
         $this->cartService = $cartService;
+        $this->cartPriceService = $cartPriceService;
     }
     public function getCheckout()
     {
@@ -26,112 +30,114 @@ class CheckoutService
                 'cartItems' => collect([]),
                 'total' => 0,
                 'subtotal' => 0,
+                'discountAmount' => 0,
+                'voucher' => null,
             ];
         }
 
-        $subTotal = $cartItems->sum(fn($cart) => $cart->variant->price * $cart->quantity);
-        $total = $subTotal;
+        $totals = $this->cartPriceService->calculateCartTotals($cartItems);
+
         return [
             'cartItems' => $cartItems,
-            'subtotal' => $subTotal,
-            'total' => $total
+            'subtotal' => $totals['subtotal'],
+            'total' => $totals['total'],
+            'discountAmount' => $totals['discountAmount'],
+            'voucher' => $totals['voucher'],
         ];
     }
-    // public function storeBill($request){
-    //         $userId = Auth::id();
-    //         $cartId = Cart::where('cart_id')->first();;
-    //         if (!$userId && !$cartId) {
-    //             return redirect()->back()->with('error', 'Giỏ hàng trống!');
-    //         }
-    //         $voucher = null;
-    //         if (!$voucher) {
-    //             return redirect()->back()->with('error', 'Voucher không hợp lệ hoặc đã hết lượt sử dụng!');
-    //         }
-    //         $voucher->decrement('quantity',1);
-    //         $bill = Bill::create([
-    //             'user_id' => $userId ?? null,
-    //             'total' => max(0,$request->total),     
-    //             'full_name' => $request->full_name,
-    //             'address' => $request->address,
-    //             'phone' => $request->phone,
-    //             'province_id' => $request->province_id,
-    //             'district_id' => $request->district_id,
-    //             'ward_id' => $request->ward_id,
-    //             'payment_method' => $request->payment_method,
-    //             'status_id' => 1,
-    //             'voucher_code'   => $voucher ? $voucher->code : null
-    //         ])->id;
-    //         BillDetails::create([
-    //             'bill_id' => $bill->id,
-    //             'variant_id' => $cartId->variant_id,
-    //             'quantity' => $cartId->quantity,
-    //             'price' => $cartId->variant->price
-    //         ]);
-    //         Cart::where($userId ? 'user_id' : 'cart_id', $userId ?? $cartId->cart_id)->delete();
-    //         return redirect()->route('client.bill.success')->with('message', 'Cảm ơn quý khách');
 
-    // }
+
+
     public function storeBill($request)
-{
-    $userId = Auth::id();
-    $cartId = session()->get('cart_id');
-
-    $cartItems = Cart::where('cart_id', $cartId)->get();
-
-    if (!$userId && $cartItems->isEmpty()) {
-        return redirect()->back()->with('error', 'Giỏ hàng trống!');
-    }
-
-    $voucherCode = $request->voucher_code;
-    $voucher = Voucher::where('code', $voucherCode)->where('quantity', '>', 0)->first();
-    if (!$voucher) {
-        return redirect()->back()->with('error', 'Voucher không hợp lệ hoặc đã hết lượt sử dụng!');
-    }
-    $voucher->decrement('quantity', 1);
-
-    $total = $request->total ?? 0;
-    if ($total <= 0) {
-        return redirect()->back()->with('error', 'Tổng tiền không hợp lệ!');
-    }
-
-    $bill = Bill::create([
-        'user_id' => $userId ?? null,
-        'total' => $total,
-        'full_name' => $request->full_name,
-        'address' => $request->address,
-        'phone' => $request->phone,
-        'email' => $request->email,
-        'province_id' => $request->province_id,
-        'district_id' => $request->district_id,
-        'ward_id' => $request->ward_id,
-        'payment_method' => $request->payment_method,
-        'status_id' => 1,
-        'voucher_code' => $voucher ? $voucher->code : null
-    ]);
-
-    foreach ($cartItems as $cartItem) {
-        $variant = ProductVariant::find($cartItem->variant_id);
-        if (!$variant) {
-            return redirect()->back()->with('error', 'Không tìm thấy biến thể sản phẩm!');
+    {
+        DB::beginTransaction();
+    
+        try {
+            $userId = Auth::id();
+            $cartId = session()->get('cart_id');
+    
+            $cartItems = Cart::where('cart_id', $cartId)->get();
+    
+            if ($cartItems->isEmpty()) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Giỏ hàng trống!'
+                ], 400);
+            }
+    
+    
+    
+    
+            $totals = $this->cartPriceService->calculateCartTotals($cartItems);
+            $total = $totals['total'];
+    
+            if ($total <= 0) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Tổng tiền không hợp lệ!'
+                ], 400);
+            }
+    
+            $bill = Bill::create([
+                'user_id' => $userId ?? null,
+                'total' => $total,
+                'full_name' => $request->full_name,
+                'address' => $request->address,
+                'phone' => $request->phone,
+                'email' => $request->email,
+                'province_id' => $request->province_id,
+                'district_id' => $request->district_id,
+                'ward_id' => $request->ward_id,
+                'payment_method' => $request->payment_method,
+                'status_id' => 1,
+            ]);
+    
+            foreach ($cartItems as $cartItem) {
+                $variant = ProductVariant::find($cartItem->variant_id);
+    
+                if (!$variant) {
+                    DB::rollBack();
+                    return response()->json([
+                        'success' => false,
+                        'message' => 'Không tìm thấy biến thể sản phẩm!'
+                    ], 400);
+                }
+    
+                if ($cartItem->quantity > $variant->stock) {
+                    DB::rollBack();
+                    return response()->json([
+                        'success' => false,
+                        'message' => 'Số lượng sản phẩm "' . $variant->name . '" trong giỏ hàng vượt quá số lượng tồn kho!'
+                    ], 400);
+                }
+    
+                BillDetails::create([
+                    'bill_id' => $bill->id,
+                    'variant_id' => $cartItem->variant_id,
+                    'product_id' => $variant->product_id,
+                    'quantity' => $cartItem->quantity,
+                    'price' => $variant->price
+                ]);
+    
+                $variant->decrement('stock', $cartItem->quantity);
+            }
+    
+            Cart::where($userId ? 'user_id' : 'cart_id', $userId ?? $cartId)->delete();
+    
+            DB::commit();
+    
+            return response()->json([
+                'success' => true,
+                'message' => 'Đặt hàng thành công!',
+                'bill_id' => $bill->id
+            ]);
+    
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return response()->json([
+                'success' => false,
+                'message' => 'Có lỗi xảy ra: ' . $e->getMessage()
+            ], 500);
         }
-
-        if ($cartItem->quantity > $variant->stock) {
-            return redirect()->back()->with('error', 'Số lượng sản phẩm "' . $variant->name . '" trong giỏ hàng vượt quá số lượng tồn kho!');
-        }
-
-        BillDetails::create([
-            'bill_id' => $bill->id,
-            'variant_id' => $cartItem->variant_id,
-            'product_id' => $variant->product_id,
-            'quantity' => $cartItem->quantity,
-            'price' => $variant->price
-        ]);
-
-        $variant->decrement('stock', $cartItem->quantity);
     }
-
-    Cart::where($userId ? 'user_id' : 'cart_id', $userId ?? $cartId)->delete();
-
-    return redirect()->route('home')->with('message', 'Cảm ơn quý khách!');
-}
 }
