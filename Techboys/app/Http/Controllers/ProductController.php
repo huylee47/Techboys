@@ -116,16 +116,7 @@ class ProductController extends Controller
     public function productList()
     {
         $products = Product::all();
-
-        // Trả về view với dữ liệu sản phẩm
+        dd($products);
         return view('client.product.list', compact('products'));
     }
-
-    // public function productDetails($slug)
-    // {
-    //     // Lấy sản phẩm theo slug
-    //     $product = Product::where('slug', $slug)->firstOrFail();
-
-    //     return view('client.product.detail', compact('product'));
-    // }
 }

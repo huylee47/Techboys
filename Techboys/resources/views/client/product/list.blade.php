@@ -7,7 +7,6 @@
 	<main>
 	    <div class="container margin_30">
 	        <div class="row">
-				{{-- Aside --}}
 	            <aside class="col-lg-3" id="sidebar_fixed">
 	                <div class="filter_col">
 	                    <div class="inner_bt"><a href="#" class="open_filters"><i class="ti-close"></i></a></div>
@@ -145,29 +144,30 @@
 	                    </div>
 	                </div>
 	            </aside>
-	            <!-- /col -->
 	            <div class="col-lg-9">
-	                <!-- /toolbox -->
 	               <div class="row small-gutters">
-						@foreach($products as $product)
-        <div class="col-6 col-md-4">
-            <div class="grid_item">
-                <span class="ribbon off">-30%</span>
+					@foreach($products as $product)
+						<div class="col-6 col-md-4">
+            				<div class="grid_item">
+                		<span class="ribbon off">-30%</span>
                 <figure>
-                    <a href="{{ route('client.product.show', $product->slug) }}">
+                    <!-- Hình ảnh sản phẩm -->
+                    <a href="">
                         <img class="img-fluid lazy" src="{{ asset('img/products/product_placeholder_square_medium.jpg') }}" data-src="{{ asset('img/products/' . $product->img) }}" alt="{{ $product->name }}">
                     </a>
-                    <div data-countdown="2019/05/15" class="countdown"></div>
                 </figure>
-                <a href="{{ route('client.product.show', $product->slug) }}">
+                <!-- Tên sản phẩm và link chi tiết -->
+                <a href="">
                     <h3>{{ $product->name }}</h3>
                 </a>
                 <div class="price_box">
+                    <!-- Giá sản phẩm -->
                     <span class="new_price">${{ number_format($product->rate_average, 2) }}</span>
                     @if($product->old_price)
                         <span class="old_price">${{ number_format($product->old_price, 2) }}</span>
                     @endif
                 </div>
+                <!-- Các tùy chọn -->
                 <ul>
                     <li><a href="#0" class="tooltip-1" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to favorites"><i class="ti-heart"></i><span>Add to favorites</span></a></li>
                     <li><a href="#0" class="tooltip-1" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to compare"><i class="ti-control-shuffle"></i><span>Add to compare</span></a></li>
@@ -175,7 +175,7 @@
                 </ul>
             </div>
         </div>
-        @endforeach
+					@endforeach
 						<!-- /col -->
 
 						{{-- <div class="col-6 col-md-4">

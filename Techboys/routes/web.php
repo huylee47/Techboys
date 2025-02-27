@@ -36,9 +36,9 @@ Route::get('login', function () {
     return view('client.login.index');
 })->name('login.client');
 
-// Route::get('/list', function () {
-//     return view('client.product.list');
-// });
+Route::get('/list', function () {
+    return view('client.product.list');
+});
 
 Route::post('/login/Client', [UserController::class, 'loginClient'])->name('loginClient.auth');
 
@@ -143,10 +143,7 @@ Route::middleware(['auth', 'auth.admin'])->group(function () {
 Route::prefix('products')->group(function () {
     Route::get('/', [ProductController::class, 'index'])->name('client.product.index');
     Route::get('/{slug}', [ProductController::class, 'productDetails'])->name('client.product.show');
-    Route::get('/list', [ProductController::class, 'index'])->name('client.product.list');
-
-    // // Chi tiết sản phẩm
-    // Route::get('/{slug}', [ProductController::class, 'productDetails'])->name('client.product.show');
+    // Route::get('/list', [ProductController::class, 'productList'])->name('client.product.list');
 });
 
 Route::prefix('cart')->group(function () {
