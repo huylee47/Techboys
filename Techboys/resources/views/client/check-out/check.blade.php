@@ -149,9 +149,9 @@
                                                         </td>
                                                     </tr>
                                                     <tr class="cart-subtotal">
-                                                        <th>Voucher</th>
+                                                        <th>Giảm giá </th>
                                                         <td>
-                                                            <span class="woocommerce-Price-amount amount">0<span class="woocommerce-Price-currencySymbol"></span>đ</span>
+                                                            <span class="woocommerce-Price-amount amount">{{ number_format($checkout['discountAmount'], 0, ',', '.') }}<span class="woocommerce-Price-currencySymbol"></span>đ</span>
                                                         </td>
                                                     </tr>
                                                     <tr class="order-total">

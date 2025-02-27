@@ -18,7 +18,8 @@
                             <div class="entry-content">
                                 <div class="woocommerce">
                                     <div class="cart-wrapper">
-                                        <form method="get" action="{{route('client.checkout.index')}}" class="woocommerce-cart-form">
+                                        <form method="" action="" class="woocommerce-cart-form">
+                                            @csrf
                                             <table class="shop_table shop_table_responsive cart">
                                                 @if ($cartItems->isEmpty())
                                                     <p class="text-center text-muted">Giỏ hàng trống</p>
@@ -35,7 +36,7 @@
                                                     </thead>
                                                     <tbody>
                                                         @foreach ($cartItems as $cart)
-                                                            <tr>
+                                                            <tr class="cart-item">
                                                                 <td class="product-remove">
                                                                     <a class="remove" href="#">×</a>
                                                                 </td>
@@ -83,10 +84,7 @@
                                                                             value="{{ $cart->quantity }}"
                                                                             class="input-text qty text update-cart"
                                                                             data-id="{{ $cart->id }}" min="1">
-
                                                                     </div>
-
-
                                                                 </td>
                                                                 <td data-title="Total" class="product-subtotal">
                                                                     <span
@@ -95,25 +93,26 @@
                                                                         đ
                                                                     </span>
                                                                 </td>
-
                                                             </tr>
                                                         @endforeach
                                                 @endif
                                                 <tr>
                                                     <td class="actions" colspan="6">
-                                                        <div class="coupon">
-                                                            <label for="coupon_code">Voucher:</label>
-                                                            <input type="text" placeholder="Nhập voucher" value=""
-                                                                id="coupon_code" class="input-text" name="coupon_code">
-                                                            <input type="submit" value="Sử dụng" name="apply_coupon"
-                                                                class="button">
+                                                        <div class="voucher">
+                                                            <label for="voucher_code">Voucher:</label>
+                                                            <input type="text" placeholder="Nhập voucher"
+                                                                value="{{ old('voucher_code', session('voucher.code') ?? '') }}"
+                                                                id="voucher_code" class="input-text" name="voucher_code">
+                                                            <button type="submit" id="apply-voucher" class="button">Sử
+                                                                dụng</button>
                                                         </div>
+                                                        <p id="voucher-error" class="text-danger small"></p>
+                                                        <p id="voucher-success" class="text-success small"></p>
                                                         <input type="submit" value="Tiếp tục mua hàng" name="update_cart"
                                                             class="button">
                                                     </td>
                                                 </tr>
                                                 </tbody>
-
                                             </table>
                                             <!-- .shop_table shop_table_responsive -->
                                         </form>
@@ -133,9 +132,31 @@
                                                                 </span>
                                                             </td>
                                                         </tr>
-                                                        <tr class="shipping">
-                                                            <td data-title="Shipping">voucher</td>
+                                                        @if ($discountAmount > 0)
+                                                            <tr class="cart-subtotal">
+                                                                <th>Giảm giá</th>
+                                                                <td data-title="Discount">
+                                                                    <span class="woocommerce-Price-amount amount">
+                                                                        <span
+                                                                            class="discount-amount">{{ number_format($discountAmount, 0, ',', '.') }}</span>
+                                                                        <span
+                                                                            class="woocommerce-Price-currencySymbol">đ</span>
+                                                                    </span>
+                                                                </td>
+                                                            </tr>
+                                                        @else
+                                                        <tr class="cart-subtotal">
+                                                            <th>Giảm giá</th>
+                                                            <td data-title="Discount">
+                                                                <span class="woocommerce-Price-amount amount">
+                                                                    <span
+                                                                        class="discount-amount">0</span>
+                                                                    <span
+                                                                        class="woocommerce-Price-currencySymbol">đ</span>
+                                                                </span>
+                                                            </td>
                                                         </tr>
+                                                        @endif
                                                         <tr class="order-total">
                                                             <th>Thanh toán</th>
                                                             <td data-title="Total">
@@ -153,8 +174,7 @@
                                                 </table>
                                                 <div class="wc-proceed-to-checkout">
                                                     <a class="checkout-button button alt wc-forward"
-                                                        href="{{route('client.checkout.index')}}">Thanh toán</a>
-                                                    {{-- <a class="back-to-shopping" href="shop.html">tiếp tục mua hàng</a> --}}
+                                                        href="{{ route('client.checkout.index') }}">Thanh toán</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -176,20 +196,27 @@
         </div>
         <!-- .col-full -->
     </div>
+    <!--.MODAL Empty -->
+    <div id="cartEmptyModal" class="modal fade" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Thông báo</h5>
+                </div>
+                <div class="modal-body">
+                    <p>Giỏ hàng trống. Vui lòng thêm sản phẩm trước khi thanh toán!</p>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- #content -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
     <script>
         $(document).ready(function() {
-            $(".update-cart").on("change", function() {
-                let cartId = $(this).data("id");
-                let quantity = $(this).val();
+            function updateCart(cartId, quantity) {
                 let maxStock = parseInt($(".stock-quantity-" + cartId).text(), 10);
-
                 if (quantity > maxStock) {
-                    alert("Số lượng bạn nhập vượt quá số lượng tồn kho. Số lượng tối đa là " + maxStock +
-                        ".");
-                    $(this).val(maxStock);
+                    alert("Số lượng bạn nhập vượt quá số lượng tồn kho. Số lượng tối đa là " + maxStock + ".");
                     return;
                 }
 
@@ -204,17 +231,147 @@
                     success: function(response) {
                         if (response.success) {
                             $(".total-price-" + cartId).text(response.new_total_price);
-                            $(".cart-subtotal .woocommerce-Price-amount").text(response
-                                .subtotal);
-                            $(".order-total .woocommerce-Price-amount").text(response.total);
+                            $(".subtotal-price").text(response.subtotal);
+                            $(".total-price").text(response.total);
+
+                            if (response.discount_amount) {
+                                $(".discount-amount").text(response.discount_amount);
+                            }
+
+                            let voucherCode = $("#voucher_code").val();
+                            if (voucherCode) {
+                                applyVoucher(voucherCode);
+                            }
                         } else {
                             alert(response.message);
                         }
                     },
                     error: function() {
-                        alert("Có lỗi xảy ra, vui lòng thử lại!");
+                        alert("Có lỗi xảy ra, vui lòng thử lại xem!");
                     }
                 });
+            }
+
+
+            function applyVoucher(voucherCode) {
+    $.ajax({
+        url: "{{ route('client.cart.applyVoucher') }}",
+        method: "POST",
+        data: {
+            _token: "{{ csrf_token() }}",
+            voucher_code: voucherCode
+        },
+        success: function(response) {
+            if (response.success) {
+                $(".subtotal-price").text(response.total_before_discount);
+                $(".discount-amount").text(response.discount_amount);
+                $(".total-price").text(response.total_after_discount);
+
+                $("#voucher-error").text("");
+                $("#voucher-success").text(response.message);
+            } else {
+                $("#voucher-error").text(response.message);
+                $("#voucher-success").text("");
+
+                $(".discount-amount").text("0");
+                $(".total-price").text(response.total_before_discount);
+            }
+        },
+        error: function(xhr) {
+            let errorMessage = "Có lỗi xảy ra, vui lòng thử lại!";
+            if (xhr.responseJSON && xhr.responseJSON.message) {
+                errorMessage = xhr.responseJSON.message;
+            }
+            $("#voucher-error").text(errorMessage);
+            $("#voucher-success").text("");
+            // Xóa giảm giá và cập nhật tổng tiền về giá gốc
+            $(".discount-amount").text("0");
+            let subtotalText = $(".subtotal-price").text();
+            $(".total-price").text(subtotalText);
+        }
+    });
+}
+
+$(document).ready(function() {
+    $("#apply-voucher").click(function() {
+        let voucherCode = $("#voucher_code").val().trim();
+        // Nếu không nhập voucher, hiển thị lỗi ngay
+        if(voucherCode === "") {
+            $("#voucher-error").text("Vui lòng nhập voucher");
+            $("#voucher-success").text("");
+            $(".discount-amount").text("0");
+            let subtotalText = $(".subtotal-price").text();
+            $(".total-price").text(subtotalText);
+            return;
+        }
+        applyVoucher(voucherCode);
+    });
+});
+function applyVoucher(voucherCode) {
+    $.ajax({
+        url: "{{ route('client.cart.applyVoucher') }}",
+        method: "POST",
+        data: {
+            _token: "{{ csrf_token() }}",
+            voucher_code: voucherCode
+        },
+        success: function(response) {
+            if (response.success) {
+                $(".subtotal-price").text(response.total_before_discount);
+                $(".discount-amount").text(response.discount_amount);
+                $(".total-price").text(response.total_after_discount);
+
+                $("#voucher-error").text("");
+                $("#voucher-success").text(response.message);
+            } else {
+                $("#voucher-error").text(response.message);
+                $("#voucher-success").text("");
+
+                $(".discount-amount").text("0");
+                $(".total-price").text(response.total_before_discount);
+            }
+        },
+        error: function(xhr) {
+            let errorMessage = "Có lỗi xảy ra, vui lòng thử lại!";
+            if (xhr.responseJSON && xhr.responseJSON.message) {
+                errorMessage = xhr.responseJSON.message;
+            }
+            $("#voucher-error").text(errorMessage);
+            $("#voucher-success").text("");
+                $(".discount-amount").text("0");
+            let subtotalText = $(".subtotal-price").text();
+            $(".total-price").text(subtotalText);
+        }
+    });
+}
+
+$(document).ready(function() {
+    $("#apply-voucher").click(function() {
+        let voucherCode = $("#voucher_code").val().trim();
+        if(voucherCode === "") {
+            $("#voucher-error").text("Vui lòng nhập voucher");
+            $("#voucher-success").text("");
+            $(".discount-amount").text("0");
+            let subtotalText = $(".subtotal-price").text();
+            $(".total-price").text(subtotalText);
+            return;
+        }
+        applyVoucher(voucherCode);
+    });
+});
+
+
+
+            $(".update-cart").on("change", function() {
+                let cartId = $(this).data("id");
+                let quantity = $(this).val();
+                updateCart(cartId, quantity);
+            });
+
+            $("#apply-voucher").on("click", function(e) {
+                e.preventDefault();
+                let voucherCode = $("#voucher_code").val();
+                applyVoucher(voucherCode);
             });
         });
     </script>
