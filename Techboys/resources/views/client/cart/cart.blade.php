@@ -99,7 +99,24 @@
                                                             </tr>
                                                         @endforeach
                                                 @endif
-
+                                                @if(!$cartItems->isEmpty())
+                                                <tr>
+                                                    <td class="actions" colspan="6">
+                                                        <div class="voucher">
+                                                            <label for="voucher_code">Voucher:</label>
+                                                            <input type="text" placeholder="Nhập voucher"
+                                                                value="{{ old('voucher_code', session('voucher.code') ?? '') }}"
+                                                                id="voucher_code" class="input-text" name="voucher_code">
+                                                            <button type="submit" id="apply-voucher" class="button">Sử dụng</button>
+                                                        </div>
+                                                        <p id="voucher-error" class="text-danger small"></p>
+                                                        <p id="voucher-success" class="text-success small"></p>
+                                                        <input type="submit" value="Tiếp tục mua hàng" name="update_cart"
+                                                            class="button">
+                                                    </td>
+                                                </tr>
+                                            @endif
+                                            
                                                 </tbody>
                                             </table>
                                             <!-- .shop_table shop_table_responsive -->
