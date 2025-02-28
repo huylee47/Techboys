@@ -108,5 +108,8 @@ class CartController extends Controller
             'voucher' => $voucherResult['voucher']
         ]);
     }
+    public function removeItem(Request $request){
+        return $this->cartService->removeItem($request);
+    }
     
 }

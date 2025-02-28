@@ -65,11 +65,9 @@ class CheckoutService
                 ], 400);
             }
     
-    
-    
-    
             $totals = $this->cartPriceService->calculateCartTotals($cartItems);
             $total = $totals['total'];
+            $voucher = $totals['voucher'];
     
             if ($total <= 0) {
                 return response()->json([
@@ -122,6 +120,14 @@ class CheckoutService
                 $variant->decrement('stock', $cartItem->quantity);
             }
     
+            if ($voucher) {
+                $voucherModel = Voucher::where('code', $voucher->code)->first();
+                if ($voucherModel && $voucherModel->quantity > 0) {
+                    $voucherModel->decrement('quantity'); 
+                }
+                session()->forget('voucher');
+            }
+    
             Cart::where($userId ? 'user_id' : 'cart_id', $userId ?? $cartId)->delete();
     
             DB::commit();
@@ -129,7 +135,8 @@ class CheckoutService
             return response()->json([
                 'success' => true,
                 'message' => 'Đặt hàng thành công!',
-                'bill_id' => $bill->id
+                'bill_id' => $bill->id,
+                'bill' => $bill
             ]);
     
         } catch (\Exception $e) {
@@ -140,4 +147,5 @@ class CheckoutService
             ], 500);
         }
     }
+    
 }

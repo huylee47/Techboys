@@ -167,11 +167,11 @@ Route::prefix('products')->group(function () {
 Route::prefix('cart')->group(function () {
     Route::get('/', [CartController::class, 'showCart'])->name('client.cart.index');
     Route::post('/add', [CartController::class, 'addToCart'])->name('client.cart.add');
-    Route::post('/remove', [CartController::class, 'removeFromCart'])->name('client.cart.remove');
+    // Route::post('/remove', [CartController::class, 'removeFromCart'])->name('client.cart.remove');
     Route::get('/reset', [CartController::class, 'resetCart'])->name('client.cart.reset');
     Route::post('/cart/update', [CartController::class, 'updateCart'])->name('client.cart.update');
     Route::post('/applyVoucher', [CartController::class, 'applyVoucher'])->name('client.cart.applyVoucher');
-    // Route::get('/getVoucherDiscount', [CartController::class, 'getDiscount'])->name('client.cart.getDiscount');
+    Route::post('/remove/{id}', [CartController::class, 'removeItem'])->name('client.cart.remove');
     // Route::get('/getCount', [CartController::class, 'getCartCount'])->name('client.cart.getCartCount');
 });
 

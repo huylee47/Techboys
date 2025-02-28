@@ -5,7 +5,7 @@ namespace App\Service;
 use App\Models\Voucher;
 
 class VoucherService{
-    public function checkVoucher($voucherCode , $carTotal){
+    public function checkVoucher($voucherCode , $cartTotal){
         $voucher = Voucher::where('code', $voucherCode)->first();
     if(!$voucher){
         return ['valid' => false, 'message' => "Voucher không tồn tại"];
@@ -19,7 +19,7 @@ class VoucherService{
     if ($voucher->quantity <= 0) {
         return ['valid' => false, 'message' => "Voucher đã hết lượt sử dụng"];
     }
-    if ($voucher->min_price > $carTotal) {
+    if ($voucher->min_price > $cartTotal) {
         return ['valid' => false, 'message' => "Hoá đơn chưa đạt giá trị tối thiểu( tối thiểu : " . number_format($voucher->min_price , 0, ',', '.') . "đ)"];
     }
     return [
@@ -51,8 +51,6 @@ class VoucherService{
         }
     
         $newTotal = max($cartTotal - $discountAmount, 0);
-    
-        $voucher->decrement('quantity');
     
         return [
             'valid' => true,

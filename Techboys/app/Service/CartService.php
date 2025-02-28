@@ -19,7 +19,8 @@ class CartService{
             $cartId = session()->get('cart_id');
     
             if (!$cartId) {
-                return response()->json(['message' => 'Giỏ hàng trống'], 200);
+                // return response()->json(['message' => 'Giỏ hàng trống'], 200);
+                return collect([]);
             }
     
             $cartItems = Cart::where('cart_id', $cartId)->with('variant.product')->get();
@@ -86,5 +87,22 @@ class CartService{
             'total_price' => $totalPrice
         ];
     }
-    
+    public function removeItem($request)
+{
+    $cartItem = Cart::find($request->id);
+
+    if (!$cartItem) {
+        return response()->json([
+            'success' => false,
+            'message' => 'Không tìm thấy mặt hàng trong giỏ hàng!',
+        ], 404);
+    }
+
+    $cartItem->delete();
+
+    return response()->json([
+        'success' => true,
+        'message' => 'Xóa mặt hàng thành công!',
+    ]);
+}
 }
