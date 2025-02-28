@@ -243,6 +243,27 @@
             <!-- .col-full -->
         </div>
     </div>
+    <div class="modal fade" id="stockWarningModal" tabindex="-1" role="dialog"
+    aria-labelledby="stockWarningModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="stockWarningModalLabel">Cảnh báo</h5>
+            </div>
+            <div class="modal-body">
+                <p>
+                    Bạn đã mua quá số lượng tồn kho hiện tại.
+                    
+                    Số lượng tồn kho hiện tại : <span id="maxStockValue"></span> sản phẩm
+                    
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+            </div>
+        </div>
+    </div>
+</div>
     <script>
         document.querySelectorAll(".choice").forEach(choice => {
             choice.addEventListener("click", function() {
@@ -273,7 +294,6 @@ document.addEventListener("DOMContentLoaded", function() {
                 variantIdInput.value = selectedVariant.id;
                 stockQuantityElement.innerText = selectedVariant.stock;
 
-                // Kiểm tra số lượng nhập vào khi biến thể thay đổi
                 checkQuantityInput(selectedVariant.stock);
             }
         }
@@ -301,8 +321,9 @@ document.addEventListener("DOMContentLoaded", function() {
         if (isNaN(value) || value < 1) {
             quantityInput.value = 1;
         } else if (value > maxStock) {
-            alert("Số lượng bạn nhập vượt quá số lượng tồn kho. Số lượng tối đa là " + maxStock + ".");
-            quantityInput.value = maxStock;
+            document.getElementById('maxStockValue').textContent = maxStock;
+        $('#stockWarningModal').modal('show');
+        quantityInput.value = maxStock;
         }
     }
 
