@@ -3,10 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProductRequest;
+use App\Models\Brand;
+use App\Models\Color;
 use App\Models\Product;
+use App\Models\ProductModel;
+use App\Models\ProductCategory;
 use App\Service\PhotoService;
 use Illuminate\Http\Request;
 use App\Service\ProductService;
+
 
 class ProductController extends Controller
 {
@@ -113,9 +118,101 @@ class ProductController extends Controller
         return $this->productService->getProductBySlug($request);
     }
 
-    public function productList()
+    // public function productList(Request $request)
+    // {
+    //     // Lấy các bộ lọc từ request
+    //     $categoryIds = $request->category_id;
+    //     $brandIds = $request->brand_id;
+    //     $colorIds = $request->color_id;
+    //     $modelIds = $request->model_id;
+
+    //     // Xây dựng truy vấn cơ bản
+    //     $query = Product::query();
+
+    //     // Lọc sản phẩm theo các điều kiện
+    //     if ($categoryIds) {
+    //         $query->whereIn('category_id', $categoryIds);
+    //     }
+
+    //     if ($brandIds) {
+    //         $query->whereIn('brand_id', $brandIds);
+    //     }
+
+    //     if ($colorIds) {
+    //         $query->whereIn('color_id', $colorIds);
+    //     }
+
+    //     if ($modelIds) {
+    //         $query->whereIn('model_id', $modelIds);
+    //     }
+
+    //     // Lấy sản phẩm với phân trang
+    //     $products = $query->paginate(21);  // Giới hạn số sản phẩm hiển thị mỗi trang
+
+    //     // Lấy các dữ liệu cần thiết cho bộ lọc
+    //     $categories = ProductCategory::all();
+    //     $brands = Brand::all();
+    //     $colors = Color::all();
+    //     $models = ProductModel::all();
+
+    //     // Kiểm tra xem có phải là yêu cầu AJAX không
+    //     if ($request->ajax()) {
+    //         return response()->json([
+    //             'products' => view('client.product.list', compact('products', 'categories', 'brands', 'colors', 'models'))->render(),
+    //             'pagination' => $products->links()->render(),
+    //         ]);
+    //     }
+
+    //     // Nếu không phải là yêu cầu AJAX, trả về view bình thường
+    //     return view('client.product.list', compact('products', 'categories', 'brands', 'colors', 'models'));
+    // }
+
+    public function productList(Request $request)
     {
-        $products = Product::paginate(21);
-        return view('client.product.list', compact('products'));
+        // Lấy các bộ lọc từ request
+        $categoryIds = $request->category_id;
+        $brandIds = $request->brand_id;
+        $colorIds = $request->color_id;
+        $modelIds = $request->model_id;
+
+        // Xây dựng truy vấn cơ bản
+        $query = Product::query();
+
+        // Lọc sản phẩm theo các điều kiện
+        if ($categoryIds) {
+            $query->whereIn('category_id', $categoryIds);
+        }
+
+        if ($brandIds) {
+            $query->whereIn('brand_id', $brandIds);
+        }
+
+        if ($colorIds) {
+            $query->whereIn('color_id', $colorIds);
+        }
+
+        if ($modelIds) {
+            $query->whereIn('model_id', $modelIds);
+        }
+
+        // Lấy sản phẩm với phân trang
+        $products = $query->paginate(21);
+
+        // Lấy các dữ liệu cần thiết cho bộ lọc
+        $categories = ProductCategory::all();
+        $brands = Brand::all();
+        $colors = Color::all();
+        $models = ProductModel::all();
+
+        // Kiểm tra xem có phải là yêu cầu AJAX không
+        if ($request->ajax()) {
+            return response()->json([
+                'products' => view('client.product.list', compact('products', 'categories', 'brands', 'colors', 'models'))->render(),
+                'pagination' => $products->links()->render(),
+            ]);
+        }
+
+        // Nếu không phải là yêu cầu AJAX, trả về view bình thường
+        return view('client.product.list', compact('products', 'categories', 'brands', 'colors', 'models'));
     }
 }
