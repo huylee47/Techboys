@@ -171,30 +171,23 @@
 					@endforeach
 					</div>
 
-
-{{-- <div class="pagination">
-    {{ $paginatedProducts->links() }}
-</div> --}}
-
-					<!-- /row -->
-	                <div class="pagination__wrapper">
-	                    <ul class="pagination">
-	                        <li><a href="#0" class="prev" title="previous page">&#10094;</a></li>
-	                        <li>
-	                            <a href="#0" class="active">1</a>
-	                        </li>
-	                        <li>
-	                            <a href="#0">2</a>
-	                        </li>
-	                        <li>
-	                            <a href="#0">3</a>
-	                        </li>
-	                        <li>
-	                            <a href="#0">4</a>
-	                        </li>
-	                        <li><a href="#0" class="next" title="next page">&#10095;</a></li>
-	                    </ul>
-	                </div>
+					<div class="pagination__wrapper">
+                            <ul class="pagination">
+                                <li>
+                                    <a href="{{ $products->previousPageUrl() }}" class="prev" title="previous page">&#10094;</a>
+                                </li>
+                                @for ($i = 1; $i <= $products->lastPage(); $i++)
+                                    <li>
+                                        <a href="{{ $products->url($i) }}" class="{{ $i == $products->currentPage() ? 'active' : '' }}">
+                                            {{ $i }}
+                                        </a>
+                                    </li>
+                                @endfor
+                                <li>
+                                    <a href="{{ $products->nextPageUrl() }}" class="next" title="next page">&#10095;</a>
+                                </li>
+                            </ul>
+                        </div>
 	            </div>
 	            <!-- /col -->
 	        </div>

@@ -115,8 +115,7 @@ class ProductController extends Controller
 
     public function productList()
     {
-        $products = Product::take(21)->get();
-        $paginatedProducts = Product::skip(21)->paginate(21);
+        $products = Product::paginate(21);
         return view('client.product.list', compact('products'));
     }
 }
