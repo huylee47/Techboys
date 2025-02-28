@@ -82,7 +82,8 @@
                                                                             type="number" name="quantity"
                                                                             value="{{ $cart->quantity }}"
                                                                             class="input-text qty text update-cart"
-                                                                            data-id="{{ $cart->id }}" min="1">
+                                                                            data-id="{{ $cart->id }}" min="1"
+                                                                            max="{{ $cart->variant->stock }}">
                                                                     </div>
                                                                 </td>
                                                                 <td data-title="Total" class="product-subtotal">
@@ -99,24 +100,26 @@
                                                             </tr>
                                                         @endforeach
                                                 @endif
-                                                @if(!$cartItems->isEmpty())
-                                                <tr>
-                                                    <td class="actions" colspan="6">
-                                                        <div class="voucher">
-                                                            <label for="voucher_code">Voucher:</label>
-                                                            <input type="text" placeholder="Nhập voucher"
-                                                                value="{{ old('voucher_code', session('voucher.code') ?? '') }}"
-                                                                id="voucher_code" class="input-text" name="voucher_code">
-                                                            <button type="submit" id="apply-voucher" class="button">Sử dụng</button>
-                                                        </div>
-                                                        <p id="voucher-error" class="text-danger small"></p>
-                                                        <p id="voucher-success" class="text-success small"></p>
-                                                        <input type="submit" value="Tiếp tục mua hàng" name="update_cart"
-                                                            class="button">
-                                                    </td>
-                                                </tr>
-                                            @endif
-                                            
+                                                @if (!$cartItems->isEmpty())
+                                                    <tr>
+                                                        <td class="actions" colspan="6">
+                                                            <div class="voucher">
+                                                                <label for="voucher_code">Voucher:</label>
+                                                                <input type="text" placeholder="Nhập voucher"
+                                                                    value="{{ old('voucher_code', session('voucher.code') ?? '') }}"
+                                                                    id="voucher_code" class="input-text"
+                                                                    name="voucher_code">
+                                                                <button type="submit" id="apply-voucher" class="button">Sử
+                                                                    dụng</button>
+                                                            </div>
+                                                            <p id="voucher-error" class="text-danger small"></p>
+                                                            <p id="voucher-success" class="text-success small"></p>
+                                                            <input type="submit" value="Tiếp tục mua hàng"
+                                                                name="update_cart" class="button">
+                                                        </td>
+                                                    </tr>
+                                                @endif
+
                                                 </tbody>
                                             </table>
                                             <!-- .shop_table shop_table_responsive -->
@@ -200,15 +203,25 @@
         </div>
         <!-- .col-full -->
     </div>
-    <!--.MODAL Empty -->
-    <div id="cartEmptyModal" class="modal fade" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
+
+    <!-- MODAL OVERRATE -->
+    <div class="modal fade" id="stockWarningModal" tabindex="-1" role="dialog"
+        aria-labelledby="stockWarningModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Thông báo</h5>
+                    <h5 class="modal-title" id="stockWarningModalLabel">Cảnh báo</h5>
                 </div>
                 <div class="modal-body">
-                    <p>Giỏ hàng trống. Vui lòng thêm sản phẩm trước khi thanh toán!</p>
+                    <p>
+                        Bạn đã mua quá số lượng tồn kho hiện tại.
+                        
+                        Số lượng tồn kho hiện tại : <span id="maxStockValue"></span> sản phẩm
+                        
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
                 </div>
             </div>
         </div>
@@ -220,7 +233,9 @@
             function updateCart(cartId, quantity) {
                 let maxStock = parseInt($(".stock-quantity-" + cartId).text(), 10);
                 if (quantity > maxStock) {
-                    alert("Số lượng bạn nhập vượt quá số lượng tồn kho. Số lượng tối đa là " + maxStock + ".");
+                    $("#maxStockValue").text(maxStock);
+                    $('#stockWarningModal').modal('show');
+                    $("#quantity-input-" + cartId).val(maxStock);
                     return;
                 }
 
@@ -247,15 +262,16 @@
                                 applyVoucher(voucherCode);
                             }
                         } else {
-                            alert(response.message);
+                            $("#maxStockValue").text(response.message);
+                            $('#stockWarningModal').modal('show');
                         }
                     },
                     error: function() {
-                        alert("Có lỗi xảy ra, vui lòng thử lại xem!");
+                        $("#maxStockValue").text("Có lỗi xảy ra, vui lòng thử lại!");
+                        $('#stockWarningModal').modal('show');
                     }
                 });
             }
-
 
             function applyVoucher(voucherCode) {
                 $.ajax({
@@ -288,7 +304,6 @@
                         }
                         $("#voucher-error").text(errorMessage);
                         $("#voucher-success").text("");
-                        // Xóa giảm giá và cập nhật tổng tiền về giá gốc
                         $(".discount-amount").text("0");
                         let subtotalText = $(".subtotal-price").text();
                         $(".total-price").text(subtotalText);
@@ -299,7 +314,6 @@
             $(document).ready(function() {
                 $("#apply-voucher").click(function() {
                     let voucherCode = $("#voucher_code").val().trim();
-                    // Nếu không nhập voucher, hiển thị lỗi ngay
                     if (voucherCode === "") {
                         $("#voucher-error").text("Vui lòng nhập voucher");
                         $("#voucher-success").text("");
@@ -379,6 +393,7 @@
                 applyVoucher(voucherCode);
             });
         });
+
         $(document).on("click", ".remove", function(e) {
             e.preventDefault();
             var cartId = $(this).data("id");

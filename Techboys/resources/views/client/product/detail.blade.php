@@ -161,39 +161,38 @@
                                                         $defaultVariant = $variants->sortBy('model.value')->first();
                                                     @endphp
 
-                                                    <div class="choice-group">
-                                                        <span class="label">Dung lượng</span>
-                                                        <div class="choice-buttons">
-                                                            @foreach ($variants->groupBy('model.name') as $modelName => $variantGroup)
-                                                                @php
-                                                                    $isActive =
-                                                                        $modelName == $defaultVariant->model->name
-                                                                            ? 'active'
-                                                                            : '';
-                                                                @endphp
-                                                                <div class="choice storage-choice {{ $isActive }}"
-                                                                    data-value="{{ $modelName }}"
-                                                                    data-price="{{ $variantGroup->first()->price }}"
-                                                                    data-model-value="{{ $variantGroup->first()->model->id }}">
-                                                                    {{ $modelName }}
-                                                                </div>
-                                                            @endforeach
-                                                        </div>
-                                                    </div>
+<div class="choice-group">
+    <span class="label">Dung lượng</span>
+    <div class="choice-buttons">
+        @foreach ($variants->groupBy('model.name') as $modelName => $variantGroup)
+            @php
+                $isActive = $modelName == $defaultVariant->model->name ? 'active' : '';
+            @endphp
+            <div class="choice storage-choice {{ $isActive }}"
+                data-value="{{ $modelName }}"
+                data-price="{{ $variantGroup->first()->price }}"
+                data-model-value="{{ $variantGroup->first()->model->id }}"
+                data-stock="{{ $variantGroup->first()->stock }}"> <!-- Thêm thuộc tính data-stock -->
+                {{ $modelName }}
+            </div>
+        @endforeach
+    </div>
+</div>
 
-                                                    <div class="choice-group">
-                                                        <span class="label">Màu sắc</span>
-                                                        <div class="choice-buttons">
-                                                            @foreach ($variants->sortBy('color.name') as $variant)
-                                                                <div class="choice color-choice"
-                                                                    data-value="{{ $variant->color->name }}"
-                                                                    data-model="{{ $variant->model->name }}"
-                                                                    data-price="{{ $variant->price }}">
-                                                                    <span>{{ $variant->color->name }}</span>
-                                                                </div>
-                                                            @endforeach
-                                                        </div>
-                                                    </div>
+<div class="choice-group">
+    <span class="label">Màu sắc</span>
+    <div class="choice-buttons">
+        @foreach ($variants->sortBy('color.name') as $variant)
+            <div class="choice color-choice"
+                data-value="{{ $variant->color->name }}"
+                data-model="{{ $variant->model->name }}"
+                data-price="{{ $variant->price }}"
+                data-stock="{{ $variant->stock }}"> <!-- Thêm thuộc tính data-stock -->
+                <span>{{ $variant->color->name }}</span>
+            </div>
+        @endforeach
+    </div>
+</div>
                                                     <p>Số lượng tồn kho: <span
                                                             id="stockQuantity">{{ $defaultVariant->stock }}</span></p>
 
@@ -206,18 +205,16 @@
 
 
                                                     <!-- .single-product-header -->
-                                                    <div class="quantity">
-                                                        <label for="quantity-input">Số lượng</label>
-                                                        <input type="number" size="4" class="input-text qty text"
-                                                            title="Qty" value="1" name="quantity"
-                                                            id="quantity-input">
-                                                    </div>
+
+                                                    <input type="hidden" name="quantity" value="1">
                                                     <input type="hidden" name="variant_id" id="variant_id"
                                                         value="">
 
                                                     <!-- .quantity -->
+                                                    
                                                     <button class="single_add_to_cart_button button alt"
                                                         type="submit">Thêm vào giỏ hàng</button>
+                                                        <p id="outOfStockMessage" class="text-danger small">Sản phẩm đã hết hàng</p>
                                                     <!-- .cart -->
                                                 </div>
                                                 <!-- .product-actions -->
@@ -243,6 +240,7 @@
             <!-- .col-full -->
         </div>
     </div>
+
     <script>
         document.querySelectorAll(".choice").forEach(choice => {
             choice.addEventListener("click", function() {
@@ -258,10 +256,20 @@ document.addEventListener("DOMContentLoaded", function() {
     let selectedStorage = null;
     let selectedColor = null;
 
-    const quantityInput = document.getElementById("quantity-input");
+    const addToCartButton = document.querySelector(".single_add_to_cart_button");
     const productPriceElement = document.getElementById("productPrice");
     const variantIdInput = document.getElementById("variant_id");
     const stockQuantityElement = document.getElementById("stockQuantity");
+
+    function updateAddToCartButton(stock) {
+        if (stock === 0) {
+            addToCartButton.style.display = "none";
+            outOfStockMessage.style.display = "block";
+        } else {
+            addToCartButton.style.display = "block";
+            outOfStockMessage.style.display = "none";
+        }
+    }
 
     function updatePriceAndVariantId() {
         if (selectedStorage && selectedColor) {
@@ -273,8 +281,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 variantIdInput.value = selectedVariant.id;
                 stockQuantityElement.innerText = selectedVariant.stock;
 
-                // Kiểm tra số lượng nhập vào khi biến thể thay đổi
-                checkQuantityInput(selectedVariant.stock);
+                updateAddToCartButton(selectedVariant.stock);
             }
         }
     }
@@ -294,16 +301,6 @@ document.addEventListener("DOMContentLoaded", function() {
                 color.classList.remove("selected");
             }
         });
-    }
-
-    function checkQuantityInput(maxStock) {
-        let value = parseInt(quantityInput.value, 10);
-        if (isNaN(value) || value < 1) {
-            quantityInput.value = 1;
-        } else if (value > maxStock) {
-            alert("Số lượng bạn nhập vượt quá số lượng tồn kho. Số lượng tối đa là " + maxStock + ".");
-            quantityInput.value = maxStock;
-        }
     }
 
     document.querySelectorAll(".color-choice").forEach(choice => {
@@ -330,11 +327,6 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     });
 
-    quantityInput.addEventListener("input", function() {
-        const maxStock = parseInt(stockQuantityElement.innerText, 10);
-        checkQuantityInput(maxStock);
-    });
-
     let minModelId = Math.min(...variants.map(v => v.model.id));
     let defaultModelChoice = document.querySelector(`.storage-choice[data-model-value="${minModelId}"]`);
 
@@ -351,5 +343,5 @@ document.addEventListener("DOMContentLoaded", function() {
         updatePriceAndVariantId();
     }
 });
-    </script>
+   </script>
 @endsection

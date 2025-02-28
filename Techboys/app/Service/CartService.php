@@ -3,6 +3,7 @@
 namespace App\Service;
 
 use App\Models\Cart;
+use App\Models\ProductVariant;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
@@ -30,6 +31,12 @@ class CartService{
     }
     
     public function addToCart($request) {
+        $variant = ProductVariant::find($request->variant_id);
+    
+        if (!$variant) {
+            return response()->json(['message' => 'Biến thể sản phẩm không tồn tại.'], 404);
+        }
+    
         if (Auth::check()) {
             $userId = Auth::id();
             $cartId = null;
@@ -42,11 +49,7 @@ class CartService{
                 session()->put('cart_id', $cartId);
             }
         }
-        // dd([
-        //     'user_id' => $userId,
-        //     'cart_id' => $cartId,
-        //     'request_data' => $request->all()
-        // ]);
+    
         $cartItem = Cart::where(function ($query) use ($userId, $cartId) {
                 if ($userId) {
                     $query->where('user_id', $userId);
@@ -57,18 +60,28 @@ class CartService{
             ->where('variant_id', $request->variant_id)
             ->first();
     
+        $maxQuantity = $variant->stock;
+        $newQuantity = $cartItem ? $cartItem->quantity + $request->quantity : $request->quantity;
+    
+        if ($newQuantity > $maxQuantity) {
+            $newQuantity = $maxQuantity;
+        }
+    
         if ($cartItem) {
-            $cartItem->increment('quantity', $request->quantity);
+            $cartItem->update(['quantity' => $newQuantity]);
         } else {
             Cart::create([
                 'user_id' => $userId,
                 'cart_id' => $cartId,
                 'variant_id' => $request->variant_id,
-                'quantity' => $request->quantity,
+                'quantity' => $newQuantity,
             ]);
         }
     
-        return response()->json(['message' => 'Thêm vào giỏ hàng thành công']);
+        return response()->json([
+            'message' => 'Thêm vào giỏ hàng thành công.',
+            'new_quantity' => $newQuantity,
+        ]);
     }
     public function updateCart($request)
     {
