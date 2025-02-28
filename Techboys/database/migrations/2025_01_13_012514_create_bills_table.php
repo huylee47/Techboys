@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('user_id')->nullable();
             $table->string('full_name');
             $table->string('phone');
-            $table->decimal('total', 10, 2);
+            $table->decimal('total', 20, 2);
             $table->text('address');
             $table->foreignId('province_id');
             $table->foreignId('district_id');
