@@ -41,7 +41,7 @@ class DatabaseSeeder extends Seeder
         $jsonContent = file_get_contents($jsonFilePath);
         $dataArray = json_decode($jsonContent, true);
 
-        foreach ($dataArray['user'] as $data) {
+        foreach ($dataArray['users'] as $data) {
             // Check if email already exists
             if (!User::where('email', $data['email'])->exists()) {
                 User::create([

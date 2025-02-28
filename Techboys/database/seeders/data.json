@@ -29,9 +29,11 @@
             "total": 1200000.0,
             "address": "123 Đường ABC, TP.HCM",
             "email": "nguyenvana@gmail.com",
+            "province_id": 1,
+            "district_id": 1,
+            "ward_id": 1,
             "payment_method": 1,
-            "status_id": 1,
-            "voucher_code": 1
+            "status_id": 1
         },
         {
             "user_id": 2,
@@ -40,9 +42,11 @@
             "total": 1500000.0,
             "address": "456 Đường XYZ, TP.HN",
             "email": "lethib@gmail.com",
+            "province_id": 1,
+            "district_id": 2,
+            "ward_id": 2,
             "payment_method": 2,
-            "status_id": 2,
-            "voucher_code": 2
+            "status_id": 2
         },
         {
             "user_id": 3,
@@ -51,9 +55,11 @@
             "total": 800000.0,
             "address": "789 Đường LMN, TP.ĐN",
             "email": "tranvanc@gmail.com",
+            "province_id": 1,
+            "district_id": 3,
+            "ward_id": 3,
             "payment_method": 1,
-            "status_id": 3,
-            "voucher_code": null
+            "status_id": 3
         },
         {
             "user_id": 4,
@@ -62,9 +68,11 @@
             "total": 2000000.0,
             "address": "101 Đường PQR, TP.CN",
             "email": "phamthid@gmail.com",
+            "province_id": 1,
+            "district_id": 5,
+            "ward_id": 6,
             "payment_method": 2,
-            "status_id": 1,
-            "voucher_code": 3
+            "status_id": 1
         },
         {
             "user_id": 5,
@@ -73,9 +81,11 @@
             "total": 950000.0,
             "address": "112 Đường STU, TP.HCM",
             "email": "vungoce@gmail.com",
+            "province_id": 1,
+            "district_id": 7,
+            "ward_id": 7,
             "payment_method": 1,
-            "status_id": 2,
-            "voucher_code": 1
+            "status_id": 2
         }
     ],
     "bill_details": [
@@ -84,40 +94,35 @@
             "product_id": 1,
             "variant_id": 2,
             "quantity": 2,
-            "price": 600000.0,
-            "slug": "iphone-13-pro-max"
+            "price": 600000.0
         },
         {
             "bill_id": 1,
             "product_id": 2,
             "variant_id": 4,
             "quantity": 1,
-            "price": 300000.0,
-            "slug": "samsung-galaxy-s22"
+            "price": 300000.0
         },
         {
             "bill_id": 2,
             "product_id": 3,
             "variant_id": 6,
             "quantity": 3,
-            "price": 450000.0,
-            "slug": "xiaomi-mi-11"
+            "price": 450000.0
         },
         {
             "bill_id": 2,
             "product_id": 4,
             "variant_id": 8,
             "quantity": 1,
-            "price": 650000.0,
-            "slug": "oppo-reno-6"
+            "price": 650000.0
         },
         {
             "bill_id": 3,
             "product_id": 5,
             "variant_id": 10,
             "quantity": 5,
-            "price": 100000.0,
-            "slug": "realme-gt"
+            "price": 100000.0
         }
     ],
     "blogs": [
@@ -1968,7 +1973,7 @@
             "stock": 50
         },
         {
-            "product_id":45,
+            "product_id": 45,
             "color_id": 2,
             "model_id": 3,
             "price": 10090000,
@@ -2186,31 +2191,31 @@
         }
     ],
     "colors": [
-        {"name":"Đỏ","color_hex":"#FF0000"},
-        {"name":"Xanh lá đậm","color_hex":"#2d3438"},
-        {"name":"Xanh lá","color_hex":"#008000"},
-        {"name":"Xanh dương","color_hex":"#0000FF"},
-        {"name":"Xanh dương đậm","color_hex":"#2d3d55"},
-        {"name":"Cam","color_hex":"#FFA500"},
-        {"name":"Tím","color_hex":"#800080"},
-        {"name":"Hồng","color_hex":"#FFC0CB"},
-        {"name":"Nâu","color_hex":"#956b48"},
-        {"name":"Đen","color_hex":"#000000"},
-        {"name":"Trắng","color_hex":"#FFFFFF"},
-        {"name":"Xám","color_hex":"#808080"},
-        {"name":"Bạc","color_hex":"#C0C0C0"},
-        {"name":"Be","color_hex":"#F5F5DC"},
-        {"name":"Đen melange","color_hex":"#555555"},
-        {"name":"Ghi","color_hex":"#7D7D7D"},
-        {"name":"Ghi đậm","color_hex":"#505050"},
-        {"name":"Vàng","color_hex":"#FFFF00"},
-        {"name":"Ghi sáng","color_hex":"#D3D3D3"},
-        {"name":"Cam đỏ","color_hex":"#FF4500"},
-        {"name":"Xanh dương nhạt","color_hex":"#679bab"},
-        {"name":"Xanh bạc hà","color_hex":"#98FF98"},
-        {"name":"Cam đậm","color_hex":"#FF8C00"},
-        {"name":"Trắng Kể","color_hex":"#F8F8FF"},
-        {"name":"Tím nhạt","color_hex":"#5a5672"}
+        { "name": "Đỏ", "color_hex": "#FF0000" },
+        { "name": "Xanh lá đậm", "color_hex": "#2d3438" },
+        { "name": "Xanh lá", "color_hex": "#008000" },
+        { "name": "Xanh dương", "color_hex": "#0000FF" },
+        { "name": "Xanh dương đậm", "color_hex": "#2d3d55" },
+        { "name": "Cam", "color_hex": "#FFA500" },
+        { "name": "Tím", "color_hex": "#800080" },
+        { "name": "Hồng", "color_hex": "#FFC0CB" },
+        { "name": "Nâu", "color_hex": "#956b48" },
+        { "name": "Đen", "color_hex": "#000000" },
+        { "name": "Trắng", "color_hex": "#FFFFFF" },
+        { "name": "Xám", "color_hex": "#808080" },
+        { "name": "Bạc", "color_hex": "#C0C0C0" },
+        { "name": "Be", "color_hex": "#F5F5DC" },
+        { "name": "Đen melange", "color_hex": "#555555" },
+        { "name": "Ghi", "color_hex": "#7D7D7D" },
+        { "name": "Ghi đậm", "color_hex": "#505050" },
+        { "name": "Vàng", "color_hex": "#FFFF00" },
+        { "name": "Ghi sáng", "color_hex": "#D3D3D3" },
+        { "name": "Cam đỏ", "color_hex": "#FF4500" },
+        { "name": "Xanh dương nhạt", "color_hex": "#679bab" },
+        { "name": "Xanh bạc hà", "color_hex": "#98FF98" },
+        { "name": "Cam đậm", "color_hex": "#FF8C00" },
+        { "name": "Trắng Kể", "color_hex": "#F8F8FF" },
+        { "name": "Tím nhạt", "color_hex": "#5a5672" }
     ],
     "product_models": [
         { "name": "64GB" },
@@ -2327,7 +2332,7 @@
             "file": "file5.mp3"
         }
     ],
-    "user": [
+    "users": [
         {
             "name": "admin",
             "email": "admin@gmail.com",
@@ -2401,13 +2406,13 @@
     ],
     "vouchers": [
         {
-            "name": "Giảm giá 10%",
+            "name": "Giảm giá 10% tối đa 500k cho đơn hàng từ 500k",
             "code": "DISCOUNT10",
             "discount_percent": 10,
             "discount_amount": null,
             "quantity": 100,
             "min_price": 500000,
-            "max_price": 5000000,
+            "max_discount": 500000,
             "start_date": "2025-01-22",
             "end_date": "2025-01-25"
         },
@@ -2418,40 +2423,40 @@
             "discount_amount": 100000,
             "quantity": 50,
             "min_price": 500000,
-            "max_price": 1000000,
+            "max_discount": 1000000,
             "start_date": "2025-01-22",
             "end_date": "2025-01-25"
         },
         {
-            "name": "Giảm giá 20% cho đơn hàng từ 1 triệu",
+            "name": "Giảm giá 20% tối đa 200k cho đơn hàng từ 1 triệu",
             "code": "DISCOUNT20",
             "discount_percent": 20,
             "discount_amount": null,
             "quantity": 200,
             "min_price": 1000000,
-            "max_price": 2000000,
+            "max_discount": 200000,
             "start_date": "2025-01-22",
             "end_date": "2025-01-25"
         },
         {
-            "name": "Giảm 200k cho tất cả sản phẩm",
+            "name": "Giảm 50k cho tổng giá trị đơn hàng tối thiểu 100k",
             "code": "DISCOUNT200K",
             "discount_percent": null,
-            "discount_amount": 200000,
+            "discount_amount": 50000,
             "quantity": 30,
             "min_price": 100000,
-            "max_price": 5000000,
+            "max_discount": 5000000,
             "start_date": "2025-01-22",
             "end_date": "2025-01-25"
         },
         {
-            "name": "Giảm giá 5% cho tất cả sản phẩm",
+            "name": "Giảm giá 5% tối đa 5 triệu cho đơn hàng tối thiểu 1 triệu",
             "code": "DISCOUNT5",
             "discount_percent": 5,
             "discount_amount": null,
             "quantity": 150,
-            "min_price": 100000,
-            "max_price": 5000000,
+            "min_price": 1000000,
+            "max_discount": 5000000,
             "start_date": "2025-01-22",
             "end_date": "2025-01-25"
         }
