@@ -123,6 +123,9 @@ class UserController extends Controller
         if (!Hash::check($password, $account->password)) {
             return redirect()->back()->with('error', 'Mật khẩu không đúng.');
         }
+        if ($account->status != 1) {
+            return redirect()->back()->with('error', 'Tài khoản của bạn đã bị khóa.');
+        }
         Auth::login($account);
 
         return redirect()->route('home')->with('success', 'Đăng nhập thành công.');

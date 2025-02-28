@@ -6,19 +6,19 @@
             <div class="row">
                 <div id="primary" class="content-area">
                     <main id="main" class="site-main">
-                        <div class="home-v1-slider home-slider" >  
-                             @foreach ($loadBanner as  $banner)
-                            <div class="slider-1"
-                                style=" height: 400px;background-size: 90% ;background-image:  url({{ asset('admin/assets/images/banner/' . $banner->image) }}); " >
+                        <div class="home-v1-slider home-slider">
+                            @foreach ($loadBanner as $banner)
+                                <div class="slider-1"
+                                    style=" height: 400px;background-size: 90% ;background-image:  url({{ asset('admin/assets/images/banner/' . $banner->image) }}); ">
 
-                                {{-- <div class="caption">
-                                    <div class="button" style="margin-top: 300px">Mua sắm ngay
-                                        <i class="tm tm-long-arrow-right"></i>
-                                    </div>
-                               
-                                </div> --}}
-                            </div>           
-                              @endforeach
+                                    {{-- <div class="caption">
+                                        <div class="button" style="margin-top: 300px">Mua sắm ngay
+                                            <i class="tm tm-long-arrow-right"></i>
+                                        </div>
+
+                                    </div> --}}
+                                </div>
+                            @endforeach
                             <!-- .slider-2 -->
                         </div>
                         <!-- .home-v1-slider -->
@@ -138,8 +138,7 @@
                                                                     <!-- /.sale-label-outer -->
                                                                 </div>
                                                                 <!-- /.sale-product-with-timer-header -->
-                                                                <img width="224" height="197" alt=""
-                                                                    class="wp-post-image"
+                                                                <img width="224" height="197" alt="" class="wp-post-image"
                                                                     src="home/assets/images/products/1.jpg">
                                                                 <div class="deal-progress">
                                                                     <div class="deal-stock">
@@ -211,8 +210,7 @@
                                                                     <!-- /.sale-label-outer -->
                                                                 </div>
                                                                 <!-- /.sale-product-with-timer-header -->
-                                                                <img width="224" height="197" alt=""
-                                                                    class="wp-post-image"
+                                                                <img width="224" height="197" alt="" class="wp-post-image"
                                                                     src="home/assets/images/products/2.jpg">
                                                                 <div class="deal-progress">
                                                                     <div class="deal-stock">
@@ -225,8 +223,7 @@
                                                                     </div>
                                                                     <!-- /.deal-stock -->
                                                                     <div class="progress">
-                                                                        <span style="width:0%"
-                                                                            class="progress-bar">0</span>
+                                                                        <span style="width:0%" class="progress-bar">0</span>
                                                                     </div>
                                                                     <!-- /.progress -->
                                                                 </div>
@@ -285,8 +282,7 @@
                                                                     <!-- /.sale-label-outer -->
                                                                 </div>
                                                                 <!-- /.sale-product-with-timer-header -->
-                                                                <img width="224" height="197" alt=""
-                                                                    class="wp-post-image"
+                                                                <img width="224" height="197" alt="" class="wp-post-image"
                                                                     src="home/assets/images/products/3.jpg">
                                                                 <div class="deal-progress">
                                                                     <div class="deal-stock">
@@ -299,8 +295,7 @@
                                                                     </div>
                                                                     <!-- /.deal-stock -->
                                                                     <div class="progress">
-                                                                        <span style="width:0%"
-                                                                            class="progress-bar">0</span>
+                                                                        <span style="width:0%" class="progress-bar">0</span>
                                                                     </div>
                                                                     <!-- /.progress -->
                                                                 </div>
@@ -359,8 +354,7 @@
                                                                     <!-- /.sale-label-outer -->
                                                                 </div>
                                                                 <!-- /.sale-product-with-timer-header -->
-                                                                <img width="224" height="197" alt=""
-                                                                    class="wp-post-image"
+                                                                <img width="224" height="197" alt="" class="wp-post-image"
                                                                     src="home/assets/images/products/4.jpg">
                                                                 <div class="deal-progress">
                                                                     <div class="deal-stock">
@@ -373,8 +367,7 @@
                                                                     </div>
                                                                     <!-- /.deal-stock -->
                                                                     <div class="progress">
-                                                                        <span style="width:0%"
-                                                                            class="progress-bar">0</span>
+                                                                        <span style="width:0%" class="progress-bar">0</span>
                                                                     </div>
                                                                     <!-- /.progress -->
                                                                 </div>
@@ -424,8 +417,8 @@
                                     <header class="section-header">
                                         <ul role="tablist" class="nav justify-content-end">
                                             <li class="nav-item">
-                                                <a class="nav-link active" href="#tab-59f89f0881f930"
-                                                    data-toggle="tab">New Arrivals</a>
+                                                <a class="nav-link active" href="#tab-59f89f0881f930" data-toggle="tab">New
+                                                    Arrivals</a>
                                             </li>
                                             <li class="nav-item">
                                                 <a class="nav-link " href="#tab-59f89f0881f931" data-toggle="tab">On
@@ -448,11 +441,10 @@
                                                         <div class="products">
                                                             @foreach ($newProduct as $np)
                                                                 <div class="product">
-                                                                    <a href="{{route('client.product.show',['slug' => $np->slug])}}"
+                                                                    <a href="{{route('client.product.show', ['slug' => $np->slug])}}"
                                                                         class="woocommerce-LoopProduct-link">
                                                                         <img src="{{ url('') }}/admin/assets/images/product/{{ $np->img }}"
-                                                                            width="100%" class="fixed-image"
-                                                                            alt="">
+                                                                            width="100%" class="fixed-image" alt="">
                                                                         <span class="price">
                                                                             <ins>
                                                                                 <span class="amount"> </span>
@@ -461,14 +453,15 @@
                                                                         </span>
                                                                         <!-- /.price -->
                                                                         <h2 class="woocommerce-loop-product__title">
-                                                                            {{ $np->name }}</h2>
+                                                                            {{ $np->name }}
+                                                                        </h2>
                                                                     </a>
                                                                     <div class="hover-area">
-                                                                        <a class="button add_to_cart_button"
-                                                                            href="cart.html" rel="nofollow">Thêm vào giỏ
+                                                                        <a class="button add_to_cart_button" href="cart.html"
+                                                                            rel="nofollow">Thêm vào giỏ
                                                                             hàng</a>
-                                                                        <a class="add-to-compare-link"
-                                                                            href="compare.html">Add to compare</a>
+                                                                        <a class="add-to-compare-link" href="compare.html">Add
+                                                                            to compare</a>
                                                                     </div>
                                                                 </div>
                                                             @endforeach
@@ -498,8 +491,8 @@
                                                                 <a href="single-product-fullwidth.html"
                                                                     class="woocommerce-LoopProduct-link">
                                                                     <img src="home/assets/images/products/11.jpg"
-                                                                        width="224" height="197"
-                                                                        class="wp-post-image" alt="">
+                                                                        width="224" height="197" class="wp-post-image"
+                                                                        alt="">
                                                                     <span class="price">
                                                                         <ins>
                                                                             <span class="amount"> </span>
@@ -530,9 +523,8 @@
                                                                             <span
                                                                                 class="woocommerce-Price-currencySymbol">$</span>150.04</span>
                                                                     </span>
-                                                                    <img src="home/assets/images/products/2.jpg"
-                                                                        width="224" height="197"
-                                                                        class="wp-post-image" alt="">
+                                                                    <img src="home/assets/images/products/2.jpg" width="224"
+                                                                        height="197" class="wp-post-image" alt="">
                                                                     <span class="price">
                                                                         <ins>
                                                                             <span class="amount"> 309.95</span>
@@ -562,8 +554,8 @@
                                                                 <a href="single-product-fullwidth.html"
                                                                     class="woocommerce-LoopProduct-link">
                                                                     <img src="home/assets/images/products/16.jpg"
-                                                                        width="224" height="197"
-                                                                        class="wp-post-image" alt="">
+                                                                        width="224" height="197" class="wp-post-image"
+                                                                        alt="">
                                                                     <span class="price">
                                                                         <ins>
                                                                             <span class="amount"> </span>
@@ -590,8 +582,8 @@
                                                                 <a href="single-product-fullwidth.html"
                                                                     class="woocommerce-LoopProduct-link">
                                                                     <img src="home/assets/images/products/10.jpg"
-                                                                        width="224" height="197"
-                                                                        class="wp-post-image" alt="">
+                                                                        width="224" height="197" class="wp-post-image"
+                                                                        alt="">
                                                                     <span class="price">
                                                                         <ins>
                                                                             <span class="amount"> </span>
@@ -617,9 +609,8 @@
                                                                 </div>
                                                                 <a href="single-product-fullwidth.html"
                                                                     class="woocommerce-LoopProduct-link">
-                                                                    <img src="home/assets/images/products/8.jpg"
-                                                                        width="224" height="197"
-                                                                        class="wp-post-image" alt="">
+                                                                    <img src="home/assets/images/products/8.jpg" width="224"
+                                                                        height="197" class="wp-post-image" alt="">
                                                                     <span class="price">
                                                                         <ins>
                                                                             <span class="amount"> </span>
@@ -645,9 +636,8 @@
                                                                 </div>
                                                                 <a href="single-product-fullwidth.html"
                                                                     class="woocommerce-LoopProduct-link">
-                                                                    <img src="home/assets/images/products/5.jpg"
-                                                                        width="224" height="197"
-                                                                        class="wp-post-image" alt="">
+                                                                    <img src="home/assets/images/products/5.jpg" width="224"
+                                                                        height="197" class="wp-post-image" alt="">
                                                                     <span class="price">
                                                                         <ins>
                                                                             <span class="amount"> </span>
@@ -678,9 +668,8 @@
                                                                             <span
                                                                                 class="woocommerce-Price-currencySymbol">$</span>150.04</span>
                                                                     </span>
-                                                                    <img src="home/assets/images/products/7.jpg"
-                                                                        width="224" height="197"
-                                                                        class="wp-post-image" alt="">
+                                                                    <img src="home/assets/images/products/7.jpg" width="224"
+                                                                        height="197" class="wp-post-image" alt="">
                                                                     <span class="price">
                                                                         <ins>
                                                                             <span class="amount"> 789.95</span>
@@ -709,9 +698,8 @@
                                                                 </div>
                                                                 <a href="single-product-fullwidth.html"
                                                                     class="woocommerce-LoopProduct-link">
-                                                                    <img src="home/assets/images/products/1.jpg"
-                                                                        width="224" height="197"
-                                                                        class="wp-post-image" alt="">
+                                                                    <img src="home/assets/images/products/1.jpg" width="224"
+                                                                        height="197" class="wp-post-image" alt="">
                                                                     <span class="price">
                                                                         <ins>
                                                                             <span class="amount"> </span>
@@ -738,8 +726,8 @@
                                                                 <a href="single-product-fullwidth.html"
                                                                     class="woocommerce-LoopProduct-link">
                                                                     <img src="home/assets/images/products/13.jpg"
-                                                                        width="224" height="197"
-                                                                        class="wp-post-image" alt="">
+                                                                        width="224" height="197" class="wp-post-image"
+                                                                        alt="">
                                                                     <span class="price">
                                                                         <ins>
                                                                             <span class="amount"> </span>
@@ -771,8 +759,8 @@
                                                                                 class="woocommerce-Price-currencySymbol">$</span>150.04</span>
                                                                     </span>
                                                                     <img src="home/assets/images/products/14.jpg"
-                                                                        width="224" height="197"
-                                                                        class="wp-post-image" alt="">
+                                                                        width="224" height="197" class="wp-post-image"
+                                                                        alt="">
                                                                     <span class="price">
                                                                         <ins>
                                                                             <span class="amount"> 262.81</span>
@@ -802,8 +790,8 @@
                                                                 <a href="single-product-fullwidth.html"
                                                                     class="woocommerce-LoopProduct-link">
                                                                     <img src="home/assets/images/products/15.jpg"
-                                                                        width="224" height="197"
-                                                                        class="wp-post-image" alt="">
+                                                                        width="224" height="197" class="wp-post-image"
+                                                                        alt="">
                                                                     <span class="price">
                                                                         <ins>
                                                                             <span class="amount"> </span>
@@ -829,9 +817,8 @@
                                                                 </div>
                                                                 <a href="single-product-fullwidth.html"
                                                                     class="woocommerce-LoopProduct-link">
-                                                                    <img src="home/assets/images/products/4.jpg"
-                                                                        width="224" height="197"
-                                                                        class="wp-post-image" alt="">
+                                                                    <img src="home/assets/images/products/4.jpg" width="224"
+                                                                        height="197" class="wp-post-image" alt="">
                                                                     <span class="price">
                                                                         <ins>
                                                                             <span class="amount"> </span>
@@ -858,8 +845,8 @@
                                                                 <a href="single-product-fullwidth.html"
                                                                     class="woocommerce-LoopProduct-link">
                                                                     <img src="home/assets/images/products/12.jpg"
-                                                                        width="224" height="197"
-                                                                        class="wp-post-image" alt="">
+                                                                        width="224" height="197" class="wp-post-image"
+                                                                        alt="">
                                                                     <span class="price">
                                                                         <ins>
                                                                             <span class="amount"> </span>
@@ -885,9 +872,8 @@
                                                                 </div>
                                                                 <a href="single-product-fullwidth.html"
                                                                     class="woocommerce-LoopProduct-link">
-                                                                    <img src="home/assets/images/products/6.jpg"
-                                                                        width="224" height="197"
-                                                                        class="wp-post-image" alt="">
+                                                                    <img src="home/assets/images/products/6.jpg" width="224"
+                                                                        height="197" class="wp-post-image" alt="">
                                                                     <span class="price">
                                                                         <ins>
                                                                             <span class="amount"> </span>
@@ -913,9 +899,8 @@
                                                                 </div>
                                                                 <a href="single-product-fullwidth.html"
                                                                     class="woocommerce-LoopProduct-link">
-                                                                    <img src="home/assets/images/products/3.jpg"
-                                                                        width="224" height="197"
-                                                                        class="wp-post-image" alt="">
+                                                                    <img src="home/assets/images/products/3.jpg" width="224"
+                                                                        height="197" class="wp-post-image" alt="">
                                                                     <span class="price">
                                                                         <ins>
                                                                             <span class="amount"> </span>
@@ -941,9 +926,8 @@
                                                                 </div>
                                                                 <a href="single-product-fullwidth.html"
                                                                     class="woocommerce-LoopProduct-link">
-                                                                    <img src="home/assets/images/products/9.jpg"
-                                                                        width="224" height="197"
-                                                                        class="wp-post-image" alt="">
+                                                                    <img src="home/assets/images/products/9.jpg" width="224"
+                                                                        height="197" class="wp-post-image" alt="">
                                                                     <span class="price">
                                                                         <ins>
                                                                             <span class="amount"> </span>
@@ -985,9 +969,8 @@
                                                                 </div>
                                                                 <a href="single-product-fullwidth.html"
                                                                     class="woocommerce-LoopProduct-link">
-                                                                    <img src="home/assets/images/products/6.jpg"
-                                                                        width="224" height="197"
-                                                                        class="wp-post-image" alt="">
+                                                                    <img src="home/assets/images/products/6.jpg" width="224"
+                                                                        height="197" class="wp-post-image" alt="">
                                                                     <span class="price">
                                                                         <ins>
                                                                             <span class="amount"> </span>
@@ -1014,8 +997,8 @@
                                                                 <a href="single-product-fullwidth.html"
                                                                     class="woocommerce-LoopProduct-link">
                                                                     <img src="home/assets/images/products/15.jpg"
-                                                                        width="224" height="197"
-                                                                        class="wp-post-image" alt="">
+                                                                        width="224" height="197" class="wp-post-image"
+                                                                        alt="">
                                                                     <span class="price">
                                                                         <ins>
                                                                             <span class="amount"> </span>
@@ -1042,8 +1025,8 @@
                                                                 <a href="single-product-fullwidth.html"
                                                                     class="woocommerce-LoopProduct-link">
                                                                     <img src="home/assets/images/products/10.jpg"
-                                                                        width="224" height="197"
-                                                                        class="wp-post-image" alt="">
+                                                                        width="224" height="197" class="wp-post-image"
+                                                                        alt="">
                                                                     <span class="price">
                                                                         <ins>
                                                                             <span class="amount"> </span>
@@ -1070,8 +1053,8 @@
                                                                 <a href="single-product-fullwidth.html"
                                                                     class="woocommerce-LoopProduct-link">
                                                                     <img src="home/assets/images/products/12.jpg"
-                                                                        width="224" height="197"
-                                                                        class="wp-post-image" alt="">
+                                                                        width="224" height="197" class="wp-post-image"
+                                                                        alt="">
                                                                     <span class="price">
                                                                         <ins>
                                                                             <span class="amount"> </span>
@@ -1102,9 +1085,8 @@
                                                                             <span
                                                                                 class="woocommerce-Price-currencySymbol">$</span>150.04</span>
                                                                     </span>
-                                                                    <img src="home/assets/images/products/7.jpg"
-                                                                        width="224" height="197"
-                                                                        class="wp-post-image" alt="">
+                                                                    <img src="home/assets/images/products/7.jpg" width="224"
+                                                                        height="197" class="wp-post-image" alt="">
                                                                     <span class="price">
                                                                         <ins>
                                                                             <span class="amount"> 789.95</span>
@@ -1133,9 +1115,8 @@
                                                                 </div>
                                                                 <a href="single-product-fullwidth.html"
                                                                     class="woocommerce-LoopProduct-link">
-                                                                    <img src="home/assets/images/products/4.jpg"
-                                                                        width="224" height="197"
-                                                                        class="wp-post-image" alt="">
+                                                                    <img src="home/assets/images/products/4.jpg" width="224"
+                                                                        height="197" class="wp-post-image" alt="">
                                                                     <span class="price">
                                                                         <ins>
                                                                             <span class="amount"> </span>
@@ -1162,8 +1143,8 @@
                                                                 <a href="single-product-fullwidth.html"
                                                                     class="woocommerce-LoopProduct-link">
                                                                     <img src="home/assets/images/products/11.jpg"
-                                                                        width="224" height="197"
-                                                                        class="wp-post-image" alt="">
+                                                                        width="224" height="197" class="wp-post-image"
+                                                                        alt="">
                                                                     <span class="price">
                                                                         <ins>
                                                                             <span class="amount"> </span>
@@ -1195,8 +1176,8 @@
                                                                                 class="woocommerce-Price-currencySymbol">$</span>150.04</span>
                                                                     </span>
                                                                     <img src="home/assets/images/products/14.jpg"
-                                                                        width="224" height="197"
-                                                                        class="wp-post-image" alt="">
+                                                                        width="224" height="197" class="wp-post-image"
+                                                                        alt="">
                                                                     <span class="price">
                                                                         <ins>
                                                                             <span class="amount"> 262.81</span>
@@ -1225,9 +1206,8 @@
                                                                 </div>
                                                                 <a href="single-product-fullwidth.html"
                                                                     class="woocommerce-LoopProduct-link">
-                                                                    <img src="home/assets/images/products/5.jpg"
-                                                                        width="224" height="197"
-                                                                        class="wp-post-image" alt="">
+                                                                    <img src="home/assets/images/products/5.jpg" width="224"
+                                                                        height="197" class="wp-post-image" alt="">
                                                                     <span class="price">
                                                                         <ins>
                                                                             <span class="amount"> </span>
@@ -1254,8 +1234,8 @@
                                                                 <a href="single-product-fullwidth.html"
                                                                     class="woocommerce-LoopProduct-link">
                                                                     <img src="home/assets/images/products/16.jpg"
-                                                                        width="224" height="197"
-                                                                        class="wp-post-image" alt="">
+                                                                        width="224" height="197" class="wp-post-image"
+                                                                        alt="">
                                                                     <span class="price">
                                                                         <ins>
                                                                             <span class="amount"> </span>
@@ -1282,8 +1262,8 @@
                                                                 <a href="single-product-fullwidth.html"
                                                                     class="woocommerce-LoopProduct-link">
                                                                     <img src="home/assets/images/products/13.jpg"
-                                                                        width="224" height="197"
-                                                                        class="wp-post-image" alt="">
+                                                                        width="224" height="197" class="wp-post-image"
+                                                                        alt="">
                                                                     <span class="price">
                                                                         <ins>
                                                                             <span class="amount"> </span>
@@ -1309,9 +1289,8 @@
                                                                 </div>
                                                                 <a href="single-product-fullwidth.html"
                                                                     class="woocommerce-LoopProduct-link">
-                                                                    <img src="home/assets/images/products/9.jpg"
-                                                                        width="224" height="197"
-                                                                        class="wp-post-image" alt="">
+                                                                    <img src="home/assets/images/products/9.jpg" width="224"
+                                                                        height="197" class="wp-post-image" alt="">
                                                                     <span class="price">
                                                                         <ins>
                                                                             <span class="amount"> </span>
@@ -1337,9 +1316,8 @@
                                                                 </div>
                                                                 <a href="single-product-fullwidth.html"
                                                                     class="woocommerce-LoopProduct-link">
-                                                                    <img src="home/assets/images/products/1.jpg"
-                                                                        width="224" height="197"
-                                                                        class="wp-post-image" alt="">
+                                                                    <img src="home/assets/images/products/1.jpg" width="224"
+                                                                        height="197" class="wp-post-image" alt="">
                                                                     <span class="price">
                                                                         <ins>
                                                                             <span class="amount"> </span>
@@ -1365,9 +1343,8 @@
                                                                 </div>
                                                                 <a href="single-product-fullwidth.html"
                                                                     class="woocommerce-LoopProduct-link">
-                                                                    <img src="home/assets/images/products/8.jpg"
-                                                                        width="224" height="197"
-                                                                        class="wp-post-image" alt="">
+                                                                    <img src="home/assets/images/products/8.jpg" width="224"
+                                                                        height="197" class="wp-post-image" alt="">
                                                                     <span class="price">
                                                                         <ins>
                                                                             <span class="amount"> </span>
@@ -1393,9 +1370,8 @@
                                                                 </div>
                                                                 <a href="single-product-fullwidth.html"
                                                                     class="woocommerce-LoopProduct-link">
-                                                                    <img src="home/assets/images/products/3.jpg"
-                                                                        width="224" height="197"
-                                                                        class="wp-post-image" alt="">
+                                                                    <img src="home/assets/images/products/3.jpg" width="224"
+                                                                        height="197" class="wp-post-image" alt="">
                                                                     <span class="price">
                                                                         <ins>
                                                                             <span class="amount"> </span>
@@ -1426,9 +1402,8 @@
                                                                             <span
                                                                                 class="woocommerce-Price-currencySymbol">$</span>150.04</span>
                                                                     </span>
-                                                                    <img src="home/assets/images/products/2.jpg"
-                                                                        width="224" height="197"
-                                                                        class="wp-post-image" alt="">
+                                                                    <img src="home/assets/images/products/2.jpg" width="224"
+                                                                        height="197" class="wp-post-image" alt="">
                                                                     <span class="price">
                                                                         <ins>
                                                                             <span class="amount"> 309.95</span>
@@ -1443,11 +1418,11 @@
                                                                         Ultrabook 8GB 512SSD W10</h2>
                                                                 </a>
                                                                 <div class="hover-area">
-                                                                    <a class="button add_to_cart_button"
-                                                                        href="cart.html" rel="nofollow">Thêm vào giỏ
+                                                                    <a class="button add_to_cart_button" href="cart.html"
+                                                                        rel="nofollow">Thêm vào giỏ
                                                                         hàng</a>
-                                                                    <a class="add-to-compare-link"
-                                                                        href="compare.html">Add to compare</a>
+                                                                    <a class="add-to-compare-link" href="compare.html">Add
+                                                                        to compare</a>
                                                                 </div>
                                                             </div>
                                                             <!-- /.product-outer -->
@@ -1474,9 +1449,8 @@
                                                                 </div>
                                                                 <a href="single-product-fullwidth.html"
                                                                     class="woocommerce-LoopProduct-link">
-                                                                    <img src="home/assets/images/products/6.jpg"
-                                                                        width="224" height="197"
-                                                                        class="wp-post-image" alt="">
+                                                                    <img src="home/assets/images/products/6.jpg" width="224"
+                                                                        height="197" class="wp-post-image" alt="">
                                                                     <span class="price">
                                                                         <ins>
                                                                             <span class="amount"> </span>
@@ -1488,11 +1462,11 @@
                                                                         Virtual Reality 3D with Bluetooth Glasses</h2>
                                                                 </a>
                                                                 <div class="hover-area">
-                                                                    <a class="button add_to_cart_button"
-                                                                        href="cart.html" rel="nofollow">Thêm vào giỏ
+                                                                    <a class="button add_to_cart_button" href="cart.html"
+                                                                        rel="nofollow">Thêm vào giỏ
                                                                         hàng</a>
-                                                                    <a class="add-to-compare-link"
-                                                                        href="compare.html">Add to compare</a>
+                                                                    <a class="add-to-compare-link" href="compare.html">Add
+                                                                        to compare</a>
                                                                 </div>
                                                             </div>
                                                             <!-- /.product-outer -->
@@ -1503,9 +1477,8 @@
                                                                 </div>
                                                                 <a href="single-product-fullwidth.html"
                                                                     class="woocommerce-LoopProduct-link">
-                                                                    <img src="home/assets/images/products/4.jpg"
-                                                                        width="224" height="197"
-                                                                        class="wp-post-image" alt="">
+                                                                    <img src="home/assets/images/products/4.jpg" width="224"
+                                                                        height="197" class="wp-post-image" alt="">
                                                                     <span class="price">
                                                                         <ins>
                                                                             <span class="amount"> </span>
@@ -1517,11 +1490,11 @@
                                                                         Cam with Wi-Fi & GPS</h2>
                                                                 </a>
                                                                 <div class="hover-area">
-                                                                    <a class="button add_to_cart_button"
-                                                                        href="cart.html" rel="nofollow">Thêm vào giỏ
+                                                                    <a class="button add_to_cart_button" href="cart.html"
+                                                                        rel="nofollow">Thêm vào giỏ
                                                                         hàng</a>
-                                                                    <a class="add-to-compare-link"
-                                                                        href="compare.html">Add to compare</a>
+                                                                    <a class="add-to-compare-link" href="compare.html">Add
+                                                                        to compare</a>
                                                                 </div>
                                                             </div>
                                                             <!-- /.product-outer -->
@@ -1532,9 +1505,8 @@
                                                                 </div>
                                                                 <a href="single-product-fullwidth.html"
                                                                     class="woocommerce-LoopProduct-link">
-                                                                    <img src="home/assets/images/products/8.jpg"
-                                                                        width="224" height="197"
-                                                                        class="wp-post-image" alt="">
+                                                                    <img src="home/assets/images/products/8.jpg" width="224"
+                                                                        height="197" class="wp-post-image" alt="">
                                                                     <span class="price">
                                                                         <ins>
                                                                             <span class="amount"> </span>
@@ -1546,11 +1518,11 @@
                                                                         Air Quality Monitor</h2>
                                                                 </a>
                                                                 <div class="hover-area">
-                                                                    <a class="button add_to_cart_button"
-                                                                        href="cart.html" rel="nofollow">Thêm vào giỏ
+                                                                    <a class="button add_to_cart_button" href="cart.html"
+                                                                        rel="nofollow">Thêm vào giỏ
                                                                         hàng</a>
-                                                                    <a class="add-to-compare-link"
-                                                                        href="compare.html">Add to compare</a>
+                                                                    <a class="add-to-compare-link" href="compare.html">Add
+                                                                        to compare</a>
                                                                 </div>
                                                             </div>
                                                             <!-- /.product-outer -->
@@ -1562,8 +1534,8 @@
                                                                 <a href="single-product-fullwidth.html"
                                                                     class="woocommerce-LoopProduct-link">
                                                                     <img src="home/assets/images/products/16.jpg"
-                                                                        width="224" height="197"
-                                                                        class="wp-post-image" alt="">
+                                                                        width="224" height="197" class="wp-post-image"
+                                                                        alt="">
                                                                     <span class="price">
                                                                         <ins>
                                                                             <span class="amount"> </span>
@@ -1575,11 +1547,11 @@
                                                                         Fitbit Flex</h2>
                                                                 </a>
                                                                 <div class="hover-area">
-                                                                    <a class="button add_to_cart_button"
-                                                                        href="cart.html" rel="nofollow">Thêm vào giỏ
+                                                                    <a class="button add_to_cart_button" href="cart.html"
+                                                                        rel="nofollow">Thêm vào giỏ
                                                                         hàng</a>
-                                                                    <a class="add-to-compare-link"
-                                                                        href="compare.html">Add to compare</a>
+                                                                    <a class="add-to-compare-link" href="compare.html">Add
+                                                                        to compare</a>
                                                                 </div>
                                                             </div>
                                                             <!-- /.product-outer -->
@@ -1596,8 +1568,8 @@
                                                                                 class="woocommerce-Price-currencySymbol">$</span>150.04</span>
                                                                     </span>
                                                                     <img src="home/assets/images/products/14.jpg"
-                                                                        width="224" height="197"
-                                                                        class="wp-post-image" alt="">
+                                                                        width="224" height="197" class="wp-post-image"
+                                                                        alt="">
                                                                     <span class="price">
                                                                         <ins>
                                                                             <span class="amount"> 262.81</span>
@@ -1612,11 +1584,11 @@
                                                                         Fitbit Flex</h2>
                                                                 </a>
                                                                 <div class="hover-area">
-                                                                    <a class="button add_to_cart_button"
-                                                                        href="cart.html" rel="nofollow">Thêm vào giỏ
+                                                                    <a class="button add_to_cart_button" href="cart.html"
+                                                                        rel="nofollow">Thêm vào giỏ
                                                                         hàng</a>
-                                                                    <a class="add-to-compare-link"
-                                                                        href="compare.html">Add to compare</a>
+                                                                    <a class="add-to-compare-link" href="compare.html">Add
+                                                                        to compare</a>
                                                                 </div>
                                                             </div>
                                                             <!-- /.product-outer -->
@@ -1627,9 +1599,8 @@
                                                                 </div>
                                                                 <a href="single-product-fullwidth.html"
                                                                     class="woocommerce-LoopProduct-link">
-                                                                    <img src="home/assets/images/products/3.jpg"
-                                                                        width="224" height="197"
-                                                                        class="wp-post-image" alt="">
+                                                                    <img src="home/assets/images/products/3.jpg" width="224"
+                                                                        height="197" class="wp-post-image" alt="">
                                                                     <span class="price">
                                                                         <ins>
                                                                             <span class="amount"> </span>
@@ -1641,11 +1612,11 @@
                                                                         Wireless NXTG</h2>
                                                                 </a>
                                                                 <div class="hover-area">
-                                                                    <a class="button add_to_cart_button"
-                                                                        href="cart.html" rel="nofollow">Thêm vào giỏ
+                                                                    <a class="button add_to_cart_button" href="cart.html"
+                                                                        rel="nofollow">Thêm vào giỏ
                                                                         hàng</a>
-                                                                    <a class="add-to-compare-link"
-                                                                        href="compare.html">Add to compare</a>
+                                                                    <a class="add-to-compare-link" href="compare.html">Add
+                                                                        to compare</a>
                                                                 </div>
                                                             </div>
                                                             <!-- /.product-outer -->
@@ -1657,8 +1628,8 @@
                                                                 <a href="single-product-fullwidth.html"
                                                                     class="woocommerce-LoopProduct-link">
                                                                     <img src="home/assets/images/products/10.jpg"
-                                                                        width="224" height="197"
-                                                                        class="wp-post-image" alt="">
+                                                                        width="224" height="197" class="wp-post-image"
+                                                                        alt="">
                                                                     <span class="price">
                                                                         <ins>
                                                                             <span class="amount"> </span>
@@ -1670,11 +1641,11 @@
                                                                         ultimate splashproof portable speaker</h2>
                                                                 </a>
                                                                 <div class="hover-area">
-                                                                    <a class="button add_to_cart_button"
-                                                                        href="cart.html" rel="nofollow">Thêm vào giỏ
+                                                                    <a class="button add_to_cart_button" href="cart.html"
+                                                                        rel="nofollow">Thêm vào giỏ
                                                                         hàng</a>
-                                                                    <a class="add-to-compare-link"
-                                                                        href="compare.html">Add to compare</a>
+                                                                    <a class="add-to-compare-link" href="compare.html">Add
+                                                                        to compare</a>
                                                                 </div>
                                                             </div>
                                                             <!-- /.product-outer -->
@@ -1685,9 +1656,8 @@
                                                                 </div>
                                                                 <a href="single-product-fullwidth.html"
                                                                     class="woocommerce-LoopProduct-link">
-                                                                    <img src="home/assets/images/products/9.jpg"
-                                                                        width="224" height="197"
-                                                                        class="wp-post-image" alt="">
+                                                                    <img src="home/assets/images/products/9.jpg" width="224"
+                                                                        height="197" class="wp-post-image" alt="">
                                                                     <span class="price">
                                                                         <ins>
                                                                             <span class="amount"> </span>
@@ -1699,11 +1669,11 @@
                                                                         Stainless with Grey Suture Leather Strap</h2>
                                                                 </a>
                                                                 <div class="hover-area">
-                                                                    <a class="button add_to_cart_button"
-                                                                        href="cart.html" rel="nofollow">Thêm vào giỏ
+                                                                    <a class="button add_to_cart_button" href="cart.html"
+                                                                        rel="nofollow">Thêm vào giỏ
                                                                         hàng</a>
-                                                                    <a class="add-to-compare-link"
-                                                                        href="compare.html">Add to compare</a>
+                                                                    <a class="add-to-compare-link" href="compare.html">Add
+                                                                        to compare</a>
                                                                 </div>
                                                             </div>
                                                             <!-- /.product-outer -->
@@ -1714,9 +1684,8 @@
                                                                 </div>
                                                                 <a href="single-product-fullwidth.html"
                                                                     class="woocommerce-LoopProduct-link">
-                                                                    <img src="home/assets/images/products/5.jpg"
-                                                                        width="224" height="197"
-                                                                        class="wp-post-image" alt="">
+                                                                    <img src="home/assets/images/products/5.jpg" width="224"
+                                                                        height="197" class="wp-post-image" alt="">
                                                                     <span class="price">
                                                                         <ins>
                                                                             <span class="amount"> </span>
@@ -1728,11 +1697,11 @@
                                                                         Wireless Controller</h2>
                                                                 </a>
                                                                 <div class="hover-area">
-                                                                    <a class="button add_to_cart_button"
-                                                                        href="cart.html" rel="nofollow">Thêm vào giỏ
+                                                                    <a class="button add_to_cart_button" href="cart.html"
+                                                                        rel="nofollow">Thêm vào giỏ
                                                                         hàng</a>
-                                                                    <a class="add-to-compare-link"
-                                                                        href="compare.html">Add to compare</a>
+                                                                    <a class="add-to-compare-link" href="compare.html">Add
+                                                                        to compare</a>
                                                                 </div>
                                                             </div>
                                                             <!-- /.product-outer -->
@@ -1744,8 +1713,8 @@
                                                                 <a href="single-product-fullwidth.html"
                                                                     class="woocommerce-LoopProduct-link">
                                                                     <img src="home/assets/images/products/15.jpg"
-                                                                        width="224" height="197"
-                                                                        class="wp-post-image" alt="">
+                                                                        width="224" height="197" class="wp-post-image"
+                                                                        alt="">
                                                                     <span class="price">
                                                                         <ins>
                                                                             <span class="amount"> </span>
@@ -1757,11 +1726,11 @@
                                                                         Fitbit Flex</h2>
                                                                 </a>
                                                                 <div class="hover-area">
-                                                                    <a class="button add_to_cart_button"
-                                                                        href="cart.html" rel="nofollow">Thêm vào giỏ
+                                                                    <a class="button add_to_cart_button" href="cart.html"
+                                                                        rel="nofollow">Thêm vào giỏ
                                                                         hàng</a>
-                                                                    <a class="add-to-compare-link"
-                                                                        href="compare.html">Add to compare</a>
+                                                                    <a class="add-to-compare-link" href="compare.html">Add
+                                                                        to compare</a>
                                                                 </div>
                                                             </div>
                                                             <!-- /.product-outer -->
@@ -1777,9 +1746,8 @@
                                                                             <span
                                                                                 class="woocommerce-Price-currencySymbol">$</span>150.04</span>
                                                                     </span>
-                                                                    <img src="home/assets/images/products/2.jpg"
-                                                                        width="224" height="197"
-                                                                        class="wp-post-image" alt="">
+                                                                    <img src="home/assets/images/products/2.jpg" width="224"
+                                                                        height="197" class="wp-post-image" alt="">
                                                                     <span class="price">
                                                                         <ins>
                                                                             <span class="amount"> 309.95</span>
@@ -1794,11 +1762,11 @@
                                                                         Ultrabook 8GB 512SSD W10</h2>
                                                                 </a>
                                                                 <div class="hover-area">
-                                                                    <a class="button add_to_cart_button"
-                                                                        href="cart.html" rel="nofollow">Thêm vào giỏ
+                                                                    <a class="button add_to_cart_button" href="cart.html"
+                                                                        rel="nofollow">Thêm vào giỏ
                                                                         hàng</a>
-                                                                    <a class="add-to-compare-link"
-                                                                        href="compare.html">Add to compare</a>
+                                                                    <a class="add-to-compare-link" href="compare.html">Add
+                                                                        to compare</a>
                                                                 </div>
                                                             </div>
                                                             <!-- /.product-outer -->
@@ -1810,8 +1778,8 @@
                                                                 <a href="single-product-fullwidth.html"
                                                                     class="woocommerce-LoopProduct-link">
                                                                     <img src="home/assets/images/products/12.jpg"
-                                                                        width="224" height="197"
-                                                                        class="wp-post-image" alt="">
+                                                                        width="224" height="197" class="wp-post-image"
+                                                                        alt="">
                                                                     <span class="price">
                                                                         <ins>
                                                                             <span class="amount"> </span>
@@ -1823,11 +1791,11 @@
                                                                         23-Inch Screen LED-Lit Monitorss Buds</h2>
                                                                 </a>
                                                                 <div class="hover-area">
-                                                                    <a class="button add_to_cart_button"
-                                                                        href="cart.html" rel="nofollow">Thêm vào giỏ
+                                                                    <a class="button add_to_cart_button" href="cart.html"
+                                                                        rel="nofollow">Thêm vào giỏ
                                                                         hàng</a>
-                                                                    <a class="add-to-compare-link"
-                                                                        href="compare.html">Add to compare</a>
+                                                                    <a class="add-to-compare-link" href="compare.html">Add
+                                                                        to compare</a>
                                                                 </div>
                                                             </div>
                                                             <!-- /.product-outer -->
@@ -1839,8 +1807,8 @@
                                                                 <a href="single-product-fullwidth.html"
                                                                     class="woocommerce-LoopProduct-link">
                                                                     <img src="home/assets/images/products/11.jpg"
-                                                                        width="224" height="197"
-                                                                        class="wp-post-image" alt="">
+                                                                        width="224" height="197" class="wp-post-image"
+                                                                        alt="">
                                                                     <span class="price">
                                                                         <ins>
                                                                             <span class="amount"> </span>
@@ -1852,11 +1820,11 @@
                                                                         ultimate splashproof portable speaker</h2>
                                                                 </a>
                                                                 <div class="hover-area">
-                                                                    <a class="button add_to_cart_button"
-                                                                        href="cart.html" rel="nofollow">Thêm vào giỏ
+                                                                    <a class="button add_to_cart_button" href="cart.html"
+                                                                        rel="nofollow">Thêm vào giỏ
                                                                         hàng</a>
-                                                                    <a class="add-to-compare-link"
-                                                                        href="compare.html">Add to compare</a>
+                                                                    <a class="add-to-compare-link" href="compare.html">Add
+                                                                        to compare</a>
                                                                 </div>
                                                             </div>
                                                             <!-- /.product-outer -->
@@ -1868,8 +1836,8 @@
                                                                 <a href="single-product-fullwidth.html"
                                                                     class="woocommerce-LoopProduct-link">
                                                                     <img src="home/assets/images/products/13.jpg"
-                                                                        width="224" height="197"
-                                                                        class="wp-post-image" alt="">
+                                                                        width="224" height="197" class="wp-post-image"
+                                                                        alt="">
                                                                     <span class="price">
                                                                         <ins>
                                                                             <span class="amount"> </span>
@@ -1881,11 +1849,11 @@
                                                                         FPV With 4K</h2>
                                                                 </a>
                                                                 <div class="hover-area">
-                                                                    <a class="button add_to_cart_button"
-                                                                        href="cart.html" rel="nofollow">Thêm vào giỏ
+                                                                    <a class="button add_to_cart_button" href="cart.html"
+                                                                        rel="nofollow">Thêm vào giỏ
                                                                         hàng</a>
-                                                                    <a class="add-to-compare-link"
-                                                                        href="compare.html">Add to compare</a>
+                                                                    <a class="add-to-compare-link" href="compare.html">Add
+                                                                        to compare</a>
                                                                 </div>
                                                             </div>
                                                             <!-- /.product-outer -->
@@ -1896,9 +1864,8 @@
                                                                 </div>
                                                                 <a href="single-product-fullwidth.html"
                                                                     class="woocommerce-LoopProduct-link">
-                                                                    <img src="home/assets/images/products/1.jpg"
-                                                                        width="224" height="197"
-                                                                        class="wp-post-image" alt="">
+                                                                    <img src="home/assets/images/products/1.jpg" width="224"
+                                                                        height="197" class="wp-post-image" alt="">
                                                                     <span class="price">
                                                                         <ins>
                                                                             <span class="amount"> </span>
@@ -1910,11 +1877,11 @@
                                                                         Watches 3 SWR50</h2>
                                                                 </a>
                                                                 <div class="hover-area">
-                                                                    <a class="button add_to_cart_button"
-                                                                        href="cart.html" rel="nofollow">Thêm vào giỏ
+                                                                    <a class="button add_to_cart_button" href="cart.html"
+                                                                        rel="nofollow">Thêm vào giỏ
                                                                         hàng</a>
-                                                                    <a class="add-to-compare-link"
-                                                                        href="compare.html">Add to compare</a>
+                                                                    <a class="add-to-compare-link" href="compare.html">Add
+                                                                        to compare</a>
                                                                 </div>
                                                             </div>
                                                             <!-- /.product-outer -->
@@ -1930,9 +1897,8 @@
                                                                             <span
                                                                                 class="woocommerce-Price-currencySymbol">$</span>150.04</span>
                                                                     </span>
-                                                                    <img src="home/assets/images/products/7.jpg"
-                                                                        width="224" height="197"
-                                                                        class="wp-post-image" alt="">
+                                                                    <img src="home/assets/images/products/7.jpg" width="224"
+                                                                        height="197" class="wp-post-image" alt="">
                                                                     <span class="price">
                                                                         <ins>
                                                                             <span class="amount"> 789.95</span>
@@ -1947,11 +1913,11 @@
                                                                         on-ear PureBass Headphones</h2>
                                                                 </a>
                                                                 <div class="hover-area">
-                                                                    <a class="button add_to_cart_button"
-                                                                        href="cart.html" rel="nofollow">Thêm vào giỏ
+                                                                    <a class="button add_to_cart_button" href="cart.html"
+                                                                        rel="nofollow">Thêm vào giỏ
                                                                         hàng</a>
-                                                                    <a class="add-to-compare-link"
-                                                                        href="compare.html">Add to compare</a>
+                                                                    <a class="add-to-compare-link" href="compare.html">Add
+                                                                        to compare</a>
                                                                 </div>
                                                             </div>
                                                             <!-- /.product-outer -->
@@ -2126,7 +2092,7 @@
                         <section
                             style="background-size: cover; background-position: center center; background-image: url( admin/assets/images/banner/banner7.png ); height: 800px;"
                             class="section-landscape-full-product-cards-carousel">
-                            
+
                             <div class="col-full">
                                 <header class="section-header">
                                     <h2 class="section-title">
@@ -2136,8 +2102,7 @@
                                 <!-- .section-header -->
                                 <div class="row">
                                     <div class="landscape-full-product-cards-carousel">
-                                        <div class="products-carousel" data-ride="tm-slick-carousel"
-                                            data-wrap=".products"
+                                        <div class="products-carousel" data-ride="tm-slick-carousel" data-wrap=".products"
                                             data-slick="{&quot;rows&quot;:2,&quot;slidesPerRow&quot;:2,&quot;slidesToShow&quot;:1,&quot;slidesToScroll&quot;:1,&quot;dots&quot;:true,&quot;arrows&quot;:false,&quot;responsive&quot;:[{&quot;breakpoint&quot;:767,&quot;settings&quot;:{&quot;slidesPerRow&quot;:2,&quot;slidesToShow&quot;:1,&quot;slidesToScroll&quot;:1}},{&quot;breakpoint&quot;:1200,&quot;settings&quot;:{&quot;slidesPerRow&quot;:1,&quot;slidesToShow&quot;:1,&quot;slidesToScroll&quot;:1}}]}">
                                             <div class="container-fluid">
                                                 <div class="woocommerce columns-2">
@@ -2151,8 +2116,7 @@
                                                                 <a class="woocommerce-LoopProduct-link"
                                                                     href="single-product-fullwidth.html">
                                                                     <img class="wp-post-image"
-                                                                        src="home/assets/images/products/1-2.jpg"
-                                                                        alt="">
+                                                                        src="home/assets/images/products/1-2.jpg" alt="">
                                                                 </a>
                                                                 <div class="media-body">
                                                                     <a class="woocommerce-LoopProduct-link "
@@ -2205,8 +2169,7 @@
                                                                 <a class="woocommerce-LoopProduct-link"
                                                                     href="single-product-fullwidth.html">
                                                                     <img class="wp-post-image"
-                                                                        src="home/assets/images/products/1-4.jpg"
-                                                                        alt="">
+                                                                        src="home/assets/images/products/1-4.jpg" alt="">
                                                                 </a>
                                                                 <div class="media-body">
                                                                     <a class="woocommerce-LoopProduct-link "
@@ -2258,8 +2221,7 @@
                                                                 <a class="woocommerce-LoopProduct-link"
                                                                     href="single-product-fullwidth.html">
                                                                     <img class="wp-post-image"
-                                                                        src="home/assets/images/products/1-1.jpg"
-                                                                        alt="">
+                                                                        src="home/assets/images/products/1-1.jpg" alt="">
                                                                 </a>
                                                                 <div class="media-body">
                                                                     <a class="woocommerce-LoopProduct-link "
@@ -2312,8 +2274,7 @@
                                                                 <a class="woocommerce-LoopProduct-link"
                                                                     href="single-product-fullwidth.html">
                                                                     <img class="wp-post-image"
-                                                                        src="home/assets/images/products/1-6.jpg"
-                                                                        alt="">
+                                                                        src="home/assets/images/products/1-6.jpg" alt="">
                                                                 </a>
                                                                 <div class="media-body">
                                                                     <a class="woocommerce-LoopProduct-link "
@@ -2366,8 +2327,7 @@
                                                                 <a class="woocommerce-LoopProduct-link"
                                                                     href="single-product-fullwidth.html">
                                                                     <img class="wp-post-image"
-                                                                        src="home/assets/images/products/1-2.jpg"
-                                                                        alt="">
+                                                                        src="home/assets/images/products/1-2.jpg" alt="">
                                                                 </a>
                                                                 <div class="media-body">
                                                                     <a class="woocommerce-LoopProduct-link "
@@ -2420,8 +2380,7 @@
                                                                 <a class="woocommerce-LoopProduct-link"
                                                                     href="single-product-fullwidth.html">
                                                                     <img class="wp-post-image"
-                                                                        src="home/assets/images/products/1-5.jpg"
-                                                                        alt="">
+                                                                        src="home/assets/images/products/1-5.jpg" alt="">
                                                                 </a>
                                                                 <div class="media-body">
                                                                     <a class="woocommerce-LoopProduct-link "
@@ -2474,8 +2433,7 @@
                                                                 <a class="woocommerce-LoopProduct-link"
                                                                     href="single-product-fullwidth.html">
                                                                     <img class="wp-post-image"
-                                                                        src="home/assets/images/products/1-3.jpg"
-                                                                        alt="">
+                                                                        src="home/assets/images/products/1-3.jpg" alt="">
                                                                 </a>
                                                                 <div class="media-body">
                                                                     <a class="woocommerce-LoopProduct-link "
@@ -2528,8 +2486,7 @@
                                                                 <a class="woocommerce-LoopProduct-link"
                                                                     href="single-product-fullwidth.html">
                                                                     <img class="wp-post-image"
-                                                                        src="home/assets/images/products/1-5.jpg"
-                                                                        alt="">
+                                                                        src="home/assets/images/products/1-5.jpg" alt="">
                                                                 </a>
                                                                 <div class="media-body">
                                                                     <a class="woocommerce-LoopProduct-link "
@@ -2606,8 +2563,7 @@
                                 <!-- .section-header -->
                                 <div class="tab-content">
                                     <div id="tab-59f89f08825d50" class="tab-pane active" role="tabpanel">
-                                        <div class="products-carousel" data-ride="tm-slick-carousel"
-                                            data-wrap=".products"
+                                        <div class="products-carousel" data-ride="tm-slick-carousel" data-wrap=".products"
                                             data-slick="{&quot;infinite&quot;:false,&quot;slidesToShow&quot;:7,&quot;slidesToScroll&quot;:7,&quot;dots&quot;:true,&quot;arrows&quot;:false,&quot;responsive&quot;:[{&quot;breakpoint&quot;:700,&quot;settings&quot;:{&quot;slidesToShow&quot;:2,&quot;slidesToScroll&quot;:2}},{&quot;breakpoint&quot;:780,&quot;settings&quot;:{&quot;slidesToShow&quot;:3,&quot;slidesToScroll&quot;:3}},{&quot;breakpoint&quot;:1200,&quot;settings&quot;:{&quot;slidesToShow&quot;:4,&quot;slidesToScroll&quot;:4}},{&quot;breakpoint&quot;:1400,&quot;settings&quot;:{&quot;slidesToShow&quot;:5,&quot;slidesToScroll&quot;:5}}]}">
                                             <div class="container-fluid">
                                                 <div class="woocommerce">
@@ -2617,8 +2573,7 @@
                                                                 <a href="single-product-fullwidth.html"
                                                                     class="woocommerce-LoopProduct-link">
                                                                     <img src="{{ url('') }}/admin/assets/images/product/{{ $hp->img }}"
-                                                                        width="100%" class="fixed-image"
-                                                                        alt="">
+                                                                        width="100%" class="fixed-image" alt="">
                                                                     <span class="price">
                                                                         <ins>
                                                                             <span class="amount"> </span>
@@ -2628,11 +2583,12 @@
                                                                     </span>
                                                                     <!-- /.price -->
                                                                     <h2 class="woocommerce-loop-product__title">
-                                                                        {{ $hp->name }}</h2>
+                                                                        {{ $hp->name }}
+                                                                    </h2>
                                                                 </a>
                                                                 <div class="hover-area">
-                                                                    <a class="button add_to_cart_button"
-                                                                        href="cart.html" rel="nofollow">Thêm vào giỏ
+                                                                    <a class="button add_to_cart_button" href="cart.html"
+                                                                        rel="nofollow">Thêm vào giỏ
                                                                         hàng</a>
                                                                 </div>
                                                             </div>
@@ -2648,8 +2604,7 @@
                                     </div>
                                     <!-- .tab-pane -->
                                     <div id="tab-59f89f08825d51" class="tab-pane " role="tabpanel">
-                                        <div class="products-carousel" data-ride="tm-slick-carousel"
-                                            data-wrap=".products"
+                                        <div class="products-carousel" data-ride="tm-slick-carousel" data-wrap=".products"
                                             data-slick="{&quot;infinite&quot;:false,&quot;slidesToShow&quot;:7,&quot;slidesToScroll&quot;:7,&quot;dots&quot;:true,&quot;arrows&quot;:false,&quot;responsive&quot;:[{&quot;breakpoint&quot;:700,&quot;settings&quot;:{&quot;slidesToShow&quot;:2,&quot;slidesToScroll&quot;:2}},{&quot;breakpoint&quot;:780,&quot;settings&quot;:{&quot;slidesToShow&quot;:3,&quot;slidesToScroll&quot;:3}},{&quot;breakpoint&quot;:1200,&quot;settings&quot;:{&quot;slidesToShow&quot;:4,&quot;slidesToScroll&quot;:4}},{&quot;breakpoint&quot;:1400,&quot;settings&quot;:{&quot;slidesToShow&quot;:5,&quot;slidesToScroll&quot;:5}}]}">
                                             <div class="container-fluid">
                                                 <div class="woocommerce">
@@ -2666,9 +2621,8 @@
                                                                         <span
                                                                             class="woocommerce-Price-currencySymbol">$</span>150.04</span>
                                                                 </span>
-                                                                <img src="home/assets/images/products/7.jpg"
-                                                                    width="224" height="197"
-                                                                    class="wp-post-image" alt="">
+                                                                <img src="home/assets/images/products/7.jpg" width="224"
+                                                                    height="197" class="wp-post-image" alt="">
                                                                 <span class="price">
                                                                     <ins>
                                                                         <span class="amount"> 789.95</span>
@@ -2697,9 +2651,8 @@
                                                             </div>
                                                             <a href="single-product-fullwidth.html"
                                                                 class="woocommerce-LoopProduct-link">
-                                                                <img src="home/assets/images/products/15.jpg"
-                                                                    width="224" height="197"
-                                                                    class="wp-post-image" alt="">
+                                                                <img src="home/assets/images/products/15.jpg" width="224"
+                                                                    height="197" class="wp-post-image" alt="">
                                                                 <span class="price">
                                                                     <ins>
                                                                         <span class="amount"> </span>
@@ -2725,9 +2678,8 @@
                                                             </div>
                                                             <a href="single-product-fullwidth.html"
                                                                 class="woocommerce-LoopProduct-link">
-                                                                <img src="home/assets/images/products/16.jpg"
-                                                                    width="224" height="197"
-                                                                    class="wp-post-image" alt="">
+                                                                <img src="home/assets/images/products/16.jpg" width="224"
+                                                                    height="197" class="wp-post-image" alt="">
                                                                 <span class="price">
                                                                     <ins>
                                                                         <span class="amount"> </span>
@@ -2753,9 +2705,8 @@
                                                             </div>
                                                             <a href="single-product-fullwidth.html"
                                                                 class="woocommerce-LoopProduct-link">
-                                                                <img src="home/assets/images/products/12.jpg"
-                                                                    width="224" height="197"
-                                                                    class="wp-post-image" alt="">
+                                                                <img src="home/assets/images/products/12.jpg" width="224"
+                                                                    height="197" class="wp-post-image" alt="">
                                                                 <span class="price">
                                                                     <ins>
                                                                         <span class="amount"> </span>
@@ -2781,9 +2732,8 @@
                                                             </div>
                                                             <a href="single-product-fullwidth.html"
                                                                 class="woocommerce-LoopProduct-link">
-                                                                <img src="home/assets/images/products/10.jpg"
-                                                                    width="224" height="197"
-                                                                    class="wp-post-image" alt="">
+                                                                <img src="home/assets/images/products/10.jpg" width="224"
+                                                                    height="197" class="wp-post-image" alt="">
                                                                 <span class="price">
                                                                     <ins>
                                                                         <span class="amount"> </span>
@@ -2814,9 +2764,8 @@
                                                                         <span
                                                                             class="woocommerce-Price-currencySymbol">$</span>150.04</span>
                                                                 </span>
-                                                                <img src="home/assets/images/products/14.jpg"
-                                                                    width="224" height="197"
-                                                                    class="wp-post-image" alt="">
+                                                                <img src="home/assets/images/products/14.jpg" width="224"
+                                                                    height="197" class="wp-post-image" alt="">
                                                                 <span class="price">
                                                                     <ins>
                                                                         <span class="amount"> 262.81</span>
@@ -2845,9 +2794,8 @@
                                                             </div>
                                                             <a href="single-product-fullwidth.html"
                                                                 class="woocommerce-LoopProduct-link">
-                                                                <img src="home/assets/images/products/4.jpg"
-                                                                    width="224" height="197"
-                                                                    class="wp-post-image" alt="">
+                                                                <img src="home/assets/images/products/4.jpg" width="224"
+                                                                    height="197" class="wp-post-image" alt="">
                                                                 <span class="price">
                                                                     <ins>
                                                                         <span class="amount"> </span>
@@ -2873,9 +2821,8 @@
                                                             </div>
                                                             <a href="single-product-fullwidth.html"
                                                                 class="woocommerce-LoopProduct-link">
-                                                                <img src="home/assets/images/products/6.jpg"
-                                                                    width="224" height="197"
-                                                                    class="wp-post-image" alt="">
+                                                                <img src="home/assets/images/products/6.jpg" width="224"
+                                                                    height="197" class="wp-post-image" alt="">
                                                                 <span class="price">
                                                                     <ins>
                                                                         <span class="amount"> </span>
@@ -2901,9 +2848,8 @@
                                                             </div>
                                                             <a href="single-product-fullwidth.html"
                                                                 class="woocommerce-LoopProduct-link">
-                                                                <img src="home/assets/images/products/9.jpg"
-                                                                    width="224" height="197"
-                                                                    class="wp-post-image" alt="">
+                                                                <img src="home/assets/images/products/9.jpg" width="224"
+                                                                    height="197" class="wp-post-image" alt="">
                                                                 <span class="price">
                                                                     <ins>
                                                                         <span class="amount"> </span>
@@ -2934,9 +2880,8 @@
                                                                         <span
                                                                             class="woocommerce-Price-currencySymbol">$</span>150.04</span>
                                                                 </span>
-                                                                <img src="home/assets/images/products/2.jpg"
-                                                                    width="224" height="197"
-                                                                    class="wp-post-image" alt="">
+                                                                <img src="home/assets/images/products/2.jpg" width="224"
+                                                                    height="197" class="wp-post-image" alt="">
                                                                 <span class="price">
                                                                     <ins>
                                                                         <span class="amount"> 309.95</span>
@@ -2965,9 +2910,8 @@
                                                             </div>
                                                             <a href="single-product-fullwidth.html"
                                                                 class="woocommerce-LoopProduct-link">
-                                                                <img src="home/assets/images/products/3.jpg"
-                                                                    width="224" height="197"
-                                                                    class="wp-post-image" alt="">
+                                                                <img src="home/assets/images/products/3.jpg" width="224"
+                                                                    height="197" class="wp-post-image" alt="">
                                                                 <span class="price">
                                                                     <ins>
                                                                         <span class="amount"> </span>
@@ -2993,9 +2937,8 @@
                                                             </div>
                                                             <a href="single-product-fullwidth.html"
                                                                 class="woocommerce-LoopProduct-link">
-                                                                <img src="home/assets/images/products/8.jpg"
-                                                                    width="224" height="197"
-                                                                    class="wp-post-image" alt="">
+                                                                <img src="home/assets/images/products/8.jpg" width="224"
+                                                                    height="197" class="wp-post-image" alt="">
                                                                 <span class="price">
                                                                     <ins>
                                                                         <span class="amount"> </span>
@@ -3021,9 +2964,8 @@
                                                             </div>
                                                             <a href="single-product-fullwidth.html"
                                                                 class="woocommerce-LoopProduct-link">
-                                                                <img src="home/assets/images/products/5.jpg"
-                                                                    width="224" height="197"
-                                                                    class="wp-post-image" alt="">
+                                                                <img src="home/assets/images/products/5.jpg" width="224"
+                                                                    height="197" class="wp-post-image" alt="">
                                                                 <span class="price">
                                                                     <ins>
                                                                         <span class="amount"> </span>
@@ -3049,9 +2991,8 @@
                                                             </div>
                                                             <a href="single-product-fullwidth.html"
                                                                 class="woocommerce-LoopProduct-link">
-                                                                <img src="home/assets/images/products/13.jpg"
-                                                                    width="224" height="197"
-                                                                    class="wp-post-image" alt="">
+                                                                <img src="home/assets/images/products/13.jpg" width="224"
+                                                                    height="197" class="wp-post-image" alt="">
                                                                 <span class="price">
                                                                     <ins>
                                                                         <span class="amount"> </span>
@@ -3077,9 +3018,8 @@
                                                             </div>
                                                             <a href="single-product-fullwidth.html"
                                                                 class="woocommerce-LoopProduct-link">
-                                                                <img src="home/assets/images/products/11.jpg"
-                                                                    width="224" height="197"
-                                                                    class="wp-post-image" alt="">
+                                                                <img src="home/assets/images/products/11.jpg" width="224"
+                                                                    height="197" class="wp-post-image" alt="">
                                                                 <span class="price">
                                                                     <ins>
                                                                         <span class="amount"> </span>
@@ -3105,9 +3045,8 @@
                                                             </div>
                                                             <a href="single-product-fullwidth.html"
                                                                 class="woocommerce-LoopProduct-link">
-                                                                <img src="home/assets/images/products/1.jpg"
-                                                                    width="224" height="197"
-                                                                    class="wp-post-image" alt="">
+                                                                <img src="home/assets/images/products/1.jpg" width="224"
+                                                                    height="197" class="wp-post-image" alt="">
                                                                 <span class="price">
                                                                     <ins>
                                                                         <span class="amount"> </span>
@@ -3136,8 +3075,7 @@
                                     </div>
                                     <!-- .tab-pane -->
                                     <div id="tab-59f89f08825d52" class="tab-pane " role="tabpanel">
-                                        <div class="products-carousel" data-ride="tm-slick-carousel"
-                                            data-wrap=".products"
+                                        <div class="products-carousel" data-ride="tm-slick-carousel" data-wrap=".products"
                                             data-slick="{&quot;infinite&quot;:false,&quot;slidesToShow&quot;:7,&quot;slidesToScroll&quot;:7,&quot;dots&quot;:true,&quot;arrows&quot;:false,&quot;responsive&quot;:[{&quot;breakpoint&quot;:700,&quot;settings&quot;:{&quot;slidesToShow&quot;:2,&quot;slidesToScroll&quot;:2}},{&quot;breakpoint&quot;:780,&quot;settings&quot;:{&quot;slidesToShow&quot;:3,&quot;slidesToScroll&quot;:3}},{&quot;breakpoint&quot;:1200,&quot;settings&quot;:{&quot;slidesToShow&quot;:4,&quot;slidesToScroll&quot;:4}},{&quot;breakpoint&quot;:1400,&quot;settings&quot;:{&quot;slidesToShow&quot;:5,&quot;slidesToScroll&quot;:5}}]}">
                                             <div class="container-fluid">
                                                 <div class="woocommerce">
@@ -3149,9 +3087,8 @@
                                                             </div>
                                                             <a href="single-product-fullwidth.html"
                                                                 class="woocommerce-LoopProduct-link">
-                                                                <img src="home/assets/images/products/10.jpg"
-                                                                    width="224" height="197"
-                                                                    class="wp-post-image" alt="">
+                                                                <img src="home/assets/images/products/10.jpg" width="224"
+                                                                    height="197" class="wp-post-image" alt="">
                                                                 <span class="price">
                                                                     <ins>
                                                                         <span class="amount"> </span>
@@ -3182,9 +3119,8 @@
                                                                         <span
                                                                             class="woocommerce-Price-currencySymbol">$</span>150.04</span>
                                                                 </span>
-                                                                <img src="home/assets/images/products/2.jpg"
-                                                                    width="224" height="197"
-                                                                    class="wp-post-image" alt="">
+                                                                <img src="home/assets/images/products/2.jpg" width="224"
+                                                                    height="197" class="wp-post-image" alt="">
                                                                 <span class="price">
                                                                     <ins>
                                                                         <span class="amount"> 309.95</span>
@@ -3218,9 +3154,8 @@
                                                                         <span
                                                                             class="woocommerce-Price-currencySymbol">$</span>150.04</span>
                                                                 </span>
-                                                                <img src="home/assets/images/products/7.jpg"
-                                                                    width="224" height="197"
-                                                                    class="wp-post-image" alt="">
+                                                                <img src="home/assets/images/products/7.jpg" width="224"
+                                                                    height="197" class="wp-post-image" alt="">
                                                                 <span class="price">
                                                                     <ins>
                                                                         <span class="amount"> 789.95</span>
@@ -3249,9 +3184,8 @@
                                                             </div>
                                                             <a href="single-product-fullwidth.html"
                                                                 class="woocommerce-LoopProduct-link">
-                                                                <img src="home/assets/images/products/6.jpg"
-                                                                    width="224" height="197"
-                                                                    class="wp-post-image" alt="">
+                                                                <img src="home/assets/images/products/6.jpg" width="224"
+                                                                    height="197" class="wp-post-image" alt="">
                                                                 <span class="price">
                                                                     <ins>
                                                                         <span class="amount"> </span>
@@ -3277,9 +3211,8 @@
                                                             </div>
                                                             <a href="single-product-fullwidth.html"
                                                                 class="woocommerce-LoopProduct-link">
-                                                                <img src="home/assets/images/products/12.jpg"
-                                                                    width="224" height="197"
-                                                                    class="wp-post-image" alt="">
+                                                                <img src="home/assets/images/products/12.jpg" width="224"
+                                                                    height="197" class="wp-post-image" alt="">
                                                                 <span class="price">
                                                                     <ins>
                                                                         <span class="amount"> </span>
@@ -3310,9 +3243,8 @@
                                                                         <span
                                                                             class="woocommerce-Price-currencySymbol">$</span>150.04</span>
                                                                 </span>
-                                                                <img src="home/assets/images/products/14.jpg"
-                                                                    width="224" height="197"
-                                                                    class="wp-post-image" alt="">
+                                                                <img src="home/assets/images/products/14.jpg" width="224"
+                                                                    height="197" class="wp-post-image" alt="">
                                                                 <span class="price">
                                                                     <ins>
                                                                         <span class="amount"> 262.81</span>
@@ -3341,9 +3273,8 @@
                                                             </div>
                                                             <a href="single-product-fullwidth.html"
                                                                 class="woocommerce-LoopProduct-link">
-                                                                <img src="home/assets/images/products/11.jpg"
-                                                                    width="224" height="197"
-                                                                    class="wp-post-image" alt="">
+                                                                <img src="home/assets/images/products/11.jpg" width="224"
+                                                                    height="197" class="wp-post-image" alt="">
                                                                 <span class="price">
                                                                     <ins>
                                                                         <span class="amount"> </span>
@@ -3369,9 +3300,8 @@
                                                             </div>
                                                             <a href="single-product-fullwidth.html"
                                                                 class="woocommerce-LoopProduct-link">
-                                                                <img src="home/assets/images/products/13.jpg"
-                                                                    width="224" height="197"
-                                                                    class="wp-post-image" alt="">
+                                                                <img src="home/assets/images/products/13.jpg" width="224"
+                                                                    height="197" class="wp-post-image" alt="">
                                                                 <span class="price">
                                                                     <ins>
                                                                         <span class="amount"> </span>
@@ -3397,9 +3327,8 @@
                                                             </div>
                                                             <a href="single-product-fullwidth.html"
                                                                 class="woocommerce-LoopProduct-link">
-                                                                <img src="home/assets/images/products/8.jpg"
-                                                                    width="224" height="197"
-                                                                    class="wp-post-image" alt="">
+                                                                <img src="home/assets/images/products/8.jpg" width="224"
+                                                                    height="197" class="wp-post-image" alt="">
                                                                 <span class="price">
                                                                     <ins>
                                                                         <span class="amount"> </span>
@@ -3425,9 +3354,8 @@
                                                             </div>
                                                             <a href="single-product-fullwidth.html"
                                                                 class="woocommerce-LoopProduct-link">
-                                                                <img src="home/assets/images/products/5.jpg"
-                                                                    width="224" height="197"
-                                                                    class="wp-post-image" alt="">
+                                                                <img src="home/assets/images/products/5.jpg" width="224"
+                                                                    height="197" class="wp-post-image" alt="">
                                                                 <span class="price">
                                                                     <ins>
                                                                         <span class="amount"> </span>
@@ -3453,9 +3381,8 @@
                                                             </div>
                                                             <a href="single-product-fullwidth.html"
                                                                 class="woocommerce-LoopProduct-link">
-                                                                <img src="home/assets/images/products/4.jpg"
-                                                                    width="224" height="197"
-                                                                    class="wp-post-image" alt="">
+                                                                <img src="home/assets/images/products/4.jpg" width="224"
+                                                                    height="197" class="wp-post-image" alt="">
                                                                 <span class="price">
                                                                     <ins>
                                                                         <span class="amount"> </span>
@@ -3481,9 +3408,8 @@
                                                             </div>
                                                             <a href="single-product-fullwidth.html"
                                                                 class="woocommerce-LoopProduct-link">
-                                                                <img src="home/assets/images/products/9.jpg"
-                                                                    width="224" height="197"
-                                                                    class="wp-post-image" alt="">
+                                                                <img src="home/assets/images/products/9.jpg" width="224"
+                                                                    height="197" class="wp-post-image" alt="">
                                                                 <span class="price">
                                                                     <ins>
                                                                         <span class="amount"> </span>
@@ -3509,9 +3435,8 @@
                                                             </div>
                                                             <a href="single-product-fullwidth.html"
                                                                 class="woocommerce-LoopProduct-link">
-                                                                <img src="home/assets/images/products/3.jpg"
-                                                                    width="224" height="197"
-                                                                    class="wp-post-image" alt="">
+                                                                <img src="home/assets/images/products/3.jpg" width="224"
+                                                                    height="197" class="wp-post-image" alt="">
                                                                 <span class="price">
                                                                     <ins>
                                                                         <span class="amount"> </span>
@@ -3537,9 +3462,8 @@
                                                             </div>
                                                             <a href="single-product-fullwidth.html"
                                                                 class="woocommerce-LoopProduct-link">
-                                                                <img src="home/assets/images/products/16.jpg"
-                                                                    width="224" height="197"
-                                                                    class="wp-post-image" alt="">
+                                                                <img src="home/assets/images/products/16.jpg" width="224"
+                                                                    height="197" class="wp-post-image" alt="">
                                                                 <span class="price">
                                                                     <ins>
                                                                         <span class="amount"> </span>
@@ -3565,9 +3489,8 @@
                                                             </div>
                                                             <a href="single-product-fullwidth.html"
                                                                 class="woocommerce-LoopProduct-link">
-                                                                <img src="home/assets/images/products/1.jpg"
-                                                                    width="224" height="197"
-                                                                    class="wp-post-image" alt="">
+                                                                <img src="home/assets/images/products/1.jpg" width="224"
+                                                                    height="197" class="wp-post-image" alt="">
                                                                 <span class="price">
                                                                     <ins>
                                                                         <span class="amount"> </span>
@@ -3593,9 +3516,8 @@
                                                             </div>
                                                             <a href="single-product-fullwidth.html"
                                                                 class="woocommerce-LoopProduct-link">
-                                                                <img src="home/assets/images/products/15.jpg"
-                                                                    width="224" height="197"
-                                                                    class="wp-post-image" alt="">
+                                                                <img src="home/assets/images/products/15.jpg" width="224"
+                                                                    height="197" class="wp-post-image" alt="">
                                                                 <span class="price">
                                                                     <ins>
                                                                         <span class="amount"> </span>
@@ -3624,8 +3546,7 @@
                                     </div>
                                     <!-- .tab-pane -->
                                     <div id="tab-59f89f08825d53" class="tab-pane " role="tabpanel">
-                                        <div class="products-carousel" data-ride="tm-slick-carousel"
-                                            data-wrap=".products"
+                                        <div class="products-carousel" data-ride="tm-slick-carousel" data-wrap=".products"
                                             data-slick="{&quot;infinite&quot;:false,&quot;slidesToShow&quot;:7,&quot;slidesToScroll&quot;:7,&quot;dots&quot;:true,&quot;arrows&quot;:false,&quot;responsive&quot;:[{&quot;breakpoint&quot;:700,&quot;settings&quot;:{&quot;slidesToShow&quot;:2,&quot;slidesToScroll&quot;:2}},{&quot;breakpoint&quot;:780,&quot;settings&quot;:{&quot;slidesToShow&quot;:3,&quot;slidesToScroll&quot;:3}},{&quot;breakpoint&quot;:1200,&quot;settings&quot;:{&quot;slidesToShow&quot;:4,&quot;slidesToScroll&quot;:4}},{&quot;breakpoint&quot;:1400,&quot;settings&quot;:{&quot;slidesToShow&quot;:5,&quot;slidesToScroll&quot;:5}}]}">
                                             <div class="container-fluid">
                                                 <div class="woocommerce">
@@ -3637,9 +3558,8 @@
                                                             </div>
                                                             <a href="single-product-fullwidth.html"
                                                                 class="woocommerce-LoopProduct-link">
-                                                                <img src="home/assets/images/products/9.jpg"
-                                                                    width="224" height="197"
-                                                                    class="wp-post-image" alt="">
+                                                                <img src="home/assets/images/products/9.jpg" width="224"
+                                                                    height="197" class="wp-post-image" alt="">
                                                                 <span class="price">
                                                                     <ins>
                                                                         <span class="amount"> </span>
@@ -3665,9 +3585,8 @@
                                                             </div>
                                                             <a href="single-product-fullwidth.html"
                                                                 class="woocommerce-LoopProduct-link">
-                                                                <img src="home/assets/images/products/10.jpg"
-                                                                    width="224" height="197"
-                                                                    class="wp-post-image" alt="">
+                                                                <img src="home/assets/images/products/10.jpg" width="224"
+                                                                    height="197" class="wp-post-image" alt="">
                                                                 <span class="price">
                                                                     <ins>
                                                                         <span class="amount"> </span>
@@ -3693,9 +3612,8 @@
                                                             </div>
                                                             <a href="single-product-fullwidth.html"
                                                                 class="woocommerce-LoopProduct-link">
-                                                                <img src="home/assets/images/products/6.jpg"
-                                                                    width="224" height="197"
-                                                                    class="wp-post-image" alt="">
+                                                                <img src="home/assets/images/products/6.jpg" width="224"
+                                                                    height="197" class="wp-post-image" alt="">
                                                                 <span class="price">
                                                                     <ins>
                                                                         <span class="amount"> </span>
@@ -3721,9 +3639,8 @@
                                                             </div>
                                                             <a href="single-product-fullwidth.html"
                                                                 class="woocommerce-LoopProduct-link">
-                                                                <img src="home/assets/images/products/15.jpg"
-                                                                    width="224" height="197"
-                                                                    class="wp-post-image" alt="">
+                                                                <img src="home/assets/images/products/15.jpg" width="224"
+                                                                    height="197" class="wp-post-image" alt="">
                                                                 <span class="price">
                                                                     <ins>
                                                                         <span class="amount"> </span>
@@ -3749,9 +3666,8 @@
                                                             </div>
                                                             <a href="single-product-fullwidth.html"
                                                                 class="woocommerce-LoopProduct-link">
-                                                                <img src="home/assets/images/products/5.jpg"
-                                                                    width="224" height="197"
-                                                                    class="wp-post-image" alt="">
+                                                                <img src="home/assets/images/products/5.jpg" width="224"
+                                                                    height="197" class="wp-post-image" alt="">
                                                                 <span class="price">
                                                                     <ins>
                                                                         <span class="amount"> </span>
@@ -3777,9 +3693,8 @@
                                                             </div>
                                                             <a href="single-product-fullwidth.html"
                                                                 class="woocommerce-LoopProduct-link">
-                                                                <img src="home/assets/images/products/16.jpg"
-                                                                    width="224" height="197"
-                                                                    class="wp-post-image" alt="">
+                                                                <img src="home/assets/images/products/16.jpg" width="224"
+                                                                    height="197" class="wp-post-image" alt="">
                                                                 <span class="price">
                                                                     <ins>
                                                                         <span class="amount"> </span>
@@ -3805,9 +3720,8 @@
                                                             </div>
                                                             <a href="single-product-fullwidth.html"
                                                                 class="woocommerce-LoopProduct-link">
-                                                                <img src="home/assets/images/products/4.jpg"
-                                                                    width="224" height="197"
-                                                                    class="wp-post-image" alt="">
+                                                                <img src="home/assets/images/products/4.jpg" width="224"
+                                                                    height="197" class="wp-post-image" alt="">
                                                                 <span class="price">
                                                                     <ins>
                                                                         <span class="amount"> </span>
@@ -3833,9 +3747,8 @@
                                                             </div>
                                                             <a href="single-product-fullwidth.html"
                                                                 class="woocommerce-LoopProduct-link">
-                                                                <img src="home/assets/images/products/1.jpg"
-                                                                    width="224" height="197"
-                                                                    class="wp-post-image" alt="">
+                                                                <img src="home/assets/images/products/1.jpg" width="224"
+                                                                    height="197" class="wp-post-image" alt="">
                                                                 <span class="price">
                                                                     <ins>
                                                                         <span class="amount"> </span>
@@ -3861,9 +3774,8 @@
                                                             </div>
                                                             <a href="single-product-fullwidth.html"
                                                                 class="woocommerce-LoopProduct-link">
-                                                                <img src="home/assets/images/products/12.jpg"
-                                                                    width="224" height="197"
-                                                                    class="wp-post-image" alt="">
+                                                                <img src="home/assets/images/products/12.jpg" width="224"
+                                                                    height="197" class="wp-post-image" alt="">
                                                                 <span class="price">
                                                                     <ins>
                                                                         <span class="amount"> </span>
@@ -3889,9 +3801,8 @@
                                                             </div>
                                                             <a href="single-product-fullwidth.html"
                                                                 class="woocommerce-LoopProduct-link">
-                                                                <img src="home/assets/images/products/8.jpg"
-                                                                    width="224" height="197"
-                                                                    class="wp-post-image" alt="">
+                                                                <img src="home/assets/images/products/8.jpg" width="224"
+                                                                    height="197" class="wp-post-image" alt="">
                                                                 <span class="price">
                                                                     <ins>
                                                                         <span class="amount"> </span>
@@ -3922,9 +3833,8 @@
                                                                         <span
                                                                             class="woocommerce-Price-currencySymbol">$</span>150.04</span>
                                                                 </span>
-                                                                <img src="home/assets/images/products/2.jpg"
-                                                                    width="224" height="197"
-                                                                    class="wp-post-image" alt="">
+                                                                <img src="home/assets/images/products/2.jpg" width="224"
+                                                                    height="197" class="wp-post-image" alt="">
                                                                 <span class="price">
                                                                     <ins>
                                                                         <span class="amount"> 309.95</span>
@@ -3953,9 +3863,8 @@
                                                             </div>
                                                             <a href="single-product-fullwidth.html"
                                                                 class="woocommerce-LoopProduct-link">
-                                                                <img src="home/assets/images/products/13.jpg"
-                                                                    width="224" height="197"
-                                                                    class="wp-post-image" alt="">
+                                                                <img src="home/assets/images/products/13.jpg" width="224"
+                                                                    height="197" class="wp-post-image" alt="">
                                                                 <span class="price">
                                                                     <ins>
                                                                         <span class="amount"> </span>
@@ -3986,9 +3895,8 @@
                                                                         <span
                                                                             class="woocommerce-Price-currencySymbol">$</span>150.04</span>
                                                                 </span>
-                                                                <img src="home/assets/images/products/14.jpg"
-                                                                    width="224" height="197"
-                                                                    class="wp-post-image" alt="">
+                                                                <img src="home/assets/images/products/14.jpg" width="224"
+                                                                    height="197" class="wp-post-image" alt="">
                                                                 <span class="price">
                                                                     <ins>
                                                                         <span class="amount"> 262.81</span>
@@ -4022,9 +3930,8 @@
                                                                         <span
                                                                             class="woocommerce-Price-currencySymbol">$</span>150.04</span>
                                                                 </span>
-                                                                <img src="home/assets/images/products/7.jpg"
-                                                                    width="224" height="197"
-                                                                    class="wp-post-image" alt="">
+                                                                <img src="home/assets/images/products/7.jpg" width="224"
+                                                                    height="197" class="wp-post-image" alt="">
                                                                 <span class="price">
                                                                     <ins>
                                                                         <span class="amount"> 789.95</span>
@@ -4053,9 +3960,8 @@
                                                             </div>
                                                             <a href="single-product-fullwidth.html"
                                                                 class="woocommerce-LoopProduct-link">
-                                                                <img src="home/assets/images/products/3.jpg"
-                                                                    width="224" height="197"
-                                                                    class="wp-post-image" alt="">
+                                                                <img src="home/assets/images/products/3.jpg" width="224"
+                                                                    height="197" class="wp-post-image" alt="">
                                                                 <span class="price">
                                                                     <ins>
                                                                         <span class="amount"> </span>
@@ -4081,9 +3987,8 @@
                                                             </div>
                                                             <a href="single-product-fullwidth.html"
                                                                 class="woocommerce-LoopProduct-link">
-                                                                <img src="home/assets/images/products/11.jpg"
-                                                                    width="224" height="197"
-                                                                    class="wp-post-image" alt="">
+                                                                <img src="home/assets/images/products/11.jpg" width="224"
+                                                                    height="197" class="wp-post-image" alt="">
                                                                 <span class="price">
                                                                     <ins>
                                                                         <span class="amount"> </span>

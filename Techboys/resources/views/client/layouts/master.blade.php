@@ -101,7 +101,7 @@
                 <div class="techmarket-sticky-wrap">
                     <div class="row">
                         <div class="site-branding">
-                            <a href="home-v1.html" class="custom-logo-link" rel="home">
+                            <a href="{{ route('home') }}" class="custom-logo-link" rel="home">
                                 <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 176 28">
                                     <defs>
                                         <style>
@@ -876,7 +876,7 @@
                 <div class="handheld-header">
                     <div class="row">
                         <div class="site-branding">
-                            <a href="home-v1.html" class="custom-logo-link" rel="home">
+                            <a href="{{ route('home') }}" class="custom-logo-link" rel="home">
                                 <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 176 28">
                                     <defs>
                                         <style>
@@ -1650,7 +1650,7 @@
                     <div class="row">
                         <div class="footer-contact">
                             <div class="footer-logo">
-                                <a href="home-v1.html" class="custom-logo-link" rel="home">
+                                <a href="{{ route('home') }}" class="custom-logo-link" rel="home">
                                     <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 176 28">
                                         <defs>
                                             <style>
