@@ -212,7 +212,29 @@
     </div>
     <!-- .col-full -->
 </div>
+<!-- Modal cảnh báo đơn hàng trống -->
+<div class="modal fade" id="emptyCartModal" tabindex="-1" role="dialog" aria-labelledby="emptyCartModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="emptyCartModalLabel">Cảnh báo</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Giỏ hàng của bạn đang trống. Vui lòng thêm sản phẩm trước khi đặt hàng.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                <a href="{{ route('home') }}" class="btn btn-primary">Quay lại trang chủ</a>
+            </div>
+        </div>
+    </div>
+</div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script>
     $(document).ready(function () {
     $('#province').change(function () {
@@ -261,6 +283,17 @@
     $('#ward').change(function () {
         var ward_id = $(this).val();
         console.log("Ward ID: ", ward_id);
+    });
+    var cartItems = @json($checkout['cartItems']);
+    if (cartItems.length === 0) {
+        $('#emptyCartModal').modal('show');
+    }
+
+    $('form.checkout').on('submit', function (e) {
+        if (cartItems.length === 0) {
+            e.preventDefault();
+            $('#emptyCartModal').modal('show');
+        }
     });
 });
 
