@@ -40,9 +40,8 @@
 	                                </li>
 	                            </ul>
 	                        </div>
-	                        <!-- /filter_type -->
 	                    </div>
-	                    <!-- /filter_type -->
+
 	                    <div class="filter_type version_2">
 	                        <h4><a href="#filter_2" data-bs-toggle="collapse" class="opened">Color</a></h4>
 	                        <div class="collapse show" id="filter_2">
@@ -74,7 +73,7 @@
 	                            </ul>
 	                        </div>
 	                    </div>
-	                    <!-- /filter_type -->
+
 	                    <div class="filter_type version_2">
 	                        <h4><a href="#filter_3" data-bs-toggle="collapse" class="closed">Brands</a></h4>
 	                        <div class="collapse" id="filter_3">
@@ -106,7 +105,7 @@
 	                            </ul>
 	                        </div>
 	                    </div>
-	                    <!-- /filter_type -->
+
 	                    <div class="filter_type version_2">
 	                        <h4><a href="#filter_4" data-bs-toggle="collapse" class="closed">Price</a></h4>
 	                        <div class="collapse" id="filter_4">
@@ -145,29 +144,23 @@
 	                </div>
 	            </aside>
 	            <div class="col-lg-9">
-	               <div class="row small-gutters">
+	               <div class="row small-gutters product">
 					@foreach($products as $product)
 						<div class="col-6 col-md-4">
             				<div class="grid_item">
-                		<span class="ribbon off">-30%</span>
-                <figure>
-                    <!-- Hình ảnh sản phẩm -->
-                    <a href="">
-                        <img class="img-fluid lazy" src="{{ asset('img/products/product_placeholder_square_medium.jpg') }}" data-src="{{ asset('img/products/' . $product->img) }}" alt="{{ $product->name }}">
+                	<span class="ribbon off">-30%</span>
+                    <a href="{{ route('client.product.show', ['slug' => $product->slug]) }}">
+						<img src="{{ url('') }}/admin/assets/images/product/{{ $product->img }}" class="product-image fix-image" style="width: 200px; height: 200px; display: flex; justify-content: center; align-items: center;" >
                     </a>
-                </figure>
-                <!-- Tên sản phẩm và link chi tiết -->
-                <a href="">
+                <a href="{{ route('client.product.show', ['slug' => $product->slug]) }}">
                     <h3>{{ $product->name }}</h3>
                 </a>
                 <div class="price_box">
-                    <!-- Giá sản phẩm -->
                     <span class="new_price">${{ number_format($product->rate_average, 2) }}</span>
                     @if($product->old_price)
                         <span class="old_price">${{ number_format($product->old_price, 2) }}</span>
                     @endif
                 </div>
-                <!-- Các tùy chọn -->
                 <ul>
                     <li><a href="#0" class="tooltip-1" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to favorites"><i class="ti-heart"></i><span>Add to favorites</span></a></li>
                     <li><a href="#0" class="tooltip-1" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to compare"><i class="ti-control-shuffle"></i><span>Add to compare</span></a></li>
@@ -176,204 +169,13 @@
             </div>
         </div>
 					@endforeach
-						<!-- /col -->
-
-						{{-- <div class="col-6 col-md-4">
-							<div class="grid_item">
-								<span class="ribbon off">-30%</span>
-								<figure>
-									<a href="product-detail-1.html">
-										<img class="img-fluid lazy" src="img/products/product_placeholder_square_medium.jpg" data-src="img/products/shoes/2.jpg" alt="">
-									</a>
-									<div data-countdown="2019/05/10" class="countdown"></div>
-								</figure>
-								<a href="product-detail-1.html">
-									<h3>Armor Okwahn II</h3>
-								</a>
-								<div class="price_box">
-									<span class="new_price">$90.00</span>
-									<span class="old_price">$170.00</span>
-								</div>
-								<ul>
-									<li><a href="#0" class="tooltip-1" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to favorites"><i class="ti-heart"></i><span>Add to favorites</span></a></li>
-									<li><a href="#0" class="tooltip-1" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to compare"><i class="ti-control-shuffle"></i><span>Add to compare</span></a></li>
-									<li><a href="#0" class="tooltip-1" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to cart"><i class="ti-shopping-cart"></i><span>Add to cart</span></a></li>
-								</ul>
-							</div>
-							<!-- /grid_item -->
-						</div>
-						<!-- /col --> --}}
-
-						{{-- <div class="col-6 col-md-4">
-							<div class="grid_item">
-								<span class="ribbon off">-50%</span>
-								<figure>
-									<a href="product-detail-1.html">
-										<img class="img-fluid lazy" src="img/products/product_placeholder_square_medium.jpg" data-src="img/products/shoes/3.jpg" alt="">
-									</a>
-									<div data-countdown="2019/05/21" class="countdown"></div>
-								</figure>
-								<a href="product-detail-1.html">
-									<h3>Armor Air Wildwood ACG</h3>
-								</a>
-								<div class="price_box">
-									<span class="new_price">$75.00</span>
-									<span class="old_price">$155.00</span>
-								</div>
-								<ul>
-									<li><a href="#0" class="tooltip-1" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to favorites"><i class="ti-heart"></i><span>Add to favorites</span></a></li>
-									<li><a href="#0" class="tooltip-1" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to compare"><i class="ti-control-shuffle"></i><span>Add to compare</span></a></li>
-									<li><a href="#0" class="tooltip-1" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to cart"><i class="ti-shopping-cart"></i><span>Add to cart</span></a></li>
-								</ul>
-							</div>
-							<!-- /grid_item -->
-						</div>
-						<!-- /col --> --}}
-
-						{{-- <div class="col-6 col-md-4">
-							<div class="grid_item">
-								<span class="ribbon new">New</span>
-								<figure>
-									<a href="product-detail-1.html">
-										<img class="img-fluid lazy" src="img/products/product_placeholder_square_medium.jpg" data-src="img/products/shoes/4.jpg" alt="">
-									</a>
-								</figure>
-								<a href="product-detail-1.html">
-									<h3>Armor ACG React Terra</h3>
-								</a>
-								<div class="price_box">
-									<span class="new_price">$110.00</span>
-								</div>
-								<ul>
-									<li><a href="#0" class="tooltip-1" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to favorites"><i class="ti-heart"></i><span>Add to favorites</span></a></li>
-									<li><a href="#0" class="tooltip-1" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to compare"><i class="ti-control-shuffle"></i><span>Add to compare</span></a></li>
-									<li><a href="#0" class="tooltip-1" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to cart"><i class="ti-shopping-cart"></i><span>Add to cart</span></a></li>
-								</ul>
-							</div>
-							<!-- /grid_item -->
-						</div>
-						<!-- /col --> --}}
-
-						{{-- <div class="col-6 col-md-4">
-							<div class="grid_item">
-								<span class="ribbon new">New</span>
-								<figure>
-									<a href="product-detail-1.html">
-										<img class="img-fluid lazy" src="img/products/product_placeholder_square_medium.jpg" data-src="img/products/shoes/5.jpg" alt="">
-									</a>
-								</figure>
-								<a href="product-detail-1.html">
-									<h3>Armor Air Zoom Alpha</h3>
-								</a>
-								<div class="price_box">
-									<span class="new_price">$140.00</span>
-								</div>
-								<ul>
-									<li><a href="#0" class="tooltip-1" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to favorites"><i class="ti-heart"></i><span>Add to favorites</span></a></li>
-									<li><a href="#0" class="tooltip-1" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to compare"><i class="ti-control-shuffle"></i><span>Add to compare</span></a></li>
-									<li><a href="#0" class="tooltip-1" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to cart"><i class="ti-shopping-cart"></i><span>Add to cart</span></a></li>
-								</ul>
-							</div>
-							<!-- /grid_item -->
-						</div>
-						<!-- /col --> --}}
-
-						{{-- <div class="col-6 col-md-4">
-							<div class="grid_item">
-								<span class="ribbon new">New</span>
-								<figure>
-									<a href="product-detail-1.html">
-										<img class="img-fluid lazy" src="img/products/product_placeholder_square_medium.jpg" data-src="img/products/shoes/6.jpg" alt="">
-									</a>
-								</figure>
-								<a href="product-detail-1.html">
-									<h3>Armor Air Alpha</h3>
-								</a>
-								<div class="price_box">
-									<span class="new_price">$130.00</span>
-								</div>
-								<ul>
-									<li><a href="#0" class="tooltip-1" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to favorites"><i class="ti-heart"></i><span>Add to favorites</span></a></li>
-									<li><a href="#0" class="tooltip-1" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to compare"><i class="ti-control-shuffle"></i><span>Add to compare</span></a></li>
-									<li><a href="#0" class="tooltip-1" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to cart"><i class="ti-shopping-cart"></i><span>Add to cart</span></a></li>
-								</ul>
-							</div>
-							<!-- /grid_item -->
-						</div>
-						<!-- /col --> --}}
-
-						{{-- <div class="col-6 col-md-4">
-							<div class="grid_item">
-								<span class="ribbon hot">Hot</span>
-								<figure>
-									<a href="product-detail-1.html">
-										<img class="img-fluid lazy" src="img/products/product_placeholder_square_medium.jpg" data-src="img/products/shoes/7.jpg" alt="">
-									</a>
-								</figure>
-								<a href="product-detail-1.html">
-									<h3>Armor Air 98</h3>
-								</a>
-								<div class="price_box">
-									<span class="new_price">$115.00</span>
-								</div>
-								<ul>
-									<li><a href="#0" class="tooltip-1" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to favorites"><i class="ti-heart"></i><span>Add to favorites</span></a></li>
-									<li><a href="#0" class="tooltip-1" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to compare"><i class="ti-control-shuffle"></i><span>Add to compare</span></a></li>
-									<li><a href="#0" class="tooltip-1" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to cart"><i class="ti-shopping-cart"></i><span>Add to cart</span></a></li>
-								</ul>
-							</div>
-							<!-- /grid_item -->
-						</div>
-						<!-- /col --> --}}
-
-						{{-- <div class="col-6 col-md-4">
-							<div class="grid_item">
-								<span class="ribbon hot">Hot</span>
-								<figure>
-									<a href="product-detail-1.html">
-										<img class="img-fluid lazy" src="img/products/product_placeholder_square_medium.jpg" data-src="img/products/shoes/8.jpg" alt="">
-									</a>
-								</figure>
-								<a href="product-detail-1.html">
-									<h3>Armor Air 720</h3>
-								</a>
-								<div class="price_box">
-									<span class="new_price">$120.00</span>
-								</div>
-								<ul>
-									<li><a href="#0" class="tooltip-1" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to favorites"><i class="ti-heart"></i><span>Add to favorites</span></a></li>
-									<li><a href="#0" class="tooltip-1" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to compare"><i class="ti-control-shuffle"></i><span>Add to compare</span></a></li>
-									<li><a href="#0" class="tooltip-1" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to cart"><i class="ti-shopping-cart"></i><span>Add to cart</span></a></li>
-								</ul>
-							</div>
-							<!-- /grid_item -->
-						</div>
-						<!-- /col --> --}}
-						
-						{{-- <div class="col-6 col-md-4">
-							<div class="grid_item">
-								<span class="ribbon hot">Hot</span>
-								<figure>
-									<a href="product-detail-1.html">
-										<img class="img-fluid lazy" src="img/products/product_placeholder_square_medium.jpg" data-src="img/products/shoes/9.jpg" alt="">
-									</a>
-								</figure>
-								<a href="product-detail-1.html">
-									<h3>Armor 720</h3>
-								</a>
-								<div class="price_box">
-									<span class="new_price">$100.00</span>
-								</div>
-								<ul>
-									<li><a href="#0" class="tooltip-1" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to favorites"><i class="ti-heart"></i><span>Add to favorites</span></a></li>
-									<li><a href="#0" class="tooltip-1" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to compare"><i class="ti-control-shuffle"></i><span>Add to compare</span></a></li>
-									<li><a href="#0" class="tooltip-1" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to cart"><i class="ti-shopping-cart"></i><span>Add to cart</span></a></li>
-								</ul>
-							</div>
-							<!-- /grid_item -->
-						</div>
-						<!-- /col -->		 --}}
 					</div>
+
+
+{{-- <div class="pagination">
+    {{ $paginatedProducts->links() }}
+</div> --}}
+
 					<!-- /row -->
 	                <div class="pagination__wrapper">
 	                    <ul class="pagination">
