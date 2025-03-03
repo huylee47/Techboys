@@ -6,6 +6,7 @@ use App\Http\Controllers\BillController;
 use App\Http\Controllers\BillDetailsController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\VoucherController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProductController;
@@ -40,6 +41,8 @@ Route::get('login', function () {
     return view('client.login.index');
 })->name('login.client');
 
+
+
 Route::post('/login/Client', [UserController::class, 'loginClient'])->name('loginClient.auth');
 //banner client
 // Route::get('/', [BannerController::class, 'indexClient']);
@@ -54,6 +57,9 @@ Route::prefix('/register')->group(function () {
     Route::get('/create', [UserController::class, 'create'])->name('client.log.create');
     Route::post('/store', [UserController::class, 'store'])->name('client.log.store');
 });
+
+//comment
+Route::get('/show', [CommentController::class, 'show'])->name('comment.show');
 
 // Xác thực email
 Route::get('/veryfi-account/{email}', [UserController::class, 'veryfi'])->name('clinet.veryfi');
@@ -151,10 +157,12 @@ Route::middleware(['auth', 'auth.admin'])->group(function () {
             Route::get('/edit', [BannerController::class, 'edit'])->name('admin.banner.edit');
             Route::post('/update/{id}', [BannerController::class, 'update'])->name('admin.banner.update');
             Route::get('/destroy/{id}', [BannerController::class, 'destroy'])->name('admin.banner.destroy');
+        });
+        Route::prefix('/comment')->group(function () {
+            Route::get('/', [CommentController::class, 'index'])->name('admin.comment.index');
+            Route::post('/block/{id}', [CommentController::class, 'block'])->name('admin.comment.block');
+            Route::post('/open/{id}', [CommentController::class, 'open'])->name('admin.comment.open');
 
-
-
-          
         });
     });
 });
