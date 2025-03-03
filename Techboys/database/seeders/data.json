@@ -2317,19 +2317,19 @@
     ],
     "storage": [
         {
-            "file": "file1.jpg"
+            "file": "anhCmt1.jpg"
         },
         {
-            "file": "file2.pdf"
+            "file": "anhCmt2.jpg"
         },
         {
-            "file": "file3.png"
+            "file": "anhCmt3.jpg"
         },
         {
-            "file": "file4.zip"
+            "file": "videoCmt.mp4"
         },
         {
-            "file": "file5.mp3"
+            "file": "videoCmt2.mp4"
         }
     ],
     "users": [

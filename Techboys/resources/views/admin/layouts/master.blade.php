@@ -89,7 +89,7 @@
                             </a>
                         </li>
                         <li class="sidebar-item {{-- {{ request()->routeIs('admin.property-request.index') ? 'active' : '' }} --}}">
-                            <a href="" class='sidebar-link'>
+                            <a href="{{ route('admin.comment.index') }}" class='sidebar-link'>
                                 <i class="bi bi-file-earmark-spreadsheet-fill"></i>
                                 <span>Phản hồi</span>
                             </a>

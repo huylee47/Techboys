@@ -12,9 +12,23 @@ class CommentController extends Controller
      */
     public function index()
     {
-        //
+        $loadAll = Comment::with(['user', 'product','storage'])->get();
+        return view('admin.comment.index', compact('loadAll'));
+    }
+    
+    public function block(Request $request)
+    {
+        $comment = Comment::find($request->id);
+        $comment->update(['status_id' => 0]);
+        return redirect()->route('admin.comment.index')->with('success', 'Ẩn bình luận thành công.');
     }
 
+    public function open(Request $request)
+    {
+        $comment = Comment::find($request->id);
+        $comment->update(['status_id' => 1]);
+        return redirect()->route('admin.comment.index')->with('success', 'Hiện bình luận thành công.');
+    }
     /**
      * Show the form for creating a new resource.
      */
@@ -34,9 +48,11 @@ class CommentController extends Controller
     /**
      * Display the specified resource.
      */
+    //client
     public function show(Comment $comment)
     {
         //
+        
     }
 
     /**
