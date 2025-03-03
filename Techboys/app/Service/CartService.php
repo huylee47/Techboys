@@ -3,12 +3,16 @@
 namespace App\Service;
 
 use App\Models\Cart;
-use App\Models\ProductVariant;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
 
 class CartService{
+    private $cartPriceService;
+
+        public function __construct(CartPriceService $cartPriceService){
+            $this->cartPriceService = $cartPriceService;
+        }
     public function getCartItems()
     {
         if (Auth::check()) {
@@ -31,12 +35,6 @@ class CartService{
     }
     
     public function addToCart($request) {
-        $variant = ProductVariant::find($request->variant_id);
-    
-        if (!$variant) {
-            return response()->json(['message' => 'Biến thể sản phẩm không tồn tại.'], 404);
-        }
-    
         if (Auth::check()) {
             $userId = Auth::id();
             $cartId = null;
@@ -49,7 +47,11 @@ class CartService{
                 session()->put('cart_id', $cartId);
             }
         }
-    
+        // dd([
+        //     'user_id' => $userId,
+        //     'cart_id' => $cartId,
+        //     'request_data' => $request->all()
+        // ]);
         $cartItem = Cart::where(function ($query) use ($userId, $cartId) {
                 if ($userId) {
                     $query->where('user_id', $userId);
@@ -60,28 +62,18 @@ class CartService{
             ->where('variant_id', $request->variant_id)
             ->first();
     
-        $maxQuantity = $variant->stock;
-        $newQuantity = $cartItem ? $cartItem->quantity + $request->quantity : $request->quantity;
-    
-        if ($newQuantity > $maxQuantity) {
-            $newQuantity = $maxQuantity;
-        }
-    
         if ($cartItem) {
-            $cartItem->update(['quantity' => $newQuantity]);
+            $cartItem->increment('quantity', $request->quantity);
         } else {
             Cart::create([
                 'user_id' => $userId,
                 'cart_id' => $cartId,
                 'variant_id' => $request->variant_id,
-                'quantity' => $newQuantity,
+                'quantity' => $request->quantity,
             ]);
         }
     
-        return response()->json([
-            'message' => 'Thêm vào giỏ hàng thành công.',
-            'new_quantity' => $newQuantity,
-        ]);
+        return response()->json(['message' => 'Thêm vào giỏ hàng thành công']);
     }
     public function updateCart($request)
     {
@@ -112,10 +104,14 @@ class CartService{
     }
 
     $cartItem->delete();
-
+    $cartItems = $this->getCartItems();
+    $totals = $this->cartPriceService->calculateCartTotals($cartItems);
     return response()->json([
         'success' => true,
         'message' => 'Xóa mặt hàng thành công!',
+        'subtotal' => number_format($totals['total'], 0, ',', '.') .'đ',
+        'total' => number_format($totals['total'], 0, ',', '.') .'đ',
+        'discount_amount' => number_format($totals['discountAmount'], 0, ',', '.') .'đ',
     ]);
 }
 }
