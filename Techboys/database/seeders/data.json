@@ -2414,7 +2414,7 @@
             "min_price": 500000,
             "max_discount": 500000,
             "start_date": "2025-01-22",
-            "end_date": "2025-01-25"
+            "end_date": "2025-06-25"
         },
         {
             "name": "Giảm 100k cho đơn hàng từ 500k",
@@ -2425,7 +2425,7 @@
             "min_price": 500000,
             "max_discount": 1000000,
             "start_date": "2025-01-22",
-            "end_date": "2025-01-25"
+            "end_date": "2025-06-25"
         },
         {
             "name": "Giảm giá 20% tối đa 200k cho đơn hàng từ 1 triệu",
@@ -2436,7 +2436,7 @@
             "min_price": 1000000,
             "max_discount": 200000,
             "start_date": "2025-01-22",
-            "end_date": "2025-01-25"
+            "end_date": "2025-06-25"
         },
         {
             "name": "Giảm 50k cho tổng giá trị đơn hàng tối thiểu 100k",
@@ -2447,7 +2447,7 @@
             "min_price": 100000,
             "max_discount": 5000000,
             "start_date": "2025-01-22",
-            "end_date": "2025-01-25"
+            "end_date": "2025-06-25"
         },
         {
             "name": "Giảm giá 5% tối đa 5 triệu cho đơn hàng tối thiểu 1 triệu",
@@ -2458,7 +2458,7 @@
             "min_price": 1000000,
             "max_discount": 5000000,
             "start_date": "2025-01-22",
-            "end_date": "2025-01-25"
+            "end_date": "2025-06-25"
         }
     ]
 }

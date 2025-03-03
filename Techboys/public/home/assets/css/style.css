@@ -26807,4 +26807,13 @@ form.track_order {
     margin-bottom: 4px;
     border-radius: 6px;
   }
+  .single_add_to_cart_button {
+    display: none;
+}
+#outOfStockMessage {
+    display: none;
+}
+.color-choice{
+    display: none;
+}
   

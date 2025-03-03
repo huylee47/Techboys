@@ -1,6 +1,7 @@
 @extends('client.layouts.master')
 
 @section('main')
+</style>
     <div id="page" class="hfeed site">
         <div id="content" class="site-content" tabindex="-1">
             <div class="col-full">
@@ -172,7 +173,7 @@
                 data-value="{{ $modelName }}"
                 data-price="{{ $variantGroup->first()->price }}"
                 data-model-value="{{ $variantGroup->first()->model->id }}"
-                data-stock="{{ $variantGroup->first()->stock }}"> <!-- Thêm thuộc tính data-stock -->
+                data-stock="{{ $variantGroup->first()->stock }}">
                 {{ $modelName }}
             </div>
         @endforeach
@@ -183,11 +184,12 @@
     <span class="label">Màu sắc</span>
     <div class="choice-buttons">
         @foreach ($variants->sortBy('color.name') as $variant)
-            <div class="choice color-choice"
+            <div class="choice color-choice"  
                 data-value="{{ $variant->color->name }}"
                 data-model="{{ $variant->model->name }}"
                 data-price="{{ $variant->price }}"
-                data-stock="{{ $variant->stock }}"> <!-- Thêm thuộc tính data-stock -->
+                data-stock="{{ $variant->stock }}"
+                style="display: none;">
                 <span>{{ $variant->color->name }}</span>
             </div>
         @endforeach
@@ -260,6 +262,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const productPriceElement = document.getElementById("productPrice");
     const variantIdInput = document.getElementById("variant_id");
     const stockQuantityElement = document.getElementById("stockQuantity");
+    const outOfStockMessage = document.getElementById("outOfStockMessage");
 
     function updateAddToCartButton(stock) {
         if (stock === 0) {
@@ -290,19 +293,20 @@ document.addEventListener("DOMContentLoaded", function() {
         let firstColorSelected = false;
         document.querySelectorAll(".color-choice").forEach(color => {
             if (color.getAttribute("data-model") === model) {
-                color.style.display = "block";
+                color.style.display = "block"; // Show the color choice
                 if (!firstColorSelected) {
                     color.classList.add("selected");
                     selectedColor = color.getAttribute("data-value");
                     firstColorSelected = true;
                 }
             } else {
-                color.style.display = "none";
+                color.style.display = "none"; // Hide irrelevant colors
                 color.classList.remove("selected");
             }
         });
     }
 
+    // Add event listeners for color choices
     document.querySelectorAll(".color-choice").forEach(choice => {
         choice.addEventListener("click", function() {
             selectedColor = this.getAttribute("data-value");
@@ -312,6 +316,7 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     });
 
+    // Add event listeners for storage choices
     document.querySelectorAll(".storage-choice").forEach(choice => {
         choice.addEventListener("click", function() {
             selectedStorage = this.getAttribute("data-value");
@@ -327,21 +332,25 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     });
 
+    // Set the default model and show its colors
     let minModelId = Math.min(...variants.map(v => v.model.id));
     let defaultModelChoice = document.querySelector(`.storage-choice[data-model-value="${minModelId}"]`);
 
     if (defaultModelChoice) {
-        defaultModelChoice.click();
-    }
-    const defaultModel = document.querySelector(".storage-choice.active");
-    if (defaultModel) {
-        selectedStorage = defaultModel.getAttribute("data-value");
-        const selectedPrice = defaultModel.getAttribute("data-price");
+        defaultModelChoice.click(); // Simulate a click to trigger the filtering
+    } else {
+        // Fallback in case no default model is found
+        const defaultModel = document.querySelector(".storage-choice.active");
+        if (defaultModel) {
+            selectedStorage = defaultModel.getAttribute("data-value");
+            const selectedPrice = defaultModel.getAttribute("data-price");
 
-        showColorsForModel(selectedStorage);
-        productPriceElement.innerText = new Intl.NumberFormat('vi-VN').format(selectedPrice) + " đ";
-        updatePriceAndVariantId();
+            showColorsForModel(selectedStorage);
+            productPriceElement.innerText = new Intl.NumberFormat('vi-VN').format(selectedPrice) + " đ";
+            updatePriceAndVariantId();
+        }
     }
 });
    </script>
+   
 @endsection
