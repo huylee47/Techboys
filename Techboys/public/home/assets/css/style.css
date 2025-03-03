@@ -3803,7 +3803,7 @@ body.can-uppercase .section-categories-carousel.section-top-categories .readmore
   .commentlist li .comment_container .comment-text .star-rating,
   .pings-list li .comment_container .comment-text .star-rating {
     letter-spacing: 3px;
-    width: 6em /*rtl:6.2em */; }
+    width: 7em /*rtl:6.2em */; }
   .commentlist li .comment_container .star-rating,
   .pings-list li .comment_container .star-rating {
     order: 3; }
@@ -20065,7 +20065,7 @@ table.shop_table_responsive.my_account_orders .order-actions {
 .single-product .woocommerce-product-rating {
   display: flex; }
   .single-product .woocommerce-product-rating .star-rating {
-    width: 6em /*rtl:6.2em*/;
+    width: 7em /*rtl:6.2em*/;
     letter-spacing: 2px; }
   .single-product .woocommerce-product-rating .woocommerce-review-link {
     font-size: 13px;
@@ -20745,7 +20745,7 @@ p.available-on-backorder {
   #reviews .avg-rating .star-rating {
     display: inline-block;
     font-size: 1.438em;
-    width: 6em /*rtl:6.2em */;
+    width: 7em /*rtl:6.2em */;
     letter-spacing: 2px; }
 
 #reviews .rating-histogram {
@@ -22998,7 +22998,7 @@ label[for="rememberme"] {
   height: 1em;
   line-height: 1;
   font-size: 1em;
-  width: 6em /*rtl:6.2em */;
+  width: 7em /*rtl:6.2em */;
   font-family: 'star';
   font-weight: 400;
   word-break: keep-all; }
