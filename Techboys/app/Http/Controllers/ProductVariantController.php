@@ -7,12 +7,10 @@ use Illuminate\Http\Request;
 
 class ProductVariantController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $stocks = ProductVariant::where('stock', '>', 0)->get();
+        return view('admin.stock.index', compact('stocks'));
     }
 
     /**
