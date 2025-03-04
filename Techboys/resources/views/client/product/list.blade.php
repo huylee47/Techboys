@@ -91,7 +91,6 @@
                             @foreach($products as $product)
                             <div class="col-6 col-md-4">
                                 <div class="grid_item">
-                                    <span class="ribbon off">-30%</span>
                                     <a href="{{ route('client.product.show', ['slug' => $product->slug]) }}">
                                         <img src="{{ url('') }}/admin/assets/images/product/{{ $product->img }}" class="product-image fix-image" style="width: 200px; height: 200px; display: flex; justify-content: center; align-items: center;" >
                                     </a>
@@ -99,9 +98,9 @@
                                         <h3>{{ $product->name }}</h3>
                                     </a>
                                     <div class="price_box">
-                                        <span class="new_price">${{ number_format($product->rate_average, 2) }}</span>
+                                        <span class="new_price">{{ number_format($product->variant->min('price'), 0, ',', '.') . ' đ' }}</span>
                                         @if($product->old_price)
-                                            <span class="old_price">${{ number_format($product->old_price, 2) }}</span>
+                                            <span class="old_price">{{ number_format($product->variant->min('price'), 0, ',', '.') . ' đ' }}</span>
                                         @endif
                                     </div>
                                     <ul>
