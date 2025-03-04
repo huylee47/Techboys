@@ -23,9 +23,10 @@ return new class extends Migration
             $table->foreignId('ward_id');
             $table->string('email');
             $table->tinyInteger('payment_method');
+            $table->tinyInteger('payment_status')->default(0);
             $table->tinyInteger('status_id')->default(1);
             $table->timestamps();
-        });
+        }); 
     }
 
     /**

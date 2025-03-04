@@ -181,3 +181,9 @@ Route::prefix('checkout')->group(function () {
     Route::get('/get-wards/{district_id}', [CheckoutController::class, 'getWards']);
     Route::post('/store', [CheckoutController::class, 'storeBill'])->name('client.checkout.store');
 });
+// CHECKOUT
+// Route::get('/vnpay-payment', function () {
+//     return view('client.payment.vnpay');
+// })->name('client.payment.vnpay');
+Route::get('/payment/vnpay/callback', [CheckoutController::class, 'vnpayCallback'])->name('client.payment.vnpay');
+
