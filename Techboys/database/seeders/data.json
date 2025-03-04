@@ -202,31 +202,31 @@
     "cart": [
         {
             "user_id": 1,
-            "cart_id": "cart_1",
+            "cart_id": null,
             "variant_id": 2,
             "quantity": 3
         },
         {
             "user_id": 2,
-            "cart_id": "cart_2",
+            "cart_id": null,
             "variant_id": 3,
             "quantity": 2
         },
         {
             "user_id": 3,
-            "cart_id": "cart_3",
+            "cart_id": null,
             "variant_id": 1,
             "quantity": 1
         },
         {
             "user_id": 4,
-            "cart_id": "cart_4",
+            "cart_id": null,
             "variant_id": 2,
             "quantity": 5
         },
         {
             "user_id": 1,
-            "cart_id": "cart_5",
+            "cart_id": null,
             "variant_id": 4,
             "quantity": 3
         }
