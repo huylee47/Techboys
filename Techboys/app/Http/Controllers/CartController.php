@@ -111,5 +111,8 @@ class CartController extends Controller
     public function removeItem(Request $request){
         return $this->cartService->removeItem($request);
     }
+    public function countItems(){
+        return $this->cartService->countItems();
+    }
     
 }
