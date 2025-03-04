@@ -72,19 +72,15 @@ class CheckoutController extends Controller
     // }
     public function vnpayCallback(Request $request)
 {
-    $vnp_HashSecret = "DBZW6GGQT04IJPPQNH2GNHSQJGQQJVMK"; // Chuỗi bí mật của VNPAY
+    $vnp_HashSecret = "DBZW6GGQT04IJPPQNH2GNHSQJGQQJVMK"; // Secret code VNPAY
     $inputData = $request->all();
 
-    // Lấy SecureHash từ payload của VNPAY
     $vnp_SecureHash = $inputData['vnp_SecureHash'] ?? '';
 
-    // Xóa SecureHash khỏi danh sách trước khi tạo hash
     unset($inputData['vnp_SecureHash']);
 
-    // Sắp xếp mảng theo key theo thứ tự alphabet
     ksort($inputData);
 
-    // Tạo chuỗi query để hash giống như hàm VNPAY
     $hashData = "";
     $i = 0;
     foreach ($inputData as $key => $value) {
@@ -96,10 +92,8 @@ class CheckoutController extends Controller
         }
     }
 
-    // Tạo mã hash
     $secureHash = hash_hmac('sha512', $hashData, $vnp_HashSecret);
 
-    // 📌 Debug: Kiểm tra hash
     if ($secureHash !== $vnp_SecureHash) {
         dd([
             'calculated_hash' => $secureHash,
@@ -108,7 +102,6 @@ class CheckoutController extends Controller
         ]);
     }
 
-    // Kiểm tra trạng thái giao dịch
     if ($inputData['vnp_ResponseCode'] == '00') {
         $billId = $inputData['vnp_TxnRef'];
 
