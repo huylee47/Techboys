@@ -787,34 +787,34 @@
                         <!-- .input-group -->
                     </form>
                     <!-- .navbar-search -->
-                    <ul class="header-compare nav navbar-nav">
+                    {{-- <ul class="header-compare nav navbar-nav">
                         <li class="nav-item">
                             <a href="compare.html" class="nav-link">
                                 <i class="tm tm-compare"></i>
                                 <span id="top-cart-compare-count" class="value">3</span>
                             </a>
                         </li>
-                    </ul>
+                    </ul> --}}
                     <!-- .header-compare -->
-                    <ul class="header-wishlist nav navbar-nav">
+                    {{-- <ul class="header-wishlist nav navbar-nav">
                         <li class="nav-item">
                             <a href="wishlist.html" class="nav-link">
                                 <i class="tm tm-favorites"></i>
                                 <span id="top-cart-wishlist-count" class="value">3</span>
                             </a>
                         </li>
-                    </ul>
+                    </ul> --}}
                     <!-- .header-wishlist -->
                     <ul id="site-header-cart" class="site-header-cart menu">
                         <li class="animate-dropdown dropdown ">
-                            <a class="cart-contents" href="cart.html" data-toggle="dropdown"
-                                title="View your shopping cart">
+                            <a class="cart-contents" href="" data-toggle="dropdown"
+                                title="Kiểm tra giỏ hàng của bạn">
                                 <i class="tm tm-shopping-bag"></i>
-                                <span class="count">2</span>
+                                <span class="count">{{$cartCount}}</span>
                                 <span class="amount">
-                                    <span class="price-label">Giỏ hàng</span>0 VNĐ</span>
+                                    <span class="price-label"><a href="{{route('client.cart.index')}}">Giỏ hàng</a></span></span>
                             </a>
-                            <ul class="dropdown-menu dropdown-menu-mini-cart">
+                            {{-- <ul class="dropdown-menu dropdown-menu-mini-cart">
                                 <li>
                                     <div class="widget woocommerce widget_shopping_cart">
                                         <div class="widget_shopping_cart_content">
@@ -863,7 +863,7 @@
                                     </div>
                                     <!-- .widget_shopping_cart -->
                                 </li>
-                            </ul>
+                            </ul> --}}
                             <!-- .dropdown-menu-mini-cart -->
                         </li>
                     </ul>

@@ -205,13 +205,8 @@
                                                         <input type="radio" data-order_button_text="" checked="checked" value="1" name="payment_method" class="input-radio" id="payment_method_bacs">
                                                         <label for="payment_method_bacs">VNPAY</label>
                                                     </li>
-                                                    <li class="wc_payment_method payment_method_cheque">
-                                                        <input type="radio" data-order_button_text="" value="2" name="payment_method" class="input-radio" id="payment_method_cheque">
-                                                        <label for="payment_method_cheque">MOMO</label>
-                                                        
-                                                    </li>
                                                     <li class="wc_payment_method payment_method_cod">
-                                                        <input type="radio" data-order_button_text="" value="3" name="payment_method" class="input-radio" id="payment_method_cod">
+                                                        <input type="radio" data-order_button_text="" value="2" name="payment_method" class="input-radio" id="payment_method_cod">
                                                         <label for="payment_method_cod">Ship COD</label>
                                                         
                                                     </li>

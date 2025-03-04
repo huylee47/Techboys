@@ -181,6 +181,8 @@ Route::prefix('cart')->group(function () {
     Route::post('/applyVoucher', [CartController::class, 'applyVoucher'])->name('client.cart.applyVoucher');
     Route::post('/remove/{id}', [CartController::class, 'removeItem'])->name('client.cart.remove');
     // Route::get('/getCount', [CartController::class, 'getCartCount'])->name('client.cart.getCartCount');
+    Route::get('/count', [CartController::class, 'countItems'])->name('client.cart.count');
+
 });
 
 Route::prefix('checkout')->group(function () {

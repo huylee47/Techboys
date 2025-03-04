@@ -52,13 +52,9 @@ class CheckoutController extends Controller
         }
     
         switch ($request->payment_method) {
-            case '3':
+            case '2':
                 // return redirect()->route('home')->with('success', 'Đơn hàng đã đặt thành công!');
                 return response()->json(' cod');
-            case '2':
-                // return redirect()->route('home')->with('success', 'Đơn hàng đã đặt thành công! Vui lòng thanh toán bằng QR Momo.');
-                return response()->json(' momo');
-
             case '1':
                 return $this->checkoutService->VNPAY($billData['bill']);
                 // return response()->json(' vnpay');

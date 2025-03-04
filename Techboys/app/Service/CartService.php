@@ -106,12 +106,18 @@ class CartService{
     $cartItem->delete();
     $cartItems = $this->getCartItems();
     $totals = $this->cartPriceService->calculateCartTotals($cartItems);
+    $cartCount = $this->countItems();
     return response()->json([
         'success' => true,
         'message' => 'Xóa mặt hàng thành công!',
+        'cart_count' => $cartCount,
         'subtotal' => number_format($totals['total'], 0, ',', '.') .'đ',
         'total' => number_format($totals['total'], 0, ',', '.') .'đ',
         'discount_amount' => number_format($totals['discountAmount'], 0, ',', '.') .'đ',
     ]);
+}
+public function countItems(){
+    $cartItems = $this->getCartItems();
+    return $cartItems->count();
 }
 }
