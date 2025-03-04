@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\checkoutRequest;
 use App\Models\Bill;
 use App\Service\AddressService;
 use App\Service\CheckoutService;
@@ -41,7 +42,7 @@ class CheckoutController extends Controller
     //     // dd($request->all());
     //     return $this->checkoutService->storeBill($request);
     // }
-    public function storeBill(Request $request)
+    public function storeBill(checkoutRequest $request)
     {
         $response = $this->checkoutService->storeBill($request);
         $billData = json_decode($response->getContent(), true);
@@ -106,12 +107,7 @@ class CheckoutController extends Controller
         $billId = $inputData['vnp_TxnRef'];
 
         $this->checkoutService->handlePaymentSuccess($billId);
-
-        return response()->json([
-            'success' => true,
-           'message' => 'Thanh toán VNPAY thành công!',
-           'payment_status' => Bill::where('id',$billId)->value('payment_status')
-        ]);
+        return view('client.payment.vnpay');
     } else {
         // return redirect()->route('home')->with('error', 'Thanh toán VNPAY thất bại!');
         return response()->json('vnpay_fail');
