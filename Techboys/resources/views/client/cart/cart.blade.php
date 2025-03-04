@@ -135,7 +135,7 @@
                                                             <td data-title="Subtotal">
                                                                 <span class="woocommerce-Price-amount amount">
                                                                     <span
-                                                                        class="subtotal-price">{{ number_format($subtotal, 0, ',', '.') .' đ'}}</span>
+                                                                        class="subtotal-price">{{ number_format($subtotal, 0, ',', '.') . ' đ' }}</span>
                                                                 </span>
                                                             </td>
                                                         </tr>
@@ -145,8 +145,8 @@
                                                                 <td data-title="Discount">
                                                                     <span class="woocommerce-Price-amount amount">
                                                                         <span
-                                                                            class="discount-amount">{{ number_format($discountAmount, 0, ',', '.') .' đ'}}</span>
-                                                        
+                                                                            class="discount-amount">{{ number_format($discountAmount, 0, ',', '.') . ' đ' }}</span>
+
                                                                     </span>
                                                                 </td>
                                                             </tr>
@@ -156,7 +156,7 @@
                                                                 <td data-title="Discount">
                                                                     <span class="woocommerce-Price-amount amount">
                                                                         <span class="discount-amount">0</span>
-                                                                   
+
                                                                     </span>
                                                                 </td>
                                                             </tr>
@@ -167,8 +167,8 @@
                                                                 <strong>
                                                                     <span class="woocommerce-Price-amount amount">
                                                                         <span
-                                                                            class="total-price">{{ number_format($total, 0, ',', '.') .' đ'}}</span>
-                                                                       
+                                                                            class="total-price">{{ number_format($total, 0, ',', '.') . ' đ' }}</span>
+
                                                                     </span>
                                                                 </strong>
                                                             </td>
@@ -211,9 +211,9 @@
                 <div class="modal-body">
                     <p>
                         Bạn đã mua quá số lượng tồn kho hiện tại.
-                        
+
                         Số lượng tồn kho hiện tại : <span id="maxStockValue"></span> sản phẩm
-                        
+
                     </p>
                 </div>
                 <div class="modal-footer">
@@ -391,44 +391,56 @@
         });
 
         $(document).on("click", ".remove", function(e) {
-    e.preventDefault();
-    var cartId = $(this).data("id");
-    var row = $(this).closest("tr");
+            e.preventDefault();
+            var cartId = $(this).data("id");
+            var row = $(this).closest("tr");
 
-    var removeUrl = "{{ route('client.cart.remove', ':id') }}";
-    removeUrl = removeUrl.replace(':id', cartId);
+            var removeUrl = "{{ route('client.cart.remove', ':id') }}".replace(':id', cartId);
 
-    $.ajax({
-        url: removeUrl,
-        method: "POST",
-        data: {
-            _token: "{{ csrf_token() }}"
-        },
-        success: function(response) {
-            if (response.success) {
-                row.fadeOut(300, function() {
-                    $(this).remove();
-                    if ($("tr.cart-item").length === 0) {
-                        $(".shop_table").html(
-                            '<p class="text-center text-muted">Giỏ hàng trống</p>'
-                        );
+            $.ajax({
+                url: removeUrl,
+                method: "POST",
+                data: {
+                    _token: "{{ csrf_token() }}"
+                },
+                success: function(response) {
+                    if (response.success) {
+                        row.fadeOut(300, function() {
+                            $(this).remove();
+                            if ($("tr.cart-item").length === 0) {
+                                $(".shop_table").html(
+                                    '<p class="text-center text-muted">Giỏ hàng trống</p>'
+                                );
+                            }
+                        });
+
+                        $(".subtotal-price").text(response.subtotal);
+                        $(".total-price").text(response.total);
+                        if (response.discount_amount) {
+                            $(".discount-amount").text(response.discount_amount);
+                        } else {
+                            $(".discount-amount").text("0");
+                        }
+
+                        updateCartCount();
+                    } else {
+                        alert(response.message);
                     }
-                });
-                $(".subtotal-price").text(response.subtotal);
-                $(".total-price").text(response.total);
-                if (response.discount_amount) {
-                    $(".discount-amount").text(response.discount_amount);
-                } else {
-                    $(".discount-amount").text("0");
+                },
+                error: function() {
+                    alert("Có lỗi xảy ra, vui lòng thử lại!");
                 }
-            } else {
-                alert(response.message);
-            }
-        },
-        error: function() {
-            alert("Có lỗi xảy ra, vui lòng thử lại!");
+            });
+        });
+
+        function updateCartCount() {
+            $.ajax({
+                url: "{{ route('client.cart.count') }}",
+                method: "GET",
+                success: function(response) {
+                    $(".count").text(response);
+                }
+            });
         }
-    });
-});
     </script>
 @endsection
