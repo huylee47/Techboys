@@ -1,7 +1,7 @@
 @extends('client.layouts.master')
 
 @section('main')
-</style>
+    </style>
     <div id="page" class="hfeed site">
         <div id="content" class="site-content" tabindex="-1">
             <div class="col-full">
@@ -162,45 +162,50 @@
                                                         $defaultVariant = $variants->sortBy('model.value')->first();
                                                     @endphp
 
-<div class="choice-group">
-    <span class="label">Dung lượng</span>
-    <div class="choice-buttons">
-        @foreach ($variants->groupBy('model.name') as $modelName => $variantGroup)
-            @php
-                $isActive = $modelName == $defaultVariant->model->name ? 'active' : '';
-            @endphp
-            <div class="choice storage-choice {{ $isActive }}"
-                data-value="{{ $modelName }}"
-                data-price="{{ $variantGroup->first()->price }}"
-                data-model-value="{{ $variantGroup->first()->model->id }}"
-                data-stock="{{ $variantGroup->first()->stock }}">
-                {{ $modelName }}
-            </div>
-        @endforeach
-    </div>
-</div>
+                                                    <div class="choice-group">
+                                                        <span class="label">Dung lượng</span>
+                                                        <div class="choice-buttons">
+                                                            @foreach ($variants->groupBy('model.name') as $modelName => $variantGroup)
+                                                                @php
+                                                                    $isActive =
+                                                                        $modelName == $defaultVariant->model->name
+                                                                            ? 'active'
+                                                                            : '';
+                                                                @endphp
+                                                                <div class="choice storage-choice {{ $isActive }}"
+                                                                    data-value="{{ $modelName }}"
+                                                                    data-price="{{ optional($variantGroup->first())->discounted_price }}"
 
-<div class="choice-group">
-    <span class="label">Màu sắc</span>
-    <div class="choice-buttons">
-        @foreach ($variants->sortBy('color.name') as $variant)
-            <div class="choice color-choice"  
-                data-value="{{ $variant->color->name }}"
-                data-model="{{ $variant->model->name }}"
-                data-price="{{ $variant->price }}"
-                data-stock="{{ $variant->stock }}"
-                style="display: none;">
-                <span>{{ $variant->color->name }}</span>
-            </div>
-        @endforeach
-    </div>
-</div>
+                                                                    data-model-value="{{ $variantGroup->first()->model->id }}"
+                                                                    data-stock="{{ $variantGroup->first()->stock }}">
+                                                                    {{ $modelName }}
+                                                                </div>
+                                                            @endforeach
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="choice-group">
+                                                        <span class="label">Màu sắc</span>
+                                                        <div class="choice-buttons">
+                                                            @foreach ($variants->sortBy('color.name') as $variant)
+                                                                <div class="choice color-choice"
+                                                                    data-value="{{ $variant->color->name }}"
+                                                                    data-model="{{ $variant->model->name }}"
+                                                                    data-price="{{ optional($variantGroup->first())->discounted_price }}"
+
+                                                                    data-stock="{{ $variant->stock }}"
+                                                                    style="display: none;">
+                                                                    <span>{{ $variant->color->name }}</span>
+                                                                </div>
+                                                            @endforeach
+                                                        </div>
+                                                    </div>
                                                     <p>Số lượng tồn kho: <span
                                                             id="stockQuantity">{{ $defaultVariant->stock }}</span></p>
 
                                                     <p class="price">
                                                         <span class="woocommerce-Price-amount amount" id="productPrice">
-                                                            {{ number_format($defaultVariant->price, 0, ',', '.') }} đ
+                                                            {{ number_format($defaultVariant->discounted_price, 0, ',', '.') }} đ
                                                         </span>
                                                     </p>
 
@@ -213,10 +218,11 @@
                                                         value="">
 
                                                     <!-- .quantity -->
-                                                    
+
                                                     <button class="single_add_to_cart_button button alt"
                                                         type="submit">Thêm vào giỏ hàng</button>
-                                                        <p id="outOfStockMessage" class="text-danger small">Sản phẩm đã hết hàng</p>
+                                                    <p id="outOfStockMessage" class="text-danger small">Sản phẩm đã hết
+                                                        hàng</p>
                                                     <!-- .cart -->
                                                 </div>
                                                 <!-- .product-actions -->
@@ -253,104 +259,110 @@
         });
     </script>
     <script>
-document.addEventListener("DOMContentLoaded", function() {
-    const variants = @json($variants);
-    let selectedStorage = null;
-    let selectedColor = null;
+        document.addEventListener("DOMContentLoaded", function() {
+            const variants = @json($variants);
+            console.log(variants);
+            let selectedStorage = null;
+            let selectedColor = null;
 
-    const addToCartButton = document.querySelector(".single_add_to_cart_button");
-    const productPriceElement = document.getElementById("productPrice");
-    const variantIdInput = document.getElementById("variant_id");
-    const stockQuantityElement = document.getElementById("stockQuantity");
-    const outOfStockMessage = document.getElementById("outOfStockMessage");
+            const addToCartButton = document.querySelector(".single_add_to_cart_button");
+            const productPriceElement = document.getElementById("productPrice");
+            const variantIdInput = document.getElementById("variant_id");
+            const stockQuantityElement = document.getElementById("stockQuantity");
+            const outOfStockMessage = document.getElementById("outOfStockMessage");
 
-    function updateAddToCartButton(stock) {
-        if (stock === 0) {
-            addToCartButton.style.display = "none";
-            outOfStockMessage.style.display = "block";
-        } else {
-            addToCartButton.style.display = "block";
-            outOfStockMessage.style.display = "none";
-        }
-    }
-
-    function updatePriceAndVariantId() {
-        if (selectedStorage && selectedColor) {
-            const selectedVariant = variants.find(v =>
-                v.model.name === selectedStorage && v.color.name === selectedColor
-            );
-            if (selectedVariant) {
-                productPriceElement.innerText = new Intl.NumberFormat('vi-VN').format(selectedVariant.price) + " đ";
-                variantIdInput.value = selectedVariant.id;
-                stockQuantityElement.innerText = selectedVariant.stock;
-
-                updateAddToCartButton(selectedVariant.stock);
-            }
-        }
-    }
-
-    function showColorsForModel(model) {
-        let firstColorSelected = false;
-        document.querySelectorAll(".color-choice").forEach(color => {
-            if (color.getAttribute("data-model") === model) {
-                color.style.display = "block"; // Show the color choice
-                if (!firstColorSelected) {
-                    color.classList.add("selected");
-                    selectedColor = color.getAttribute("data-value");
-                    firstColorSelected = true;
+            function updateAddToCartButton(stock) {
+                if (stock === 0) {
+                    addToCartButton.style.display = "none";
+                    outOfStockMessage.style.display = "block";
+                } else {
+                    addToCartButton.style.display = "block";
+                    outOfStockMessage.style.display = "none";
                 }
+            }
+
+            function updatePriceAndVariantId() {
+                if (selectedStorage && selectedColor) {
+                    const selectedVariant = variants.find(v =>
+                        v.model.name === selectedStorage && v.color.name === selectedColor
+                    );
+                    if (selectedVariant) {
+                        productPriceElement.innerText = new Intl.NumberFormat('vi-VN').format(selectedVariant
+                            .discounted_price) + " đ";
+                        variantIdInput.value = selectedVariant.id;
+                        stockQuantityElement.innerText = selectedVariant.stock;
+
+                        updateAddToCartButton(selectedVariant.stock);
+                    }
+                }
+            }
+
+            function showColorsForModel(model) {
+                let firstColorSelected = false;
+                document.querySelectorAll(".color-choice").forEach(color => {
+                    if (color.getAttribute("data-model") === model) {
+                        color.style.display = "block"; // Show the color choice
+                        if (!firstColorSelected) {
+                            color.classList.add("selected");
+                            selectedColor = color.getAttribute("data-value");
+                            firstColorSelected = true;
+                        }
+                    } else {
+                        color.style.display = "none"; // Hide irrelevant colors
+                        color.classList.remove("selected");
+                    }
+                });
+            }
+
+            // Add event listeners for color choices
+            document.querySelectorAll(".color-choice").forEach(choice => {
+                choice.addEventListener("click", function() {
+                    selectedColor = this.getAttribute("data-value");
+                    document.querySelectorAll(".color-choice").forEach(c => c.classList.remove(
+                        "selected"));
+                    this.classList.add("selected");
+                    updatePriceAndVariantId();
+                });
+            });
+
+            // Add event listeners for storage choices
+            document.querySelectorAll(".storage-choice").forEach(choice => {
+                choice.addEventListener("click", function() {
+                    selectedStorage = this.getAttribute("data-value");
+                    // const selectedPrice = this.getAttribute("data-price");
+                    const selectedPrice = parseFloat(this.getAttribute("data-price")) || 0;
+
+
+                    showColorsForModel(selectedStorage);
+                    productPriceElement.innerText = new Intl.NumberFormat('vi-VN').format(
+                        selectedPrice) + " đ";
+
+                    document.querySelectorAll(".storage-choice").forEach(item => item.classList
+                        .remove("active"));
+                    this.classList.add("active");
+
+                    updatePriceAndVariantId();
+                });
+            });
+
+            // Set the default model and show its colors
+            let minModelId = Math.min(...variants.map(v => v.model.id));
+            let defaultModelChoice = document.querySelector(`.storage-choice[data-model-value="${minModelId}"]`);
+
+            if (defaultModelChoice) {
+                defaultModelChoice.click(); // Simulate a click to trigger the filtering
             } else {
-                color.style.display = "none"; // Hide irrelevant colors
-                color.classList.remove("selected");
+                // Fallback in case no default model is found
+                const defaultModel = document.querySelector(".storage-choice.active");
+                if (defaultModel) {
+                    selectedStorage = defaultModel.getAttribute("data-value");
+                    const selectedPrice = defaultModel.getAttribute("data-price");
+
+                    showColorsForModel(selectedStorage);
+                    productPriceElement.innerText = new Intl.NumberFormat('vi-VN').format(selectedPrice) + " đ";
+                    updatePriceAndVariantId();
+                }
             }
         });
-    }
-
-    // Add event listeners for color choices
-    document.querySelectorAll(".color-choice").forEach(choice => {
-        choice.addEventListener("click", function() {
-            selectedColor = this.getAttribute("data-value");
-            document.querySelectorAll(".color-choice").forEach(c => c.classList.remove("selected"));
-            this.classList.add("selected");
-            updatePriceAndVariantId();
-        });
-    });
-
-    // Add event listeners for storage choices
-    document.querySelectorAll(".storage-choice").forEach(choice => {
-        choice.addEventListener("click", function() {
-            selectedStorage = this.getAttribute("data-value");
-            const selectedPrice = this.getAttribute("data-price");
-
-            showColorsForModel(selectedStorage);
-            productPriceElement.innerText = new Intl.NumberFormat('vi-VN').format(selectedPrice) + " đ";
-
-            document.querySelectorAll(".storage-choice").forEach(item => item.classList.remove("active"));
-            this.classList.add("active");
-
-            updatePriceAndVariantId();
-        });
-    });
-
-    // Set the default model and show its colors
-    let minModelId = Math.min(...variants.map(v => v.model.id));
-    let defaultModelChoice = document.querySelector(`.storage-choice[data-model-value="${minModelId}"]`);
-
-    if (defaultModelChoice) {
-        defaultModelChoice.click(); // Simulate a click to trigger the filtering
-    } else {
-        // Fallback in case no default model is found
-        const defaultModel = document.querySelector(".storage-choice.active");
-        if (defaultModel) {
-            selectedStorage = defaultModel.getAttribute("data-value");
-            const selectedPrice = defaultModel.getAttribute("data-price");
-
-            showColorsForModel(selectedStorage);
-            productPriceElement.innerText = new Intl.NumberFormat('vi-VN').format(selectedPrice) + " đ";
-            updatePriceAndVariantId();
-        }
-    }
-});
-   </script>
-   
+    </script>
 @endsection
