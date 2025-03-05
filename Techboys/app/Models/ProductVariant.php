@@ -10,6 +10,8 @@ class ProductVariant extends Model
 {
     use HasFactory,SoftDeletes;
     protected $table = 'product_variants';
+    protected $appends = ['discounted_price'];
+
     protected $fillable = ['product_id', 'color_id', 'price', 'stock','model_id'];
 
     public function product(){
@@ -27,4 +29,13 @@ class ProductVariant extends Model
     public function model(){
         return $this->belongsTo(ProductModel::class);
     }
+    public function getDiscountedPriceAttribute()
+    {
+        $promotion = $this->product->promotion;
+        if ($promotion) {
+            return $this->price * (1 - $promotion->discount_percent / 100);
+        }
+        return $this->price;
+    }
+
 }
