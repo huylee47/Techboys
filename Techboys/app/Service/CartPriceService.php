@@ -1,6 +1,7 @@
 <?php
 namespace App\Service;
 
+use App\Models\Promotion;
 use App\Service\VoucherService;
 use Illuminate\Support\Facades\Session;
 
@@ -21,15 +22,27 @@ class CartPriceService
      */
     public function calculateCartTotals($cartItems)
     {
-        $subtotal = $cartItems->sum(fn($cart) => $cart->variant->price * $cart->quantity);
+        $subtotal = 0;
+    
+        foreach ($cartItems as $cart) {
+            $promotion = Promotion::where('product_id', $cart->variant->product->id)->first();
+            if ($promotion) {
+                $cart->discounted_price = $cart->variant->price * (1 - $promotion->discount_percent / 100);
+            } else {
+                $cart->discounted_price = $cart->variant->price;
+            }
+    
+            $subtotal += $cart->discounted_price * $cart->quantity;
+        }
+    
         $total = $subtotal;
         $discountAmount = 0;
         $voucher = null;
-
+        
         if (Session::has('voucher')) {
             $voucherData = Session::get('voucher');
             $voucherResult = $this->voucherService->applyVoucher($voucherData['code'], $subtotal);
-
+    
             if ($voucherResult['valid']) {
                 $voucher = $voucherResult['voucher'];
                 $discountAmount = $voucherResult['discountAmount'];
@@ -38,7 +51,7 @@ class CartPriceService
                 Session::forget('voucher');
             }
         }
-
+    
         return [
             'subtotal' => $subtotal,
             'total' => $total,
@@ -46,6 +59,7 @@ class CartPriceService
             'voucher' => $voucher,
         ];
     }
+    
 
     /**
      * 
