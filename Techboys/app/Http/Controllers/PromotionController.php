@@ -3,10 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Models\Promotion;
+use App\Service\PromotionService;
 use Illuminate\Http\Request;
 
 class PromotionController extends Controller
 {
+    private $promotionService;
+    public function __construct(PromotionService $promotionService)
+    {
+        $this->promotionService = $promotionService;
+    }
     /**
      * Display a listing of the resource.
      */
