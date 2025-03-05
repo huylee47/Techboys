@@ -12,6 +12,8 @@ use App\Service\CartService;
 use App\Service\ProductService;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
+use App\Console\Commands\RemoveExpiredPromotions;
+use Illuminate\Console\Scheduling\Schedule;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -31,10 +33,18 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
 
-
+        $this->commands([
+            RemoveExpiredPromotions::class,
+        ]);
+    
+        $this->app->booted(function () {
+            $schedule = app(Schedule::class);
+            $schedule->command('promotions:remove-expired')->daily();
+        });
         $config = Config::first();
         $categories = ProductCategory::get();
         $hotproducts = Product::orderBy('purchases','desc')->take(16)->get();
+        $discountedProducts = Product::whereHas('promotion')->get();
         $newProduct = Product::orderBy('created_at', 'desc')->take(20)->get();  
         $loadBanner = Banner::all();
         $cartService = app(CartService::class);
@@ -42,6 +52,7 @@ class AppServiceProvider extends ServiceProvider
         View::share('categories', $categories);
         View::share('hotproducts', $hotproducts);
         View::share('loadBanner', $loadBanner);
+        View::share('discountedProducts', $discountedProducts);
         View::composer('*', function ($view) {
             $productService = app(ProductService::class);
             $newProduct = $productService->getNewProducts();
