@@ -24,5 +24,8 @@ class Product extends Model
     public function image(){
         return $this->hasMany(Images::class, 'product_id');
     }
+    public function promotion(){
+        return $this->hasOne(Promotion::class);
+    }
     
 }

@@ -166,7 +166,7 @@
                                                         </td>
                                                         <td class="product-total">
                                                             <span class="woocommerce-Price-amount amount">
-                                                                {{ number_format($item->variant->price * $item->quantity, 0, ',', '.') }}</span>
+                                                                {{ number_format($item->variant->discounted_price * $item->quantity, 0, ',', '.') }}</span>
                                                         </td>
                                                     </tr>
                                                     @endforeach

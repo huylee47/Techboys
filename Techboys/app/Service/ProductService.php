@@ -195,4 +195,10 @@ class ProductService{
             abort(404);
         }
     }
+    public function getNewProducts(){
+        return Product::with(['variant', 'promotion'])
+            ->orderBy('created_at', 'desc')
+            ->take(20)
+            ->get();
+    }
 }

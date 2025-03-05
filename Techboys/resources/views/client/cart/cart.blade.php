@@ -71,7 +71,7 @@
                                                                 <td data-title="Price" class="product-price">
                                                                     <span class="woocommerce-Price-amount amount">
                                                                         <span
-                                                                            class="woocommerce-Price-currencySymbol">{{ number_format($cart->variant->price, 0, ',', '.') }}
+                                                                            class="woocommerce-Price-currencySymbol">{{ number_format($cart->variant->discounted_price , 0, ',', '.') }}
                                                                             đ</span>
                                                                     </span>
                                                                 </td>
@@ -89,7 +89,7 @@
                                                                 <td data-title="Total" class="product-subtotal">
                                                                     <span
                                                                         class="woocommerce-Price-amount amount total-price-{{ $cart->id }}">
-                                                                        {{ number_format($cart->variant->price * $cart->quantity, 0, ',', '.') }}
+                                                                        {{ number_format($cart->variant->discounted_price * $cart->quantity, 0, ',', '.') }}
                                                                         đ
                                                                     </span>
                                                                     <a class="remove" href="#"
