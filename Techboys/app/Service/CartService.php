@@ -3,6 +3,7 @@
 namespace App\Service;
 
 use App\Models\Cart;
+use App\Models\Promotion;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
@@ -85,8 +86,12 @@ class CartService{
     
         $cart->quantity = $request->quantity;
         $cart->save();
-    
-        $totalPrice = $cart->variant->price * $cart->quantity;
+        $promotion = Promotion::where('product_id', $cart->variant->product->id)->first();
+        if ($promotion) {
+            $totalPrice = $cart->variant->discounted_price * $cart->quantity;
+        } else {
+            $totalPrice = $cart->variant->price * $cart->quantity;
+        }
     
         return [
             'total_price' => $totalPrice
