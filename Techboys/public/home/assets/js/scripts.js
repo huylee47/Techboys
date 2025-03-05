@@ -163,7 +163,10 @@
 	
 			if (seconds_left <= 0) {
 				clearInterval(countdownInterval);
-				countdown_output.html('<span class="expired">Kết thúc !</span>');
+				'<span data-value="' + 0 + '" class="days"><span class="value">' + 0 +  '</span><b>' + deal_countdown_text.days_text + '</b></span>' +
+				'<span class="hours"><span class="value">' + 0 + '</span><b>' + deal_countdown_text.hours_text + '</b></span>' +
+				'<span class="minutes"><span class="value">' + 0 + '</span><b>' + deal_countdown_text.mins_text + '</b></span>' +
+				'<span class="seconds"><span class="value">' + 0 + '</span><b>' + deal_countdown_text.secs_text + '</b></span>'
 				return;
 			}
 	
