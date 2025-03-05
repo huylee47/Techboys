@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cart;
+use App\Models\Promotion;
 use App\Service\CartService;
 use App\Service\CartPriceService;
 use Illuminate\Http\Request;
@@ -23,10 +24,10 @@ class CartController extends Controller
         //
     }
     // CLIENT
-    public function showCart(Request $request)
+    public function showCart()
     {
         $cartItems = $this->cartService->getCartItems();
-
+    
         if ($cartItems instanceof \Illuminate\Http\JsonResponse) {
             return view('client.cart.cart', [
                 'cartItems' => collect([]),
@@ -36,9 +37,18 @@ class CartController extends Controller
                 'voucher' => null
             ]);
         }
-
+    
+        foreach ($cartItems as $cart) {
+            $promotion = Promotion::where('product_id', $cart->variant->product->id)->first();
+            if ($promotion) {
+                $cart->discounted_price = $cart->variant->price * (1 - $promotion->discount_percent / 100);
+            } else {
+                $cart->discounted_price = $cart->variant->price;
+            }
+        }
+    
         $totals = $this->cartPriceService->calculateCartTotals($cartItems);
-
+    
         return view('client.cart.cart', [
             'cartItems' => $cartItems,
             'subtotal' => $totals['subtotal'],
@@ -47,6 +57,7 @@ class CartController extends Controller
             'voucher' => $totals['voucher'],
         ]);
     }
+    
     
     public function addToCart(Request $request)
     {
@@ -88,7 +99,7 @@ class CartController extends Controller
             ], 400);
         }
 
-        $subtotal = $cartItems->sum(fn($cart) => $cart->variant->price * $cart->quantity);
+        $subtotal = $cartItems->sum(fn($cart) => $cart->variant->discounted_price * $cart->quantity);
         $voucherResult = $this->cartPriceService->applyVoucherToCart($voucherCode, $subtotal);
 
         if (!$voucherResult['valid']) {
