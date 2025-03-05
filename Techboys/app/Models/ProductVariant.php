@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -32,7 +33,8 @@ class ProductVariant extends Model
     public function getDiscountedPriceAttribute()
     {
         $promotion = $this->product->promotion;
-        if ($promotion) {
+    
+        if ($promotion && Carbon::now()->lt(Carbon::parse($promotion->end_date))) {
             return $this->price * (1 - $promotion->discount_percent / 100);
         }
         return $this->price;
