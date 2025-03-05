@@ -447,7 +447,7 @@
                                                                             <ins>
                                                                                 <span class="amount">Chỉ từ  </span>
                                                                             </ins>
-                                                                            <span class="amount">{{ number_format($np->variant->min('price'), 0, ',', '.') . ' đ' }}</span>
+                                                                            <span class="amount">{{ number_format($np->variant->min('discounted_price'), 0, ',', '.') . ' đ' }}</span>
                                                                         </span>
                                                                         <!-- /.price -->
                                                                         <h2 class="woocommerce-loop-product__title">
