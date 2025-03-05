@@ -113,21 +113,55 @@ class UserController extends Controller
     {
         $username = $request->input('username');
         $password = $request->input('password');
-
+    
         $account = User::where('username', $username)->first();
-
+    
         if (!$account) {
             return redirect()->back()->with('error', 'Không tìm thấy tài khoản.');
         }
-
+    
         if (!Hash::check($password, $account->password)) {
             return redirect()->back()->with('error', 'Mật khẩu không đúng.');
         }
+    
         if ($account->status != 1) {
             return redirect()->back()->with('error', 'Tài khoản của bạn đã bị khóa.');
         }
+    
         Auth::login($account);
-
+    
+        $cartId = session()->get('cart_id');
+        $hasSessionCart = false;
+    
+        if ($cartId) {
+            $sessionCartItems = Cart::where('cart_id', $cartId)->get();
+    
+            if ($sessionCartItems->count() > 0) {
+                $hasSessionCart = true;
+    
+                foreach ($sessionCartItems as $item) {
+                    $existingItem = Cart::where('user_id', $account->id)
+                        ->where('variant_id', $item->variant_id)
+                        ->first();
+    
+                    if ($existingItem) {
+                        $existingItem->quantity += $item->quantity;
+                        $existingItem->save();
+                    } else {
+                        $item->user_id = $account->id;
+                        $item->cart_id = null;
+                        $item->save();
+                    }
+                }
+    
+                session()->forget('cart_id');
+            }
+        }
+    
+        if ($hasSessionCart) {
+            return redirect()->route('client.cart.index')->with('success', 'Đăng nhập thành công, vui lòng kiểm tra giỏ hàng của bạn.');
+        }
+    
         return redirect()->route('home')->with('success', 'Đăng nhập thành công.');
     }
     public function create()
