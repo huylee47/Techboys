@@ -26749,6 +26749,15 @@ form.track_order {
   display: block; 
   margin: auto;
 }
+.fixed-sale-image{
+max-width: 200px;
+    max-height: 320px;
+    width: auto;
+    height: auto;
+    object-fit: contain; /* Giữ nguyên tỷ lệ ảnh mà không bị bóp méo */
+    display: block;
+    margin: auto;
+}
 .choice-group {
     display: block;
     width: 100%;
