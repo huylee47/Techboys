@@ -186,6 +186,9 @@
                                         <!-- /.slick-list -->
                                     </div>
                                     <!-- /.sale-products-with-timer-carousel -->
+                                    @if ($discountedProducts->isEmpty())
+                                        <p></p>
+                                    @else
                                     <footer class="section-footer">
                                         <nav class="custom-slick-pagination">
                                             <a class="slider-prev left" href="#"
@@ -196,6 +199,8 @@
                                                     class="tm tm-arrow-right"></i></a>
                                         </nav>
                                     </footer>
+                                    @endif
+
                                     <!-- /.section-footer -->
                                 </div>
                                 <!-- /.deals-carousel-inner-block -->
