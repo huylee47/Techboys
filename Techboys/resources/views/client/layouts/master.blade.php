@@ -1583,6 +1583,7 @@
         <!-- .header-v1 -->
         <!-- ============================================================= Header End ============================================================= -->
         @yield('main');
+        @yield('loading');
         <!-- #content -->
         <footer class="site-footer footer-v1">
             <div class="col-full">
