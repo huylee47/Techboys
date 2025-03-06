@@ -1,7 +1,6 @@
 @extends('client.layouts.master')
 
 @section('main')
-
 <body>
     <div id="page" class="theia-exception">
         <main>
@@ -9,7 +8,9 @@
                 <div class="row">
                     <aside class="col-lg-3" id="sidebar_fixed">
                         <div class="filter_col">
-                            <div class="inner_bt"><a href="#" class="open_filters"><i class="ti-close"></i></a></div>
+                            <div class="inner_bt">
+                                <a href="#" class="open_filters"><i class="ti-close"></i></a>
+                            </div>
 
                             <!-- Bộ lọc Brands -->
                             <div class="filter_type version_2">
@@ -58,7 +59,9 @@
                             <div class="col-6 col-md-4">
                                 <div class="grid_item">
                                     <a href="{{ route('client.product.show', ['slug' => $product->slug]) }}">
-                                        <img src="{{ url('') }}/admin/assets/images/product/{{ $product->img }}" class="product-image fix-image" style="width: 200px; height: 200px; display: flex; justify-content: center; align-items: center;" >
+                                        <img src="{{ url('') }}/admin/assets/images/product/{{ $product->img }}" 
+                                             class="product-image fix-image" 
+                                             style="width: 200px; height: 200px; display: flex; justify-content: center; align-items: center;">
                                     </a>
                                     <a href="{{ route('client.product.show', ['slug' => $product->slug]) }}">
                                         <h3>{{ $product->name }}</h3>
@@ -86,11 +89,11 @@
                                     <a href="{{ $products->previousPageUrl() }}" class="prev" title="previous page">&#10094;</a>
                                 </li>
                                 @for ($i = 1; $i <= $products->lastPage(); $i++)
-                                    <li>
-                                        <a href="{{ $products->url($i) }}" class="{{ $i == $products->currentPage() ? 'active' : '' }}">
-                                            {{ $i }}
-                                        </a>
-                                    </li>
+                                <li>
+                                    <a href="{{ $products->url($i) }}" class="{{ $i == $products->currentPage() ? 'active' : '' }}">
+                                        {{ $i }}
+                                    </a>
+                                </li>
                                 @endfor
                                 <li>
                                     <a href="{{ $products->nextPageUrl() }}" class="next" title="next page">&#10095;</a>
@@ -103,86 +106,53 @@
         </main>
     </div>
 
-    <script>
-    $(document).ready(function() {
-    // Khi checkbox thay đổi, gửi yêu cầu AJAX
-    $('.category-filter, .brand-filter, .color-filter, .model-filter').on('change', function() {
-        applyFilters();
+<script>
+$(document).ready(function() {
+    checkFilterState();
+
+    $('.brand-filter, .model-filter').on('change', function() {
+        checkFilterState();
     });
 
-    // Khi nút "Filter" được nhấn, gửi yêu cầu AJAX với bộ lọc hiện tại
     $('#filter-button').on('click', function(e) {
         e.preventDefault();
+        if (!$(this).hasClass('disabled')) {
+            applyFilters();
+        }
+    });
+
+    $('#reset-button').on('click', function(e) {
+        e.preventDefault();
+        $('.brand-filter, .model-filter').prop('checked', false);
+        checkFilterState();
         applyFilters();
     });
 
-    // Khi nút "Reset" được nhấn, reset các bộ lọc và gửi yêu cầu AJAX
-    $('#reset-button').on('click', function(e) {
-        e.preventDefault();
-        resetFilters();
-    });
-
-    // Hàm gửi yêu cầu AJAX với bộ lọc hiện tại
-    function applyFilters() {
-        var categoryIds = [];
-        var brandIds = [];
-        var colorIds = [];
-        var modelIds = [];
-
-        // Lấy các category đã chọn
-        $('.category-filter:checked').each(function() {
-            categoryIds.push($(this).data('id'));
-        });
-
-        // Lấy các brand đã chọn
-        $('.brand-filter:checked').each(function() {
-            brandIds.push($(this).data('id'));
-        });
-
-        // Lấy các color đã chọn
-        $('.color-filter:checked').each(function() {
-            colorIds.push($(this).data('id'));
-        });
-
-        // Lấy các model đã chọn
-        $('.model-filter:checked').each(function() {
-            modelIds.push($(this).data('id'));
-        });
-
-        // Gửi AJAX để lấy danh sách sản phẩm mới
-        $.ajax({
-            url: '{{ route('client.product.index') }}', // Thay đổi route tại đây
-            method: 'GET',
-            data: {
-                category_id: categoryIds,
-                brand_id: brandIds,
-                color_id: colorIds,
-                model_id: modelIds
-            },
-            success: function(response) {
-                $('#product_list').html(response.products);
-                $('#pagination').html(response.pagination);
-            }
-        });
+    function checkFilterState() {
+        var hasChecked = $('.brand-filter:checked, .model-filter:checked').length > 0;
+        $('#filter-button').toggleClass('disabled', !hasChecked);
     }
 
-    // Hàm reset bộ lọc
-    function resetFilters() {
-        // Bỏ chọn tất cả các checkbox
-        $('.category-filter, .brand-filter, .color-filter, .model-filter').prop('checked', false);
+    function applyFilters() {
+        var brandIds = $('.brand-filter:checked').map(function() { return $(this).data('id'); }).get();
+        var modelIds = $('.model-filter:checked').map(function() { return $(this).data('id'); }).get();
 
-        // Gửi AJAX để lấy lại danh sách sản phẩm mà không có bộ lọc
         $.ajax({
-            url: '{{ route('client.product.index') }}', // Thay đổi route tại đây
+            url: '{{ route('client.product.filter') }}',
             method: 'GET',
+            data: { brand_id: brandIds, model_id: modelIds },
+            beforeSend: function() {
+                $('#product_list').html('<p>Loading...</p>');
+            },
             success: function(response) {
-                $('#product_list').html(response.products);
-                $('#pagination').html(response.pagination);
+                $('#product_list').html($(response).find('#product_list').html());
+                $('#pagination').html($(response).find('#pagination').html());
+            },
+            error: function() {
+                alert('Đã xảy ra lỗi. Vui lòng thử lại!');
             }
         });
     }
 });
-
 </script>
-
 @endsection
