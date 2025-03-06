@@ -7,8 +7,6 @@ use App\Models\Bill;
 use App\Service\AddressService;
 use App\Service\CheckoutService;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Redis;
 use Kjmtrue\VietnamZone\Models\District;
 use Kjmtrue\VietnamZone\Models\Ward;
 
@@ -46,14 +44,6 @@ class CheckoutController extends Controller
     // }
     public function storeBill(checkoutRequest $request)
     {
-        if ($request->payment_method == 1) {
-            return $this->checkoutService->storeTemporaryBill($request);
-        }
-    
-        if ($request->payment_method != 2) {
-            return redirect()->route('home')->with('error', 'Phương thức thanh toán không hợp lệ!');
-        }
-    
         $response = $this->checkoutService->storeBill($request);
         $billData = json_decode($response->getContent(), true);
     
@@ -61,66 +51,63 @@ class CheckoutController extends Controller
             return redirect()->route('home')->with('error', $billData['message']);
         }
     
-        $this->checkoutService->COD($billData['bill']);
-        return redirect()->route('client.payment.cod', ['bill_id' => $billData['bill']]);
-    }
-    
+        switch ($request->payment_method) {
+            case '2':
+                // return redirect()->route('home')->with('success', 'Đơn hàng đã đặt thành công!');
+                return response()->json(' cod');
+            case '1':
+                return $this->checkoutService->VNPAY($billData['bill']);
+                // return response()->json(' vnpay');
 
+            default:
+                return redirect()->route('home')->with('error', 'Phương thức thanh toán không hợp lệ!');
+        }
+    }
+    // public function vnpayCallback(Request $request){
+    //     // dd($request->all());
+    //     return $this->checkoutService->vnpayCallback($request);
+    // }
     public function vnpayCallback(Request $request)
-    {
-        $vnp_HashSecret = "DBZW6GGQT04IJPPQNH2GNHSQJGQQJVMK";
-        $inputData = $request->all();
-        $vnp_SecureHash = $inputData['vnp_SecureHash'] ?? '';
-    
-        unset($inputData['vnp_SecureHash']);
-        ksort($inputData);
-    
-        $hashData = "";
-        $i = 0;
-        foreach ($inputData as $key => $value) {
-            $hashData .= ($i == 1 ? '&' : '') . urlencode($key) . "=" . urlencode($value);
+{
+    $vnp_HashSecret = "DBZW6GGQT04IJPPQNH2GNHSQJGQQJVMK"; // Secret code VNPAY
+    $inputData = $request->all();
+
+    $vnp_SecureHash = $inputData['vnp_SecureHash'] ?? '';
+
+    unset($inputData['vnp_SecureHash']);
+
+    ksort($inputData);
+
+    $hashData = "";
+    $i = 0;
+    foreach ($inputData as $key => $value) {
+        if ($i == 1) {
+            $hashData .= '&' . urlencode($key) . "=" . urlencode($value);
+        } else {
+            $hashData .= urlencode($key) . "=" . urlencode($value);
             $i = 1;
         }
-    
-        $secureHash = hash_hmac('sha512', $hashData, $vnp_HashSecret);
-        if ($secureHash !== $vnp_SecureHash) {
-            return response()->json(['error' => 'Invalid hash'], 400);
-        }
-    
-        $userId = Auth::id();
-        $sessionId = session()->getId();
-        $redisKey = $userId ? 'temp_bill_' . $userId : 'temp_bill_session_' . $sessionId;
-    
-        $tempBill = Redis::get($redisKey);
-    
-        if (!$tempBill) {
-            // dd($tempBill);
-            dd($redisKey);
-            return response()->json(['error' => 'Không tìm thấy đơn hàng tạm thời.'], 400);
-        }
-    
-        $billData = json_decode($tempBill, true);
-    
-        if ($inputData['vnp_ResponseCode'] == '00') {
-            $billData['payment_status'] = 1;
-    
-            $response = $this->checkoutService->storeBill(new checkoutRequest($billData));
-            // dd($response->getContent());
-            $newBill = json_decode($response->getContent(), true);
-    
-            Redis::del($redisKey);
-    
-            $this->checkoutService->handlePaymentSuccess($newBill['bill_id']);
-    
-            return view('client.payment.vnpay');
-        } else {
-            return view('client.payment.error');
-        }
     }
-    
-    
-public function codSuccess(){
-    return view('client.payment.cod');
+
+    $secureHash = hash_hmac('sha512', $hashData, $vnp_HashSecret);
+
+    if ($secureHash !== $vnp_SecureHash) {
+        dd([
+            'calculated_hash' => $secureHash,
+            'received_hash' => $vnp_SecureHash,
+            'data_string' => $hashData
+        ]);
+    }
+
+    if ($inputData['vnp_ResponseCode'] == '00') {
+        $billId = $inputData['vnp_TxnRef'];
+
+        $this->checkoutService->handlePaymentSuccess($billId);
+        return view('client.payment.vnpay');
+    } else {
+        // return redirect()->route('home')->with('error', 'Thanh toán VNPAY thất bại!');
+        return response()->json('vnpay_fail');
+    }
 }
 
 }
