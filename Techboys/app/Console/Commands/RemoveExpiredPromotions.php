@@ -32,6 +32,5 @@ class RemoveExpiredPromotions extends Command
         Promotion::where('end_date', '<=', $today)->delete();
 
         $this->info('Expired promotions have been removed successfully.');
-        
     }   
 }
