@@ -149,7 +149,7 @@ class ProductController extends Controller
             ]);
         }
 
-        // Nếu không phải là yêu cầu AJAX, trả về view bình thường
+        // Nếu không phải là yêu cầu AJAX, trả về view bình     
         return view('client.product.list', compact('products', 'brands', 'models'));
     }
 
@@ -160,10 +160,10 @@ class ProductController extends Controller
         $products = Product::where('name', 'LIKE', "%{$keyword}%")
             ->orWhere('description', 'LIKE', "%{$keyword}%")
             ->orWhereHas('category', function ($query) use ($keyword) {
-                $query->where('category_name', 'LIKE', "%{$keyword}%");
+                $query->where('name', 'LIKE', "%{$keyword}%");
             })
             ->paginate(12);
 
-        return view('client.pages.search', compact('products', 'keyword'));
+        return view('client.product.search', compact('products', 'keyword'));
     }
 }
