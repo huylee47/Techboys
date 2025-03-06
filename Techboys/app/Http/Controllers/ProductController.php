@@ -118,77 +118,16 @@ class ProductController extends Controller
         return $this->productService->getProductBySlug($request);
     }
 
-    // public function productList(Request $request)
-    // {
-    //     // Lấy các bộ lọc từ request
-    //     $categoryIds = $request->category_id;
-    //     $brandIds = $request->brand_id;
-    //     $colorIds = $request->color_id;
-    //     $modelIds = $request->model_id;
-
-    //     // Xây dựng truy vấn cơ bản
-    //     $query = Product::query();
-
-    //     // Lọc sản phẩm theo các điều kiện
-    //     if ($categoryIds) {
-    //         $query->whereIn('category_id', $categoryIds);
-    //     }
-
-    //     if ($brandIds) {
-    //         $query->whereIn('brand_id', $brandIds);
-    //     }
-
-    //     if ($colorIds) {
-    //         $query->whereIn('color_id', $colorIds);
-    //     }
-
-    //     if ($modelIds) {
-    //         $query->whereIn('model_id', $modelIds);
-    //     }
-
-    //     // Lấy sản phẩm với phân trang
-    //     $products = $query->paginate(21);  // Giới hạn số sản phẩm hiển thị mỗi trang
-
-    //     // Lấy các dữ liệu cần thiết cho bộ lọc
-    //     $categories = ProductCategory::all();
-    //     $brands = Brand::all();
-    //     $colors = Color::all();
-    //     $models = ProductModel::all();
-
-    //     // Kiểm tra xem có phải là yêu cầu AJAX không
-    //     if ($request->ajax()) {
-    //         return response()->json([
-    //             'products' => view('client.product.list', compact('products', 'categories', 'brands', 'colors', 'models'))->render(),
-    //             'pagination' => $products->links()->render(),
-    //         ]);
-    //     }
-
-    //     // Nếu không phải là yêu cầu AJAX, trả về view bình thường
-    //     return view('client.product.list', compact('products', 'categories', 'brands', 'colors', 'models'));
-    // }
-
     public function productList(Request $request)
     {
-        // Lấy các bộ lọc từ request
-        $categoryIds = $request->category_id;
         $brandIds = $request->brand_id;
-        $colorIds = $request->color_id;
         $modelIds = $request->model_id;
 
         // Xây dựng truy vấn cơ bản
         $query = Product::query();
 
-        // Lọc sản phẩm theo các điều kiện
-        if ($categoryIds) {
-            $query->whereIn('category_id', $categoryIds);
-        }
-
         if ($brandIds) {
             $query->whereIn('brand_id', $brandIds);
-        }
-
-        if ($colorIds) {
-            $query->whereIn('color_id', $colorIds);
         }
 
         if ($modelIds) {
@@ -199,20 +138,32 @@ class ProductController extends Controller
         $products = $query->paginate(21);
 
         // Lấy các dữ liệu cần thiết cho bộ lọc
-        $categories = ProductCategory::all();
         $brands = Brand::all();
-        $colors = Color::all();
         $models = ProductModel::all();
 
         // Kiểm tra xem có phải là yêu cầu AJAX không
         if ($request->ajax()) {
             return response()->json([
-                'products' => view('client.product.list', compact('products', 'categories', 'brands', 'colors', 'models'))->render(),
+                'products' => view('client.product.list', compact('products', 'brands', 'models'))->render(),
                 'pagination' => $products->links()->render(),
             ]);
         }
 
         // Nếu không phải là yêu cầu AJAX, trả về view bình thường
-        return view('client.product.list', compact('products', 'categories', 'brands', 'colors', 'models'));
+        return view('client.product.list', compact('products', 'brands', 'models'));
+    }
+
+    public function search(Request $request)
+    {
+        $keyword = $request->input('keyword');
+
+        $products = Product::where('name', 'LIKE', "%{$keyword}%")
+            ->orWhere('description', 'LIKE', "%{$keyword}%")
+            ->orWhereHas('category', function ($query) use ($keyword) {
+                $query->where('category_name', 'LIKE', "%{$keyword}%");
+            })
+            ->paginate(12);
+
+        return view('client.pages.search', compact('products', 'keyword'));
     }
 }
