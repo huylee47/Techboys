@@ -11,23 +11,6 @@
                         <div class="filter_col">
                             <div class="inner_bt"><a href="#" class="open_filters"><i class="ti-close"></i></a></div>
 
-                            <!-- Bộ lọc Categories -->
-                            <div class="filter_type version_2">
-                                <h4><a href="#filter_1" data-bs-toggle="collapse" class="opened">Categories</a></h4>
-                                <div class="collapse show" id="filter_1">
-                                    <ul>
-                                        @foreach($categories as $category)
-                                        <li>
-                                            <label class="container_check">{{ $category->name }}
-                                                <input type="checkbox" class="category-filter" data-id="{{ $category->id }}">
-                                                <span class="checkmark"></span>
-                                            </label>
-                                        </li>
-                                        @endforeach
-                                    </ul>
-                                </div>
-                            </div>
-
                             <!-- Bộ lọc Brands -->
                             <div class="filter_type version_2">
                                 <h4><a href="#filter_2" data-bs-toggle="collapse" class="opened">Brands</a></h4>
@@ -37,23 +20,6 @@
                                         <li>
                                             <label class="container_check">{{ $brand->name }}
                                                 <input type="checkbox" class="brand-filter" data-id="{{ $brand->id }}">
-                                                <span class="checkmark"></span>
-                                            </label>
-                                        </li>
-                                        @endforeach
-                                    </ul>
-                                </div>
-                            </div>
-
-                            <!-- Bộ lọc Colors -->
-                            <div class="filter_type version_2">
-                                <h4><a href="#filter_3" data-bs-toggle="collapse" class="opened">Colors</a></h4>
-                                <div class="collapse show" id="filter_3">
-                                    <ul>
-                                        @foreach($colors as $color)
-                                        <li>
-                                            <label class="container_check">{{ $color->name }}
-                                                <input type="checkbox" class="color-filter" data-id="{{ $color->id }}">
                                                 <span class="checkmark"></span>
                                             </label>
                                         </li>
