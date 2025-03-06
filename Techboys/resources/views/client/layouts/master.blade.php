@@ -751,7 +751,7 @@
                         </ul>
                     </div>
                     <!-- .departments-menu -->
-                    <form class="navbar-search" method="get" action="home-v1.html">
+                    <form class="navbar-search" method="get" action="{{ route('client.product.search') }}">
                         <label class="sr-only screen-reader-text" for="search">Tìm kiếm:</label>
                         <div class="input-group">
                             <input type="text" id="search" class="form-control search-field product-search-field"
