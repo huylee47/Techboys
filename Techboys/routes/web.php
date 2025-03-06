@@ -139,6 +139,7 @@ Route::middleware(['auth', 'auth.admin'])->group(function () {
 Route::prefix('products')->group(function () {
     Route::get('/', [ProductController::class, 'productList'])->name('client.product.index');
     Route::get('/{slug}', [ProductController::class, 'productDetails'])->name('client.product.show');
+    Route::get('/search', [ProductController::class, 'search'])->name('client.product.search');
 });
 
 Route::prefix('cart')->group(function () {
