@@ -11,6 +11,7 @@ use App\Service\CartService;
 use App\Service\CartPriceService;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redis;
 
 class CheckoutService
 {
@@ -46,103 +47,39 @@ class CheckoutService
         ];
     }
 
+    public function storeTemporaryBill($request)
+    {
+        $userId = Auth::id();
+        $sessionId = session()->getId();
+        $tempBillId = now()->timestamp . ($userId ?? $sessionId);
+        $cartItems = $this->cartService->getCartItems();
+        $totals = $this->cartPriceService->calculateCartTotals($cartItems);
 
+        $billData = [
+            'id' => $tempBillId,
+            'user_id' => $userId ?? null,
+            'full_name' => $request->full_name,
+            'address' => $request->address,
+            'phone' => $request->phone,
+            'email' => $request->email,
+            'province_id' => $request->province_id,
+            'district_id' => $request->district_id,
+            'ward_id' => $request->ward_id,
+            'payment_method' => $request->payment_method,
+            'payment_status' => 0,
+            'status_id' => 1,
+            'cart_items' => $cartItems,
+            'total' => $totals['total']
+        ];
 
-    // public function storeBill($request)
-    // {
-    //     DB::beginTransaction();
-
-    //     try {
-    //         $userId = Auth::id();
-    //         $cartId = session()->get('cart_id');
-
-    //         $cartItems = Cart::where('cart_id', $cartId)->get();
-
-    //         if ($cartItems->isEmpty()) {
-    //             return response()->json([
-    //                 'success' => false,
-    //                 'message' => 'Giỏ hàng trống!'
-    //             ], 400);
-    //         }
-
-    //         $totals = $this->cartPriceService->calculateCartTotals($cartItems);
-    //         $total = $totals['total'];
-    //         $voucher = $totals['voucher'];
-
-    //         if ($total <= 0) {
-    //             return response()->json([
-    //                 'success' => false,
-    //                 'message' => 'Tổng tiền không hợp lệ!'
-    //             ], 400);
-    //         }
-
-    //         $bill = Bill::create([
-    //             'user_id' => $userId ?? null,
-    //             'total' => $total,
-    //             'full_name' => $request->full_name,
-    //             'address' => $request->address,
-    //             'phone' => $request->phone,
-    //             'email' => $request->email,
-    //             'province_id' => $request->province_id,
-    //             'district_id' => $request->district_id,
-    //             'ward_id' => $request->ward_id,
-    //             'payment_method' => $request->payment_method,
-    //             'status_id' => 1,
-    //             'payment_status' => 0,
-    //         ]);
-
-    //         foreach ($cartItems as $cartItem) {
-    //             $variant = ProductVariant::find($cartItem->variant_id);
-
-    //             if (!$variant) {
-    //                 DB::rollBack();
-    //                 return response()->json([
-    //                     'success' => false,
-    //                     'message' => 'Không tìm thấy biến thể sản phẩm!'
-    //                 ], 400);
-    //             }
-
-    //             if ($cartItem->quantity > $variant->stock) {
-    //                 DB::rollBack();
-    //                 return response()->json([
-    //                     'success' => false,
-    //                     'message' => 'Số lượng sản phẩm "' . $variant->name . '" trong giỏ hàng vượt quá số lượng tồn kho!'
-    //                 ], 400);
-    //             }
-
-    //             BillDetails::create([
-    //                 'bill_id' => $bill->id,
-    //                 'variant_id' => $cartItem->variant_id,
-    //                 'product_id' => $variant->product_id,
-    //                 'quantity' => $cartItem->quantity,
-    //                 'price' => $variant->price
-    //             ]);
-    //         }
-
-    //         if ($voucher) {
-    //             $voucherModel = Voucher::where('code', $voucher->code)->first();
-    //             if ($voucherModel && $voucherModel->quantity > 0) {
-    //                 $voucherModel->decrement('quantity');
-    //             }
-    //             session()->forget('voucher');
-    //         }
-
-
-
-    //         return response()->json([
-    //             'success' => true,
-    //             'message' => 'Đặt hàng thành công!',
-    //             'bill_id' => $bill->id,
-    //             'bill' => $bill
-    //         ]);
-    //     } catch (\Exception $e) {
-    //         DB::rollBack();
-    //         return response()->json([
-    //             'success' => false,
-    //             'message' => 'Có lỗi xảy ra: ' . $e->getMessage()
-    //         ], 500);
-    //     }
-    // }
+        $redisKey = $userId ? 'temp_bill_' . $userId : 'temp_bill_session_' . $sessionId;
+        Redis::setex($redisKey, 3600, json_encode($billData));
+        // return response()->json([
+        //     'bill' => $billData,
+        //     'key' => $redisKey
+        // ]);
+        return $this->VNPAY($billData);
+    }
 
 
     public function storeBill($request)
@@ -152,6 +89,7 @@ class CheckoutService
         try {
             $userId = Auth::id();
             $cartId = session()->get('cart_id');
+            $tempBillId = $request->id;
 
             if ($userId) {
                 $cartItems = Cart::where('user_id', $userId)->get();
@@ -179,6 +117,7 @@ class CheckoutService
             }
 
             $bill = Bill::create([
+                'id' => $tempBillId,
                 'user_id' => $userId ?? null,
                 'total' => $total,
                 'full_name' => $request->full_name,
@@ -284,7 +223,7 @@ class CheckoutService
             $bill->update([
                 'payment_status' => 1
             ]);
-            Cart::where($userId ? 'user_id' : 'cart_id', $userId ?? $cartId)->delete();
+            Cart::where(isset($userId) ? 'user_id' : 'cart_id', $userId ?? $cartId)->delete();
 
             DB::commit();
 
@@ -300,6 +239,44 @@ class CheckoutService
             ], 500);
         }
     }
+
+    public function handlePaymentFail($billId)
+    {
+        DB::beginTransaction();
+        try {
+            $bill = Bill::find($billId);
+            if (!$bill) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Không tìm thấy đơn hàng!'
+                ], 404);
+            }
+
+            BillDetails::where('bill_id', $billId)->delete();
+
+            $unpaidBills = Bill::where('payment_status', 0)
+                ->where('created_at', '<', now()->subMinutes(15))
+                ->get();
+
+            foreach ($unpaidBills as $bill) {
+                $bill->update(['status_id' => 0]);
+            }
+
+            DB::commit();
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Xử lý đơn hàng thất bại thành công!'
+            ]);
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return response()->json([
+                'success' => false,
+                'message' => 'Có lỗi xảy ra: ' . $e->getMessage()
+            ], 500);
+        }
+    }
+
 
     public function VNPAY($bill)
     {
@@ -371,6 +348,64 @@ class CheckoutService
             die();
         } else {
             echo json_encode($returnData);
+        }
+    }
+    public function handleOrderSuccess($billId)
+    {
+        $userId = Auth::id();
+        $cartId = session()->get('cart_id');
+        DB::beginTransaction();
+
+        try {
+            $bill = Bill::find($billId);
+
+            if (!$bill) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Không tìm thấy đơn hàng!'
+                ], 404);
+            }
+
+            $billDetails = BillDetails::where('bill_id', $billId)->get();
+
+            foreach ($billDetails as $billDetail) {
+                $variant = ProductVariant::find($billDetail->variant_id);
+                if ($variant) {
+                    $variant->decrement('stock', $billDetail->quantity);
+                }
+            }
+
+            Cart::where(isset($userId) ? 'user_id' : 'cart_id', $userId ?? $cartId)->delete();
+
+            DB::commit();
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Đơn hàng COD đã được xác nhận và số lượng sản phẩm đã cập nhật!'
+            ]);
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return response()->json([
+                'success' => false,
+                'message' => 'Có lỗi xảy ra: ' . $e->getMessage()
+            ], 500);
+        }
+    }
+
+    public function COD($billID)
+    {
+        try {
+            $response = $this->handleOrderSuccess($billID);
+            $data = json_decode($response->getContent(), true);
+
+            if (!$data['success']) {
+                return redirect()->route('home')->with('error', $data['message']);
+            }
+
+            return $response;
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->route('home')->with('error', 'Có lỗi xảy ra: ' . $e->getMessage());
         }
     }
 }
