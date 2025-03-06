@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thanh toán VNPAY thành công</title>
+    <title>Thanh toán COD thành công</title>
     <style>
         body {
             display: flex;
@@ -67,7 +67,7 @@
 <body>
     <div class="success-container">
         <div class="checkmark"></div>
-        <p class="message">Thanh toán thành công! Bạn sẽ được chuyển hướng về trang chủ sau 3 giây.</p>
+        <p class="message">Đặt hàng thành công! Bạn sẽ được chuyển hướng về trang chủ sau 3 giây.</p>
         <p>Nếu không, hãy nhấp vào <a href="{{ route('home') }}" class="redirect">đây</a>.</p>
     </div>
 </body>
