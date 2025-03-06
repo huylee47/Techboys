@@ -5,8 +5,6 @@ namespace App\Service;
 use App\Models\Cart;
 use App\Models\Promotion;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log;
-
 use Illuminate\Support\Str;
 
 
@@ -16,31 +14,26 @@ class CartService{
         public function __construct(CartPriceService $cartPriceService){
             $this->cartPriceService = $cartPriceService;
         }
-        public function getCartItems()
-        {
-            if (Auth::check()) {
-                $userId = Auth::id();
-                Log::info('User ID: ' . $userId);
-        
-                $cartItems = Cart::where('user_id', $userId)
-                    ->with('variant.product')
-                    ->get();
-            } else {
-                $cartId = session()->get('cart_id');
-                Log::info('Session cart_id: ' . $cartId);
-        
-                if (!$cartId) {
-                    return collect([]);
-                }
-        
-                $cartItems = Cart::where('cart_id', $cartId)
-                    ->with('variant.product')
-                    ->get();
+    public function getCartItems()
+    {
+        if (Auth::check()) {
+        $userId = Auth::id();
+        // $cartItems = Cart::where('user_id', $userId)->get();
+        $cartItems = Cart::where('user_id', $userId)->with('variant.product')->get();
+
+        } else {
+            $cartId = session()->get('cart_id');
+    
+            if (!$cartId) {
+                // return response()->json(['message' => 'Giỏ hàng trống'], 200);
+                return collect([]);
             }
-        
-            return $cartItems;
+    
+            $cartItems = Cart::where('cart_id', $cartId)->with('variant.product')->get();
         }
-        
+    
+        return  $cartItems;
+    }
     
     public function addToCart($request) {
         if (Auth::check()) {
@@ -77,10 +70,10 @@ class CartService{
                 'user_id' => $userId,
                 'cart_id' => $cartId,
                 'variant_id' => $request->variant_id,
-                'quantity' => 1,
+                'quantity' => $request->quantity,
             ]);
         }
-        session()->put('cart_id', $cartId);
+    
         return response()->json(['message' => 'Thêm vào giỏ hàng thành công']);
     }
     public function updateCart($request)
