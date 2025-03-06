@@ -120,50 +120,71 @@ class ProductController extends Controller
 
     public function productList(Request $request)
     {
-        $brandIds = $request->brand_id;
-        $modelIds = $request->model_id;
-
-        // Xây dựng truy vấn cơ bản
-        $query = Product::query();
-
-        if ($brandIds) {
-            $query->whereIn('brand_id', $brandIds);
-        }
-
-        if ($modelIds) {
-            $query->whereIn('model_id', $modelIds);
-        }
-
-        // Lấy sản phẩm với phân trang
-        $products = $query->paginate(21);
-
-        // Lấy các dữ liệu cần thiết cho bộ lọc
+        // Lấy danh sách thương hiệu và model
         $brands = Brand::all();
         $models = ProductModel::all();
 
-        // Kiểm tra xem có phải là yêu cầu AJAX không
-        if ($request->ajax()) {
-            return response()->json([
-                'products' => view('client.product.list', compact('products', 'brands', 'models'))->render(),
-                'pagination' => $products->links()->render(),
-            ]);
+        // Tạo query sản phẩm
+        $query = Product::query();
+
+        if ($request->has('brand_id') && !empty($request->brand_id)) {
+            $query->whereIn('brand_id', $request->brand_id);
         }
 
-        // Nếu không phải là yêu cầu AJAX, trả về view bình     
+        if ($request->has('model_id') && !empty($request->model_id)) {
+            $query->whereIn('model_id', $request->model_id);
+        }
+
+        // Phân trang sản phẩm
+        $products = $query->paginate(21);
+
+        // Trả về view chính
         return view('client.product.list', compact('products', 'brands', 'models'));
     }
 
     public function search(Request $request)
     {
-        $keyword = $request->input('keyword');
+        // Lấy từ khóa tìm kiếm đúng theo input của form
+        $keyword = trim($request->input('s')); // Thay đổi 'keyword' thành 's' cho đúng form
 
-        $products = Product::where('name', 'LIKE', "%{$keyword}%")
-            ->orWhere('description', 'LIKE', "%{$keyword}%")
-            ->orWhereHas('category', function ($query) use ($keyword) {
-                $query->where('name', 'LIKE', "%{$keyword}%");
-            })
-            ->paginate(12);
+        // Nếu không có từ khóa, trả về tất cả sản phẩm
+        if (!$keyword) {
+            return redirect()->route('client.product.list')->with('error', 'Vui lòng nhập từ khóa tìm kiếm.');
+        }
 
-        return view('client.product.search', compact('products', 'keyword'));
+        // Chỉ tìm kiếm theo tên sản phẩm
+        $products = Product::where('name', 'LIKE', "%{$keyword}%")->paginate(12);
+
+        // Lấy danh sách thương hiệu và model để hiển thị bộ lọc
+        $brands = Brand::all();
+        $models = ProductModel::all();
+
+        return view('client.product.search', compact('products', 'keyword', 'brands', 'models'));
+    }
+
+    public function filter(Request $request)
+    {
+        // Lấy danh sách thương hiệu và model
+        $brands = Brand::all();
+        $models = ProductModel::all();
+
+        // Tạo query sản phẩm
+        $query = Product::query();
+
+        if ($request->has('brand_id') && !empty($request->brand_id)) {
+            $query->whereIn('brand_id', $request->brand_id);
+        }
+
+        if ($request->has('model_id') && !empty($request->model_id)) {
+            $query->whereIn('model_id', $request->model_id);
+        }
+
+        // Phân trang sản phẩm
+        $products = $query->paginate(21);
+
+        // Trả về view dưới dạng JSON
+        return response()->json([
+            'html' => view('client.product.list', compact('products', 'brands', 'models'))->render()
+        ]);
     }
 }
