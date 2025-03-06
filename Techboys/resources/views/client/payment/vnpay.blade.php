@@ -61,13 +61,13 @@
     <script>
         setTimeout(function() {
             window.location.href = "{{ route('home') }}";
-        }, 5000);
+        }, 3000);
     </script>
 </head>
 <body>
     <div class="success-container">
         <div class="checkmark"></div>
-        <p class="message">Thanh toán thành công! Bạn sẽ được chuyển hướng về trang chủ sau 5 giây.</p>
+        <p class="message">Thanh toán thành công! Bạn sẽ được chuyển hướng về trang chủ sau 3 giây.</p>
         <p>Nếu không, hãy nhấp vào <a href="{{ route('home') }}" class="redirect">đây</a>.</p>
     </div>
 </body>
