@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thanh toán VNPAY thành công</title>
+    <title>Thanh toán thất bại</title>
     <style>
         body {
             display: flex;
@@ -14,17 +14,17 @@
             font-family: Arial, sans-serif;
             text-align: center;
         }
-        .success-container {
+        .error-container {
             background: white;
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
         }
-        .checkmark {
+        .error-icon {
             width: 100px;
             height: 100px;
             border-radius: 50%;
-            background: #4bff7b;
+            background: #ff4b4b;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -32,8 +32,8 @@
             position: relative;
             animation: popIn 0.5s ease-in-out;
         }
-        .checkmark::after {
-            content: '\2713';
+        .error-icon::after {
+            content: '\2716'; /* Dấu X */
             font-size: 50px;
             color: white;
             font-weight: bold;
@@ -50,6 +50,7 @@
         .message {
             font-size: 18px;
             margin-bottom: 15px;
+            color: #d9534f;
         }
         .redirect {
             color: #00a1e4;
@@ -65,9 +66,10 @@
     </script>
 </head>
 <body>
-    <div class="success-container">
-        <div class="checkmark"></div>
-        <p class="message">Thanh toán thành công! Bạn sẽ được chuyển hướng về trang chủ sau 3 giây.</p>
+    <div class="error-container">
+        <div class="error-icon"></div>
+        <p class="message">Thanh toán thất bại! Vui lòng thử lại hoặc kiểm tra phương thức thanh toán.</p>
+        <p>Bạn sẽ được chuyển hướng về trang chủ sau 3 giây.</p>
         <p>Nếu không, hãy nhấp vào <a href="{{ route('home') }}" class="redirect">đây</a>.</p>
     </div>
 </body>

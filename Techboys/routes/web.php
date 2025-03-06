@@ -196,4 +196,5 @@ Route::prefix('checkout')->group(function () {
 //     return view('client.payment.vnpay');
 // })->name('client.payment.vnpay');
 Route::get('/payment/vnpay/callback', [CheckoutController::class, 'vnpayCallback'])->name('client.payment.vnpay');
+Route::get('/payment/cod/success', [CheckoutController::class, 'codSuccess'])->name('client.payment.cod');
 
