@@ -70,8 +70,6 @@
         }
     </style>
     @yield('styles')
-    @yield('loading')
-
 </head>
 
 <body class="page-template-default error-page woocommerce-active single-product full-width normal">
@@ -1936,13 +1934,7 @@
     <script type="text/javascript" src="{{ url('') }}/home/assets/js/pace.min.js"></script>
     <script type="text/javascript" src="{{ url('') }}/home/assets/js/slick.min.js"></script>
     <script type="text/javascript" src="{{ url('') }}/home/assets/js/scripts.js"></script>
-    <script>
-        window.addEventListener("pageshow", function (event) {
-            if (event.persisted) {
-                location.reload();
-            }
-        });
-    </script>
+
 </body>
 
 </html>
