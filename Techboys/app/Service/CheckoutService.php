@@ -11,6 +11,7 @@ use App\Service\CartService;
 use App\Service\CartPriceService;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Redis;
 
 class CheckoutService
@@ -246,22 +247,38 @@ class CheckoutService
         try {
             $bill = Bill::find($billId);
             if (!$bill) {
+                Log::warning("handlePaymentFail - Không tìm thấy đơn hàng với billId: $billId");
                 return response()->json([
                     'success' => false,
                     'message' => 'Không tìm thấy đơn hàng!'
                 ], 404);
             }
-
-            BillDetails::where('bill_id', $billId)->delete();
-
+            
+            $billDetails = BillDetails::where('bill_id', $billId)->get();
+            Log::info("handlePaymentFail - Bill Details: " . json_encode($billDetails->toArray(), JSON_PRETTY_PRINT));
+            
+            foreach ($billDetails as $billDetail) {
+                $variant = ProductVariant::find($billDetail->variant_id);
+                if ($variant) {
+                    $variant->increment('stock', $billDetail->quantity);
+                    Log::info("Stock được cập nhật cho variant_id {$variant->id}, tăng: {$billDetail->quantity}");
+                } else {
+                    Log::error("handlePaymentFail - Không tìm thấy variant_id: " . json_encode($billDetail->variant_id));
+                }
+            }
+            
+            $deletedRows = BillDetails::where('bill_id', $billId)->delete();
+            Log::info("handlePaymentFail - Số lượng billDetails bị xóa: $deletedRows");
+            
             $unpaidBills = Bill::where('payment_status', 0)
                 ->where('created_at', '<', now()->subMinutes(15))
                 ->get();
-
+            
             foreach ($unpaidBills as $bill) {
                 $bill->update(['status_id' => 0]);
+                Log::info("handlePaymentFail - Cập nhật status_id = 0 cho billId: {$bill->id}");
             }
-
+            
             DB::commit();
 
             return response()->json([
@@ -276,6 +293,7 @@ class CheckoutService
             ], 500);
         }
     }
+
 
 
     public function VNPAY($bill)
@@ -354,55 +372,76 @@ class CheckoutService
     {
         $userId = Auth::id();
         $cartId = session()->get('cart_id');
+        // dd($cartId, $userId,$billId);
         DB::beginTransaction();
-
+    
         try {
-            $bill = Bill::find($billId);
-
+            Log::info("Bắt đầu xử lý đơn hàng với billId: {$billId['id']}");
+            $bill = Bill::find($billId['id']);
             if (!$bill) {
+                Log::error("Không tìm thấy đơn hàng với billId: {$billId['id']}");
                 return response()->json([
                     'success' => false,
                     'message' => 'Không tìm thấy đơn hàng!'
                 ], 404);
             }
-
-            $billDetails = BillDetails::where('bill_id', $billId)->get();
-
+            // Log::info("Tìm thấy bill, kiểm tra chi tiết đơn hàng...");
+        
+            $billDetails = BillDetails::where('bill_id', $billId['id'])->get();
+            if ($billDetails->isEmpty()) {
+                Log::error("Không tìm thấy chi tiết đơn hàng cho billId: {$billId['id']}");
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Không tìm thấy chi tiết đơn hàng!'
+                ], 404);
+            }
+            
+            // dd($bill, $billDetails);
+        
+            // Log::info('Bill Details:', $billDetails->toArray());
+        
             foreach ($billDetails as $billDetail) {
                 $variant = ProductVariant::find($billDetail->variant_id);
                 if ($variant) {
+                    Log::info("Trừ stock cho variant_id {$variant->id}, Số lượng: {$billDetail->quantity}");
                     $variant->decrement('stock', $billDetail->quantity);
+                } else {
+                    Log::error("Không tìm thấy variant_id: " . $billDetail->variant_id);
                 }
             }
-
+        
             Cart::where(isset($userId) ? 'user_id' : 'cart_id', $userId ?? $cartId)->delete();
-
+            
             DB::commit();
-
+            Log::info("Xử lý đơn hàng thành công!");
+        
             return response()->json([
                 'success' => true,
                 'message' => 'Đơn hàng COD đã được xác nhận và số lượng sản phẩm đã cập nhật!'
             ]);
         } catch (\Exception $e) {
             DB::rollBack();
+            Log::error("Lỗi khi xử lý đơn hàng: " . $e->getMessage());
             return response()->json([
                 'success' => false,
                 'message' => 'Có lỗi xảy ra: ' . $e->getMessage()
             ], 500);
         }
+        
     }
+    
 
     public function COD($billID)
     {
         try {
             $response = $this->handleOrderSuccess($billID);
             $data = json_decode($response->getContent(), true);
-
+            // dd($data);
             if (!$data['success']) {
                 return redirect()->route('home')->with('error', $data['message']);
             }
 
-            return $response;
+            // return $response;
         } catch (\Exception $e) {
             DB::rollBack();
             return redirect()->route('home')->with('error', 'Có lỗi xảy ra: ' . $e->getMessage());
