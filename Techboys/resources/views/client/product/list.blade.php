@@ -3,11 +3,9 @@
 @section('main')
 <div class="container margin_30">
     <div class="row">
-        <!-- SIDEBAR - BỘ LỌC -->
         <aside class="col-lg-3">
             <div class="filter_col">
                 <form action="{{ route('client.product.filter') }}" method="GET" id="filter-form">
-                    <!-- Bộ lọc Brands -->
                     <div class="filter_type version_2">
                         <h4><a href="#filter_2" data-bs-toggle="collapse" class="opened">Brands</a></h4>
                         <div class="collapse show" id="filter_2">
@@ -26,7 +24,6 @@
                         </div>
                     </div>
 
-                    <!-- Bộ lọc Models -->
                     <div class="filter_type version_2">
                         <h4><a href="#filter_4" data-bs-toggle="collapse" class="opened">Models</a></h4>
                         <div class="collapse show" id="filter_4">
@@ -54,7 +51,6 @@
             </div>
         </aside>
 
-        <!-- DANH SÁCH SẢN PHẨM -->
         <div class="col-lg-9">
             <div class="row small-gutters product" id="product_list">
                 @foreach($products as $product)
@@ -81,7 +77,6 @@
                 @endforeach
             </div>
 
-            <!-- PHÂN TRANG -->
             <div class="pagination__wrapper">
                 <ul class="pagination">
                     <li>
