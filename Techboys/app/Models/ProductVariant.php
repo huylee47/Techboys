@@ -32,12 +32,17 @@ class ProductVariant extends Model
     }
     public function getDiscountedPriceAttribute()
     {
-        $promotion = $this->product->promotion;
+        if (!$this->product) {
+            return $this->price;
+        }
     
-        if ($promotion && Carbon::now()->lt(Carbon::parse($promotion->end_date))) {
-            return $this->price * (1 - $promotion->discount_percent / 100);
+        $promotion = $this->product->promotion;
+        if ($promotion && now()->lt(Carbon::parse($promotion->end_date))) {
+            return round($this->price * (1 - $promotion->discount_percent / 100), 2);
         }
         return $this->price;
     }
+    
+
 
 }
