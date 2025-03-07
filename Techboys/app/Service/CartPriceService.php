@@ -3,6 +3,7 @@ namespace App\Service;
 
 use App\Models\Promotion;
 use App\Service\VoucherService;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Session;
 
 class CartPriceService
@@ -26,7 +27,7 @@ class CartPriceService
     
         foreach ($cartItems as $cart) {
             $promotion = Promotion::where('product_id', $cart->variant->product->id)->first();
-            if ($promotion) {
+            if ($promotion && now()->lt(Carbon::parse($promotion->end_date))) {
                 $cart->discounted_price = $cart->variant->price * (1 - $promotion->discount_percent / 100);
             } else {
                 $cart->discounted_price = $cart->variant->price;

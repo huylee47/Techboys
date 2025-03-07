@@ -55,13 +55,16 @@ class CheckoutController extends Controller
         }
     
         $response = $this->checkoutService->storeBill($request);
+        // dd($response);
         $billData = json_decode($response->getContent(), true);
+        // dd($billData);
     
         if (!$billData['success']) {
             return redirect()->route('home')->with('error', $billData['message']);
         }
     
-        $this->checkoutService->COD($billData['bill']);
+        $billcod = $this->checkoutService->COD($billData['bill']);
+        // dd($billcod);
         return redirect()->route('client.payment.cod', ['bill_id' => $billData['bill']]);
     }
     
@@ -114,6 +117,7 @@ class CheckoutController extends Controller
     
             return view('client.payment.vnpay');
         } else {
+            // return $this->checkoutService->handlePaymentFail($billData['id']);
             return view('client.payment.error');
         }
     }

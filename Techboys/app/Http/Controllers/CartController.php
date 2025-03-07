@@ -6,6 +6,7 @@ use App\Models\Cart;
 use App\Models\Promotion;
 use App\Service\CartService;
 use App\Service\CartPriceService;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -40,7 +41,7 @@ class CartController extends Controller
     
         foreach ($cartItems as $cart) {
             $promotion = Promotion::where('product_id', $cart->variant->product->id)->first();
-            if ($promotion) {
+            if ($promotion && now()->lt(Carbon::parse($promotion->end_date))) {
                 $cart->discounted_price = $cart->variant->price * (1 - $promotion->discount_percent / 100);
             } else {
                 $cart->discounted_price = $cart->variant->price;
@@ -48,7 +49,8 @@ class CartController extends Controller
         }
     
         $totals = $this->cartPriceService->calculateCartTotals($cartItems);
-    
+        // dd($totals);
+
         return view('client.cart.cart', [
             'cartItems' => $cartItems,
             'subtotal' => $totals['subtotal'],

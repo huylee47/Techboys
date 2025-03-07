@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Mail\ForgotPassword;
 use App\Mail\verifyAccount;
+use App\Models\Cart;
 use Illuminate\Auth\Notifications\VerifyEmail;
 use Mail;
 use App\Models\User;
