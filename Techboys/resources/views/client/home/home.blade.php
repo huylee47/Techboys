@@ -7,38 +7,18 @@
                 <div id="primary" class="content-area">
                     <main id="main" class="site-main">
                         <div class="home-v1-slider home-slider">
-                            <div class="slider-1"
-                                style="background-image: url(home/assets/images/slider/home-v1-background.jpg);">
-                                <img src="home/assets/images/slider/home-v1-img-1.png" alt="">
-                                <div class="caption">
-                                    <div class="title">Turn. Click. Expand. Smart modular design simplifies adding storage
-                                        for growing media.</div>
-                                    <div class="sub-title">Powerful Six Core processor, vibrant 4KUHD display output and
-                                        fast SSD elegantly cased in a soft alloy design.</div>
-                                    <div class="button">Get Yours now
-                                        <i class="tm tm-long-arrow-right"></i>
-                                    </div>
-                                    <div class="bottom-caption">Free shipping on US Terority</div>
+                            @foreach ($loadBanner as $banner)
+                                <div class="slider-1"
+                                    style=" height: 400px;background-size: 90% ;background-image:  url({{ asset('admin/assets/images/banner/' . $banner->image) }}); ">
+
+                                    {{-- <div class="caption">
+                                        <div class="button" style="margin-top: 300px">Mua sắm ngay
+                                            <i class="tm tm-long-arrow-right"></i>
+                                        </div>
+
+                                    </div> --}}
                                 </div>
-                            </div>
-                            <!-- .slider-1 -->
-                            <div class="slider-1 slider-2"
-                                style="background-image: url(home/assets/images/slider/home-v1-background.jpg);">
-                                <img src="home/assets/images/slider/home-v1-img-2.png" alt="">
-                                <div class="caption">
-                                    <div class="title">The new-tech gift you
-                                        <br> are wishing for is
-                                        <br> right here
-                                    </div>
-                                    <div class="sub-title">Big screens in incredibly slim designs
-                                        <br>that in your hand.
-                                    </div>
-                                    <div class="button">Browse now
-                                        <i class="tm tm-long-arrow-right"></i>
-                                    </div>
-                                    <div class="bottom-caption">Free shipping on US Terority </div>
-                                </div>
-                            </div>
+                            @endforeach
                             <!-- .slider-2 -->
                         </div>
                         <!-- .home-v1-slider -->
@@ -107,7 +87,7 @@
                                 <div class="deals-carousel-inner-block">
                                     <header class="section-header">
                                         <h2 class="section-title">
-                                            <strong>Deals</strong> of the week
+                                            <strong>Sản phẩm</strong>  giảm giá
                                         </h2>
                                         <nav class="custom-slick-nav"></nav>
                                     </header>
@@ -119,300 +99,82 @@
                                                     <div class="products" data-ride="tm-slick-carousel"
                                                         data-wrap=".products"
                                                         data-slick="{&quot;infinite&quot;:false,&quot;slidesToShow&quot;:1,&quot;slidesToScroll&quot;:1,&quot;dots&quot;:false,&quot;arrows&quot;:true,&quot;prevArrow&quot;:&quot;&lt;a href=\&quot;#\&quot;&gt;&lt;i class=\&quot;tm tm-arrow-left\&quot;&gt;&lt;\/i&gt;&lt;\/a&gt;&quot;,&quot;nextArrow&quot;:&quot;&lt;a href=\&quot;#\&quot;&gt;&lt;i class=\&quot;tm tm-arrow-right\&quot;&gt;&lt;\/i&gt;&lt;\/a&gt;&quot;,&quot;appendArrows&quot;:&quot;#sale-with-timer-carousel .custom-slick-nav&quot;,&quot;responsive&quot;:[{&quot;breakpoint&quot;:767,&quot;settings&quot;:{&quot;slidesToShow&quot;:1,&quot;slidesToScroll&quot;:1}},{&quot;breakpoint&quot;:1023,&quot;settings&quot;:{&quot;slidesToShow&quot;:2,&quot;slidesToScroll&quot;:2}}]}">
-                                                        <div class="sale-product-with-timer product">
-                                                            <a class="woocommerce-LoopProduct-link"
-                                                                href="single-product-fullwidth.html">
-                                                                <div class="sale-product-with-timer-header">
-                                                                    <div class="price-and-title">
-                                                                        <span class="price">
-                                                                            <ins>
-                                                                                <span
-                                                                                    class="woocommerce-Price-amount amount">
-                                                                                    <span
-                                                                                        class="woocommerce-Price-currencySymbol">$</span>425.89</span>
-                                                                            </ins>
-                                                                            <del>
-                                                                                <span
-                                                                                    class="woocommerce-Price-amount amount">
-                                                                                    <span
-                                                                                        class="woocommerce-Price-currencySymbol">$</span>545.89</span>
-                                                                            </del>
-                                                                        </span>
-                                                                        <!-- /.price -->
-                                                                        <h2 class="woocommerce-loop-product__title">Tablet
-                                                                            Red EliteBook Revolve</h2>
-                                                                    </div>
-                                                                    <!-- /.price-and-title -->
-                                                                    <div class="sale-label-outer">
-                                                                        <div class="sale-saved-label">
-                                                                            <span class="saved-label-text">Save</span>
-                                                                            <span class="saved-label-amount">
-                                                                                <span
-                                                                                    class="woocommerce-Price-amount amount">
-                                                                                    <span
-                                                                                        class="woocommerce-Price-currencySymbol">$</span>120.00</span>
-                                                                            </span>
-                                                                        </div>
-                                                                        <!-- /.sale-saved-label -->
-                                                                    </div>
-                                                                    <!-- /.sale-label-outer -->
-                                                                </div>
-                                                                <!-- /.sale-product-with-timer-header -->
-                                                                <img width="224" height="197" alt=""
-                                                                    class="wp-post-image"
-                                                                    src="home/assets/images/products/1.jpg">
-                                                                <div class="deal-progress">
-                                                                    <div class="deal-stock">
-                                                                        <div class="stock-sold">Already Sold:
-                                                                            <strong>0</strong>
-                                                                        </div>
-                                                                        <div class="stock-available">Available:
-                                                                            <strong>1000</strong>
-                                                                        </div>
-                                                                    </div>
-                                                                    <!-- /.deal-stock -->
-                                                                    <div class="progress">
-                                                                        <span style="width:0%" class="progress-bar">0</span>
-                                                                    </div>
-                                                                    <!-- /.progress -->
-                                                                </div>
-                                                                <!-- /.deal-progress -->
-                                                                <div class="deal-countdown-timer">
-                                                                    <div class="marketing-text">
-                                                                        <span class="line-1">Hurry up!</span>
-                                                                        <span class="line-2">Offers ends in:</span>
-                                                                    </div>
-                                                                    <!-- /.marketing-text -->
-                                                                    <span class="deal-time-diff"
-                                                                        style="display:none;">28800</span>
-                                                                    <div class="deal-countdown countdown"></div>
-                                                                </div>
-                                                                <!-- /.deal-countdown-timer -->
-                                                            </a>
-                                                            <!-- /.woocommerce-LoopProduct-link -->
+                                                        @if ($discountedProducts->isEmpty()) 
+                                                        <div class="alert alert-info" role="alert">
+                                                            Chưa có sản phẩm nào được giảm giá.
                                                         </div>
+                                                    @else
+                                                        @foreach ($discountedProducts as $dp)
+                                                            @php
+                                                                $timeDiff = strtotime($dp->promotion->end_date) - time();
+                                                            @endphp
+                                                    
+                                                            @if ($timeDiff > 0)
+                                                                <div class="sale-product-with-timer product">
+                                                                    <a class="woocommerce-LoopProduct-link"
+                                                                        href="{{ route('client.product.show', ['slug' => $dp->slug]) }}">
+                                                                            
+                                                                        <div class="sale-product-with-timer-header">
+                                                                            <div class="price-and-title">
+                                                                                <span class="price">
+                                                                                    <ins>
+                                                                                        <span class="woocommerce-Price-amount amount">
+                                                                                            <span class="woocommerce-Price-currencySymbol">Chỉ với</span>
+                                                                                            {{ number_format($dp->variant->min('discounted_price'), 0, ',', '.') }} đ
+                                                                                        </span>
+                                                                                    </ins>
+                                                                                    <del>
+                                                                                        <span class="woocommerce-Price-amount amount">
+                                                                                            <span class="woocommerce-Price-currencySymbol">
+                                                                                                {{ number_format($dp->variant->min('price'), 0, ',', '.') }} đ
+                                                                                            </span>
+                                                                                        </span>
+                                                                                    </del>
+                                                                                </span>
+                                                                                <!-- /.price -->
+                                                                                <h2 class="woocommerce-loop-product__title">{{ $dp->name }}</h2>
+                                                                            </div>
+                                                                            <!-- /.price-and-title -->
+                                                                            <div class="sale-label-outer">
+                                                                                <div class="sale-saved-label">
+                                                                                    <span class="saved-label-text">Giảm</span>
+                                                                                    <span class="saved-label-amount">
+                                                                                        <span class="woocommerce-Price-amount amount">
+                                                                                            {{ $dp->promotion->discount_percent }} %
+                                                                                        </span>
+                                                                                    </span>
+                                                                                </div>
+                                                                                <!-- /.sale-saved-label -->
+                                                                            </div>
+                                                                            <!-- /.sale-label-outer -->
+                                                                        </div>
+                                                                        <!-- /.sale-product-with-timer-header -->
+                                                                        <img class="img-fluid fixed-sale-image" 
+                                                                            src="{{ url('') }}/admin/assets/images/product/{{ $dp->img }}" 
+                                                                            alt="Product Image">
+                                                                        <!-- /.deal-progress -->
+                                                                        <div class="deal-countdown-timer">
+                                                                            <div class="marketing-text">
+                                                                                <span class="line-1">Nhanh nào!</span>
+                                                                                <span class="line-2">Giảm giá kết thúc trong:</span>
+                                                                            </div>
+                                                                            <!-- /.marketing-text -->
+                                                                            <span class="deal-time-diff"
+                                                                                style="display:none;">{{ $timeDiff }}</span>
+                                                                            <div class="deal-countdown countdown"></div>
+                                                                        </div>
+                                                                        <!-- /.deal-countdown-timer -->
+                                                                    </a>
+                                                                    <!-- /.woocommerce-LoopProduct-link -->
+                                                                </div>
+                                                            @endif
+                                                        @endforeach
+                                                    @endif
+                                                        {{-- 2 --}}
                                                         <!-- /.sale-product-with-timer -->
-                                                        <div class="sale-product-with-timer product">
-                                                            <a class="woocommerce-LoopProduct-link"
-                                                                href="single-product-fullwidth.html">
-                                                                <div class="sale-product-with-timer-header">
-                                                                    <div class="price-and-title">
-                                                                        <span class="price">
-                                                                            <ins>
-                                                                                <span
-                                                                                    class="woocommerce-Price-amount amount">
-                                                                                    <span
-                                                                                        class="woocommerce-Price-currencySymbol">$</span>425.89</span>
-                                                                            </ins>
-                                                                            <del>
-                                                                                <span
-                                                                                    class="woocommerce-Price-amount amount">
-                                                                                    <span
-                                                                                        class="woocommerce-Price-currencySymbol">$</span>545.89</span>
-                                                                            </del>
-                                                                        </span>
-                                                                        <!-- /.price -->
-                                                                        <h2 class="woocommerce-loop-product__title">Tablet
-                                                                            Red EliteBook Revolve</h2>
-                                                                    </div>
-                                                                    <!-- /.price-and-title -->
-                                                                    <div class="sale-label-outer">
-                                                                        <div class="sale-saved-label">
-                                                                            <span class="saved-label-text">Save</span>
-                                                                            <span class="saved-label-amount">
-                                                                                <span
-                                                                                    class="woocommerce-Price-amount amount">
-                                                                                    <span
-                                                                                        class="woocommerce-Price-currencySymbol">$</span>120.00</span>
-                                                                            </span>
-                                                                        </div>
-                                                                        <!-- /.sale-saved-label -->
-                                                                    </div>
-                                                                    <!-- /.sale-label-outer -->
-                                                                </div>
-                                                                <!-- /.sale-product-with-timer-header -->
-                                                                <img width="224" height="197" alt=""
-                                                                    class="wp-post-image"
-                                                                    src="home/assets/images/products/2.jpg">
-                                                                <div class="deal-progress">
-                                                                    <div class="deal-stock">
-                                                                        <div class="stock-sold">Already Sold:
-                                                                            <strong>0</strong>
-                                                                        </div>
-                                                                        <div class="stock-available">Available:
-                                                                            <strong>1000</strong>
-                                                                        </div>
-                                                                    </div>
-                                                                    <!-- /.deal-stock -->
-                                                                    <div class="progress">
-                                                                        <span style="width:0%"
-                                                                            class="progress-bar">0</span>
-                                                                    </div>
-                                                                    <!-- /.progress -->
-                                                                </div>
-                                                                <!-- /.deal-progress -->
-                                                                <div class="deal-countdown-timer">
-                                                                    <div class="marketing-text">
-                                                                        <span class="line-1">Hurry up!</span>
-                                                                        <span class="line-2">Offers ends in:</span>
-                                                                    </div>
-                                                                    <!-- /.marketing-text -->
-                                                                    <span class="deal-time-diff"
-                                                                        style="display:none;">28800</span>
-                                                                    <div class="deal-countdown countdown"></div>
-                                                                </div>
-                                                                <!-- /.deal-countdown-timer -->
-                                                            </a>
-                                                            <!-- /.woocommerce-LoopProduct-link -->
-                                                        </div>
+
                                                         <!-- /.sale-product-with-timer -->
-                                                        <div class="sale-product-with-timer product">
-                                                            <a class="woocommerce-LoopProduct-link"
-                                                                href="single-product-fullwidth.html">
-                                                                <div class="sale-product-with-timer-header">
-                                                                    <div class="price-and-title">
-                                                                        <span class="price">
-                                                                            <ins>
-                                                                                <span
-                                                                                    class="woocommerce-Price-amount amount">
-                                                                                    <span
-                                                                                        class="woocommerce-Price-currencySymbol">$</span>425.89</span>
-                                                                            </ins>
-                                                                            <del>
-                                                                                <span
-                                                                                    class="woocommerce-Price-amount amount">
-                                                                                    <span
-                                                                                        class="woocommerce-Price-currencySymbol">$</span>545.89</span>
-                                                                            </del>
-                                                                        </span>
-                                                                        <!-- /.price -->
-                                                                        <h2 class="woocommerce-loop-product__title">Tablet
-                                                                            Red EliteBook Revolve</h2>
-                                                                    </div>
-                                                                    <!-- /.price-and-title -->
-                                                                    <div class="sale-label-outer">
-                                                                        <div class="sale-saved-label">
-                                                                            <span class="saved-label-text">Save</span>
-                                                                            <span class="saved-label-amount">
-                                                                                <span
-                                                                                    class="woocommerce-Price-amount amount">
-                                                                                    <span
-                                                                                        class="woocommerce-Price-currencySymbol">$</span>120.00</span>
-                                                                            </span>
-                                                                        </div>
-                                                                        <!-- /.sale-saved-label -->
-                                                                    </div>
-                                                                    <!-- /.sale-label-outer -->
-                                                                </div>
-                                                                <!-- /.sale-product-with-timer-header -->
-                                                                <img width="224" height="197" alt=""
-                                                                    class="wp-post-image"
-                                                                    src="home/assets/images/products/3.jpg">
-                                                                <div class="deal-progress">
-                                                                    <div class="deal-stock">
-                                                                        <div class="stock-sold">Already Sold:
-                                                                            <strong>0</strong>
-                                                                        </div>
-                                                                        <div class="stock-available">Available:
-                                                                            <strong>1000</strong>
-                                                                        </div>
-                                                                    </div>
-                                                                    <!-- /.deal-stock -->
-                                                                    <div class="progress">
-                                                                        <span style="width:0%"
-                                                                            class="progress-bar">0</span>
-                                                                    </div>
-                                                                    <!-- /.progress -->
-                                                                </div>
-                                                                <!-- /.deal-progress -->
-                                                                <div class="deal-countdown-timer">
-                                                                    <div class="marketing-text">
-                                                                        <span class="line-1">Hurry up!</span>
-                                                                        <span class="line-2">Offers ends in:</span>
-                                                                    </div>
-                                                                    <!-- /.marketing-text -->
-                                                                    <span class="deal-time-diff"
-                                                                        style="display:none;">28800</span>
-                                                                    <div class="deal-countdown countdown"></div>
-                                                                </div>
-                                                                <!-- /.deal-countdown-timer -->
-                                                            </a>
-                                                            <!-- /.woocommerce-LoopProduct-link -->
-                                                        </div>
-                                                        <!-- /.sale-product-with-timer -->
-                                                        <div class="sale-product-with-timer product">
-                                                            <a class="woocommerce-LoopProduct-link"
-                                                                href="single-product-fullwidth.html">
-                                                                <div class="sale-product-with-timer-header">
-                                                                    <div class="price-and-title">
-                                                                        <span class="price">
-                                                                            <ins>
-                                                                                <span
-                                                                                    class="woocommerce-Price-amount amount">
-                                                                                    <span
-                                                                                        class="woocommerce-Price-currencySymbol">$</span>425.89</span>
-                                                                            </ins>
-                                                                            <del>
-                                                                                <span
-                                                                                    class="woocommerce-Price-amount amount">
-                                                                                    <span
-                                                                                        class="woocommerce-Price-currencySymbol">$</span>545.89</span>
-                                                                            </del>
-                                                                        </span>
-                                                                        <!-- /.price -->
-                                                                        <h2 class="woocommerce-loop-product__title">Tablet
-                                                                            Red EliteBook Revolve</h2>
-                                                                    </div>
-                                                                    <!-- /.price-and-title -->
-                                                                    <div class="sale-label-outer">
-                                                                        <div class="sale-saved-label">
-                                                                            <span class="saved-label-text">Save</span>
-                                                                            <span class="saved-label-amount">
-                                                                                <span
-                                                                                    class="woocommerce-Price-amount amount">
-                                                                                    <span
-                                                                                        class="woocommerce-Price-currencySymbol">$</span>120.00</span>
-                                                                            </span>
-                                                                        </div>
-                                                                        <!-- /.sale-saved-label -->
-                                                                    </div>
-                                                                    <!-- /.sale-label-outer -->
-                                                                </div>
-                                                                <!-- /.sale-product-with-timer-header -->
-                                                                <img width="224" height="197" alt=""
-                                                                    class="wp-post-image"
-                                                                    src="home/assets/images/products/4.jpg">
-                                                                <div class="deal-progress">
-                                                                    <div class="deal-stock">
-                                                                        <div class="stock-sold">Already Sold:
-                                                                            <strong>0</strong>
-                                                                        </div>
-                                                                        <div class="stock-available">Available:
-                                                                            <strong>1000</strong>
-                                                                        </div>
-                                                                    </div>
-                                                                    <!-- /.deal-stock -->
-                                                                    <div class="progress">
-                                                                        <span style="width:0%"
-                                                                            class="progress-bar">0</span>
-                                                                    </div>
-                                                                    <!-- /.progress -->
-                                                                </div>
-                                                                <!-- /.deal-progress -->
-                                                                <div class="deal-countdown-timer">
-                                                                    <div class="marketing-text">
-                                                                        <span class="line-1">Hurry up!</span>
-                                                                        <span class="line-2">Offers ends in:</span>
-                                                                    </div>
-                                                                    <!-- /.marketing-text -->
-                                                                    <span class="deal-time-diff"
-                                                                        style="display:none;">28800</span>
-                                                                    <div class="deal-countdown countdown"></div>
-                                                                </div>
-                                                                <!-- /.deal-countdown-timer -->
-                                                            </a>
-                                                            <!-- /.woocommerce-LoopProduct-link -->
-                                                        </div>
+
                                                         <!-- /.sale-product-with-timer -->
                                                     </div>
                                                     <!-- /.products -->
@@ -424,16 +186,21 @@
                                         <!-- /.slick-list -->
                                     </div>
                                     <!-- /.sale-products-with-timer-carousel -->
+                                    @if ($discountedProducts->isEmpty())
+                                        <p></p>
+                                    @else
                                     <footer class="section-footer">
                                         <nav class="custom-slick-pagination">
                                             <a class="slider-prev left" href="#"
                                                 data-target="#sale-with-timer-carousel .products">
-                                                <i class="tm tm-arrow-left"></i>Previous deal</a>
+                                                <i class="tm tm-arrow-left"></i>Trước đó</a>
                                             <a class="slider-next right" href="#"
-                                                data-target="#sale-with-timer-carousel .products">Next deal<i
+                                                data-target="#sale-with-timer-carousel .products">Xem tiếp<i
                                                     class="tm tm-arrow-right"></i></a>
                                         </nav>
                                     </footer>
+                                    @endif
+
                                     <!-- /.section-footer -->
                                 </div>
                                 <!-- /.deals-carousel-inner-block -->
@@ -444,16 +211,14 @@
                                     <header class="section-header">
                                         <ul role="tablist" class="nav justify-content-end">
                                             <li class="nav-item">
-                                                <a class="nav-link active" href="#tab-59f89f0881f930"
-                                                    data-toggle="tab">New Arrivals</a>
+                                                <a class="nav-link active" href="#tab-59f89f0881f930" data-toggle="tab">Sản phẩm mới</a>
                                             </li>
-                                            <li class="nav-item">
+                                            {{-- <li class="nav-item">
                                                 <a class="nav-link " href="#tab-59f89f0881f931" data-toggle="tab">On
                                                     Sale</a>
-                                            </li>
+                                            </li> --}}
                                             <li class="nav-item">
-                                                <a class="nav-link " href="#tab-59f89f0881f932" data-toggle="tab">Best
-                                                    Rated</a>
+                                                <a class="nav-link " href="#tab-59f89f0881f932" data-toggle="tab">Đánh giá cao</a>
                                             </li>
                                         </ul>
                                     </header>
@@ -468,27 +233,24 @@
                                                         <div class="products">
                                                             @foreach ($newProduct as $np)
                                                                 <div class="product">
-                                                                    <a href="{{route('client.product.show',['slug' => $np->slug])}}"
+                                                                    <a href="{{route('client.product.show', ['slug' => $np->slug])}}"
                                                                         class="woocommerce-LoopProduct-link">
                                                                         <img src="{{ url('') }}/admin/assets/images/product/{{ $np->img }}"
-                                                                            width="100%" class="fixed-image"
-                                                                            alt="">
+                                                                            width="100%" class="fixed-image" alt="">
                                                                         <span class="price">
                                                                             <ins>
-                                                                                <span class="amount"> </span>
+                                                                                <span class="amount">Chỉ từ  </span>
                                                                             </ins>
-                                                                            <span class="amount"> 456.00</span>
+                                                                            <span class="amount">{{ number_format($np->variant->min('discounted_price'), 0, ',', '.') . ' đ' }}</span>
                                                                         </span>
                                                                         <!-- /.price -->
                                                                         <h2 class="woocommerce-loop-product__title">
-                                                                            {{ $np->name }}</h2>
+                                                                            {{ $np->name }}
+                                                                        </h2>
                                                                     </a>
                                                                     <div class="hover-area">
-                                                                        <a class="button add_to_cart_button"
-                                                                            href="cart.html" rel="nofollow">Thêm vào giỏ
-                                                                            hàng</a>
-                                                                        <a class="add-to-compare-link"
-                                                                            href="compare.html">Add to compare</a>
+                                                                        <a class="button add_to_cart_button" href="{{route('client.product.show', ['slug' => $np->slug])}}"
+                                                                            rel="nofollow">Xem chi tiết</a>
                                                                     </div>
                                                                 </div>
                                                             @endforeach
@@ -503,7 +265,7 @@
                                             <!-- .products-carousel -->
                                         </div>
                                         <!-- .tab-pane -->
-                                        <div id="tab-59f89f0881f931" class="tab-pane " role="tabpanel">
+                                        {{-- <div id="tab-59f89f0881f931" class="tab-pane " role="tabpanel">
                                             <div class="products-carousel" data-ride="tm-slick-carousel"
                                                 data-wrap=".products"
                                                 data-slick="{&quot;infinite&quot;:false,&quot;rows&quot;:2,&quot;slidesPerRow&quot;:5,&quot;slidesToShow&quot;:1,&quot;slidesToScroll&quot;:1,&quot;dots&quot;:true,&quot;arrows&quot;:false,&quot;responsive&quot;:[{&quot;breakpoint&quot;:1023,&quot;settings&quot;:{&quot;slidesPerRow&quot;:2}},{&quot;breakpoint&quot;:1169,&quot;settings&quot;:{&quot;slidesPerRow&quot;:4}},{&quot;breakpoint&quot;:1400,&quot;settings&quot;:{&quot;slidesPerRow&quot;:3}}]}">
@@ -518,8 +280,8 @@
                                                                 <a href="single-product-fullwidth.html"
                                                                     class="woocommerce-LoopProduct-link">
                                                                     <img src="home/assets/images/products/11.jpg"
-                                                                        width="224" height="197"
-                                                                        class="wp-post-image" alt="">
+                                                                        width="224" height="197" class="wp-post-image"
+                                                                        alt="">
                                                                     <span class="price">
                                                                         <ins>
                                                                             <span class="amount"> </span>
@@ -532,9 +294,8 @@
                                                                 </a>
                                                                 <div class="hover-area">
                                                                     <a class="button add_to_cart_button" href="cart.html"
-                                                                        rel="nofollow">Thêm vào giỏ hàng</a>
-                                                                    <a class="add-to-compare-link" href="compare.html">Add
-                                                                        to compare</a>
+                                                                        rel="nofollow">Xem chi tiết</a>
+
                                                                 </div>
                                                             </div>
                                                             <!-- /.product-outer -->
@@ -550,9 +311,8 @@
                                                                             <span
                                                                                 class="woocommerce-Price-currencySymbol">$</span>150.04</span>
                                                                     </span>
-                                                                    <img src="home/assets/images/products/2.jpg"
-                                                                        width="224" height="197"
-                                                                        class="wp-post-image" alt="">
+                                                                    <img src="home/assets/images/products/2.jpg" width="224"
+                                                                        height="197" class="wp-post-image" alt="">
                                                                     <span class="price">
                                                                         <ins>
                                                                             <span class="amount"> 309.95</span>
@@ -568,9 +328,8 @@
                                                                 </a>
                                                                 <div class="hover-area">
                                                                     <a class="button add_to_cart_button" href="cart.html"
-                                                                        rel="nofollow">Thêm vào giỏ hàng</a>
-                                                                    <a class="add-to-compare-link" href="compare.html">Add
-                                                                        to compare</a>
+                                                                        rel="nofollow">Xem chi tiết</a>
+
                                                                 </div>
                                                             </div>
                                                             <!-- /.product-outer -->
@@ -582,8 +341,8 @@
                                                                 <a href="single-product-fullwidth.html"
                                                                     class="woocommerce-LoopProduct-link">
                                                                     <img src="home/assets/images/products/16.jpg"
-                                                                        width="224" height="197"
-                                                                        class="wp-post-image" alt="">
+                                                                        width="224" height="197" class="wp-post-image"
+                                                                        alt="">
                                                                     <span class="price">
                                                                         <ins>
                                                                             <span class="amount"> </span>
@@ -596,9 +355,8 @@
                                                                 </a>
                                                                 <div class="hover-area">
                                                                     <a class="button add_to_cart_button" href="cart.html"
-                                                                        rel="nofollow">Thêm vào giỏ hàng</a>
-                                                                    <a class="add-to-compare-link" href="compare.html">Add
-                                                                        to compare</a>
+                                                                        rel="nofollow">Xem chi tiết</a>
+
                                                                 </div>
                                                             </div>
                                                             <!-- /.product-outer -->
@@ -610,8 +368,8 @@
                                                                 <a href="single-product-fullwidth.html"
                                                                     class="woocommerce-LoopProduct-link">
                                                                     <img src="home/assets/images/products/10.jpg"
-                                                                        width="224" height="197"
-                                                                        class="wp-post-image" alt="">
+                                                                        width="224" height="197" class="wp-post-image"
+                                                                        alt="">
                                                                     <span class="price">
                                                                         <ins>
                                                                             <span class="amount"> </span>
@@ -624,9 +382,8 @@
                                                                 </a>
                                                                 <div class="hover-area">
                                                                     <a class="button add_to_cart_button" href="cart.html"
-                                                                        rel="nofollow">Thêm vào giỏ hàng</a>
-                                                                    <a class="add-to-compare-link" href="compare.html">Add
-                                                                        to compare</a>
+                                                                        rel="nofollow">Xem chi tiết</a>
+
                                                                 </div>
                                                             </div>
                                                             <!-- /.product-outer -->
@@ -637,9 +394,8 @@
                                                                 </div>
                                                                 <a href="single-product-fullwidth.html"
                                                                     class="woocommerce-LoopProduct-link">
-                                                                    <img src="home/assets/images/products/8.jpg"
-                                                                        width="224" height="197"
-                                                                        class="wp-post-image" alt="">
+                                                                    <img src="home/assets/images/products/8.jpg" width="224"
+                                                                        height="197" class="wp-post-image" alt="">
                                                                     <span class="price">
                                                                         <ins>
                                                                             <span class="amount"> </span>
@@ -652,9 +408,8 @@
                                                                 </a>
                                                                 <div class="hover-area">
                                                                     <a class="button add_to_cart_button" href="cart.html"
-                                                                        rel="nofollow">Thêm vào giỏ hàng</a>
-                                                                    <a class="add-to-compare-link" href="compare.html">Add
-                                                                        to compare</a>
+                                                                        rel="nofollow">Xem chi tiết</a>
+
                                                                 </div>
                                                             </div>
                                                             <!-- /.product-outer -->
@@ -665,9 +420,8 @@
                                                                 </div>
                                                                 <a href="single-product-fullwidth.html"
                                                                     class="woocommerce-LoopProduct-link">
-                                                                    <img src="home/assets/images/products/5.jpg"
-                                                                        width="224" height="197"
-                                                                        class="wp-post-image" alt="">
+                                                                    <img src="home/assets/images/products/5.jpg" width="224"
+                                                                        height="197" class="wp-post-image" alt="">
                                                                     <span class="price">
                                                                         <ins>
                                                                             <span class="amount"> </span>
@@ -680,9 +434,8 @@
                                                                 </a>
                                                                 <div class="hover-area">
                                                                     <a class="button add_to_cart_button" href="cart.html"
-                                                                        rel="nofollow">Thêm vào giỏ hàng</a>
-                                                                    <a class="add-to-compare-link" href="compare.html">Add
-                                                                        to compare</a>
+                                                                        rel="nofollow">Xem chi tiết</a>
+
                                                                 </div>
                                                             </div>
                                                             <!-- /.product-outer -->
@@ -698,9 +451,8 @@
                                                                             <span
                                                                                 class="woocommerce-Price-currencySymbol">$</span>150.04</span>
                                                                     </span>
-                                                                    <img src="home/assets/images/products/7.jpg"
-                                                                        width="224" height="197"
-                                                                        class="wp-post-image" alt="">
+                                                                    <img src="home/assets/images/products/7.jpg" width="224"
+                                                                        height="197" class="wp-post-image" alt="">
                                                                     <span class="price">
                                                                         <ins>
                                                                             <span class="amount"> 789.95</span>
@@ -716,9 +468,8 @@
                                                                 </a>
                                                                 <div class="hover-area">
                                                                     <a class="button add_to_cart_button" href="cart.html"
-                                                                        rel="nofollow">Thêm vào giỏ hàng</a>
-                                                                    <a class="add-to-compare-link" href="compare.html">Add
-                                                                        to compare</a>
+                                                                        rel="nofollow">Xem chi tiết</a>
+
                                                                 </div>
                                                             </div>
                                                             <!-- /.product-outer -->
@@ -729,9 +480,8 @@
                                                                 </div>
                                                                 <a href="single-product-fullwidth.html"
                                                                     class="woocommerce-LoopProduct-link">
-                                                                    <img src="home/assets/images/products/1.jpg"
-                                                                        width="224" height="197"
-                                                                        class="wp-post-image" alt="">
+                                                                    <img src="home/assets/images/products/1.jpg" width="224"
+                                                                        height="197" class="wp-post-image" alt="">
                                                                     <span class="price">
                                                                         <ins>
                                                                             <span class="amount"> </span>
@@ -744,9 +494,8 @@
                                                                 </a>
                                                                 <div class="hover-area">
                                                                     <a class="button add_to_cart_button" href="cart.html"
-                                                                        rel="nofollow">Thêm vào giỏ hàng</a>
-                                                                    <a class="add-to-compare-link" href="compare.html">Add
-                                                                        to compare</a>
+                                                                        rel="nofollow">Xem chi tiết</a>
+
                                                                 </div>
                                                             </div>
                                                             <!-- /.product-outer -->
@@ -758,8 +507,8 @@
                                                                 <a href="single-product-fullwidth.html"
                                                                     class="woocommerce-LoopProduct-link">
                                                                     <img src="home/assets/images/products/13.jpg"
-                                                                        width="224" height="197"
-                                                                        class="wp-post-image" alt="">
+                                                                        width="224" height="197" class="wp-post-image"
+                                                                        alt="">
                                                                     <span class="price">
                                                                         <ins>
                                                                             <span class="amount"> </span>
@@ -772,9 +521,8 @@
                                                                 </a>
                                                                 <div class="hover-area">
                                                                     <a class="button add_to_cart_button" href="cart.html"
-                                                                        rel="nofollow">Thêm vào giỏ hàng</a>
-                                                                    <a class="add-to-compare-link" href="compare.html">Add
-                                                                        to compare</a>
+                                                                        rel="nofollow">Xem chi tiết</a>
+
                                                                 </div>
                                                             </div>
                                                             <!-- /.product-outer -->
@@ -791,8 +539,8 @@
                                                                                 class="woocommerce-Price-currencySymbol">$</span>150.04</span>
                                                                     </span>
                                                                     <img src="home/assets/images/products/14.jpg"
-                                                                        width="224" height="197"
-                                                                        class="wp-post-image" alt="">
+                                                                        width="224" height="197" class="wp-post-image"
+                                                                        alt="">
                                                                     <span class="price">
                                                                         <ins>
                                                                             <span class="amount"> 262.81</span>
@@ -808,9 +556,8 @@
                                                                 </a>
                                                                 <div class="hover-area">
                                                                     <a class="button add_to_cart_button" href="cart.html"
-                                                                        rel="nofollow">Thêm vào giỏ hàng</a>
-                                                                    <a class="add-to-compare-link" href="compare.html">Add
-                                                                        to compare</a>
+                                                                        rel="nofollow">Xem chi tiết</a>
+
                                                                 </div>
                                                             </div>
                                                             <!-- /.product-outer -->
@@ -822,8 +569,8 @@
                                                                 <a href="single-product-fullwidth.html"
                                                                     class="woocommerce-LoopProduct-link">
                                                                     <img src="home/assets/images/products/15.jpg"
-                                                                        width="224" height="197"
-                                                                        class="wp-post-image" alt="">
+                                                                        width="224" height="197" class="wp-post-image"
+                                                                        alt="">
                                                                     <span class="price">
                                                                         <ins>
                                                                             <span class="amount"> </span>
@@ -836,9 +583,8 @@
                                                                 </a>
                                                                 <div class="hover-area">
                                                                     <a class="button add_to_cart_button" href="cart.html"
-                                                                        rel="nofollow">Thêm vào giỏ hàng</a>
-                                                                    <a class="add-to-compare-link" href="compare.html">Add
-                                                                        to compare</a>
+                                                                        rel="nofollow">Xem chi tiết</a>
+
                                                                 </div>
                                                             </div>
                                                             <!-- /.product-outer -->
@@ -849,9 +595,8 @@
                                                                 </div>
                                                                 <a href="single-product-fullwidth.html"
                                                                     class="woocommerce-LoopProduct-link">
-                                                                    <img src="home/assets/images/products/4.jpg"
-                                                                        width="224" height="197"
-                                                                        class="wp-post-image" alt="">
+                                                                    <img src="home/assets/images/products/4.jpg" width="224"
+                                                                        height="197" class="wp-post-image" alt="">
                                                                     <span class="price">
                                                                         <ins>
                                                                             <span class="amount"> </span>
@@ -864,9 +609,8 @@
                                                                 </a>
                                                                 <div class="hover-area">
                                                                     <a class="button add_to_cart_button" href="cart.html"
-                                                                        rel="nofollow">Thêm vào giỏ hàng</a>
-                                                                    <a class="add-to-compare-link" href="compare.html">Add
-                                                                        to compare</a>
+                                                                        rel="nofollow">Xem chi tiết</a>
+
                                                                 </div>
                                                             </div>
                                                             <!-- /.product-outer -->
@@ -878,8 +622,8 @@
                                                                 <a href="single-product-fullwidth.html"
                                                                     class="woocommerce-LoopProduct-link">
                                                                     <img src="home/assets/images/products/12.jpg"
-                                                                        width="224" height="197"
-                                                                        class="wp-post-image" alt="">
+                                                                        width="224" height="197" class="wp-post-image"
+                                                                        alt="">
                                                                     <span class="price">
                                                                         <ins>
                                                                             <span class="amount"> </span>
@@ -892,9 +636,8 @@
                                                                 </a>
                                                                 <div class="hover-area">
                                                                     <a class="button add_to_cart_button" href="cart.html"
-                                                                        rel="nofollow">Thêm vào giỏ hàng</a>
-                                                                    <a class="add-to-compare-link" href="compare.html">Add
-                                                                        to compare</a>
+                                                                        rel="nofollow">Xem chi tiết</a>
+
                                                                 </div>
                                                             </div>
                                                             <!-- /.product-outer -->
@@ -905,9 +648,8 @@
                                                                 </div>
                                                                 <a href="single-product-fullwidth.html"
                                                                     class="woocommerce-LoopProduct-link">
-                                                                    <img src="home/assets/images/products/6.jpg"
-                                                                        width="224" height="197"
-                                                                        class="wp-post-image" alt="">
+                                                                    <img src="home/assets/images/products/6.jpg" width="224"
+                                                                        height="197" class="wp-post-image" alt="">
                                                                     <span class="price">
                                                                         <ins>
                                                                             <span class="amount"> </span>
@@ -920,9 +662,8 @@
                                                                 </a>
                                                                 <div class="hover-area">
                                                                     <a class="button add_to_cart_button" href="cart.html"
-                                                                        rel="nofollow">Thêm vào giỏ hàng</a>
-                                                                    <a class="add-to-compare-link" href="compare.html">Add
-                                                                        to compare</a>
+                                                                        rel="nofollow">Xem chi tiết</a>
+
                                                                 </div>
                                                             </div>
                                                             <!-- /.product-outer -->
@@ -933,9 +674,8 @@
                                                                 </div>
                                                                 <a href="single-product-fullwidth.html"
                                                                     class="woocommerce-LoopProduct-link">
-                                                                    <img src="home/assets/images/products/3.jpg"
-                                                                        width="224" height="197"
-                                                                        class="wp-post-image" alt="">
+                                                                    <img src="home/assets/images/products/3.jpg" width="224"
+                                                                        height="197" class="wp-post-image" alt="">
                                                                     <span class="price">
                                                                         <ins>
                                                                             <span class="amount"> </span>
@@ -948,9 +688,8 @@
                                                                 </a>
                                                                 <div class="hover-area">
                                                                     <a class="button add_to_cart_button" href="cart.html"
-                                                                        rel="nofollow">Thêm vào giỏ hàng</a>
-                                                                    <a class="add-to-compare-link" href="compare.html">Add
-                                                                        to compare</a>
+                                                                        rel="nofollow">Xem chi tiết</a>
+
                                                                 </div>
                                                             </div>
                                                             <!-- /.product-outer -->
@@ -961,9 +700,8 @@
                                                                 </div>
                                                                 <a href="single-product-fullwidth.html"
                                                                     class="woocommerce-LoopProduct-link">
-                                                                    <img src="home/assets/images/products/9.jpg"
-                                                                        width="224" height="197"
-                                                                        class="wp-post-image" alt="">
+                                                                    <img src="home/assets/images/products/9.jpg" width="224"
+                                                                        height="197" class="wp-post-image" alt="">
                                                                     <span class="price">
                                                                         <ins>
                                                                             <span class="amount"> </span>
@@ -976,9 +714,8 @@
                                                                 </a>
                                                                 <div class="hover-area">
                                                                     <a class="button add_to_cart_button" href="cart.html"
-                                                                        rel="nofollow">Thêm vào giỏ hàng</a>
-                                                                    <a class="add-to-compare-link" href="compare.html">Add
-                                                                        to compare</a>
+                                                                        rel="nofollow">Xem chi tiết</a>
+
                                                                 </div>
                                                             </div>
                                                             <!-- /.product-outer -->
@@ -989,7 +726,7 @@
                                                 <!-- .container-fluid -->
                                             </div>
                                             <!-- .products-carousel -->
-                                        </div>
+                                        </div> --}}
                                         <!-- .tab-pane -->
                                         <div id="tab-59f89f0881f932" class="tab-pane " role="tabpanel">
                                             <div class="products-carousel" data-ride="tm-slick-carousel"
@@ -1005,9 +742,8 @@
                                                                 </div>
                                                                 <a href="single-product-fullwidth.html"
                                                                     class="woocommerce-LoopProduct-link">
-                                                                    <img src="home/assets/images/products/6.jpg"
-                                                                        width="224" height="197"
-                                                                        class="wp-post-image" alt="">
+                                                                    <img src="home/assets/images/products/6.jpg" width="224"
+                                                                        height="197" class="wp-post-image" alt="">
                                                                     <span class="price">
                                                                         <ins>
                                                                             <span class="amount"> </span>
@@ -1020,9 +756,8 @@
                                                                 </a>
                                                                 <div class="hover-area">
                                                                     <a class="button add_to_cart_button" href="cart.html"
-                                                                        rel="nofollow">Thêm vào giỏ hàng</a>
-                                                                    <a class="add-to-compare-link" href="compare.html">Add
-                                                                        to compare</a>
+                                                                        rel="nofollow">Xem chi tiết</a>
+
                                                                 </div>
                                                             </div>
                                                             <!-- /.product-outer -->
@@ -1034,8 +769,8 @@
                                                                 <a href="single-product-fullwidth.html"
                                                                     class="woocommerce-LoopProduct-link">
                                                                     <img src="home/assets/images/products/15.jpg"
-                                                                        width="224" height="197"
-                                                                        class="wp-post-image" alt="">
+                                                                        width="224" height="197" class="wp-post-image"
+                                                                        alt="">
                                                                     <span class="price">
                                                                         <ins>
                                                                             <span class="amount"> </span>
@@ -1048,9 +783,8 @@
                                                                 </a>
                                                                 <div class="hover-area">
                                                                     <a class="button add_to_cart_button" href="cart.html"
-                                                                        rel="nofollow">Thêm vào giỏ hàng</a>
-                                                                    <a class="add-to-compare-link" href="compare.html">Add
-                                                                        to compare</a>
+                                                                        rel="nofollow">Xem chi tiết</a>
+
                                                                 </div>
                                                             </div>
                                                             <!-- /.product-outer -->
@@ -1062,8 +796,8 @@
                                                                 <a href="single-product-fullwidth.html"
                                                                     class="woocommerce-LoopProduct-link">
                                                                     <img src="home/assets/images/products/10.jpg"
-                                                                        width="224" height="197"
-                                                                        class="wp-post-image" alt="">
+                                                                        width="224" height="197" class="wp-post-image"
+                                                                        alt="">
                                                                     <span class="price">
                                                                         <ins>
                                                                             <span class="amount"> </span>
@@ -1076,9 +810,8 @@
                                                                 </a>
                                                                 <div class="hover-area">
                                                                     <a class="button add_to_cart_button" href="cart.html"
-                                                                        rel="nofollow">Thêm vào giỏ hàng</a>
-                                                                    <a class="add-to-compare-link" href="compare.html">Add
-                                                                        to compare</a>
+                                                                        rel="nofollow">Xem chi tiết</a>
+
                                                                 </div>
                                                             </div>
                                                             <!-- /.product-outer -->
@@ -1090,8 +823,8 @@
                                                                 <a href="single-product-fullwidth.html"
                                                                     class="woocommerce-LoopProduct-link">
                                                                     <img src="home/assets/images/products/12.jpg"
-                                                                        width="224" height="197"
-                                                                        class="wp-post-image" alt="">
+                                                                        width="224" height="197" class="wp-post-image"
+                                                                        alt="">
                                                                     <span class="price">
                                                                         <ins>
                                                                             <span class="amount"> </span>
@@ -1104,9 +837,8 @@
                                                                 </a>
                                                                 <div class="hover-area">
                                                                     <a class="button add_to_cart_button" href="cart.html"
-                                                                        rel="nofollow">Thêm vào giỏ hàng</a>
-                                                                    <a class="add-to-compare-link" href="compare.html">Add
-                                                                        to compare</a>
+                                                                        rel="nofollow">Xem chi tiết</a>
+
                                                                 </div>
                                                             </div>
                                                             <!-- /.product-outer -->
@@ -1122,9 +854,8 @@
                                                                             <span
                                                                                 class="woocommerce-Price-currencySymbol">$</span>150.04</span>
                                                                     </span>
-                                                                    <img src="home/assets/images/products/7.jpg"
-                                                                        width="224" height="197"
-                                                                        class="wp-post-image" alt="">
+                                                                    <img src="home/assets/images/products/7.jpg" width="224"
+                                                                        height="197" class="wp-post-image" alt="">
                                                                     <span class="price">
                                                                         <ins>
                                                                             <span class="amount"> 789.95</span>
@@ -1140,9 +871,8 @@
                                                                 </a>
                                                                 <div class="hover-area">
                                                                     <a class="button add_to_cart_button" href="cart.html"
-                                                                        rel="nofollow">Thêm vào giỏ hàng</a>
-                                                                    <a class="add-to-compare-link" href="compare.html">Add
-                                                                        to compare</a>
+                                                                        rel="nofollow">Xem chi tiết</a>
+
                                                                 </div>
                                                             </div>
                                                             <!-- /.product-outer -->
@@ -1153,9 +883,8 @@
                                                                 </div>
                                                                 <a href="single-product-fullwidth.html"
                                                                     class="woocommerce-LoopProduct-link">
-                                                                    <img src="home/assets/images/products/4.jpg"
-                                                                        width="224" height="197"
-                                                                        class="wp-post-image" alt="">
+                                                                    <img src="home/assets/images/products/4.jpg" width="224"
+                                                                        height="197" class="wp-post-image" alt="">
                                                                     <span class="price">
                                                                         <ins>
                                                                             <span class="amount"> </span>
@@ -1168,9 +897,8 @@
                                                                 </a>
                                                                 <div class="hover-area">
                                                                     <a class="button add_to_cart_button" href="cart.html"
-                                                                        rel="nofollow">Thêm vào giỏ hàng</a>
-                                                                    <a class="add-to-compare-link" href="compare.html">Add
-                                                                        to compare</a>
+                                                                        rel="nofollow">Xem chi tiết</a>
+
                                                                 </div>
                                                             </div>
                                                             <!-- /.product-outer -->
@@ -1182,8 +910,8 @@
                                                                 <a href="single-product-fullwidth.html"
                                                                     class="woocommerce-LoopProduct-link">
                                                                     <img src="home/assets/images/products/11.jpg"
-                                                                        width="224" height="197"
-                                                                        class="wp-post-image" alt="">
+                                                                        width="224" height="197" class="wp-post-image"
+                                                                        alt="">
                                                                     <span class="price">
                                                                         <ins>
                                                                             <span class="amount"> </span>
@@ -1196,9 +924,8 @@
                                                                 </a>
                                                                 <div class="hover-area">
                                                                     <a class="button add_to_cart_button" href="cart.html"
-                                                                        rel="nofollow">Thêm vào giỏ hàng</a>
-                                                                    <a class="add-to-compare-link" href="compare.html">Add
-                                                                        to compare</a>
+                                                                        rel="nofollow">Xem chi tiết</a>
+
                                                                 </div>
                                                             </div>
                                                             <!-- /.product-outer -->
@@ -1215,8 +942,8 @@
                                                                                 class="woocommerce-Price-currencySymbol">$</span>150.04</span>
                                                                     </span>
                                                                     <img src="home/assets/images/products/14.jpg"
-                                                                        width="224" height="197"
-                                                                        class="wp-post-image" alt="">
+                                                                        width="224" height="197" class="wp-post-image"
+                                                                        alt="">
                                                                     <span class="price">
                                                                         <ins>
                                                                             <span class="amount"> 262.81</span>
@@ -1232,9 +959,8 @@
                                                                 </a>
                                                                 <div class="hover-area">
                                                                     <a class="button add_to_cart_button" href="cart.html"
-                                                                        rel="nofollow">Thêm vào giỏ hàng</a>
-                                                                    <a class="add-to-compare-link" href="compare.html">Add
-                                                                        to compare</a>
+                                                                        rel="nofollow">Xem chi tiết</a>
+
                                                                 </div>
                                                             </div>
                                                             <!-- /.product-outer -->
@@ -1245,9 +971,8 @@
                                                                 </div>
                                                                 <a href="single-product-fullwidth.html"
                                                                     class="woocommerce-LoopProduct-link">
-                                                                    <img src="home/assets/images/products/5.jpg"
-                                                                        width="224" height="197"
-                                                                        class="wp-post-image" alt="">
+                                                                    <img src="home/assets/images/products/5.jpg" width="224"
+                                                                        height="197" class="wp-post-image" alt="">
                                                                     <span class="price">
                                                                         <ins>
                                                                             <span class="amount"> </span>
@@ -1260,9 +985,8 @@
                                                                 </a>
                                                                 <div class="hover-area">
                                                                     <a class="button add_to_cart_button" href="cart.html"
-                                                                        rel="nofollow">Thêm vào giỏ hàng</a>
-                                                                    <a class="add-to-compare-link" href="compare.html">Add
-                                                                        to compare</a>
+                                                                        rel="nofollow">Xem chi tiết</a>
+
                                                                 </div>
                                                             </div>
                                                             <!-- /.product-outer -->
@@ -1274,8 +998,8 @@
                                                                 <a href="single-product-fullwidth.html"
                                                                     class="woocommerce-LoopProduct-link">
                                                                     <img src="home/assets/images/products/16.jpg"
-                                                                        width="224" height="197"
-                                                                        class="wp-post-image" alt="">
+                                                                        width="224" height="197" class="wp-post-image"
+                                                                        alt="">
                                                                     <span class="price">
                                                                         <ins>
                                                                             <span class="amount"> </span>
@@ -1288,9 +1012,8 @@
                                                                 </a>
                                                                 <div class="hover-area">
                                                                     <a class="button add_to_cart_button" href="cart.html"
-                                                                        rel="nofollow">Thêm vào giỏ hàng</a>
-                                                                    <a class="add-to-compare-link" href="compare.html">Add
-                                                                        to compare</a>
+                                                                        rel="nofollow">Xem chi tiết</a>
+
                                                                 </div>
                                                             </div>
                                                             <!-- /.product-outer -->
@@ -1302,8 +1025,8 @@
                                                                 <a href="single-product-fullwidth.html"
                                                                     class="woocommerce-LoopProduct-link">
                                                                     <img src="home/assets/images/products/13.jpg"
-                                                                        width="224" height="197"
-                                                                        class="wp-post-image" alt="">
+                                                                        width="224" height="197" class="wp-post-image"
+                                                                        alt="">
                                                                     <span class="price">
                                                                         <ins>
                                                                             <span class="amount"> </span>
@@ -1316,9 +1039,8 @@
                                                                 </a>
                                                                 <div class="hover-area">
                                                                     <a class="button add_to_cart_button" href="cart.html"
-                                                                        rel="nofollow">Thêm vào giỏ hàng</a>
-                                                                    <a class="add-to-compare-link" href="compare.html">Add
-                                                                        to compare</a>
+                                                                        rel="nofollow">Xem chi tiết</a>
+
                                                                 </div>
                                                             </div>
                                                             <!-- /.product-outer -->
@@ -1329,9 +1051,8 @@
                                                                 </div>
                                                                 <a href="single-product-fullwidth.html"
                                                                     class="woocommerce-LoopProduct-link">
-                                                                    <img src="home/assets/images/products/9.jpg"
-                                                                        width="224" height="197"
-                                                                        class="wp-post-image" alt="">
+                                                                    <img src="home/assets/images/products/9.jpg" width="224"
+                                                                        height="197" class="wp-post-image" alt="">
                                                                     <span class="price">
                                                                         <ins>
                                                                             <span class="amount"> </span>
@@ -1344,9 +1065,8 @@
                                                                 </a>
                                                                 <div class="hover-area">
                                                                     <a class="button add_to_cart_button" href="cart.html"
-                                                                        rel="nofollow">Thêm vào giỏ hàng</a>
-                                                                    <a class="add-to-compare-link" href="compare.html">Add
-                                                                        to compare</a>
+                                                                        rel="nofollow">Xem chi tiết</a>
+
                                                                 </div>
                                                             </div>
                                                             <!-- /.product-outer -->
@@ -1357,9 +1077,8 @@
                                                                 </div>
                                                                 <a href="single-product-fullwidth.html"
                                                                     class="woocommerce-LoopProduct-link">
-                                                                    <img src="home/assets/images/products/1.jpg"
-                                                                        width="224" height="197"
-                                                                        class="wp-post-image" alt="">
+                                                                    <img src="home/assets/images/products/1.jpg" width="224"
+                                                                        height="197" class="wp-post-image" alt="">
                                                                     <span class="price">
                                                                         <ins>
                                                                             <span class="amount"> </span>
@@ -1372,9 +1091,8 @@
                                                                 </a>
                                                                 <div class="hover-area">
                                                                     <a class="button add_to_cart_button" href="cart.html"
-                                                                        rel="nofollow">Thêm vào giỏ hàng</a>
-                                                                    <a class="add-to-compare-link" href="compare.html">Add
-                                                                        to compare</a>
+                                                                        rel="nofollow">Xem chi tiết</a>
+
                                                                 </div>
                                                             </div>
                                                             <!-- /.product-outer -->
@@ -1385,9 +1103,8 @@
                                                                 </div>
                                                                 <a href="single-product-fullwidth.html"
                                                                     class="woocommerce-LoopProduct-link">
-                                                                    <img src="home/assets/images/products/8.jpg"
-                                                                        width="224" height="197"
-                                                                        class="wp-post-image" alt="">
+                                                                    <img src="home/assets/images/products/8.jpg" width="224"
+                                                                        height="197" class="wp-post-image" alt="">
                                                                     <span class="price">
                                                                         <ins>
                                                                             <span class="amount"> </span>
@@ -1400,9 +1117,8 @@
                                                                 </a>
                                                                 <div class="hover-area">
                                                                     <a class="button add_to_cart_button" href="cart.html"
-                                                                        rel="nofollow">Thêm vào giỏ hàng</a>
-                                                                    <a class="add-to-compare-link" href="compare.html">Add
-                                                                        to compare</a>
+                                                                        rel="nofollow">Xem chi tiết</a>
+
                                                                 </div>
                                                             </div>
                                                             <!-- /.product-outer -->
@@ -1413,9 +1129,8 @@
                                                                 </div>
                                                                 <a href="single-product-fullwidth.html"
                                                                     class="woocommerce-LoopProduct-link">
-                                                                    <img src="home/assets/images/products/3.jpg"
-                                                                        width="224" height="197"
-                                                                        class="wp-post-image" alt="">
+                                                                    <img src="home/assets/images/products/3.jpg" width="224"
+                                                                        height="197" class="wp-post-image" alt="">
                                                                     <span class="price">
                                                                         <ins>
                                                                             <span class="amount"> </span>
@@ -1428,9 +1143,8 @@
                                                                 </a>
                                                                 <div class="hover-area">
                                                                     <a class="button add_to_cart_button" href="cart.html"
-                                                                        rel="nofollow">Thêm vào giỏ hàng</a>
-                                                                    <a class="add-to-compare-link" href="compare.html">Add
-                                                                        to compare</a>
+                                                                        rel="nofollow">Xem chi tiết</a>
+
                                                                 </div>
                                                             </div>
                                                             <!-- /.product-outer -->
@@ -1446,9 +1160,8 @@
                                                                             <span
                                                                                 class="woocommerce-Price-currencySymbol">$</span>150.04</span>
                                                                     </span>
-                                                                    <img src="home/assets/images/products/2.jpg"
-                                                                        width="224" height="197"
-                                                                        class="wp-post-image" alt="">
+                                                                    <img src="home/assets/images/products/2.jpg" width="224"
+                                                                        height="197" class="wp-post-image" alt="">
                                                                     <span class="price">
                                                                         <ins>
                                                                             <span class="amount"> 309.95</span>
@@ -1463,11 +1176,9 @@
                                                                         Ultrabook 8GB 512SSD W10</h2>
                                                                 </a>
                                                                 <div class="hover-area">
-                                                                    <a class="button add_to_cart_button"
-                                                                        href="cart.html" rel="nofollow">Thêm vào giỏ
-                                                                        hàng</a>
-                                                                    <a class="add-to-compare-link"
-                                                                        href="compare.html">Add to compare</a>
+                                                                    <a class="button add_to_cart_button" href="cart.html"
+                                                                        rel="nofollow">Xem chi tiết</a>
+
                                                                 </div>
                                                             </div>
                                                             <!-- /.product-outer -->
@@ -1480,509 +1191,468 @@
                                             <!-- .products-carousel -->
                                         </div>
                                         <!-- .tab-pane -->
-                                        <div id="tab-59f89f0881f933" class="tab-pane " role="tabpanel">
-                                            <div class="products-carousel" data-ride="tm-slick-carousel"
-                                                data-wrap=".products"
-                                                data-slick="{&quot;infinite&quot;:false,&quot;rows&quot;:2,&quot;slidesPerRow&quot;:5,&quot;slidesToShow&quot;:1,&quot;slidesToScroll&quot;:1,&quot;dots&quot;:true,&quot;arrows&quot;:false,&quot;responsive&quot;:[{&quot;breakpoint&quot;:1023,&quot;settings&quot;:{&quot;slidesPerRow&quot;:2}},{&quot;breakpoint&quot;:1169,&quot;settings&quot;:{&quot;slidesPerRow&quot;:4}},{&quot;breakpoint&quot;:1400,&quot;settings&quot;:{&quot;slidesPerRow&quot;:3}}]}">
-                                                <div class="container-fluid">
-                                                    <div class="woocommerce">
-                                                        <div class="products">
-                                                            <div class="product">
-                                                                <div class="yith-wcwl-add-to-wishlist">
-                                                                    <a href="wishlist.html" rel="nofollow"
-                                                                        class="add_to_wishlist"> Add to Wishlist</a>
+                                            {{-- <div id="tab-59f89f0881f933" class="tab-pane " role="tabpanel">
+                                                <div class="products-carousel" data-ride="tm-slick-carousel"
+                                                    data-wrap=".products"
+                                                    data-slick="{&quot;infinite&quot;:false,&quot;rows&quot;:2,&quot;slidesPerRow&quot;:5,&quot;slidesToShow&quot;:1,&quot;slidesToScroll&quot;:1,&quot;dots&quot;:true,&quot;arrows&quot;:false,&quot;responsive&quot;:[{&quot;breakpoint&quot;:1023,&quot;settings&quot;:{&quot;slidesPerRow&quot;:2}},{&quot;breakpoint&quot;:1169,&quot;settings&quot;:{&quot;slidesPerRow&quot;:4}},{&quot;breakpoint&quot;:1400,&quot;settings&quot;:{&quot;slidesPerRow&quot;:3}}]}">
+                                                    <div class="container-fluid">
+                                                        <div class="woocommerce">
+                                                            <div class="products">
+                                                                <div class="product">
+                                                                    <div class="yith-wcwl-add-to-wishlist">
+                                                                        <a href="wishlist.html" rel="nofollow"
+                                                                            class="add_to_wishlist"> Add to Wishlist</a>
+                                                                    </div>
+                                                                    <a href="single-product-fullwidth.html"
+                                                                        class="woocommerce-LoopProduct-link">
+                                                                        <img src="home/assets/images/products/6.jpg" width="224"
+                                                                            height="197" class="wp-post-image" alt="">
+                                                                        <span class="price">
+                                                                            <ins>
+                                                                                <span class="amount"> </span>
+                                                                            </ins>
+                                                                            <span class="amount"> 456.00</span>
+                                                                        </span>
+                                                                        <!-- /.price -->
+                                                                        <h2 class="woocommerce-loop-product__title">Gear
+                                                                            Virtual Reality 3D with Bluetooth Glasses</h2>
+                                                                    </a>
+                                                                    <div class="hover-area">
+                                                                        <a class="button add_to_cart_button" href=""
+                                                                            rel="nofollow">Xem chi tiết</a>
+
+                                                                    </div>
                                                                 </div>
-                                                                <a href="single-product-fullwidth.html"
-                                                                    class="woocommerce-LoopProduct-link">
-                                                                    <img src="home/assets/images/products/6.jpg"
-                                                                        width="224" height="197"
-                                                                        class="wp-post-image" alt="">
-                                                                    <span class="price">
-                                                                        <ins>
-                                                                            <span class="amount"> </span>
-                                                                        </ins>
-                                                                        <span class="amount"> 456.00</span>
-                                                                    </span>
-                                                                    <!-- /.price -->
-                                                                    <h2 class="woocommerce-loop-product__title">Gear
-                                                                        Virtual Reality 3D with Bluetooth Glasses</h2>
-                                                                </a>
-                                                                <div class="hover-area">
-                                                                    <a class="button add_to_cart_button"
-                                                                        href="cart.html" rel="nofollow">Thêm vào giỏ
-                                                                        hàng</a>
-                                                                    <a class="add-to-compare-link"
-                                                                        href="compare.html">Add to compare</a>
+                                                                <!-- /.product-outer -->
+                                                                <div class="product">
+                                                                    <div class="yith-wcwl-add-to-wishlist">
+                                                                        <a href="wishlist.html" rel="nofollow"
+                                                                            class="add_to_wishlist"> Add to Wishlist</a>
+                                                                    </div>
+                                                                    <a href="single-product-fullwidth.html"
+                                                                        class="woocommerce-LoopProduct-link">
+                                                                        <img src="home/assets/images/products/4.jpg" width="224"
+                                                                            height="197" class="wp-post-image" alt="">
+                                                                        <span class="price">
+                                                                            <ins>
+                                                                                <span class="amount"> </span>
+                                                                            </ins>
+                                                                            <span class="amount"> 456.00</span>
+                                                                        </span>
+                                                                        <!-- /.price -->
+                                                                        <h2 class="woocommerce-loop-product__title">4K Action
+                                                                            Cam with Wi-Fi & GPS</h2>
+                                                                    </a>
+                                                                    <div class="hover-area">
+                                                                        <a class="button add_to_cart_button" href="cart.html"
+                                                                            rel="nofollow">Xem chi tiết</a>
+
+                                                                    </div>
                                                                 </div>
-                                                            </div>
-                                                            <!-- /.product-outer -->
-                                                            <div class="product">
-                                                                <div class="yith-wcwl-add-to-wishlist">
-                                                                    <a href="wishlist.html" rel="nofollow"
-                                                                        class="add_to_wishlist"> Add to Wishlist</a>
+                                                                <!-- /.product-outer -->
+                                                                <div class="product">
+                                                                    <div class="yith-wcwl-add-to-wishlist">
+                                                                        <a href="wishlist.html" rel="nofollow"
+                                                                            class="add_to_wishlist"> Add to Wishlist</a>
+                                                                    </div>
+                                                                    <a href="single-product-fullwidth.html"
+                                                                        class="woocommerce-LoopProduct-link">
+                                                                        <img src="home/assets/images/products/8.jpg" width="224"
+                                                                            height="197" class="wp-post-image" alt="">
+                                                                        <span class="price">
+                                                                            <ins>
+                                                                                <span class="amount"> </span>
+                                                                            </ins>
+                                                                            <span class="amount"> 456.00</span>
+                                                                        </span>
+                                                                        <!-- /.price -->
+                                                                        <h2 class="woocommerce-loop-product__title">Video &
+                                                                            Air Quality Monitor</h2>
+                                                                    </a>
+                                                                    <div class="hover-area">
+                                                                        <a class="button add_to_cart_button" href="cart.html"
+                                                                            rel="nofollow">Xem chi tiết</a>
+
+                                                                    </div>
                                                                 </div>
-                                                                <a href="single-product-fullwidth.html"
-                                                                    class="woocommerce-LoopProduct-link">
-                                                                    <img src="home/assets/images/products/4.jpg"
-                                                                        width="224" height="197"
-                                                                        class="wp-post-image" alt="">
-                                                                    <span class="price">
-                                                                        <ins>
-                                                                            <span class="amount"> </span>
-                                                                        </ins>
-                                                                        <span class="amount"> 456.00</span>
-                                                                    </span>
-                                                                    <!-- /.price -->
-                                                                    <h2 class="woocommerce-loop-product__title">4K Action
-                                                                        Cam with Wi-Fi & GPS</h2>
-                                                                </a>
-                                                                <div class="hover-area">
-                                                                    <a class="button add_to_cart_button"
-                                                                        href="cart.html" rel="nofollow">Thêm vào giỏ
-                                                                        hàng</a>
-                                                                    <a class="add-to-compare-link"
-                                                                        href="compare.html">Add to compare</a>
-                                                                </div>
-                                                            </div>
-                                                            <!-- /.product-outer -->
-                                                            <div class="product">
-                                                                <div class="yith-wcwl-add-to-wishlist">
-                                                                    <a href="wishlist.html" rel="nofollow"
-                                                                        class="add_to_wishlist"> Add to Wishlist</a>
-                                                                </div>
-                                                                <a href="single-product-fullwidth.html"
-                                                                    class="woocommerce-LoopProduct-link">
-                                                                    <img src="home/assets/images/products/8.jpg"
-                                                                        width="224" height="197"
-                                                                        class="wp-post-image" alt="">
-                                                                    <span class="price">
-                                                                        <ins>
-                                                                            <span class="amount"> </span>
-                                                                        </ins>
-                                                                        <span class="amount"> 456.00</span>
-                                                                    </span>
-                                                                    <!-- /.price -->
-                                                                    <h2 class="woocommerce-loop-product__title">Video &
-                                                                        Air Quality Monitor</h2>
-                                                                </a>
-                                                                <div class="hover-area">
-                                                                    <a class="button add_to_cart_button"
-                                                                        href="cart.html" rel="nofollow">Thêm vào giỏ
-                                                                        hàng</a>
-                                                                    <a class="add-to-compare-link"
-                                                                        href="compare.html">Add to compare</a>
-                                                                </div>
-                                                            </div>
-                                                            <!-- /.product-outer -->
-                                                            <div class="product">
-                                                                <div class="yith-wcwl-add-to-wishlist">
-                                                                    <a href="wishlist.html" rel="nofollow"
-                                                                        class="add_to_wishlist"> Add to Wishlist</a>
-                                                                </div>
-                                                                <a href="single-product-fullwidth.html"
-                                                                    class="woocommerce-LoopProduct-link">
-                                                                    <img src="home/assets/images/products/16.jpg"
-                                                                        width="224" height="197"
-                                                                        class="wp-post-image" alt="">
-                                                                    <span class="price">
-                                                                        <ins>
-                                                                            <span class="amount"> </span>
-                                                                        </ins>
-                                                                        <span class="amount"> 262.81</span>
-                                                                    </span>
-                                                                    <!-- /.price -->
-                                                                    <h2 class="woocommerce-loop-product__title">Band
-                                                                        Fitbit Flex</h2>
-                                                                </a>
-                                                                <div class="hover-area">
-                                                                    <a class="button add_to_cart_button"
-                                                                        href="cart.html" rel="nofollow">Thêm vào giỏ
-                                                                        hàng</a>
-                                                                    <a class="add-to-compare-link"
-                                                                        href="compare.html">Add to compare</a>
-                                                                </div>
-                                                            </div>
-                                                            <!-- /.product-outer -->
-                                                            <div class="product">
-                                                                <div class="yith-wcwl-add-to-wishlist">
-                                                                    <a href="wishlist.html" rel="nofollow"
-                                                                        class="add_to_wishlist"> Add to Wishlist</a>
-                                                                </div>
-                                                                <a href="single-product-fullwidth.html"
-                                                                    class="woocommerce-LoopProduct-link">
-                                                                    <span class="onsale">
-                                                                        <span class="woocommerce-Price-amount amount">
-                                                                            <span
-                                                                                class="woocommerce-Price-currencySymbol">$</span>150.04</span>
-                                                                    </span>
-                                                                    <img src="home/assets/images/products/14.jpg"
-                                                                        width="224" height="197"
-                                                                        class="wp-post-image" alt="">
-                                                                    <span class="price">
-                                                                        <ins>
+                                                                <!-- /.product-outer -->
+                                                                <div class="product">
+                                                                    <div class="yith-wcwl-add-to-wishlist">
+                                                                        <a href="wishlist.html" rel="nofollow"
+                                                                            class="add_to_wishlist"> Add to Wishlist</a>
+                                                                    </div>
+                                                                    <a href="single-product-fullwidth.html"
+                                                                        class="woocommerce-LoopProduct-link">
+                                                                        <img src="home/assets/images/products/16.jpg"
+                                                                            width="224" height="197" class="wp-post-image"
+                                                                            alt="">
+                                                                        <span class="price">
+                                                                            <ins>
+                                                                                <span class="amount"> </span>
+                                                                            </ins>
                                                                             <span class="amount"> 262.81</span>
-                                                                        </ins>
-                                                                        <del>
-                                                                            <span class="amount">399.00</span>
-                                                                        </del>
-                                                                        <span class="amount"> </span>
-                                                                    </span>
-                                                                    <!-- /.price -->
-                                                                    <h2 class="woocommerce-loop-product__title">Band
-                                                                        Fitbit Flex</h2>
-                                                                </a>
-                                                                <div class="hover-area">
-                                                                    <a class="button add_to_cart_button"
-                                                                        href="cart.html" rel="nofollow">Thêm vào giỏ
-                                                                        hàng</a>
-                                                                    <a class="add-to-compare-link"
-                                                                        href="compare.html">Add to compare</a>
+                                                                        </span>
+                                                                        <!-- /.price -->
+                                                                        <h2 class="woocommerce-loop-product__title">Band
+                                                                            Fitbit Flex</h2>
+                                                                    </a>
+                                                                    <div class="hover-area">
+                                                                        <a class="button add_to_cart_button" href="cart.html"
+                                                                            rel="nofollow">Xem chi tiết</a>
+
+                                                                    </div>
                                                                 </div>
-                                                            </div>
-                                                            <!-- /.product-outer -->
-                                                            <div class="product">
-                                                                <div class="yith-wcwl-add-to-wishlist">
-                                                                    <a href="wishlist.html" rel="nofollow"
-                                                                        class="add_to_wishlist"> Add to Wishlist</a>
-                                                                </div>
-                                                                <a href="single-product-fullwidth.html"
-                                                                    class="woocommerce-LoopProduct-link">
-                                                                    <img src="home/assets/images/products/3.jpg"
-                                                                        width="224" height="197"
-                                                                        class="wp-post-image" alt="">
-                                                                    <span class="price">
-                                                                        <ins>
+                                                                <!-- /.product-outer -->
+                                                                <div class="product">
+                                                                    <div class="yith-wcwl-add-to-wishlist">
+                                                                        <a href="wishlist.html" rel="nofollow"
+                                                                            class="add_to_wishlist"> Add to Wishlist</a>
+                                                                    </div>
+                                                                    <a href="single-product-fullwidth.html"
+                                                                        class="woocommerce-LoopProduct-link">
+                                                                        <span class="onsale">
+                                                                            <span class="woocommerce-Price-amount amount">
+                                                                                <span
+                                                                                    class="woocommerce-Price-currencySymbol">$</span>150.04</span>
+                                                                        </span>
+                                                                        <img src="home/assets/images/products/14.jpg"
+                                                                            width="224" height="197" class="wp-post-image"
+                                                                            alt="">
+                                                                        <span class="price">
+                                                                            <ins>
+                                                                                <span class="amount"> 262.81</span>
+                                                                            </ins>
+                                                                            <del>
+                                                                                <span class="amount">399.00</span>
+                                                                            </del>
                                                                             <span class="amount"> </span>
-                                                                        </ins>
-                                                                        <span class="amount"> 456.00</span>
-                                                                    </span>
-                                                                    <!-- /.price -->
-                                                                    <h2 class="woocommerce-loop-product__title">On-ear
-                                                                        Wireless NXTG</h2>
-                                                                </a>
-                                                                <div class="hover-area">
-                                                                    <a class="button add_to_cart_button"
-                                                                        href="cart.html" rel="nofollow">Thêm vào giỏ
-                                                                        hàng</a>
-                                                                    <a class="add-to-compare-link"
-                                                                        href="compare.html">Add to compare</a>
+                                                                        </span>
+                                                                        <!-- /.price -->
+                                                                        <h2 class="woocommerce-loop-product__title">Band
+                                                                            Fitbit Flex</h2>
+                                                                    </a>
+                                                                    <div class="hover-area">
+                                                                        <a class="button add_to_cart_button" href="cart.html"
+                                                                            rel="nofollow">Xem chi tiết</a>
+
+                                                                    </div>
                                                                 </div>
-                                                            </div>
-                                                            <!-- /.product-outer -->
-                                                            <div class="product">
-                                                                <div class="yith-wcwl-add-to-wishlist">
-                                                                    <a href="wishlist.html" rel="nofollow"
-                                                                        class="add_to_wishlist"> Add to Wishlist</a>
+                                                                <!-- /.product-outer -->
+                                                                <div class="product">
+                                                                    <div class="yith-wcwl-add-to-wishlist">
+                                                                        <a href="wishlist.html" rel="nofollow"
+                                                                            class="add_to_wishlist"> Add to Wishlist</a>
+                                                                    </div>
+                                                                    <a href="single-product-fullwidth.html"
+                                                                        class="woocommerce-LoopProduct-link">
+                                                                        <img src="home/assets/images/products/3.jpg" width="224"
+                                                                            height="197" class="wp-post-image" alt="">
+                                                                        <span class="price">
+                                                                            <ins>
+                                                                                <span class="amount"> </span>
+                                                                            </ins>
+                                                                            <span class="amount"> 456.00</span>
+                                                                        </span>
+                                                                        <!-- /.price -->
+                                                                        <h2 class="woocommerce-loop-product__title">On-ear
+                                                                            Wireless NXTG</h2>
+                                                                    </a>
+                                                                    <div class="hover-area">
+                                                                        <a class="button add_to_cart_button" href="cart.html"
+                                                                            rel="nofollow">Xem chi tiết</a>
+
+                                                                    </div>
                                                                 </div>
-                                                                <a href="single-product-fullwidth.html"
-                                                                    class="woocommerce-LoopProduct-link">
-                                                                    <img src="home/assets/images/products/10.jpg"
-                                                                        width="224" height="197"
-                                                                        class="wp-post-image" alt="">
-                                                                    <span class="price">
-                                                                        <ins>
+                                                                <!-- /.product-outer -->
+                                                                <div class="product">
+                                                                    <div class="yith-wcwl-add-to-wishlist">
+                                                                        <a href="wishlist.html" rel="nofollow"
+                                                                            class="add_to_wishlist"> Add to Wishlist</a>
+                                                                    </div>
+                                                                    <a href="single-product-fullwidth.html"
+                                                                        class="woocommerce-LoopProduct-link">
+                                                                        <img src="home/assets/images/products/10.jpg"
+                                                                            width="224" height="197" class="wp-post-image"
+                                                                            alt="">
+                                                                        <span class="price">
+                                                                            <ins>
+                                                                                <span class="amount"> </span>
+                                                                            </ins>
+                                                                            <span class="amount"> 456.00</span>
+                                                                        </span>
+                                                                        <!-- /.price -->
+                                                                        <h2 class="woocommerce-loop-product__title">Xtreme
+                                                                            ultimate splashproof portable speaker</h2>
+                                                                    </a>
+                                                                    <div class="hover-area">
+                                                                        <a class="button add_to_cart_button" href="cart.html"
+                                                                            rel="nofollow">Xem chi tiết</a>
+
+                                                                    </div>
+                                                                </div>
+                                                                <!-- /.product-outer -->
+                                                                <div class="product">
+                                                                    <div class="yith-wcwl-add-to-wishlist">
+                                                                        <a href="wishlist.html" rel="nofollow"
+                                                                            class="add_to_wishlist"> Add to Wishlist</a>
+                                                                    </div>
+                                                                    <a href="single-product-fullwidth.html"
+                                                                        class="woocommerce-LoopProduct-link">
+                                                                        <img src="home/assets/images/products/9.jpg" width="224"
+                                                                            height="197" class="wp-post-image" alt="">
+                                                                        <span class="price">
+                                                                            <ins>
+                                                                                <span class="amount"> </span>
+                                                                            </ins>
+                                                                            <span class="amount"> 456.00</span>
+                                                                        </span>
+                                                                        <!-- /.price -->
+                                                                        <h2 class="woocommerce-loop-product__title">Watch
+                                                                            Stainless with Grey Suture Leather Strap</h2>
+                                                                    </a>
+                                                                    <div class="hover-area">
+                                                                        <a class="button add_to_cart_button" href="cart.html"
+                                                                            rel="nofollow">Xem chi tiết</a>
+
+                                                                    </div>
+                                                                </div>
+                                                                <!-- /.product-outer -->
+                                                                <div class="product">
+                                                                    <div class="yith-wcwl-add-to-wishlist">
+                                                                        <a href="wishlist.html" rel="nofollow"
+                                                                            class="add_to_wishlist"> Add to Wishlist</a>
+                                                                    </div>
+                                                                    <a href="single-product-fullwidth.html"
+                                                                        class="woocommerce-LoopProduct-link">
+                                                                        <img src="home/assets/images/products/5.jpg" width="224"
+                                                                            height="197" class="wp-post-image" alt="">
+                                                                        <span class="price">
+                                                                            <ins>
+                                                                                <span class="amount"> </span>
+                                                                            </ins>
+                                                                            <span class="amount"> 456.00</span>
+                                                                        </span>
+                                                                        <!-- /.price -->
+                                                                        <h2 class="woocommerce-loop-product__title">XONE
+                                                                            Wireless Controller</h2>
+                                                                    </a>
+                                                                    <div class="hover-area">
+                                                                        <a class="button add_to_cart_button" href="cart.html"
+                                                                            rel="nofollow">Xem chi tiết</a>
+
+                                                                    </div>
+                                                                </div>
+                                                                <!-- /.product-outer -->
+                                                                <div class="product">
+                                                                    <div class="yith-wcwl-add-to-wishlist">
+                                                                        <a href="wishlist.html" rel="nofollow"
+                                                                            class="add_to_wishlist"> Add to Wishlist</a>
+                                                                    </div>
+                                                                    <a href="single-product-fullwidth.html"
+                                                                        class="woocommerce-LoopProduct-link">
+                                                                        <img src="home/assets/images/products/15.jpg"
+                                                                            width="224" height="197" class="wp-post-image"
+                                                                            alt="">
+                                                                        <span class="price">
+                                                                            <ins>
+                                                                                <span class="amount"> </span>
+                                                                            </ins>
+                                                                            <span class="amount"> 399.00</span>
+                                                                        </span>
+                                                                        <!-- /.price -->
+                                                                        <h2 class="woocommerce-loop-product__title">Band
+                                                                            Fitbit Flex</h2>
+                                                                    </a>
+                                                                    <div class="hover-area">
+                                                                        <a class="button add_to_cart_button" href="cart.html"
+                                                                            rel="nofollow">Xem chi tiết</a>
+
+                                                                    </div>
+                                                                </div>
+                                                                <!-- /.product-outer -->
+                                                                <div class="product">
+                                                                    <div class="yith-wcwl-add-to-wishlist">
+                                                                        <a href="wishlist.html" rel="nofollow"
+                                                                            class="add_to_wishlist"> Add to Wishlist</a>
+                                                                    </div>
+                                                                    <a href="single-product-fullwidth.html"
+                                                                        class="woocommerce-LoopProduct-link">
+                                                                        <span class="onsale">
+                                                                            <span class="woocommerce-Price-amount amount">
+                                                                                <span
+                                                                                    class="woocommerce-Price-currencySymbol">$</span>150.04</span>
+                                                                        </span>
+                                                                        <img src="home/assets/images/products/2.jpg" width="224"
+                                                                            height="197" class="wp-post-image" alt="">
+                                                                        <span class="price">
+                                                                            <ins>
+                                                                                <span class="amount"> 309.95</span>
+                                                                            </ins>
+                                                                            <del>
+                                                                                <span class="amount">459.00</span>
+                                                                            </del>
                                                                             <span class="amount"> </span>
-                                                                        </ins>
-                                                                        <span class="amount"> 456.00</span>
-                                                                    </span>
-                                                                    <!-- /.price -->
-                                                                    <h2 class="woocommerce-loop-product__title">Xtreme
-                                                                        ultimate splashproof portable speaker</h2>
-                                                                </a>
-                                                                <div class="hover-area">
-                                                                    <a class="button add_to_cart_button"
-                                                                        href="cart.html" rel="nofollow">Thêm vào giỏ
-                                                                        hàng</a>
-                                                                    <a class="add-to-compare-link"
-                                                                        href="compare.html">Add to compare</a>
+                                                                        </span>
+                                                                        <!-- /.price -->
+                                                                        <h2 class="woocommerce-loop-product__title">ZenBook 3
+                                                                            Ultrabook 8GB 512SSD W10</h2>
+                                                                    </a>
+                                                                    <div class="hover-area">
+                                                                        <a class="button add_to_cart_button" href="cart.html"
+                                                                            rel="nofollow">Xem chi tiết</a>
+
+                                                                    </div>
                                                                 </div>
-                                                            </div>
-                                                            <!-- /.product-outer -->
-                                                            <div class="product">
-                                                                <div class="yith-wcwl-add-to-wishlist">
-                                                                    <a href="wishlist.html" rel="nofollow"
-                                                                        class="add_to_wishlist"> Add to Wishlist</a>
+                                                                <!-- /.product-outer -->
+                                                                <div class="product">
+                                                                    <div class="yith-wcwl-add-to-wishlist">
+                                                                        <a href="wishlist.html" rel="nofollow"
+                                                                            class="add_to_wishlist"> Add to Wishlist</a>
+                                                                    </div>
+                                                                    <a href="single-product-fullwidth.html"
+                                                                        class="woocommerce-LoopProduct-link">
+                                                                        <img src="home/assets/images/products/12.jpg"
+                                                                            width="224" height="197" class="wp-post-image"
+                                                                            alt="">
+                                                                        <span class="price">
+                                                                            <ins>
+                                                                                <span class="amount"> </span>
+                                                                            </ins>
+                                                                            <span class="amount"> 456.00</span>
+                                                                        </span>
+                                                                        <!-- /.price -->
+                                                                        <h2 class="woocommerce-loop-product__title">Bbd
+                                                                            23-Inch Screen LED-Lit Monitorss Buds</h2>
+                                                                    </a>
+                                                                    <div class="hover-area">
+                                                                        <a class="button add_to_cart_button" href="cart.html"
+                                                                            rel="nofollow">Xem chi tiết</a>
+
+                                                                    </div>
                                                                 </div>
-                                                                <a href="single-product-fullwidth.html"
-                                                                    class="woocommerce-LoopProduct-link">
-                                                                    <img src="home/assets/images/products/9.jpg"
-                                                                        width="224" height="197"
-                                                                        class="wp-post-image" alt="">
-                                                                    <span class="price">
-                                                                        <ins>
+                                                                <!-- /.product-outer -->
+                                                                <div class="product">
+                                                                    <div class="yith-wcwl-add-to-wishlist">
+                                                                        <a href="wishlist.html" rel="nofollow"
+                                                                            class="add_to_wishlist"> Add to Wishlist</a>
+                                                                    </div>
+                                                                    <a href="single-product-fullwidth.html"
+                                                                        class="woocommerce-LoopProduct-link">
+                                                                        <img src="home/assets/images/products/11.jpg"
+                                                                            width="224" height="197" class="wp-post-image"
+                                                                            alt="">
+                                                                        <span class="price">
+                                                                            <ins>
+                                                                                <span class="amount"> </span>
+                                                                            </ins>
+                                                                            <span class="amount"> 456.00</span>
+                                                                        </span>
+                                                                        <!-- /.price -->
+                                                                        <h2 class="woocommerce-loop-product__title">Xtreme
+                                                                            ultimate splashproof portable speaker</h2>
+                                                                    </a>
+                                                                    <div class="hover-area">
+                                                                        <a class="button add_to_cart_button" href="cart.html"
+                                                                            rel="nofollow">Xem chi tiết</a>
+
+                                                                    </div>
+                                                                </div>
+                                                                <!-- /.product-outer -->
+                                                                <div class="product">
+                                                                    <div class="yith-wcwl-add-to-wishlist">
+                                                                        <a href="wishlist.html" rel="nofollow"
+                                                                            class="add_to_wishlist"> Add to Wishlist</a>
+                                                                    </div>
+                                                                    <a href="single-product-fullwidth.html"
+                                                                        class="woocommerce-LoopProduct-link">
+                                                                        <img src="home/assets/images/products/13.jpg"
+                                                                            width="224" height="197" class="wp-post-image"
+                                                                            alt="">
+                                                                        <span class="price">
+                                                                            <ins>
+                                                                                <span class="amount"> </span>
+                                                                            </ins>
+                                                                            <span class="amount"> 456.00</span>
+                                                                        </span>
+                                                                        <!-- /.price -->
+                                                                        <h2 class="woocommerce-loop-product__title">Drone WIFI
+                                                                            FPV With 4K</h2>
+                                                                    </a>
+                                                                    <div class="hover-area">
+                                                                        <a class="button add_to_cart_button" href="cart.html"
+                                                                            rel="nofollow">Xem chi tiết</a>
+
+                                                                    </div>
+                                                                </div>
+                                                                <!-- /.product-outer -->
+                                                                <div class="product">
+                                                                    <div class="yith-wcwl-add-to-wishlist">
+                                                                        <a href="wishlist.html" rel="nofollow"
+                                                                            class="add_to_wishlist"> Add to Wishlist</a>
+                                                                    </div>
+                                                                    <a href="single-product-fullwidth.html"
+                                                                        class="woocommerce-LoopProduct-link">
+                                                                        <img src="home/assets/images/products/1.jpg" width="224"
+                                                                            height="197" class="wp-post-image" alt="">
+                                                                        <span class="price">
+                                                                            <ins>
+                                                                                <span class="amount"> </span>
+                                                                            </ins>
+                                                                            <span class="amount"> 456.00</span>
+                                                                        </span>
+                                                                        <!-- /.price -->
+                                                                        <h2 class="woocommerce-loop-product__title">Smart
+                                                                            Watches 3 SWR50</h2>
+                                                                    </a>
+                                                                    <div class="hover-area">
+                                                                        <a class="button add_to_cart_button" href="cart.html"
+                                                                            rel="nofollow">Xem chi tiết</a>
+
+                                                                    </div>
+                                                                </div>
+                                                                <!-- /.product-outer -->
+                                                                <div class="product">
+                                                                    <div class="yith-wcwl-add-to-wishlist">
+                                                                        <a href="wishlist.html" rel="nofollow"
+                                                                            class="add_to_wishlist"> Add to Wishlist</a>
+                                                                    </div>
+                                                                    <a href="single-product-fullwidth.html"
+                                                                        class="woocommerce-LoopProduct-link">
+                                                                        <span class="onsale">
+                                                                            <span class="woocommerce-Price-amount amount">
+                                                                                <span
+                                                                                    class="woocommerce-Price-currencySymbol">$</span>150.04</span>
+                                                                        </span>
+                                                                        <img src="home/assets/images/products/7.jpg" width="224"
+                                                                            height="197" class="wp-post-image" alt="">
+                                                                        <span class="price">
+                                                                            <ins>
+                                                                                <span class="amount"> 789.95</span>
+                                                                            </ins>
+                                                                            <del>
+                                                                                <span class="amount">999.00</span>
+                                                                            </del>
                                                                             <span class="amount"> </span>
-                                                                        </ins>
-                                                                        <span class="amount"> 456.00</span>
-                                                                    </span>
-                                                                    <!-- /.price -->
-                                                                    <h2 class="woocommerce-loop-product__title">Watch
-                                                                        Stainless with Grey Suture Leather Strap</h2>
-                                                                </a>
-                                                                <div class="hover-area">
-                                                                    <a class="button add_to_cart_button"
-                                                                        href="cart.html" rel="nofollow">Thêm vào giỏ
-                                                                        hàng</a>
-                                                                    <a class="add-to-compare-link"
-                                                                        href="compare.html">Add to compare</a>
+                                                                        </span>
+                                                                        <!-- /.price -->
+                                                                        <h2 class="woocommerce-loop-product__title">Bluetooth
+                                                                            on-ear PureBass Headphones</h2>
+                                                                    </a>
+                                                                    <div class="hover-area">
+                                                                        <a class="button add_to_cart_button" href="cart.html"
+                                                                            rel="nofollow">Xem chi tiết</a>
+
+                                                                    </div>
                                                                 </div>
+                                                                <!-- /.product-outer -->
                                                             </div>
-                                                            <!-- /.product-outer -->
-                                                            <div class="product">
-                                                                <div class="yith-wcwl-add-to-wishlist">
-                                                                    <a href="wishlist.html" rel="nofollow"
-                                                                        class="add_to_wishlist"> Add to Wishlist</a>
-                                                                </div>
-                                                                <a href="single-product-fullwidth.html"
-                                                                    class="woocommerce-LoopProduct-link">
-                                                                    <img src="home/assets/images/products/5.jpg"
-                                                                        width="224" height="197"
-                                                                        class="wp-post-image" alt="">
-                                                                    <span class="price">
-                                                                        <ins>
-                                                                            <span class="amount"> </span>
-                                                                        </ins>
-                                                                        <span class="amount"> 456.00</span>
-                                                                    </span>
-                                                                    <!-- /.price -->
-                                                                    <h2 class="woocommerce-loop-product__title">XONE
-                                                                        Wireless Controller</h2>
-                                                                </a>
-                                                                <div class="hover-area">
-                                                                    <a class="button add_to_cart_button"
-                                                                        href="cart.html" rel="nofollow">Thêm vào giỏ
-                                                                        hàng</a>
-                                                                    <a class="add-to-compare-link"
-                                                                        href="compare.html">Add to compare</a>
-                                                                </div>
-                                                            </div>
-                                                            <!-- /.product-outer -->
-                                                            <div class="product">
-                                                                <div class="yith-wcwl-add-to-wishlist">
-                                                                    <a href="wishlist.html" rel="nofollow"
-                                                                        class="add_to_wishlist"> Add to Wishlist</a>
-                                                                </div>
-                                                                <a href="single-product-fullwidth.html"
-                                                                    class="woocommerce-LoopProduct-link">
-                                                                    <img src="home/assets/images/products/15.jpg"
-                                                                        width="224" height="197"
-                                                                        class="wp-post-image" alt="">
-                                                                    <span class="price">
-                                                                        <ins>
-                                                                            <span class="amount"> </span>
-                                                                        </ins>
-                                                                        <span class="amount"> 399.00</span>
-                                                                    </span>
-                                                                    <!-- /.price -->
-                                                                    <h2 class="woocommerce-loop-product__title">Band
-                                                                        Fitbit Flex</h2>
-                                                                </a>
-                                                                <div class="hover-area">
-                                                                    <a class="button add_to_cart_button"
-                                                                        href="cart.html" rel="nofollow">Thêm vào giỏ
-                                                                        hàng</a>
-                                                                    <a class="add-to-compare-link"
-                                                                        href="compare.html">Add to compare</a>
-                                                                </div>
-                                                            </div>
-                                                            <!-- /.product-outer -->
-                                                            <div class="product">
-                                                                <div class="yith-wcwl-add-to-wishlist">
-                                                                    <a href="wishlist.html" rel="nofollow"
-                                                                        class="add_to_wishlist"> Add to Wishlist</a>
-                                                                </div>
-                                                                <a href="single-product-fullwidth.html"
-                                                                    class="woocommerce-LoopProduct-link">
-                                                                    <span class="onsale">
-                                                                        <span class="woocommerce-Price-amount amount">
-                                                                            <span
-                                                                                class="woocommerce-Price-currencySymbol">$</span>150.04</span>
-                                                                    </span>
-                                                                    <img src="home/assets/images/products/2.jpg"
-                                                                        width="224" height="197"
-                                                                        class="wp-post-image" alt="">
-                                                                    <span class="price">
-                                                                        <ins>
-                                                                            <span class="amount"> 309.95</span>
-                                                                        </ins>
-                                                                        <del>
-                                                                            <span class="amount">459.00</span>
-                                                                        </del>
-                                                                        <span class="amount"> </span>
-                                                                    </span>
-                                                                    <!-- /.price -->
-                                                                    <h2 class="woocommerce-loop-product__title">ZenBook 3
-                                                                        Ultrabook 8GB 512SSD W10</h2>
-                                                                </a>
-                                                                <div class="hover-area">
-                                                                    <a class="button add_to_cart_button"
-                                                                        href="cart.html" rel="nofollow">Thêm vào giỏ
-                                                                        hàng</a>
-                                                                    <a class="add-to-compare-link"
-                                                                        href="compare.html">Add to compare</a>
-                                                                </div>
-                                                            </div>
-                                                            <!-- /.product-outer -->
-                                                            <div class="product">
-                                                                <div class="yith-wcwl-add-to-wishlist">
-                                                                    <a href="wishlist.html" rel="nofollow"
-                                                                        class="add_to_wishlist"> Add to Wishlist</a>
-                                                                </div>
-                                                                <a href="single-product-fullwidth.html"
-                                                                    class="woocommerce-LoopProduct-link">
-                                                                    <img src="home/assets/images/products/12.jpg"
-                                                                        width="224" height="197"
-                                                                        class="wp-post-image" alt="">
-                                                                    <span class="price">
-                                                                        <ins>
-                                                                            <span class="amount"> </span>
-                                                                        </ins>
-                                                                        <span class="amount"> 456.00</span>
-                                                                    </span>
-                                                                    <!-- /.price -->
-                                                                    <h2 class="woocommerce-loop-product__title">Bbd
-                                                                        23-Inch Screen LED-Lit Monitorss Buds</h2>
-                                                                </a>
-                                                                <div class="hover-area">
-                                                                    <a class="button add_to_cart_button"
-                                                                        href="cart.html" rel="nofollow">Thêm vào giỏ
-                                                                        hàng</a>
-                                                                    <a class="add-to-compare-link"
-                                                                        href="compare.html">Add to compare</a>
-                                                                </div>
-                                                            </div>
-                                                            <!-- /.product-outer -->
-                                                            <div class="product">
-                                                                <div class="yith-wcwl-add-to-wishlist">
-                                                                    <a href="wishlist.html" rel="nofollow"
-                                                                        class="add_to_wishlist"> Add to Wishlist</a>
-                                                                </div>
-                                                                <a href="single-product-fullwidth.html"
-                                                                    class="woocommerce-LoopProduct-link">
-                                                                    <img src="home/assets/images/products/11.jpg"
-                                                                        width="224" height="197"
-                                                                        class="wp-post-image" alt="">
-                                                                    <span class="price">
-                                                                        <ins>
-                                                                            <span class="amount"> </span>
-                                                                        </ins>
-                                                                        <span class="amount"> 456.00</span>
-                                                                    </span>
-                                                                    <!-- /.price -->
-                                                                    <h2 class="woocommerce-loop-product__title">Xtreme
-                                                                        ultimate splashproof portable speaker</h2>
-                                                                </a>
-                                                                <div class="hover-area">
-                                                                    <a class="button add_to_cart_button"
-                                                                        href="cart.html" rel="nofollow">Thêm vào giỏ
-                                                                        hàng</a>
-                                                                    <a class="add-to-compare-link"
-                                                                        href="compare.html">Add to compare</a>
-                                                                </div>
-                                                            </div>
-                                                            <!-- /.product-outer -->
-                                                            <div class="product">
-                                                                <div class="yith-wcwl-add-to-wishlist">
-                                                                    <a href="wishlist.html" rel="nofollow"
-                                                                        class="add_to_wishlist"> Add to Wishlist</a>
-                                                                </div>
-                                                                <a href="single-product-fullwidth.html"
-                                                                    class="woocommerce-LoopProduct-link">
-                                                                    <img src="home/assets/images/products/13.jpg"
-                                                                        width="224" height="197"
-                                                                        class="wp-post-image" alt="">
-                                                                    <span class="price">
-                                                                        <ins>
-                                                                            <span class="amount"> </span>
-                                                                        </ins>
-                                                                        <span class="amount"> 456.00</span>
-                                                                    </span>
-                                                                    <!-- /.price -->
-                                                                    <h2 class="woocommerce-loop-product__title">Drone WIFI
-                                                                        FPV With 4K</h2>
-                                                                </a>
-                                                                <div class="hover-area">
-                                                                    <a class="button add_to_cart_button"
-                                                                        href="cart.html" rel="nofollow">Thêm vào giỏ
-                                                                        hàng</a>
-                                                                    <a class="add-to-compare-link"
-                                                                        href="compare.html">Add to compare</a>
-                                                                </div>
-                                                            </div>
-                                                            <!-- /.product-outer -->
-                                                            <div class="product">
-                                                                <div class="yith-wcwl-add-to-wishlist">
-                                                                    <a href="wishlist.html" rel="nofollow"
-                                                                        class="add_to_wishlist"> Add to Wishlist</a>
-                                                                </div>
-                                                                <a href="single-product-fullwidth.html"
-                                                                    class="woocommerce-LoopProduct-link">
-                                                                    <img src="home/assets/images/products/1.jpg"
-                                                                        width="224" height="197"
-                                                                        class="wp-post-image" alt="">
-                                                                    <span class="price">
-                                                                        <ins>
-                                                                            <span class="amount"> </span>
-                                                                        </ins>
-                                                                        <span class="amount"> 456.00</span>
-                                                                    </span>
-                                                                    <!-- /.price -->
-                                                                    <h2 class="woocommerce-loop-product__title">Smart
-                                                                        Watches 3 SWR50</h2>
-                                                                </a>
-                                                                <div class="hover-area">
-                                                                    <a class="button add_to_cart_button"
-                                                                        href="cart.html" rel="nofollow">Thêm vào giỏ
-                                                                        hàng</a>
-                                                                    <a class="add-to-compare-link"
-                                                                        href="compare.html">Add to compare</a>
-                                                                </div>
-                                                            </div>
-                                                            <!-- /.product-outer -->
-                                                            <div class="product">
-                                                                <div class="yith-wcwl-add-to-wishlist">
-                                                                    <a href="wishlist.html" rel="nofollow"
-                                                                        class="add_to_wishlist"> Add to Wishlist</a>
-                                                                </div>
-                                                                <a href="single-product-fullwidth.html"
-                                                                    class="woocommerce-LoopProduct-link">
-                                                                    <span class="onsale">
-                                                                        <span class="woocommerce-Price-amount amount">
-                                                                            <span
-                                                                                class="woocommerce-Price-currencySymbol">$</span>150.04</span>
-                                                                    </span>
-                                                                    <img src="home/assets/images/products/7.jpg"
-                                                                        width="224" height="197"
-                                                                        class="wp-post-image" alt="">
-                                                                    <span class="price">
-                                                                        <ins>
-                                                                            <span class="amount"> 789.95</span>
-                                                                        </ins>
-                                                                        <del>
-                                                                            <span class="amount">999.00</span>
-                                                                        </del>
-                                                                        <span class="amount"> </span>
-                                                                    </span>
-                                                                    <!-- /.price -->
-                                                                    <h2 class="woocommerce-loop-product__title">Bluetooth
-                                                                        on-ear PureBass Headphones</h2>
-                                                                </a>
-                                                                <div class="hover-area">
-                                                                    <a class="button add_to_cart_button"
-                                                                        href="cart.html" rel="nofollow">Thêm vào giỏ
-                                                                        hàng</a>
-                                                                    <a class="add-to-compare-link"
-                                                                        href="compare.html">Add to compare</a>
-                                                                </div>
-                                                            </div>
-                                                            <!-- /.product-outer -->
                                                         </div>
+                                                        <!-- .woocommerce -->
                                                     </div>
-                                                    <!-- .woocommerce -->
+                                                    <!-- .container-fluid -->
                                                 </div>
-                                                <!-- .container-fluid -->
-                                            </div>
-                                            <!-- .products-carousel -->
-                                        </div>
+                                                <!-- .products-carousel -->
+                                            </div> --}}
                                         <!-- .tab-pane -->
                                     </div>
                                     <!-- .tab-content -->
@@ -2144,8 +1814,9 @@
                         </section>
                         <!-- .section-categories-carousel -->
                         <section
-                            style="background-size: cover; background-position: center center; background-image: url( home/assets/images/products/card-bg.jpg ); height: 853px;"
+                            style="background-size: cover; background-position: center center; background-image: url( admin/assets/images/banner/banner7.png ); height: 800px;"
                             class="section-landscape-full-product-cards-carousel">
+
                             <div class="col-full">
                                 <header class="section-header">
                                     <h2 class="section-title">
@@ -2155,8 +1826,7 @@
                                 <!-- .section-header -->
                                 <div class="row">
                                     <div class="landscape-full-product-cards-carousel">
-                                        <div class="products-carousel" data-ride="tm-slick-carousel"
-                                            data-wrap=".products"
+                                        <div class="products-carousel" data-ride="tm-slick-carousel" data-wrap=".products"
                                             data-slick="{&quot;rows&quot;:2,&quot;slidesPerRow&quot;:2,&quot;slidesToShow&quot;:1,&quot;slidesToScroll&quot;:1,&quot;dots&quot;:true,&quot;arrows&quot;:false,&quot;responsive&quot;:[{&quot;breakpoint&quot;:767,&quot;settings&quot;:{&quot;slidesPerRow&quot;:2,&quot;slidesToShow&quot;:1,&quot;slidesToScroll&quot;:1}},{&quot;breakpoint&quot;:1200,&quot;settings&quot;:{&quot;slidesPerRow&quot;:1,&quot;slidesToShow&quot;:1,&quot;slidesToScroll&quot;:1}}]}">
                                             <div class="container-fluid">
                                                 <div class="woocommerce columns-2">
@@ -2170,8 +1840,7 @@
                                                                 <a class="woocommerce-LoopProduct-link"
                                                                     href="single-product-fullwidth.html">
                                                                     <img class="wp-post-image"
-                                                                        src="home/assets/images/products/1-2.jpg"
-                                                                        alt="">
+                                                                        src="home/assets/images/products/1-2.jpg" alt="">
                                                                 </a>
                                                                 <div class="media-body">
                                                                     <a class="woocommerce-LoopProduct-link "
@@ -2204,9 +1873,7 @@
                                                                     </a>
                                                                     <div class="hover-area">
                                                                         <a class="button add_to_cart_button"
-                                                                            href="cart.html">Thêm vào giỏ hàng</a>
-                                                                        <a href="compare.html"
-                                                                            class="add-to-compare-link">Add to compare</a>
+                                                                            href="cart.html">Xem chi tiết</a>
                                                                     </div>
                                                                     <!-- .hover-area -->
                                                                 </div>
@@ -2224,8 +1891,7 @@
                                                                 <a class="woocommerce-LoopProduct-link"
                                                                     href="single-product-fullwidth.html">
                                                                     <img class="wp-post-image"
-                                                                        src="home/assets/images/products/1-4.jpg"
-                                                                        alt="">
+                                                                        src="home/assets/images/products/1-4.jpg" alt="">
                                                                 </a>
                                                                 <div class="media-body">
                                                                     <a class="woocommerce-LoopProduct-link "
@@ -2257,9 +1923,7 @@
                                                                     </a>
                                                                     <div class="hover-area">
                                                                         <a class="button add_to_cart_button"
-                                                                            href="cart.html">Thêm vào giỏ hàng</a>
-                                                                        <a href="compare.html"
-                                                                            class="add-to-compare-link">Add to compare</a>
+                                                                            href="cart.html">Xem chi tiết</a>
                                                                     </div>
                                                                     <!-- .hover-area -->
                                                                 </div>
@@ -2277,8 +1941,7 @@
                                                                 <a class="woocommerce-LoopProduct-link"
                                                                     href="single-product-fullwidth.html">
                                                                     <img class="wp-post-image"
-                                                                        src="home/assets/images/products/1-1.jpg"
-                                                                        alt="">
+                                                                        src="home/assets/images/products/1-1.jpg" alt="">
                                                                 </a>
                                                                 <div class="media-body">
                                                                     <a class="woocommerce-LoopProduct-link "
@@ -2311,9 +1974,7 @@
                                                                     </a>
                                                                     <div class="hover-area">
                                                                         <a class="button add_to_cart_button"
-                                                                            href="cart.html">Thêm vào giỏ hàng</a>
-                                                                        <a href="compare.html"
-                                                                            class="add-to-compare-link">Add to compare</a>
+                                                                            href="cart.html">Xem chi tiết</a>
                                                                     </div>
                                                                     <!-- .hover-area -->
                                                                 </div>
@@ -2331,8 +1992,7 @@
                                                                 <a class="woocommerce-LoopProduct-link"
                                                                     href="single-product-fullwidth.html">
                                                                     <img class="wp-post-image"
-                                                                        src="home/assets/images/products/1-6.jpg"
-                                                                        alt="">
+                                                                        src="home/assets/images/products/1-6.jpg" alt="">
                                                                 </a>
                                                                 <div class="media-body">
                                                                     <a class="woocommerce-LoopProduct-link "
@@ -2365,9 +2025,7 @@
                                                                     </a>
                                                                     <div class="hover-area">
                                                                         <a class="button add_to_cart_button"
-                                                                            href="cart.html">Thêm vào giỏ hàng</a>
-                                                                        <a href="compare.html"
-                                                                            class="add-to-compare-link">Add to compare</a>
+                                                                            href="cart.html">Xem chi tiết</a>
                                                                     </div>
                                                                     <!-- .hover-area -->
                                                                 </div>
@@ -2385,8 +2043,7 @@
                                                                 <a class="woocommerce-LoopProduct-link"
                                                                     href="single-product-fullwidth.html">
                                                                     <img class="wp-post-image"
-                                                                        src="home/assets/images/products/1-2.jpg"
-                                                                        alt="">
+                                                                        src="home/assets/images/products/1-2.jpg" alt="">
                                                                 </a>
                                                                 <div class="media-body">
                                                                     <a class="woocommerce-LoopProduct-link "
@@ -2419,9 +2076,7 @@
                                                                     </a>
                                                                     <div class="hover-area">
                                                                         <a class="button add_to_cart_button"
-                                                                            href="cart.html">Thêm vào giỏ hàng</a>
-                                                                        <a href="compare.html"
-                                                                            class="add-to-compare-link">Add to compare</a>
+                                                                            href="cart.html">Xem chi tiết</a>
                                                                     </div>
                                                                     <!-- .hover-area -->
                                                                 </div>
@@ -2439,8 +2094,7 @@
                                                                 <a class="woocommerce-LoopProduct-link"
                                                                     href="single-product-fullwidth.html">
                                                                     <img class="wp-post-image"
-                                                                        src="home/assets/images/products/1-5.jpg"
-                                                                        alt="">
+                                                                        src="home/assets/images/products/1-5.jpg" alt="">
                                                                 </a>
                                                                 <div class="media-body">
                                                                     <a class="woocommerce-LoopProduct-link "
@@ -2473,9 +2127,7 @@
                                                                     </a>
                                                                     <div class="hover-area">
                                                                         <a class="button add_to_cart_button"
-                                                                            href="cart.html">Thêm vào giỏ hàng</a>
-                                                                        <a href="compare.html"
-                                                                            class="add-to-compare-link">Add to compare</a>
+                                                                            href="cart.html">Xem chi tiết</a>
                                                                     </div>
                                                                     <!-- .hover-area -->
                                                                 </div>
@@ -2493,8 +2145,7 @@
                                                                 <a class="woocommerce-LoopProduct-link"
                                                                     href="single-product-fullwidth.html">
                                                                     <img class="wp-post-image"
-                                                                        src="home/assets/images/products/1-3.jpg"
-                                                                        alt="">
+                                                                        src="home/assets/images/products/1-3.jpg" alt="">
                                                                 </a>
                                                                 <div class="media-body">
                                                                     <a class="woocommerce-LoopProduct-link "
@@ -2527,9 +2178,7 @@
                                                                     </a>
                                                                     <div class="hover-area">
                                                                         <a class="button add_to_cart_button"
-                                                                            href="cart.html">Thêm vào giỏ hàng</a>
-                                                                        <a href="compare.html"
-                                                                            class="add-to-compare-link">Add to compare</a>
+                                                                            href="cart.html">Xem chi tiết</a>
                                                                     </div>
                                                                     <!-- .hover-area -->
                                                                 </div>
@@ -2547,8 +2196,7 @@
                                                                 <a class="woocommerce-LoopProduct-link"
                                                                     href="single-product-fullwidth.html">
                                                                     <img class="wp-post-image"
-                                                                        src="home/assets/images/products/1-5.jpg"
-                                                                        alt="">
+                                                                        src="home/assets/images/products/1-5.jpg" alt="">
                                                                 </a>
                                                                 <div class="media-body">
                                                                     <a class="woocommerce-LoopProduct-link "
@@ -2580,9 +2228,7 @@
                                                                     </a>
                                                                     <div class="hover-area">
                                                                         <a class="button add_to_cart_button"
-                                                                            href="cart.html">Thêm vào giỏ hàng</a>
-                                                                        <a href="compare.html"
-                                                                            class="add-to-compare-link">Add to compare</a>
+                                                                            href="cart.html">Xem chi tiết</a>
                                                                     </div>
                                                                     <!-- .hover-area -->
                                                                 </div>
@@ -2625,8 +2271,7 @@
                                 <!-- .section-header -->
                                 <div class="tab-content">
                                     <div id="tab-59f89f08825d50" class="tab-pane active" role="tabpanel">
-                                        <div class="products-carousel" data-ride="tm-slick-carousel"
-                                            data-wrap=".products"
+                                        <div class="products-carousel" data-ride="tm-slick-carousel" data-wrap=".products"
                                             data-slick="{&quot;infinite&quot;:false,&quot;slidesToShow&quot;:7,&quot;slidesToScroll&quot;:7,&quot;dots&quot;:true,&quot;arrows&quot;:false,&quot;responsive&quot;:[{&quot;breakpoint&quot;:700,&quot;settings&quot;:{&quot;slidesToShow&quot;:2,&quot;slidesToScroll&quot;:2}},{&quot;breakpoint&quot;:780,&quot;settings&quot;:{&quot;slidesToShow&quot;:3,&quot;slidesToScroll&quot;:3}},{&quot;breakpoint&quot;:1200,&quot;settings&quot;:{&quot;slidesToShow&quot;:4,&quot;slidesToScroll&quot;:4}},{&quot;breakpoint&quot;:1400,&quot;settings&quot;:{&quot;slidesToShow&quot;:5,&quot;slidesToScroll&quot;:5}}]}">
                                             <div class="container-fluid">
                                                 <div class="woocommerce">
@@ -2636,8 +2281,7 @@
                                                                 <a href="single-product-fullwidth.html"
                                                                     class="woocommerce-LoopProduct-link">
                                                                     <img src="{{ url('') }}/admin/assets/images/product/{{ $hp->img }}"
-                                                                        width="100%" class="fixed-image"
-                                                                        alt="">
+                                                                        width="100%" class="fixed-image" alt="">
                                                                     <span class="price">
                                                                         <ins>
                                                                             <span class="amount"> </span>
@@ -2647,12 +2291,12 @@
                                                                     </span>
                                                                     <!-- /.price -->
                                                                     <h2 class="woocommerce-loop-product__title">
-                                                                        {{ $hp->name }}</h2>
+                                                                        {{ $hp->name }}
+                                                                    </h2>
                                                                 </a>
                                                                 <div class="hover-area">
-                                                                    <a class="button add_to_cart_button"
-                                                                        href="cart.html" rel="nofollow">Thêm vào giỏ
-                                                                        hàng</a>
+                                                                    <a class="button add_to_cart_button" href="cart.html"
+                                                                        rel="nofollow">Xem chi tiết</a>
                                                                 </div>
                                                             </div>
                                                         @endforeach
@@ -2667,8 +2311,7 @@
                                     </div>
                                     <!-- .tab-pane -->
                                     <div id="tab-59f89f08825d51" class="tab-pane " role="tabpanel">
-                                        <div class="products-carousel" data-ride="tm-slick-carousel"
-                                            data-wrap=".products"
+                                        <div class="products-carousel" data-ride="tm-slick-carousel" data-wrap=".products"
                                             data-slick="{&quot;infinite&quot;:false,&quot;slidesToShow&quot;:7,&quot;slidesToScroll&quot;:7,&quot;dots&quot;:true,&quot;arrows&quot;:false,&quot;responsive&quot;:[{&quot;breakpoint&quot;:700,&quot;settings&quot;:{&quot;slidesToShow&quot;:2,&quot;slidesToScroll&quot;:2}},{&quot;breakpoint&quot;:780,&quot;settings&quot;:{&quot;slidesToShow&quot;:3,&quot;slidesToScroll&quot;:3}},{&quot;breakpoint&quot;:1200,&quot;settings&quot;:{&quot;slidesToShow&quot;:4,&quot;slidesToScroll&quot;:4}},{&quot;breakpoint&quot;:1400,&quot;settings&quot;:{&quot;slidesToShow&quot;:5,&quot;slidesToScroll&quot;:5}}]}">
                                             <div class="container-fluid">
                                                 <div class="woocommerce">
@@ -2685,9 +2328,8 @@
                                                                         <span
                                                                             class="woocommerce-Price-currencySymbol">$</span>150.04</span>
                                                                 </span>
-                                                                <img src="home/assets/images/products/7.jpg"
-                                                                    width="224" height="197"
-                                                                    class="wp-post-image" alt="">
+                                                                <img src="home/assets/images/products/7.jpg" width="224"
+                                                                    height="197" class="wp-post-image" alt="">
                                                                 <span class="price">
                                                                     <ins>
                                                                         <span class="amount"> 789.95</span>
@@ -2703,9 +2345,7 @@
                                                             </a>
                                                             <div class="hover-area">
                                                                 <a class="button add_to_cart_button" href="cart.html"
-                                                                    rel="nofollow">Thêm vào giỏ hàng</a>
-                                                                <a class="add-to-compare-link" href="compare.html">Add
-                                                                    to compare</a>
+                                                                    rel="nofollow">Xem chi tiết</a>
                                                             </div>
                                                         </div>
                                                         <!-- /.product-outer -->
@@ -2716,9 +2356,8 @@
                                                             </div>
                                                             <a href="single-product-fullwidth.html"
                                                                 class="woocommerce-LoopProduct-link">
-                                                                <img src="home/assets/images/products/15.jpg"
-                                                                    width="224" height="197"
-                                                                    class="wp-post-image" alt="">
+                                                                <img src="home/assets/images/products/15.jpg" width="224"
+                                                                    height="197" class="wp-post-image" alt="">
                                                                 <span class="price">
                                                                     <ins>
                                                                         <span class="amount"> </span>
@@ -2731,9 +2370,7 @@
                                                             </a>
                                                             <div class="hover-area">
                                                                 <a class="button add_to_cart_button" href="cart.html"
-                                                                    rel="nofollow">Thêm vào giỏ hàng</a>
-                                                                <a class="add-to-compare-link" href="compare.html">Add
-                                                                    to compare</a>
+                                                                    rel="nofollow">Xem chi tiết</a>
                                                             </div>
                                                         </div>
                                                         <!-- /.product-outer -->
@@ -2744,9 +2381,8 @@
                                                             </div>
                                                             <a href="single-product-fullwidth.html"
                                                                 class="woocommerce-LoopProduct-link">
-                                                                <img src="home/assets/images/products/16.jpg"
-                                                                    width="224" height="197"
-                                                                    class="wp-post-image" alt="">
+                                                                <img src="home/assets/images/products/16.jpg" width="224"
+                                                                    height="197" class="wp-post-image" alt="">
                                                                 <span class="price">
                                                                     <ins>
                                                                         <span class="amount"> </span>
@@ -2759,9 +2395,7 @@
                                                             </a>
                                                             <div class="hover-area">
                                                                 <a class="button add_to_cart_button" href="cart.html"
-                                                                    rel="nofollow">Thêm vào giỏ hàng</a>
-                                                                <a class="add-to-compare-link" href="compare.html">Add
-                                                                    to compare</a>
+                                                                    rel="nofollow">Xem chi tiết</a>
                                                             </div>
                                                         </div>
                                                         <!-- /.product-outer -->
@@ -2772,9 +2406,8 @@
                                                             </div>
                                                             <a href="single-product-fullwidth.html"
                                                                 class="woocommerce-LoopProduct-link">
-                                                                <img src="home/assets/images/products/12.jpg"
-                                                                    width="224" height="197"
-                                                                    class="wp-post-image" alt="">
+                                                                <img src="home/assets/images/products/12.jpg" width="224"
+                                                                    height="197" class="wp-post-image" alt="">
                                                                 <span class="price">
                                                                     <ins>
                                                                         <span class="amount"> </span>
@@ -2787,9 +2420,7 @@
                                                             </a>
                                                             <div class="hover-area">
                                                                 <a class="button add_to_cart_button" href="cart.html"
-                                                                    rel="nofollow">Thêm vào giỏ hàng</a>
-                                                                <a class="add-to-compare-link" href="compare.html">Add
-                                                                    to compare</a>
+                                                                    rel="nofollow">Xem chi tiết</a>
                                                             </div>
                                                         </div>
                                                         <!-- /.product-outer -->
@@ -2800,9 +2431,8 @@
                                                             </div>
                                                             <a href="single-product-fullwidth.html"
                                                                 class="woocommerce-LoopProduct-link">
-                                                                <img src="home/assets/images/products/10.jpg"
-                                                                    width="224" height="197"
-                                                                    class="wp-post-image" alt="">
+                                                                <img src="home/assets/images/products/10.jpg" width="224"
+                                                                    height="197" class="wp-post-image" alt="">
                                                                 <span class="price">
                                                                     <ins>
                                                                         <span class="amount"> </span>
@@ -2815,9 +2445,7 @@
                                                             </a>
                                                             <div class="hover-area">
                                                                 <a class="button add_to_cart_button" href="cart.html"
-                                                                    rel="nofollow">Thêm vào giỏ hàng</a>
-                                                                <a class="add-to-compare-link" href="compare.html">Add
-                                                                    to compare</a>
+                                                                    rel="nofollow">Xem chi tiết</a>
                                                             </div>
                                                         </div>
                                                         <!-- /.product-outer -->
@@ -2833,9 +2461,8 @@
                                                                         <span
                                                                             class="woocommerce-Price-currencySymbol">$</span>150.04</span>
                                                                 </span>
-                                                                <img src="home/assets/images/products/14.jpg"
-                                                                    width="224" height="197"
-                                                                    class="wp-post-image" alt="">
+                                                                <img src="home/assets/images/products/14.jpg" width="224"
+                                                                    height="197" class="wp-post-image" alt="">
                                                                 <span class="price">
                                                                     <ins>
                                                                         <span class="amount"> 262.81</span>
@@ -2851,9 +2478,7 @@
                                                             </a>
                                                             <div class="hover-area">
                                                                 <a class="button add_to_cart_button" href="cart.html"
-                                                                    rel="nofollow">Thêm vào giỏ hàng</a>
-                                                                <a class="add-to-compare-link" href="compare.html">Add
-                                                                    to compare</a>
+                                                                    rel="nofollow">Xem chi tiết</a>
                                                             </div>
                                                         </div>
                                                         <!-- /.product-outer -->
@@ -2864,9 +2489,8 @@
                                                             </div>
                                                             <a href="single-product-fullwidth.html"
                                                                 class="woocommerce-LoopProduct-link">
-                                                                <img src="home/assets/images/products/4.jpg"
-                                                                    width="224" height="197"
-                                                                    class="wp-post-image" alt="">
+                                                                <img src="home/assets/images/products/4.jpg" width="224"
+                                                                    height="197" class="wp-post-image" alt="">
                                                                 <span class="price">
                                                                     <ins>
                                                                         <span class="amount"> </span>
@@ -2879,9 +2503,7 @@
                                                             </a>
                                                             <div class="hover-area">
                                                                 <a class="button add_to_cart_button" href="cart.html"
-                                                                    rel="nofollow">Thêm vào giỏ hàng</a>
-                                                                <a class="add-to-compare-link" href="compare.html">Add
-                                                                    to compare</a>
+                                                                    rel="nofollow">Xem chi tiết</a>
                                                             </div>
                                                         </div>
                                                         <!-- /.product-outer -->
@@ -2892,9 +2514,8 @@
                                                             </div>
                                                             <a href="single-product-fullwidth.html"
                                                                 class="woocommerce-LoopProduct-link">
-                                                                <img src="home/assets/images/products/6.jpg"
-                                                                    width="224" height="197"
-                                                                    class="wp-post-image" alt="">
+                                                                <img src="home/assets/images/products/6.jpg" width="224"
+                                                                    height="197" class="wp-post-image" alt="">
                                                                 <span class="price">
                                                                     <ins>
                                                                         <span class="amount"> </span>
@@ -2907,9 +2528,7 @@
                                                             </a>
                                                             <div class="hover-area">
                                                                 <a class="button add_to_cart_button" href="cart.html"
-                                                                    rel="nofollow">Thêm vào giỏ hàng</a>
-                                                                <a class="add-to-compare-link" href="compare.html">Add
-                                                                    to compare</a>
+                                                                    rel="nofollow">Xem chi tiết</a>
                                                             </div>
                                                         </div>
                                                         <!-- /.product-outer -->
@@ -2920,9 +2539,8 @@
                                                             </div>
                                                             <a href="single-product-fullwidth.html"
                                                                 class="woocommerce-LoopProduct-link">
-                                                                <img src="home/assets/images/products/9.jpg"
-                                                                    width="224" height="197"
-                                                                    class="wp-post-image" alt="">
+                                                                <img src="home/assets/images/products/9.jpg" width="224"
+                                                                    height="197" class="wp-post-image" alt="">
                                                                 <span class="price">
                                                                     <ins>
                                                                         <span class="amount"> </span>
@@ -2935,9 +2553,7 @@
                                                             </a>
                                                             <div class="hover-area">
                                                                 <a class="button add_to_cart_button" href="cart.html"
-                                                                    rel="nofollow">Thêm vào giỏ hàng</a>
-                                                                <a class="add-to-compare-link" href="compare.html">Add
-                                                                    to compare</a>
+                                                                    rel="nofollow">Xem chi tiết</a>
                                                             </div>
                                                         </div>
                                                         <!-- /.product-outer -->
@@ -2953,9 +2569,8 @@
                                                                         <span
                                                                             class="woocommerce-Price-currencySymbol">$</span>150.04</span>
                                                                 </span>
-                                                                <img src="home/assets/images/products/2.jpg"
-                                                                    width="224" height="197"
-                                                                    class="wp-post-image" alt="">
+                                                                <img src="home/assets/images/products/2.jpg" width="224"
+                                                                    height="197" class="wp-post-image" alt="">
                                                                 <span class="price">
                                                                     <ins>
                                                                         <span class="amount"> 309.95</span>
@@ -2971,9 +2586,7 @@
                                                             </a>
                                                             <div class="hover-area">
                                                                 <a class="button add_to_cart_button" href="cart.html"
-                                                                    rel="nofollow">Thêm vào giỏ hàng</a>
-                                                                <a class="add-to-compare-link" href="compare.html">Add
-                                                                    to compare</a>
+                                                                    rel="nofollow">Xem chi tiết</a>
                                                             </div>
                                                         </div>
                                                         <!-- /.product-outer -->
@@ -2984,9 +2597,8 @@
                                                             </div>
                                                             <a href="single-product-fullwidth.html"
                                                                 class="woocommerce-LoopProduct-link">
-                                                                <img src="home/assets/images/products/3.jpg"
-                                                                    width="224" height="197"
-                                                                    class="wp-post-image" alt="">
+                                                                <img src="home/assets/images/products/3.jpg" width="224"
+                                                                    height="197" class="wp-post-image" alt="">
                                                                 <span class="price">
                                                                     <ins>
                                                                         <span class="amount"> </span>
@@ -2999,9 +2611,7 @@
                                                             </a>
                                                             <div class="hover-area">
                                                                 <a class="button add_to_cart_button" href="cart.html"
-                                                                    rel="nofollow">Thêm vào giỏ hàng</a>
-                                                                <a class="add-to-compare-link" href="compare.html">Add
-                                                                    to compare</a>
+                                                                    rel="nofollow">Xem chi tiết</a>
                                                             </div>
                                                         </div>
                                                         <!-- /.product-outer -->
@@ -3012,9 +2622,8 @@
                                                             </div>
                                                             <a href="single-product-fullwidth.html"
                                                                 class="woocommerce-LoopProduct-link">
-                                                                <img src="home/assets/images/products/8.jpg"
-                                                                    width="224" height="197"
-                                                                    class="wp-post-image" alt="">
+                                                                <img src="home/assets/images/products/8.jpg" width="224"
+                                                                    height="197" class="wp-post-image" alt="">
                                                                 <span class="price">
                                                                     <ins>
                                                                         <span class="amount"> </span>
@@ -3027,9 +2636,7 @@
                                                             </a>
                                                             <div class="hover-area">
                                                                 <a class="button add_to_cart_button" href="cart.html"
-                                                                    rel="nofollow">Thêm vào giỏ hàng</a>
-                                                                <a class="add-to-compare-link" href="compare.html">Add
-                                                                    to compare</a>
+                                                                    rel="nofollow">Xem chi tiết</a>
                                                             </div>
                                                         </div>
                                                         <!-- /.product-outer -->
@@ -3040,9 +2647,8 @@
                                                             </div>
                                                             <a href="single-product-fullwidth.html"
                                                                 class="woocommerce-LoopProduct-link">
-                                                                <img src="home/assets/images/products/5.jpg"
-                                                                    width="224" height="197"
-                                                                    class="wp-post-image" alt="">
+                                                                <img src="home/assets/images/products/5.jpg" width="224"
+                                                                    height="197" class="wp-post-image" alt="">
                                                                 <span class="price">
                                                                     <ins>
                                                                         <span class="amount"> </span>
@@ -3055,9 +2661,7 @@
                                                             </a>
                                                             <div class="hover-area">
                                                                 <a class="button add_to_cart_button" href="cart.html"
-                                                                    rel="nofollow">Thêm vào giỏ hàng</a>
-                                                                <a class="add-to-compare-link" href="compare.html">Add
-                                                                    to compare</a>
+                                                                    rel="nofollow">Xem chi tiết</a>
                                                             </div>
                                                         </div>
                                                         <!-- /.product-outer -->
@@ -3068,9 +2672,8 @@
                                                             </div>
                                                             <a href="single-product-fullwidth.html"
                                                                 class="woocommerce-LoopProduct-link">
-                                                                <img src="home/assets/images/products/13.jpg"
-                                                                    width="224" height="197"
-                                                                    class="wp-post-image" alt="">
+                                                                <img src="home/assets/images/products/13.jpg" width="224"
+                                                                    height="197" class="wp-post-image" alt="">
                                                                 <span class="price">
                                                                     <ins>
                                                                         <span class="amount"> </span>
@@ -3083,9 +2686,7 @@
                                                             </a>
                                                             <div class="hover-area">
                                                                 <a class="button add_to_cart_button" href="cart.html"
-                                                                    rel="nofollow">Thêm vào giỏ hàng</a>
-                                                                <a class="add-to-compare-link" href="compare.html">Add
-                                                                    to compare</a>
+                                                                    rel="nofollow">Xem chi tiết</a>
                                                             </div>
                                                         </div>
                                                         <!-- /.product-outer -->
@@ -3096,9 +2697,8 @@
                                                             </div>
                                                             <a href="single-product-fullwidth.html"
                                                                 class="woocommerce-LoopProduct-link">
-                                                                <img src="home/assets/images/products/11.jpg"
-                                                                    width="224" height="197"
-                                                                    class="wp-post-image" alt="">
+                                                                <img src="home/assets/images/products/11.jpg" width="224"
+                                                                    height="197" class="wp-post-image" alt="">
                                                                 <span class="price">
                                                                     <ins>
                                                                         <span class="amount"> </span>
@@ -3111,9 +2711,7 @@
                                                             </a>
                                                             <div class="hover-area">
                                                                 <a class="button add_to_cart_button" href="cart.html"
-                                                                    rel="nofollow">Thêm vào giỏ hàng</a>
-                                                                <a class="add-to-compare-link" href="compare.html">Add
-                                                                    to compare</a>
+                                                                    rel="nofollow">Xem chi tiết</a>
                                                             </div>
                                                         </div>
                                                         <!-- /.product-outer -->
@@ -3124,9 +2722,8 @@
                                                             </div>
                                                             <a href="single-product-fullwidth.html"
                                                                 class="woocommerce-LoopProduct-link">
-                                                                <img src="home/assets/images/products/1.jpg"
-                                                                    width="224" height="197"
-                                                                    class="wp-post-image" alt="">
+                                                                <img src="home/assets/images/products/1.jpg" width="224"
+                                                                    height="197" class="wp-post-image" alt="">
                                                                 <span class="price">
                                                                     <ins>
                                                                         <span class="amount"> </span>
@@ -3139,9 +2736,7 @@
                                                             </a>
                                                             <div class="hover-area">
                                                                 <a class="button add_to_cart_button" href="cart.html"
-                                                                    rel="nofollow">Thêm vào giỏ hàng</a>
-                                                                <a class="add-to-compare-link" href="compare.html">Add
-                                                                    to compare</a>
+                                                                    rel="nofollow">Xem chi tiết</a>
                                                             </div>
                                                         </div>
                                                         <!-- /.product-outer -->
@@ -3155,8 +2750,7 @@
                                     </div>
                                     <!-- .tab-pane -->
                                     <div id="tab-59f89f08825d52" class="tab-pane " role="tabpanel">
-                                        <div class="products-carousel" data-ride="tm-slick-carousel"
-                                            data-wrap=".products"
+                                        <div class="products-carousel" data-ride="tm-slick-carousel" data-wrap=".products"
                                             data-slick="{&quot;infinite&quot;:false,&quot;slidesToShow&quot;:7,&quot;slidesToScroll&quot;:7,&quot;dots&quot;:true,&quot;arrows&quot;:false,&quot;responsive&quot;:[{&quot;breakpoint&quot;:700,&quot;settings&quot;:{&quot;slidesToShow&quot;:2,&quot;slidesToScroll&quot;:2}},{&quot;breakpoint&quot;:780,&quot;settings&quot;:{&quot;slidesToShow&quot;:3,&quot;slidesToScroll&quot;:3}},{&quot;breakpoint&quot;:1200,&quot;settings&quot;:{&quot;slidesToShow&quot;:4,&quot;slidesToScroll&quot;:4}},{&quot;breakpoint&quot;:1400,&quot;settings&quot;:{&quot;slidesToShow&quot;:5,&quot;slidesToScroll&quot;:5}}]}">
                                             <div class="container-fluid">
                                                 <div class="woocommerce">
@@ -3168,9 +2762,8 @@
                                                             </div>
                                                             <a href="single-product-fullwidth.html"
                                                                 class="woocommerce-LoopProduct-link">
-                                                                <img src="home/assets/images/products/10.jpg"
-                                                                    width="224" height="197"
-                                                                    class="wp-post-image" alt="">
+                                                                <img src="home/assets/images/products/10.jpg" width="224"
+                                                                    height="197" class="wp-post-image" alt="">
                                                                 <span class="price">
                                                                     <ins>
                                                                         <span class="amount"> </span>
@@ -3183,9 +2776,7 @@
                                                             </a>
                                                             <div class="hover-area">
                                                                 <a class="button add_to_cart_button" href="cart.html"
-                                                                    rel="nofollow">Thêm vào giỏ hàng</a>
-                                                                <a class="add-to-compare-link" href="compare.html">Add
-                                                                    to compare</a>
+                                                                    rel="nofollow">Xem chi tiết</a>
                                                             </div>
                                                         </div>
                                                         <!-- /.product-outer -->
@@ -3201,9 +2792,8 @@
                                                                         <span
                                                                             class="woocommerce-Price-currencySymbol">$</span>150.04</span>
                                                                 </span>
-                                                                <img src="home/assets/images/products/2.jpg"
-                                                                    width="224" height="197"
-                                                                    class="wp-post-image" alt="">
+                                                                <img src="home/assets/images/products/2.jpg" width="224"
+                                                                    height="197" class="wp-post-image" alt="">
                                                                 <span class="price">
                                                                     <ins>
                                                                         <span class="amount"> 309.95</span>
@@ -3219,9 +2809,7 @@
                                                             </a>
                                                             <div class="hover-area">
                                                                 <a class="button add_to_cart_button" href="cart.html"
-                                                                    rel="nofollow">Thêm vào giỏ hàng</a>
-                                                                <a class="add-to-compare-link" href="compare.html">Add
-                                                                    to compare</a>
+                                                                    rel="nofollow">Xem chi tiết</a>
                                                             </div>
                                                         </div>
                                                         <!-- /.product-outer -->
@@ -3237,9 +2825,8 @@
                                                                         <span
                                                                             class="woocommerce-Price-currencySymbol">$</span>150.04</span>
                                                                 </span>
-                                                                <img src="home/assets/images/products/7.jpg"
-                                                                    width="224" height="197"
-                                                                    class="wp-post-image" alt="">
+                                                                <img src="home/assets/images/products/7.jpg" width="224"
+                                                                    height="197" class="wp-post-image" alt="">
                                                                 <span class="price">
                                                                     <ins>
                                                                         <span class="amount"> 789.95</span>
@@ -3255,9 +2842,7 @@
                                                             </a>
                                                             <div class="hover-area">
                                                                 <a class="button add_to_cart_button" href="cart.html"
-                                                                    rel="nofollow">Thêm vào giỏ hàng</a>
-                                                                <a class="add-to-compare-link" href="compare.html">Add
-                                                                    to compare</a>
+                                                                    rel="nofollow">Xem chi tiết</a>
                                                             </div>
                                                         </div>
                                                         <!-- /.product-outer -->
@@ -3268,9 +2853,8 @@
                                                             </div>
                                                             <a href="single-product-fullwidth.html"
                                                                 class="woocommerce-LoopProduct-link">
-                                                                <img src="home/assets/images/products/6.jpg"
-                                                                    width="224" height="197"
-                                                                    class="wp-post-image" alt="">
+                                                                <img src="home/assets/images/products/6.jpg" width="224"
+                                                                    height="197" class="wp-post-image" alt="">
                                                                 <span class="price">
                                                                     <ins>
                                                                         <span class="amount"> </span>
@@ -3283,9 +2867,7 @@
                                                             </a>
                                                             <div class="hover-area">
                                                                 <a class="button add_to_cart_button" href="cart.html"
-                                                                    rel="nofollow">Thêm vào giỏ hàng</a>
-                                                                <a class="add-to-compare-link" href="compare.html">Add
-                                                                    to compare</a>
+                                                                    rel="nofollow">Xem chi tiết</a>
                                                             </div>
                                                         </div>
                                                         <!-- /.product-outer -->
@@ -3296,9 +2878,8 @@
                                                             </div>
                                                             <a href="single-product-fullwidth.html"
                                                                 class="woocommerce-LoopProduct-link">
-                                                                <img src="home/assets/images/products/12.jpg"
-                                                                    width="224" height="197"
-                                                                    class="wp-post-image" alt="">
+                                                                <img src="home/assets/images/products/12.jpg" width="224"
+                                                                    height="197" class="wp-post-image" alt="">
                                                                 <span class="price">
                                                                     <ins>
                                                                         <span class="amount"> </span>
@@ -3311,9 +2892,7 @@
                                                             </a>
                                                             <div class="hover-area">
                                                                 <a class="button add_to_cart_button" href="cart.html"
-                                                                    rel="nofollow">Thêm vào giỏ hàng</a>
-                                                                <a class="add-to-compare-link" href="compare.html">Add
-                                                                    to compare</a>
+                                                                    rel="nofollow">Xem chi tiết</a>
                                                             </div>
                                                         </div>
                                                         <!-- /.product-outer -->
@@ -3329,9 +2908,8 @@
                                                                         <span
                                                                             class="woocommerce-Price-currencySymbol">$</span>150.04</span>
                                                                 </span>
-                                                                <img src="home/assets/images/products/14.jpg"
-                                                                    width="224" height="197"
-                                                                    class="wp-post-image" alt="">
+                                                                <img src="home/assets/images/products/14.jpg" width="224"
+                                                                    height="197" class="wp-post-image" alt="">
                                                                 <span class="price">
                                                                     <ins>
                                                                         <span class="amount"> 262.81</span>
@@ -3347,9 +2925,7 @@
                                                             </a>
                                                             <div class="hover-area">
                                                                 <a class="button add_to_cart_button" href="cart.html"
-                                                                    rel="nofollow">Thêm vào giỏ hàng</a>
-                                                                <a class="add-to-compare-link" href="compare.html">Add
-                                                                    to compare</a>
+                                                                    rel="nofollow">Xem chi tiết</a>
                                                             </div>
                                                         </div>
                                                         <!-- /.product-outer -->
@@ -3360,9 +2936,8 @@
                                                             </div>
                                                             <a href="single-product-fullwidth.html"
                                                                 class="woocommerce-LoopProduct-link">
-                                                                <img src="home/assets/images/products/11.jpg"
-                                                                    width="224" height="197"
-                                                                    class="wp-post-image" alt="">
+                                                                <img src="home/assets/images/products/11.jpg" width="224"
+                                                                    height="197" class="wp-post-image" alt="">
                                                                 <span class="price">
                                                                     <ins>
                                                                         <span class="amount"> </span>
@@ -3375,9 +2950,7 @@
                                                             </a>
                                                             <div class="hover-area">
                                                                 <a class="button add_to_cart_button" href="cart.html"
-                                                                    rel="nofollow">Thêm vào giỏ hàng</a>
-                                                                <a class="add-to-compare-link" href="compare.html">Add
-                                                                    to compare</a>
+                                                                    rel="nofollow">Xem chi tiết</a>
                                                             </div>
                                                         </div>
                                                         <!-- /.product-outer -->
@@ -3388,9 +2961,8 @@
                                                             </div>
                                                             <a href="single-product-fullwidth.html"
                                                                 class="woocommerce-LoopProduct-link">
-                                                                <img src="home/assets/images/products/13.jpg"
-                                                                    width="224" height="197"
-                                                                    class="wp-post-image" alt="">
+                                                                <img src="home/assets/images/products/13.jpg" width="224"
+                                                                    height="197" class="wp-post-image" alt="">
                                                                 <span class="price">
                                                                     <ins>
                                                                         <span class="amount"> </span>
@@ -3403,9 +2975,7 @@
                                                             </a>
                                                             <div class="hover-area">
                                                                 <a class="button add_to_cart_button" href="cart.html"
-                                                                    rel="nofollow">Thêm vào giỏ hàng</a>
-                                                                <a class="add-to-compare-link" href="compare.html">Add
-                                                                    to compare</a>
+                                                                    rel="nofollow">Xem chi tiết</a>
                                                             </div>
                                                         </div>
                                                         <!-- /.product-outer -->
@@ -3416,9 +2986,8 @@
                                                             </div>
                                                             <a href="single-product-fullwidth.html"
                                                                 class="woocommerce-LoopProduct-link">
-                                                                <img src="home/assets/images/products/8.jpg"
-                                                                    width="224" height="197"
-                                                                    class="wp-post-image" alt="">
+                                                                <img src="home/assets/images/products/8.jpg" width="224"
+                                                                    height="197" class="wp-post-image" alt="">
                                                                 <span class="price">
                                                                     <ins>
                                                                         <span class="amount"> </span>
@@ -3431,9 +3000,7 @@
                                                             </a>
                                                             <div class="hover-area">
                                                                 <a class="button add_to_cart_button" href="cart.html"
-                                                                    rel="nofollow">Thêm vào giỏ hàng</a>
-                                                                <a class="add-to-compare-link" href="compare.html">Add
-                                                                    to compare</a>
+                                                                    rel="nofollow">Xem chi tiết</a>
                                                             </div>
                                                         </div>
                                                         <!-- /.product-outer -->
@@ -3444,9 +3011,8 @@
                                                             </div>
                                                             <a href="single-product-fullwidth.html"
                                                                 class="woocommerce-LoopProduct-link">
-                                                                <img src="home/assets/images/products/5.jpg"
-                                                                    width="224" height="197"
-                                                                    class="wp-post-image" alt="">
+                                                                <img src="home/assets/images/products/5.jpg" width="224"
+                                                                    height="197" class="wp-post-image" alt="">
                                                                 <span class="price">
                                                                     <ins>
                                                                         <span class="amount"> </span>
@@ -3459,9 +3025,7 @@
                                                             </a>
                                                             <div class="hover-area">
                                                                 <a class="button add_to_cart_button" href="cart.html"
-                                                                    rel="nofollow">Thêm vào giỏ hàng</a>
-                                                                <a class="add-to-compare-link" href="compare.html">Add
-                                                                    to compare</a>
+                                                                    rel="nofollow">Xem chi tiết</a>
                                                             </div>
                                                         </div>
                                                         <!-- /.product-outer -->
@@ -3472,9 +3036,8 @@
                                                             </div>
                                                             <a href="single-product-fullwidth.html"
                                                                 class="woocommerce-LoopProduct-link">
-                                                                <img src="home/assets/images/products/4.jpg"
-                                                                    width="224" height="197"
-                                                                    class="wp-post-image" alt="">
+                                                                <img src="home/assets/images/products/4.jpg" width="224"
+                                                                    height="197" class="wp-post-image" alt="">
                                                                 <span class="price">
                                                                     <ins>
                                                                         <span class="amount"> </span>
@@ -3487,9 +3050,7 @@
                                                             </a>
                                                             <div class="hover-area">
                                                                 <a class="button add_to_cart_button" href="cart.html"
-                                                                    rel="nofollow">Thêm vào giỏ hàng</a>
-                                                                <a class="add-to-compare-link" href="compare.html">Add
-                                                                    to compare</a>
+                                                                    rel="nofollow">Xem chi tiết</a>
                                                             </div>
                                                         </div>
                                                         <!-- /.product-outer -->
@@ -3500,9 +3061,8 @@
                                                             </div>
                                                             <a href="single-product-fullwidth.html"
                                                                 class="woocommerce-LoopProduct-link">
-                                                                <img src="home/assets/images/products/9.jpg"
-                                                                    width="224" height="197"
-                                                                    class="wp-post-image" alt="">
+                                                                <img src="home/assets/images/products/9.jpg" width="224"
+                                                                    height="197" class="wp-post-image" alt="">
                                                                 <span class="price">
                                                                     <ins>
                                                                         <span class="amount"> </span>
@@ -3515,9 +3075,7 @@
                                                             </a>
                                                             <div class="hover-area">
                                                                 <a class="button add_to_cart_button" href="cart.html"
-                                                                    rel="nofollow">Thêm vào giỏ hàng</a>
-                                                                <a class="add-to-compare-link" href="compare.html">Add
-                                                                    to compare</a>
+                                                                    rel="nofollow">Xem chi tiết</a>
                                                             </div>
                                                         </div>
                                                         <!-- /.product-outer -->
@@ -3528,9 +3086,8 @@
                                                             </div>
                                                             <a href="single-product-fullwidth.html"
                                                                 class="woocommerce-LoopProduct-link">
-                                                                <img src="home/assets/images/products/3.jpg"
-                                                                    width="224" height="197"
-                                                                    class="wp-post-image" alt="">
+                                                                <img src="home/assets/images/products/3.jpg" width="224"
+                                                                    height="197" class="wp-post-image" alt="">
                                                                 <span class="price">
                                                                     <ins>
                                                                         <span class="amount"> </span>
@@ -3543,9 +3100,7 @@
                                                             </a>
                                                             <div class="hover-area">
                                                                 <a class="button add_to_cart_button" href="cart.html"
-                                                                    rel="nofollow">Thêm vào giỏ hàng</a>
-                                                                <a class="add-to-compare-link" href="compare.html">Add
-                                                                    to compare</a>
+                                                                    rel="nofollow">Xem chi tiết</a>
                                                             </div>
                                                         </div>
                                                         <!-- /.product-outer -->
@@ -3556,9 +3111,8 @@
                                                             </div>
                                                             <a href="single-product-fullwidth.html"
                                                                 class="woocommerce-LoopProduct-link">
-                                                                <img src="home/assets/images/products/16.jpg"
-                                                                    width="224" height="197"
-                                                                    class="wp-post-image" alt="">
+                                                                <img src="home/assets/images/products/16.jpg" width="224"
+                                                                    height="197" class="wp-post-image" alt="">
                                                                 <span class="price">
                                                                     <ins>
                                                                         <span class="amount"> </span>
@@ -3571,9 +3125,7 @@
                                                             </a>
                                                             <div class="hover-area">
                                                                 <a class="button add_to_cart_button" href="cart.html"
-                                                                    rel="nofollow">Thêm vào giỏ hàng</a>
-                                                                <a class="add-to-compare-link" href="compare.html">Add
-                                                                    to compare</a>
+                                                                    rel="nofollow">Xem chi tiết</a>
                                                             </div>
                                                         </div>
                                                         <!-- /.product-outer -->
@@ -3584,9 +3136,8 @@
                                                             </div>
                                                             <a href="single-product-fullwidth.html"
                                                                 class="woocommerce-LoopProduct-link">
-                                                                <img src="home/assets/images/products/1.jpg"
-                                                                    width="224" height="197"
-                                                                    class="wp-post-image" alt="">
+                                                                <img src="home/assets/images/products/1.jpg" width="224"
+                                                                    height="197" class="wp-post-image" alt="">
                                                                 <span class="price">
                                                                     <ins>
                                                                         <span class="amount"> </span>
@@ -3599,9 +3150,7 @@
                                                             </a>
                                                             <div class="hover-area">
                                                                 <a class="button add_to_cart_button" href="cart.html"
-                                                                    rel="nofollow">Thêm vào giỏ hàng</a>
-                                                                <a class="add-to-compare-link" href="compare.html">Add
-                                                                    to compare</a>
+                                                                    rel="nofollow">Xem chi tiết</a>
                                                             </div>
                                                         </div>
                                                         <!-- /.product-outer -->
@@ -3612,9 +3161,8 @@
                                                             </div>
                                                             <a href="single-product-fullwidth.html"
                                                                 class="woocommerce-LoopProduct-link">
-                                                                <img src="home/assets/images/products/15.jpg"
-                                                                    width="224" height="197"
-                                                                    class="wp-post-image" alt="">
+                                                                <img src="home/assets/images/products/15.jpg" width="224"
+                                                                    height="197" class="wp-post-image" alt="">
                                                                 <span class="price">
                                                                     <ins>
                                                                         <span class="amount"> </span>
@@ -3627,9 +3175,7 @@
                                                             </a>
                                                             <div class="hover-area">
                                                                 <a class="button add_to_cart_button" href="cart.html"
-                                                                    rel="nofollow">Thêm vào giỏ hàng</a>
-                                                                <a class="add-to-compare-link" href="compare.html">Add
-                                                                    to compare</a>
+                                                                    rel="nofollow">Xem chi tiết</a>
                                                             </div>
                                                         </div>
                                                         <!-- /.product-outer -->
@@ -3643,8 +3189,7 @@
                                     </div>
                                     <!-- .tab-pane -->
                                     <div id="tab-59f89f08825d53" class="tab-pane " role="tabpanel">
-                                        <div class="products-carousel" data-ride="tm-slick-carousel"
-                                            data-wrap=".products"
+                                        <div class="products-carousel" data-ride="tm-slick-carousel" data-wrap=".products"
                                             data-slick="{&quot;infinite&quot;:false,&quot;slidesToShow&quot;:7,&quot;slidesToScroll&quot;:7,&quot;dots&quot;:true,&quot;arrows&quot;:false,&quot;responsive&quot;:[{&quot;breakpoint&quot;:700,&quot;settings&quot;:{&quot;slidesToShow&quot;:2,&quot;slidesToScroll&quot;:2}},{&quot;breakpoint&quot;:780,&quot;settings&quot;:{&quot;slidesToShow&quot;:3,&quot;slidesToScroll&quot;:3}},{&quot;breakpoint&quot;:1200,&quot;settings&quot;:{&quot;slidesToShow&quot;:4,&quot;slidesToScroll&quot;:4}},{&quot;breakpoint&quot;:1400,&quot;settings&quot;:{&quot;slidesToShow&quot;:5,&quot;slidesToScroll&quot;:5}}]}">
                                             <div class="container-fluid">
                                                 <div class="woocommerce">
@@ -3656,9 +3201,8 @@
                                                             </div>
                                                             <a href="single-product-fullwidth.html"
                                                                 class="woocommerce-LoopProduct-link">
-                                                                <img src="home/assets/images/products/9.jpg"
-                                                                    width="224" height="197"
-                                                                    class="wp-post-image" alt="">
+                                                                <img src="home/assets/images/products/9.jpg" width="224"
+                                                                    height="197" class="wp-post-image" alt="">
                                                                 <span class="price">
                                                                     <ins>
                                                                         <span class="amount"> </span>
@@ -3671,9 +3215,7 @@
                                                             </a>
                                                             <div class="hover-area">
                                                                 <a class="button add_to_cart_button" href="cart.html"
-                                                                    rel="nofollow">Thêm vào giỏ hàng</a>
-                                                                <a class="add-to-compare-link" href="compare.html">Add
-                                                                    to compare</a>
+                                                                    rel="nofollow">Xem chi tiết</a>
                                                             </div>
                                                         </div>
                                                         <!-- /.product-outer -->
@@ -3684,9 +3226,8 @@
                                                             </div>
                                                             <a href="single-product-fullwidth.html"
                                                                 class="woocommerce-LoopProduct-link">
-                                                                <img src="home/assets/images/products/10.jpg"
-                                                                    width="224" height="197"
-                                                                    class="wp-post-image" alt="">
+                                                                <img src="home/assets/images/products/10.jpg" width="224"
+                                                                    height="197" class="wp-post-image" alt="">
                                                                 <span class="price">
                                                                     <ins>
                                                                         <span class="amount"> </span>
@@ -3699,9 +3240,7 @@
                                                             </a>
                                                             <div class="hover-area">
                                                                 <a class="button add_to_cart_button" href="cart.html"
-                                                                    rel="nofollow">Thêm vào giỏ hàng</a>
-                                                                <a class="add-to-compare-link" href="compare.html">Add
-                                                                    to compare</a>
+                                                                    rel="nofollow">Xem chi tiết</a>
                                                             </div>
                                                         </div>
                                                         <!-- /.product-outer -->
@@ -3712,9 +3251,8 @@
                                                             </div>
                                                             <a href="single-product-fullwidth.html"
                                                                 class="woocommerce-LoopProduct-link">
-                                                                <img src="home/assets/images/products/6.jpg"
-                                                                    width="224" height="197"
-                                                                    class="wp-post-image" alt="">
+                                                                <img src="home/assets/images/products/6.jpg" width="224"
+                                                                    height="197" class="wp-post-image" alt="">
                                                                 <span class="price">
                                                                     <ins>
                                                                         <span class="amount"> </span>
@@ -3727,9 +3265,7 @@
                                                             </a>
                                                             <div class="hover-area">
                                                                 <a class="button add_to_cart_button" href="cart.html"
-                                                                    rel="nofollow">Thêm vào giỏ hàng</a>
-                                                                <a class="add-to-compare-link" href="compare.html">Add
-                                                                    to compare</a>
+                                                                    rel="nofollow">Xem chi tiết</a>
                                                             </div>
                                                         </div>
                                                         <!-- /.product-outer -->
@@ -3740,9 +3276,8 @@
                                                             </div>
                                                             <a href="single-product-fullwidth.html"
                                                                 class="woocommerce-LoopProduct-link">
-                                                                <img src="home/assets/images/products/15.jpg"
-                                                                    width="224" height="197"
-                                                                    class="wp-post-image" alt="">
+                                                                <img src="home/assets/images/products/15.jpg" width="224"
+                                                                    height="197" class="wp-post-image" alt="">
                                                                 <span class="price">
                                                                     <ins>
                                                                         <span class="amount"> </span>
@@ -3755,9 +3290,7 @@
                                                             </a>
                                                             <div class="hover-area">
                                                                 <a class="button add_to_cart_button" href="cart.html"
-                                                                    rel="nofollow">Thêm vào giỏ hàng</a>
-                                                                <a class="add-to-compare-link" href="compare.html">Add
-                                                                    to compare</a>
+                                                                    rel="nofollow">Xem chi tiết</a>
                                                             </div>
                                                         </div>
                                                         <!-- /.product-outer -->
@@ -3768,9 +3301,8 @@
                                                             </div>
                                                             <a href="single-product-fullwidth.html"
                                                                 class="woocommerce-LoopProduct-link">
-                                                                <img src="home/assets/images/products/5.jpg"
-                                                                    width="224" height="197"
-                                                                    class="wp-post-image" alt="">
+                                                                <img src="home/assets/images/products/5.jpg" width="224"
+                                                                    height="197" class="wp-post-image" alt="">
                                                                 <span class="price">
                                                                     <ins>
                                                                         <span class="amount"> </span>
@@ -3783,9 +3315,7 @@
                                                             </a>
                                                             <div class="hover-area">
                                                                 <a class="button add_to_cart_button" href="cart.html"
-                                                                    rel="nofollow">Thêm vào giỏ hàng</a>
-                                                                <a class="add-to-compare-link" href="compare.html">Add
-                                                                    to compare</a>
+                                                                    rel="nofollow">Xem chi tiết</a>
                                                             </div>
                                                         </div>
                                                         <!-- /.product-outer -->
@@ -3796,9 +3326,8 @@
                                                             </div>
                                                             <a href="single-product-fullwidth.html"
                                                                 class="woocommerce-LoopProduct-link">
-                                                                <img src="home/assets/images/products/16.jpg"
-                                                                    width="224" height="197"
-                                                                    class="wp-post-image" alt="">
+                                                                <img src="home/assets/images/products/16.jpg" width="224"
+                                                                    height="197" class="wp-post-image" alt="">
                                                                 <span class="price">
                                                                     <ins>
                                                                         <span class="amount"> </span>
@@ -3811,9 +3340,7 @@
                                                             </a>
                                                             <div class="hover-area">
                                                                 <a class="button add_to_cart_button" href="cart.html"
-                                                                    rel="nofollow">Thêm vào giỏ hàng</a>
-                                                                <a class="add-to-compare-link" href="compare.html">Add
-                                                                    to compare</a>
+                                                                    rel="nofollow">Xem chi tiết</a>
                                                             </div>
                                                         </div>
                                                         <!-- /.product-outer -->
@@ -3824,9 +3351,8 @@
                                                             </div>
                                                             <a href="single-product-fullwidth.html"
                                                                 class="woocommerce-LoopProduct-link">
-                                                                <img src="home/assets/images/products/4.jpg"
-                                                                    width="224" height="197"
-                                                                    class="wp-post-image" alt="">
+                                                                <img src="home/assets/images/products/4.jpg" width="224"
+                                                                    height="197" class="wp-post-image" alt="">
                                                                 <span class="price">
                                                                     <ins>
                                                                         <span class="amount"> </span>
@@ -3839,9 +3365,7 @@
                                                             </a>
                                                             <div class="hover-area">
                                                                 <a class="button add_to_cart_button" href="cart.html"
-                                                                    rel="nofollow">Thêm vào giỏ hàng</a>
-                                                                <a class="add-to-compare-link" href="compare.html">Add
-                                                                    to compare</a>
+                                                                    rel="nofollow">Xem chi tiết</a>
                                                             </div>
                                                         </div>
                                                         <!-- /.product-outer -->
@@ -3852,9 +3376,8 @@
                                                             </div>
                                                             <a href="single-product-fullwidth.html"
                                                                 class="woocommerce-LoopProduct-link">
-                                                                <img src="home/assets/images/products/1.jpg"
-                                                                    width="224" height="197"
-                                                                    class="wp-post-image" alt="">
+                                                                <img src="home/assets/images/products/1.jpg" width="224"
+                                                                    height="197" class="wp-post-image" alt="">
                                                                 <span class="price">
                                                                     <ins>
                                                                         <span class="amount"> </span>
@@ -3867,9 +3390,7 @@
                                                             </a>
                                                             <div class="hover-area">
                                                                 <a class="button add_to_cart_button" href="cart.html"
-                                                                    rel="nofollow">Thêm vào giỏ hàng</a>
-                                                                <a class="add-to-compare-link" href="compare.html">Add
-                                                                    to compare</a>
+                                                                    rel="nofollow">Xem chi tiết</a>
                                                             </div>
                                                         </div>
                                                         <!-- /.product-outer -->
@@ -3880,9 +3401,8 @@
                                                             </div>
                                                             <a href="single-product-fullwidth.html"
                                                                 class="woocommerce-LoopProduct-link">
-                                                                <img src="home/assets/images/products/12.jpg"
-                                                                    width="224" height="197"
-                                                                    class="wp-post-image" alt="">
+                                                                <img src="home/assets/images/products/12.jpg" width="224"
+                                                                    height="197" class="wp-post-image" alt="">
                                                                 <span class="price">
                                                                     <ins>
                                                                         <span class="amount"> </span>
@@ -3895,9 +3415,7 @@
                                                             </a>
                                                             <div class="hover-area">
                                                                 <a class="button add_to_cart_button" href="cart.html"
-                                                                    rel="nofollow">Thêm vào giỏ hàng</a>
-                                                                <a class="add-to-compare-link" href="compare.html">Add
-                                                                    to compare</a>
+                                                                    rel="nofollow">Xem chi tiết</a>
                                                             </div>
                                                         </div>
                                                         <!-- /.product-outer -->
@@ -3908,9 +3426,8 @@
                                                             </div>
                                                             <a href="single-product-fullwidth.html"
                                                                 class="woocommerce-LoopProduct-link">
-                                                                <img src="home/assets/images/products/8.jpg"
-                                                                    width="224" height="197"
-                                                                    class="wp-post-image" alt="">
+                                                                <img src="home/assets/images/products/8.jpg" width="224"
+                                                                    height="197" class="wp-post-image" alt="">
                                                                 <span class="price">
                                                                     <ins>
                                                                         <span class="amount"> </span>
@@ -3923,9 +3440,7 @@
                                                             </a>
                                                             <div class="hover-area">
                                                                 <a class="button add_to_cart_button" href="cart.html"
-                                                                    rel="nofollow">Thêm vào giỏ hàng</a>
-                                                                <a class="add-to-compare-link" href="compare.html">Add
-                                                                    to compare</a>
+                                                                    rel="nofollow">Xem chi tiết</a>
                                                             </div>
                                                         </div>
                                                         <!-- /.product-outer -->
@@ -3941,9 +3456,8 @@
                                                                         <span
                                                                             class="woocommerce-Price-currencySymbol">$</span>150.04</span>
                                                                 </span>
-                                                                <img src="home/assets/images/products/2.jpg"
-                                                                    width="224" height="197"
-                                                                    class="wp-post-image" alt="">
+                                                                <img src="home/assets/images/products/2.jpg" width="224"
+                                                                    height="197" class="wp-post-image" alt="">
                                                                 <span class="price">
                                                                     <ins>
                                                                         <span class="amount"> 309.95</span>
@@ -3959,9 +3473,7 @@
                                                             </a>
                                                             <div class="hover-area">
                                                                 <a class="button add_to_cart_button" href="cart.html"
-                                                                    rel="nofollow">Thêm vào giỏ hàng</a>
-                                                                <a class="add-to-compare-link" href="compare.html">Add
-                                                                    to compare</a>
+                                                                    rel="nofollow">Xem chi tiết</a>
                                                             </div>
                                                         </div>
                                                         <!-- /.product-outer -->
@@ -3972,9 +3484,8 @@
                                                             </div>
                                                             <a href="single-product-fullwidth.html"
                                                                 class="woocommerce-LoopProduct-link">
-                                                                <img src="home/assets/images/products/13.jpg"
-                                                                    width="224" height="197"
-                                                                    class="wp-post-image" alt="">
+                                                                <img src="home/assets/images/products/13.jpg" width="224"
+                                                                    height="197" class="wp-post-image" alt="">
                                                                 <span class="price">
                                                                     <ins>
                                                                         <span class="amount"> </span>
@@ -3987,9 +3498,7 @@
                                                             </a>
                                                             <div class="hover-area">
                                                                 <a class="button add_to_cart_button" href="cart.html"
-                                                                    rel="nofollow">Thêm vào giỏ hàng</a>
-                                                                <a class="add-to-compare-link" href="compare.html">Add
-                                                                    to compare</a>
+                                                                    rel="nofollow">Xem chi tiết</a>
                                                             </div>
                                                         </div>
                                                         <!-- /.product-outer -->
@@ -4005,9 +3514,8 @@
                                                                         <span
                                                                             class="woocommerce-Price-currencySymbol">$</span>150.04</span>
                                                                 </span>
-                                                                <img src="home/assets/images/products/14.jpg"
-                                                                    width="224" height="197"
-                                                                    class="wp-post-image" alt="">
+                                                                <img src="home/assets/images/products/14.jpg" width="224"
+                                                                    height="197" class="wp-post-image" alt="">
                                                                 <span class="price">
                                                                     <ins>
                                                                         <span class="amount"> 262.81</span>
@@ -4023,9 +3531,7 @@
                                                             </a>
                                                             <div class="hover-area">
                                                                 <a class="button add_to_cart_button" href="cart.html"
-                                                                    rel="nofollow">Thêm vào giỏ hàng</a>
-                                                                <a class="add-to-compare-link" href="compare.html">Add
-                                                                    to compare</a>
+                                                                    rel="nofollow">Xem chi tiết</a>
                                                             </div>
                                                         </div>
                                                         <!-- /.product-outer -->
@@ -4041,9 +3547,8 @@
                                                                         <span
                                                                             class="woocommerce-Price-currencySymbol">$</span>150.04</span>
                                                                 </span>
-                                                                <img src="home/assets/images/products/7.jpg"
-                                                                    width="224" height="197"
-                                                                    class="wp-post-image" alt="">
+                                                                <img src="home/assets/images/products/7.jpg" width="224"
+                                                                    height="197" class="wp-post-image" alt="">
                                                                 <span class="price">
                                                                     <ins>
                                                                         <span class="amount"> 789.95</span>
@@ -4059,9 +3564,7 @@
                                                             </a>
                                                             <div class="hover-area">
                                                                 <a class="button add_to_cart_button" href="cart.html"
-                                                                    rel="nofollow">Thêm vào giỏ hàng</a>
-                                                                <a class="add-to-compare-link" href="compare.html">Add
-                                                                    to compare</a>
+                                                                    rel="nofollow">Xem chi tiết</a>
                                                             </div>
                                                         </div>
                                                         <!-- /.product-outer -->
@@ -4072,9 +3575,8 @@
                                                             </div>
                                                             <a href="single-product-fullwidth.html"
                                                                 class="woocommerce-LoopProduct-link">
-                                                                <img src="home/assets/images/products/3.jpg"
-                                                                    width="224" height="197"
-                                                                    class="wp-post-image" alt="">
+                                                                <img src="home/assets/images/products/3.jpg" width="224"
+                                                                    height="197" class="wp-post-image" alt="">
                                                                 <span class="price">
                                                                     <ins>
                                                                         <span class="amount"> </span>
@@ -4087,9 +3589,7 @@
                                                             </a>
                                                             <div class="hover-area">
                                                                 <a class="button add_to_cart_button" href="cart.html"
-                                                                    rel="nofollow">Thêm vào giỏ hàng</a>
-                                                                <a class="add-to-compare-link" href="compare.html">Add
-                                                                    to compare</a>
+                                                                    rel="nofollow">Xem chi tiết</a>
                                                             </div>
                                                         </div>
                                                         <!-- /.product-outer -->
@@ -4100,9 +3600,8 @@
                                                             </div>
                                                             <a href="single-product-fullwidth.html"
                                                                 class="woocommerce-LoopProduct-link">
-                                                                <img src="home/assets/images/products/11.jpg"
-                                                                    width="224" height="197"
-                                                                    class="wp-post-image" alt="">
+                                                                <img src="home/assets/images/products/11.jpg" width="224"
+                                                                    height="197" class="wp-post-image" alt="">
                                                                 <span class="price">
                                                                     <ins>
                                                                         <span class="amount"> </span>
@@ -4115,9 +3614,7 @@
                                                             </a>
                                                             <div class="hover-area">
                                                                 <a class="button add_to_cart_button" href="cart.html"
-                                                                    rel="nofollow">Thêm vào giỏ hàng</a>
-                                                                <a class="add-to-compare-link" href="compare.html">Add
-                                                                    to compare</a>
+                                                                    rel="nofollow">Xem chi tiết</a>
                                                             </div>
                                                         </div>
                                                         <!-- /.product-outer -->
@@ -4140,9 +3637,9 @@
                             <div class="row">
                                 <div class="banner banner-long text-in-right">
                                     <a href="shop.html">
-                                        <div style="background-size: cover; background-position: center center; background-image: url( home/assets/images/banner/3-2.jpg ); height: 259px;"
+                                        <div style="background-size: cover; background-position: center center; background-image: url( admin/assets/images/banner/image.png ); height: 290px;"
                                             class="banner-bg">
-                                            <div class="caption">
+                                            {{-- <div class="caption">
                                                 <div class="banner-info">
                                                     <h3 class="title">
                                                         <strong>Shop now</strong> to find savings on everything you need
@@ -4151,7 +3648,7 @@
                                                 </div>
                                                 <!-- /.banner-info -->
                                                 <span class="banner-action button">Browse</span>
-                                            </div>
+                                            </div> --}}
                                             <!-- /.caption -->
                                         </div>
                                         <!-- /.banner-bg -->
@@ -4160,9 +3657,9 @@
                                 <!-- /.banner -->
                                 <div class="banner banner-short text-in-left">
                                     <a href="shop.html">
-                                        <div style="background-size: cover; background-position: center center; background-image: url( home/assets/images/banner/3-3.jpg ); height: 259px;"
+                                        <div style="background-size: cover; background-position: center center; background-image: url( admin/assets/images/banner/image1.png); height: 290px; width: 290px"
                                             class="banner-bg">
-                                            <div class="caption">
+                                            {{-- <div class="caption">
                                                 <div class="banner-info">
                                                     <h3 class="title">
                                                         <strong>1000 mAh</strong>
@@ -4172,7 +3669,7 @@
                                                 <!-- /.banner-info -->
                                                 <span class="price">$34.99</span>
                                                 <span class="banner-action button">Buy Now</span>
-                                            </div>
+                                            </div> --}}
                                             <!-- /.caption -->
                                         </div>
                                         <!-- /.banner-bg -->

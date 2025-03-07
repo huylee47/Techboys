@@ -4,6 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Kjmtrue\VietnamZone\Models\District;
+use Kjmtrue\VietnamZone\Models\Province;
+use Kjmtrue\VietnamZone\Models\Ward;
 
 class Bill extends Model
 {
@@ -11,7 +14,7 @@ class Bill extends Model
 
     protected $table = 'bills';
 
-    protected $fillable = ['user_id', 'full_name', 'phone', 'total', 'address', 'email', 'payment_method', 'status_id', 'voucher_code'];  // Thêm voucher_code vào
+    protected $fillable = ['user_id', 'full_name', 'phone', 'total', 'address', 'email', 'payment_method','payment_status', 'status_id','province_id', 'district_id', 'ward_id'];
 
     public function user()
     {
@@ -23,8 +26,18 @@ class Bill extends Model
         return $this->belongsTo(Status::class);
     }
 
-    public function voucher_code()
+    public function province()
     {
-        return $this->belongsTo(Voucher::class, 'voucher_code', 'Id'); // Chỉnh sửa tên cột là 'voucher_code'
+        return $this->belongsTo(Province::class, 'province_id');
+    }
+
+    public function district()
+    {
+        return $this->belongsTo(District::class, 'district_id');
+    }
+
+    public function ward()
+    {
+        return $this->belongsTo(Ward::class, 'ward_id');
     }
 }

@@ -16,14 +16,17 @@ return new class extends Migration
             $table->foreignId('user_id')->nullable();
             $table->string('full_name');
             $table->string('phone');
-            $table->decimal('total', 10, 2);
+            $table->decimal('total', 20, 2);
             $table->text('address');
+            $table->foreignId('province_id');
+            $table->foreignId('district_id');
+            $table->foreignId('ward_id');
             $table->string('email');
             $table->tinyInteger('payment_method');
-            $table->tinyInteger('status_id');
-            $table->string('voucher_code')->nullable();
+            $table->tinyInteger('payment_status')->default(0);
+            $table->tinyInteger('status_id')->default(1);
             $table->timestamps();
-        });
+        }); 
     }
 
     /**

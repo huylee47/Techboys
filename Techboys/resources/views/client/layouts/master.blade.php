@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en-US" itemscope="itemscope" itemtype="http://schema.org/WebPage">
+
 <head>
     <meta charset="UTF-8">
     <meta name="csrf-token" content="{{ csrf_token() }}" />
@@ -20,6 +21,8 @@
     <link href="https://fonts.googleapis.com/css?family=Rubik:300,400,500,900" rel="stylesheet">
     <link rel="shortcut icon" href="{{ url('') }}/home/assets/images/fav-icon.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="shortcut icon" href="{{ url('') }}/home/assets/images/fav-icon.png">
+
     <style>
         .user-menu {
             position: relative;
@@ -43,7 +46,7 @@
 
         .dropdown-menu li {
             list-style-type: none;
-           
+
         }
 
         .dropdown-menu li a {
@@ -63,7 +66,7 @@
         .dropdown-menu li a p {
             margin: 0;
             padding: 5px;
-        
+
         }
     </style>
     @yield('styles')
@@ -98,7 +101,7 @@
                 <div class="techmarket-sticky-wrap">
                     <div class="row">
                         <div class="site-branding">
-                            <a href="home-v1.html" class="custom-logo-link" rel="home">
+                            <a href="{{ route('home') }}" class="custom-logo-link" rel="home">
                                 <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 176 28">
                                     <defs>
                                         <style>
@@ -164,6 +167,9 @@
                                 <li class="menu-item animate-dropdown">
                                     <a title="Headphones Sale" href="product-category.html">Liên hệ</a>
                                 </li>
+                                <li class="menu-item animate-dropdown">
+                                    <a title="Headphones Sale" href="{{ route('blog') }}">Blog</a>
+                                </li>
                                 <li class="techmarket-flex-more-menu-item dropdown">
                                     <a title="..." href="#" data-toggle="dropdown" class="dropdown-toggle">...</a>
                                     <ul class="overflow-items dropdown-menu"></ul>
@@ -189,10 +195,14 @@
                                         <a title="My Account" href="{{ route('login.client') }}">
                                             <i class="tm tm-login-register"></i>Đăng nhập</a>
                                     @else 
+
+
                                         <div class="user-menu">
                                             <a href="#" class="user-menu-toggle">
-                                                <i class="tm tm-login-register"></i><b style="margin-top: 5px">{{ Auth::user()->name }}</b>
-                                                <i class="fas fa-bars hamburger-icon" style="margin-left: 10px; margin-top: 5px"></i>
+                                                <i class="tm tm-login-register"></i><b
+                                                    style="margin-top: 5px">{{ Auth::user()->name }}</b>
+                                                <i class="fas fa-bars hamburger-icon"
+                                                    style="margin-left: 10px; margin-top: 5px"></i>
                                             </a>
                                             <ul class="dropdown-menu" id="userDropdownMenu">
                                                 <li>
@@ -765,34 +775,34 @@
 </form>
 
                     <!-- .navbar-search -->
-                    <ul class="header-compare nav navbar-nav">
+                    {{-- <ul class="header-compare nav navbar-nav">
                         <li class="nav-item">
                             <a href="compare.html" class="nav-link">
                                 <i class="tm tm-compare"></i>
                                 <span id="top-cart-compare-count" class="value">3</span>
                             </a>
                         </li>
-                    </ul>
+                    </ul> --}}
                     <!-- .header-compare -->
-                    <ul class="header-wishlist nav navbar-nav">
+                    {{-- <ul class="header-wishlist nav navbar-nav">
                         <li class="nav-item">
                             <a href="wishlist.html" class="nav-link">
                                 <i class="tm tm-favorites"></i>
                                 <span id="top-cart-wishlist-count" class="value">3</span>
                             </a>
                         </li>
-                    </ul>
+                    </ul> --}}
                     <!-- .header-wishlist -->
                     <ul id="site-header-cart" class="site-header-cart menu">
                         <li class="animate-dropdown dropdown ">
-                            <a class="cart-contents" href="cart.html" data-toggle="dropdown"
-                                title="View your shopping cart">
+                            <a class="cart-contents" href="" data-toggle="dropdown"
+                                title="Kiểm tra giỏ hàng của bạn">
                                 <i class="tm tm-shopping-bag"></i>
-                                <span class="count">2</span>
+                                <span class="count">{{$cartCount}}</span>
                                 <span class="amount">
-                                    <span class="price-label">Giỏ hàng</span>0 VNĐ</span>
+                                    <span class="price-label"><a href="{{route('client.cart.index')}}">Giỏ hàng</a></span></span>
                             </a>
-                            <ul class="dropdown-menu dropdown-menu-mini-cart">
+                            {{-- <ul class="dropdown-menu dropdown-menu-mini-cart">
                                 <li>
                                     <div class="widget woocommerce widget_shopping_cart">
                                         <div class="widget_shopping_cart_content">
@@ -841,7 +851,7 @@
                                     </div>
                                     <!-- .widget_shopping_cart -->
                                 </li>
-                            </ul>
+                            </ul> --}}
                             <!-- .dropdown-menu-mini-cart -->
                         </li>
                     </ul>
@@ -854,7 +864,7 @@
                 <div class="handheld-header">
                     <div class="row">
                         <div class="site-branding">
-                            <a href="home-v1.html" class="custom-logo-link" rel="home">
+                            <a href="{{ route('home') }}" class="custom-logo-link" rel="home">
                                 <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 176 28">
                                     <defs>
                                         <style>
@@ -1561,6 +1571,7 @@
         <!-- .header-v1 -->
         <!-- ============================================================= Header End ============================================================= -->
         @yield('main');
+        @yield('loading');
         <!-- #content -->
         <footer class="site-footer footer-v1">
             <div class="col-full">
@@ -1628,7 +1639,7 @@
                     <div class="row">
                         <div class="footer-contact">
                             <div class="footer-logo">
-                                <a href="home-v1.html" class="custom-logo-link" rel="home">
+                                <a href="{{ route('home') }}" class="custom-logo-link" rel="home">
                                     <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 176 28">
                                         <defs>
                                             <style>

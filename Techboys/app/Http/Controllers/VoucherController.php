@@ -35,7 +35,7 @@ class VoucherController extends Controller
             'code' => 'required|max:255',
             'name' => 'required|max:255',
             'min_price' => 'required|nullable|numeric|min:0',
-            'max_price' => 'required|nullable|numeric|min:0',
+            'max_discount' => 'required|nullable|numeric|min:0',
             'start_date' => 'required|date',
             'end_date' => 'required|date|after:start_date',
             'quantity' => 'required|numeric|min:1',
@@ -49,9 +49,9 @@ class VoucherController extends Controller
             'name.max' => 'Tên không được vượt quá 255 ký tự.',
             'min_price.min' => 'Giá tối thiểu phải là một số dương.',
             'min_price.required' => 'Vui lòng nhập giá tối thiểu.',
-            'max_price.min' => 'Giá tối đa phải là một số dương.',
-            'max_price.required' => 'Vui lòng nhập giá tối đa.',
-            'max_price.after' => 'Giá tối đa phải lớn hơn hoặc bằng giá tối thiểu.',
+            'max_discount.min' => 'Giá tối đa phải là một số dương.',
+            'max_discount.required' => 'Vui lòng nhập giá tối đa.',
+            'max_discount.after' => 'Giá tối đa phải lớn hơn hoặc bằng giá tối thiểu.',
             'start_date.required' => 'Vui lòng chọn ngày bắt đầu.',
             'start_date.date' => 'Ngày bắt đầu phải là ngày hợp lệ.',
             'end_date.required' => 'Vui lòng chọn ngày kết thúc.',
@@ -76,7 +76,7 @@ class VoucherController extends Controller
                 ->withErrors(['error' => 'Bạn chỉ được điền một trong hai trường: giảm(%) hoặc giảm(Đ)'])
                 ->withInput();
         }
-        if(($request->min_price) > ($request->max_price)){
+        if(($request->min_price) > ($request->max_discount)){
             return redirect()->back()
                 ->withErrors(['error' => 'Giá tối thiểu phải nhỏ hơn giá tối đa.'])
                 ->withInput();
@@ -88,7 +88,7 @@ class VoucherController extends Controller
             'discount_percent' => $request->discount_percent,
             'discount_amount' => $request->discount_amount,
             'min_price' => $request->min_price,
-            'max_price' => $request->max_price,
+            'max_discount' => $request->max_discount,
             'start_date' => $request->start_date,
             'end_date' => $request->end_date,
             'quantity' => $request->quantity
@@ -126,7 +126,7 @@ class VoucherController extends Controller
             'code' => 'required|max:255',
             'name' => 'required|max:255',
             'min_price' => 'required|nullable|numeric|min:0',
-            'max_price' => 'required|nullable|numeric|min:0',
+            'max_discount' => 'required|nullable|numeric|min:0',
             'start_date' => 'required|date',
             'end_date' => 'required|date|after:start_date',
             'quantity' => 'required|numeric|min:1',
@@ -140,9 +140,9 @@ class VoucherController extends Controller
             'name.max' => 'Tên không được vượt quá 255 ký tự.',
             'min_price.min' => 'Giá tối thiểu phải là một số dương.',
             'min_price.required' => 'Vui lòng nhập giá tối thiểu.',
-            'max_price.min' => 'Giá tối đa phải là một số dương.',
-            'max_price.required' => 'Vui lòng nhập giá tối đa.',
-            'max_price.after' => 'Giá tối đa phải lớn hơn hoặc bằng giá tối thiểu.',
+            'max_discount.min' => 'Giá tối đa phải là một số dương.',
+            'max_discount.required' => 'Vui lòng nhập giá tối đa.',
+            'max_discount.after' => 'Giá tối đa phải lớn hơn hoặc bằng giá tối thiểu.',
             'start_date.required' => 'Vui lòng chọn ngày bắt đầu.',
             'start_date.date' => 'Ngày bắt đầu phải là ngày hợp lệ.',
             'end_date.required' => 'Vui lòng chọn ngày kết thúc.',
@@ -167,7 +167,7 @@ class VoucherController extends Controller
                 ->withErrors(['error' => 'Bạn chỉ được điền một trong hai trường: giảm(%) hoặc giảm(Đ)'])
                 ->withInput();
         }
-        if(($request->min_price) > ($request->max_price)){
+        if(($request->min_price) > ($request->max_discount)){
             return redirect()->back()
                 ->withErrors(['error' => 'Giá tối thiểu phải nhỏ hơn giá tối đa.'])
                 ->withInput();
@@ -177,7 +177,7 @@ class VoucherController extends Controller
             'name' => $request->name,
             'discount_percent' => $request->discount_percent,
             'discount_amount' => $request->discount_amount,
-            'max_price' => $request->max_price,
+            'max_discount' => $request->max_discount,
             'min_price' => $request->min_price,
             'start_date' => $request->start_date,
             'end_date' => $request->end_date,

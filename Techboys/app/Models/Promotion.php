@@ -8,13 +8,13 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Promotion extends Model
 {
-    use HasFactory,SoftDeletes;
-    protected $fillable = ['name', 'status_id', 'discount_percent', 'discount_amount', 'product_id'];
+    use HasFactory;
+    protected $fillable = ['name', 'status_id', 'discount_percent', 'product_id','end_date'];
 
     public function status(){
         return $this->belongsTo(Status::class);
     }
     public function product(){
-        return $this->hasMany(Product::class);
+        return $this->belongsTo(Product::class);
     }
 }
