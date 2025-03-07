@@ -161,7 +161,6 @@ class ProductController extends Controller
 
         return view('client.product.search', compact('products', 'keyword', 'brands', 'models'));
     }
-
     public function filter(Request $request)
     {
         // Lấy danh sách thương hiệu và model
@@ -171,20 +170,18 @@ class ProductController extends Controller
         // Tạo query sản phẩm
         $query = Product::query();
 
-        if ($request->has('brand_id') && !empty($request->brand_id)) {
+        if ($request->has('brand_id')) {
             $query->whereIn('brand_id', $request->brand_id);
         }
 
-        if ($request->has('model_id') && !empty($request->model_id)) {
+        if ($request->has('model_id')) {
             $query->whereIn('model_id', $request->model_id);
         }
 
         // Phân trang sản phẩm
-        $products = $query->paginate(21);
+        $products = $query->paginate(21)->appends($request->query());
 
-        // Trả về view dưới dạng JSON
-        return response()->json([
-            'html' => view('client.product.list', compact('products', 'brands', 'models'))->render()
-        ]);
+        // Trả về view danh sách sản phẩm với kết quả lọc
+        return view('client.product.list', compact('products', 'brands', 'models'));
     }
 }
