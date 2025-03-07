@@ -761,31 +761,19 @@
                         </ul>
                     </div>
                     <!-- .departments-menu -->
-                    <form class="navbar-search" method="get" action="home-v1.html">
-                        <label class="sr-only screen-reader-text" for="search">Tìm kiếm:</label>
-                        <div class="input-group">
-                            <input type="text" id="search" class="form-control search-field product-search-field"
-                                dir="ltr" value="" name="s" placeholder="Nhập sản phẩm muốn tìm" />
-                            <div class="input-group-addon search-categories popover-header">
-                                <select name='product_cat' id='product_cat' class='postform resizeselect'>
-                                    <option value='0' selected='selected'>Tất cả danh mục</option>
-                                    @foreach ($categories as $category)
-                                        <option class="level-0" value="television">{{$category->name}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <!-- .input-group-addon -->
-                            <div class="input-group-btn input-group-append">
-                                <input type="hidden" id="search-param" name="post_type" value="product" />
-                                <button type="submit" class="btn btn-primary">
-                                    <i class="fa fa-search"></i>
-                                    <span class="search-btn">Tìm kiếm</span>
-                                </button>
-                            </div>
-                            <!-- .input-group-btn -->
-                        </div>
-                        <!-- .input-group -->
-                    </form>
+                    <form class="navbar-search" method="get" action="{{ route('client.product.search') }}">
+    <div class="input-group">
+        <input type="text" id="search" class="form-control search-field product-search-field"
+            name="s" placeholder="Nhập sản phẩm muốn tìm" required/>
+        <div class="input-group-btn input-group-append">
+            <button type="submit" class="btn btn-primary">
+                <i class="fa fa-search"></i>
+                <span class="search-btn">Tìm kiếm</span>
+            </button>
+        </div>
+    </div>
+</form>
+
                     <!-- .navbar-search -->
                     {{-- <ul class="header-compare nav navbar-nav">
                         <li class="nav-item">

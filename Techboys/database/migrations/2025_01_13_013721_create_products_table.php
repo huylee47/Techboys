@@ -6,9 +6,6 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
         Schema::create('products', function (Blueprint $table) {
@@ -19,16 +16,13 @@ return new class extends Migration
             $table->string('name')->unique();
             $table->string('img')->nullable();
             $table->string('slug');
-            $table->decimal('rate_average',10,2);
+            $table->decimal('rate_average', 10, 2);
             $table->longText('description');
             $table->softDeletes();
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('products');
