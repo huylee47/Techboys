@@ -350,7 +350,7 @@
                                                         class="comment byuser comment-author-admin bypostauthor even thread-even depth-1">
                                                         <div class="comment_container" id="comment-83">
                                                             <div class="comment-text">
-                                                                <div class="star-rating" style="margin-top: -110px">
+                                                                <div class="star-rating" >
                                                                     <span style="width:{{ $commments->rate *20}}%">Rated
                                                                         <strong class="rating">5</strong> out of 5</span>
                                                                 </div>
