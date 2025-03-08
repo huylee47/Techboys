@@ -21,12 +21,13 @@ Route::get('/', function () {
     return view('client.home.home');
 })->name('home');
 
-
-
 Route::get('/blog', [BlogController::class, 'indexClient'])->name('blog');
 Route::get('blog/{slug}', [BlogController::class, 'DetailBlog'])->name('DetailBlog');
 
-
+// About
+Route::get('/about', function () {
+    return view('client.about.about');
+})->name('about');
 
 Route::get('test', function () {
     return view('admin.product.imageIndex');
@@ -163,12 +164,10 @@ Route::middleware(['auth', 'auth.admin'])->group(function () {
             Route::get('/', [CommentController::class, 'index'])->name('admin.comment.index');
             Route::post('/block/{id}', [CommentController::class, 'block'])->name('admin.comment.block');
             Route::post('/open/{id}', [CommentController::class, 'open'])->name('admin.comment.open');
-
         });
-        Route::prefix('/revenue')->group(function (){
+        Route::prefix('/revenue')->group(function () {
             Route::get('/', [RevenueController::class, 'index'])->name('admin.revenue.revenue');
             Route::get('/filter', [RevenueController::class, 'filterRevenue'])->name('admin.revenue.filter');
-
         });
     });
 });
@@ -191,7 +190,6 @@ Route::prefix('cart')->group(function () {
     Route::post('/remove/{id}', [CartController::class, 'removeItem'])->name('client.cart.remove');
     // Route::get('/getCount', [CartController::class, 'getCartCount'])->name('client.cart.getCartCount');
     Route::get('/count', [CartController::class, 'countItems'])->name('client.cart.count');
-
 });
 
 Route::prefix('checkout')->group(function () {
