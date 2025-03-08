@@ -305,10 +305,7 @@
                                                                     <label for="comment">Bình luận của bạn</label>
                                                                     <textarea aria-required="true" rows="8" cols="45" name="comment" id="comment"></textarea>
                                                                 </p>
-                                                                <p class="comment-form-author">
-                                                                    <label for="author">Tên</label>
-                                                                    <input type="text" aria-required="true" size="30" value="" name="author" id="author">
-                                                                </p>
+                                                           
                                                                 <div class="col-md-6 mb-3">
                                                                     <label for="images" class="form-label">Ảnh </label>
                                                                     <input class="form-control" type="file" id="images" name="image" accept="image/*">
