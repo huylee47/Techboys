@@ -13,12 +13,12 @@ return new class extends Migration
     {
         Schema::create('comments', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->nullable();;
+            $table->foreignId('user_id')->nullable();
             $table->foreignId('product_id');
             $table->text('content');
-            $table->decimal('rate',10,2);
-            $table->foreignId('file_id');
-            $table->foreignId('status_id');
+            $table->decimal('rate', 10, 2);
+            $table->foreignId('file_id')->nullable()->constrained('storages')->onDelete('cascade');
+            $table->foreignId('status_id')->default(1);
             $table->timestamps();
         });
     }
