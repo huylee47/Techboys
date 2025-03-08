@@ -59,7 +59,7 @@ Route::prefix('/register')->group(function () {
     Route::post('/store', [UserController::class, 'store'])->name('client.log.store');
 });
 
-//comment
+
 
 // Xác thực email
 Route::get('/veryfi-account/{email}', [UserController::class, 'veryfi'])->name('clinet.veryfi');
@@ -205,4 +205,5 @@ Route::prefix('checkout')->group(function () {
 Route::get('/payment/vnpay/callback', [CheckoutController::class, 'vnpayCallback'])->name('client.payment.vnpay');
 Route::get('/payment/cod/success', [CheckoutController::class, 'codSuccess'])->name('client.payment.cod');
 
+//comment
 Route::post('/comment/store', [CommentController::class, 'store'])->name('client.comment.store');
