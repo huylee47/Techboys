@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Comment;
 use Illuminate\Http\Request;
+use App\Models\Storage;
+use Illuminate\Support\Facades\Auth;
 
 class CommentController extends Controller
 {
@@ -42,7 +44,34 @@ class CommentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'comment' => 'required',
+            'rate' => 'required|numeric|min:1|max:5',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+
+        $comment = new Comment();
+        $comment->user_id = Auth::check() ? Auth::id() : null;
+        $comment->product_id = $request->product_id;
+        $comment->content = $request->comment;
+        $comment->rate = $request->rate;
+
+        if ($request->hasFile('image')) {
+            $imageName = time().'.'.$request->image->extension();
+            $request->image->move(public_path('admin/assets/images/comment'), $imageName);
+
+            $storage = new Storage();
+            $storage->file = $imageName;
+            $storage->save();
+
+            $comment->file_id = $storage->id;
+        } else {
+            $comment->file_id = null;
+        }
+
+        $comment->save();
+
+        return redirect()->back()->with('success', 'Bình luận của bạn đã được gửi.');
     }
 
     /**
