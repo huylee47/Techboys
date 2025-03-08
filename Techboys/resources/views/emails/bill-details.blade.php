@@ -74,7 +74,7 @@
     <div class="container">
         <!-- Header -->
         <div class="header">
-            <h2>🎉 Xác Nhận Đơn Hàng 🎉</h2>
+            <h2>🎉 Chi Tiết Đơn Hàng 🎉</h2>
             <p>Cảm ơn {{ $bill->full_name }} đã đặt hàng tại cửa hàng của chúng tôi!</p>
         </div>
 
