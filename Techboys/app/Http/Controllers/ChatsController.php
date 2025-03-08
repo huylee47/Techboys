@@ -3,10 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Models\Chats;
+use App\Service\ChatsService;
 use Illuminate\Http\Request;
 
 class ChatsController extends Controller
 {
+    private $chatsService;
+    public function __construct(ChatsService $chatsService){
+        $this->chatsService = $chatsService;
+    }
     /**
      * Display a listing of the resource.
      */
@@ -61,5 +66,12 @@ class ChatsController extends Controller
     public function destroy(Chats $chats)
     {
         //
+    }
+    public function sendMessage(Request $request){
+        $this->chatsService->sendMessage($request);
+        return response()->json(['message' => 'Message sent successfully']);
+    }
+    public function loadMessage(){
+        return response()->json($this->chatsService->loadMessage());
     }
 }
