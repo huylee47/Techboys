@@ -5,6 +5,7 @@ use App\Http\Controllers\BlogController;
 use App\Http\Controllers\BillController;
 use App\Http\Controllers\BillDetailsController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\ChatsController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\VoucherController;
@@ -172,12 +173,9 @@ Route::middleware(['auth', 'auth.admin'])->group(function () {
         });
     });
 });
-
-Route::prefix('products')->group(function () {
-    Route::get('/', [ProductController::class, 'productList'])->name('client.product.index');
-    Route::get('/search', [ProductController::class, 'search'])->name('client.product.search');
-    Route::get('/filter', [ProductController::class, 'filter'])->name('client.product.filter');
-    Route::get('/{slug}', [ProductController::class, 'productDetails'])->name('client.product.show');
+Route::prefix('message')->group(function () {
+    Route::post('/send', [ChatsController::class, 'sendMessage'])->name('client.send.message');
+    Route::get('/load', [ChatsController::class, 'loadMessage'])->name('client.load.messages');
 });
 
 Route::prefix('cart')->group(function () {
@@ -205,3 +203,12 @@ Route::prefix('checkout')->group(function () {
 // })->name('client.payment.vnpay');
 Route::get('/payment/vnpay/callback', [CheckoutController::class, 'vnpayCallback'])->name('client.payment.vnpay');
 Route::get('/payment/cod/success', [CheckoutController::class, 'codSuccess'])->name('client.payment.cod');
+
+
+
+Route::prefix('products')->group(function () {
+    Route::get('/', [ProductController::class, 'productList'])->name('client.product.index');
+    Route::get('/search', [ProductController::class, 'search'])->name('client.product.search');
+    Route::get('/filter', [ProductController::class, 'filter'])->name('client.product.filter');
+    Route::get('/{slug}', [ProductController::class, 'productDetails'])->name('client.product.show');
+});
