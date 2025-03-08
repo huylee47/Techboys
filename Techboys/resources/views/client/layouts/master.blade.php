@@ -158,7 +158,9 @@
                         <nav id="primary-navigation" class="primary-navigation" aria-label="Primary Navigation"
                             data-nav="flex-menu">
                             <ul id="menu-primary-menu" class="nav yamm">
-                                
+                                <li class="menu-item animate-dropdown">
+                                    <a title="about us" href="{{ route('about') }}">Về chúng tôi</a>
+                                </li>
                                 <li class="menu-item animate-dropdown">
                                     <a title="Headphones Sale" href="product-category.html">Liên hệ</a>
                                 </li>
