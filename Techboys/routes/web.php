@@ -204,3 +204,5 @@ Route::prefix('checkout')->group(function () {
 // })->name('client.payment.vnpay');
 Route::get('/payment/vnpay/callback', [CheckoutController::class, 'vnpayCallback'])->name('client.payment.vnpay');
 Route::get('/payment/cod/success', [CheckoutController::class, 'codSuccess'])->name('client.payment.cod');
+
+Route::post('/comment/store', [CommentController::class, 'store'])->name('client.comment.store');
