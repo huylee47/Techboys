@@ -60,7 +60,6 @@ Route::prefix('/register')->group(function () {
 });
 
 //comment
-Route::get('/show', [CommentController::class, 'show'])->name('comment.show');
 
 // Xác thực email
 Route::get('/veryfi-account/{email}', [UserController::class, 'veryfi'])->name('clinet.veryfi');
