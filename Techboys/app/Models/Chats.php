@@ -9,7 +9,7 @@ class Chats extends Model
 {
     use HasFactory;
     protected $table = 'chats';
-    protected $fillable = ['staff_id', 'customer_id', 'status_id'];
+    protected $fillable = ['staff_id', 'customer_id','guest_id', 'status_id'];
 
     public function User(){
         return $this->belongsTo(User::class);
