@@ -44,7 +44,7 @@
     cursor: pointer;
 }
 .real-time-content {
-    height: 300px;
+    height: 400px;
     overflow-y: auto;
     z-index: 9999;
 
