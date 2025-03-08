@@ -5,11 +5,11 @@
     <div class="col-full">
         <div class="row">
             <nav class="woocommerce-breadcrumb">
-                <a href="home-v1.html">Home</a>
+                <a href="{{ route('home') }}">Trang chủ</a>
                 <span class="delimiter">
                     <i class="tm tm-breadcrumbs-arrow-right"></i>
                 </span>
-                About Us
+                Về chúng tôi
             </nav>
             <!-- .woocommerce-breadcrumb -->
             <div id="primary" class="content-area">
@@ -21,9 +21,13 @@
                             </div>
                             <!-- .page-featured-image -->
                             <div class="page-header-caption">
-                                <h1 class="entry-title">About Us</h1>
-                                <p class="entry-subtitle">Passion may be a friendly or eager interest in or admiration for a proposal,
-                                    <br> cause, discovery, or activity or love to a feeling of unusual excitement. </p>
+                                <h1 class="entry-title">Về chúng tôi</h1>
+                                <p class="entry-subtitle">Đam mê công nghệ, kết nối tương lai,
+                                    <br> TechBoy – Nơi hội tụ đam mê công nghệ!
+
+Chúng tôi là một doanh nghiệp chuyên cung cấp các sản phẩm điện thoại và đồ điện tử chất lượng cao, cam kết mang đến trải nghiệm tốt nhất cho khách hàng. Với sứ mệnh "Kết nối công nghệ – Nâng tầm cuộc sống", TechBoy không ngừng cập nhật những sản phẩm mới nhất, từ smartphone cao cấp đến các thiết bị điện tử thông minh.
+
+Tại TechBoy, chúng tôi luôn đặt uy tín – chất lượng – dịch vụ lên hàng đầu, đảm bảo khách hàng nhận được sản phẩm chính hãng với giá cả hợp lý. Hãy đồng hành cùng chúng tôi để khám phá thế giới công nghệ đỉnh cao!</p>
                             </div>
                             <!-- .page-header-caption -->
                         </header>
