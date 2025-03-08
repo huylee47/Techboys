@@ -173,6 +173,7 @@ Route::middleware(['auth', 'auth.admin'])->group(function () {
     });
 });
 
+// Products
 Route::prefix('products')->group(function () {
     Route::get('/', [ProductController::class, 'productList'])->name('client.product.index');
     Route::get('/search', [ProductController::class, 'search'])->name('client.product.search');
