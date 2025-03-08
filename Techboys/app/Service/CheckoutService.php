@@ -2,6 +2,7 @@
 
 namespace App\Service;
 
+use App\Mail\OrderDetailMail;
 use App\Models\Bill;
 use App\Models\BillDetails;
 use App\Models\Cart;
@@ -12,6 +13,7 @@ use App\Service\CartPriceService;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Redis;
 
 class CheckoutService
@@ -171,6 +173,16 @@ class CheckoutService
 
 
             DB::commit();
+            // Mail::to($bill->email)->send(new OrderDetailMail($bill));
+            try {
+                Log::info('Đang gửi email cho: ' . $bill->email);
+                $billDetails = BillDetails::where('bill_id', $bill->id)->with('variant')->get(); 
+                Mail::to($bill->email)->send(new OrderDetailMail($bill,$billDetails));
+                Log::info('Gửi email thành công!');
+            } catch (\Exception $e) {
+                Log::error('Lỗi khi gửi email: ' . $e->getMessage());
+            }
+            
 
             return response()->json([
                 'success' => true,
@@ -241,49 +253,40 @@ class CheckoutService
         }
     }
 
-    public function handlePaymentFail($billId)
+    public function cancelOrder($billId)
     {
         DB::beginTransaction();
         try {
             $bill = Bill::find($billId);
+    
             if (!$bill) {
-                Log::warning("handlePaymentFail - Không tìm thấy đơn hàng với billId: $billId");
                 return response()->json([
                     'success' => false,
                     'message' => 'Không tìm thấy đơn hàng!'
                 ], 404);
             }
-            
-            $billDetails = BillDetails::where('bill_id', $billId)->get();
-            Log::info("handlePaymentFail - Bill Details: " . json_encode($billDetails->toArray(), JSON_PRETTY_PRINT));
-            
-            foreach ($billDetails as $billDetail) {
+    
+            if ($bill->status_id != 1) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Chỉ có thể hủy đơn hàng đang trong trạng thái xử lý!'
+                ], 400);
+            }
+    
+            foreach ($bill->billDetails as $billDetail) {
                 $variant = ProductVariant::find($billDetail->variant_id);
                 if ($variant) {
                     $variant->increment('stock', $billDetail->quantity);
-                    Log::info("Stock được cập nhật cho variant_id {$variant->id}, tăng: {$billDetail->quantity}");
-                } else {
-                    Log::error("handlePaymentFail - Không tìm thấy variant_id: " . json_encode($billDetail->variant_id));
                 }
             }
-            
-            $deletedRows = BillDetails::where('bill_id', $billId)->delete();
-            Log::info("handlePaymentFail - Số lượng billDetails bị xóa: $deletedRows");
-            
-            $unpaidBills = Bill::where('payment_status', 0)
-                ->where('created_at', '<', now()->subMinutes(15))
-                ->get();
-            
-            foreach ($unpaidBills as $bill) {
-                $bill->update(['status_id' => 0]);
-                Log::info("handlePaymentFail - Cập nhật status_id = 0 cho billId: {$bill->id}");
-            }
-            
+    
+            $bill->update(['status_id' => 0]);
+    
             DB::commit();
-
+    
             return response()->json([
                 'success' => true,
-                'message' => 'Xử lý đơn hàng thất bại thành công!'
+                'message' => 'Đơn hàng đã được hủy thành công và tồn kho đã được khôi phục!'
             ]);
         } catch (\Exception $e) {
             DB::rollBack();
@@ -293,6 +296,7 @@ class CheckoutService
             ], 500);
         }
     }
+    
 
 
 
