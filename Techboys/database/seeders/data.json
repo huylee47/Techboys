@@ -33,6 +33,7 @@
             "district_id": 1,
             "ward_id": 1,
             "payment_method": 1,
+            "payment_status": 1,
             "status_id": 1
         },
         {
@@ -46,6 +47,7 @@
             "district_id": 2,
             "ward_id": 2,
             "payment_method": 2,
+            "payment_status": 0,
             "status_id": 2
         },
         {
@@ -59,6 +61,7 @@
             "district_id": 3,
             "ward_id": 3,
             "payment_method": 1,
+            "payment_status": 1,
             "status_id": 3
         },
         {
@@ -72,6 +75,7 @@
             "district_id": 5,
             "ward_id": 6,
             "payment_method": 2,
+            "payment_status": 0,
             "status_id": 1
         },
         {
@@ -84,7 +88,8 @@
             "province_id": 1,
             "district_id": 7,
             "ward_id": 7,
-            "payment_method": 1,
+            "payment_status": 2,
+            "payment_method": 0,
             "status_id": 2
         }
     ],
