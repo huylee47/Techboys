@@ -292,44 +292,32 @@
                                                         <div class="comment-respond" id="respond">
                                                             <h3 class="comment-reply-title" id="reply-title">Thêm bình luận
                                                             </h3>
-                                                            <form novalidate="" class="comment-form" id="commentform"
-                                                                method="post" action="#">
+                                                            <form novalidate="" class="comment-form" id="commentform" method="post" action="{{ route('client.comment.store') }}" enctype="multipart/form-data">
+                                                                @csrf
                                                                 <div class="comment-form-rating">
                                                                     <label>Đánh giá của bạn</label>
                                                                     <p class="stars">
-                                                                        <span><a href="#" class="star-1">1</a><a href="#"
-                                                                                class="star-2">2</a><a href="#"
-                                                                                class="star-3">3</a><a href="#"
-                                                                                class="star-4">4</a><a href="#"
-                                                                                class="star-5">5</a></span>
+                                                                        <span><a href="#" class="star-1">1</a><a href="#" class="star-2">2</a><a href="#" class="star-3">3</a><a href="#" class="star-4">4</a><a href="#" class="star-5">5</a></span>
                                                                     </p>
+                                                                    <input type="hidden" name="rate" id="rating-value" value="0">
                                                                 </div>
                                                                 <p class="comment-form-comment">
                                                                     <label for="comment">Bình luận của bạn</label>
-                                                                    <textarea aria-required="true" rows="8" cols="45"
-                                                                        name="comment" id="comment"></textarea>
+                                                                    <textarea aria-required="true" rows="8" cols="45" name="comment" id="comment"></textarea>
                                                                 </p>
                                                                 <p class="comment-form-author">
-                                                                    <label for="author">Tên
-                                                                    </label>
-                                                                    <input type="text" aria-required="true" size="30"
-                                                                        value="" name="author" id="author">
+                                                                    <label for="author">Tên</label>
+                                                                    <input type="text" aria-required="true" size="30" value="" name="author" id="author">
                                                                 </p>
                                                                 <div class="col-md-6 mb-3">
                                                                     <label for="images" class="form-label">Ảnh </label>
-                                                                    <input class="form-control" type="file" id="images"
-                                                                        name="image" accept="image/*">
-                                                                    <div id="image-preview-container" class="mt-3"
-                                                                        style="display: flex; gap: 10px; flex-wrap: wrap;">
-                                                                    </div>
+                                                                    <input class="form-control" type="file" id="images" name="image" accept="image/*">
+                                                                    <div id="image-preview-container" class="mt-3" style="display: flex; gap: 10px; flex-wrap: wrap;"></div>
                                                                 </div>
                                                                 <p class="form-submit">
-                                                                    <input type="submit" value="Bình luận" class="submit"
-                                                                        id="submit" name="submit">
-                                                                    <input type="hidden" id="comment_post_ID" value="185"
-                                                                        name="comment_post_ID">
-                                                                    <input type="hidden" value="0" id="comment_parent"
-                                                                        name="comment_parent">
+                                                                    <input type="submit" value="Bình luận" class="submit" id="submit" name="submit">
+                                                                    <input type="hidden" id="comment_post_ID" value="{{ $product->id }}" name="product_id">
+                                                                    <input type="hidden" value="0" id="comment_parent" name="comment_parent">
                                                                 </p>
                                                             </form>
                                                             <!-- /.comment-form -->
@@ -356,7 +344,7 @@
                                                                 </div>
                                                                 <p class="meta">
                                                                     <strong itemprop="author"
-                                                                        class="woocommerce-review__author">{{ $commments->user->name }}</strong>
+                                                                        class="woocommerce-review__author">{{ $commments->user->name ?? 'Anonymous' }}</strong>
                                                                     <span class="woocommerce-review__dash">&ndash;</span>
                                                                     <time datetime="2017-06-21T08:05:40+00:00"
                                                                         itemprop="datePublished"
@@ -364,13 +352,13 @@
                                                                 </p>
                                                                 <div class="description">
                                                                      <p>{{ $commments->content }}</p>
-                                                                    <p >     @if(strtolower(pathinfo($commments->storage->file, PATHINFO_EXTENSION)) === 'mp4')
+                                                                    <p >     @if($commments->storage && strtolower(pathinfo($commments->storage->file, PATHINFO_EXTENSION)) === 'mp4')
                                                                         <video width="150" height="100" controls>
                                                                             <source src="{{ asset('admin/assets/images/comment/' . $commments->storage->file) }}"
                                                                                 type="video/mp4">
                                                                             Trình duyệt của bạn không hỗ trợ thẻ video.
                                                                         </video>
-                                                                    @else
+                                                                    @elseif($commments->storage)
                                                                         <img src="{{ asset('admin/assets/images/comment/' . $commments->storage->file) }}" alt=""
                                                                             style="width: 150px; height: auto;">
                                                                     @endif</p>
@@ -545,6 +533,42 @@
                     productPriceElement.innerText = new Intl.NumberFormat('vi-VN').format(selectedPrice) + " đ";
                     updatePriceAndVariantId();
                 }
+            }
+        });
+    </script>
+    <script>
+        document.querySelectorAll('.stars a').forEach(star => {
+            star.addEventListener('click', function(event) {
+                event.preventDefault();
+                let rating = this.classList[0].split('-')[1];
+                document.getElementById('rating-value').value = rating;
+                document.querySelectorAll('.stars a').forEach(s => s.classList.remove('selected'));
+                this.classList.add('selected');
+            });
+
+            star.addEventListener('mouseover', function() {
+                document.querySelectorAll('.stars a').forEach(s => s.classList.remove('hover'));
+                this.classList.add('hover');
+            });
+
+            star.addEventListener('mouseout', function() {
+                document.querySelectorAll('.stars a').forEach(s => s.classList.remove('hover'));
+            });
+        });
+
+        document.querySelector('.stars').addEventListener('mouseout', function() {
+            let rating = document.getElementById('rating-value').value;
+            document.querySelectorAll('.stars a').forEach(s => s.classList.remove('selected'));
+            if (rating > 0) {
+                document.querySelector('.star-' + rating).classList.add('selected');
+            }
+        });
+
+        // Ensure the selected rating is displayed correctly on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            let rating = document.getElementById('rating-value').value;
+            if (rating > 0) {
+                document.querySelector('.star-' + rating).classList.add('selected');
             }
         });
     </script>
