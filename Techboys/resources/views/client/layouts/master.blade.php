@@ -164,9 +164,7 @@
                                 <li class="menu-item animate-dropdown">
                                     <a title="Headphones Sale" href="product-category.html">Liên hệ</a>
                                 </li>
-                                <li class="sale-clr yamm-fw menu-item animate-dropdown">
-                                    <a title="Super deals" href="{{ route('client.product.index') }}">Sản phẩm</a>
-                                </li>
+                                
                                 <li class="menu-item animate-dropdown">
                                     <a title="Headphones Sale" href="{{ route('blog') }}">Blog</a>
                                 </li>
