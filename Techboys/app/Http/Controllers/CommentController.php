@@ -45,6 +45,10 @@ class CommentController extends Controller
      */
     public function store(Request $request, CommentService $commentService)
     {
+        if (!Auth::check()) {
+            return redirect()->back()->with('error', 'Bạn phải đăng nhập để bình luận.');
+        }
+
         $request->validate([
             'comment' => 'required',
             'rate' => 'required|numeric|min:1|max:5',
@@ -52,7 +56,7 @@ class CommentController extends Controller
         ]);
 
         $data = [
-            'user_id' => Auth::check() ? Auth::id() : null,
+            'user_id' => Auth::id(),
             'product_id' => $request->product_id,
             'content' => $request->comment,
             'rate' => $request->rate,
