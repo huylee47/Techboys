@@ -6,6 +6,7 @@ use App\Models\Comment;
 use Illuminate\Http\Request;
 use App\Models\Storage;
 use Illuminate\Support\Facades\Auth;
+use App\Service\CommentService;
 
 class CommentController extends Controller
 {
@@ -42,7 +43,7 @@ class CommentController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request, CommentService $commentService)
     {
         $request->validate([
             'comment' => 'required',
@@ -50,11 +51,12 @@ class CommentController extends Controller
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
-        $comment = new Comment();
-        $comment->user_id = Auth::check() ? Auth::id() : null;
-        $comment->product_id = $request->product_id;
-        $comment->content = $request->comment;
-        $comment->rate = $request->rate;
+        $data = [
+            'user_id' => Auth::check() ? Auth::id() : null,
+            'product_id' => $request->product_id,
+            'content' => $request->comment,
+            'rate' => $request->rate,
+        ];
 
         if ($request->hasFile('image')) {
             $imageName = time().'.'.$request->image->extension();
@@ -64,12 +66,10 @@ class CommentController extends Controller
             $storage->file = $imageName;
             $storage->save();
 
-            $comment->file_id = $storage->id;
-        } else {
-            $comment->file_id = null;
+            $data['file_id'] = $storage->id;
         }
 
-        $comment->save();
+        $commentService->storeComment($data);
 
         return redirect()->back()->with('success', 'Bình luận của bạn đã được gửi.');
     }
