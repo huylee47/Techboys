@@ -292,6 +292,16 @@
                                                         <div class="comment-respond" id="respond">
                                                             <h3 class="comment-reply-title" id="reply-title">Thêm bình luận
                                                             </h3>
+                                                            @if (session('success'))
+                                                                <div class="alert alert-success">
+                                                                    {{ session('success') }}
+                                                                </div>
+                                                            @endif
+                                                            @if (session('error'))
+                                                                <div class="alert alert-danger">
+                                                                    {{ session('error') }}
+                                                                </div>
+                                                            @endif
                                                             @if (Auth::check())
                                                                 <form novalidate="" class="comment-form" id="commentform" method="post" action="{{ route('client.comment.store') }}" enctype="multipart/form-data">
                                                                     @csrf
@@ -323,6 +333,7 @@
                                                                         <input type="hidden" value="0" id="comment_parent" name="comment_parent">
                                                                     </p>
                                                                 </form>
+                                                                
                                                             @else
                                                                 <p>Bạn phải <a href="{{ route('login.client') }}">đăng nhập</a> để bình luận.</p>
                                                             @endif
