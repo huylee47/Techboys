@@ -292,31 +292,40 @@
                                                         <div class="comment-respond" id="respond">
                                                             <h3 class="comment-reply-title" id="reply-title">Thêm bình luận
                                                             </h3>
-                                                            <form novalidate="" class="comment-form" id="commentform" method="post" action="{{ route('client.comment.store') }}" enctype="multipart/form-data">
-                                                                @csrf
-                                                                <div class="comment-form-rating">
-                                                                    <label>Đánh giá của bạn</label>
-                                                                    <p class="stars">
-                                                                        <span><a href="#" class="star-1">1</a><a href="#" class="star-2">2</a><a href="#" class="star-3">3</a><a href="#" class="star-4">4</a><a href="#" class="star-5">5</a></span>
+                                                            @if (Auth::check())
+                                                                <form novalidate="" class="comment-form" id="commentform" method="post" action="{{ route('client.comment.store') }}" enctype="multipart/form-data">
+                                                                    @csrf
+                                                                    <div class="comment-form-rating">
+                                                                        <label>Đánh giá của bạn</label>
+                                                                        <p class="stars">
+                                                                            <span>
+                                                                                <a href="#" class="star-1">1</a>
+                                                                                <a href="#" class="star-2">2</a>
+                                                                                <a href="#" class="star-3">3</a>
+                                                                                <a href="#" class="star-4">4</a>
+                                                                                <a href="#" class="star-5">5</a>
+                                                                            </span>
+                                                                        </p>
+                                                                        <input type="hidden" name="rate" id="rating-value" value="0">
+                                                                    </div>
+                                                                    <p class="comment-form-comment">
+                                                                        <label for="comment">Bình luận của bạn</label>
+                                                                        <textarea aria-required="true" rows="8" cols="45" name="comment" id="comment"></textarea>
                                                                     </p>
-                                                                    <input type="hidden" name="rate" id="rating-value" value="0">
-                                                                </div>
-                                                                <p class="comment-form-comment">
-                                                                    <label for="comment">Bình luận của bạn</label>
-                                                                    <textarea aria-required="true" rows="8" cols="45" name="comment" id="comment"></textarea>
-                                                                </p>
-                                                           
-                                                                <div class="col-md-6 mb-3">
-                                                                    <label for="images" class="form-label">Ảnh </label>
-                                                                    <input class="form-control" type="file" id="images" name="image" accept="image/*">
-                                                                    <div id="image-preview-container" class="mt-3" style="display: flex; gap: 10px; flex-wrap: wrap;"></div>
-                                                                </div>
-                                                                <p class="form-submit">
-                                                                    <input type="submit" value="Bình luận" class="submit" id="submit" name="submit">
-                                                                    <input type="hidden" id="comment_post_ID" value="{{ $product->id }}" name="product_id">
-                                                                    <input type="hidden" value="0" id="comment_parent" name="comment_parent">
-                                                                </p>
-                                                            </form>
+                                                                    <div class="col-md-6 mb-3">
+                                                                        <label for="images" class="form-label">Ảnh </label>
+                                                                        <input class="form-control" type="file" id="images" name="image" accept="image/*">
+                                                                        <div id="image-preview-container" class="mt-3" style="display: flex; gap: 10px; flex-wrap: wrap;"></div>
+                                                                    </div>
+                                                                    <p class="form-submit">
+                                                                        <input type="submit" value="Bình luận" class="submit" id="submit" name="submit">
+                                                                        <input type="hidden" id="comment_post_ID" value="{{ $product->id }}" name="product_id">
+                                                                        <input type="hidden" value="0" id="comment_parent" name="comment_parent">
+                                                                    </p>
+                                                                </form>
+                                                            @else
+                                                                <p>Bạn phải <a href="{{ route('login.client') }}">đăng nhập</a> để bình luận.</p>
+                                                            @endif
                                                             <!-- /.comment-form -->
                                                         </div>
                                                         <!-- /.comment-respond -->
