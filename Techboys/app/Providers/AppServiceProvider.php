@@ -9,6 +9,7 @@ use App\Models\ProductCategory;
 use App\Service\VoucherService;
 use App\Service\CartPriceService;
 use App\Service\CartService;
+use App\Service\ChatsService;
 use App\Service\ProductService;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
@@ -54,6 +55,9 @@ class AppServiceProvider extends ServiceProvider
         View::share('loadBanner', $loadBanner);
         View::share('discountedProducts', $discountedProducts);
         View::composer('*', function ($view) {
+            $messageService = app(ChatsService::class);
+            $messages = $messageService->loadMessage();
+            $view->with('messages', $messages);
             $productService = app(ProductService::class);
             $newProduct = $productService->getNewProducts();
             $view->with('newProduct', $newProduct);
