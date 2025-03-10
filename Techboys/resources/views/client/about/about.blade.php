@@ -23,11 +23,7 @@
                             <div class="page-header-caption">
                                 <h1 class="entry-title">Về chúng tôi</h1>
                                 <p class="entry-subtitle">Đam mê công nghệ, kết nối tương lai,
-                                    <br> TechBoy – Nơi hội tụ đam mê công nghệ!
-
-Chúng tôi là một doanh nghiệp chuyên cung cấp các sản phẩm điện thoại và đồ điện tử chất lượng cao, cam kết mang đến trải nghiệm tốt nhất cho khách hàng. Với sứ mệnh "Kết nối công nghệ – Nâng tầm cuộc sống", TechBoy không ngừng cập nhật những sản phẩm mới nhất, từ smartphone cao cấp đến các thiết bị điện tử thông minh.
-
-Tại TechBoy, chúng tôi luôn đặt uy tín – chất lượng – dịch vụ lên hàng đầu, đảm bảo khách hàng nhận được sản phẩm chính hãng với giá cả hợp lý. Hãy đồng hành cùng chúng tôi để khám phá thế giới công nghệ đỉnh cao!</p>
+                                    <br> TechBoys – Nơi hội tụ đam mê công nghệ! Chúng tôi là một doanh nghiệp chuyên cung cấp các sản phẩm điện thoại và đồ điện tử chất lượng cao, cam kết mang đến trải nghiệm tốt nhất cho khách hàng. Với sứ mệnh "Kết nối công nghệ – Nâng tầm cuộc sống", TechBoy không ngừng cập nhật những sản phẩm mới nhất, từ smartphone cao cấp đến các thiết bị điện tử thông minh. Tại TechBoys, chúng tôi luôn đặt uy tín – chất lượng – dịch vụ lên hàng đầu, đảm bảo khách hàng nhận được sản phẩm chính hãng với giá cả hợp lý. Hãy đồng hành cùng chúng tôi để khám phá thế giới công nghệ đỉnh cao!</p>
                             </div>
                             <!-- .page-header-caption -->
                         </header>
@@ -40,8 +36,8 @@ Tại TechBoy, chúng tôi luôn đặt uy tín – chất lượng – dịch v
                                     </div>
                                     <!-- .single_image -->
                                     <div class="text-block">
-                                        <h2 class="align-top">What we really do?</h2>
-                                        <p>Donec libero dolor, tincidunt id laoreet vitae,ullamcorper eu tortor. Maecenas pellentesque,dui vitae iaculis mattis, tortor nisi faucibus magna,vitae ultrices lacus purus vitae metus.</p>
+                                        <h2 class="align-top">Chúng tôi làm gì</h2>
+                                        <p>Chúng tôi chuyên cung cấp điện thoại và thiết bị điện tử chất lượng cao, cam kết mang đến sản phẩm chính hãng với giá cả cạnh tranh. Bên cạnh đó, TechBoys luôn cập nhật xu hướng công nghệ mới nhất để đáp ứng nhu cầu đa dạng của khách hàng.</p>
                                     </div>
                                     <!-- .text_block -->
                                 </div>
@@ -52,8 +48,8 @@ Tại TechBoy, chúng tôi luôn đặt uy tín – chất lượng – dịch v
                                     </div>
                                     <!-- .single_image -->
                                     <div class="text-block">
-                                        <h2 class="align-top">Our Vision</h2>
-                                        <p>Donec libero dolor, tincidunt id laoreet vitae,ullamcorper eu tortor. Maecenas pellentesque,dui vitae iaculis mattis, tortor nisi faucibus magna,vitae ultrices lacus purus vitae metus.</p>
+                                        <h2 class="align-top">Tầm nhìn của chúng tôi</h2>
+                                        <p>TechBoys hướng tới trở thành một trong những hệ thống bán lẻ điện thoại và thiết bị điện tử hàng đầu, nơi khách hàng có thể tìm thấy những sản phẩm công nghệ tiên tiến nhất với dịch vụ tốt nhất. Chúng tôi không ngừng đổi mới, nâng cao trải nghiệm mua sắm và xây dựng một cộng đồng yêu công nghệ vững mạnh.</p>
                                     </div>
                                     <!-- .text_block -->
                                 </div>
@@ -64,104 +60,29 @@ Tại TechBoy, chúng tôi luôn đặt uy tín – chất lượng – dịch v
                                     </div>
                                     <!-- .single_image -->
                                     <div class="text-block">
-                                        <h2 class="align-top">History of Beginning</h2>
-                                        <p>Donec libero dolor, tincidunt id laoreet vitae,ullamcorper eu tortor. Maecenas pellentesque,dui vitae iaculis mattis, tortor nisi faucibus magna,vitae ultrices lacus purus vitae metus.</p>
+                                        <h2 class="align-top">Đội ngũ nhân viên</h2>
+                                        <p>Tại TechBoys, chúng tôi tự hào có một đội ngũ nhân viên trẻ trung, nhiệt huyết và giàu kinh nghiệm trong lĩnh vực công nghệ. Mỗi thành viên đều được đào tạo bài bản, luôn sẵn sàng tư vấn, hỗ trợ khách hàng với thái độ tận tâm và chuyên nghiệp. Chúng tôi tin rằng, với tinh thần làm việc trách nhiệm và sáng tạo, TechBoy sẽ mang đến cho khách hàng những trải nghiệm mua sắm tốt nhất.</p>
                                     </div>
                                     <!-- .text_block -->
                                 </div>
                                 <!-- .col -->
                             </div>
                             <!-- .about-features -->
-                            <div class="light-bg team-member-wrapper">
-                                <div class="col-full">
-                                    <div class="row">
-                                        <div class="col-sm-2">
-                                            <div class="team-member">
-                                                <img src="{{ asset('home/assets/images/team-member/1.jpg') }}" alt="">
-                                                <div class="profile">
-                                                    <h3>Thomas Snow
-                                                        <small class="description">CEO/Founder</small>
-                                                    </h3>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- .col -->
-                                        <div class="col-sm-2">
-                                            <div class="team-member circle">
-                                                <img src="{{ asset('home/assets/images/team-member/2.jpg') }}" alt="">
-                                                <div class="profile">
-                                                    <h3>Anna Baranov
-                                                        <small class="description">Client Care</small>
-                                                    </h3>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- .col -->
-                                        <div class="col-sm-2">
-                                            <div class="team-member circle">
-                                                <img src="{{ asset('home/assets/images/team-member/3.jpg') }}" alt="">
-                                                <div class="profile">
-                                                    <h3>Andre Kowalsy
-                                                        <small class="description">Support Boss</small>
-                                                    </h3>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- .col -->
-                                        <div class="col-sm-2">
-                                            <div class="team-member circle">
-                                                <img src="{{ asset('home/assets/images/team-member/4.jpg') }}" alt="">
-                                                <div class="profile">
-                                                    <h3>Pamela Doe
-                                                        <small class="description">Delivery Driver</small>
-                                                    </h3>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- .col -->
-                                        <div class="col-sm-2">
-                                            <div class="team-member circle">
-                                                <img src="{{ asset('home/assets/images/team-member/5.jpg') }}" alt="">
-                                                <div class="profile">
-                                                    <h3>Susan McCain
-                                                        <small class="description">Packaging Girl</small>
-                                                    </h3>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- .col -->
-                                        <div class="col-sm-2">
-                                            <div class="team-member circle">
-                                                <img src="{{ asset('home/assets/images/team-member/7.png') }}" alt="">
-                                                <div class="profile">
-                                                    <h3>See Details
-                                                        <small class="description"></small>
-                                                    </h3>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- .col -->
-                                    </div>
-                                    <!-- .row -->
-                                </div>
-                                <!-- .container -->
-                            </div>
-                            <!-- .team-member-wrapper -->
                             <div class="row accordion-block">
                                 <div class="text-boxes col-sm-7">
                                     <div class="row first-row">
                                         <div class="col-sm-6">
                                             <div class="text-block">
-                                                <h3 class="highlight">What we really do?</h3>
-                                                <p>Donec libero dolor, tincidunt id laoreet vitae, ullamcorper eu tortor. Maecenas pellentesque, dui vitae iaculis mattis, tortor nisi faucibus magna, vitae ultrices lacus purus vitae metus. Ut nec odio facilisis, ultricies nunc eget, fringilla orci.</p>
+                                                <h3 class="highlight">Chúng tôi làm gì?</h3>
+                                                <p>Chúng tôi chuyên cung cấp điện thoại và thiết bị điện tử chất lượng cao, cam kết mang đến sản phẩm chính hãng với giá cả cạnh tranh. Bên cạnh đó, TechBoys luôn cập nhật xu hướng công nghệ mới nhất để đáp ứng nhu cầu đa dạng của khách hàng.</p>
                                             </div>
                                             <!-- .text-block -->
                                         </div>
                                         <!-- .col -->
                                         <div class="col-sm-6">
                                             <div class="text-block">
-                                                <h3 class="highlight">Our Vision</h3>
-                                                <p>Vestibulum velit nibh, egestas vel faucibus vitae, feugiat sollicitudin urna. Praesent iaculis id ipsum sit amet pretium. Aliquam tristique sapien nec enim euismod, scelerisque facilisis arcu consectetur. Vestibulum velit nibh, egestas vel faucibus vitae.</p>
+                                                <h3 class="highlight">Tầm nhìn của chúng tôi</h3>
+                                                <p>TechBoys hướng tới trở thành một trong những hệ thống bán lẻ điện thoại và thiết bị điện tử hàng đầu, nơi khách hàng có thể tìm thấy những sản phẩm công nghệ tiên tiến nhất với dịch vụ tốt nhất. Chúng tôi không ngừng đổi mới, nâng cao trải nghiệm mua sắm và xây dựng một cộng đồng yêu công nghệ vững mạnh.</p>
                                             </div>
                                             <!-- .text-block -->
                                         </div>
@@ -171,16 +92,16 @@ Tại TechBoy, chúng tôi luôn đặt uy tín – chất lượng – dịch v
                                     <div class="row">
                                         <div class="col-sm-6">
                                             <div class="text-block">
-                                                <h3 class="highlight">What we really do?</h3>
-                                                <p>Donec libero dolor, tincidunt id laoreet vitae, ullamcorper eu tortor. Maecenas pellentesque, dui vitae iaculis mattis, tortor nisi faucibus magna, vitae ultrices lacus purus vitae metus. Ut nec odio facilisis, ultricies nunc eget, fringilla orci.</p>
+                                                <h3 class="highlight">Đội ngũ nhân viên</h3>
+                                                <p>Tại TechBoys, chúng tôi tự hào có một đội ngũ nhân viên trẻ trung, nhiệt huyết và giàu kinh nghiệm trong lĩnh vực công nghệ. Mỗi thành viên đều được đào tạo bài bản, luôn sẵn sàng tư vấn, hỗ trợ khách hàng với thái độ tận tâm và chuyên nghiệp. Chúng tôi tin rằng, với tinh thần làm việc trách nhiệm và sáng tạo, TechBoy sẽ mang đến cho khách hàng những trải nghiệm mua sắm tốt nhất.</p>
                                             </div>
                                             <!-- .text-block -->
                                         </div>
                                         <!-- .col -->
                                         <div class="col-sm-6">
                                             <div class="text-block">
-                                                <h3 class="highlight">Our Vision</h3>
-                                                <p>Vestibulum velit nibh, egestas vel faucibus vitae, feugiat sollicitudin urna. Praesent iaculis id ipsum sit amet pretium. Aliquam tristique sapien nec enim euismod, scelerisque facilisis arcu consectetur. Vestibulum velit nibh, egestas vel faucibus vitae.</p>
+                                                <h3 class="highlight">Chất lượng sản phẩm</h3>
+                                                <p>TechBoy cam kết cung cấp các sản phẩm chính hãng 100%, đảm bảo chất lượng cao và nguồn gốc rõ ràng. Chúng tôi luôn chọn lọc kỹ lưỡng từ những thương hiệu uy tín, mang đến cho khách hàng những thiết bị công nghệ hiện đại, bền bỉ và đáng tin cậy. Mỗi sản phẩm tại TechBoy đều được kiểm tra cẩn thận trước khi đến tay khách hàng, đi kèm với chế độ bảo hành minh bạch và dịch vụ hậu mãi tận tâm.</p>
                                             </div>
                                             <!-- .text-block -->
                                         </div>
@@ -192,7 +113,7 @@ Tại TechBoy, chúng tôi luôn đặt uy tín – chất lượng – dịch v
                                 <div class="about-accordion col-sm-5">
                                     <div class="vc_column-inner ">
                                         <div class="wpb_wrapper">
-                                            <h3 class="about-accordion-title">What can we do for you ?</h3>
+                                            <h3 class="about-accordion-title">Chúng tôi có thể giúp gì bạn?</h3>
                                             <div id="accordion" role="tablist" aria-multiselectable="true">
                                                 <div class="card">
                                                     <div class="card-header" role="tab" id="headingOne">
