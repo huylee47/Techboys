@@ -103,7 +103,7 @@ Route::middleware(['auth', 'auth.admin'])->group(function () {
             Route::post('/update/{id}', [VoucherController::class, 'update'])->name('admin.voucher.update');
             Route::get('/destroy/{id}', [VoucherController::class, 'destroy'])->name('admin.voucher.destroy');
         });
-
+        
         Route::prefix('/product')->group(function () {
             Route::get('/', [ProductController::class, 'index'])->name('admin.product.index');
             Route::get('/create', [ProductController::class, 'create'])->name('admin.product.create');
@@ -169,6 +169,13 @@ Route::middleware(['auth', 'auth.admin'])->group(function () {
         Route::prefix('/revenue')->group(function (){
             Route::get('/', [RevenueController::class, 'index'])->name('admin.revenue.revenue');
             Route::get('/filter', [RevenueController::class, 'filterRevenue'])->name('admin.revenue.filter');
+
+        });
+        Route::prefix('/chats')->group(function (){
+            Route::get('/', [ChatsController::class, 'index'])->name('admin.messages');
+            Route::get('/{chatId}', [ChatsController::class, 'loadMessagesAdmin']);
+            Route::post('/{chatId}/send', [ChatsController::class,'sendMessageAdmin'])->name('admin.send.message');
+            // Route::post('/send', [ChatsController::class, 'sendMessageAdmin']);
 
         });
     });
