@@ -7,10 +7,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
     <title>@yield('title')</title>
     <link rel="stylesheet" type="text/css" href="{{ url('') }}/home/assets/css/bootstrap.min.css" media="all" />
-    <link rel="stylesheet" type="text/css" href="{{ url('') }}/home/assets/css/font-awesome.min.css" media="all" />
-    <link rel="stylesheet" type="text/css" href="{{ url('') }}/home/assets/css/bootstrap-grid.min.css" media="all" />
-    <link rel="stylesheet" type="text/css" href="{{ url('') }}/home/assets/css/bootstrap-reboot.min.css" media="all" />
-    <link rel="stylesheet" type="text/css" href="{{ url('') }}/home/assets/css/font-techmarket.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="{{ url('') }}/home/assets/css/font-awesome.min.css"
+        media="all" />
+    <link rel="stylesheet" type="text/css" href="{{ url('') }}/home/assets/css/bootstrap-grid.min.css"
+        media="all" />
+    <link rel="stylesheet" type="text/css" href="{{ url('') }}/home/assets/css/bootstrap-reboot.min.css"
+        media="all" />
+    <link rel="stylesheet" type="text/css" href="{{ url('') }}/home/assets/css/font-techmarket.css"
+        media="all" />
     <link rel="stylesheet" type="text/css" href="{{ url('') }}/home/assets/css/slick.css" media="all" />
     <link rel="stylesheet" type="text/css" href="{{ url('') }}/home/assets/css/techmarket-font-awesome.css"
         media="all" />
@@ -139,7 +143,8 @@
                                         points="132.04 2.09 127.09 7.88 130.78 7.88 130.78 8.69 126.4 8.69 124.42 11 123.29 11 132.65 0 133.04 0 133.04 11 132.04 11 132.04 2.09" />
                                     <polygon class="cls-1"
                                         points="120.97 2.04 116.98 6.15 116.98 6.19 116.97 6.17 116.95 6.19 116.95 6.15 112.97 2.04 112.97 11 112 11 112 0 112.32 0 116.97 4.8 121.62 0 121.94 0 121.94 11 120.97 11 120.97 2.04" />
-                                    <ellipse class="cls-3" cx="116.3" cy="22.81" rx="5.15" ry="5.18" />
+                                    <ellipse class="cls-3" cx="116.3" cy="22.81" rx="5.15"
+                                        ry="5.18" />
                                     <rect class="cls-2" x="99.13" y="0.44" width="5.87" height="27.12" />
                                     <polygon class="cls-1"
                                         points="85.94 27.56 79.92 27.56 79.92 0.44 85.94 0.44 85.94 16.86 96.35 16.86 96.35 21.84 85.94 21.84 85.94 27.56" />
@@ -174,7 +179,8 @@
                                     <a title="Headphones Sale" href="{{ route('blog') }}">Blog</a>
                                 </li>
                                 <li class="techmarket-flex-more-menu-item dropdown">
-                                    <a title="..." href="#" data-toggle="dropdown" class="dropdown-toggle">...</a>
+                                    <a title="..." href="#" data-toggle="dropdown"
+                                        class="dropdown-toggle">...</a>
                                     <ul class="overflow-items dropdown-menu"></ul>
                                     <!-- . -->
                                 </li>
@@ -329,7 +335,8 @@
                             </li>
                             <li class="yamm-tfw menu-item menu-item-has-children animate-dropdown dropdown-submenu">
                                 <a title="Cameras &amp; Photo" data-toggle="dropdown" class="dropdown-toggle"
-                                    aria-haspopup="true" href="#">Cameras &#038; Photo <span class="caret"></span></a>
+                                    aria-haspopup="true" href="#">Cameras &#038; Photo <span
+                                        class="caret"></span></a>
                                 <ul role="menu" class=" dropdown-menu">
                                     <li class="menu-item menu-item-object-static_block animate-dropdown">
                                         <div class="yamm-content">
@@ -546,7 +553,8 @@
                             </li>
                             <li class="yamm-tfw menu-item menu-item-has-children animate-dropdown dropdown-submenu">
                                 <a title="TV &amp; Audio" data-toggle="dropdown" class="dropdown-toggle"
-                                    aria-haspopup="true" href="#">TV &#038; Audio <span class="caret"></span></a>
+                                    aria-haspopup="true" href="#">TV &#038; Audio <span
+                                        class="caret"></span></a>
                                 <ul role="menu" class=" dropdown-menu">
                                     <li class="menu-item menu-item-object-static_block animate-dropdown">
                                         <div class="yamm-content">
@@ -770,8 +778,9 @@
                     <!-- .departments-menu -->
                     <form class="navbar-search" method="get" action="{{ route('client.product.search') }}">
                         <div class="input-group">
-                            <input type="text" id="search" class="form-control search-field product-search-field"
-                                name="s" placeholder="Nhập sản phẩm muốn tìm" required />
+                            <input type="text" id="search"
+                                class="form-control search-field product-search-field" name="s"
+                                placeholder="Nhập sản phẩm muốn tìm" required />
                             <div class="input-group-btn input-group-append">
                                 <button type="submit" class="btn btn-primary">
                                     <i class="fa fa-search"></i>
@@ -802,7 +811,8 @@
                     <!-- .header-wishlist -->
                     <ul id="site-header-cart" class="site-header-cart menu">
                         <li class="animate-dropdown dropdown ">
-                            <a class="cart-contents" href="" data-toggle="dropdown" title="Kiểm tra giỏ hàng của bạn">
+                            <a class="cart-contents" href="" data-toggle="dropdown"
+                                title="Kiểm tra giỏ hàng của bạn">
                                 <i class="tm tm-shopping-bag"></i>
                                 <span class="count">{{ $cartCount }}</span>
                                 <span class="amount">
@@ -906,7 +916,8 @@
                                         points="132.04 2.09 127.09 7.88 130.78 7.88 130.78 8.69 126.4 8.69 124.42 11 123.29 11 132.65 0 133.04 0 133.04 11 132.04 11 132.04 2.09" />
                                     <polygon class="cls-1"
                                         points="120.97 2.04 116.98 6.15 116.98 6.19 116.97 6.17 116.95 6.19 116.95 6.15 112.97 2.04 112.97 11 112 11 112 0 112.32 0 116.97 4.8 121.62 0 121.94 0 121.94 11 120.97 11 120.97 2.04" />
-                                    <ellipse class="cls-3" cx="116.3" cy="22.81" rx="5.15" ry="5.18" />
+                                    <ellipse class="cls-3" cx="116.3" cy="22.81" rx="5.15"
+                                        ry="5.18" />
                                     <rect class="cls-2" x="99.13" y="0.44" width="5.87" height="27.12" />
                                     <polygon class="cls-1"
                                         points="85.94 27.56 79.92 27.56 79.92 0.44 85.94 0.44 85.94 16.86 96.35 16.86 96.35 21.84 85.94 21.84 85.94 27.56" />
@@ -952,7 +963,8 @@
                     <!-- /.row -->
                     <div class="techmarket-sticky-wrap">
                         <div class="row">
-                            <nav id="handheld-navigation" class="handheld-navigation" aria-label="Handheld Navigation">
+                            <nav id="handheld-navigation" class="handheld-navigation"
+                                aria-label="Handheld Navigation">
                                 <button class="btn navbar-toggler" type="button">
                                     <i class="tm tm-departments-thin"></i>
                                     <span>Menu</span>
@@ -1463,7 +1475,8 @@
                                         <li
                                             class="yamm-tfw menu-item menu-item-has-children animate-dropdown dropdown-submenu">
                                             <a title="Accesories" data-toggle="dropdown" class="dropdown-toggle"
-                                                aria-haspopup="true" href="#">Accesories <span class="caret"></span></a>
+                                                aria-haspopup="true" href="#">Accesories <span
+                                                    class="caret"></span></a>
                                             <ul role="menu" class=" dropdown-menu">
                                                 <li class="menu-item menu-item-object-static_block animate-dropdown">
                                                     <div class="yamm-content">
@@ -1664,84 +1677,90 @@
                         <!-- .footer-social-icons -->
                         {{--
                     </div> --}}
-                    <!-- .col-full -->
-                    {{--
+                        <!-- .col-full -->
+                        {{--
                 </div> --}}
-                <!-- .before-footer-wrap -->
-                <div class="footer-widgets-block">
-                    <div class="row">
-                        <div class="footer-contact">
-                            <div class="footer-logo">
-                                <a href="{{ route('home') }}" class="custom-logo-link" rel="home">
-                                    <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 176 28">
-                                        <defs>
-                                            <style>
-                                                .cls-1,
-                                                .cls-2 {
-                                                    fill: #333e48;
-                                                }
+                        <!-- .before-footer-wrap -->
+                        <div class="footer-widgets-block">
+                            <div class="row">
+                                <div class="footer-contact">
+                                    <div class="footer-logo">
+                                        <a href="{{ route('home') }}" class="custom-logo-link" rel="home">
+                                            <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg"
+                                                viewBox="0 0 176 28">
+                                                <defs>
+                                                    <style>
+                                                        .cls-1,
+                                                        .cls-2 {
+                                                            fill: #333e48;
+                                                        }
 
-                                                .cls-1 {
-                                                    fill-rule: evenodd;
-                                                }
+                                                        .cls-1 {
+                                                            fill-rule: evenodd;
+                                                        }
 
-                                                .cls-3 {
-                                                    fill: #3265b0;
-                                                }
-                                            </style>
-                                        </defs>
-                                        <polygon class="cls-1"
-                                            points="171.63 0.91 171.63 11 170.63 11 170.63 0.91 170.63 0.84 170.63 0.06 176 0.06 176 0.91 171.63 0.91" />
-                                        <rect class="cls-2" x="166.19" y="0.06" width="3.47" height="0.84" />
-                                        <rect class="cls-2" x="159.65" y="4.81" width="3.51" height="0.84" />
-                                        <polygon class="cls-1"
-                                            points="158.29 11 157.4 11 157.4 0.06 158.26 0.06 158.36 0.06 164.89 0.06 164.89 0.87 158.36 0.87 158.36 10.19 164.99 10.19 164.99 11 158.36 11 158.29 11" />
-                                        <polygon class="cls-1"
-                                            points="149.54 6.61 150.25 5.95 155.72 10.98 154.34 10.98 149.54 6.61" />
-                                        <polygon class="cls-1"
-                                            points="147.62 10.98 146.65 10.98 146.65 0.05 147.62 0.05 147.62 5.77 153.6 0.33 154.91 0.33 147.62 7.05 147.62 10.98" />
-                                        <path class="cls-1"
-                                            d="M156.39,24h-1.25s-0.49-.39-0.71-0.59l-1.35-1.25c-0.25-.23-0.68-0.66-0.68-0.66s0-.46,0-0.72a3.56,3.56,0,0,0,3.54-2.87,3.36,3.36,0,0,0-3.22-4H148.8V24h-1V13.06h5c2.34,0.28,4,1.72,4.12,4a4.26,4.26,0,0,1-3.38,4.34C154.48,22.24,156.39,24,156.39,24Z"
-                                            transform="translate(-12 -13)" />
-                                        <polygon class="cls-1"
-                                            points="132.04 2.09 127.09 7.88 130.78 7.88 130.78 8.69 126.4 8.69 124.42 11 123.29 11 132.65 0 133.04 0 133.04 11 132.04 11 132.04 2.09" />
-                                        <polygon class="cls-1"
-                                            points="120.97 2.04 116.98 6.15 116.98 6.19 116.97 6.17 116.95 6.19 116.95 6.15 112.97 2.04 112.97 11 112 11 112 0 112.32 0 116.97 4.8 121.62 0 121.94 0 121.94 11 120.97 11 120.97 2.04" />
-                                        <ellipse class="cls-3" cx="116.3" cy="22.81" rx="5.15" ry="5.18" />
-                                        <rect class="cls-2" x="99.13" y="0.44" width="5.87" height="27.12" />
-                                        <polygon class="cls-1"
-                                            points="85.94 27.56 79.92 27.56 79.92 0.44 85.94 0.44 85.94 16.86 96.35 16.86 96.35 21.84 85.94 21.84 85.94 27.56" />
-                                        <path class="cls-1"
-                                            d="M77.74,36.07a9,9,0,0,0,6.41-2.68L88,37c-2.6,2.74-6.71,4-10.89,4A13.94,13.94,0,0,1,62.89,27.15,14.19,14.19,0,0,1,77.11,13c4.38,0,8.28,1.17,10.89,4,0,0-3.89,3.82-3.91,3.8A9,9,0,1,0,77.74,36.07Z"
-                                            transform="translate(-12 -13)" />
-                                        <rect class="cls-2" x="37.4" y="11.14" width="7.63" height="4.98" />
-                                        <polygon class="cls-1"
-                                            points="32.85 27.56 28.6 27.56 28.6 5.42 28.6 3.96 28.6 0.44 47.95 0.44 47.95 5.42 34.46 5.42 34.46 22.72 48.25 22.72 48.25 27.56 34.46 27.56 32.85 27.56" />
-                                        <polygon class="cls-1"
-                                            points="15.4 27.56 9.53 27.56 9.53 5.57 9.53 0.59 9.53 0.44 24.93 0.44 24.93 5.57 15.4 5.57 15.4 27.56" />
-                                        <rect class="cls-2" y="0.44" width="7.19" height="5.13" />
-                                    </svg>
-                                </a>
-                            </div>
-                            <!-- .footer-logo -->
-                            <div class="contact-payment-wrap">
-                                <div class="footer-contact-info">
-                                    <div class="media">
-                                        <span class="media-left icon media-middle">
-                                            <i class="tm tm-call-us-footer"></i>
-                                        </span>
-                                        <div class="media-body">
-                                            <span class="call-us-title">Liên hệ với chúng tôi</span>
-                                            <span class="call-us-text">{{ $config->hotline }}</span>
-                                            <address class="footer-contact-address">{{ $config->address }}
-                                            </address>
-                                        </div>
-                                        <!-- .media-body -->
+                                                        .cls-3 {
+                                                            fill: #3265b0;
+                                                        }
+                                                    </style>
+                                                </defs>
+                                                <polygon class="cls-1"
+                                                    points="171.63 0.91 171.63 11 170.63 11 170.63 0.91 170.63 0.84 170.63 0.06 176 0.06 176 0.91 171.63 0.91" />
+                                                <rect class="cls-2" x="166.19" y="0.06" width="3.47"
+                                                    height="0.84" />
+                                                <rect class="cls-2" x="159.65" y="4.81" width="3.51"
+                                                    height="0.84" />
+                                                <polygon class="cls-1"
+                                                    points="158.29 11 157.4 11 157.4 0.06 158.26 0.06 158.36 0.06 164.89 0.06 164.89 0.87 158.36 0.87 158.36 10.19 164.99 10.19 164.99 11 158.36 11 158.29 11" />
+                                                <polygon class="cls-1"
+                                                    points="149.54 6.61 150.25 5.95 155.72 10.98 154.34 10.98 149.54 6.61" />
+                                                <polygon class="cls-1"
+                                                    points="147.62 10.98 146.65 10.98 146.65 0.05 147.62 0.05 147.62 5.77 153.6 0.33 154.91 0.33 147.62 7.05 147.62 10.98" />
+                                                <path class="cls-1"
+                                                    d="M156.39,24h-1.25s-0.49-.39-0.71-0.59l-1.35-1.25c-0.25-.23-0.68-0.66-0.68-0.66s0-.46,0-0.72a3.56,3.56,0,0,0,3.54-2.87,3.36,3.36,0,0,0-3.22-4H148.8V24h-1V13.06h5c2.34,0.28,4,1.72,4.12,4a4.26,4.26,0,0,1-3.38,4.34C154.48,22.24,156.39,24,156.39,24Z"
+                                                    transform="translate(-12 -13)" />
+                                                <polygon class="cls-1"
+                                                    points="132.04 2.09 127.09 7.88 130.78 7.88 130.78 8.69 126.4 8.69 124.42 11 123.29 11 132.65 0 133.04 0 133.04 11 132.04 11 132.04 2.09" />
+                                                <polygon class="cls-1"
+                                                    points="120.97 2.04 116.98 6.15 116.98 6.19 116.97 6.17 116.95 6.19 116.95 6.15 112.97 2.04 112.97 11 112 11 112 0 112.32 0 116.97 4.8 121.62 0 121.94 0 121.94 11 120.97 11 120.97 2.04" />
+                                                <ellipse class="cls-3" cx="116.3" cy="22.81" rx="5.15"
+                                                    ry="5.18" />
+                                                <rect class="cls-2" x="99.13" y="0.44" width="5.87"
+                                                    height="27.12" />
+                                                <polygon class="cls-1"
+                                                    points="85.94 27.56 79.92 27.56 79.92 0.44 85.94 0.44 85.94 16.86 96.35 16.86 96.35 21.84 85.94 21.84 85.94 27.56" />
+                                                <path class="cls-1"
+                                                    d="M77.74,36.07a9,9,0,0,0,6.41-2.68L88,37c-2.6,2.74-6.71,4-10.89,4A13.94,13.94,0,0,1,62.89,27.15,14.19,14.19,0,0,1,77.11,13c4.38,0,8.28,1.17,10.89,4,0,0-3.89,3.82-3.91,3.8A9,9,0,1,0,77.74,36.07Z"
+                                                    transform="translate(-12 -13)" />
+                                                <rect class="cls-2" x="37.4" y="11.14" width="7.63"
+                                                    height="4.98" />
+                                                <polygon class="cls-1"
+                                                    points="32.85 27.56 28.6 27.56 28.6 5.42 28.6 3.96 28.6 0.44 47.95 0.44 47.95 5.42 34.46 5.42 34.46 22.72 48.25 22.72 48.25 27.56 34.46 27.56 32.85 27.56" />
+                                                <polygon class="cls-1"
+                                                    points="15.4 27.56 9.53 27.56 9.53 5.57 9.53 0.59 9.53 0.44 24.93 0.44 24.93 5.57 15.4 5.57 15.4 27.56" />
+                                                <rect class="cls-2" y="0.44" width="7.19" height="5.13" />
+                                            </svg>
+                                        </a>
                                     </div>
-                                    <!-- .media -->
-                                </div>
-                                <!-- .footer-contact-info -->
-                                {{-- <div class="footer-payment-info">
+                                    <!-- .footer-logo -->
+                                    <div class="contact-payment-wrap">
+                                        <div class="footer-contact-info">
+                                            <div class="media">
+                                                <span class="media-left icon media-middle">
+                                                    <i class="tm tm-call-us-footer"></i>
+                                                </span>
+                                                <div class="media-body">
+                                                    <span class="call-us-title">Liên hệ với chúng tôi</span>
+                                                    <span class="call-us-text">{{ $config->hotline }}</span>
+                                                    <address class="footer-contact-address">{{ $config->address }}
+                                                    </address>
+                                                </div>
+                                                <!-- .media-body -->
+                                            </div>
+                                            <!-- .media -->
+                                        </div>
+                                        <!-- .footer-contact-info -->
+                                        {{-- <div class="footer-payment-info">
                                     <div class="media">
                                         <span class="media-left icon media-middle">
                                             <i class="tm tm-safe-payments"></i>
@@ -1794,87 +1813,87 @@
                                     </div>
                                     <!-- .media -->
                                 </div> --}}
-                                <!-- .footer-payment-info -->
-                            </div>
-                            <!-- .contact-payment-wrap -->
-                        </div>
-                        <!-- .footer-contact -->
-                        <div class="footer-widgets">
-                            <div class="columns">
-                                <aside class="widget clearfix">
-                                    <div class="body">
-                                        <h4 class="widget-title">Các danh mục</h4>
-                                        <div class="menu-footer-menu-1-container">
-                                            <ul id="menu-footer-menu-1" class="menu">
-                                                <li class="menu-item">
-                                                    <a href="shop.html">Computers &#038; Laptops</a>
-                                                </li>
-                                                <li class="menu-item">
-                                                    <a href="shop.html">Cameras &#038; Photography</a>
-                                                </li>
-                                                <li class="menu-item">
-                                                    <a href="shop.html">Smart Phones &#038; Tablets</a>
-                                                </li>
-                                                <li class="menu-item">
-                                                    <a href="shop.html">Video Games &#038; Consoles</a>
-                                                </li>
-                                                <li class="menu-item">
-                                                    <a href="shop.html">TV</a>
-                                                </li>
-                                                <li class="menu-item">
-                                                    <a href="shop.html">Car Electronic &#038; GPS</a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        <!-- .menu-footer-menu-1-container -->
+                                        <!-- .footer-payment-info -->
                                     </div>
-                                    <!-- .body -->
-                                </aside>
-                                <!-- .widget -->
-                            </div>
-                            <!-- .columns -->
-                            <div class="columns">
-                                <aside class="widget clearfix">
-                                    <div class="body">
-                                        <h4 class="widget-title">&nbsp;</h4>
-                                        <div class="menu-footer-menu-2-container">
-                                            <ul id="menu-footer-menu-2" class="menu">
-                                                <li class="menu-item">
-                                                    <a href="shop.html">Printers &#038; Ink</a>
-                                                </li>
-                                                <li class="menu-item">
-                                                    <a href="shop.html">Audio &amp; Music</a>
-                                                </li>
-                                                <li class="menu-item">
-                                                    <a href="shop.html">Home Theaters</a>
-                                                </li>
-                                                <li class="menu-item">
-                                                    <a href="shop.html">PC Components</a>
-                                                </li>
-                                                <li class="menu-item">
-                                                    <a href="shop.html">Ultrabooks</a>
-                                                </li>
-                                                <li class="menu-item">
-                                                    <a href="shop.html">Smartwatches</a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        <!-- .menu-footer-menu-2-container -->
+                                    <!-- .contact-payment-wrap -->
+                                </div>
+                                <!-- .footer-contact -->
+                                <div class="footer-widgets">
+                                    <div class="columns">
+                                        <aside class="widget clearfix">
+                                            <div class="body">
+                                                <h4 class="widget-title">Các danh mục</h4>
+                                                <div class="menu-footer-menu-1-container">
+                                                    <ul id="menu-footer-menu-1" class="menu">
+                                                        <li class="menu-item">
+                                                            <a href="shop.html">Computers &#038; Laptops</a>
+                                                        </li>
+                                                        <li class="menu-item">
+                                                            <a href="shop.html">Cameras &#038; Photography</a>
+                                                        </li>
+                                                        <li class="menu-item">
+                                                            <a href="shop.html">Smart Phones &#038; Tablets</a>
+                                                        </li>
+                                                        <li class="menu-item">
+                                                            <a href="shop.html">Video Games &#038; Consoles</a>
+                                                        </li>
+                                                        <li class="menu-item">
+                                                            <a href="shop.html">TV</a>
+                                                        </li>
+                                                        <li class="menu-item">
+                                                            <a href="shop.html">Car Electronic &#038; GPS</a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <!-- .menu-footer-menu-1-container -->
+                                            </div>
+                                            <!-- .body -->
+                                        </aside>
+                                        <!-- .widget -->
                                     </div>
-                                    <!-- .body -->
-                                </aside>
-                                <!-- .widget -->
-                            </div>
-                            <!-- .columns -->
-                            <div class="columns">
-                                <aside class="widget clearfix">
-                                    <div class="body">
-                                        <h4 class="widget-title">
-                                            <a href="#" class="footer-address-map-link">
-                                                <i class="tm tm-map-marker"> </i> Địa chỉ</a>
-                                        </h4>
-                                        {!! $config->map !!}
-                                        {{-- <div class="menu-footer-menu-3-container">
+                                    <!-- .columns -->
+                                    <div class="columns">
+                                        <aside class="widget clearfix">
+                                            <div class="body">
+                                                <h4 class="widget-title">&nbsp;</h4>
+                                                <div class="menu-footer-menu-2-container">
+                                                    <ul id="menu-footer-menu-2" class="menu">
+                                                        <li class="menu-item">
+                                                            <a href="shop.html">Printers &#038; Ink</a>
+                                                        </li>
+                                                        <li class="menu-item">
+                                                            <a href="shop.html">Audio &amp; Music</a>
+                                                        </li>
+                                                        <li class="menu-item">
+                                                            <a href="shop.html">Home Theaters</a>
+                                                        </li>
+                                                        <li class="menu-item">
+                                                            <a href="shop.html">PC Components</a>
+                                                        </li>
+                                                        <li class="menu-item">
+                                                            <a href="shop.html">Ultrabooks</a>
+                                                        </li>
+                                                        <li class="menu-item">
+                                                            <a href="shop.html">Smartwatches</a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <!-- .menu-footer-menu-2-container -->
+                                            </div>
+                                            <!-- .body -->
+                                        </aside>
+                                        <!-- .widget -->
+                                    </div>
+                                    <!-- .columns -->
+                                    <div class="columns">
+                                        <aside class="widget clearfix">
+                                            <div class="body">
+                                                <h4 class="widget-title">
+                                                    <a href="#" class="footer-address-map-link">
+                                                        <i class="tm tm-map-marker"> </i> Địa chỉ</a>
+                                                </h4>
+                                                {!! $config->map !!}
+                                                {{-- <div class="menu-footer-menu-3-container">
                                             <ul id="menu-footer-menu-3" class="menu">
                                                 <li class="menu-item">
                                                     <a href="login-and-register.html">My Account</a>
@@ -1899,20 +1918,20 @@
                                                 </li>
                                             </ul>
                                         </div> --}}
-                                        <!-- .menu-footer-menu-3-container -->
+                                                <!-- .menu-footer-menu-3-container -->
+                                            </div>
+                                            <!-- .body -->
+                                        </aside>
+                                        <!-- .widget -->
                                     </div>
-                                    <!-- .body -->
-                                </aside>
-                                <!-- .widget -->
+                                    <!-- .columns -->
+                                </div>
+                                <!-- .footer-widgets -->
                             </div>
-                            <!-- .columns -->
+                            <!-- .row -->
                         </div>
-                        <!-- .footer-widgets -->
-                    </div>
-                    <!-- .row -->
-                </div>
-                <!-- .footer-widgets-block -->
-                {{-- <div class="site-info">
+                        <!-- .footer-widgets-block -->
+                        {{-- <div class="site-info">
                     <div class="col-full">
                         <div class="copyright">Copyright &copy; 2025 <a href="home-v1.html">Techboys</a> </div>
                         <!-- .copyright -->
@@ -1923,20 +1942,20 @@
                     </div>
                     <!-- .col-full -->
                 </div> --}}
-                <!-- .site-info -->
-            </div>
-            <!-- .col-full -->
+                        <!-- .site-info -->
+                    </div>
+                    <!-- .col-full -->
         </footer>
         <!-- .site-footer -->
     </div>
     <script>
-        document.querySelector('.user-menu-toggle').addEventListener('click', function () {
+        document.querySelector('.user-menu-toggle').addEventListener('click', function() {
             var dropdownMenu = document.getElementById('userDropdownMenu');
             dropdownMenu.style.display = dropdownMenu.style.display === 'block' ? 'none' : 'block';
         });
 
         // Đóng menu thả xuống nếu người dùng nhấp chuột bên ngoài menu
-        window.addEventListener('click', function (e) {
+        window.addEventListener('click', function(e) {
             if (!e.target.matches('.user-menu-toggle') && !e.target.closest('.user-menu')) {
                 document.getElementById('userDropdownMenu').style.display = 'none';
             }
@@ -1957,12 +1976,12 @@
     <script type="text/javascript" src="{{ url('') }}/home/assets/js/pace.min.js"></script>
     <script type="text/javascript" src="{{ url('') }}/home/assets/js/slick.min.js"></script>
     <script type="text/javascript" src="{{ url('') }}/home/assets/js/scripts.js"></script>
+    <script src="https://js.pusher.com/8.4.0/pusher.min.js"></script>
     @vite(['resources/js/app.js'])
 
     <script>
-        document.addEventListener("DOMContentLoaded", async function () {
+        document.addEventListener("DOMContentLoaded", async function() {
             let csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute("content");
-            console.log(csrfToken);
             let chatIcon = document.getElementById("chat-icon");
             let chatModal = document.getElementById("chat-modal");
             let closeChat = document.getElementById("close-chat");
@@ -1972,18 +1991,20 @@
 
             let sendMessageUrl = "{{ route('client.send.message') }}";
             let loadMessagesUrl = "{{ route('client.load.messages') }}";
-            let chatId = null; // Khởi tạo biến chatId
+            let chatId = null;
+            const mess = @json($messages);
+            console.log(mess);
 
-            chatIcon.addEventListener("click", function () {
-                document.getElementById("chat-modal").style.display = "block";
+            chatIcon.addEventListener("click", function() {
+                chatModal.style.display = "block";
                 loadMessages();
             });
 
-            closeChat.addEventListener("click", function () {
+            closeChat.addEventListener("click", function() {
                 chatModal.style.display = "none";
             });
 
-            sendMessage.addEventListener("click", function () {
+            sendMessage.addEventListener("click", function() {
                 let message = chatInput.value.trim();
                 if (message) {
                     sendMessageToServer(message);
@@ -1991,104 +2012,113 @@
             });
 
             async function loadMessages() {
-    try {
-        let response = await fetch(loadMessagesUrl);
-        let data = await response.json();
-        console.log("Dữ liệu API nhận được:", data);
+                try {
+                    let response = await fetch(loadMessagesUrl);
+                    let data = await response.json();
+                    console.log("Dữ liệu API nhận được:", data);
 
-        chatMessages.innerHTML = "";
+                    chatMessages.innerHTML = "";
 
-        if (data.original && data.original.chat_id) {
-            chatId = data.original.chat_id;
-        } else {
-            console.error("Lỗi: API không trả về chatId.");
-            return;
-        }
+                    if (data.original && data.original.chat_id) {
+                        chatId = data.original.chat_id;
+                    } else {
+                        console.error("Lỗi: API không trả về chatId.");
+                        return;
+                    }
 
-        if (data.original && data.original.messages) {
-            data.original.messages.forEach(msg => {
-                let sender = msg.sender_id ? "Admin" : "Guest";
-                let msgDiv = document.createElement("div");
-                msgDiv.classList.add("message");
-                msgDiv.textContent = sender + ": " + msg.message;
-                chatMessages.appendChild(msgDiv);
-            });
-        } else {
-            console.error("Lỗi: API không trả về danh sách tin nhắn.");
-        }
+                    if (data.original && data.original.messages) {
+                        data.original.messages.forEach(msg => {
+                            let sender = getSenderName(msg);
+                            displayMessage(sender, msg.message);
+                        });
+                    } else {
+                        console.error("Lỗi: API không trả về danh sách tin nhắn.");
+                    }
 
-        chatMessages.scrollTop = chatMessages.scrollHeight;
+                    chatMessages.scrollTop = chatMessages.scrollHeight;
+                } catch (error) {
+                    console.error("Lỗi tải tin nhắn:", error);
+                }
+            }
 
-        if (chatId) {
-            console.log(`Đăng ký Echo.private('chat.${chatId}')`);
-            Echo.private(`chat.${chatId}`)
-                .listen('MessageSent', (event) => {
-                    let sender = event.message.sender_id ? "Admin" : "Guest";
-                    displayMessage(sender, event.message.message);
+            function getSenderName(msg) {
+                console.log("Tin nhắn nhận được:", msg);
+                if (!msg) return "Không xác định";
+
+                if (msg.sender_id) {
+                    if (msg.role_id === 1) {
+                        return "Admin";
+                    } else if (msg.role_id === 2) {
+                        return msg.customer_name || "Khách hàng";
+                    }
+                } else{
+                    return "Guest";
+                }
+                
+            }
+
+
+            function setupPusher(chatId) {
+                console.log(`🔹 Đăng ký Echo.private('chat.${chatId}')`);
+
+                const pusher = new Pusher("83277f57e063c09290aa", {
+                    cluster: "ap1",
+                    encrypted: true,
+                    authEndpoint: "/broadcasting/auth",
+                    auth: {
+                        headers: {
+                            "X-CSRF-TOKEN": csrfToken
+                        }
+                    }
+                });
+
+                const channel = pusher.subscribe(`chat.${chatId}`);
+                channel.bind("MessageSent", function(data) {
+                    let sender = getSenderName(data.message);
+                    displayMessage(sender, data.message.message);
                     chatMessages.scrollTop = chatMessages.scrollHeight;
                 });
-        } else {
-            console.error("Lỗi: chatId chưa được xác định sau khi tải tin nhắn.");
-        }
-    } catch (error) {
-        console.error("Lỗi tải tin nhắn:", error);
-    }
-}
-function sendMessageToServer(message) {
-    let csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute("content");
-    
-    console.log("🔹 Gửi tin nhắn:", message);
-    console.log("🔹 CSRF Token:", csrfToken);
-    
-    fetch(sendMessageUrl, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-            "X-CSRF-TOKEN": csrfToken
-        },
-        body: JSON.stringify({
-            message: message
-        })
-    })
-    .then(response => response.json())
-    .then(data => {
-        console.log("🔹 Phản hồi từ server:", data);
+            }
 
-        if (data.success) {
-            displayMessage("Guest", message);
-            chatInput.value = "";
-            chatMessages.scrollTop = chatMessages.scrollHeight;
-        } else {
-            console.error("❌ Lỗi gửi tin nhắn:", data);
-        }
-    })
-    .catch(error => console.error("❌ Lỗi kết nối:", error));
-}
-           function displayMessage(sender, message) {
+            function sendMessageToServer(message) {
+                fetch(sendMessageUrl, {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "X-CSRF-TOKEN": csrfToken
+                        },
+                        body: JSON.stringify({
+                            message: message
+                        })
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log("🔹 Phản hồi từ server:", data);
+
+                        if (data.message && data.message === "Message sent successfully") {
+                            displayMessage("Bạn", message);
+                            chatInput.value = "";
+                            chatMessages.scrollTop = chatMessages.scrollHeight;
+                        } else {
+                            console.error("Lỗi gửi tin nhắn:", data);
+                        }
+                    })
+                    .catch(error => console.error("Lỗi kết nối:", error));
+            }
+
+            function displayMessage(sender, message) {
                 let msgDiv = document.createElement("div");
                 msgDiv.innerHTML = `<strong>${sender}:</strong> ${message}`;
                 chatMessages.appendChild(msgDiv);
             }
 
-            // Load tin nhắn khi trang load
-            await loadMessages();
+            let response = await fetch(loadMessagesUrl);
+            let data = await response.json();
+            if (data.original && data.original.chat_id) {
+                chatId = data.original.chat_id;
+                setupPusher(chatId);
+            }
         });
-        const pusher = new Pusher("83277f57e063c09290aa", {
-    cluster: "ap1",
-    encrypted: true,
-    authEndpoint: "/broadcasting/auth",
-    auth: {
-        headers: {
-            "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').getAttribute("content")
-        }
-    }
-});
-
-const channel = pusher.subscribe(`chat.${chatId}`);
-channel.bind("MessageSent", function (data) {
-    displayMessage(data.message.sender_id ? "Bạn" : "Guest", data.message.message);
-});
-
     </script>
 
 </body>
