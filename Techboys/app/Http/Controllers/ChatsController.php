@@ -12,14 +12,20 @@ class ChatsController extends Controller
     public function __construct(ChatsService $chatsService){
         $this->chatsService = $chatsService;
     }
+    // ADMIN
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        return $this->chatsService->index();
     }
-
+    public function loadMessagesAdmin($chatId){
+        return $this->chatsService->loadMessageAdmin($chatId);
+    }
+    public function sendMessageAdmin(Request $request, $chatId){
+        return $this->chatsService->sendMessageAdmin($request, $chatId);
+    }
     /**
      * Show the form for creating a new resource.
      */
@@ -67,6 +73,7 @@ class ChatsController extends Controller
     {
         //
     }
+    // CLIENT
     public function sendMessage(Request $request){
         $this->chatsService->sendMessage($request);
         return response()->json(['message' => 'Message sent successfully']);
