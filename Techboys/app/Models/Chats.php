@@ -17,4 +17,7 @@ class Chats extends Model
     public function Status(){
         return $this->belongsTo(Status::class);
     }
+    public function Message(){
+        return $this->hasMany(Message::class);
+    }
 }
