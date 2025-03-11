@@ -120,14 +120,14 @@
                                                         <h5 class="mb-0">
                                                             <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                                                                 <i class="fa-icon"></i>
-                                                                Support 24/7
+                                                                Hỗ trợ 24/7
                                                             </a>
                                                         </h5>
                                                     </div>
                                                     <!-- .card-header -->
                                                     <div id="collapseOne" class="collapse show" role="tabpanel" aria-labelledby="headingOne">
                                                         <div class="card-block">
-                                                            Vestibulum velit nibh, egestas vel faucibus vitae, feugiat sollicitudin urna. Praesent iaculis id ipsum sit amet pretium. Aliquam tristique sapien nec enim euismod, scelerisque facilisis arcu consectetur.
+                                                            TechBoys luôn sẵn sàng hỗ trợ khách hàng mọi lúc, mọi nơi với dịch vụ chăm sóc khách hàng 24/7. Dù bạn cần tư vấn sản phẩm, giải đáp thắc mắc hay hỗ trợ kỹ thuật, đội ngũ chuyên viên của chúng tôi sẽ luôn lắng nghe và phản hồi nhanh chóng. Sự hài lòng của khách hàng là ưu tiên hàng đầu của TechBoys!
                                                         </div>
                                                     </div>
                                                     <!-- .collapse -->
@@ -145,7 +145,7 @@
                                                     <!-- .card-header -->
                                                     <div id="collapseTwo" class="collapse" role="tabpanel" aria-labelledby="headingTwo">
                                                         <div class="card-block">
-                                                            Vestibulum velit nibh, egestas vel faucibus vitae, feugiat sollicitudin urna. Praesent iaculis id ipsum sit amet pretium. Aliquam tristique sapien nec enim euismod, scelerisque facilisis arcu consectetur.
+                                                            TechBoys cam kết mang đến sản phẩm chính hãng, dịch vụ uy tín và trải nghiệm mua sắm tốt nhất. Chúng tôi luôn chọn lọc những thiết bị công nghệ hiện đại từ các thương hiệu hàng đầu, đảm bảo chất lượng vượt trội. Mỗi sản phẩm đều được kiểm định nghiêm ngặt, đi kèm chế độ bảo hành rõ ràng, giúp khách hàng yên tâm tuyệt đối khi sử dụng.
                                                         </div>
                                                     </div>
                                                     <!-- .collapse -->
@@ -156,14 +156,14 @@
                                                         <h5 class="mb-0">
                                                             <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
                                                                 <i class="fa-icon"></i>
-                                                                Fastest Delivery
+                                                                Giao hàng nhanh
                                                             </a>
                                                         </h5>
                                                     </div>
                                                     <!-- .card-header -->
                                                     <div id="collapseThree" class="collapse" role="tabpanel" aria-labelledby="headingThree">
                                                         <div class="card-block">
-                                                            Vestibulum velit nibh, egestas vel faucibus vitae, feugiat sollicitudin urna. Praesent iaculis id ipsum sit amet pretium. Aliquam tristique sapien nec enim euismod, scelerisque facilisis arcu consectetur.
+                                                            TechBoys cam kết giao hàng nhanh chóng, an toàn và đúng hẹn trên toàn quốc. Chúng tôi hợp tác với các đơn vị vận chuyển uy tín để đảm bảo sản phẩm đến tay khách hàng trong thời gian ngắn nhất. Dù bạn ở đâu, TechBoy luôn sẵn sàng mang công nghệ đến tận cửa nhà bạn! 
                                                         </div>
                                                     </div>
                                                     <!-- .collapse -->
@@ -174,14 +174,14 @@
                                                         <h5 class="mb-0">
                                                             <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
                                                                 <i class="fa-icon"></i>
-                                                                Customer Care
+                                                                Chăm sóc khách hàng
                                                             </a>
                                                         </h5>
                                                     </div>
                                                     <!-- .card-header -->
                                                     <div id="collapseFour" class="collapse" role="tabpanel" aria-labelledby="headingFour">
                                                         <div class="card-block">
-                                                            Vestibulum velit nibh, egestas vel faucibus vitae, feugiat sollicitudin urna. Praesent iaculis id ipsum sit amet pretium. Aliquam tristique sapien nec enim euismod, scelerisque facilisis arcu consectetur.
+                                                            TechBoys luôn đặt khách hàng lên hàng đầu với dịch vụ chăm sóc tận tâm, chuyên nghiệp. Đội ngũ hỗ trợ của chúng tôi luôn sẵn sàng lắng nghe, giải đáp thắc mắc và xử lý mọi vấn đề một cách nhanh chóng. Dù bạn cần tư vấn sản phẩm, hỗ trợ kỹ thuật hay bảo hành, TechBoy cam kết mang đến trải nghiệm phục vụ tốt nhất!
                                                         </div>
                                                     </div>
                                                     <!-- .collapse -->
@@ -192,14 +192,14 @@
                                                         <h5 class="mb-0">
                                                             <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFive" aria-expanded="true" aria-controls="collapseFive">
                                                                 <i class="fa-icon"></i>
-                                                                Over 200 Satisfied Customers
+                                                                Rất nhiều khách hàng hài lòng
                                                             </a>
                                                         </h5>
                                                     </div>
                                                     <!-- .card-header -->
                                                     <div id="collapseFive" class="collapse" role="tabpanel" aria-labelledby="headingFive">
                                                         <div class="card-block">
-                                                            Vestibulum velit nibh, egestas vel faucibus vitae, feugiat sollicitudin urna. Praesent iaculis id ipsum sit amet pretium. Aliquam tristique sapien nec enim euismod, scelerisque facilisis arcu consectetur.
+                                                            TechBoys tự hào khi nhận được sự tin tưởng và yêu thích từ hàng nghìn khách hàng. Với sản phẩm chất lượng, dịch vụ tận tâm và chính sách ưu đãi hấp dẫn, chúng tôi đã và đang mang đến trải nghiệm mua sắm tuyệt vời. Sự hài lòng của khách hàng chính là động lực để TechBoy không ngừng phát triển và hoàn thiện mỗi ngày!
                                                         </div>
                                                     </div>
                                                     <!-- .collapse -->
