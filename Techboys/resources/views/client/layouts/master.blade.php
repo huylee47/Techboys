@@ -2119,6 +2119,7 @@
                 setupPusher(chatId);
             }
         });
+    
     </script>
 
 </body>
