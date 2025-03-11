@@ -1,22 +1,30 @@
 @extends('admin.layouts.master')
 
 @section('main')
-<div class="container mt-4">
+<div class="" id="main">
+    <div class="container mt-4">
     <div class="row">
         <!-- Danh sách cuộc trò chuyện -->
         <div class="col-md-4">
             <h5>Danh sách tin nhắn</h5>
             <ul class="list-group" id="chat-list">
                 @foreach($chats as $chat)
-                    <li class="list-group-item chat-item" data-chat-id="{{ $chat->id }}">
-                        {{ $chat->customer ? $chat->customer->name : 'Guest ' . $chat->guest_id }}
-                    </li>
+                <li class="list-group-item chat-item {{ request('chat_id') == $chat->id ? 'active' : '' }}"
+                    data-chat-id="{{ $chat->id }}">
+                    @if ($chat->customer && $chat->customer->role_id != 1)
+                        {{ $chat->customer->name }}
+                    @elseif ($chat->staff && $chat->staff->role_id ==1)
+                        {{ 'Nhân viên: ' . $chat->staff->name }}
+                    @else
+                        {{ 'Guest ' . $chat->id }}
+                    @endif
+                </li>
                 @endforeach
             </ul>
         </div>
-
+        
         <!-- Nội dung tin nhắn -->
-        <div class="col-md-8">
+        <div class="col-md-8" >
             <h5>Tin nhắn</h5>
             <div class="card">
                 <div class="card-body chat-box" id="chat-box">
@@ -34,12 +42,14 @@
         </div>
     </div>
 </div>
+</div>
+
 <script src="https://js.pusher.com/8.4.0/pusher.min.js"></script>
 @vite(['resources/js/app.js'])
 <script>
 document.addEventListener("DOMContentLoaded", function () {
     let selectedChatId = null;
-    let pusherInstance = new Pusher("83277f57e063c09290aa", {
+    let pusherInstance = new Pusher("{{env('PUSHER_APP_KEY')}}", {
         cluster: "ap1",
         encrypted: true,
     });
@@ -53,27 +63,33 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function setupPusher(chatId) {
-        if (activeChannel) {
-            pusherInstance.unsubscribe(activeChannel);
+        if (!pusherInstance) {
+            pusherInstance = new Pusher("{{env('PUSHER_APP_KEY')}}", {
+                cluster: "ap1",
+                encrypted: true,
+            });
         }
 
         activeChannel = `chat.${chatId}`;
         const channel = pusherInstance.subscribe(activeChannel);
         console.log(`📡 Đã đăng ký kênh: ${activeChannel}`);
 
-        channel.bind("App\\Events\\MessageSent", function (data) {
-            console.log("Tin nhắn mới từ Client:", data);
+        channel.bind("MessageSent", function (data) {
+            console.log("📩 Tin nhắn mới từ Pusher:", data);
 
             if (selectedChatId == data.chat_id) {
                 displayMessage(data.sender_id ? "Admin" : "Guest", data.message.message);
             } else {
-                alert(" Bạn có tin nhắn mới từ khách hàng!");
+                alert("📨 Bạn có tin nhắn mới từ khách hàng!");
             }
         });
     }
 
     document.querySelectorAll(".chat-item").forEach(item => {
         item.addEventListener("click", function () {
+            document.querySelectorAll(".chat-item").forEach(el => el.classList.remove("active"));
+
+            this.classList.add("active");
             selectedChatId = this.getAttribute("data-chat-id");
             document.getElementById("message-input").disabled = false;
             loadMessages(selectedChatId);
@@ -149,6 +165,11 @@ document.addEventListener("DOMContentLoaded", function () {
             event.preventDefault();
             sendMessage();
         }
+    });
+
+    document.querySelectorAll(".chat-item").forEach(item => {
+        let chatId = item.getAttribute("data-chat-id");
+        setupPusher(chatId);
     });
 });
 </script>
