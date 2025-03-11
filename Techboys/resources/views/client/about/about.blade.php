@@ -16,9 +16,6 @@
                 <main id="main" class="site-main">
                     <div class="type-page hentry">
                         <header class="entry-header">
-                            <div class="page-featured-image">
-                                <img width="1920" height="1391" alt="" class="attachment-full size-full wp-post-image" src="{{ asset('home/assets/images/products/about-header.jpg') }}">
-                            </div>
                             <!-- .page-featured-image -->
                             <div class="page-header-caption">
                                 <h1 class="entry-title">Về chúng tôi</h1>
@@ -32,7 +29,7 @@
                             <div class="about-features row">
                                 <div class="col-md-4">
                                     <div class="single-image">
-                                        <img alt="" class="" src="{{ asset('home/assets/images/products/3column1.jpg') }}">
+                                        <img alt="" class="" src="{{ asset('home/assets/images/about/about1.avif') }}">
                                     </div>
                                     <!-- .single_image -->
                                     <div class="text-block">
@@ -44,7 +41,7 @@
                                 <!-- .col -->
                                 <div class="col-md-4">
                                     <div class="single-image">
-                                        <img alt="" class="" src="{{ asset('home/assets/images/products/3column2.jpg') }}">
+                                        <img alt="" class="" src="{{ asset('home/assets/images/about/about2.avif') }}">
                                     </div>
                                     <!-- .single_image -->
                                     <div class="text-block">
@@ -56,7 +53,7 @@
                                 <!-- .col -->
                                 <div class="col-md-4">
                                     <div class="single-image">
-                                        <img alt="" class="" src="{{ asset('home/assets/images/products/3column2.jpg') }}">
+                                        <img alt="" class="" style="width: 442px" src="{{ asset('home/assets/images/about/about3.avif') }}">
                                     </div>
                                     <!-- .single_image -->
                                     <div class="text-block">
