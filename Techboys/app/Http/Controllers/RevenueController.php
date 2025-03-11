@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Revenue;
+use App\Models\BillDetails;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 class RevenueController extends Controller
@@ -40,10 +42,20 @@ class RevenueController extends Controller
         ->orderBy('month')
         ->pluck('revenue', 'month');
 
+        $bestSellingProducts = BillDetails::select('product_id')
+        ->selectRaw('SUM(quantity) as total_sold')
+        ->groupBy('product_id')
+        ->orderByDesc('total_sold')
+        ->take(10) 
+        ->get();
+    $products = Product::whereIn('id', $bestSellingProducts->pluck('product_id'))
+        ->get()
+        ->keyBy('id');
+
     
         return view('admin.revenue.revenue', compact(
             'revenueDay', 'revenueWeek', 'revenueMonth', 'revenueQuarter',
-            'successfulOrders', 'cancelledOrders','monthlyRevenue'
+            'successfulOrders', 'cancelledOrders','monthlyRevenue','bestSellingProducts', 'products'
         ));
     }
     public function filterRevenue(Request $request)
@@ -52,7 +64,7 @@ class RevenueController extends Controller
     $endDate = Carbon::parse($request->end_date)->endOfDay();
 
     $filteredRevenue = Revenue::whereBetween('created_at', [$startDate, $endDate])
-        ->selectRaw('DATE(created_at) as date, SUM(total) as revenue')
+        ->selectRaw('DATE(created_at) as date, SUM( CASE WHEN payment_status = 1 THEN total ELSE 0 END) as revenue')
         ->groupBy('date')
         ->orderBy('date')
         ->pluck('revenue', 'date');
