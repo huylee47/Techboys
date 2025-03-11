@@ -20,4 +20,12 @@ class Chats extends Model
     public function Message(){
         return $this->hasMany(Message::class);
     }
+    public function customer(){
+        return $this->belongsTo(User::class, 'customer_id');
+    }
+    
+    public function staff(){
+        return $this->belongsTo(User::class, 'staff_id');
+    }
+    
 }
