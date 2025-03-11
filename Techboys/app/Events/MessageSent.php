@@ -8,6 +8,7 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 use App\Models\Message;
+use Illuminate\Support\Facades\Log;
 
 class MessageSent implements ShouldBroadcast
 {
@@ -21,6 +22,7 @@ class MessageSent implements ShouldBroadcast
     public function __construct(Message $message)
     {
         $this->message = $message;
+        Log::info('📡 MessageSent event fired!', ['message' => $message]);
     }
 
     /**
@@ -28,8 +30,8 @@ class MessageSent implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        // return new Channel('chat.' . $this->message->chat_id);
-        return new PrivateChannel('chat.' . $this->message->chat_id);
+        return new Channel('chat.' . $this->message->chat_id);
+        // return new PrivateChannel('chat.' . $this->message->chat_id);
     }
 
     /**
