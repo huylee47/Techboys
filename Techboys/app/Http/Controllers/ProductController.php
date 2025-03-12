@@ -169,12 +169,12 @@ class ProductController extends Controller
 
         $query = Product::query();
 
-        if ($request->has('brand_id') && !empty($request->brand_id)) {
+        if ($request->has('brand_id')) {
             $query->whereIn('brand_id', $request->brand_id);
         }
 
-        if ($request->has('model_id') && !empty($request->model_id)) {
-            $query->whereIn('model_id', $request->model_id);
+        if ($request->filled('model_id')) {
+            $query->whereIn('model_id', (array) $request->model_id);
         }
 
         $products = $query->paginate(21)->appends($request->query());
