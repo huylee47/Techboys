@@ -12,4 +12,14 @@ window.Echo = new Echo({
     forceTLS: import.meta.env.VITE_PUSHER_SCHEME === "https",
     disableStats: true,
     enabledTransports: ["ws", "wss"],
+    encrypted: true,
+    authEndpoint: "/broadcasting/auth",
+    auth: {
+        headers: {
+            "X-CSRF-TOKEN": document.head.querySelector('meta[name="csrf-token"]').content
+        }
+    }
 });
+console.log(" Echo Instance:", window.Echo);
+console.log(" Pusher Instance:", window.Pusher);
+
