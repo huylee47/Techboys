@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="csrf-token" content="{{ csrf_token() }}" />
+    <meta name="chat-id" content="{{ $chatId ?? '' }}">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
     <title>@yield('title')</title>
     <link rel="stylesheet" type="text/css" href="{{ url('') }}/home/assets/css/bootstrap.min.css" media="all" />
@@ -1980,147 +1981,128 @@
     @vite(['resources/js/app.js'])
 
     <script>
-        document.addEventListener("DOMContentLoaded", async function() {
-            let csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute("content");
-            let chatIcon = document.getElementById("chat-icon");
-            let chatModal = document.getElementById("chat-modal");
-            let closeChat = document.getElementById("close-chat");
-            let chatInput = document.getElementById("chat-input");
-            let sendMessage = document.getElementById("send-message");
-            let chatMessages = document.getElementById("chat-messages");
+document.addEventListener("DOMContentLoaded", async function() {
+    let csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute("content");
+    let chatIcon = document.getElementById("chat-icon");
+    let chatModal = document.getElementById("chat-modal");
+    let closeChat = document.getElementById("close-chat");
+    let chatInput = document.getElementById("chat-input");
+    let sendMessage = document.getElementById("send-message");
+    let chatMessages = document.getElementById("chat-messages");
 
-            let sendMessageUrl = "{{ route('client.send.message') }}";
-            let loadMessagesUrl = "{{ route('client.load.messages') }}";
-            let chatId = null;
-            const mess = @json($messages);
-            console.log(mess);
+    let sendMessageUrl = "{{ route('client.send.message') }}";
+    let loadMessagesUrl = "{{ route('client.load.messages') }}";
+    let chatId = null;
+    console.log("CSRF Token:", csrfToken);
 
-            chatIcon.addEventListener("click", function() {
-                chatModal.style.display = "block";
-                loadMessages();
-            });
+    chatIcon.addEventListener("click", function() {
+        chatModal.style.display = "block";
+        loadMessages();
+    });
 
-            closeChat.addEventListener("click", function() {
-                chatModal.style.display = "none";
-            });
+    closeChat.addEventListener("click", function() {
+        chatModal.style.display = "none";
+    });
 
-            sendMessage.addEventListener("click", function() {
-                let message = chatInput.value.trim();
-                if (message) {
-                    sendMessageToServer(message);
-                }
-            });
+    sendMessage.addEventListener("click", function() {
+        let message = chatInput.value.trim();
+        if (message) {
+            sendMessageToServer(message);
+        }
+    });
 
-            async function loadMessages() {
-                try {
-                    let response = await fetch(loadMessagesUrl);
-                    let data = await response.json();
-                    console.log("Dữ liệu API nhận được:", data);
+    async function loadMessages() {
+        try {
+            let response = await axios.get(loadMessagesUrl);
+            let data = response.data;
+            console.log("API nhận được:", data);
 
-                    chatMessages.innerHTML = "";
+            chatMessages.innerHTML = "";
 
-                    if (data.original && data.original.chat_id) {
-                        chatId = data.original.chat_id;
-                    } else {
-                        console.error("Lỗi: API không trả về chatId.");
-                        return;
-                    }
-
-                    if (data.original && data.original.messages) {
-                        data.original.messages.forEach(msg => {
-                            let sender = getSenderName(msg);
-                            displayMessage(sender, msg.message);
-                        });
-                    } else {
-                        console.error("Lỗi: API không trả về danh sách tin nhắn.");
-                    }
-
-                    chatMessages.scrollTop = chatMessages.scrollHeight;
-                } catch (error) {
-                    console.error("Lỗi tải tin nhắn:", error);
-                }
-            }
-
-            function getSenderName(msg) {
-                console.log("Tin nhắn nhận được:", msg);
-                if (!msg) return "Không xác định";
-
-                if (msg.sender_id) {
-                    if (msg.role_id === 1) {
-                        return "Admin";
-                    } else if (msg.role_id === 2) {
-                        return msg.customer_name || "Khách hàng";
-                    }
-                } else{
-                    return "Guest";
-                }
-                
-            }
-
-
-            function setupPusher(chatId) {
-                console.log(`🔹 Đăng ký Echo.private('chat.${chatId}')`);
-
-                const pusher = new Pusher("83277f57e063c09290aa", {
-                    cluster: "ap1",
-                    encrypted: true,
-                    authEndpoint: "/broadcasting/auth",
-                    auth: {
-                        headers: {
-                            "X-CSRF-TOKEN": csrfToken
-                        }
-                    }
-                });
-
-                const channel = pusher.subscribe(`chat.${chatId}`);
-                channel.bind("MessageSent", function(data) {
-                    let sender = getSenderName(data.message);
-                    displayMessage(sender, data.message.message);
-                    chatMessages.scrollTop = chatMessages.scrollHeight;
-                });
-            }
-
-            function sendMessageToServer(message) {
-                fetch(sendMessageUrl, {
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/json",
-                            "X-CSRF-TOKEN": csrfToken
-                        },
-                        body: JSON.stringify({
-                            message: message
-                        })
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        console.log("🔹 Phản hồi từ server:", data);
-
-                        if (data.message && data.message === "Message sent successfully") {
-                            displayMessage("Bạn", message);
-                            chatInput.value = "";
-                            chatMessages.scrollTop = chatMessages.scrollHeight;
-                        } else {
-                            console.error("Lỗi gửi tin nhắn:", data);
-                        }
-                    })
-                    .catch(error => console.error("Lỗi kết nối:", error));
-            }
-
-            function displayMessage(sender, message) {
-                let msgDiv = document.createElement("div");
-                msgDiv.innerHTML = `<strong>${sender}:</strong> ${message}`;
-                chatMessages.appendChild(msgDiv);
-            }
-
-            let response = await fetch(loadMessagesUrl);
-            let data = await response.json();
             if (data.original && data.original.chat_id) {
                 chatId = data.original.chat_id;
-                setupPusher(chatId);
+            } else {
+                console.error("API không trả về chatId.");
+                return;
             }
-        });
-    
-    </script>
+
+            if (data.original && data.original.messages) {
+                data.original.messages.forEach(msg => {
+                    let sender = getSenderName(msg);
+                    displayMessage(sender, msg.message);
+                });
+            } else {
+                console.error("API không trả về danh sách tin nhắn.");
+            }
+
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+            setupEcho(chatId);
+        } catch (error) {
+            console.error("Lỗi tải tin nhắn:", error);
+        }
+    }
+
+    function getSenderName(msg) {
+        console.log("Tin nhắn nhận được:", msg);
+        if (!msg) return "Không xác định";
+
+        if (msg.sender_id) {
+            return msg.role_id === 1 ? "Admin" : msg.customer_name || "Khách hàng";
+        } else {
+            return "Guest";
+        }
+    }
+
+    function setupEcho(chatId) {
+        console.log(`📡 Đăng ký Echo('chat.${chatId}')`);
+
+        window.Echo.channel(`chat.${chatId}`)
+            .listen("MessageSent", (data) => {
+                console.log("🔔 Tin nhắn mới từ Echo:", data);
+                let sender = getSenderName(data.message);
+                displayMessage(sender, data.message.message);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            });
+    }
+
+    function sendMessageToServer(message) {
+        axios.post(sendMessageUrl, { message: message }, {
+            headers: {
+                "X-CSRF-TOKEN": csrfToken
+            }
+        })
+        .then(response => {
+            console.log("Phản hồi từ server:", response.data);
+            if (response.data.message === "Message sent successfully") {
+                displayMessage("Bạn", message);
+                chatInput.value = "";
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            } else {
+                console.error("Lỗi gửi tin nhắn:", response.data);
+            }
+        })
+        .catch(error => console.error("Lỗi kết nối:", error));
+    }
+
+    function displayMessage(sender, message) {
+        let msgDiv = document.createElement("div");
+        msgDiv.innerHTML = `<strong>${sender}:</strong> ${message}`;
+        chatMessages.appendChild(msgDiv);
+    }
+
+    let response = await axios.get(loadMessagesUrl);
+    let data = response.data;
+    if (data.original && data.original.chat_id) {
+        chatId = data.original.chat_id;
+        setupEcho(chatId);
+    }
+
+    // Kiểm tra sự kiện từ Pusher
+    window.Echo.connector.pusher.bind("message.sent", function(data) {
+        console.log("📡 Nhận tin nhắn trực tiếp từ Pusher:", data);
+    });
+});
+</script>
 
 </body>
 
