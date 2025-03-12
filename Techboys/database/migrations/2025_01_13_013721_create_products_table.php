@@ -6,7 +6,22 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-
+    public function up(): void
+    {
+        Schema::create('products', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('brand_id');
+            $table->foreignId('category_id')->nullable();
+            $table->integer('purchases')->nullable();
+            $table->string('name');
+            $table->string('img')->nullable();
+            $table->string('slug');
+            $table->decimal('rate_average', 10, 2);
+            $table->longText('description');
+            $table->softDeletes();
+            $table->timestamps();
+        });
+    }
 
     public function down(): void
     {
