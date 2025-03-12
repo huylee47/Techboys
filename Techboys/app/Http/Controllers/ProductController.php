@@ -161,24 +161,4 @@ class ProductController extends Controller
 
         return view('client.product.search', compact('products', 'keyword', 'brands', 'models'));
     }
-
-    public function filter(Request $request)
-    {
-        $brands = Brand::all();
-        $models = ProductModel::all();
-
-        $query = Product::query();
-
-        if ($request->has('brand_id')) {
-            $query->whereIn('brand_id', $request->brand_id);
-        }
-
-        if ($request->filled('model_id')) {
-            $query->whereIn('model_id', (array) $request->model_id);
-        }
-
-        $products = $query->paginate(21)->appends($request->query());
-
-        return view('client.product.list', compact('products', 'brands', 'models'));
-    }
 }
