@@ -25,22 +25,22 @@
                     </div>
 
                     <div class="filter_type version_2">
-                        <h4><a href="#filter_4" data-bs-toggle="collapse" class="opened">Models</a></h4>
-                        <div class="collapse show" id="filter_4">
-                            <ul>
-                                @foreach($models as $model)
-                                <li>
-                                    <label class="container_check">
-                                        {{ $model->name }}
-                                        <input type="checkbox" name="model_id[]" value="{{ $model->id }}"
-                                            {{ in_array($model->id, request()->model_id ?? []) ? 'checked' : '' }}>
-                                        <span class="checkmark"></span>
-                                    </label>
-                                </li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    </div>
+    <h4><a href="#filter_4" data-bs-toggle="collapse" class="opened">Models</a></h4>
+    <div class="collapse show" id="filter_4">
+        <ul>
+            @foreach($models as $model)
+            <li>
+                <label class="container_check">
+                    {{ $model->name }}
+                   <input type="checkbox" name="model_id[]" value="{{ $model->id }}" 
+       {{ in_array($model->id, request()->model_id ?? []) ? 'checked' : '' }}>
+                    <span class="checkmark"></span>
+                </label>
+            </li>
+            @endforeach
+        </ul>
+    </div>
+</div>
 
                     <!-- Nút Lọc & Reset -->
                     <div class="buttons">
