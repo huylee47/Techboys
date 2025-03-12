@@ -46,131 +46,108 @@
 
 <script src="https://js.pusher.com/8.4.0/pusher.min.js"></script>
 @vite(['resources/js/app.js'])
+
 <script>
-document.addEventListener("DOMContentLoaded", function () {
-    let selectedChatId = null;
-    let pusherInstance = new Pusher("{{env('PUSHER_APP_KEY')}}", {
-        cluster: "ap1",
-        encrypted: true,
-    });
+    document.addEventListener("DOMContentLoaded", function () {
+        let selectedChatId = null;
+        let csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute("content");
 
-    let activeChannel = null;
-    let csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute("content");
-    console.log(csrfToken);
+        console.log("CSRF Token:", csrfToken);
 
-    function getSendMessageUrl(chatId) {
-        return `/admin/chats/${chatId}/send`;
-    }
-
-    function setupPusher(chatId) {
-        if (!pusherInstance) {
-            pusherInstance = new Pusher("{{env('PUSHER_APP_KEY')}}", {
-                cluster: "ap1",
-                encrypted: true,
-            });
+        function getSendMessageUrl(chatId) {
+            return `/admin/chats/${chatId}/send`;
         }
 
-        activeChannel = `chat.${chatId}`;
-        const channel = pusherInstance.subscribe(activeChannel);
-        console.log(`📡 Đã đăng ký kênh: ${activeChannel}`);
+        function setupEcho(chatId) {
+            console.log(`Đăng ký Echo('chat.${chatId}')`);
 
-        channel.bind("MessageSent", function (data) {
-            console.log("📩 Tin nhắn mới từ Pusher:", data);
-
-            if (selectedChatId == data.chat_id) {
-                displayMessage(data.sender_id ? "Admin" : "Guest", data.message.message);
-            } else {
-                alert("📨 Bạn có tin nhắn mới từ khách hàng!");
-            }
-        });
-    }
-
-    document.querySelectorAll(".chat-item").forEach(item => {
-        item.addEventListener("click", function () {
-            document.querySelectorAll(".chat-item").forEach(el => el.classList.remove("active"));
-
-            this.classList.add("active");
-            selectedChatId = this.getAttribute("data-chat-id");
-            document.getElementById("message-input").disabled = false;
-            loadMessages(selectedChatId);
-        });
-    });
-
-    function loadMessages(chatId) {
-        console.log("Đang tải tin nhắn cho chat:", chatId);
-        fetch(`/admin/chats/${chatId}`)
-            .then(response => {
-                if (!response.ok) throw new Error("Lỗi khi tải tin nhắn!");
-                return response.json();
-            })
-            .then(data => {
-                let messagesContainer = document.getElementById("messages-container");
-                messagesContainer.innerHTML = "";
-
-                data.messages.forEach(msg => {
-                    let sender = msg.sender_role === 1 ? "Admin" : msg.sender_name || "Guest";
-                    displayMessage(sender, msg.message);
+            window.Echo.channel(`chat.${chatId}`)
+                .listen("MessageSent", (data) => {
+                    console.log("Tin nhắn mới từ Echo:", data);
+                    if (selectedChatId == data.chat_id) {
+                        displayMessage(data.sender_id ? "Admin" : "Guest", data.message.message);
+                    } else {
+                        alert("Bạn có tin nhắn mới từ khách hàng!");
+                    }
                 });
+        }
 
-                setupPusher(chatId);
+        document.querySelectorAll(".chat-item").forEach(item => {
+            item.addEventListener("click", function () {
+                document.querySelectorAll(".chat-item").forEach(el => el.classList.remove("active"));
+                this.classList.add("active");
+                selectedChatId = this.getAttribute("data-chat-id");
+                document.getElementById("message-input").disabled = false;
+                loadMessages(selectedChatId);
+            });
+        });
+
+        function loadMessages(chatId) {
+            console.log("Đang tải tin nhắn cho chat:", chatId);
+            axios.get(`/admin/chats/${chatId}`)
+                .then(response => {
+                    let messagesContainer = document.getElementById("messages-container");
+                    messagesContainer.innerHTML = "";
+                    
+                    response.data.messages.forEach(msg => {
+                        let sender = msg.sender_role === 1 ? "Admin" : msg.sender_name || "Guest";
+                        displayMessage(sender, msg.message);
+                    });
+                    
+                    setupEcho(chatId);
+                })
+                .catch(error => {
+                    console.error("Lỗi tải tin nhắn:", error);
+                    alert("Lỗi khi tải tin nhắn, vui lòng thử lại.");
+                });
+        }
+
+        function displayMessage(sender, message) {
+            let messagesContainer = document.getElementById("messages-container");
+            let msgDiv = document.createElement("div");
+            msgDiv.innerHTML = `<strong>${sender}:</strong> ${message}`;
+            messagesContainer.appendChild(msgDiv);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+
+        function sendMessage() {
+            let messageInput = document.getElementById("message-input");
+            let message = messageInput.value.trim();
+
+            if (!message || !selectedChatId) return;
+
+            axios.post(getSendMessageUrl(selectedChatId), { message: message }, {
+                headers: { "X-CSRF-TOKEN": csrfToken }
+            })
+            .then(response => {
+                if (response.data.success) {
+                    displayMessage("Admin", message);
+                    messageInput.value = "";
+                } else {
+                    console.error("Lỗi gửi tin nhắn:", response.data);
+                    alert("Không thể gửi tin nhắn, thử lại!");
+                }
             })
             .catch(error => {
-                console.error("Lỗi tải tin nhắn:", error);
-                alert("Lỗi khi tải tin nhắn, vui lòng thử lại.");
+                console.error("Lỗi kết nối:", error);
+                alert("Lỗi kết nối đến server!");
             });
-    }
-
-    function displayMessage(sender, message) {
-        let messagesContainer = document.getElementById("messages-container");
-        let msgDiv = document.createElement("div");
-        msgDiv.innerHTML = `<strong>${sender}:</strong> ${message}`;
-        messagesContainer.appendChild(msgDiv);
-        messagesContainer.scrollTop = messagesContainer.scrollHeight;
-    }
-
-    function sendMessage() {
-        let messageInput = document.getElementById("message-input");
-        let message = messageInput.value.trim();
-
-        if (!message || !selectedChatId) return;
-
-        fetch(getSendMessageUrl(selectedChatId), {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "X-CSRF-TOKEN": csrfToken
-            },
-            body: JSON.stringify({ message: message })
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                displayMessage("Admin", message);
-                messageInput.value = "";
-            } else {
-                console.error("Lỗi gửi tin nhắn:", data);
-                alert("Không thể gửi tin nhắn, thử lại!");
-            }
-        })
-        .catch(error => {
-            console.error("Lỗi kết nối:", error);
-            alert("Lỗi kết nối đến server!");
-        });
-    }
-
-    document.getElementById("send-message").addEventListener("click", sendMessage);
-    
-    document.getElementById("message-input").addEventListener("keypress", function (event) {
-        if (event.key === "Enter") {
-            event.preventDefault();
-            sendMessage();
         }
-    });
 
-    document.querySelectorAll(".chat-item").forEach(item => {
-        let chatId = item.getAttribute("data-chat-id");
-        setupPusher(chatId);
+        document.getElementById("send-message").addEventListener("click", sendMessage);
+        
+        document.getElementById("message-input").addEventListener("keypress", function (event) {
+            if (event.key === "Enter") {
+                event.preventDefault();
+                sendMessage();
+            }
+        });
+
+        document.querySelectorAll(".chat-item").forEach(item => {
+            let chatId = item.getAttribute("data-chat-id");
+            setupEcho(chatId);
+        });
     });
-});
 </script>
+
 @endsection
