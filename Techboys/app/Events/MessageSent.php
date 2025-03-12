@@ -30,8 +30,8 @@ class MessageSent implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new Channel('chat.' . $this->message->chat_id);
-        // return new PrivateChannel('chat.' . $this->message->chat_id);
+        // return new Channel('chat.' . $this->message->chat_id);
+        return ['chat.' . $this->message->chat_id]; 
     }
 
     /**
@@ -47,5 +47,6 @@ class MessageSent implements ShouldBroadcast
             'created_at' => $this->message->created_at->toDateTimeString(),
         ];
     }
+    
 }
 
