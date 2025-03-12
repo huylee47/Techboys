@@ -158,14 +158,14 @@
                         <nav id="primary-navigation" class="primary-navigation" aria-label="Primary Navigation"
                             data-nav="flex-menu">
                             <ul id="menu-primary-menu" class="nav yamm">
-                                <li class="sale-clr yamm-fw menu-item animate-dropdown">
-                                    <a title="Super deals" href="product-category.html">Sản phẩm hot</a>
-                                </li>
                                 <li class="menu-item animate-dropdown">
-                                    <a title="about us" href="product-category.html">Về chúng tôi</a>
+                                    <a title="about us" href="{{ route('about') }}">Về chúng tôi</a>
                                 </li>
                                 <li class="menu-item animate-dropdown">
                                     <a title="Headphones Sale" href="product-category.html">Liên hệ</a>
+                                </li>
+                                <li class="sale-clr yamm-fw menu-item animate-dropdown">
+                                    <a title="Super deals" href="{{ route('client.product.index') }}">Sản phẩm</a>
                                 </li>
                                 <li class="menu-item animate-dropdown">
                                     <a title="Headphones Sale" href="{{ route('blog') }}">Blog</a>
