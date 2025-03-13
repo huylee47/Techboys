@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="csrf-token" content="{{ csrf_token() }}" />
+    <meta name="chat-id" content="{{ $chatId ?? '' }}">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
     <title>@yield('title')</title>
     <link rel="stylesheet" type="text/css" href="{{ url('') }}/home/assets/css/bootstrap.min.css" media="all" />
@@ -15,8 +16,11 @@
     <link rel="stylesheet" type="text/css" href="{{ url('') }}/home/assets/css/techmarket-font-awesome.css"
         media="all" />
     <link rel="stylesheet" type="text/css" href="{{ url('') }}/home/assets/css/slick-style.css" media="all" />
+
     <link rel="stylesheet" type="text/css" href="{{ url('') }}/home/assets/css/animate.min.css" media="all" />
     <link rel="stylesheet" type="text/css" href="{{ url('') }}/home/assets/css/style.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="{{ url('') }}/home/assets/css/real-time.css" media="all" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
     <link rel="stylesheet" type="text/css" href="{{ url('') }}/home/assets/css/colors/blue.css" media="all" />
     <link href="https://fonts.googleapis.com/css?family=Rubik:300,400,500,900" rel="stylesheet">
     <link rel="shortcut icon" href="{{ url('') }}/home/assets/images/fav-icon.png">
@@ -194,9 +198,7 @@
                                     @guest
                                         <a title="My Account" href="{{ route('login.client') }}">
                                             <i class="tm tm-login-register"></i>Đăng nhập</a>
-                                    @else 
-
-
+                                    @else
                                         <div class="user-menu">
                                             <a href="#" class="user-menu-toggle">
                                                 <i class="tm tm-login-register"></i><b
@@ -264,7 +266,7 @@
                                             <div class="bg-yamm-content bg-yamm-content-bottom bg-yamm-content-right">
                                                 <div class="kc-col-container">
                                                     <div class="kc_single_image">
-                                                        <img src="{{asset('home/assets/images/megamenu.jpg')  }}"
+                                                        <img src="{{ asset('home/assets/images/megamenu.jpg') }}"
                                                             class="" alt="" />
                                                     </div>
                                                     <!-- .kc_single_image -->
@@ -335,7 +337,7 @@
                                             <div class="bg-yamm-content bg-yamm-content-bottom bg-yamm-content-right">
                                                 <div class="kc-col-container">
                                                     <div class="kc_single_image">
-                                                        <img src="{{asset('home/assets/images/megamenu-1.jpg')  }}"
+                                                        <img src="{{ asset('home/assets/images/megamenu-1.jpg') }}"
                                                             class="" alt="" />
                                                     </div>
                                                     <!-- .kc_single_image -->
@@ -354,8 +356,10 @@
                                                                 <li><a href="shop.html">Point & Shoot Cameras</a></li>
                                                                 <li><a href="shop.html">Lenses</a></li>
                                                                 <li><a href="shop.html">Camera Accessories</a></li>
-                                                                <li><a href="shop.html">Security & Surveillance</a></li>
-                                                                <li><a href="shop.html">Binoculars & Telescopes</a></li>
+                                                                <li><a href="shop.html">Security & Surveillance</a>
+                                                                </li>
+                                                                <li><a href="shop.html">Binoculars & Telescopes</a>
+                                                                </li>
                                                                 <li><a href="shop.html">Camcorders</a></li>
                                                                 <li class="nav-divider"></li>
                                                                 <li>
@@ -406,7 +410,7 @@
                                             <div class="bg-yamm-content bg-yamm-content-bottom bg-yamm-content-right">
                                                 <div class="kc-col-container">
                                                     <div class="kc_single_image">
-                                                        <img src="{{asset('home/assets/images/megamenu.jpg')  }}"
+                                                        <img src="{{ asset('home/assets/images/megamenu.jpg') }}"
                                                             class="" alt="" />
                                                     </div>
                                                     <!-- .kc_single_image -->
@@ -478,7 +482,7 @@
                                             <div class="bg-yamm-content bg-yamm-content-bottom bg-yamm-content-right">
                                                 <div class="kc-col-container">
                                                     <div class="kc_single_image">
-                                                        <img src="{{asset('home/assets/images/megamenu-1.jpg')  }}"
+                                                        <img src="{{ asset('home/assets/images/megamenu-1.jpg') }}"
                                                             class="" alt="" />
                                                     </div>
                                                     <!-- .kc_single_image -->
@@ -497,8 +501,10 @@
                                                                 <li><a href="shop.html">Point & Shoot Cameras</a></li>
                                                                 <li><a href="shop.html">Lenses</a></li>
                                                                 <li><a href="shop.html">Camera Accessories</a></li>
-                                                                <li><a href="shop.html">Security & Surveillance</a></li>
-                                                                <li><a href="shop.html">Binoculars & Telescopes</a></li>
+                                                                <li><a href="shop.html">Security & Surveillance</a>
+                                                                </li>
+                                                                <li><a href="shop.html">Binoculars & Telescopes</a>
+                                                                </li>
                                                                 <li><a href="shop.html">Camcorders</a></li>
                                                                 <li class="nav-divider"></li>
                                                                 <li>
@@ -548,7 +554,7 @@
                                             <div class="bg-yamm-content bg-yamm-content-bottom bg-yamm-content-right">
                                                 <div class="kc-col-container">
                                                     <div class="kc_single_image">
-                                                        <img src="{{asset('home/assets/images/megamenu.jpg')  }}"
+                                                        <img src="{{ asset('home/assets/images/megamenu.jpg') }}"
                                                             class="" alt="" />
                                                     </div>
                                                     <!-- .kc_single_image -->
@@ -620,7 +626,7 @@
                                             <div class="bg-yamm-content bg-yamm-content-bottom bg-yamm-content-right">
                                                 <div class="kc-col-container">
                                                     <div class="kc_single_image">
-                                                        <img src="{{asset('home/assets/images/megamenu-1.jpg')  }}"
+                                                        <img src="{{ asset('home/assets/images/megamenu-1.jpg') }}"
                                                             class="" alt="" />
                                                     </div>
                                                     <!-- .kc_single_image -->
@@ -639,8 +645,10 @@
                                                                 <li><a href="shop.html">Point & Shoot Cameras</a></li>
                                                                 <li><a href="shop.html">Lenses</a></li>
                                                                 <li><a href="shop.html">Camera Accessories</a></li>
-                                                                <li><a href="shop.html">Security & Surveillance</a></li>
-                                                                <li><a href="shop.html">Binoculars & Telescopes</a></li>
+                                                                <li><a href="shop.html">Security & Surveillance</a>
+                                                                </li>
+                                                                <li><a href="shop.html">Binoculars & Telescopes</a>
+                                                                </li>
                                                                 <li><a href="shop.html">Camcorders</a></li>
                                                                 <li class="nav-divider"></li>
                                                                 <li>
@@ -690,7 +698,7 @@
                                             <div class="bg-yamm-content bg-yamm-content-bottom bg-yamm-content-right">
                                                 <div class="kc-col-container">
                                                     <div class="kc_single_image">
-                                                        <img src="{{asset('home/assets/images/megamenu.jpg')  }}"
+                                                        <img src="{{ asset('home/assets/images/megamenu.jpg') }}"
                                                             class="" alt="" />
                                                     </div>
                                                     <!-- .kc_single_image -->
@@ -762,17 +770,17 @@
                     </div>
                     <!-- .departments-menu -->
                     <form class="navbar-search" method="get" action="{{ route('client.product.search') }}">
-    <div class="input-group">
-        <input type="text" id="search" class="form-control search-field product-search-field"
-            name="s" placeholder="Nhập sản phẩm muốn tìm" required/>
-        <div class="input-group-btn input-group-append">
-            <button type="submit" class="btn btn-primary">
-                <i class="fa fa-search"></i>
-                <span class="search-btn">Tìm kiếm</span>
-            </button>
-        </div>
-    </div>
-</form>
+                        <div class="input-group">
+                            <input type="text" id="search" class="form-control search-field product-search-field"
+                                name="s" placeholder="Nhập sản phẩm muốn tìm" required />
+                            <div class="input-group-btn input-group-append">
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fa fa-search"></i>
+                                    <span class="search-btn">Tìm kiếm</span>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
 
                     <!-- .navbar-search -->
                     {{-- <ul class="header-compare nav navbar-nav">
@@ -795,12 +803,12 @@
                     <!-- .header-wishlist -->
                     <ul id="site-header-cart" class="site-header-cart menu">
                         <li class="animate-dropdown dropdown ">
-                            <a class="cart-contents" href="" data-toggle="dropdown"
-                                title="Kiểm tra giỏ hàng của bạn">
+                            <a class="cart-contents" href="" data-toggle="dropdown" title="Kiểm tra giỏ hàng của bạn">
                                 <i class="tm tm-shopping-bag"></i>
-                                <span class="count">{{$cartCount}}</span>
+                                <span class="count">{{ $cartCount }}</span>
                                 <span class="amount">
-                                    <span class="price-label"><a href="{{route('client.cart.index')}}">Giỏ hàng</a></span></span>
+                                    <span class="price-label"><a href="{{ route('client.cart.index') }}">Giỏ
+                                            hàng</a></span></span>
                             </a>
                             {{-- <ul class="dropdown-menu dropdown-menu-mini-cart">
                                 <li>
@@ -965,7 +973,8 @@
                                         <li
                                             class="yamm-tfw menu-item menu-item-has-children animate-dropdown dropdown-submenu">
                                             <a title="Computers &amp; Laptops" data-toggle="dropdown"
-                                                class="dropdown-toggle" aria-haspopup="true" href="#">Computers &#038;
+                                                class="dropdown-toggle" aria-haspopup="true" href="#">Computers
+                                                &#038;
                                                 Laptops <span class="caret"></span></a>
                                             <ul role="menu" class=" dropdown-menu">
                                                 <li class="menu-item menu-item-object-static_block animate-dropdown">
@@ -974,7 +983,7 @@
                                                             class="bg-yamm-content bg-yamm-content-bottom bg-yamm-content-right">
                                                             <div class="kc-col-container">
                                                                 <div class="kc_single_image">
-                                                                    <img src="{{asset('home/assets/images/megamenu.jpg')  }}"
+                                                                    <img src="{{ asset('home/assets/images/megamenu.jpg') }}"
                                                                         class="" alt="" />
                                                                 </div>
                                                                 <!-- .kc_single_image -->
@@ -1045,7 +1054,8 @@
                                         <li
                                             class="yamm-tfw menu-item menu-item-has-children animate-dropdown dropdown-submenu">
                                             <a title="Cameras &amp; Photo" data-toggle="dropdown"
-                                                class="dropdown-toggle" aria-haspopup="true" href="#">Cameras &#038;
+                                                class="dropdown-toggle" aria-haspopup="true" href="#">Cameras
+                                                &#038;
                                                 Photo <span class="caret"></span></a>
                                             <ul role="menu" class=" dropdown-menu">
                                                 <li class="menu-item menu-item-object-static_block animate-dropdown">
@@ -1054,7 +1064,7 @@
                                                             class="bg-yamm-content bg-yamm-content-bottom bg-yamm-content-right">
                                                             <div class="kc-col-container">
                                                                 <div class="kc_single_image">
-                                                                    <img src="{{asset('home/assets/images/megamenu-1.jpg')  }}"
+                                                                    <img src="{{ asset('home/assets/images/megamenu-1.jpg') }}"
                                                                         class="" alt="" />
                                                                 </div>
                                                                 <!-- .kc_single_image -->
@@ -1127,7 +1137,8 @@
                                         <li
                                             class="yamm-tfw menu-item menu-item-has-children animate-dropdown dropdown-submenu">
                                             <a title="Smart Phones &amp; Tablets" data-toggle="dropdown"
-                                                class="dropdown-toggle" aria-haspopup="true" href="#">Smart Phones
+                                                class="dropdown-toggle" aria-haspopup="true" href="#">Smart
+                                                Phones
                                                 &#038; Tablets <span class="caret"></span></a>
                                             <ul role="menu" class=" dropdown-menu">
                                                 <li class="menu-item menu-item-object-static_block animate-dropdown">
@@ -1136,7 +1147,7 @@
                                                             class="bg-yamm-content bg-yamm-content-bottom bg-yamm-content-right">
                                                             <div class="kc-col-container">
                                                                 <div class="kc_single_image">
-                                                                    <img src="{{asset('home/assets/images/megamenu.jpg')  }}"
+                                                                    <img src="{{ asset('home/assets/images/megamenu.jpg') }}"
                                                                         class="" alt="" />
                                                                 </div>
                                                                 <!-- .kc_single_image -->
@@ -1207,7 +1218,8 @@
                                         <li
                                             class="yamm-tfw menu-item menu-item-has-children animate-dropdown dropdown-submenu">
                                             <a title="Video Games &amp; Consoles" data-toggle="dropdown"
-                                                class="dropdown-toggle" aria-haspopup="true" href="#">Video Games &#038;
+                                                class="dropdown-toggle" aria-haspopup="true" href="#">Video
+                                                Games &#038;
                                                 Consoles <span class="caret"></span></a>
                                             <ul role="menu" class=" dropdown-menu">
                                                 <li class="menu-item menu-item-object-static_block animate-dropdown">
@@ -1216,7 +1228,7 @@
                                                             class="bg-yamm-content bg-yamm-content-bottom bg-yamm-content-right">
                                                             <div class="kc-col-container">
                                                                 <div class="kc_single_image">
-                                                                    <img src="{{asset('home/assets/images/megamenu-1.jpg')  }}"
+                                                                    <img src="{{ asset('home/assets/images/megamenu-1.jpg') }}"
                                                                         class="" alt="" />
                                                                 </div>
                                                                 <!-- .kc_single_image -->
@@ -1298,7 +1310,7 @@
                                                             class="bg-yamm-content bg-yamm-content-bottom bg-yamm-content-right">
                                                             <div class="kc-col-container">
                                                                 <div class="kc_single_image">
-                                                                    <img src="{{asset('home/assets/images/megamenu.jpg')  }}"
+                                                                    <img src="{{ asset('home/assets/images/megamenu.jpg') }}"
                                                                         class="" alt="" />
                                                                 </div>
                                                                 <!-- .kc_single_image -->
@@ -1369,7 +1381,8 @@
                                         <li
                                             class="yamm-tfw menu-item menu-item-has-children animate-dropdown dropdown-submenu">
                                             <a title="Car Electronic &amp; GPS" data-toggle="dropdown"
-                                                class="dropdown-toggle" aria-haspopup="true" href="#">Car Electronic
+                                                class="dropdown-toggle" aria-haspopup="true" href="#">Car
+                                                Electronic
                                                 &#038; GPS <span class="caret"></span></a>
                                             <ul role="menu" class=" dropdown-menu">
                                                 <li class="menu-item menu-item-object-static_block animate-dropdown">
@@ -1378,7 +1391,7 @@
                                                             class="bg-yamm-content bg-yamm-content-bottom bg-yamm-content-right">
                                                             <div class="kc-col-container">
                                                                 <div class="kc_single_image">
-                                                                    <img src="{{asset('home/assets/images/megamenu-1.jpg')  }}"
+                                                                    <img src="{{ asset('home/assets/images/megamenu-1.jpg') }}"
                                                                         class="" alt="" />
                                                                 </div>
                                                                 <!-- .kc_single_image -->
@@ -1459,7 +1472,7 @@
                                                             class="bg-yamm-content bg-yamm-content-bottom bg-yamm-content-right">
                                                             <div class="kc-col-container">
                                                                 <div class="kc_single_image">
-                                                                    <img src="{{asset('home/assets/images/megamenu.jpg')  }}"
+                                                                    <img src="{{ asset('home/assets/images/megamenu.jpg') }}"
                                                                         class="" alt="" />
                                                                 </div>
                                                                 <!-- .kc_single_image -->
@@ -1572,6 +1585,27 @@
         <!-- ============================================================= Header End ============================================================= -->
         @yield('main');
         @yield('loading');
+        <!-- Icon mở chat -->
+        <div id="chat-icon" class="real-time-icon">
+            {{-- <img src="{{ asset('images/messenger-icon.png') }}" width="50" height="50" alt="Chat"> --}}
+            <i class="bi bi-chat-dots-fill"></i>
+        </div>
+        <!-- Modal Chat -->
+        <div id="chat-modal" class="real-time-box">
+            <div class="real-time-title">
+                <span>Hỗ trợ khách hàng</span>
+                <span id="close-chat" class="real-time-close">&times;</span>
+            </div>
+            <div id="chat-messages" class="real-time-content">
+                <!-- Tin nhắn sẽ hiển thị ở đây -->
+            </div>
+            <div class="real-time-sent-content">
+                <input type="text" id="chat-input" placeholder="Nhập tin nhắn...">
+                <button id="send-message">Gửi</button>
+            </div>
+
+        </div>
+
         <!-- #content -->
         <footer class="site-footer footer-v1">
             <div class="col-full">
@@ -1699,8 +1733,9 @@
                                         </span>
                                         <div class="media-body">
                                             <span class="call-us-title">Liên hệ với chúng tôi</span>
-                                            <span class="call-us-text">{{$config->hotline}}</span>
-                                            <address class="footer-contact-address">{{$config->address}}</address>
+                                            <span class="call-us-text">{{ $config->hotline }}</span>
+                                            <address class="footer-contact-address">{{ $config->address }}
+                                            </address>
                                         </div>
                                         <!-- .media-body -->
                                     </div>
@@ -1839,7 +1874,7 @@
                                             <a href="#" class="footer-address-map-link">
                                                 <i class="tm tm-map-marker"> </i> Địa chỉ</a>
                                         </h4>
-                                        {!!$config->map!!}
+                                        {!! $config->map !!}
                                         {{-- <div class="menu-footer-menu-3-container">
                                             <ul id="menu-footer-menu-3" class="menu">
                                                 <li class="menu-item">
@@ -1923,6 +1958,134 @@
     <script type="text/javascript" src="{{ url('') }}/home/assets/js/pace.min.js"></script>
     <script type="text/javascript" src="{{ url('') }}/home/assets/js/slick.min.js"></script>
     <script type="text/javascript" src="{{ url('') }}/home/assets/js/scripts.js"></script>
+    <script src="https://js.pusher.com/8.4.0/pusher.min.js"></script>
+    @vite(['resources/js/app.js'])
+    <script>
+        document.addEventListener("DOMContentLoaded", async function () {
+            let csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute("content");
+            let chatIcon = document.getElementById("chat-icon");
+            let chatModal = document.getElementById("chat-modal");
+            let closeChat = document.getElementById("close-chat");
+            let chatInput = document.getElementById("chat-input");
+            let sendMessage = document.getElementById("send-message");
+            let chatMessages = document.getElementById("chat-messages");
+
+            let sendMessageUrl = "{{ route('client.send.message') }}";
+            let loadMessagesUrl = "{{ route('client.load.messages') }}";
+            let chatId = null;
+            console.log("CSRF Token:", csrfToken);
+
+            chatIcon.addEventListener("click", function () {
+                chatModal.style.display = "block";
+                loadMessages();
+            });
+
+            closeChat.addEventListener("click", function () {
+                chatModal.style.display = "none";
+            });
+
+            sendMessage.addEventListener("click", function () {
+                let message = chatInput.value.trim();
+                if (message) {
+                    sendMessageToServer(message);
+                }
+            });
+
+            async function loadMessages() {
+                try {
+                    let response = await axios.get(loadMessagesUrl);
+                    let data = response.data;
+                    console.log("Dữ liệu API nhận được khi mở modal:", data);
+
+                    chatMessages.innerHTML = "";
+
+                    if (data.original && data.original.chat_id) {
+                        chatId = data.original.chat_id;
+                    } else {
+                        console.error("API không trả về chatId.");
+                        return;
+                    }
+
+                    if (data.original && data.original.messages) {
+                        data.original.messages.forEach(msg => {
+                            console.log(" Kiểm tra role_id của từng tin nhắn:", msg);
+                            let sender = getSenderName(msg);
+                            displayMessage(sender, msg.message);
+                        });
+                    } else {
+                        console.error("API không trả về danh sách tin nhắn.");
+                    }
+
+                    chatMessages.scrollTop = chatMessages.scrollHeight;
+                    setupEcho(chatId);
+                } catch (error) {
+                    console.error("Lỗi tải tin nhắn:", error);
+                }
+            }
+            function getSenderName(msg) {
+                if (!msg) return "Không xác định";
+                console.log("Kiểm tra role_id:", msg.role_id);
+                if (msg.sender_id) {
+                    return msg.role_id === 1 ? "Admin" : "Bạn";
+                } else {
+                    return "Bạn";
+                }
+            }
+
+            function setupEcho(chatId) {
+                console.log(` Đăng ký Echo('chat.${chatId}')`);
+
+                window.Echo.channel(`chat.${chatId}`)
+                    .listen("MessageSent", (data) => {
+                        console.log(" Tin nhắn mới từ Admin:", data);
+                        let sender = getSenderName(data);
+                        displayMessage(sender, data.message);
+                        chatMessages.scrollTop = chatMessages.scrollHeight;
+                    });
+            }
+
+            function sendMessageToServer(message) {
+                axios.post(sendMessageUrl, { message: message }, {
+                    headers: {
+                        "X-CSRF-TOKEN": csrfToken
+                    }
+                })
+                    .then(response => {
+                        console.log("Phản hồi từ server:", response.data);
+                        if (response.data.message === "Message sent successfully") {
+                            // displayMessage("Bạn", message);
+                            chatInput.value = "";
+                            chatMessages.scrollTop = chatMessages.scrollHeight;
+                        } else {
+                            console.error("Lỗi gửi tin nhắn:", response.data);
+                        }
+                    })
+                    .catch(error => console.error("Lỗi kết nối:", error));
+            }
+
+            function displayMessage(sender, message) {
+                let msgDiv = document.createElement("div");
+                msgDiv.innerHTML = `<strong>${sender}:</strong> ${message}`;
+                chatMessages.appendChild(msgDiv);
+            }
+
+            let response = await axios.get(loadMessagesUrl);
+            let data = response.data;
+
+            window.Echo.connector.pusher.bind("message.sent", function (data) {
+                console.log("Nhận tin nhắn trực tiếp từ Pusher:", data);
+            });
+            chatInput.addEventListener("keypress", function (event) {
+                if (event.key === "Enter" && !event.shiftKey) {
+                    event.preventDefault();
+                    let message = chatInput.value.trim();
+                    if (message) {
+                        sendMessageToServer(message);
+                    }
+                }
+            });
+        });
+    </script>
 
 </body>
 

@@ -5,6 +5,7 @@ use App\Http\Controllers\BlogController;
 use App\Http\Controllers\BillController;
 use App\Http\Controllers\BillDetailsController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\ChatsController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\VoucherController;
@@ -103,7 +104,7 @@ Route::middleware(['auth', 'auth.admin'])->group(function () {
             Route::post('/update/{id}', [VoucherController::class, 'update'])->name('admin.voucher.update');
             Route::get('/destroy/{id}', [VoucherController::class, 'destroy'])->name('admin.voucher.destroy');
         });
-
+        
         Route::prefix('/product')->group(function () {
             Route::get('/', [ProductController::class, 'index'])->name('admin.product.index');
             Route::get('/create', [ProductController::class, 'create'])->name('admin.product.create');
@@ -169,8 +170,18 @@ Route::middleware(['auth', 'auth.admin'])->group(function () {
             Route::get('/', [RevenueController::class, 'index'])->name('admin.revenue.revenue');
             Route::get('/filter', [RevenueController::class, 'filterRevenue'])->name('admin.revenue.filter');
         });
+        Route::prefix('/chats')->group(function (){
+            Route::get('/', [ChatsController::class, 'index'])->name('admin.messages');
+            Route::get('/{chatId}', [ChatsController::class, 'loadMessagesAdmin']);
+            Route::post('/{chatId}/send', [ChatsController::class,'sendMessageAdmin'])->name('admin.send.message');
+            // Route::post('/send', [ChatsController::class, 'sendMessageAdmin']);
+
+        });
     });
 });
+Route::prefix('message')->group(function () {
+    Route::post('/send', [ChatsController::class, 'sendMessage'])->name('client.send.message');
+    Route::get('/load', [ChatsController::class, 'loadMessage'])->name('client.load.messages');
 
 // Products
 Route::prefix('products')->group(function () {
@@ -204,3 +215,12 @@ Route::prefix('checkout')->group(function () {
 // })->name('client.payment.vnpay');
 Route::get('/payment/vnpay/callback', [CheckoutController::class, 'vnpayCallback'])->name('client.payment.vnpay');
 Route::get('/payment/cod/success', [CheckoutController::class, 'codSuccess'])->name('client.payment.cod');
+
+
+
+Route::prefix('products')->group(function () {
+    Route::get('/', [ProductController::class, 'productList'])->name('client.product.index');
+    Route::get('/search', [ProductController::class, 'search'])->name('client.product.search');
+    Route::get('/filter', [ProductController::class, 'filter'])->name('client.product.filter');
+    Route::get('/{slug}', [ProductController::class, 'productDetails'])->name('client.product.show');
+});
