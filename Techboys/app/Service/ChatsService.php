@@ -24,7 +24,8 @@ public function loadMessageAdmin($chatId)
     $messages->each(function ($msg) {
         $user = User::find($msg->sender_id);
         $msg->sender_name = $user ? $user->name : "Guest";
-        $msg->sender_role = $user ? $user->role_id : null;
+        $msg->role_id = $user ? $user->role_id : null;
+        $msg->gender = $user ? $user->gender : null;
     });
 
     return response()->json(['messages' => $messages]);
@@ -38,13 +39,17 @@ public function sendMessageAdmin($request, $chatId)
     $message->guest_id = null;
     $message->message = $request->message;
     $message->save();
+    $message->load('User');
 
     broadcast(new MessageSent($message))->toOthers();
 
-    return response()->json(['success' => true, 'message' => $message]);
+    return response()->json([
+        'success' => true, 
+        'message' => $message
+    ]);
 }
 // CLIENT
-    public function sendMessage($request)
+public function sendMessage($request)
 {
     $message = $request->input('message');
 
@@ -83,6 +88,8 @@ public function sendMessageAdmin($request, $chatId)
         'message' => $message
     ]);
 
+    $newMessage->load('User');
+
     broadcast(new MessageSent($newMessage))->toOthers();
 
     return response()->json([
@@ -118,8 +125,8 @@ public function loadMessage()
                 'message' => $message->message,
                 'sender_id' => $message->sender_id,
                 'guest_id' => $message->guest_id,
-                'role_id' => $message->User?->role_id,
-                'customer_name' => $message->User?->name,
+                'role_id' => $message->User?->role_id ?? null,
+                'customer_name' => $message->User?->name ?? null,
             ];
         });
 
