@@ -182,7 +182,7 @@ Route::middleware(['auth', 'auth.admin'])->group(function () {
 Route::prefix('message')->group(function () {
     Route::post('/send', [ChatsController::class, 'sendMessage'])->name('client.send.message');
     Route::get('/load', [ChatsController::class, 'loadMessage'])->name('client.load.messages');
-
+});
 // Products
 Route::prefix('products')->group(function () {
     Route::get('/', [ProductController::class, 'productList'])->name('client.product.index');
