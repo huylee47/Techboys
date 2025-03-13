@@ -99,6 +99,9 @@ class DatabaseSeeder extends Seeder
         foreach ($dataArray['message'] as $data) {
             Message::create($data);
         }
+        foreach ($dataArray['product_models'] as $data) {
+            ProductModel::create($data);
+        }
         foreach ($dataArray['products'] as $data) {
             Product::create($data);
         }
@@ -128,9 +131,6 @@ class DatabaseSeeder extends Seeder
         }
         foreach ($dataArray['role'] as $data) {
             Role::create($data);
-        }
-        foreach ($dataArray['product_models'] as $data) {
-            ProductModel::create($data);
         }
         foreach ($dataArray['colors'] as $data) {
             Color::create($data);
