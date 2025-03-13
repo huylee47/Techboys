@@ -174,8 +174,6 @@ Route::middleware(['auth', 'auth.admin'])->group(function () {
             Route::get('/', [ChatsController::class, 'index'])->name('admin.messages');
             Route::get('/{chatId}', [ChatsController::class, 'loadMessagesAdmin']);
             Route::post('/{chatId}/send', [ChatsController::class,'sendMessageAdmin'])->name('admin.send.message');
-            // Route::post('/send', [ChatsController::class, 'sendMessageAdmin']);
-
         });
     });
 });
