@@ -22,12 +22,13 @@ Route::get('/', function () {
     return view('client.home.home');
 })->name('home');
 
-
-
 Route::get('/blog', [BlogController::class, 'indexClient'])->name('blog');
 Route::get('blog/{slug}', [BlogController::class, 'DetailBlog'])->name('DetailBlog');
 
-
+// About
+Route::get('/about', function () {
+    return view('client.about.about');
+})->name('about');
 
 Route::get('test', function () {
     return view('admin.product.imageIndex');
@@ -164,12 +165,10 @@ Route::middleware(['auth', 'auth.admin'])->group(function () {
             Route::get('/', [CommentController::class, 'index'])->name('admin.comment.index');
             Route::post('/block/{id}', [CommentController::class, 'block'])->name('admin.comment.block');
             Route::post('/open/{id}', [CommentController::class, 'open'])->name('admin.comment.open');
-
         });
-        Route::prefix('/revenue')->group(function (){
+        Route::prefix('/revenue')->group(function () {
             Route::get('/', [RevenueController::class, 'index'])->name('admin.revenue.revenue');
             Route::get('/filter', [RevenueController::class, 'filterRevenue'])->name('admin.revenue.filter');
-
         });
         Route::prefix('/chats')->group(function (){
             Route::get('/', [ChatsController::class, 'index'])->name('admin.messages');
@@ -183,6 +182,13 @@ Route::middleware(['auth', 'auth.admin'])->group(function () {
 Route::prefix('message')->group(function () {
     Route::post('/send', [ChatsController::class, 'sendMessage'])->name('client.send.message');
     Route::get('/load', [ChatsController::class, 'loadMessage'])->name('client.load.messages');
+
+// Products
+Route::prefix('products')->group(function () {
+    Route::get('/', [ProductController::class, 'productList'])->name('client.product.index');
+    Route::get('/search', [ProductController::class, 'search'])->name('client.product.search');
+    Route::get('/filter', [ProductController::class, 'filter'])->name('client.product.filter');
+    Route::get('/{slug}', [ProductController::class, 'productDetails'])->name('client.product.show');
 });
 
 Route::prefix('cart')->group(function () {
@@ -195,7 +201,6 @@ Route::prefix('cart')->group(function () {
     Route::post('/remove/{id}', [CartController::class, 'removeItem'])->name('client.cart.remove');
     // Route::get('/getCount', [CartController::class, 'getCartCount'])->name('client.cart.getCartCount');
     Route::get('/count', [CartController::class, 'countItems'])->name('client.cart.count');
-
 });
 
 Route::prefix('checkout')->group(function () {
