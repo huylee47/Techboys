@@ -2012,55 +2012,54 @@ document.addEventListener("DOMContentLoaded", async function() {
     });
 
     async function loadMessages() {
-        try {
-            let response = await axios.get(loadMessagesUrl);
-            let data = response.data;
-            console.log("API nhận được:", data);
+    try {
+        let response = await axios.get(loadMessagesUrl);
+        let data = response.data;
+        console.log("Dữ liệu API nhận được khi mở modal:", data);
 
-            chatMessages.innerHTML = "";
+        chatMessages.innerHTML = "";
 
-            if (data.original && data.original.chat_id) {
-                chatId = data.original.chat_id;
-            } else {
-                console.error("API không trả về chatId.");
-                return;
-            }
-
-            if (data.original && data.original.messages) {
-                data.original.messages.forEach(msg => {
-                    let sender = getSenderName(msg);
-                    displayMessage(sender, msg.message);
-                });
-            } else {
-                console.error("API không trả về danh sách tin nhắn.");
-            }
-
-            chatMessages.scrollTop = chatMessages.scrollHeight;
-            setupEcho(chatId);
-        } catch (error) {
-            console.error("Lỗi tải tin nhắn:", error);
-        }
-    }
-
-    function getSenderName(msg) {
-        console.log("Tin nhắn nhận được:", msg);
-        if (!msg) return "Không xác định";
-
-        if (msg.sender_id) {
-            return msg.role_id === 1 ? "Admin" : msg.customer_name || "Khách hàng";
+        if (data.original && data.original.chat_id) {
+            chatId = data.original.chat_id;
         } else {
-            return "Guest";
+            console.error("API không trả về chatId.");
+            return;
+        }
+
+        if (data.original && data.original.messages) {
+            data.original.messages.forEach(msg => {
+                console.log(" Kiểm tra role_id của từng tin nhắn:", msg);
+                let sender = getSenderName(msg);
+                displayMessage(sender, msg.message);
+            });
+        } else {
+            console.error("API không trả về danh sách tin nhắn.");
+        }
+
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+        setupEcho(chatId);
+    } catch (error) {
+        console.error("Lỗi tải tin nhắn:", error);
+    }
+}
+   function getSenderName(msg) {
+        if (!msg) return "Không xác định";
+        console.log("Kiểm tra role_id:", msg.role_id);
+        if (msg.sender_id) {
+            return msg.role_id === 1 ? "Admin" : msg.customer_name || "Bạn";
+        } else {
+            return "Bạn";
         }
     }
 
     function setupEcho(chatId) {
-        console.log(`📡 Đăng ký Echo('chat.${chatId}')`);
+        console.log(` Đăng ký Echo('chat.${chatId}')`);
 
         window.Echo.channel(`chat.${chatId}`)
             .listen("MessageSent", (data) => {
-                console.log("🔔 Tin nhắn mới từ Echo:", data);
-                let sender = getSenderName(data.message);
-                displayMessage(sender, data.message.message);
+                console.log(" Tin nhắn mới từ Admin:", data);
+                let sender = getSenderName(data);
+                displayMessage(sender, data.message);
                 chatMessages.scrollTop = chatMessages.scrollHeight;
             });
     }
@@ -2074,7 +2073,7 @@ document.addEventListener("DOMContentLoaded", async function() {
         .then(response => {
             console.log("Phản hồi từ server:", response.data);
             if (response.data.message === "Message sent successfully") {
-                displayMessage("Bạn", message);
+                // displayMessage("Bạn", message);
                 chatInput.value = "";
                 chatMessages.scrollTop = chatMessages.scrollHeight;
             } else {
@@ -2092,14 +2091,10 @@ document.addEventListener("DOMContentLoaded", async function() {
 
     let response = await axios.get(loadMessagesUrl);
     let data = response.data;
-    if (data.original && data.original.chat_id) {
-        chatId = data.original.chat_id;
-        setupEcho(chatId);
-    }
 
     // Kiểm tra sự kiện từ Pusher
     window.Echo.connector.pusher.bind("message.sent", function(data) {
-        console.log("📡 Nhận tin nhắn trực tiếp từ Pusher:", data);
+        console.log("Nhận tin nhắn trực tiếp từ Pusher:", data);
     });
 });
 </script>
