@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Revenue;
+use App\Models\Bill;
 use App\Models\BillDetails;
 use App\Models\Product;
 use Illuminate\Http\Request;
@@ -11,33 +11,33 @@ class RevenueController extends Controller
 {
     public function index(){
 
-        $revenueDay = Revenue::whereDate('created_at', Carbon::today())
+        $revenueDay = Bill::whereDate('created_at', Carbon::today())
          ->where('payment_status', 1) // Chỉ tính đơn đã thanh toán
          ->sum('total');
 
-        $revenueWeek = Revenue::whereBetween('created_at', [
+        $revenueWeek = Bill::whereBetween('created_at', [
              Carbon::now()->startOfWeek(),
              Carbon::now()->endOfWeek()
          ])
          ->where('payment_status', 1)
          ->sum('total');
 
-        $revenueMonth = Revenue::whereMonth('created_at', Carbon::now()->month)
+        $revenueMonth = Bill::whereMonth('created_at', Carbon::now()->month)
         ->where('payment_status', 1)
         ->sum('total');
 
-        $revenueQuarter = Revenue::whereBetween('created_at', [
+        $revenueQuarter = Bill::whereBetween('created_at', [
              Carbon::now()->startOfQuarter(),
              Carbon::now()->endOfQuarter()
          ])
          ->where('payment_status', 1)
          ->sum('total');
 
-        $successfulOrders = Revenue::where('payment_status', 1)->count();
+        $successfulOrders = Bill::where('payment_status', 1)->count();
 
-        $cancelledOrders = Revenue::where('status_id', 0)->count();
+        $cancelledOrders = Bill::where('status_id', 0)->count();
 
-        $monthlyRevenue = Revenue::selectRaw('MONTH(created_at) as month, SUM(total) as revenue')
+        $monthlyRevenue = Bill::selectRaw('MONTH(created_at) as month, SUM(total) as revenue')
         ->groupBy('month')
         ->orderBy('month')
         ->pluck('revenue', 'month');
@@ -63,7 +63,7 @@ class RevenueController extends Controller
     $startDate = Carbon::parse($request->start_date)->startOfDay();
     $endDate = Carbon::parse($request->end_date)->endOfDay();
 
-    $filteredRevenue = Revenue::whereBetween('created_at', [$startDate, $endDate])
+    $filteredRevenue = Bill::whereBetween('created_at', [$startDate, $endDate])
         ->selectRaw('DATE(created_at) as date, SUM( CASE WHEN payment_status = 1 THEN total ELSE 0 END) as revenue')
         ->groupBy('date')
         ->orderBy('date')
