@@ -1,6 +1,101 @@
 @extends('client.layouts.master')
 
 @section('main')
+    <style>
+        .commentlist .comment .star-rating {
+            color: #ffcc00;
+            margin-top: 5px;
+            display: block; /* Ensure it takes full width */
+        }
+
+        .commentlist .comment .comment-meta .star-rating {
+            display: inline-block; /* Keep it in line with the date */
+            margin-top: 0; /* Reset any top margin */
+            margin-left: 5px; /* Add some spacing */
+        }
+
+        .commentlist {
+            list-style: none;
+            padding: 0;
+        }
+
+        .commentlist .comment {
+            margin-bottom: 20px;
+            padding: 15px;
+            /* border: 1px solid #e1e1e1; */
+            border-radius: 5px;
+            /* background-color: #f9f9f9; */
+        }
+
+        .commentlist .comment .comment-body {
+            display: flex;
+            align-items: flex-start; /* Align items to the top */
+        }
+
+        .commentlist .comment .comment-avatar {
+            width: 50px;
+            margin-right: 15px;
+        }
+
+        .commentlist .comment .comment-avatar img {
+            width: 100%;
+            border-radius: 50%;
+        }
+
+        .commentlist .comment .comment-content {
+            flex-grow: 1;
+            max-width: 80%; /* Adjust this value as needed */
+        }
+
+        .commentlist .comment .comment-author {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .commentlist .comment .comment-meta {
+            font-size: 12px;
+            color: #999;
+            margin-bottom: 5px;
+        }
+
+        .commentlist .comment .star-rating {
+            color: #ffcc00;
+            margin-top: 5px;
+            display: block;
+        }
+
+        .commentlist .comment img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+
+        .commentlist .comment video {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+
+        .alert {
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid transparent;
+            border-radius: 4px;
+        }
+
+        .alert-success {
+            color: #3c763d;
+            background-color: #dff0d8;
+            border-color: #d6e9c6;
+        }
+
+        .alert-danger {
+            color: #a94442;
+            background-color: #f2dede;
+            border-color: #ebccd1;
+        }
     </style>
     <div id="page" class="hfeed site">
         <div id="content" class="site-content" tabindex="-1">
@@ -355,33 +450,36 @@
                                                         class="comment byuser comment-author-admin bypostauthor even thread-even depth-1">
                                                         <div class="comment_container" id="comment-83">
                                                             <div class="comment-text">
-                                                                <div class="star-rating" >
-                                                                    <span style="width:{{ $commments->rate *20}}%">Rated
-                                                                        <strong class="rating">5</strong> out of 5</span>
+                                                                <div class="comment-body">
+                                                                    
+                                                                    <div class="comment-content">
+                                                                        <p class="comment-author">
+                                                                            {{ $commments->user->name ?? 'Anonymous' }}
+                                                                        </p>
+                                                                        <p class="comment-meta">
+                                                                            <time datetime="2017-06-21T08:05:40+00:00"
+                                                                                itemprop="datePublished"
+                                                                                class="woocommerce-review__published-date">{{ $commments->created_at }}</time>
+                                                                            <div class="star-rating">
+                                                                                <span style="width:{{ $commments->rate *20}}%">Rated
+                                                                                    <strong class="rating">5</strong> out of 5</span>
+                                                                            </div>
+                                                                        </p>
+                                                                        <div class="description">
+                                                                            <p>{{ $commments->content }}</p>
+                                                                            <p>
+                                                                                @if($commments->storage && strtolower(pathinfo($commments->storage->file, PATHINFO_EXTENSION)) === 'mp4')
+                                                                                    <video width="150" height="100" controls>
+                                                                                        <source src="{{ asset('admin/assets/images/comment/' . $commments->storage->file) }}" type="video/mp4">
+                                                                                        Trình duyệt của bạn không hỗ trợ thẻ video.
+                                                                                    </video>
+                                                                                @elseif($commments->storage)
+                                                                                    <img src="{{ asset('admin/assets/images/comment/' . $commments->storage->file) }}" alt="" style="width: 150px; height: auto;">
+                                                                                @endif
+                                                                            </p>
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
-                                                                <p class="meta">
-                                                                    <strong itemprop="author"
-                                                                        class="woocommerce-review__author">{{ $commments->user->name  }}</strong>
-                                                                    <span class="woocommerce-review__dash">&ndash;</span>
-                                                                    <time datetime="2017-06-21T08:05:40+00:00"
-                                                                        itemprop="datePublished"
-                                                                        class="woocommerce-review__published-date">{{ $commments->created_at }}</time>
-                                                                </p>
-                                                                <div class="description">
-                                                                     <p>{{ $commments->content }}</p>
-                                                                    <p >     @if($commments->storage && strtolower(pathinfo($commments->storage->file, PATHINFO_EXTENSION)) === 'mp4')
-                                                                        <video width="150" height="100" controls>
-                                                                            <source src="{{ asset('admin/assets/images/comment/' . $commments->storage->file) }}"
-                                                                                type="video/mp4">
-                                                                            Trình duyệt của bạn không hỗ trợ thẻ video.
-                                                                        </video>
-                                                                    @elseif($commments->storage)
-                                                                        <img src="{{ asset('admin/assets/images/comment/' . $commments->storage->file) }}" alt=""
-                                                                            style="width: 150px; height: auto;">
-                                                                    @endif</p>
-                                                                   
-                                                                </div>
-                                                              
                                                                 <!-- /.description -->
                                                             </div>
                                                             <!-- /.comment-text -->
