@@ -53,6 +53,15 @@ class CommentController extends Controller
             'comment' => 'required',
             'rate' => 'required|numeric|min:1|max:5',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ],[
+            'comment.required' => 'Vui lòng nhập bình luận.',
+            'rate.required' => 'Vui lòng chọn đánh giá.',
+            'rate.numeric' => 'Đánh giá phải là một số.',
+            'rate.min' => 'Đánh giá phải từ 1 đến 5.',
+            'rate.max' => 'Đánh giá phải từ 1 đến 5.',
+            'image.image' => 'Vui lòng chọn một hình ảnh.',
+            'image.mimes' => 'Hình ảnh phải có định dạng: jpeg, png, jpg, gif, svg.',
+            'image.max' => 'Kích thước hình ảnh không được vượt quá 2048KB.',
         ]);
 
         $data = [
