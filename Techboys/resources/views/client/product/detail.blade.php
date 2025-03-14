@@ -217,12 +217,15 @@
                                         <!-- .single-product-meta -->
                                         <div class="rating-and-sharing-wrapper">
                                             <div class="woocommerce-product-rating">
+                                                @php
+                                                    $averageRating = app('App\Http\Controllers\CommentController')->calculateAverageRating($product->id);
+                                                    $ratingCount = $commment->count();
+                                                @endphp
                                                 <div class="star-rating">
-                                                    <span style="width:100%">Đánh giá
-                                                        <strong class="rating">3.00</strong> out of 5 based on
-                                                        <span class="rating">1</span> customer rating</span>
+                                                    <span style="width:{{ ($averageRating / 5) * 100 }}%">Đánh giá
+                                                        <strong class="rating">{{ $averageRating }}</strong> out of 5 based on
+                                                        <span class="rating">{{ $ratingCount }}</span> customer rating</span>
                                                 </div>
-                                               
                                             </div>
                                         </div>
                                         <!-- .rating-and-sharing-wrapper -->
