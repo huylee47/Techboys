@@ -79,7 +79,6 @@
                         if (selectedChatId == data.chat_id) {
                             let sender = getSenderName(data);
 
-                            // Nếu tin nhắn này là của admin thì bỏ qua (tránh lặp)
                             if (data.sender_id !== window.adminId) {
                                 displayMessage(sender, data.message, false);
                             }
@@ -132,18 +131,23 @@
 
             function getSenderName(msg) {
                 if (!msg) return "Không xác định";
-                if (msg.role_id === 1) {
-                    return "Admin";
-                } else if (msg.role_id === 2) {
-                    if (msg.gender === 1) {
-                        return `Anh ${msg.customer_name || "Không xác định"}`;
-                    } else {
-                        return `Chị ${msg.customer_name || "Không xác định"}`;
+
+                if (msg.sender_id) {
+                    if (msg.role_id === 1) {
+                        return "Admin";
                     }
-                } else {
-                    return "Guest";
+                    if (msg.role_id === 2) {
+                        return msg.gender === 1 ?
+                            `Anh ${msg.customer_name || "Không xác định"}` :
+                            `Chị ${msg.customer_name || "Không xác định"}`;
+                    }
+                } else if (msg.guest_id) {
+                    return `Guest #${msg.chat_id}`;
                 }
+
+                return "Không xác định";
             }
+
 
             function displayMessage(sender, message, isSender) {
                 let messagesContainer = document.getElementById("messages-container");
@@ -166,8 +170,8 @@
 
                 let sender = getSenderName({
                     role_id: 1
-                }); // Admin mặc định
-                displayMessage(sender, message, true); // Hiển thị ngay lập tức
+                });
+                displayMessage(sender, message, true);
 
                 axios.post(getSendMessageUrl(selectedChatId), {
                     message: message
@@ -209,7 +213,6 @@
                     document.getElementById("message-input").disabled = false;
                     loadMessages(selectedChatId);
 
-                    // Reset bộ đếm khi mở chat
                     let badge = document.querySelector(
                         `.new-message-count[data-chat-id="${selectedChatId}"]`);
                     if (badge) {
@@ -218,6 +221,61 @@
                     }
                 });
             });
+            window.Echo.channel("admin.chats")
+                .listen("NewChatCreated", (data) => {
+                    console.log("Chat mới được tạo:", data);
+
+                    let chatList = document.getElementById("chat-list");
+
+                    if (document.querySelector(`.chat-item[data-chat-id="${data.chat_id}"]`)) {
+                        return;
+                    }
+
+                    let senderName = getSenderName({
+                        sender_id: data.customer_id,
+                        guest_id: data.guest_id,
+                        chat_id: data.chat_id,
+                        role_id: data.role_id,
+                        gender: data.gender,
+                        customer_name: data.customer_name
+                    });
+
+                    let newChatItem = document.createElement("li");
+                    newChatItem.classList.add("list-group-item", "chat-item");
+                    newChatItem.setAttribute("data-chat-id", data.chat_id);
+
+                    let chatName = document.createElement("span");
+                    chatName.classList.add("chat-name");
+                    chatName.innerText = senderName;
+                    newChatItem.appendChild(chatName);
+
+                    let badge = document.createElement("span");
+                    badge.classList.add("badge", "bg-danger", "new-message-count");
+                    badge.setAttribute("data-chat-id", data.chat_id);
+                    badge.style.display = "none";
+                    badge.innerText = "0";
+                    newChatItem.appendChild(badge);
+
+                    newChatItem.addEventListener("click", function() {
+                        document.querySelectorAll(".chat-item").forEach(el => el.classList.remove(
+                            "active"));
+                        this.classList.add("active");
+                        selectedChatId = data.chat_id;
+                        document.getElementById("message-input").disabled = false;
+                        loadMessages(selectedChatId);
+
+                        let badge = document.querySelector(
+                            `.new-message-count[data-chat-id="${selectedChatId}"]`);
+                        if (badge) {
+                            badge.innerText = "0";
+                            badge.style.display = "none";
+                        }
+                    });
+
+                    chatList.prepend(newChatItem);
+
+                    setupEcho(data.chat_id);
+                });
 
         });
     </script>
