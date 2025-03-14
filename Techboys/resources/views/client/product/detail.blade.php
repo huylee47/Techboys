@@ -326,58 +326,29 @@
                                             <div class="advanced-review-rating">
                                                 <h2 class="based-title">Đánh giá</h2>
                                                 <div class="avg-rating">
-                                                    <span class="avg-rating-number">5.0</span>
-                                                    <div title="Rated 5.0 out of 5" class="star-rating">
-                                                        <span style="width:100%"></span>
+                                                    <span class="avg-rating-number">{{ $averageRating }}</span>
+                                                    <div title="Rated {{ $averageRating }} out of 5" class="star-rating">
+                                                        <span style="width:{{ ($averageRating / 5) * 100 }}%"></span>
                                                     </div>
                                                 </div>
                                                 <!-- /.avg-rating -->
                                                 <div class="rating-histogram">
-                                                    <div class="rating-bar">
-                                                        <div title="Rated 5 out of 5" class="star-rating">
-                                                            <span style="width:100%"></span>
+                                                    @for ($i = 5; $i >= 1; $i--)
+                                                        @php
+                                                            $count = $commment->where('rate', $i)->count();
+                                                            $total = $commment->count();
+                                                            $percentage = ($total > 0) ? ($count / $total) * 100 : 0;
+                                                        @endphp
+                                                        <div class="rating-bar">
+                                                            <div title="Rated {{ $i }} out of 5" class="star-rating">
+                                                                <span style="width:{{ ($i / 5) * 100 }}%"></span>
+                                                            </div>
+                                                            <div class="rating-count">{{ $count }}</div>
+                                                            <div class="rating-percentage-bar">
+                                                                <span class="rating-percentage" style="width:{{ $percentage }}%"></span>
+                                                            </div>
                                                         </div>
-                                                        <div class="rating-count">1</div>
-                                                        <div class="rating-percentage-bar">
-                                                            <span class="rating-percentage" style="width:100%"></span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="rating-bar">
-                                                        <div title="Rated 4 out of 5" class="star-rating">
-                                                            <span style="width:80%"></span>
-                                                        </div>
-                                                        <div class="rating-count zero">0</div>
-                                                        <div class="rating-percentage-bar">
-                                                            <span class="rating-percentage" style="width:0%"></span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="rating-bar">
-                                                        <div title="Rated 3 out of 5" class="star-rating">
-                                                            <span style="width:60%"></span>
-                                                        </div>
-                                                        <div class="rating-count zero">0</div>
-                                                        <div class="rating-percentage-bar">
-                                                            <span class="rating-percentage" style="width:0%"></span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="rating-bar">
-                                                        <div title="Rated 2 out of 5" class="star-rating">
-                                                            <span style="width:40%"></span>
-                                                        </div>
-                                                        <div class="rating-count zero">0</div>
-                                                        <div class="rating-percentage-bar">
-                                                            <span class="rating-percentage" style="width:0%"></span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="rating-bar">
-                                                        <div title="Rated 1 out of 5" class="star-rating">
-                                                            <span style="width:20%"></span>
-                                                        </div>
-                                                        <div class="rating-count zero">0</div>
-                                                        <div class="rating-percentage-bar">
-                                                            <span class="rating-percentage" style="width:0%"></span>
-                                                        </div>
-                                                    </div>
+                                                    @endfor
                                                 </div>
                                                 <!-- /.rating-histogram -->
                                             </div>
