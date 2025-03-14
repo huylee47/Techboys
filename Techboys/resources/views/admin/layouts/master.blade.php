@@ -71,9 +71,9 @@
                             </a>
                         </li>
                         <li class="sidebar-item ">
-                            <a href="{{route('admin.banner.index')}}" class='sidebar-link'>
-                                <i class="bi bi-file-earmark-spreadsheet-fill"></i>
-                                <span>banner</span>
+                            <a href="{{route('admin.messages')}}" class='sidebar-link'>
+                                <i class="bi bi-mailbox2"></i>
+                                <span>Chat với khách hàng</span>
                             </a>
                         </li>
                         <li class="sidebar-item {{ request()->routeIs('admin.voucher*') ? 'active' : '' }}">
