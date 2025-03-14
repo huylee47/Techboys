@@ -1905,7 +1905,7 @@
     @vite(['resources/js/app.js'])
     <script>
         var sendMessageUrl = "{{ route('client.message.send') }}";
-        var loadMessagesUrl = "{{ route('client.load.messages') }}";
+        var loadMessagesUrl = "{{ route('client.message.load') }}";
         var currentUserId = "{{ auth()->id() ?? null }}"
         var guestId = "{{ session()->getId() }}";
         var userRole = document.querySelector('meta[name="user-role"]').getAttribute("content");
