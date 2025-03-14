@@ -1904,11 +1904,11 @@
 
     @vite(['resources/js/app.js'])
     <script>
-            var sendMessageUrl = "{{ route('client.send.message') }}";
-            var loadMessagesUrl = "{{ route('client.load.messages') }}";
-            var currentUserId = "{{ auth()->id() ?? null }}"
-            var guestId = "{{ session()->getId() }}";
-            var  userRole = document.querySelector('meta[name="user-role"]').getAttribute("content");
+        var sendMessageUrl = "{{ route('client.message.send') }}";
+        var loadMessagesUrl = "{{ route('client.load.messages') }}";
+        var currentUserId = "{{ auth()->id() ?? null }}"
+        var guestId = "{{ session()->getId() }}";
+        var userRole = document.querySelector('meta[name="user-role"]').getAttribute("content");
     </script>
     <script type="text/javascript" src="{{ url('') }}/home/assets/js/chat.js"></script>
 

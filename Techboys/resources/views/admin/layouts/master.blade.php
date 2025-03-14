@@ -70,6 +70,12 @@
                                 <span>Tình trạng đơn hàng</span>
                             </a>
                         </li>
+                        <li class="sidebar-item ">
+                            <a href="{{route('admin.banner.index')}}" class='sidebar-link'>
+                                <i class="bi bi-file-earmark-spreadsheet-fill"></i>
+                                <span>banner</span>
+                            </a>
+                        </li>
                         <li class="sidebar-item {{ request()->routeIs('admin.voucher*') ? 'active' : '' }}">
                             <a href="{{route('admin.voucher.index')}}" class='sidebar-link'>
                                 <i><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-ticket" viewBox="0 0 16 16">
