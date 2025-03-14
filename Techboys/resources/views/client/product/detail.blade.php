@@ -222,9 +222,7 @@
                                                         <strong class="rating">3.00</strong> out of 5 based on
                                                         <span class="rating">1</span> customer rating</span>
                                                 </div>
-                                                <a rel="nofollow" class="woocommerce-review-link" href="#reviews">(<span
-                                                        class="count">1</span> customer
-                                                    review)</a>
+                                               
                                             </div>
                                         </div>
                                         <!-- .rating-and-sharing-wrapper -->
