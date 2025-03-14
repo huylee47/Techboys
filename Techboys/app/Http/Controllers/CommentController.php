@@ -88,6 +88,12 @@ class CommentController extends Controller
         
     }
 
+    public function calculateAverageRating($productId)
+    {
+        $averageRating = Comment::where('product_id', $productId)->avg('rate');
+        return round($averageRating, 1);
+    }
+
     /**
      * Show the form for editing the specified resource.
      */
