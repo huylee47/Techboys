@@ -45,15 +45,6 @@ public function broadcastWith()
 {
     $this->message->load('User');
     
-    Log::info(' message data:', [
-        'chat_id' => $this->message->chat_id,
-        'sender_id' => $this->message->sender_id,
-        'guest_id' => $this->message->guest_id,
-        'message' => $this->message->message,
-        'created_at' => $this->message->created_at,
-        'role_id' => $this->message->User?->role_id ?? null,
-        'customer_name' => $this->message->User?->name ?? null
-    ]);
 
     return [
         'chat_id' => $this->message->chat_id,
@@ -63,7 +54,7 @@ public function broadcastWith()
         'created_at' => $this->message->created_at,
         'role_id' => $this->message->User?->role_id ?? null,
         'customer_name' => $this->message->User?->name ?? null,
-        'debug' => 'debug'
+        'gender' => $this->message->User?->gender ?? null,
     ];
 }
 

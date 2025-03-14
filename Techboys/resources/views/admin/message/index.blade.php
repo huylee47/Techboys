@@ -4,7 +4,6 @@
     <div class="" id="main">
         <div class="container mt-4">
             <div class="row">
-                <!-- Danh sách cuộc trò chuyện -->
                 <div class="col-md-4">
                     <h5>Danh sách tin nhắn</h5>
                     <ul class="list-group" id="chat-list">
@@ -30,9 +29,8 @@
                     </ul>
                 </div>
 
-                <!-- Nội dung tin nhắn -->
                 <div class="col-md-8">
-                    <h5>Tin nhắn</h5>
+                    <h5>Tin nhắn </h5>
                     <div class="card">
                         <div class="card-body chat-box" id="chat-box">
                             <div id="messages-container">
@@ -56,6 +54,7 @@
     @vite(['resources/js/app.js'])
 
     <script>
+        window.adminId = {{ auth()->id() }};
         document.addEventListener("DOMContentLoaded", function() {
             let selectedChatId = null;
             let csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute("content");
@@ -79,7 +78,10 @@
 
                         if (selectedChatId == data.chat_id) {
                             let sender = getSenderName(data);
-                            displayMessage(sender, data.message);
+
+                            if (data.sender_id !== window.adminId) {
+                                displayMessage(sender, data.message, false);
+                            }
                         } else {
                             updateNewMessageCount(data.chat_id);
                         }
@@ -106,16 +108,15 @@
             });
 
             function loadMessages(chatId) {
-                console.log("Đang tải tin nhắn cho chat:", chatId);
                 axios.get(`/admin/chats/${chatId}`)
                     .then(response => {
-                        console.log("Dữ liệu API trả về:", response.data);
                         let messagesContainer = document.getElementById("messages-container");
                         messagesContainer.innerHTML = "";
 
                         response.data.messages.forEach(msg => {
                             let sender = getSenderName(msg);
-                            displayMessage(sender, msg.message);
+                            let isSender = msg.sender_id === window.adminId; // So sánh với adminId
+                            displayMessage(sender, msg.message, isSender);
                         });
 
                         setupEcho(chatId);
@@ -126,25 +127,37 @@
                     });
             }
 
+
+
             function getSenderName(msg) {
                 if (!msg) return "Không xác định";
-                if (msg.role_id === 1) {
-                    return "Admin";
-                } else if (msg.role_id === 2) {
-                    if (msg.gender === 1) {
-                        return `Anh ${msg.sender_name || "Không xác định"}`;
-                    } else {
-                        return `Chị ${msg.sender_name || "Không xác định"}`;
+
+                if (msg.sender_id) {
+                    if (msg.role_id === 1) {
+                        return "Admin";
                     }
-                } else {
-                    return "Guest";
+                    if (msg.role_id === 2) {
+                        return msg.gender === 1 ?
+                            `Anh ${msg.customer_name || "Không xác định"}` :
+                            `Chị ${msg.customer_name || "Không xác định"}`;
+                    }
+                } else if (msg.guest_id) {
+                    return `Guest #${msg.chat_id}`;
                 }
+
+                return "Không xác định";
             }
 
-            function displayMessage(sender, message) {
+
+            function displayMessage(sender, message, isSender) {
                 let messagesContainer = document.getElementById("messages-container");
                 let msgDiv = document.createElement("div");
-                msgDiv.innerHTML = `<strong>${sender}:</strong> ${message}`;
+
+                let messageClass = isSender ? "sent" : "received";
+
+                msgDiv.classList.add("message", messageClass);
+                msgDiv.innerHTML = `<div class="content">${message}</div>`;
+
                 messagesContainer.appendChild(msgDiv);
                 messagesContainer.scrollTop = messagesContainer.scrollHeight;
             }
@@ -155,27 +168,29 @@
 
                 if (!message || !selectedChatId) return;
 
-                axios.post(getSendMessageUrl(selectedChatId), {
-                        message: message
-                    }, {
-                        headers: {
-                            "X-CSRF-TOKEN": csrfToken
-                        }
-                    })
-                    .then(response => {
-                        if (response.data.success) {
-                            messageInput.value = "";
-                        } else {
-                            console.error("Lỗi gửi tin nhắn:", response.data);
-                            alert("Không thể gửi tin nhắn, thử lại!");
-                        }
-                    })
-                    .catch(error => {
-                        console.error("Lỗi kết nối:", error);
-                        alert("Lỗi kết nối đến server!");
-                    });
-            }
+                let sender = getSenderName({
+                    role_id: 1
+                });
+                displayMessage(sender, message, true);
 
+                axios.post(getSendMessageUrl(selectedChatId), {
+                    message: message
+                }, {
+                    headers: {
+                        "X-CSRF-TOKEN": csrfToken
+                    }
+                }).then(response => {
+                    if (response.data.success) {
+                        messageInput.value = "";
+                    } else {
+                        console.error("Lỗi gửi tin nhắn:", response.data);
+                        alert("Không thể gửi tin nhắn, thử lại!");
+                    }
+                }).catch(error => {
+                    console.error("Lỗi kết nối:", error);
+                    alert("Lỗi kết nối đến server!");
+                });
+            }
             document.getElementById("send-message").addEventListener("click", sendMessage);
 
             document.getElementById("message-input").addEventListener("keypress", function(event) {
@@ -198,7 +213,6 @@
                     document.getElementById("message-input").disabled = false;
                     loadMessages(selectedChatId);
 
-                    // Reset bộ đếm khi mở chat
                     let badge = document.querySelector(
                         `.new-message-count[data-chat-id="${selectedChatId}"]`);
                     if (badge) {
@@ -207,6 +221,61 @@
                     }
                 });
             });
+            window.Echo.channel("admin.chats")
+                .listen("NewChatCreated", (data) => {
+                    console.log("Chat mới được tạo:", data);
+
+                    let chatList = document.getElementById("chat-list");
+
+                    if (document.querySelector(`.chat-item[data-chat-id="${data.chat_id}"]`)) {
+                        return;
+                    }
+
+                    let senderName = getSenderName({
+                        sender_id: data.customer_id,
+                        guest_id: data.guest_id,
+                        chat_id: data.chat_id,
+                        role_id: data.role_id,
+                        gender: data.gender,
+                        customer_name: data.customer_name
+                    });
+
+                    let newChatItem = document.createElement("li");
+                    newChatItem.classList.add("list-group-item", "chat-item");
+                    newChatItem.setAttribute("data-chat-id", data.chat_id);
+
+                    let chatName = document.createElement("span");
+                    chatName.classList.add("chat-name");
+                    chatName.innerText = senderName;
+                    newChatItem.appendChild(chatName);
+
+                    let badge = document.createElement("span");
+                    badge.classList.add("badge", "bg-danger", "new-message-count");
+                    badge.setAttribute("data-chat-id", data.chat_id);
+                    badge.style.display = "none";
+                    badge.innerText = "0";
+                    newChatItem.appendChild(badge);
+
+                    newChatItem.addEventListener("click", function() {
+                        document.querySelectorAll(".chat-item").forEach(el => el.classList.remove(
+                            "active"));
+                        this.classList.add("active");
+                        selectedChatId = data.chat_id;
+                        document.getElementById("message-input").disabled = false;
+                        loadMessages(selectedChatId);
+
+                        let badge = document.querySelector(
+                            `.new-message-count[data-chat-id="${selectedChatId}"]`);
+                        if (badge) {
+                            badge.innerText = "0";
+                            badge.style.display = "none";
+                        }
+                    });
+
+                    chatList.prepend(newChatItem);
+
+                    setupEcho(data.chat_id);
+                });
 
         });
     </script>

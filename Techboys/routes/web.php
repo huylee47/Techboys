@@ -180,8 +180,8 @@ Route::middleware(['auth', 'auth.admin'])->group(function () {
     });
 });
 Route::prefix('message')->group(function () {
-    Route::post('/send', [ChatsController::class, 'sendMessage'])->name('client.send.message');
-    Route::get('/load', [ChatsController::class, 'loadMessage'])->name('client.load.messages');
+    Route::post('/send', [ChatsController::class, 'sendMessage'])->name('client.message.send');
+    Route::get('/load', [ChatsController::class, 'loadMessage'])->name('client.message.load');
 });
 // Products
 Route::prefix('products')->group(function () {

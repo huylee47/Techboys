@@ -1,3 +1,6 @@
+#chat-icon {
+    display: none;
+}
 .real-time-icon {
     position: fixed;
     bottom: 80px;
@@ -77,3 +80,34 @@
     background: #0056b3;
 }
 
+.message {
+    display: flex;
+    margin-bottom: 10px;
+}
+.message:first-child {
+    margin-top: 10px;
+}
+.message.sent {
+    justify-content: flex-end;
+}
+
+.message.received {
+    justify-content: flex-start;
+}
+
+.message .content {
+    padding: 8px 12px;
+    border-radius: 8px;
+    max-width: 60%;
+    word-wrap: break-word;
+}
+
+.message.sent .content {
+    background-color: #007bff;
+    color: white;
+}
+
+.message.received .content {
+    background-color: #f1f1f1;
+    color: black;
+}

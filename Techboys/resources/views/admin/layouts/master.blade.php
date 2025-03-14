@@ -10,6 +10,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ url('') }}/admin/assets/css/bootstrap.css">
+    <link rel="stylesheet" href="{{ url('') }}/admin/assets/css/chat.css">
 
     <link rel="stylesheet" href="{{ url('') }}/admin/assets/vendors/simple-datatables/style.css">
     <link rel="stylesheet" href="{{ url('') }}/admin/assets/vendors/iconly/bold.css">
@@ -67,6 +68,12 @@
                             <a href="" class='sidebar-link'>
                                 <i class="bi bi-truck"></i>
                                 <span>Tình trạng đơn hàng</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item {{ request()->routeIs('admin.messages') ? 'active' : '' }}">
+                            <a href="{{route('admin.messages')}}" class='sidebar-link'>
+                                <i class="bi bi-mailbox2"></i>
+                                <span>Chat với khách hàng</span>
                             </a>
                         </li>
                         <li class="sidebar-item {{ request()->routeIs('admin.voucher*') ? 'active' : '' }}">
