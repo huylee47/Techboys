@@ -70,7 +70,7 @@
                                 <span>Tình trạng đơn hàng</span>
                             </a>
                         </li>
-                        <li class="sidebar-item ">
+                        <li class="sidebar-item {{ request()->routeIs('admin.messages') ? 'active' : '' }}">
                             <a href="{{route('admin.messages')}}" class='sidebar-link'>
                                 <i class="bi bi-mailbox2"></i>
                                 <span>Chat với khách hàng</span>
