@@ -13,9 +13,17 @@ class ChatsService
 // ADMIN
 public function index()
 {
-    $chats = Chats::with('user')->get();
+    $chats = Chats::with(['customer' => function ($query) {
+        $query->where('role_id', 2);
+    }])
+    ->whereHas('customer', function ($query) {
+        $query->where('role_id', 2);
+    })
+    ->get();
+
     return view('admin.message.index', compact('chats'));
 }
+
 
 public function loadMessageAdmin($chatId)
 {
@@ -23,7 +31,7 @@ public function loadMessageAdmin($chatId)
 
     $messages->each(function ($msg) {
         $user = User::find($msg->sender_id);
-        $msg->sender_name = $user ? $user->name : "Guest";
+        $msg->customer_name = $user ? $user->name : "Guest";
         $msg->role_id = $user ? $user->role_id : null;
         $msg->gender = $user ? $user->gender : null;
     });
