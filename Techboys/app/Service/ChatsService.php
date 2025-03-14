@@ -3,6 +3,7 @@
 namespace App\Service;
 
 use App\Events\MessageSent;
+use App\Events\NewChatCreated;
 use App\Models\Chats;
 use App\Models\Message;
 use App\Models\User;
@@ -16,10 +17,14 @@ public function index()
     $chats = Chats::with(['customer' => function ($query) {
         $query->where('role_id', 2);
     }])
-    ->whereHas('customer', function ($query) {
-        $query->where('role_id', 2);
+    ->where(function ($query) {
+        $query->whereHas('customer', function ($q) {
+            $q->where('role_id', 2);
+        })->orWhereNotNull('guest_id');
     })
+    ->orderBy('created_at', 'desc')
     ->get();
+
 
     return view('admin.message.index', compact('chats'));
 }
@@ -81,12 +86,15 @@ public function sendMessage($request)
             }
         })->first();
 
+    $isNewChat = false;
+
     if (!$chat) {
         $chat = Chats::create([
             'customer_id' => $senderId,
             'guest_id' => $guestId,
             'status_id' => 1
         ]);
+        $isNewChat = true;
     }
 
     $newMessage = Message::create([
@@ -100,12 +108,17 @@ public function sendMessage($request)
 
     broadcast(new MessageSent($newMessage))->toOthers();
 
+    if ($isNewChat) {
+        broadcast(new NewChatCreated($chat))->toOthers();
+    }
+
     return response()->json([
         'success' => true,
         'chat_id' => $chat->id,
         'message' => $newMessage,
     ]);
 }
+
 public function loadMessage()
 {
     $user = Auth::user();
