@@ -194,26 +194,7 @@
                                             <h1 class="product_title entry-title">{{ $product->name }}</h1>
                                         </div>
                                         <!-- .single-product-header -->
-                                        <div class="single-product-meta">
-                                            <div class="brand">
-                                                <a href="#">
-                                                    <img alt="galaxy" src="{{ url('') }}/home/assets/images/brands/5.png">
-                                                </a>
-                                            </div>
-                                            <div class="cat-and-sku">
-                                                <span class="posted_in categories">
-                                                    <a rel="tag" href="product-category.html">{{ $product->category->name }}
-                                                        |</a>
-                                                    <a rel="tag"
-                                                        href="product-category.html">{{ $product->brand->name }}</a>
-                                                </span>
-                                            </div>
-                                            {{-- <div class="product-label">
-                                                <div class="ribbon label green-label">
-                                                    <span>A+</span>
-                                                </div>
-                                            </div> --}}
-                                        </div>
+                                       
                                         <!-- .single-product-meta -->
                                         <div class="rating-and-sharing-wrapper">
                                             <div class="woocommerce-product-rating">
