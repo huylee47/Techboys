@@ -125,7 +125,7 @@ table td.total {
 }
 
 table td.grand {
-  border-top: 1px solid #5D6975;;
+  border-top: 1px solid #5D6975;
 }
 
 #notices .notice {
