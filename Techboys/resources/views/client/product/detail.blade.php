@@ -412,7 +412,7 @@
                                                                 <div class="comment-body">
                                                                     
                                                                     <div class="comment-content">
-                                                                        <p class="comment-author">
+                                                                        <p class="comment-author" style="width: max-content;">
                                                                             {{ $commments->user->name ?? 'Anonymous' }}
                                                                         </p>
                                                                         <p class="comment-meta">
