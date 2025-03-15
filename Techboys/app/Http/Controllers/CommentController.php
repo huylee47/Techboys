@@ -52,16 +52,16 @@ class CommentController extends Controller
         $request->validate([
             'comment' => 'required',
             'rate' => 'required|numeric|min:1|max:5',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'media' => 'nullable|file|mimes:jpeg,png,jpg,gif,svg,mp4|max:20480', // 20MB max
         ],[
             'comment.required' => 'Vui lòng nhập bình luận.',
             'rate.required' => 'Vui lòng chọn đánh giá.',
             'rate.numeric' => 'Đánh giá phải là một số.',
             'rate.min' => 'Đánh giá phải từ 1 đến 5.',
             'rate.max' => 'Đánh giá phải từ 1 đến 5.',
-            'image.image' => 'Vui lòng chọn một hình ảnh.',
-            'image.mimes' => 'Hình ảnh phải có định dạng: jpeg, png, jpg, gif, svg.',
-            'image.max' => 'Kích thước hình ảnh không được vượt quá 2048KB.',
+            'media.file' => 'Vui lòng chọn một tệp tin.',
+            'media.mimes' => 'Tệp tin phải có định dạng: jpeg, png, jpg, gif, svg, mp4.',
+            'media.max' => 'Kích thước tệp tin không được vượt quá 20480KB.',
         ]);
 
         $data = [
@@ -71,12 +71,12 @@ class CommentController extends Controller
             'rate' => $request->rate,
         ];
 
-        if ($request->hasFile('image')) {
-            $imageName = time().'.'.$request->image->extension();
-            $request->image->move(public_path('admin/assets/images/comment'), $imageName);
+        if ($request->hasFile('media')) {
+            $mediaName = time().'.'.$request->media->extension();
+            $request->media->move(public_path('admin/assets/images/comment'), $mediaName);
 
             $storage = new Storage();
-            $storage->file = $imageName;
+            $storage->file = $mediaName;
             $storage->save();
 
             $data['file_id'] = $storage->id;
