@@ -406,7 +406,8 @@
                                                                             value="{{ $product->id }}" name="product_id">
                                                                         <input type="hidden" value="0" id="comment_parent"
                                                                             name="comment_parent">
-                                                                        <input type="hidden" name="file_id" id="file_id" value="">
+                                                                        <input type="hidden" name="file_id" id="file_id"
+                                                                            value="">
                                                                     </p>
                                                                 </form>
 
@@ -450,17 +451,21 @@
                                                                         </div>
                                                                         </p>
                                                                         <div class="description">
-                                                                            <p style="width: 1000px;">{{ $commments->content }}</p>
+                                                                            <p style="width: 1000px;">{{ $commments->content }}
+                                                                            </p>
                                                                             <p>
                                                                                 @if($commments->storage && strtolower(pathinfo($commments->storage->file, PATHINFO_EXTENSION)) === 'mp4')
                                                                                     <video width="auto" height="100" controls>
-m                                       <source  5                                                                                         sprc="{{ asset('admin/assets/images/comment/' . $commments->storage->file) }}"
+                                                                                        m
+                                                                                        <source 5
+                                                                                            sprc="{{ asset('admin/assets/images/comment/' . $commments->storage->file) }}"
                                                                                             type="video/mp4">
                                                                                         Trình duyệt của bạn không hỗ trợ thẻ video.
                                                                                     </video>
                                                                                 @elseif($commments->storage)
                                                                                     <img src="{{ asset('admin/assets/images/comment/' . $commments->storage->file) }}"
-                                                                                        alt="" style="width: auto; max-height: 150px;">
+                                                                                        alt=""
+                                                                                        style="width: auto; max-height: 150px;">
                                                                                 @endif
                                                                             </p>
                                                                         </div>
