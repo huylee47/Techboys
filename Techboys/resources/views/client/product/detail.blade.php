@@ -378,6 +378,7 @@
                                                                         <input type="hidden" name="rate" id="rating-value"
                                                                             value="0">
                                                                         @error('rate')
+                                                                            @php $message = $message ?? ''; @endphp
                                                                             <span class="text-danger">{{ $message }}</span>
                                                                         @enderror
                                                                     </div>
@@ -386,6 +387,7 @@
                                                                         <textarea aria-required="true" rows="8" cols="45"
                                                                             name="comment" id="comment"></textarea>
                                                                         @error('comment')
+                                                                            @php $message = $message ?? ''; @endphp
                                                                             <span class="text-danger">{{ $message }}</span>
                                                                         @enderror
                                                                     </p>
@@ -440,7 +442,8 @@
                                                                                 itemprop="datePublished"
                                                                                 class="woocommerce-review__published-date">{{ $commments->created_at }}</time>
                                                                         <div class="star-rating">
-                                                                            <span style="width:{{ $commments->rate * 20}}%">Rated
+                                                                            <span
+                                                                                style="width:{{ $commments->rate * 20}}%">Rated
                                                                                 <strong class="rating">5</strong> out of
                                                                                 5</span>
                                                                         </div>
