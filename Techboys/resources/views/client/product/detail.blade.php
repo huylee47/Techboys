@@ -449,10 +449,10 @@
                                                                         </div>
                                                                         </p>
                                                                         <div class="description">
-                                                                            <p>{{ $commments->content }}</p>
+                                                                            <p style="width: 5000px;">{{ $commments->content }}</p>
                                                                             <p>
                                                                                 @if($commments->storage && strtolower(pathinfo($commments->storage->file, PATHINFO_EXTENSION)) === 'mp4')
-                                                                                    <video width="150" height="100" controls>
+                                                                                    <video width="auto" height="100" controls>
                                                                                         <source
                                                                                             src="{{ asset('admin/assets/images/comment/' . $commments->storage->file) }}"
                                                                                             type="video/mp4">
@@ -460,7 +460,7 @@
                                                                                     </video>
                                                                                 @elseif($commments->storage)
                                                                                     <img src="{{ asset('admin/assets/images/comment/' . $commments->storage->file) }}"
-                                                                                        alt="" style="width: 150px; height: auto;">
+                                                                                        alt="" style="width: auto; max-height: 150px;">
                                                                                 @endif
                                                                             </p>
                                                                         </div>
