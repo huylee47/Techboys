@@ -392,10 +392,10 @@
                                                                         @enderror
                                                                     </p>
                                                                     <div class="col-md-6 mb-3">
-                                                                        <label for="images" class="form-label">Ảnh </label>
-                                                                        <input class="form-control" type="file" id="images"
-                                                                            name="image" accept="image/*">
-                                                                        <div id="image-preview-container" class="mt-3"
+                                                                        <label for="media" class="form-label">Ảnh/Video</label>
+                                                                        <input class="form-control" type="file" id="media"
+                                                                            name="media" accept="image/*,video/*">
+                                                                        <div id="media-preview-container" class="mt-3"
                                                                             style="display: flex; gap: 10px; flex-wrap: wrap;">
                                                                         </div>
                                                                     </div>
@@ -406,6 +406,7 @@
                                                                             value="{{ $product->id }}" name="product_id">
                                                                         <input type="hidden" value="0" id="comment_parent"
                                                                             name="comment_parent">
+                                                                        <input type="hidden" name="file_id" id="file_id" value="">
                                                                     </p>
                                                                 </form>
 
@@ -449,12 +450,11 @@
                                                                         </div>
                                                                         </p>
                                                                         <div class="description">
-                                                                            <p style="width: 5000px;">{{ $commments->content }}</p>
+                                                                            <p style="width: 1000px;">{{ $commments->content }}</p>
                                                                             <p>
                                                                                 @if($commments->storage && strtolower(pathinfo($commments->storage->file, PATHINFO_EXTENSION)) === 'mp4')
                                                                                     <video width="auto" height="100" controls>
-                                                                                        <source
-                                                                                            src="{{ asset('admin/assets/images/comment/' . $commments->storage->file) }}"
+m                                       <source  5                                                                                         sprc="{{ asset('admin/assets/images/comment/' . $commments->storage->file) }}"
                                                                                             type="video/mp4">
                                                                                         Trình duyệt của bạn không hỗ trợ thẻ video.
                                                                                     </video>
@@ -502,20 +502,28 @@
         </div>
     </div>
     <script>
-        document.getElementById('images').addEventListener('change', function (event) {
-            let previewContainer = document.getElementById('image-preview-container');
+        document.getElementById('media').addEventListener('change', function (event) {
+            let previewContainer = document.getElementById('media-preview-container');
             previewContainer.innerHTML = '';
 
             Array.from(event.target.files).forEach(file => {
                 let reader = new FileReader();
                 reader.onload = function (e) {
-                    let img = document.createElement('img');
-                    img.src = e.target.result;
-                    img.style.width = '100px';
-                    img.style.height = '100px';
-                    img.style.objectFit = 'cover';
-                    img.style.borderRadius = '5px';
-                    previewContainer.appendChild(img);
+                    let element;
+                    if (file.type.startsWith('image/')) {
+                        element = document.createElement('img');
+                        element.style.width = '100px';
+                        element.style.height = '100px';
+                        element.style.objectFit = 'cover';
+                        element.style.borderRadius = '5px';
+                    } else if (file.type.startsWith('video/')) {
+                        element = document.createElement('video');
+                        element.controls = true;
+                        element.style.width = '150px';
+                        element.style.height = '100px';
+                    }
+                    element.src = e.target.result;
+                    previewContainer.appendChild(element);
                 };
                 reader.readAsDataURL(file);
             });
