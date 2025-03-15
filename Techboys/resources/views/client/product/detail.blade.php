@@ -5,13 +5,17 @@
         .commentlist .comment .star-rating {
             color: #ffcc00;
             margin-top: 5px;
-            display: block; /* Ensure it takes full width */
+            display: block;
+            /* Ensure it takes full width */
         }
 
         .commentlist .comment .comment-meta .star-rating {
-            display: inline-block; /* Keep it in line with the date */
-            margin-top: 0; /* Reset any top margin */
-            margin-left: 5px; /* Add some spacing */
+            display: inline-block;
+            /* Keep it in line with the date */
+            margin-top: 0;
+            /* Reset any top margin */
+            margin-left: 5px;
+            /* Add some spacing */
         }
 
         .commentlist {
@@ -29,7 +33,8 @@
 
         .commentlist .comment .comment-body {
             display: flex;
-            align-items: flex-start; /* Align items to the top */
+            align-items: flex-start;
+            /* Align items to the top */
         }
 
         .commentlist .comment .comment-avatar {
@@ -44,7 +49,8 @@
 
         .commentlist .comment .comment-content {
             flex-grow: 1;
-            max-width: 80%; /* Adjust this value as needed */
+            max-width: 80%;
+            /* Adjust this value as needed */
         }
 
         .commentlist .comment .comment-author {
@@ -194,7 +200,7 @@
                                             <h1 class="product_title entry-title">{{ $product->name }}</h1>
                                         </div>
                                         <!-- .single-product-header -->
-                                       
+
                                         <!-- .single-product-meta -->
                                         <div class="rating-and-sharing-wrapper">
                                             <div class="woocommerce-product-rating">
@@ -204,8 +210,10 @@
                                                 @endphp
                                                 <div class="star-rating">
                                                     <span style="width:{{ ($averageRating / 5) * 100 }}%">Đánh giá
-                                                        <strong class="rating">{{ $averageRating }}</strong> out of 5 based on
-                                                        <span class="rating">{{ $ratingCount }}</span> customer rating</span>
+                                                        <strong class="rating">{{ $averageRating }}</strong> out of 5 based
+                                                        on
+                                                        <span class="rating">{{ $ratingCount }}</span> customer
+                                                        rating</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -315,20 +323,21 @@
                                                 <!-- /.avg-rating -->
                                                 <div class="rating-histogram">
                                                     @for ($i = 5; $i >= 1; $i--)
-                                                        @php
-                                                            $count = $commment->where('rate', $i)->count();
-                                                            $total = $commment->count();
-                                                            $percentage = ($total > 0) ? ($count / $total) * 100 : 0;
-                                                        @endphp
-                                                        <div class="rating-bar">
-                                                            <div title="Rated {{ $i }} out of 5" class="star-rating">
-                                                                <span style="width:{{ ($i / 5) * 100 }}%"></span>
-                                                            </div>
-                                                            <div class="rating-count">{{ $count }}</div>
-                                                            <div class="rating-percentage-bar">
-                                                                <span class="rating-percentage" style="width:{{ $percentage }}%"></span>
-                                                            </div>
-                                                        </div>
+                                                                                                    @php
+                                                                                                        $count = $commment->where('rate', $i)->count();
+                                                                                                        $total = $commment->count();
+                                                                                                        $percentage = ($total > 0) ? ($count / $total) * 100 : 0;
+                                                                                                    @endphp
+                                                                                                    <div class="rating-bar">
+                                                                                                        <div title="Rated {{ $i }} out of 5" class="star-rating">
+                                                                                                            <span style="width:{{ ($i / 5) * 100 }}%"></span>
+                                                                                                        </div>
+                                                                                                        <div class="rating-count">{{ $count }}</div>
+                                                                                                        <div class="rating-percentage-bar">
+                                                                                                            <span class="rating-percentage"
+                                                                                                                style="width:{{ $percentage }}%"></span>
+                                                                                                        </div>
+                                                                                                    </div>
                                                     @endfor
                                                 </div>
                                                 <!-- /.rating-histogram -->
@@ -351,7 +360,9 @@
                                                                 </div>
                                                             @endif
                                                             @if (Auth::check())
-                                                                <form novalidate="" class="comment-form" id="commentform" method="post" action="{{ route('client.comment.store') }}" enctype="multipart/form-data">
+                                                                <form novalidate="" class="comment-form" id="commentform"
+                                                                    method="post" action="{{ route('client.comment.store') }}"
+                                                                    enctype="multipart/form-data">
                                                                     @csrf
                                                                     <div class="comment-form-rating">
                                                                         <label>Đánh giá của bạn</label>
@@ -364,32 +375,41 @@
                                                                                 <a href="#" class="star-5">5</a>
                                                                             </span>
                                                                         </p>
-                                                                        <input type="hidden" name="rate" id="rating-value" value="0">
+                                                                        <input type="hidden" name="rate" id="rating-value"
+                                                                            value="0">
                                                                         @error('rate')
                                                                             <span class="text-danger">{{ $message }}</span>
                                                                         @enderror
                                                                     </div>
                                                                     <p class="comment-form-comment">
                                                                         <label for="comment">Bình luận của bạn</label>
-                                                                        <textarea aria-required="true" rows="8" cols="45" name="comment" id="comment"></textarea>
+                                                                        <textarea aria-required="true" rows="8" cols="45"
+                                                                            name="comment" id="comment"></textarea>
                                                                         @error('comment')
                                                                             <span class="text-danger">{{ $message }}</span>
                                                                         @enderror
                                                                     </p>
                                                                     <div class="col-md-6 mb-3">
                                                                         <label for="images" class="form-label">Ảnh </label>
-                                                                        <input class="form-control" type="file" id="images" name="image" accept="image/*">
-                                                                        <div id="image-preview-container" class="mt-3" style="display: flex; gap: 10px; flex-wrap: wrap;"></div>
+                                                                        <input class="form-control" type="file" id="images"
+                                                                            name="image" accept="image/*">
+                                                                        <div id="image-preview-container" class="mt-3"
+                                                                            style="display: flex; gap: 10px; flex-wrap: wrap;">
+                                                                        </div>
                                                                     </div>
                                                                     <p class="form-submit">
-                                                                        <input type="submit" value="Bình luận" class="submit" id="submit" name="submit">
-                                                                        <input type="hidden" id="comment_post_ID" value="{{ $product->id }}" name="product_id">
-                                                                        <input type="hidden" value="0" id="comment_parent" name="comment_parent">
+                                                                        <input type="submit" value="Bình luận" class="submit"
+                                                                            id="submit" name="submit">
+                                                                        <input type="hidden" id="comment_post_ID"
+                                                                            value="{{ $product->id }}" name="product_id">
+                                                                        <input type="hidden" value="0" id="comment_parent"
+                                                                            name="comment_parent">
                                                                     </p>
                                                                 </form>
-                                                                
+
                                                             @else
-                                                                <p>Bạn phải <a href="{{ route('login.client') }}">đăng nhập</a> để bình luận.</p>
+                                                                <p>Bạn phải <a href="{{ route('login.client') }}">đăng nhập</a>
+                                                                    để bình luận.</p>
                                                             @endif
                                                             <!-- /.comment-form -->
                                                         </div>
@@ -410,7 +430,7 @@
                                                         <div class="comment_container" id="comment-83">
                                                             <div class="comment-text">
                                                                 <div class="comment-body">
-                                                                    
+
                                                                     <div class="comment-content">
                                                                         <p class="comment-author" style="width: max-content;">
                                                                             {{ $commments->user->name ?? 'Anonymous' }}
@@ -419,21 +439,25 @@
                                                                             <time datetime="2017-06-21T08:05:40+00:00"
                                                                                 itemprop="datePublished"
                                                                                 class="woocommerce-review__published-date">{{ $commments->created_at }}</time>
-                                                                            <div class="star-rating">
-                                                                                <span style="width:{{ $commments->rate *20}}%">Rated
-                                                                                    <strong class="rating">5</strong> out of 5</span>
-                                                                            </div>
+                                                                        <div class="star-rating">
+                                                                            <span style="width:{{ $commments->rate * 20}}%">Rated
+                                                                                <strong class="rating">5</strong> out of
+                                                                                5</span>
+                                                                        </div>
                                                                         </p>
                                                                         <div class="description">
                                                                             <p>{{ $commments->content }}</p>
                                                                             <p>
                                                                                 @if($commments->storage && strtolower(pathinfo($commments->storage->file, PATHINFO_EXTENSION)) === 'mp4')
                                                                                     <video width="150" height="100" controls>
-                                                                                        <source src="{{ asset('admin/assets/images/comment/' . $commments->storage->file) }}" type="video/mp4">
+                                                                                        <source
+                                                                                            src="{{ asset('admin/assets/images/comment/' . $commments->storage->file) }}"
+                                                                                            type="video/mp4">
                                                                                         Trình duyệt của bạn không hỗ trợ thẻ video.
                                                                                     </video>
                                                                                 @elseif($commments->storage)
-                                                                                    <img src="{{ asset('admin/assets/images/comment/' . $commments->storage->file) }}" alt="" style="width: 150px; height: auto;">
+                                                                                    <img src="{{ asset('admin/assets/images/comment/' . $commments->storage->file) }}"
+                                                                                        alt="" style="width: 150px; height: auto;">
                                                                                 @endif
                                                                             </p>
                                                                         </div>
@@ -612,7 +636,7 @@
     </script>
     <script>
         document.querySelectorAll('.stars a').forEach(star => {
-            star.addEventListener('click', function(event) {
+            star.addEventListener('click', function (event) {
                 event.preventDefault();
                 let rating = this.classList[0].split('-')[1];
                 document.getElementById('rating-value').value = rating;
@@ -620,17 +644,17 @@
                 this.classList.add('selected');
             });
 
-            star.addEventListener('mouseover', function() {
+            star.addEventListener('mouseover', function () {
                 document.querySelectorAll('.stars a').forEach(s => s.classList.remove('hover'));
                 this.classList.add('hover');
             });
 
-            star.addEventListener('mouseout', function() {
+            star.addEventListener('mouseout', function () {
                 document.querySelectorAll('.stars a').forEach(s => s.classList.remove('hover'));
             });
         });
 
-        document.querySelector('.stars').addEventListener('mouseout', function() {
+        document.querySelector('.stars').addEventListener('mouseout', function () {
             let rating = document.getElementById('rating-value').value;
             document.querySelectorAll('.stars a').forEach(s => s.classList.remove('selected'));
             if (rating > 0) {
@@ -639,7 +663,7 @@
         });
 
         // Ensure the selected rating is displayed correctly on page load
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             let rating = document.getElementById('rating-value').value;
             if (rating > 0) {
                 document.querySelector('.star-' + rating).classList.add('selected');
