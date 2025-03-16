@@ -84,7 +84,7 @@ class CommentController extends Controller
 
         $commentService->storeComment($data);
 
-        return redirect()->back()->with('success', 'Bình luận của bạn đã được gửi.');
+        return redirect()->back()->withInput()->with('success', 'Bình luận của bạn đã được gửi.');
     }
 
     /**
