@@ -173,8 +173,10 @@ class ProductController extends Controller
             $query->whereIn('brand_id', $request->brand_id);
         }
 
-        if ($request->filled('model_id')) {
-            $query->whereIn('model_id', (array) $request->model_id);
+        if ($request->has('model_id') && !empty($request->model_id)) {
+            $query->whereHas('variant', function ($q) use ($request) {
+                $q->whereIn('model_id', $request->model_id);
+            });
         }
 
         $products = $query->paginate(21)->appends($request->query());
