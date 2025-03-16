@@ -42,4 +42,13 @@ class Product extends Model
     {
         return $this->belongsTo(ProductModel::class, 'model_id');
     }
+
+    public function getDiscountedPriceAttribute()
+    {
+        if ($this->promotion && $this->promotion->discount_percent > 0) {
+            $minPrice = $this->variant->min('price');
+            return $minPrice - ($minPrice * $this->promotion->discount_percent / 100);
+        }
+        return null;
+    }
 }
