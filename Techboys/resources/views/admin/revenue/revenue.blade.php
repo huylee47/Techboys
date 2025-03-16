@@ -9,7 +9,7 @@
         </header>
 
         <div class="page-heading">
-            <h3>Tổng quan doanh thu</h3>
+            <h3>Doanh thu</h3>
         </div>
 
         <div class="page-content">
@@ -260,15 +260,12 @@
                         </div>
                         <div class="card-body">
                             <ul class="list-group">
-                                <li class="list-group-item d-flex justify-content-between align-items-center">
-                                    Product A <span class="badge bg-primary rounded-pill">$5,000</span>
-                                </li>
-                                <li class="list-group-item d-flex justify-content-between align-items-center">
-                                    Product B <span class="badge bg-success rounded-pill">$3,200</span>
-                                </li>
-                                <li class="list-group-item d-flex justify-content-between align-items-center">
-                                    Product C <span class="badge bg-danger rounded-pill">$2,750</span>
-                                </li>
+                                @foreach($bestSellingProducts as $item)
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        {{ $products[$item->product_id]->name ?? 'Sản phẩm không tồn tại' }}
+                                        <span class="badge bg-primary rounded-pill">{{ $item->total_sold }}</span>
+                                    </li>
+                                @endforeach
                             </ul>
                         </div>
                     </div>
