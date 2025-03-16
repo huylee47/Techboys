@@ -198,35 +198,24 @@ class ProductController extends Controller
     {
         $keyword = trim($request->input('s'));
 
-        if ($request->ajax()) {
-            // Nếu là AJAX thì trả về danh sách sản phẩm gợi ý
-            if (!$keyword) {
-                return response()->json('<p class="text-muted p-2">Không có sản phẩm gợi ý...</p>');
-            }
-
-            $products = Product::where('name', 'LIKE', "%{$keyword}%")->limit(10)->get();
-
-            if ($products->isEmpty()) {
-                return response()->json('<p class="text-muted p-2">Không tìm thấy sản phẩm...</p>');
-            }
-
-            $html = '<ul class="list-group">';
-            foreach ($products as $product) {
-                $html .= '<li class="list-group-item">
-                        <a href="' . route('client.product.show', ['slug' => $product->slug]) . '" class="d-flex align-items-center">
-                            <img src="' . url('') . '/admin/assets/images/product/' . $product->img . '" class="me-2" style="width: 50px; height: 50px; object-fit: cover;">
-                            <span>' . $product->name . '</span>
-                        </a>
-                      </li>';
-            }
-            $html .= '</ul>';
-
-            return response()->json($html);
+        if (!$keyword) {
+            return redirect()->route('client.product.index')->with('error', 'Vui lòng nhập từ khóa tìm kiếm.');
         }
 
-        // Nếu không phải AJAX => Chuyển hướng đến trang tìm kiếm
-        return redirect()->route('client.product.index', ['s' => $keyword]);
+        // Nếu là AJAX request (dropdown tìm kiếm)
+        if ($request->ajax()) {
+            $products = Product::where('name', 'LIKE', "%{$keyword}%")->limit(5)->get();
+            return response()->json($products);
+        }
+
+        // Nếu là tìm kiếm bằng nút "Tìm kiếm", hiển thị trang search.blade.php
+        $products = Product::where('name', 'LIKE', "%{$keyword}%")->paginate(12);
+        $brands = Brand::all();
+        $models = ProductModel::all();
+
+        return view('client.product.search', compact('products', 'keyword', 'brands', 'models'));
     }
+
 
 
     public function filter(Request $request)
