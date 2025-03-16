@@ -73,9 +73,17 @@
                             <h3>{{ $product->name }}</h3>
                         </a>
                         <div class="price_box">
-                            <span class="new_price">
-                                {{ number_format($product->variant->min('price'), 0, ',', '.') }} đ
-                            </span>
+                            @if($product->promotion && $product->promotion->discount_percent > 0)
+                                <span class="new_price">Chỉ từ {{ number_format($product->variant->min('discounted_price'), 0, ',', '.') }} đ</span>
+                                <br>
+                                <span class="old_price" style="text-decoration: line-through;">
+                                    {{ number_format($product->variant->min('price'), 0, ',', '.') }} đ
+                                </span>
+                            @else
+                                <span class="new_price">
+                                    {{ number_format($product->variant->min('price'), 0, ',', '.') }} đ
+                                </span>
+                            @endif
                         </div>
                         <ul>
                             <li>
