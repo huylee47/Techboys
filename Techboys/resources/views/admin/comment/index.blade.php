@@ -64,7 +64,7 @@
                                         <td class="text-center">
                                             @if(strtolower(pathinfo($cmt->storage->file, PATHINFO_EXTENSION)) === 'mp4')
                                                 <video width="150" height="100" controls>
-                                                    <source src="{{ asset('admin/assets/images/comment/' . $cmt->storage->file) }}"
+                                                    <source src="{{ asset('admin/assets/images/comment/' . $cmt->storage->file) }}?t={{ time() }}"
                                                         type="video/mp4">
                                                     Trình duyệt của bạn không hỗ trợ thẻ video.
                                                 </video>
