@@ -142,57 +142,6 @@ class ProductController extends Controller
         return view('client.product.list', compact('products', 'brands', 'models'));
     }
 
-    // public function search(Request $request)
-    // {
-    //     // Lấy từ khóa tìm kiếm đúng theo input của form
-    //     $keyword = trim($request->input('s')); // Thay đổi 'keyword' thành 's' cho đúng form
-
-    //     // Nếu không có từ khóa, trả về tất cả sản phẩm
-    //     if (!$keyword) {
-    //         return redirect()->route('client.product.list')->with('error', 'Vui lòng nhập từ khóa tìm kiếm.');
-    //     }
-
-    //     // Chỉ tìm kiếm theo tên sản phẩm
-    //     $products = Product::where('name', 'LIKE', "%{$keyword}%")->paginate(12);
-
-    //     // Lấy danh sách thương hiệu và model để hiển thị bộ lọc
-    //     $brands = Brand::all();
-    //     $models = ProductModel::all();
-
-    //     return view('client.product.search', compact('products', 'keyword', 'brands', 'models'));
-    // }
-
-    // public function search(Request $request)
-    // {
-    //     $keyword = trim($request->input('s'));
-
-    //     if (!$keyword) {
-    //         return response()->json('<p class="text-muted p-2">Không có sản phẩm gợi ý...</p>');
-    //     }
-
-    //     // Tìm kiếm sản phẩm không phân biệt hoa/thường
-    //     $products = Product::where('name', 'LIKE', "%{$keyword}%")
-    //         ->limit(10) // Giới hạn số lượng gợi ý
-    //         ->get();
-
-    //     if ($products->isEmpty()) {
-    //         return response()->json('<p class="text-muted p-2">Không tìm thấy sản phẩm...</p>');
-    //     }
-
-    //     // Tạo HTML cho dropdown sản phẩm
-    //     $html = '<ul class="list-group">';
-    //     foreach ($products as $product) {
-    //         $html .= '<li class="list-group-item">
-    //                 <a href="' . route('client.product.show', ['slug' => $product->slug]) . '" class="d-flex align-items-center">
-    //                     <img src="' . url('') . '/admin/assets/images/product/' . $product->img . '" class="me-2" style="width: 50px; height: 50px; object-fit: cover;">
-    //                     <span>' . $product->name . '</span>
-    //                 </a>
-    //               </li>';
-    //     }
-    //     $html .= '</ul>';
-
-    //     return response()->json($html);
-    // }
 
     public function search(Request $request)
     {
@@ -215,8 +164,6 @@ class ProductController extends Controller
 
         return view('client.product.search', compact('products', 'keyword', 'brands', 'models'));
     }
-
-
 
     public function filter(Request $request)
     {
