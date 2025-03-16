@@ -27843,7 +27843,7 @@ main.freeze {
 /* ===================================  Search dropdown =================================== */
 .search-dropdown {
     position: absolute;
-    width: 1400px;
+    width: 1025px;
     background: white;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
     z-index: 1000;
