@@ -790,8 +790,8 @@
             </button>
         </div>
     </div>
+    <div id="search-dropdown" class="dropdown-menu" style="width: 100%;"></div>
 </form>
-<div id="search-dropdown" class="dropdown-menu" style="width: 100%; display: none;"></div>
 
 
                     <!-- .navbar-search -->
@@ -1902,6 +1902,7 @@
     <script type="text/javascript" src="{{ url('') }}/home/assets/js/slick.min.js"></script>
     <script type="text/javascript" src="{{ url('') }}/home/assets/js/scripts.js"></script>
     <script src="https://js.pusher.com/8.4.0/pusher.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     @vite(['resources/js/app.js'])
     <script>
@@ -1912,37 +1913,29 @@
         var userRole = document.querySelector('meta[name="user-role"]').getAttribute("content");
 
         $(document).ready(function () {
-    $("#search").keyup(function () {
-        let query = $(this).val();
-        if (query.length > 1) {
-            $.ajax({
-                url: "{{ route('client.product.search') }}",
-                method: "GET",
-                data: { s: query },
-                success: function (data) {
-                    $("#search-dropdown").html(data).fadeIn();
-                },
-            });
-        } else {
-            $("#search-dropdown").fadeOut();
-        }
-    });
+        $('#search').on('keyup', function () {
+            let keyword = $(this).val().trim();
+            if (keyword.length > 0) {
+                $.ajax({
+                    url: "{{ route('client.product.search') }}",
+                    type: "GET",
+                    data: { s: keyword },
+                    success: function (response) {
+                        $('#search-dropdown').html(response).show();
+                    }
+                });
+            } else {
+                $('#search-dropdown').hide();
+            }
+        });
 
-    // Xử lý khi chọn một sản phẩm từ dropdown
-    $(document).on("click", ".search-item", function () {
-        $("#search").val($(this).text());
-        $("#search-dropdown").fadeOut();
-        $("#search-form").submit();
+        // Ẩn dropdown khi click ra ngoài
+        $(document).on('click', function (event) {
+            if (!$(event.target).closest('#search-form, #search-dropdown').length) {
+                $('#search-dropdown').hide();
+            }
+        });
     });
-
-    // Ẩn dropdown khi click ra ngoài
-    $(document).click(function (event) {
-        if (!$(event.target).closest("#search-dropdown, #search").length) {
-            $("#search-dropdown").fadeOut();
-        }
-    });
-});
-
     </script>
     <script type="text/javascript" src="{{ url('') }}/home/assets/js/chat.js"></script>
 
