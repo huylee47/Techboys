@@ -8,21 +8,47 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Product extends Model
 {
-    use HasFactory,SoftDeletes;
-    protected $table = 'products';
-    protected $fillable = ['name', 'brand_id', 'description', 'category_id','purchases','img','slug','rate_average'];
+    use HasFactory, SoftDeletes;
 
-    public function brand(){
+    protected $table = 'products';
+    protected $fillable = ['name', 'brand_id', 'category_id', 'purchases', 'img', 'slug', 'rate_average', 'description'];
+
+    public function brand()
+    {
         return $this->belongsTo(Brand::class);
     }
-    public function category(){
+
+    public function category()
+    {
         return $this->belongsTo(ProductCategory::class);
     }
-    public function variant(){
+
+    public function variant()
+    {
         return $this->hasMany(ProductVariant::class, 'product_id');
     }
-    public function image(){
+
+    public function image()
+    {
         return $this->hasMany(Images::class, 'product_id');
     }
-    
+
+    public function promotion()
+    {
+        return $this->hasOne(Promotion::class);
+    }
+
+    public function model()
+    {
+        return $this->belongsTo(ProductModel::class, 'model_id');
+    }
+
+    public function getDiscountedPriceAttribute()
+    {
+        if ($this->promotion && $this->promotion->discount_percent > 0) {
+            $minPrice = $this->variant->min('price');
+            return $minPrice - ($minPrice * $this->promotion->discount_percent / 100);
+        }
+        return null;
+    }
 }

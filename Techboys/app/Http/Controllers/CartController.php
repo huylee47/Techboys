@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cart;
+use App\Models\Promotion;
 use App\Service\CartService;
 use App\Service\CartPriceService;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -23,10 +25,10 @@ class CartController extends Controller
         //
     }
     // CLIENT
-    public function showCart(Request $request)
+    public function showCart()
     {
         $cartItems = $this->cartService->getCartItems();
-
+    
         if ($cartItems instanceof \Illuminate\Http\JsonResponse) {
             return view('client.cart.cart', [
                 'cartItems' => collect([]),
@@ -36,8 +38,18 @@ class CartController extends Controller
                 'voucher' => null
             ]);
         }
-
+    
+        foreach ($cartItems as $cart) {
+            $promotion = Promotion::where('product_id', $cart->variant->product->id)->first();
+            if ($promotion && now()->lt(Carbon::parse($promotion->end_date))) {
+                $cart->discounted_price = $cart->variant->price * (1 - $promotion->discount_percent / 100);
+            } else {
+                $cart->discounted_price = $cart->variant->price;
+            }
+        }
+    
         $totals = $this->cartPriceService->calculateCartTotals($cartItems);
+        // dd($totals);
 
         return view('client.cart.cart', [
             'cartItems' => $cartItems,
@@ -47,6 +59,7 @@ class CartController extends Controller
             'voucher' => $totals['voucher'],
         ]);
     }
+    
     
     public function addToCart(Request $request)
     {
@@ -88,7 +101,7 @@ class CartController extends Controller
             ], 400);
         }
 
-        $subtotal = $cartItems->sum(fn($cart) => $cart->variant->price * $cart->quantity);
+        $subtotal = $cartItems->sum(fn($cart) => $cart->variant->discounted_price * $cart->quantity);
         $voucherResult = $this->cartPriceService->applyVoucherToCart($voucherCode, $subtotal);
 
         if (!$voucherResult['valid']) {
@@ -110,6 +123,9 @@ class CartController extends Controller
     }
     public function removeItem(Request $request){
         return $this->cartService->removeItem($request);
+    }
+    public function countItems(){
+        return $this->cartService->countItems();
     }
     
 }

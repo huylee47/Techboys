@@ -8,8 +8,13 @@ use App\Models\Product;
 use App\Models\ProductCategory;
 use App\Service\VoucherService;
 use App\Service\CartPriceService;
+use App\Service\CartService;
+use App\Service\ChatsService;
+use App\Service\ProductService;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
+use App\Console\Commands\RemoveExpiredPromotions;
+use Illuminate\Console\Scheduling\Schedule;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -28,16 +33,40 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+
+        $this->commands([
+            RemoveExpiredPromotions::class,
+        ]);
+    
+        $this->app->booted(function () {
+            $schedule = app(Schedule::class);
+            $schedule->command('promotions:remove-expired')->daily();
+        });
         $config = Config::first();
         $categories = ProductCategory::get();
         $hotproducts = Product::orderBy('purchases','desc')->take(16)->get();
-        $newProduct = Product::orderBy('created_at', 'desc')->take(20)->get();
+        $discountedProducts = Product::whereHas('promotion')->get();
+        $newProduct = Product::orderBy('created_at', 'desc')->take(20)->get();  
         $loadBanner = Banner::all();
-
+        $cartService = app(CartService::class);
         View::share('config', $config);
         View::share('categories', $categories);
-        View::share('newProduct', $newProduct);
         View::share('hotproducts', $hotproducts);
         View::share('loadBanner', $loadBanner);
+        View::share('discountedProducts', $discountedProducts);
+        View::composer('*', function ($view) {
+            $messageService = app(ChatsService::class);
+            $messages = $messageService->loadMessage();
+            $view->with('messages', $messages);
+            $productService = app(ProductService::class);
+            $newProduct = $productService->getNewProducts();
+            $view->with('newProduct', $newProduct);
+            $cartService = app(CartService::class); 
+            $cartCount = $cartService->countItems();
+            $view->with([
+                'cartCount' => $cartCount,
+            ]);
+        });
+    
     }
 }

@@ -145,47 +145,49 @@
 	/*  Deal Countdown timer
 	/*===================================================================================*/
 
- 	$( '.deal-countdown-timer' ).each( function() {
+	$( '.deal-countdown-timer' ).each( function() {
 		var deal_countdown_text = {
- 		    'days_text': 'Days',
- 		    'hours_text': 'Hours',
- 		    'mins_text': 'Mins',
- 		    'secs_text': 'Secs'
-		    
- 		  };
-
-
-		// set the date we're counting down to
+			'days_text': 'Ngày',
+			'hours_text': 'Giờ',
+			'mins_text': 'Phút',
+			'secs_text': 'Giây'
+		};
+	
 		var deal_time_diff = $(this).children('.deal-time-diff').text();
 		var countdown_output = $(this).children('.deal-countdown');
 		var target_date = ( new Date().getTime() ) + ( deal_time_diff * 1000 );
-
-		// variables for time units
-		var days, hours, minutes, seconds;
-
-		// update the tag with id "countdown" every 1 second
-		setInterval( function () {
-
-			// find the amount of "seconds" between now and target
+	
+		var countdownInterval = setInterval( function () {
 			var current_date = new Date().getTime();
 			var seconds_left = (target_date - current_date) / 1000;
-
-			// do some time calculations
-			days = parseInt(seconds_left / 86400);
+	
+			if (seconds_left <= 0) {
+				clearInterval(countdownInterval);
+				'<span data-value="' + 0 + '" class="days"><span class="value">' + 0 +  '</span><b>' + deal_countdown_text.days_text + '</b></span>' +
+				'<span class="hours"><span class="value">' + 0 + '</span><b>' + deal_countdown_text.hours_text + '</b></span>' +
+				'<span class="minutes"><span class="value">' + 0 + '</span><b>' + deal_countdown_text.mins_text + '</b></span>' +
+				'<span class="seconds"><span class="value">' + 0 + '</span><b>' + deal_countdown_text.secs_text + '</b></span>'
+				return;
+			}
+	
+			var days = parseInt(seconds_left / 86400);
 			seconds_left = seconds_left % 86400;
-
-			hours = parseInt(seconds_left / 3600);
+	
+			var hours = parseInt(seconds_left / 3600);
 			seconds_left = seconds_left % 3600;
-
-			minutes = parseInt(seconds_left / 60);
-			seconds = parseInt(seconds_left % 60);
-
-			// format countdown string + set tag value
-			countdown_output.html( '<span data-value="' + days + '" class="days"><span class="value">' + days +  '</span><b>' + deal_countdown_text.days_text + '</b></span><span class="hours"><span class="value">' + hours + '</span><b>' + deal_countdown_text.hours_text + '</b></span><span class="minutes"><span class="value">'
-			+ minutes + '</span><b>' + deal_countdown_text.mins_text + '</b></span><span class="seconds"><span class="value">' + seconds + '</span><b>' + deal_countdown_text.secs_text + '</b></span>' );
-
+	
+			var minutes = parseInt(seconds_left / 60);
+			var seconds = parseInt(seconds_left % 60);
+	
+			countdown_output.html(
+				'<span data-value="' + days + '" class="days"><span class="value">' + days +  '</span><b>' + deal_countdown_text.days_text + '</b></span>' +
+				'<span class="hours"><span class="value">' + hours + '</span><b>' + deal_countdown_text.hours_text + '</b></span>' +
+				'<span class="minutes"><span class="value">' + minutes + '</span><b>' + deal_countdown_text.mins_text + '</b></span>' +
+				'<span class="seconds"><span class="value">' + seconds + '</span><b>' + deal_countdown_text.secs_text + '</b></span>'
+			);
 		}, 1000 );
 	});
+	
 
    
 	/*===================================================================================*/
