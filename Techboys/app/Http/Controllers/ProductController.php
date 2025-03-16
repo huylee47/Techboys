@@ -144,23 +144,28 @@ class ProductController extends Controller
 
     public function search(Request $request)
     {
-        // Lấy từ khóa tìm kiếm đúng theo input của form
-        $keyword = trim($request->input('s')); // Thay đổi 'keyword' thành 's' cho đúng form
+        $keyword = strtolower(trim($request->input('s')));
 
-        // Nếu không có từ khóa, trả về tất cả sản phẩm
         if (!$keyword) {
-            return redirect()->route('client.product.list')->with('error', 'Vui lòng nhập từ khóa tìm kiếm.');
+            return redirect()->route('client.product.index')->with('error', 'Vui lòng nhập từ khóa tìm kiếm.');
         }
 
-        // Chỉ tìm kiếm theo tên sản phẩm
-        $products = Product::where('name', 'LIKE', "%{$keyword}%")->paginate(12);
+        // Tìm kiếm không phân biệt hoa thường
+        $products = Product::whereRaw('LOWER(name) LIKE ?', ["%{$keyword}%"])->paginate(12);
 
-        // Lấy danh sách thương hiệu và model để hiển thị bộ lọc
-        $brands = Brand::all();
-        $models = ProductModel::all();
+        // Nếu request là AJAX, trả về danh sách sản phẩm để hiển thị dropdown
+        if ($request->ajax()) {
+            $output = '<ul class="dropdown-menu show" style="width:100%;">';
+            foreach ($products as $product) {
+                $output .= '<li class="search-item"><a href="' . route('client.product.show', ['slug' => $product->slug]) . '">' . $product->name . '</a></li>';
+            }
+            $output .= '</ul>';
+            return response()->json($output);
+        }
 
-        return view('client.product.search', compact('products', 'keyword', 'brands', 'models'));
+        return view('client.product.search', compact('products', 'keyword'));
     }
+
 
     public function filter(Request $request)
     {
