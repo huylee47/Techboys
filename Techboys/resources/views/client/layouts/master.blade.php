@@ -49,9 +49,10 @@
         .dropdown-menu {
             display: none;
             position: absolute;
-            background-color: #f9f9f9;
+            /* background-color: #f9f9f9; */
             box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
             z-index: 1;
+            border: none;
         }
 
         .dropdown-menu li {
@@ -71,12 +72,6 @@
             width: 25px;
             height: auto;
             float: left;
-        }
-
-        .dropdown-menu li a p {
-            margin: 0;
-            padding: 5px;
-
         }
     </style>
     @yield('styles')
@@ -790,7 +785,8 @@
             </button>
         </div>
     </div>
-    <div id="search-dropdown" class="dropdown-menu" style="width: 100%;"></div>
+
+    <div id="search-dropdown" class="search-dropdown"></div>
 </form>
 
 
@@ -1912,16 +1908,34 @@
         var guestId = "{{ session()->getId() }}";
         var userRole = document.querySelector('meta[name="user-role"]').getAttribute("content");
 
-        $(document).ready(function () {
+         $(document).ready(function () {
         $('#search').on('keyup', function () {
-            let keyword = $(this).val().trim();
-            if (keyword.length > 0) {
+            let query = $(this).val();
+            if (query.length > 0) {
                 $.ajax({
                     url: "{{ route('client.product.search') }}",
                     type: "GET",
-                    data: { s: keyword },
-                    success: function (response) {
-                        $('#search-dropdown').html(response).show();
+                    data: { s: query },
+                    success: function (data) {
+                        let dropdown = $('#search-dropdown');
+                        dropdown.empty(); // Xóa dữ liệu cũ
+
+                        if (data.length > 0) {
+                            data.forEach(product => {
+                                dropdown.append(`
+                                    <li class="list-group-item">
+                                        <a href="/products/${product.slug}" class="d-flex align-items-center">
+                                            <img src="{{ url('') }}/admin/assets/images/product/${product.img}" 
+                                                 class="me-2" style="width: 50px; height: 50px; object-fit: cover;">
+                                            <span>${product.name}</span>
+                                        </a>
+                                    </li>
+                                `);
+                            });
+                            dropdown.show();
+                        } else {
+                            dropdown.hide();
+                        }
                     }
                 });
             } else {
@@ -1930,9 +1944,9 @@
         });
 
         // Ẩn dropdown khi click ra ngoài
-        $(document).on('click', function (event) {
-            if (!$(event.target).closest('#search-form, #search-dropdown').length) {
-                $('#search-dropdown').hide();
+        $(document).click(function (e) {
+            if (!$(e.target).closest("#search-form").length) {
+                $("#search-dropdown").hide();
             }
         });
     });
