@@ -32,8 +32,8 @@
             <li>
                 <label class="container_check">
                     {{ $model->name }}
-                   <input type="checkbox" name="model_id[]" value="{{ $model->id }}" 
-       {{ in_array($model->id, request()->model_id ?? []) ? 'checked' : '' }}>
+                    <input type="checkbox" name="model_id[]" value="{{ $model->id }}" 
+                           {{ in_array($model->id, request()->model_id ?? []) ? 'checked' : '' }}>
                     <span class="checkmark"></span>
                 </label>
             </li>
