@@ -142,28 +142,90 @@ class ProductController extends Controller
         return view('client.product.list', compact('products', 'brands', 'models'));
     }
 
+    // public function search(Request $request)
+    // {
+    //     // Lấy từ khóa tìm kiếm đúng theo input của form
+    //     $keyword = trim($request->input('s')); // Thay đổi 'keyword' thành 's' cho đúng form
+
+    //     // Nếu không có từ khóa, trả về tất cả sản phẩm
+    //     if (!$keyword) {
+    //         return redirect()->route('client.product.list')->with('error', 'Vui lòng nhập từ khóa tìm kiếm.');
+    //     }
+
+    //     // Chỉ tìm kiếm theo tên sản phẩm
+    //     $products = Product::where('name', 'LIKE', "%{$keyword}%")->paginate(12);
+
+    //     // Lấy danh sách thương hiệu và model để hiển thị bộ lọc
+    //     $brands = Brand::all();
+    //     $models = ProductModel::all();
+
+    //     return view('client.product.search', compact('products', 'keyword', 'brands', 'models'));
+    // }
+
+    // public function search(Request $request)
+    // {
+    //     $keyword = trim($request->input('s'));
+
+    //     if (!$keyword) {
+    //         return response()->json('<p class="text-muted p-2">Không có sản phẩm gợi ý...</p>');
+    //     }
+
+    //     // Tìm kiếm sản phẩm không phân biệt hoa/thường
+    //     $products = Product::where('name', 'LIKE', "%{$keyword}%")
+    //         ->limit(10) // Giới hạn số lượng gợi ý
+    //         ->get();
+
+    //     if ($products->isEmpty()) {
+    //         return response()->json('<p class="text-muted p-2">Không tìm thấy sản phẩm...</p>');
+    //     }
+
+    //     // Tạo HTML cho dropdown sản phẩm
+    //     $html = '<ul class="list-group">';
+    //     foreach ($products as $product) {
+    //         $html .= '<li class="list-group-item">
+    //                 <a href="' . route('client.product.show', ['slug' => $product->slug]) . '" class="d-flex align-items-center">
+    //                     <img src="' . url('') . '/admin/assets/images/product/' . $product->img . '" class="me-2" style="width: 50px; height: 50px; object-fit: cover;">
+    //                     <span>' . $product->name . '</span>
+    //                 </a>
+    //               </li>';
+    //     }
+    //     $html .= '</ul>';
+
+    //     return response()->json($html);
+    // }
+
     public function search(Request $request)
     {
-        $keyword = strtolower(trim($request->input('s')));
+        $keyword = trim($request->input('s'));
 
-        if (!$keyword) {
-            return redirect()->route('client.product.index')->with('error', 'Vui lòng nhập từ khóa tìm kiếm.');
-        }
-
-        // Tìm kiếm không phân biệt hoa thường
-        $products = Product::whereRaw('LOWER(name) LIKE ?', ["%{$keyword}%"])->paginate(12);
-
-        // Nếu request là AJAX, trả về danh sách sản phẩm để hiển thị dropdown
         if ($request->ajax()) {
-            $output = '<ul class="dropdown-menu show" style="width:100%;">';
-            foreach ($products as $product) {
-                $output .= '<li class="search-item"><a href="' . route('client.product.show', ['slug' => $product->slug]) . '">' . $product->name . '</a></li>';
+            // Nếu là AJAX thì trả về danh sách sản phẩm gợi ý
+            if (!$keyword) {
+                return response()->json('<p class="text-muted p-2">Không có sản phẩm gợi ý...</p>');
             }
-            $output .= '</ul>';
-            return response()->json($output);
+
+            $products = Product::where('name', 'LIKE', "%{$keyword}%")->limit(10)->get();
+
+            if ($products->isEmpty()) {
+                return response()->json('<p class="text-muted p-2">Không tìm thấy sản phẩm...</p>');
+            }
+
+            $html = '<ul class="list-group">';
+            foreach ($products as $product) {
+                $html .= '<li class="list-group-item">
+                        <a href="' . route('client.product.show', ['slug' => $product->slug]) . '" class="d-flex align-items-center">
+                            <img src="' . url('') . '/admin/assets/images/product/' . $product->img . '" class="me-2" style="width: 50px; height: 50px; object-fit: cover;">
+                            <span>' . $product->name . '</span>
+                        </a>
+                      </li>';
+            }
+            $html .= '</ul>';
+
+            return response()->json($html);
         }
 
-        return view('client.product.search', compact('products', 'keyword'));
+        // Nếu không phải AJAX => Chuyển hướng đến trang tìm kiếm
+        return redirect()->route('client.product.index', ['s' => $keyword]);
     }
 
 
@@ -178,8 +240,10 @@ class ProductController extends Controller
             $query->whereIn('brand_id', $request->brand_id);
         }
 
-        if ($request->has('model_id')) {
-            $query->whereIn('model_id', $request->model_id);
+        if ($request->has('model_id') && !empty($request->model_id)) {
+            $query->whereHas('variant', function ($q) use ($request) {
+                $q->whereIn('model_id', $request->model_id);
+            });
         }
 
         $products = $query->paginate(21)->appends($request->query());
