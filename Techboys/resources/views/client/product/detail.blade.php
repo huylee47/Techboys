@@ -456,9 +456,7 @@
                                                                             <p>
                                                                                 @if($commments->storage && strtolower(pathinfo($commments->storage->file, PATHINFO_EXTENSION)) === 'mp4')
                                                                                     <video width="auto" height="100" controls>
-                                                                                        m
-                                                                                        <source 5
-                                                                                            sprc="{{ asset('admin/assets/images/comment/' . $commments->storage->file) }}"
+                                                                                        <source src="{{ asset('admin/assets/images/comment/' . $commments->storage->file) }}"
                                                                                             type="video/mp4">
                                                                                         Trình duyệt của bạn không hỗ trợ thẻ video.
                                                                                     </video>
@@ -532,6 +530,14 @@
                 };
                 reader.readAsDataURL(file);
             });
+        });
+
+        // Ensure the selected rating is displayed correctly on page load
+        document.addEventListener('DOMContentLoaded', function () {
+            let rating = document.getElementById('rating-value').value;
+            if (rating > 0) {
+                document.querySelector('.star-' + rating).classList.add('selected');
+            }
         });
     </script>
     <script>
