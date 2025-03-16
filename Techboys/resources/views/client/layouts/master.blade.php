@@ -779,19 +779,20 @@
                         </ul>
                     </div>
                     <!-- .departments-menu -->
-                    <form class="navbar-search" method="get" action="{{ route('client.product.search') }}">
-                        <div class="input-group">
-                            <input type="text" id="search"
-                                class="form-control search-field product-search-field" name="s"
-                                placeholder="Nhập sản phẩm muốn tìm" required />
-                            <div class="input-group-btn input-group-append">
-                                <button type="submit" class="btn btn-primary">
-                                    <i class="fa fa-search"></i>
-                                    <span class="search-btn">Tìm kiếm</span>
-                                </button>
-                            </div>
-                        </div>
-                    </form>
+                    <form id="search-form" class="navbar-search" method="GET" action="{{ route('client.product.search') }}">
+    <div class="input-group">
+        <input type="text" id="search" class="form-control search-field" name="s"
+            placeholder="Nhập sản phẩm muốn tìm" autocomplete="off" required />
+        <div class="input-group-btn input-group-append">
+            <button type="submit" class="btn btn-primary">
+                <i class="fa fa-search"></i>
+                <span class="search-btn">Tìm kiếm</span>
+            </button>
+        </div>
+    </div>
+</form>
+<div id="search-dropdown" class="dropdown-menu" style="width: 100%; display: none;"></div>
+
 
                     <!-- .navbar-search -->
                     {{-- <ul class="header-compare nav navbar-nav">
@@ -1909,6 +1910,39 @@
         var currentUserId = "{{ auth()->id() ?? null }}"
         var guestId = "{{ session()->getId() }}";
         var userRole = document.querySelector('meta[name="user-role"]').getAttribute("content");
+
+        $(document).ready(function () {
+    $("#search").keyup(function () {
+        let query = $(this).val();
+        if (query.length > 1) {
+            $.ajax({
+                url: "{{ route('client.product.search') }}",
+                method: "GET",
+                data: { s: query },
+                success: function (data) {
+                    $("#search-dropdown").html(data).fadeIn();
+                },
+            });
+        } else {
+            $("#search-dropdown").fadeOut();
+        }
+    });
+
+    // Xử lý khi chọn một sản phẩm từ dropdown
+    $(document).on("click", ".search-item", function () {
+        $("#search").val($(this).text());
+        $("#search-dropdown").fadeOut();
+        $("#search-form").submit();
+    });
+
+    // Ẩn dropdown khi click ra ngoài
+    $(document).click(function (event) {
+        if (!$(event.target).closest("#search-dropdown, #search").length) {
+            $("#search-dropdown").fadeOut();
+        }
+    });
+});
+
     </script>
     <script type="text/javascript" src="{{ url('') }}/home/assets/js/chat.js"></script>
 
