@@ -295,7 +295,7 @@
             "user_id": 1,
             "product_id": 1,
             "content": "Sản phẩm rất tốt, tôi rất thích!",
-            "rate": 4.5,
+            "rate": 4.0,
             "file_id": 1,
             "status_id": 1
         },
@@ -319,7 +319,7 @@
             "user_id": 4,
             "product_id": 4,
             "content": "Rất tiếc, sản phẩm bị lỗi, cần cải thiện.",
-            "rate": 1.5,
+            "rate": 1.0,
             "file_id": 4,
             "status_id": 3
         },

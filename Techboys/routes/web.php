@@ -61,8 +61,7 @@ Route::prefix('/register')->group(function () {
     Route::post('/store', [UserController::class, 'store'])->name('client.log.store');
 });
 
-//comment
-Route::get('/show', [CommentController::class, 'show'])->name('comment.show');
+
 
 // Xác thực email
 Route::get('/veryfi-account/{email}', [UserController::class, 'veryfi'])->name('clinet.veryfi');
@@ -217,6 +216,10 @@ Route::get('/payment/vnpay/callback', [CheckoutController::class, 'vnpayCallback
 Route::get('/payment/cod/success', [CheckoutController::class, 'codSuccess'])->name('client.payment.cod');
 
 
+//comment
+Route::post('/comment/store', [CommentController::class, 'store'])->name('client.comment.store');
+
+
 
 Route::prefix('products')->group(function () {
     Route::get('/', [ProductController::class, 'productList'])->name('client.product.index');
@@ -224,3 +227,4 @@ Route::prefix('products')->group(function () {
     Route::get('/filter', [ProductController::class, 'filter'])->name('client.product.filter');
     Route::get('/{slug}', [ProductController::class, 'productDetails'])->name('client.product.show');
 });
+
