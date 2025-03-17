@@ -538,9 +538,9 @@
                                                                                         style="width: auto; max-height: 150px;">
                                                                                 @endif
                                                                             </p>
-                                                                            <button class="reply-button" data-comment-id="{{ $commments->id }}">Trả lời</button>
+                                                                            <button class="reply-button" data-comment-id="{{ $commments->id }}">Phản hồi</button>
                                                                             <div class="reply-input" id="reply-input-{{ $commments->id }}" style="display: none;">
-                                                                                <textarea rows="3" placeholder="Nhập câu trả lời của bạn..."></textarea>
+                                                                                <textarea rows="3" placeholder="Nhập phản hồi"></textarea>
                                                                                 <button class="submit-reply" data-comment-id="{{ $commments->id }}">Gửi</button>
                                                                             </div>
                                                                         </div>
