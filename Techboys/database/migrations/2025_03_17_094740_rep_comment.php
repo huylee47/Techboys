@@ -12,6 +12,17 @@ return new class extends Migration
     public function up(): void
     {
         //
+        Schema::create('rep_comment', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('user_id')->nullable();
+            $table->foreignId('product_id');
+            $table->text('content');
+            $table->decimal('rate', 10, 2);
+            $table->foreignId('file_id')->nullable();;
+            $table->text('rep_content');
+            $table->foreignId('status_id')->default(1);
+            $table->timestamps();
+        });
     }
 
     /**
@@ -20,5 +31,6 @@ return new class extends Migration
     public function down(): void
     {
         //
+        Schema::dropIfExists('rep_comment');
     }
 };
