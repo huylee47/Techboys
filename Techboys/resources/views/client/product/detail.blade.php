@@ -129,8 +129,6 @@
             cursor: pointer;
         }
 
-      
-
         .reply-button {
             margin-left: 20px;
             padding: 5px 10px;
@@ -139,6 +137,11 @@
             background: none;
             color: #007bff;
             cursor: pointer;
+        }
+
+        .reply-button:hover {
+            background: none; /* Ensure no background change on hover */
+            color: #007bff; /* Ensure no color change on hover */
         }
 
         .reply-input {
@@ -167,7 +170,9 @@
             cursor: pointer;
         }
 
-       
+        .reply-input button:hover {
+            background-color: #0056b3;
+        }
     </style>
     <div id="page" class="hfeed site">
         <div id="content" class="site-content" tabindex="-1">
