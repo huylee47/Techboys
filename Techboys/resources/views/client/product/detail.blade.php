@@ -542,11 +542,12 @@
                                                                                 <button class="reply-button" data-comment-id="{{ $commments->id }}">Phản hồi</button>
                                                                             @endif
                                                                             <div class="reply-input" id="reply-input-{{ $commments->id }}" style="display: none;">
-                                                                                <form action="">
-                                                                                     <textarea rows="3" placeholder="Nhập phản hồi"></textarea>
-                                                                                <button type="submit" class="submit-reply" data-comment-id="{{ $commments->id }}">Gửi</button>
+                                                                                <form method="post" action="{{ route('client.comment.reply') }}">
+                                                                                    @csrf
+                                                                                    <textarea rows="3" name="rep_content" placeholder="Nhập phản hồi"></textarea>
+                                                                                    <input type="hidden" name="comment_id" value="{{ $commments->id }}">
+                                                                                    <button type="submit" class="submit-reply">Gửi</button>
                                                                                 </form>
-                                                                               
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -780,15 +781,6 @@
                 const commentId = this.getAttribute('data-comment-id');
                 const replyInput = document.getElementById(`reply-input-${commentId}`);
                 replyInput.style.display = replyInput.style.display === 'none' ? 'block' : 'none';
-            });
-        });
-
-        document.querySelectorAll('.submit-reply').forEach(button => {
-            button.addEventListener('click', function() {
-                const commentId = this.getAttribute('data-comment-id');
-                const replyInput = document.getElementById(`reply-input-${commentId}`).querySelector('textarea').value;
-                // Handle the reply submission logic here
-                console.log(`Reply to comment ${commentId}: ${replyInput}`);
             });
         });
     </script>
