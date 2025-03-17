@@ -41,32 +41,61 @@
                         <thead>
                             <tr>
                                 <th class="col-1">STT</th>
+                                <th class="col-1">Mã đơn hàng</th>
                                 <th class="col-2">Tên khách hàng</th>
-                                <th class="col-2">Số điện thoại</th>
+                                <th class="col-1">Số điện thoại</th>
                                 <th class="col-1">Tổng tiền</th>
-                                <th class="col-1">Trạng thái</th>
-                                <th class="col-4">Chức năng</th>
+                                <th class="col-1">PT Thanh toán</th>
+                                <th class="col-1">TT Đơn hàng</th>
+                                <th class="col-2">TT Thanh toán</th>
+                                <th class="col-2">Chức năng</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($bills as $bill)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
+                                    <td>{{$bill->order_id}}</td>
                                     <td>{{ $bill->full_name }}</td>
                                     <td>{{ $bill->phone }}</td>
-                                    <td>{{ number_format($bill->total, 0, ',', '.') }} VND</td>
+                                    <td>{{ number_format($bill->total, 0, ',', '.') }} đ</td>
                                     <td>
-                                        @if ($bill->status_id == 1)
-                                            <span class="badge bg-success">Đang xử lý</span>
-                                        @elseif ($bill->status_id == 2)
-                                            <span class="badge bg-warning">Đang giao</span>
+                                        @if ($bill->payment_method == 1)
+                                            <span class="">Banking</span>
                                         @else
-                                            <span class="badge bg-danger">Đã hoàn thành</span>
+                                            <span class="">COD</span>
                                         @endif
                                     </td>
-                                    <td class="text-center">
+                                    <td>
+                                        @if ($bill->status_id == 1)
+                                            <span class="badge bg-warning">Chờ xử lý</span>
+                                        @elseif ($bill->status_id == 2)
+                                            <span class="badge bg-info">Đang giao</span>
+                                         @elseif ($bill->status_id == 3)
+                                            <span class="badge bg-success">Đã giao</span>
+                                        @elseif ($bill->status_id == 4)
+                                            <span class="badge bg-success">Đã nhận hàng</span>
+                                        @else
+                                            <span class="badge bg-danger">Đã huỷ</span>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        @if ($bill->payment_status == 1)
+                                            <span class="badge bg-success">Đã thanh toán</span>
+                                        @else
+                                            <span class="badge bg-warning">Chưa thanh toán</span>
+                                        @endif
+                                    </td>
+                                    <td class="text-left">
                                         <a href="{{ route('admin.bill.download', $bill->id) }}" class="btn btn-primary">Tải về</a>
                                         <a href="{{ route('admin.bill.show', $bill->id) }}" class="btn btn-primary">Chi tiết</a>
+                                        <a href=""></a>
+                                        {{-- @if ($bill->status_id == 1)
+                                        <a href="{{ route('admin.bill.invoice', $bill->id) }}" class="btn btn-success">Xuất đơn</a>
+                                        @if($bill->payment_status != 1)
+                                        <a href="{{ route('admin.bill.cancel', $bill->id) }}" class="btn btn-danger">Huỷ đơn</a>
+                                        @endif
+                                        @endif --}}
                                     </td>
                                 </tr>
                             @endforeach
