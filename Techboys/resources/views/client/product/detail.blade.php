@@ -102,6 +102,76 @@
             background-color: #f2dede;
             border-color: #ebccd1;
         }
+
+        .reply-input {
+            margin-top: 10px;
+            margin-left: 20px;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background: none;
+        }
+
+        .reply-input textarea {
+            width: 100%;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .reply-input button {
+            margin-top: 5px;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+        }
+
+        .reply-input button:hover {
+            background-color: #0056b3;
+        }
+
+        .reply-button {
+            margin-left: 20px;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 5px;
+            background: none;
+            color: #007bff;
+            cursor: pointer;
+        }
+
+        .reply-input {
+            margin-top: 10px;
+            margin-left: 40px;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background: none;
+        }
+
+        .reply-input textarea {
+            width: 100%;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .reply-input button {
+            margin-top: 5px;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+        }
+
+        .reply-input button:hover {
+            background-color: #0056b3;
+        }
     </style>
     <div id="page" class="hfeed site">
         <div id="content" class="site-content" tabindex="-1">
@@ -466,6 +536,11 @@
                                                                                         style="width: auto; max-height: 150px;">
                                                                                 @endif
                                                                             </p>
+                                                                            <button class="reply-button" data-comment-id="{{ $commments->id }}">Trả lời</button>
+                                                                            <div class="reply-input" id="reply-input-{{ $commments->id }}" style="display: none;">
+                                                                                <textarea rows="3" placeholder="Nhập câu trả lời của bạn..."></textarea>
+                                                                                <button class="submit-reply" data-comment-id="{{ $commments->id }}">Gửi</button>
+                                                                            </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -690,6 +765,24 @@
             if (rating > 0) {
                 document.querySelector('.star-' + rating).classList.add('selected');
             }
+        });
+    </script>
+    <script>
+        document.querySelectorAll('.reply-button').forEach(button => {
+            button.addEventListener('click', function() {
+                const commentId = this.getAttribute('data-comment-id');
+                const replyInput = document.getElementById(`reply-input-${commentId}`);
+                replyInput.style.display = replyInput.style.display === 'none' ? 'block' : 'none';
+            });
+        });
+
+        document.querySelectorAll('.submit-reply').forEach(button => {
+            button.addEventListener('click', function() {
+                const commentId = this.getAttribute('data-comment-id');
+                const replyInput = document.getElementById(`reply-input-${commentId}`).querySelector('textarea').value;
+                // Handle the reply submission logic here
+                console.log(`Reply to comment ${commentId}: ${replyInput}`);
+            });
         });
     </script>
 @endsection
