@@ -130,12 +130,14 @@
         }
 
         .reply-button {
+            margin-top: 5px;
             margin-left: 100px;
             padding: 5px 15px;
             border: none;
             background: none;
             color: #007bff;
             cursor: pointer;
+            border-radius: 20px;
         }
 
         .reply-button:hover {
