@@ -52,6 +52,12 @@
                                 <span>Tổng quan</span>
                             </a>
                         </li>
+                    <li class="sidebar-item ">
+                            <a href="{{route('admin.revenue.revenue')}}" class='sidebar-link'>
+                                <i class="bi bi-shop"></i>
+                                <span>Doanh thu</span>
+                            </a>
+                        </li>
                         <li class="sidebar-item {{ request()->routeIs('admin.category*') ? 'active' : '' }}">
                             <a href="{{route('admin.category.index')}}" class='sidebar-link'>
                                 <i class="bi bi-grid"></i>
