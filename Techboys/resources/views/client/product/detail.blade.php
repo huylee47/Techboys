@@ -437,7 +437,7 @@
 
                                                                     <div class="comment-content">
                                                                         <p class="comment-author" style="width: max-content;">
-                                                                            {{ $commments->user->name ?? 'Anonymous' }}
+                                                                            {{ $commments->user->name  }}
                                                                         </p>
                                                                         <p class="comment-meta">
                                                                             <time datetime="2017-06-21T08:05:40+00:00"
