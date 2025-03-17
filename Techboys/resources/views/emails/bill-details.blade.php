@@ -83,6 +83,7 @@
             <p><strong>Ngày đặt:</strong> {{ date('d/m/Y H:i', strtotime($bill->created_at)) }}</p>
 
             <div class="info">
+                <p><strong>Mã đơn hàng:</strong> {{ $bill->order_id }}</p>
                 <p><strong>Người nhận:</strong> {{ $bill->full_name }}</p>
                 <p><strong>Địa chỉ:</strong> {{ $bill->address }}</p>
                 <p><strong>Số điện thoại:</strong> {{ $bill->phone }}</p>
