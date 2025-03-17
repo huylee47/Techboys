@@ -1,6 +1,107 @@
 @extends('client.layouts.master')
 
 @section('main')
+    <style>
+        .commentlist .comment .star-rating {
+            color: #ffcc00;
+            margin-top: 5px;
+            display: block;
+            /* Ensure it takes full width */
+        }
+
+        .commentlist .comment .comment-meta .star-rating {
+            display: inline-block;
+            /* Keep it in line with the date */
+            margin-top: 0;
+            /* Reset any top margin */
+            margin-left: 5px;
+            /* Add some spacing */
+        }
+
+        .commentlist {
+            list-style: none;
+            padding: 0;
+        }
+
+        .commentlist .comment {
+            margin-bottom: 20px;
+            padding: 15px;
+            /* border: 1px solid #e1e1e1; */
+            border-radius: 5px;
+            /* background-color: #f9f9f9; */
+        }
+
+        .commentlist .comment .comment-body {
+            display: flex;
+            align-items: flex-start;
+            /* Align items to the top */
+        }
+
+        .commentlist .comment .comment-avatar {
+            width: 50px;
+            margin-right: 15px;
+        }
+
+        .commentlist .comment .comment-avatar img {
+            width: 100%;
+            border-radius: 50%;
+        }
+
+        .commentlist .comment .comment-content {
+            flex-grow: 1;
+            max-width: 80%;
+            /* Adjust this value as needed */
+        }
+
+        .commentlist .comment .comment-author {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .commentlist .comment .comment-meta {
+            font-size: 12px;
+            color: #999;
+            margin-bottom: 5px;
+        }
+
+        .commentlist .comment .star-rating {
+            color: #ffcc00;
+            margin-top: 5px;
+            display: block;
+        }
+
+        .commentlist .comment img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+
+        .commentlist .comment video {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+
+        .alert {
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid transparent;
+            border-radius: 4px;
+        }
+
+        .alert-success {
+            color: #3c763d;
+            background-color: #dff0d8;
+            border-color: #d6e9c6;
+        }
+
+        .alert-danger {
+            color: #a94442;
+            background-color: #f2dede;
+            border-color: #ebccd1;
+        }
     </style>
     <div id="page" class="hfeed site">
         <div id="content" class="site-content" tabindex="-1">
@@ -57,8 +158,7 @@
                                                                 tabindex="-1">
                                                                 <img width="600" height="600"
                                                                     src="{{ url('') }}/home/assets/images/products/big-card-2.jpg"
-                                                                    class="attachment-shop_single size-shop_single"
-                                                                    alt="">
+                                                                    class="attachment-shop_single size-shop_single" alt="">
                                                             </a>
                                                         </div>
                                                     </figure>
@@ -85,8 +185,7 @@
                                                         class="techmarket-wc-product-gallery__image">
                                                         <img width="180" height="180"
                                                             src="{{ url('') }}/home/assets/images/products/sm-card-3.jpg"
-                                                            class="attachment-shop_thumbnail size-shop_thumbnail"
-                                                            alt="">
+                                                            class="attachment-shop_thumbnail size-shop_thumbnail" alt="">
                                                     </figure> --}}
                                                 </figure>
                                                 <!-- .techmarket-single-product-gallery-thumbnails__wrapper -->
@@ -101,38 +200,21 @@
                                             <h1 class="product_title entry-title">{{ $product->name }}</h1>
                                         </div>
                                         <!-- .single-product-header -->
-                                        <div class="single-product-meta">
-                                            <div class="brand">
-                                                <a href="#">
-                                                    <img alt="galaxy"
-                                                        src="{{ url('') }}/home/assets/images/brands/5.png">
-                                                </a>
-                                            </div>
-                                            <div class="cat-and-sku">
-                                                <span class="posted_in categories">
-                                                    <a rel="tag"
-                                                        href="product-category.html">{{ $product->category->name }} |</a>
-                                                    <a rel="tag"
-                                                        href="product-category.html">{{ $product->brand->name }}</a>
-                                                </span>
-                                            </div>
-                                            {{-- <div class="product-label">
-                                                <div class="ribbon label green-label">
-                                                    <span>A+</span>
-                                                </div>
-                                            </div> --}}
-                                        </div>
+
                                         <!-- .single-product-meta -->
                                         <div class="rating-and-sharing-wrapper">
                                             <div class="woocommerce-product-rating">
+                                                @php
+                                                    $averageRating = app('App\Http\Controllers\CommentController')->calculateAverageRating($product->id);
+                                                    $ratingCount = $commment->count();
+                                                @endphp
                                                 <div class="star-rating">
-                                                    <span style="width:100%">Đánh giá
-                                                        <strong class="rating">3.00</strong> out of 5 based on
-                                                        <span class="rating">1</span> customer rating</span>
+                                                    <span style="width:{{ ($averageRating / 5) * 100 }}%">Đánh giá
+                                                        <strong class="rating">{{ $averageRating }}</strong> out of 5 based
+                                                        on
+                                                        <span class="rating">{{ $ratingCount }}</span> customer
+                                                        rating</span>
                                                 </div>
-                                                <a rel="nofollow" class="woocommerce-review-link" href="#reviews">(<span
-                                                        class="count">1</span> customer
-                                                    review)</a>
                                             </div>
                                         </div>
                                         <!-- .rating-and-sharing-wrapper -->
@@ -166,20 +248,19 @@
                                                         <span class="label">Dung lượng</span>
                                                         <div class="choice-buttons">
                                                             @foreach ($variants->groupBy('model.name') as $modelName => $variantGroup)
-                                                                @php
-                                                                    $isActive =
-                                                                        $modelName == $defaultVariant->model->name
-                                                                            ? 'active'
-                                                                            : '';
-                                                                @endphp
-                                                                <div class="choice storage-choice {{ $isActive }}"
-                                                                    data-value="{{ $modelName }}"
-                                                                    data-price="{{ optional($variantGroup->first())->discounted_price }}"
-
-                                                                    data-model-value="{{ $variantGroup->first()->model->id }}"
-                                                                    data-stock="{{ $variantGroup->first()->stock }}">
-                                                                    {{ $modelName }}
-                                                                </div>
+                                                                                                                    @php
+                                                                                                                        $isActive =
+                                                                                                                            $modelName == $defaultVariant->model->name
+                                                                                                                            ? 'active'
+                                                                                                                            : '';
+                                                                                                                    @endphp
+                                                                                                                    <div class="choice storage-choice {{ $isActive }}"
+                                                                                                                        data-value="{{ $modelName }}"
+                                                                                                                        data-price="{{ optional($variantGroup->first())->discounted_price }}"
+                                                                                                                        data-model-value="{{ $variantGroup->first()->model->id }}"
+                                                                                                                        data-stock="{{ $variantGroup->first()->stock }}">
+                                                                                                                        {{ $modelName }}
+                                                                                                                    </div>
                                                             @endforeach
                                                         </div>
                                                     </div>
@@ -192,9 +273,7 @@
                                                                     data-value="{{ $variant->color->name }}"
                                                                     data-model="{{ $variant->model->name }}"
                                                                     data-price="{{ optional($variantGroup->first())->discounted_price }}"
-
-                                                                    data-stock="{{ $variant->stock }}"
-                                                                    style="display: none;">
+                                                                    data-stock="{{ $variant->stock }}" style="display: none;">
                                                                     <span>{{ $variant->color->name }}</span>
                                                                 </div>
                                                             @endforeach
@@ -205,7 +284,8 @@
 
                                                     <p class="price">
                                                         <span class="woocommerce-Price-amount amount" id="productPrice">
-                                                            {{ number_format($defaultVariant->discounted_price, 0, ',', '.') }} đ
+                                                            {{ number_format($defaultVariant->discounted_price, 0, ',', '.') }}
+                                                            đ
                                                         </span>
                                                     </p>
 
@@ -214,13 +294,12 @@
                                                     <!-- .single-product-header -->
 
                                                     <input type="hidden" name="quantity" value="1">
-                                                    <input type="hidden" name="variant_id" id="variant_id"
-                                                        value="">
+                                                    <input type="hidden" name="variant_id" id="variant_id" value="">
 
                                                     <!-- .quantity -->
 
-                                                    <button class="single_add_to_cart_button button alt"
-                                                        type="submit">Thêm vào giỏ hàng</button>
+                                                    <button class="single_add_to_cart_button button alt" type="submit">Thêm
+                                                        vào giỏ hàng</button>
                                                     <p id="outOfStockMessage" class="text-danger small">Sản phẩm đã hết
                                                         hàng</p>
                                                     <!-- .cart -->
@@ -229,149 +308,187 @@
                                             </div>
                                         </form>
                                     </div>
-                                    </div>
-                                        <div class="tab-pane" id="tab-reviews" role="tabpanel">
-                                                <div class="techmarket-advanced-reviews" id="reviews">
-                                                    <div class="advanced-review row">
-                                                        <div class="advanced-review-rating">
-                                                            <h2 class="based-title">Đánh giá</h2>
-                                                            <div class="avg-rating">
-                                                                <span class="avg-rating-number">5.0</span>
-                                                                <div title="Rated 5.0 out of 5" class="star-rating">
-                                                                    <span style="width:100%"></span>
-                                                                </div>
-                                                            </div>
-                                                            <!-- /.avg-rating -->
-                                                            <div class="rating-histogram">
-                                                                <div class="rating-bar">
-                                                                    <div title="Rated 5 out of 5" class="star-rating">
-                                                                        <span style="width:100%"></span>
-                                                                    </div>
-                                                                    <div class="rating-count">1</div>
-                                                                    <div class="rating-percentage-bar">
-                                                                        <span class="rating-percentage" style="width:100%"></span>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="rating-bar">
-                                                                    <div title="Rated 4 out of 5" class="star-rating">
-                                                                        <span style="width:80%"></span>
-                                                                    </div>
-                                                                    <div class="rating-count zero">0</div>
-                                                                    <div class="rating-percentage-bar">
-                                                                        <span class="rating-percentage" style="width:0%"></span>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="rating-bar">
-                                                                    <div title="Rated 3 out of 5" class="star-rating">
-                                                                        <span style="width:60%"></span>
-                                                                    </div>
-                                                                    <div class="rating-count zero">0</div>
-                                                                    <div class="rating-percentage-bar">
-                                                                        <span class="rating-percentage" style="width:0%"></span>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="rating-bar">
-                                                                    <div title="Rated 2 out of 5" class="star-rating">
-                                                                        <span style="width:40%"></span>
-                                                                    </div>
-                                                                    <div class="rating-count zero">0</div>
-                                                                    <div class="rating-percentage-bar">
-                                                                        <span class="rating-percentage" style="width:0%"></span>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="rating-bar">
-                                                                    <div title="Rated 1 out of 5" class="star-rating">
-                                                                        <span style="width:20%"></span>
-                                                                    </div>
-                                                                    <div class="rating-count zero">0</div>
-                                                                    <div class="rating-percentage-bar">
-                                                                        <span class="rating-percentage" style="width:0%"></span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <!-- /.rating-histogram -->
-                                                        </div>
-                                                        <!-- /.advanced-review-rating -->
-                                                        <div class="advanced-review-comment">
-                                                            <div id="review_form_wrapper">
-                                                                <div id="review_form">
-                                                                    <div class="comment-respond" id="respond">
-                                                                        <h3 class="comment-reply-title" id="reply-title">Thêm bình luận</h3>
-                                                                        <form novalidate="" class="comment-form" id="commentform" method="post" action="#">
-                                                                            <div class="comment-form-rating">
-                                                                                <label>Đánh giá của bạn</label>
-                                                                                <p class="stars">
-                                                                                    <span><a href="#" class="star-1">1</a><a href="#" class="star-2">2</a><a href="#" class="star-3">3</a><a href="#" class="star-4">4</a><a href="#" class="star-5">5</a></span>
-                                                                                </p>
-                                                                            </div>
-                                                                            <p class="comment-form-comment">
-                                                                                <label for="comment">Bình luận của bạn</label>
-                                                                                <textarea aria-required="true" rows="8" cols="45" name="comment" id="comment"></textarea>
-                                                                            </p>
-                                                                            <p class="comment-form-author">
-                                                                                <label for="author">Tên
-                                                                                </label>
-                                                                                <input type="text" aria-required="true" size="30" value="" name="author" id="author">
-                                                                            </p>
-                                                                            <div class="col-md-6 mb-3">
-                                                                                <label for="images" class="form-label">Ảnh </label>
-                                                                                <input class="form-control" type="file" id="images" name="image"
-                                                                                    accept="image/*">
-                                                                                <div id="image-preview-container" class="mt-3"
-                                                                                    style="display: flex; gap: 10px; flex-wrap: wrap;"></div>
-                                                                            </div>
-                                                                            <p class="form-submit">
-                                                                                <input type="submit" value="Bình luận" class="submit" id="submit" name="submit">
-                                                                                <input type="hidden" id="comment_post_ID" value="185" name="comment_post_ID">
-                                                                                <input type="hidden" value="0" id="comment_parent" name="comment_parent">
-                                                                            </p>
-                                                                        </form>
-                                                                        <!-- /.comment-form -->
-                                                                    </div>
-                                                                    <!-- /.comment-respond -->
-                                                                </div>
-                                                                <!-- /#review_form -->
-                                                            </div>
-                                                            <!-- /#review_form_wrapper -->
-                                                        </div>
-                                                        <!-- /.advanced-review-comment -->
+                                </div>
+                                <div class="tab-pane" id="tab-reviews" role="tabpanel">
+                                    <div class="techmarket-advanced-reviews" id="reviews">
+                                        <div class="advanced-review row">
+                                            <div class="advanced-review-rating">
+                                                <h2 class="based-title">Đánh giá</h2>
+                                                <div class="avg-rating">
+                                                    <span class="avg-rating-number">{{ $averageRating }}</span>
+                                                    <div title="Rated {{ $averageRating }} out of 5" class="star-rating">
+                                                        <span style="width:{{ ($averageRating / 5) * 100 }}%"></span>
                                                     </div>
-                                                    <!-- /.advanced-review -->
-                                                    <div id="comments">
-                                                        <ol class="commentlist">
-                                                            <li id="li-comment-83" class="comment byuser comment-author-admin bypostauthor even thread-even depth-1">
-                                                                <div class="comment_container" id="comment-83">
-                                                                    <div class="comment-text">
-                                                                        <div class="star-rating">
-                                                                            <span style="width:100%">Rated
-                                                                                <strong class="rating">5</strong> out of 5</span>
+                                                </div>
+                                                <!-- /.avg-rating -->
+                                                <div class="rating-histogram">
+                                                    @for ($i = 5; $i >= 1; $i--)
+                                                                                                    @php
+                                                                                                        $count = $commment->where('rate', $i)->count();
+                                                                                                        $total = $commment->count();
+                                                                                                        $percentage = ($total > 0) ? ($count / $total) * 100 : 0;
+                                                                                                    @endphp
+                                                                                                    <div class="rating-bar">
+                                                                                                        <div title="Rated {{ $i }} out of 5" class="star-rating">
+                                                                                                            <span style="width:{{ ($i / 5) * 100 }}%"></span>
+                                                                                                        </div>
+                                                                                                        <div class="rating-count">{{ $count }}</div>
+                                                                                                        <div class="rating-percentage-bar">
+                                                                                                            <span class="rating-percentage"
+                                                                                                                style="width:{{ $percentage }}%"></span>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                    @endfor
+                                                </div>
+                                                <!-- /.rating-histogram -->
+                                            </div>
+                                            <!-- /.advanced-review-rating -->
+                                            <div class="advanced-review-comment">
+                                                <div id="review_form_wrapper">
+                                                    <div id="review_form">
+                                                        <div class="comment-respond" id="respond">
+                                                            <h3 class="comment-reply-title" id="reply-title">Thêm bình luận
+                                                            </h3>
+                                                            @if (session('success'))
+                                                                <div class="alert alert-success">
+                                                                    {{ session('success') }}
+                                                                </div>
+                                                            @endif
+                                                            @if (session('error'))
+                                                                <div class="alert alert-danger">
+                                                                    {{ session('error') }}
+                                                                </div>
+                                                            @endif
+                                                            @if (Auth::check())
+                                                                <form novalidate="" class="comment-form" id="commentform"
+                                                                    method="post" action="{{ route('client.comment.store') }}"
+                                                                    enctype="multipart/form-data">
+                                                                    @csrf
+                                                                    <div class="comment-form-rating">
+                                                                        <label>Đánh giá của bạn</label>
+                                                                        <p class="stars">
+                                                                            <span>
+                                                                                <a href="#" class="star-1">1</a>
+                                                                                <a href="#" class="star-2">2</a>
+                                                                                <a href="#" class="star-3">3</a>
+                                                                                <a href="#" class="star-4">4</a>
+                                                                                <a href="#" class="star-5">5</a>
+                                                                            </span>
+                                                                        </p>
+                                                                        <input type="hidden" name="rate" id="rating-value"
+                                                                            value="0">
+                                                                        @error('rate')
+                                                                            @php $message = $message ?? ''; @endphp
+                                                                            <span class="text-danger">{{ $message }}</span>
+                                                                        @enderror
+                                                                    </div>
+                                                                    <p class="comment-form-comment">
+                                                                        <label for="comment">Bình luận của bạn</label>
+                                                                        <textarea aria-required="true" rows="8" cols="45"
+                                                                            name="comment" id="comment"></textarea>
+                                                                        @error('comment')
+                                                                            @php $message = $message ?? ''; @endphp
+                                                                            <span class="text-danger">{{ $message }}</span>
+                                                                        @enderror
+                                                                    </p>
+                                                                    <div class="col-md-6 mb-3">
+                                                                        <label for="media" class="form-label">Ảnh/Video</label>
+                                                                        <input class="form-control" type="file" id="media"
+                                                                            name="media" accept="image/*,video/*">
+                                                                        <div id="media-preview-container" class="mt-3"
+                                                                            style="display: flex; gap: 10px; flex-wrap: wrap;">
                                                                         </div>
-                                                                        <p class="meta">
-                                                                            <strong itemprop="author" class="woocommerce-review__author">first last</strong>
-                                                                            <span class="woocommerce-review__dash">&ndash;</span>
-                                                                            <time datetime="2017-06-21T08:05:40+00:00" itemprop="datePublished" class="woocommerce-review__published-date">June 21, 2017</time>
+                                                                    </div>
+                                                                    <p class="form-submit">
+                                                                        <input type="submit" value="Bình luận" class="submit"
+                                                                            id="submit" name="submit">
+                                                                        <input type="hidden" id="comment_post_ID"
+                                                                            value="{{ $product->id }}" name="product_id">
+                                                                        <input type="hidden" value="0" id="comment_parent"
+                                                                            name="comment_parent">
+                                                                        <input type="hidden" name="file_id" id="file_id"
+                                                                            value="">
+                                                                    </p>
+                                                                </form>
+
+                                                            @else
+                                                                <p>Bạn phải <a href="{{ route('login.client') }}">đăng nhập</a>
+                                                                    để bình luận.</p>
+                                                            @endif
+                                                            <!-- /.comment-form -->
+                                                        </div>
+                                                        <!-- /.comment-respond -->
+                                                    </div>
+                                                    <!-- /#review_form -->
+                                                </div>
+                                                <!-- /#review_form_wrapper -->
+                                            </div>
+                                            <!-- /.advanced-review-comment -->
+                                        </div>
+                                        <!-- /.advanced-review -->
+                                        @foreach ($commment as $commments)
+                                            <div id="comments">
+                                                <ol class="commentlist">
+                                                    <li id="li-comment-83"
+                                                        class="comment byuser comment-author-admin bypostauthor even thread-even depth-1">
+                                                        <div class="comment_container" id="comment-83">
+                                                            <div class="comment-text">
+                                                                <div class="comment-body">
+
+                                                                    <div class="comment-content">
+                                                                        <p class="comment-author" style="width: max-content;">
+                                                                            {{ $commments->user->name ?? 'Anonymous' }}
+                                                                        </p>
+                                                                        <p class="comment-meta">
+                                                                            <time datetime="2017-06-21T08:05:40+00:00"
+                                                                                itemprop="datePublished"
+                                                                                class="woocommerce-review__published-date">{{ $commments->created_at }}</time>
+                                                                        <div class="star-rating">
+                                                                            <span
+                                                                                style="width:{{ $commments->rate * 20}}%">Rated
+                                                                                <strong class="rating">5</strong> out of
+                                                                                5</span>
+                                                                        </div>
                                                                         </p>
                                                                         <div class="description">
-                                                                            <p>Wow great product</p>
+                                                                            <p style="width: 1000px;">{{ $commments->content }}
+                                                                            </p>
+                                                                            <p>
+                                                                                @if($commments->storage && strtolower(pathinfo($commments->storage->file, PATHINFO_EXTENSION)) === 'mp4')
+                                                                                    <video width="auto" height="100" controls>
+                                                                                        <source src="{{ asset('admin/assets/images/comment/' . $commments->storage->file) }}"
+                                                                                            type="video/mp4">
+                                                                                        Trình duyệt của bạn không hỗ trợ thẻ video.
+                                                                                    </video>
+                                                                                @elseif($commments->storage)
+                                                                                    <img src="{{ asset('admin/assets/images/comment/' . $commments->storage->file) }}"
+                                                                                        alt=""
+                                                                                        style="width: auto; max-height: 150px;">
+                                                                                @endif
+                                                                            </p>
                                                                         </div>
-                                                                        <!-- /.description -->
                                                                     </div>
-                                                                    <!-- /.comment-text -->
                                                                 </div>
-                                                                <!-- /.comment_container -->
-                                                            </li>
-                                                            <!-- /.comment -->
-                                                        </ol>
-                                                        <!-- /.commentlist -->
-                                                    </div>
-                                                    <!-- /#comments -->
-                                                </div>
-                                                <!-- /.techmarket-advanced-reviews -->
+                                                                <!-- /.description -->
+                                                            </div>
+                                                            <!-- /.comment-text -->
+                                                        </div>
+                                                        <!-- /.comment_container -->
+                                                    </li>
+                                                    <!-- /.comment -->
+                                                </ol>
+                                                <!-- /.commentlist -->
                                             </div>
-                                        <!-- .product-actions-wrapper -->
-                                    
-                                    <!-- .entry-summary -->
-                               
+                                        @endforeach
+
+                                        <!-- /#comments -->
+                                    </div>
+                                    <!-- /.techmarket-advanced-reviews -->
+                                </div>
+                                <!-- .product-actions-wrapper -->
+
+                                <!-- .entry-summary -->
+
                                 <!-- .single-product-wrapper -->
                                 {{-- OTHER --}}
                                 <!-- .brands-carousel -->
@@ -388,28 +505,44 @@
         </div>
     </div>
     <script>
-        document.getElementById('images').addEventListener('change', function (event) {
-            let previewContainer = document.getElementById('image-preview-container');
+        document.getElementById('media').addEventListener('change', function (event) {
+            let previewContainer = document.getElementById('media-preview-container');
             previewContainer.innerHTML = '';
 
             Array.from(event.target.files).forEach(file => {
                 let reader = new FileReader();
                 reader.onload = function (e) {
-                    let img = document.createElement('img');
-                    img.src = e.target.result;
-                    img.style.width = '100px';
-                    img.style.height = '100px';
-                    img.style.objectFit = 'cover';
-                    img.style.borderRadius = '5px';
-                    previewContainer.appendChild(img);
+                    let element;
+                    if (file.type.startsWith('image/')) {
+                        element = document.createElement('img');
+                        element.style.width = '100px';
+                        element.style.height = '100px';
+                        element.style.objectFit = 'cover';
+                        element.style.borderRadius = '5px';
+                    } else if (file.type.startsWith('video/')) {
+                        element = document.createElement('video');
+                        element.controls = true;
+                        element.style.width = '150px';
+                        element.style.height = '100px';
+                    }
+                    element.src = e.target.result;
+                    previewContainer.appendChild(element);
                 };
                 reader.readAsDataURL(file);
             });
         });
+
+        // Ensure the selected rating is displayed correctly on page load
+        document.addEventListener('DOMContentLoaded', function () {
+            let rating = document.getElementById('rating-value').value;
+            if (rating > 0) {
+                document.querySelector('.star-' + rating).classList.add('selected');
+            }
+        });
     </script>
     <script>
         document.querySelectorAll(".choice").forEach(choice => {
-            choice.addEventListener("click", function() {
+            choice.addEventListener("click", function () {
                 let parent = this.parentElement;
                 parent.querySelectorAll(".choice").forEach(c => c.classList.remove("selected"));
                 this.classList.add("selected");
@@ -417,7 +550,7 @@
         });
     </script>
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
+        document.addEventListener("DOMContentLoaded", function () {
             const variants = @json($variants);
             console.log(variants);
             let selectedStorage = null;
@@ -474,7 +607,7 @@
 
             // Add event listeners for color choices
             document.querySelectorAll(".color-choice").forEach(choice => {
-                choice.addEventListener("click", function() {
+                choice.addEventListener("click", function () {
                     selectedColor = this.getAttribute("data-value");
                     document.querySelectorAll(".color-choice").forEach(c => c.classList.remove(
                         "selected"));
@@ -485,7 +618,7 @@
 
             // Add event listeners for storage choices
             document.querySelectorAll(".storage-choice").forEach(choice => {
-                choice.addEventListener("click", function() {
+                choice.addEventListener("click", function () {
                     selectedStorage = this.getAttribute("data-value");
                     // const selectedPrice = this.getAttribute("data-price");
                     const selectedPrice = parseFloat(this.getAttribute("data-price")) || 0;
@@ -520,6 +653,42 @@
                     productPriceElement.innerText = new Intl.NumberFormat('vi-VN').format(selectedPrice) + " đ";
                     updatePriceAndVariantId();
                 }
+            }
+        });
+    </script>
+    <script>
+        document.querySelectorAll('.stars a').forEach(star => {
+            star.addEventListener('click', function (event) {
+                event.preventDefault();
+                let rating = this.classList[0].split('-')[1];
+                document.getElementById('rating-value').value = rating;
+                document.querySelectorAll('.stars a').forEach(s => s.classList.remove('selected'));
+                this.classList.add('selected');
+            });
+
+            star.addEventListener('mouseover', function () {
+                document.querySelectorAll('.stars a').forEach(s => s.classList.remove('hover'));
+                this.classList.add('hover');
+            });
+
+            star.addEventListener('mouseout', function () {
+                document.querySelectorAll('.stars a').forEach(s => s.classList.remove('hover'));
+            });
+        });
+
+        document.querySelector('.stars').addEventListener('mouseout', function () {
+            let rating = document.getElementById('rating-value').value;
+            document.querySelectorAll('.stars a').forEach(s => s.classList.remove('selected'));
+            if (rating > 0) {
+                document.querySelector('.star-' + rating).classList.add('selected');
+            }
+        });
+
+        // Ensure the selected rating is displayed correctly on page load
+        document.addEventListener('DOMContentLoaded', function () {
+            let rating = document.getElementById('rating-value').value;
+            if (rating > 0) {
+                document.querySelector('.star-' + rating).classList.add('selected');
             }
         });
     </script>

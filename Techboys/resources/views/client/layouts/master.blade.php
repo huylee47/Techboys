@@ -49,9 +49,10 @@
         .dropdown-menu {
             display: none;
             position: absolute;
-            background-color: #f9f9f9;
+            /* background-color: #f9f9f9; */
             box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
             z-index: 1;
+            border: none;
         }
 
         .dropdown-menu li {
@@ -71,12 +72,6 @@
             width: 25px;
             height: auto;
             float: left;
-        }
-
-        .dropdown-menu li a p {
-            margin: 0;
-            padding: 5px;
-
         }
     </style>
     @yield('styles')
@@ -779,19 +774,21 @@
                         </ul>
                     </div>
                     <!-- .departments-menu -->
-                    <form class="navbar-search" method="get" action="{{ route('client.product.search') }}">
-                        <div class="input-group">
-                            <input type="text" id="search"
-                                class="form-control search-field product-search-field" name="s"
-                                placeholder="Nhập sản phẩm muốn tìm" required />
-                            <div class="input-group-btn input-group-append">
-                                <button type="submit" class="btn btn-primary">
-                                    <i class="fa fa-search"></i>
-                                    <span class="search-btn">Tìm kiếm</span>
-                                </button>
-                            </div>
-                        </div>
-                    </form>
+                    <form id="search-form" class="navbar-search" method="GET" action="{{ route('client.product.search') }}">
+    <div class="input-group">
+        <input type="text" id="search" class="form-control search-field" name="s"
+            placeholder="Nhập sản phẩm muốn tìm" autocomplete="off" required />
+        <div class="input-group-btn input-group-append">
+            <button type="submit" class="btn btn-primary">
+                <i class="fa fa-search"></i>
+                <span class="search-btn">Tìm kiếm</span>
+            </button>
+        </div>
+    </div>
+
+    <div id="search-dropdown" class="search-dropdown"></div>
+</form>
+
 
                     <!-- .navbar-search -->
                     {{-- <ul class="header-compare nav navbar-nav">
@@ -1901,6 +1898,7 @@
     <script type="text/javascript" src="{{ url('') }}/home/assets/js/slick.min.js"></script>
     <script type="text/javascript" src="{{ url('') }}/home/assets/js/scripts.js"></script>
     <script src="https://js.pusher.com/8.4.0/pusher.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     @vite(['resources/js/app.js'])
     <script>
@@ -1909,6 +1907,49 @@
         var currentUserId = "{{ auth()->id() ?? null }}"
         var guestId = "{{ session()->getId() }}";
         var userRole = document.querySelector('meta[name="user-role"]').getAttribute("content");
+
+         $(document).ready(function () {
+        $('#search').on('keyup', function () {
+            let query = $(this).val();
+            if (query.length > 0) {
+                $.ajax({
+                    url: "{{ route('client.product.search') }}",
+                    type: "GET",
+                    data: { s: query },
+                    success: function (data) {
+                        let dropdown = $('#search-dropdown');
+                        dropdown.empty(); // Xóa dữ liệu cũ
+
+                        if (data.length > 0) {
+                            data.forEach(product => {
+                                dropdown.append(`
+                                    <li class="list-group-item">
+                                        <a href="/products/${product.slug}" class="d-flex align-items-center">
+                                            <img src="{{ url('') }}/admin/assets/images/product/${product.img}" 
+                                                 class="me-2" style="width: 50px; height: 50px; object-fit: cover;">
+                                            <span>${product.name}</span>
+                                        </a>
+                                    </li>
+                                `);
+                            });
+                            dropdown.show();
+                        } else {
+                            dropdown.hide();
+                        }
+                    }
+                });
+            } else {
+                $('#search-dropdown').hide();
+            }
+        });
+
+        // Ẩn dropdown khi click ra ngoài
+        $(document).click(function (e) {
+            if (!$(e.target).closest("#search-form").length) {
+                $("#search-dropdown").hide();
+            }
+        });
+    });
     </script>
     <script type="text/javascript" src="{{ url('') }}/home/assets/js/chat.js"></script>
 
