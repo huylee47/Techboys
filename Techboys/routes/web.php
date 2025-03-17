@@ -225,6 +225,7 @@ Route::get('/payment/cod/success', [CheckoutController::class, 'codSuccess'])->n
 
 //comment
 Route::post('/comment/store', [CommentController::class, 'store'])->name('client.comment.store');
+Route::post('/comment/reply', [CommentController::class, 'reply'])->name('client.comment.reply');
 
 
 
