@@ -114,8 +114,7 @@
                             <a href="{{route('admin.banner.index')}}" class='sidebar-link'>
                                 <i class="bi bi-bookmarks-fill"></i>
                                 <span>Banner</span>
-
-
+                            </a> <!-- Thêm thẻ đóng </a> vào đây -->
                         </li>
                         <li class="sidebar-item ">
                             <a href="{{route('admin.stock.index')}}" class='sidebar-link'>
@@ -123,7 +122,7 @@
                                 <span>Sản phẩm tồn kho</span>
                             </a>
                         </li>
-
+                        
                     </ul>
                 </div>
                 <button class="sidebar-toggler btn x"><i data-feather="x"></i></button>
