@@ -20,7 +20,7 @@ return new class extends Migration
             $table->decimal('rate', 10, 2);
             $table->text('content');
             $table->foreignId('file_id')->nullable();
-            $table->text('rep_content');
+            $table->text('rep_content')->nullable();
             $table->timestamps();
         });
     }
