@@ -542,8 +542,11 @@
                                                                                 <button class="reply-button" data-comment-id="{{ $commments->id }}">Phản hồi</button>
                                                                             @endif
                                                                             <div class="reply-input" id="reply-input-{{ $commments->id }}" style="display: none;">
-                                                                                <textarea rows="3" placeholder="Nhập phản hồi"></textarea>
-                                                                                <button class="submit-reply" data-comment-id="{{ $commments->id }}">Gửi</button>
+                                                                                <form action="">
+                                                                                     <textarea rows="3" placeholder="Nhập phản hồi"></textarea>
+                                                                                <button type="submit" class="submit-reply" data-comment-id="{{ $commments->id }}">Gửi</button>
+                                                                                </form>
+                                                                               
                                                                             </div>
                                                                         </div>
                                                                     </div>
