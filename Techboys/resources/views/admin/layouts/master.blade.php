@@ -47,12 +47,12 @@
                         <li class="sidebar-title">Menu</li>
 
                         <li class="sidebar-item  {{-- {{ request()->routeIs('index') ? 'active' : '' }} --}}">
-                            <a href="" class='sidebar-link'>
+                            <a href="{{route('admin.index')}}" class='sidebar-link'>
                                 <i class="bi bi-grid-fill"></i>
                                 <span>Tổng quan</span>
                             </a>
                         </li>
-                    <li class="sidebar-item ">
+                        <li class="sidebar-item ">
                             <a href="{{route('admin.revenue.revenue')}}" class='sidebar-link'>
                                 <i class="bi bi-shop"></i>
                                 <span>Doanh thu</span>
