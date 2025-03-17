@@ -133,13 +133,15 @@
             margin-left: 20px;
             padding: 5px 10px;
             border: none;
-            border-radius: 5px;
             background: none;
             color: #007bff;
             cursor: pointer;
         }
 
-       
+        .reply-button:hover {
+            background: none; /* Ensure no background change on hover */
+            color: #007bff; /* Ensure no color change on hover */
+        }
 
         .reply-input {
             margin-top: 10px;
@@ -157,9 +159,19 @@
             border-radius: 5px;
         }
 
-     
+        .reply-input button {
+            margin-top: 5px;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+        }
 
-     
+        .reply-input button:hover {
+            background-color: #0056b3;
+        }
     </style>
     <div id="page" class="hfeed site">
         <div id="content" class="site-content" tabindex="-1">
