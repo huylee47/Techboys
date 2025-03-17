@@ -1,233 +1,145 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
+<html lang="vi">
+<head>
     <meta charset="utf-8">
-    <title>Example 1</title>
-    <link rel="stylesheet" href="style.css" media="all" />
-  </head>
+    <title>Hóa Đơn - Techboys</title>
+    <style>
+        @font-face {
+            font-family: 'DejaVu Sans';
+            font-style: normal;
+            font-weight: normal;
+            src: url("{{ storage_path('fonts/DejaVuSans.ttf') }}") format('truetype');
+        }
 
-  <style>
-    .clearfix:after {
-  content: "";
-  display: table;
-  clear: both;
-}
+        body {
+            font-family: 'DejaVu Sans', Arial, sans-serif;
+            font-size: 14px;
+            margin: 20px;
+            padding: 0;
+        }
 
-a {
-  color: #5D6975;
-  text-decoration: underline;
-}
+        .container {
+            width: 100%;
+            max-width: 800px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+        }
 
-body {
-  position: relative;
-  width: 21cm;  
-  height: 29.7cm; 
-  margin: 0 auto; 
-  color: #001028;
-  background: #FFFFFF; 
-  font-family: Arial, sans-serif; 
-  font-size: 12px; 
-  font-family: Arial;
-}
+        h1, h2, h3 {
+            text-align: center;
+            color: #333;
+        }
 
-header {
-  padding: 10px 0;
-  margin-bottom: 30px;
-}
+        .store-name {
+            font-size: 24px;
+            font-weight: bold;
+            text-align: center;
+            color: #0056b3;
+            margin-bottom: 5px;
+        }
 
-#logo {
-  text-align: center;
-  margin-bottom: 10px;
-}
+        .line {
+            border-top: 2px solid #0056b3;
+            margin: 10px 0;
+        }
 
-#logo img {
-  width: 90px;
-}
+        .invoice-info p {
+            margin: 5px 0;
+        }
 
-h1 {
-  border-top: 1px solid  #5D6975;
-  border-bottom: 1px solid  #5D6975;
-  color: #5D6975;
-  font-size: 2.4em;
-  line-height: 1.4em;
-  font-weight: normal;
-  text-align: center;
-  margin: 0 0 20px 0;
-  background: url(dimension.png);
-}
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
 
-#project {
-  float: left;
-}
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+        }
 
-#project span {
-  color: #5D6975;
-  text-align: right;
-  width: 52px;
-  margin-right: 10px;
-  display: inline-block;
-  font-size: 0.8em;
-}
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
 
-#company {
-  float: right;
-  text-align: right;
-}
+        .total {
+            font-size: 16px;
+            font-weight: bold;
+            text-align: right;
+        }
 
-#project div,
-#company div {
-  white-space: nowrap;        
-}
+        .footer {
+            text-align: center;
+            font-size: 12px;
+            margin-top: 20px;
+            color: #555;
+            padding-top: 10px;
+            border-top: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="store-name">Techboys</div>
+        <h2>Hóa Đơn Mua Hàng</h2>
+        <div class="line"></div>
 
-table {
-  width: 100%;
-  border-collapse: collapse;
-  border-spacing: 0;
-  margin-bottom: 20px;
-}
+        <div class="invoice-info">
+            <p><strong>Mã Hóa Đơn:</strong> {{ $bill->order_id ?? $bill->phone }}</p>
+            <p><strong>Khách Hàng:</strong> {{ $bill->full_name }}</p>
+            <p><strong>Email:</strong> {{ $bill->email }}</p>
+            <p><strong>Ngày Tạo:</strong> {{ $bill->created_at->format('d/m/Y') }}</p>
+            <p><strong>Địa Chỉ:</strong> {{ $bill->address }}</p>
+            <p><strong>Phương Thức Thanh Toán:</strong> {{ $bill->payment_method == 1 ? 'VNPAY' : 'COD' }}</p>
+            <p><strong>Trạng Thái Thanh Toán:</strong> 
+                <span style="color: {{ $bill->payment_status == 1 ? 'green' : 'red' }}">
+                    {{ $bill->payment_status == 1 ? 'Đã thanh toán' : 'Chưa thanh toán' }}
+                </span>
+            </p>
+        </div>
 
-table tr:nth-child(2n-1) td {
-  background: #F5F5F5;
-}
+        <h3>Chi Tiết Đơn Hàng</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Sản Phẩm</th>
+                    <th>Số Lượng</th>
+                    <th>Đơn Giá</th>
+                    <th>Tổng</th>
+                    <th>Khuyến Mại</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($billDetails as $billDetail)
+                <tr>
+                    <td>{{ $billDetail->product->name }} {{ $billDetail->variant->color->name }} {{ $billDetail->variant->model->name }}</td>
+                    <td>{{ $billDetail->quantity }}</td>
+                    <td>{{ number_format($billDetail->price, 0, ',', '.') }} đ</td>
+                    <td>{{ number_format($billDetail->price * $billDetail->quantity, 0, ',', '.') }} đ</td>
+                    @php
+                        $isPromotionActive = $productPromotions->contains(function ($promotion) use ($billDetail) {
+                            return $promotion->product_id == $billDetail->product->id &&
+                                   $billDetail->created_at <= $promotion->end_date;
+                        });
+                    @endphp
+                    <td>{{ $isPromotionActive ? 'Có' : 'Không' }}</td>
+                </tr>
+                @endforeach
+                <tr>
+                    <td colspan="3" class="total">Tổng cộng</td>
+                    <td colspan="2" class="total">{{ number_format($bill->total, 0, ',', '.') }} đ</td>
+                </tr>
+            </tbody>
+        </table>
 
-table th,
-table td {
-  text-align: center;
-}
-
-table th {
-  padding: 5px 20px;
-  color: #5D6975;
-  border-bottom: 1px solid #C1CED9;
-  white-space: nowrap;        
-  font-weight: normal;
-}
-
-table .service,
-table .desc {
-  text-align: left;
-}
-
-table td {
-  padding: 20px;
-  text-align: right;
-}
-
-table td.service,
-table td.desc {
-  vertical-align: top;
-}
-
-table td.unit,
-table td.qty,
-table td.total {
-  font-size: 1.2em;
-}
-
-table td.grand {
-  border-top: 1px solid #5D6975;
-}
-
-#notices .notice {
-  color: #5D6975;
-  font-size: 1.2em;
-}
-
-footer {
-  color: #5D6975;
-  width: 100%;
-  height: 30px;
-  position: absolute;
-  bottom: 0;
-  border-top: 1px solid #C1CED9;
-  padding: 8px 0;
-  text-align: center;
-}
-  </style>
-
-  <body>
-    <header class="clearfix">
-      <div id="logo">
-        <img src=""> 
-        {{-- Logo --}}
-      </div>
-      <h1>Hoá đơn</h1>
-      <div id="company" class="clearfix">
-        <div>Techboy</div>
-        <div>Địa chỉ</div>
-        <div>Số điện thoại</div>
-        <div><a href="mailto:company@example.com">company@example.com</a></div>
-      </div>
-      <div id="project">
-        <div><span>PROJECT</span> Website development</div>
-        <div><span>CLIENT</span> John Doe</div>
-        <div><span>ADDRESS</span> 796 Silver Harbour, TX 79273, US</div>
-        <div><span>EMAIL</span> <a href="mailto:john@example.com">john@example.com</a></div>
-        <div><span>DATE</span> August 17, 2015</div>
-        <div><span>DUE DATE</span> September 17, 2015</div>
-      </div>
-    </header>
-    <main>
-      <table>
-        <thead>
-          <tr>
-            <th class="service">SERVICE</th>
-            <th class="desc">DESCRIPTION</th>
-            <th>PRICE</th>
-            <th>QTY</th>
-            <th>TOTAL</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td class="service">Design</td>
-            <td class="desc">Creating a recognizable design solution based on the company's existing visual identity</td>
-            <td class="unit">$40.00</td>
-            <td class="qty">26</td>
-            <td class="total">$1,040.00</td>
-          </tr>
-          <tr>
-            <td class="service">Development</td>
-            <td class="desc">Developing a Content Management System-based Website</td>
-            <td class="unit">$40.00</td>
-            <td class="qty">80</td>
-            <td class="total">$3,200.00</td>
-          </tr>
-          <tr>
-            <td class="service">SEO</td>
-            <td class="desc">Optimize the site for search engines (SEO)</td>
-            <td class="unit">$40.00</td>
-            <td class="qty">20</td>
-            <td class="total">$800.00</td>
-          </tr>
-          <tr>
-            <td class="service">Training</td>
-            <td class="desc">Initial training sessions for staff responsible for uploading web content</td>
-            <td class="unit">$40.00</td>
-            <td class="qty">4</td>
-            <td class="total">$160.00</td>
-          </tr>
-          <tr>
-            <td colspan="4">SUBTOTAL</td>
-            <td class="total">$5,200.00</td>
-          </tr>
-          <tr>
-            <td colspan="4">TAX 25%</td>
-            <td class="total">$1,300.00</td>
-          </tr>
-          <tr>
-            <td colspan="4" class="grand total">GRAND TOTAL</td>
-            <td class="grand total">$6,500.00</td>
-          </tr>
-        </tbody>
-      </table>
-      <div id="notices">
-        <div>NOTICE:</div>
-        <div class="notice">A finance charge of 1.5% will be made on unpaid balances after 30 days.</div>
-      </div>
-    </main>
-    <footer>
-      Invoice was created on a computer and is valid without the signature and seal.
-    </footer>
-  </body>
+        <div class="footer">
+            <p>Hóa đơn được tạo tự động và có hiệu lực mà không cần chữ ký.</p>
+            <p>Cảm ơn quý khách đã mua hàng tại <strong>Techboys</strong>!</p>
+        </div>
+    </div>
+</body>
 </html>

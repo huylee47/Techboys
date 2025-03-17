@@ -38,10 +38,18 @@
                 <div class="sidebar-menu">
                     <ul class="menu">
                         <li class="sidebar-title">Menu</li>
-                        <li class="sidebar-item  {{-- {{ request()->routeIs('index') ? 'active' : '' }} --}}">
-                            <a href="" class='sidebar-link'>
+
+                        <li class="sidebar-item  {{ request()->routeIs('admin.index') ? 'active' : '' }}">
+                            <a href="{{route('admin.index')}}" class='sidebar-link'>
+
                                 <i class="bi bi-grid-fill"></i>
                                 <span>Tổng quan</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item  {{ request()->routeIs('admin.revenue*') ? 'active' : '' }}">
+                            <a href="{{route('admin.revenue.revenue')}}" class='sidebar-link'>
+                                <i class="bi bi-kanban-fill"></i>
+                                <span>Doanh thu</span>
                             </a>
                         </li>
                         <li class="sidebar-item {{ request()->routeIs('admin.category*') ? 'active' : '' }}">
@@ -56,16 +64,11 @@
                                 <span>Sản phẩm</span>
                             </a>
                         </li>
-                        <li class="sidebar-item {{ request()->routeIs('admin.blogs*') ? 'active' : '' }}">
-                            <a href="{{route('admin.blogs.index')}}" class='sidebar-link'>
-                                <i class="bi bi-file-earmark-spreadsheet-fill"></i>
-                                <span>Blogs</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item {{-- {{ request()->routeIs('admin.property-request.index') ? 'active' : '' }} --}}">
-                            <a href="" class='sidebar-link'>
+                        <li class="sidebar-item {{ request()->routeIs('admin.bill*') ? 'active' : '' }}">
+                            <a href="{{route('admin.bill.index')}}" class='sidebar-link'>
+
                                 <i class="bi bi-truck"></i>
-                                <span>Tình trạng đơn hàng</span>
+                                <span>Quản lý đơn hàng</span>
                             </a>
                         </li>
                         <li class="sidebar-item {{ request()->routeIs('admin.messages') ? 'active' : '' }}">
@@ -82,7 +85,7 @@
                                 <span>Voucher</span>
                             </a>
                         </li>
-                        <li class="sidebar-item {{ request()->routeIs('admin.user*') ? 'active' : '' }}"">
+                        <li class="sidebar-item {{ request()->routeIs('admin.user*') ? 'active' : '' }}">
                             <a href="{{route('admin.user.index')}}" class='sidebar-link'>
                                 <i class="bi bi-person"></i>
                                 <span>Tài khoản người dùng</span>
@@ -100,11 +103,19 @@
                                 <span>Phản hồi</span>
                             </a>
                         </li>
-                        <li class="sidebar-item {{ request()->routeIs('admin.banner*') ? 'active' : '' }}"">
-                            <a href="{{route('admin.banner.index')}}" class='sidebar-link'>
-                                <i class="bi bi-image"></i>
-                                <span>Banners</span>
+
+                        <li class="sidebar-item {{ request()->routeIs('admin.blogs*') ? 'active' : '' }} ">
+                            <a href="{{route('admin.blogs.index')}}" class='sidebar-link'>
+                                <i class="bi bi-justify-left"></i>
+                                <span>Blogs</span>
                             </a>
+                        </li>
+                        <li class="sidebar-item {{ request()->routeIs('admin.banner*') ? 'active' : '' }}">
+                            <a href="{{route('admin.banner.index')}}" class='sidebar-link'>
+                                <i class="bi bi-bookmarks-fill"></i>
+                                <span>Banner</span>
+
+
                         </li>
                         <li class="sidebar-item ">
                             <a href="{{route('admin.stock.index')}}" class='sidebar-link'>

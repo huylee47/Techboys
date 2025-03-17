@@ -88,39 +88,59 @@ class CheckoutService
     public function storeBill($request)
     {
         DB::beginTransaction();
-
+    
         try {
             $userId = Auth::id();
             $cartId = session()->get('cart_id');
             $tempBillId = $request->id;
-
-            if ($userId) {
-                $cartItems = Cart::where('user_id', $userId)->get();
-            } else {
-                $cartItems = Cart::where('cart_id', $cartId)->get();
-            }
-
-
+    
+            $cartItems = $userId ? Cart::where('user_id', $userId)->get() : Cart::where('cart_id', $cartId)->get();
+    
             if ($cartItems->isEmpty()) {
                 return response()->json([
                     'success' => false,
                     'message' => 'Giỏ hàng trống!'
                 ], 400);
             }
-
+    
+            foreach ($cartItems as $cartItem) {
+                $variant = ProductVariant::find($cartItem->variant_id);
+    
+                if (!$variant) {
+                    return response()->json([
+                        'success' => false,
+                        'message' => 'Không tìm thấy biến thể sản phẩm!'
+                    ], 400);
+                }
+    
+                if ($variant->stock == 0) {
+                    return response()->json([
+                        'success' => false,
+                        'message' => 'Sản phẩm "' . $variant->name . '" đã hết hàng!'
+                    ], 400);
+                }
+    
+                if ($cartItem->quantity > $variant->stock) {
+                    return response()->json([
+                        'success' => false,
+                        'message' => 'Số lượng sản phẩm "' . $variant->name . '" vượt quá số lượng tồn kho!'
+                    ], 400);
+                }
+            }
+    
             $totals = $this->cartPriceService->calculateCartTotals($cartItems);
             $total = $totals['total'];
             $voucher = $totals['voucher'];
-
+    
             if ($total <= 0) {
                 return response()->json([
                     'success' => false,
                     'message' => 'Tổng tiền không hợp lệ!'
                 ], 400);
             }
-
+    
             $bill = Bill::create([
-                'id' => $tempBillId,
+                'order_id' => $tempBillId,
                 'user_id' => $userId ?? null,
                 'total' => $total,
                 'full_name' => $request->full_name,
@@ -134,26 +154,9 @@ class CheckoutService
                 'payment_status' => 0,
                 'status_id' => 1,
             ]);
-
+    
             foreach ($cartItems as $cartItem) {
                 $variant = ProductVariant::find($cartItem->variant_id);
-
-                if (!$variant) {
-                    DB::rollBack();
-                    return response()->json([
-                        'success' => false,
-                        'message' => 'Không tìm thấy biến thể sản phẩm!'
-                    ], 400);
-                }
-
-                if ($cartItem->quantity > $variant->stock) {
-                    DB::rollBack();
-                    return response()->json([
-                        'success' => false,
-                        'message' => 'Số lượng sản phẩm "' . $variant->name . '" trong giỏ hàng vượt quá số lượng tồn kho!'
-                    ], 400);
-                }
-
                 BillDetails::create([
                     'bill_id' => $bill->id,
                     'variant_id' => $cartItem->variant_id,
@@ -162,7 +165,7 @@ class CheckoutService
                     'price' => $variant->price
                 ]);
             }
-
+    
             if ($voucher) {
                 $voucherModel = Voucher::where('code', $voucher->code)->first();
                 if ($voucherModel && $voucherModel->quantity > 0) {
@@ -170,20 +173,28 @@ class CheckoutService
                 }
                 session()->forget('voucher');
             }
-
-
+    
+            $billDetails = BillDetails::where('bill_id', $bill->id)->get();
+    
+            foreach ($billDetails as $billDetail) {
+                $variant = ProductVariant::find($billDetail->variant_id);
+                if ($variant) {
+                    $variant->decrement('stock', $billDetail->quantity);
+                }
+            }
+    
             DB::commit();
-            // Mail::to($bill->email)->send(new OrderDetailMail($bill));
+    
+            // Gửi email
             try {
                 Log::info('Đang gửi email cho: ' . $bill->email);
-                $billDetails = BillDetails::where('bill_id', $bill->id)->with('variant')->get(); 
-                Mail::to($bill->email)->send(new OrderDetailMail($bill,$billDetails));
+                $billDetails = BillDetails::where('bill_id', $bill->id)->with('variant')->get();
+                Mail::to($bill->email)->send(new OrderDetailMail($bill, $billDetails));
                 Log::info('Gửi email thành công!');
             } catch (\Exception $e) {
                 Log::error('Lỗi khi gửi email: ' . $e->getMessage());
             }
-            
-
+    
             return response()->json([
                 'success' => true,
                 'message' => 'Đặt hàng thành công!',
@@ -198,6 +209,7 @@ class CheckoutService
             ], 500);
         }
     }
+    
 
 
 
@@ -224,14 +236,7 @@ class CheckoutService
                 ], 400);
             }
 
-            $billDetails = BillDetails::where('bill_id', $billId)->get();
 
-            foreach ($billDetails as $billDetail) {
-                $variant = ProductVariant::find($billDetail->variant_id);
-                if ($variant) {
-                    $variant->decrement('stock', $billDetail->quantity);
-                }
-            }
 
             $bill->update([
                 'payment_status' => 1
