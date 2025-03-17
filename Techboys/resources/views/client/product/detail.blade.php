@@ -131,7 +131,7 @@
 
         .reply-button {
             margin-top: 5px;
-            margin-left: 110px;
+            margin-left: 3px;
             padding: 5px 15px;
             border: none;
             background: none;
@@ -141,8 +141,8 @@
         }
 
         .reply-button:hover {
-            background: none; /* Ensure no background change on hover */
-            color: #007bff; /* Ensure no color change on hover */
+            background: none; 
+            color: #007bff; 
         }
 
         .reply-input {
@@ -538,7 +538,9 @@
                                                                                         style="width: auto; max-height: 150px;">
                                                                                 @endif
                                                                             </p>
-                                                                            <button class="reply-button" data-comment-id="{{ $commments->id }}">Phản hồi</button>
+                                                                            @if(Auth::check() && Auth::user()->role_id == 1)
+                                                                                <button class="reply-button" data-comment-id="{{ $commments->id }}">Phản hồi</button>
+                                                                            @endif
                                                                             <div class="reply-input" id="reply-input-{{ $commments->id }}" style="display: none;">
                                                                                 <textarea rows="3" placeholder="Nhập phản hồi"></textarea>
                                                                                 <button class="submit-reply" data-comment-id="{{ $commments->id }}">Gửi</button>
