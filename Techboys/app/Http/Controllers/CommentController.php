@@ -87,6 +87,20 @@ class CommentController extends Controller
         return redirect()->back()->withInput()->with('success', 'Bình luận của bạn đã được gửi.');
     }
 
+    public function reply(Request $request, CommentService $commentService)
+    {
+        $data = [
+            'user_id' => Auth::id(),
+            'comment_id' => $request->comment_id,
+            'rep_content' => $request->reply,
+            'product_id' => Comment::find($request->comment_id)->product_id,
+        ];
+
+        $commentService->storeReply($data);
+
+        return redirect()->back()->with('success', 'Phản hồi của bạn đã được gửi.');
+    }
+
     /**
      * Display the specified resource.
      */
