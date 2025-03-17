@@ -18,4 +18,15 @@ class CommentService
 
         return $comment;
     }
+
+    public function storeReply($data)
+    {
+        $reply = new Comment();
+        $reply->user_id = $data['user_id'];
+        $reply->product_id = $data['product_id'];
+        $reply->content = $data['rep_content'];
+        $reply->save();
+
+        return $reply;
+    }
 }
