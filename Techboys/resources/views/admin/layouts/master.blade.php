@@ -64,10 +64,10 @@
                                 <span>Sản phẩm</span>
                             </a>
                         </li>
-                        <li class="sidebar-item {{-- {{ request()->routeIs('admin.property-request.index') ? 'active' : '' }} --}}">
-                            <a href="" class='sidebar-link'>
+                        <li class="sidebar-item {{ request()->routeIs('admin.bill*') ? 'active' : '' }}">
+                            <a href="{{route('admin.bill.index')}}" class='sidebar-link'>
                                 <i class="bi bi-truck"></i>
-                                <span>Tình trạng đơn hàng</span>
+                                <span>Quản lý đơn hàng</span>
                             </a>
                         </li>
                         <li class="sidebar-item {{ request()->routeIs('admin.messages') ? 'active' : '' }}">
