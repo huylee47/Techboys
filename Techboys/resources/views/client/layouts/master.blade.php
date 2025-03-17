@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en-US" itemscope="itemscope" itemtype="http://schema.org/WebPage">
-
 <head>
     <meta charset="UTF-8">
     <meta name="csrf-token" content="{{ csrf_token() }}" />
@@ -22,7 +21,6 @@
     <link rel="stylesheet" type="text/css" href="{{ url('') }}/home/assets/css/techmarket-font-awesome.css"
         media="all" />
     <link rel="stylesheet" type="text/css" href="{{ url('') }}/home/assets/css/slick-style.css" media="all" />
-
     <link rel="stylesheet" type="text/css" href="{{ url('') }}/home/assets/css/animate.min.css" media="all" />
     <link rel="stylesheet" type="text/css" href="{{ url('') }}/home/assets/css/style.css" media="all" />
     <link rel="stylesheet" type="text/css" href="{{ url('') }}/home/assets/css/real-time.css" media="all" />
@@ -81,18 +79,16 @@
     </style>
     @yield('styles')
 </head>
-
 <body class="page-template-default error-page woocommerce-active single-product full-width normal">
     <div id="page" class="hfeed site">
         <div class="top-bar top-bar-v1">
             <div class="col-full">
                 <ul id="menu-top-bar-left" class="nav justify-content-center">
                     <li class="menu-item animate-dropdown">
-                        <a title="Techboys - Always free delivery" href="contact-v1.html">Techboys &#8211; Lựa chọn tối
-                            ưu</a>
+                        <a title="Techboys - Always free delivery" href="contact-v1.html">Techboys &#8211; Lựa chọn tối ưu</a>
                     </li>
                     <li class="menu-item animate-dropdown">
-                        <a title="Sản phẩm chất lượng" href="shop.html">Sản phẩm chất lượng</a>
+                        <a title="Sản phẩm chất lượng" href="{{ route('client.product.index') }}">Sản phẩm chất lượng</a>
                     </li>
                     <li class="menu-item animate-dropdown">
                         <a title="Hỗ trợ nhanh chóng" href="track-your-order.html">Hỗ trợ nhanh chóng</a>
@@ -101,11 +97,8 @@
                         <a title="Không thu phụ phí" href="contact-v2.html">Không thu phụ phí</a>
                     </li>
                 </ul>
-                <!-- .nav -->
             </div>
-            <!-- .col-full -->
         </div>
-        <!-- .top-bar-v1 -->
         <header id="masthead" class="site-header header-v1" style="background-image: none; ">
             <div class="col-full desktop-only">
                 <div class="techmarket-sticky-wrap">
@@ -164,8 +157,7 @@
                             </a>
                             <!-- /.custom-logo-link -->
                         </div>
-                        <!-- /.site-branding -->
-                        <!-- ============================================================= End Header Logo ============================================================= -->
+                        <!-- ====================== End Header Logo ====================== -->
                         <nav id="primary-navigation" class="primary-navigation" aria-label="Primary Navigation"
                             data-nav="flex-menu">
                             <ul id="menu-primary-menu" class="nav yamm">
@@ -185,7 +177,6 @@
                                     <a title="..." href="#" data-toggle="dropdown"
                                         class="dropdown-toggle">...</a>
                                     <ul class="overflow-items dropdown-menu"></ul>
-                                    <!-- . -->
                                 </li>
                             </ul>
                             <!-- .nav -->
@@ -234,8 +225,6 @@
                                                     </a>
                                                 </li>
                                             </ul>
-
-
                                         </div>
                                     @endguest
                                 </li>
@@ -246,7 +235,6 @@
                     </div>
                     <!-- /.row -->
                 </div>
-                <!-- .techmarket-sticky-wrap -->
                 <div class="row align-items-center">
                     <div id="departments-menu" class="dropdown departments-menu">
                         <button class="btn dropdown-toggle btn-block" type="button" data-toggle="dropdown"
