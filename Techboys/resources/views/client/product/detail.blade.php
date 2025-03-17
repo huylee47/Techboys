@@ -131,7 +131,7 @@
 
         .reply-button {
             margin-top: 5px;
-            margin-left: 100px;
+            margin-left: 110px;
             padding: 5px 15px;
             border: none;
             background: none;
