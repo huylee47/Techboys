@@ -130,8 +130,8 @@
         }
 
         .reply-button {
-            margin-left: 20px;
-            padding: 5px 10px;
+            margin-left: 100px;
+            padding: 5px 15px;
             border: none;
             background: none;
             color: #007bff;
