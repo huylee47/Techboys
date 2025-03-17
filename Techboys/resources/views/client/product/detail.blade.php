@@ -139,10 +139,7 @@
             cursor: pointer;
         }
 
-        .reply-button:hover {
-            background: none; /* Ensure no background change on hover */
-            color: #007bff; /* Ensure no color change on hover */
-        }
+       
 
         .reply-input {
             margin-top: 10px;
