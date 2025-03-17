@@ -89,10 +89,12 @@ class CommentController extends Controller
 
     public function reply(Request $request, CommentService $commentService)
     {
+    
+
         $data = [
             'user_id' => Auth::id(),
             'comment_id' => $request->comment_id,
-            'rep_content' => $request->reply,
+            'rep_content' => $request->rep_content,
             'product_id' => Comment::find($request->comment_id)->product_id,
         ];
 
