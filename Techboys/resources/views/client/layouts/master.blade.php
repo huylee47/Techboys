@@ -791,56 +791,6 @@
                                     <span class="price-label"><a href="{{ route('client.cart.index') }}">Giỏ
                                             hàng</a></span></span>
                             </a>
-                            {{-- <ul class="dropdown-menu dropdown-menu-mini-cart">
-                                <li>
-                                    <div class="widget woocommerce widget_shopping_cart">
-                                        <div class="widget_shopping_cart_content">
-                                            <ul class="woocommerce-mini-cart cart_list product_list_widget ">
-                                                <li class="woocommerce-mini-cart-item mini_cart_item">
-                                                    <a href="#" class="remove" aria-label="Remove this item"
-                                                        data-product_id="65" data-product_sku="">×</a>
-                                                    <a href="single-product-sidebar.html">
-                                                        <img src="{{asset('home/assets/images/products/mini-cart1.jpg')  }}"
-                                                            class="attachment-shop_thumbnail size-shop_thumbnail wp-post-image"
-                                                            alt="">XONE Wireless Controller&nbsp;
-                                                    </a>
-                                                    <span class="quantity">1 ×
-                                                        <span class="woocommerce-Price-amount amount">
-                                                            <span
-                                                                class="woocommerce-Price-currencySymbol">$</span>64.99</span>
-                                                    </span>
-                                                </li>
-                                                <li class="woocommerce-mini-cart-item mini_cart_item">
-                                                    <a href="#" class="remove" aria-label="Remove this item"
-                                                        data-product_id="27" data-product_sku="">×</a>
-                                                    <a href="single-product-sidebar.html">
-                                                        <img src="{{asset('home/assets/images/products/mini-cart2.jpg')  }}"
-                                                            class="attachment-shop_thumbnail size-shop_thumbnail wp-post-image"
-                                                            alt="">Gear Virtual Reality 3D with Bluetooth Glasses&nbsp;
-                                                    </a>
-                                                    <span class="quantity">1 ×
-                                                        <span class="woocommerce-Price-amount amount">
-                                                            <span
-                                                                class="woocommerce-Price-currencySymbol">$</span>72.00</span>
-                                                    </span>
-                                                </li>
-                                            </ul>
-                                            <!-- .cart_list -->
-                                            <p class="woocommerce-mini-cart__total total">
-                                                <strong>Subtotal:</strong>
-                                                <span class="woocommerce-Price-amount amount">
-                                                    <span class="woocommerce-Price-currencySymbol">$</span>136.99</span>
-                                            </p>
-                                            <p class="woocommerce-mini-cart__buttons buttons">
-                                                <a href="cart.html" class="button wc-forward">View cart</a>
-                                                <a href="checkout.html" class="button checkout wc-forward">Checkout</a>
-                                            </p>
-                                        </div>
-                                        <!-- .widget_shopping_cart_content -->
-                                    </div>
-                                    <!-- .widget_shopping_cart -->
-                                </li>
-                            </ul> --}}
                             <!-- .dropdown-menu-mini-cart -->
                         </li>
                     </ul>
@@ -907,7 +857,7 @@
                             <!-- /.custom-logo-link -->
                         </div>
                         <!-- /.site-branding -->
-                        <!-- ============================================================= End Header Logo ============================================================= -->
+                        <!-- ============================================================= End Header Logo ============================= -->
                         <div class="handheld-header-links">
                             <ul class="columns-3">
                                 <li class="my-account">
@@ -1557,16 +1507,11 @@
                                 <span class="count">2</span>
                             </a>
                         </div>
-                        <!-- /.row -->
                     </div>
-                    <!-- .techmarket-sticky-wrap -->
                 </div>
-                <!-- .handheld-header -->
             </div>
-            <!-- .handheld-only -->
         </header>
-        <!-- .header-v1 -->
-        <!-- ============================================================= Header End ============================================================= -->
+        <!-- ============================= Header End ============================= -->
         @yield('main');
         @yield('loading');
         <!-- Icon mở chat -->
@@ -1581,7 +1526,6 @@
                 <span id="close-chat" class="real-time-close">&times;</span>
             </div>
             <div id="chat-messages" class="real-time-content">
-                <!-- Tin nhắn sẽ hiển thị ở đây -->
             </div>
             <div class="real-time-sent-content">
                 <input type="text" id="chat-input" placeholder="Nhập tin nhắn...">
@@ -1594,64 +1538,6 @@
             <div class="col-full">
                 <div class="before-footer-wrap">
                     <div class="col-full">
-                        {{-- <div class="footer-newsletter">
-                            <div class="media">
-                                <i class="footer-newsletter-icon tm tm-newsletter"></i>
-                                <div class="media-body">
-                                    <div class="clearfix">
-                                        <div class="newsletter-header">
-                                            <h5 class="newsletter-title">Đăng ký </h5>
-                                            <span class="newsletter-marketing-text">... và nhận ngay
-                                                <strong>Phiếu giảm giá 100k cho lần đầu mua hàng</strong>
-                                            </span>
-                                        </div>
-                                        <!-- .newsletter-header -->
-                                        <div class="newsletter-body">
-                                            <form class="newsletter-form">
-                                                <input type="text" placeholder="Enter your email address">
-                                                <button class="button" type="button">Đăng ký ngay</button>
-                                            </form>
-                                        </div>
-                                        <!-- .newsletter body -->
-                                    </div>
-                                    <!-- .clearfix -->
-                                </div>
-                                <!-- .media-body -->
-                            </div>
-                            <!-- .media -->
-                        </div> --}}
-                        <!-- .footer-newsletter -->
-                        {{-- <div class="footer-social-icons">
-                            <ul class="social-icons nav">
-                                <li class="nav-item">
-                                    <a class="sm-icon-label-link nav-link" href="#">
-                                        <i class="fa fa-facebook"></i> Facebook</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="sm-icon-label-link nav-link" href="#">
-                                        <i class="fa fa-twitter"></i> Twitter</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="sm-icon-label-link nav-link" href="#">
-                                        <i class="fa fa-google-plus"></i> Google+</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="sm-icon-label-link nav-link" href="#">
-                                        <i class="fa fa-vimeo-square"></i> Vimeo</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="sm-icon-label-link nav-link" href="#">
-                                        <i class="fa fa-rss"></i> RSS</a>
-                                </li>
-                            </ul>
-                        </div> --}}
-                        <!-- .footer-social-icons -->
-                        {{--
-                    </div> --}}
-                        <!-- .col-full -->
-                        {{--
-                </div> --}}
-                        <!-- .before-footer-wrap -->
                         <div class="footer-widgets-block">
                             <div class="row">
                                 <div class="footer-contact">
@@ -1726,16 +1612,10 @@
                                                     <address class="footer-contact-address">{{ $config->address }}
                                                     </address>
                                                 </div>
-                                                <!-- .media-body -->
                                             </div>
-                                            <!-- .media -->
                                         </div>
-                                        <!-- .footer-contact-info -->
-                                        <!-- .footer-payment-info -->
                                     </div>
-                                    <!-- .contact-payment-wrap -->
                                 </div>
-                                <!-- .footer-contact -->
                                 <div class="footer-widgets">
                                     <div class="columns">
                                         <aside class="widget clearfix">
@@ -1744,22 +1624,22 @@
                                                 <div class="menu-footer-menu-1-container">
                                                     <ul id="menu-footer-menu-1" class="menu">
                                                         <li class="menu-item">
-                                                            <a href="shop.html">Computers &#038; Laptops</a>
+                                                            <a href="{{ route('client.product.index') }}">Điện thoại</a>
                                                         </li>
                                                         <li class="menu-item">
-                                                            <a href="shop.html">Cameras &#038; Photography</a>
+                                                            <a href="{{ route('client.product.index') }}">Laptop</a>
                                                         </li>
                                                         <li class="menu-item">
-                                                            <a href="shop.html">Smart Phones &#038; Tablets</a>
+                                                            <a href="{{ route('client.product.index') }}">Máy tính bảng</a>
                                                         </li>
                                                         <li class="menu-item">
-                                                            <a href="shop.html">Video Games &#038; Consoles</a>
+                                                            <a href="{{ route('client.product.index') }}">Tai nghe</a>
                                                         </li>
                                                         <li class="menu-item">
-                                                            <a href="shop.html">TV</a>
+                                                            <a href="{{ route('client.product.index') }}">TV</a>
                                                         </li>
                                                         <li class="menu-item">
-                                                            <a href="shop.html">Car Electronic &#038; GPS</a>
+                                                            <a href="{{ route('client.product.index') }}">Car Máy ảnh</a>
                                                         </li>
                                                     </ul>
                                                 </div>
@@ -1835,26 +1715,20 @@
                     </div>
                     <!-- .col-full -->
                 </div> --}}
-                        <!-- .site-info -->
                     </div>
-                    <!-- .col-full -->
         </footer>
-        <!-- .site-footer -->
     </div>
     <script>
         document.querySelector('.user-menu-toggle').addEventListener('click', function() {
             var dropdownMenu = document.getElementById('userDropdownMenu');
             dropdownMenu.style.display = dropdownMenu.style.display === 'block' ? 'none' : 'block';
         });
-
-        // Đóng menu thả xuống nếu người dùng nhấp chuột bên ngoài menu
         window.addEventListener('click', function(e) {
             if (!e.target.matches('.user-menu-toggle') && !e.target.closest('.user-menu')) {
                 document.getElementById('userDropdownMenu').style.display = 'none';
             }
         });
     </script>
-
     <script type="text/javascript" src="{{ url('') }}/home/assets/js/jquery.min.js"></script>
     <script type="text/javascript" src="{{ url('') }}/home/assets/js/tether.min.js"></script>
     <script type="text/javascript" src="{{ url('') }}/home/assets/js/bootstrap.min.js"></script>
@@ -1870,7 +1744,6 @@
     <script type="text/javascript" src="{{ url('') }}/home/assets/js/slick.min.js"></script>
     <script type="text/javascript" src="{{ url('') }}/home/assets/js/scripts.js"></script>
     <script src="https://js.pusher.com/8.4.0/pusher.min.js"></script>
-
     @vite(['resources/js/app.js'])
     <script>
         var sendMessageUrl = "{{ route('client.message.send') }}";
@@ -1882,5 +1755,4 @@
     <script type="text/javascript" src="{{ url('') }}/home/assets/js/chat.js"></script>
 
 </body>
-
 </html>
