@@ -39,6 +39,7 @@
                     <ul class="menu">
                         <li class="sidebar-title">Menu</li>
 
+
                         <li class="sidebar-item  {{ request()->routeIs('admin.index') ? 'active' : '' }}">
                             <a href="{{route('admin.index')}}" class='sidebar-link'>
 
@@ -46,6 +47,7 @@
                                 <span>Tổng quan</span>
                             </a>
                         </li>
+
                         <li class="sidebar-item  {{ request()->routeIs('admin.revenue*') ? 'active' : '' }}">
                             <a href="{{route('admin.revenue.revenue')}}" class='sidebar-link'>
                                 <i class="bi bi-kanban-fill"></i>

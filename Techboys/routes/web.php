@@ -17,11 +17,23 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ProductVariantController;
 use App\Http\Controllers\RevenueController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Cache;
+use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 // Client routes
-Route::get('/', function () {
+Route::middleware(['track.online'])->group(function(){
+    Route::get('/', function () {
     return view('client.home.home');
-})->name('home');
+    })->name('home');
+});
+Route::get('/online-users', function () {
+    // Đếm số lượng session còn trong cache
+    $onlineUsers = collect(Cache::getStore()->getPrefix())
+        ->filter(fn($key) => str_contains($key, 'user-online-'))
+        ->count();
+
+    return response()->json(['online' => $onlineUsers]);
+});
 
 Route::get('/blog', [BlogController::class, 'indexClient'])->name('blog');
 Route::get('blog/{slug}', [BlogController::class, 'DetailBlog'])->name('DetailBlog');
@@ -53,7 +65,7 @@ Route::post('/login/Client', [UserController::class, 'loginClient'])->name('logi
 //contact client
 Route::get('/contact', function () {
     return view('client.contact.contact');
-});
+})->name('contact');
 Route::post('/contact', [ContactController::class, 'saveContact']);
 
 // Đăng ký
