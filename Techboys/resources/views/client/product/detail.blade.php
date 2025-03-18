@@ -550,7 +550,8 @@
                                                                                     <input type="hidden" name="comment_rate" value="{{ $commments->rate }}">
                                                                                     <input type="hidden" name="comment_user_name" value="{{ $commments->user->name }}">
                                                                                     <input type="hidden" name="comment_created_at" value="{{ $commments->created_at }}">
-                                                                                 
+                                                                                    <input type="hidden" name="comment_product_id" value="{{ $commments->product_id }}">
+                                                                                  
                                                                                     <button type="submit" class="submit-reply">Gửi</button>
                                                                                 </form>
                                                                             </div>
