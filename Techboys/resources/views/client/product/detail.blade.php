@@ -547,6 +547,7 @@
                                                                                     <textarea rows="3" name="rep_content" placeholder="Nhập phản hồi"></textarea>
                                                                                     <input type="hidden" name="comment_id" value="{{ $commments->id }}">
                                                                                     <input type="hidden" name="comment_content" value="{{ $commments->content }}">
+                                                                                    <input type="hidden" name="comment_rate" value="{{ $commments->rate }}">
                                                                                    
                                                                                     <button type="submit" class="submit-reply">Gửi</button>
                                                                                 </form>
