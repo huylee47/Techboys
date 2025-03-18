@@ -186,7 +186,10 @@
             border-radius: 20px;
         }
 
-     
+        .toggle-replies-button:hover {
+            background: none;
+            color: #007bff;
+        }
     </style>
     <div id="page" class="hfeed site">
         <div id="content" class="site-content" tabindex="-1">
