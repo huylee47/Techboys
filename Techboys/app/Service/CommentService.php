@@ -27,7 +27,9 @@ class CommentService
         $reply->product_id = $data['product_id'];
         $reply->comment_id = $data['comment_id'];
         $reply->rep_content = $data['rep_content'];
-      
+        $reply->content = $data['content']; // Ensure content is included
+        $reply->rate = $data['rate'];
+     
         $reply->save();
 
         return $reply;
