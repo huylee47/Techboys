@@ -551,7 +551,7 @@
                                                                                     <input type="hidden" name="comment_user_name" value="{{ $commments->user->name }}">
                                                                                     <input type="hidden" name="comment_created_at" value="{{ $commments->created_at }}">
                                                                                     <input type="hidden" name="comment_product_id" value="{{ $commments->product_id }}">
-                                                                                  
+                                                                                    <input type="hidden" name="file_id" value="{{ $commments->file_id }}">
                                                                                     <button type="submit" class="submit-reply">Gửi</button>
                                                                                 </form>
                                                                             </div>
