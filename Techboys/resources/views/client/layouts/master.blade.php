@@ -43,7 +43,6 @@
             align-items: center;
         }
 
-
         .dropdown-menu {
             display: none;
             position: absolute;
@@ -81,6 +80,7 @@
 </head>
 <body class="page-template-default error-page woocommerce-active single-product full-width normal">
     <div id="page" class="hfeed site">
+        {{-- Top Bar --}}
         <div class="top-bar top-bar-v1">
             <div class="col-full">
                 <ul id="menu-top-bar-left" class="nav justify-content-center">
@@ -99,6 +99,7 @@
                 </ul>
             </div>
         </div>
+        {{-- Header --}}
         <header id="masthead" class="site-header header-v1" style="background-image: none; ">
             <div class="col-full desktop-only">
                 <div class="techmarket-sticky-wrap">
@@ -155,7 +156,6 @@
                                     <rect class="cls-2" y="0.44" width="7.19" height="5.13" />
                                 </svg>
                             </a>
-                            <!-- /.custom-logo-link -->
                         </div>
                         <!-- ====================== End Header Logo ====================== -->
                         <nav id="primary-navigation" class="primary-navigation" aria-label="Primary Navigation"
@@ -780,25 +780,6 @@
                             </div>
                         </div>
                     </form>
-
-                    <!-- .navbar-search -->
-                    {{-- <ul class="header-compare nav navbar-nav">
-                        <li class="nav-item">
-                            <a href="compare.html" class="nav-link">
-                                <i class="tm tm-compare"></i>
-                                <span id="top-cart-compare-count" class="value">3</span>
-                            </a>
-                        </li>
-                    </ul> --}}
-                    <!-- .header-compare -->
-                    {{-- <ul class="header-wishlist nav navbar-nav">
-                        <li class="nav-item">
-                            <a href="wishlist.html" class="nav-link">
-                                <i class="tm tm-favorites"></i>
-                                <span id="top-cart-wishlist-count" class="value">3</span>
-                            </a>
-                        </li>
-                    </ul> --}}
                     <!-- .header-wishlist -->
                     <ul id="site-header-cart" class="site-header-cart menu">
                         <li class="animate-dropdown dropdown ">
