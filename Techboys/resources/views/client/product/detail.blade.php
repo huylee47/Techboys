@@ -537,17 +537,15 @@
                                                                                         alt=""
                                                                                         style="width: auto; max-height: 150px;">
                                                                                 @endif
-                                                                                @foreach ($commments->replies as $reply)
-                                                                               <div style="margin-left: 30px">
-                                                                                   <p class="comment-author" style="width: max-content;">
-                                                                                        Admin
-                                                                                    </p>
-                                                                                        <p style="width: 1000px;">{{ $reply->rep_content }}</p>
-                                                                               
-                                                                               </div>
-                                                                                 
-                                                                             
-                                                                            @endforeach
+                                                                                <button class="toggle-replies-button" data-comment-id="{{ $commments->id }}">Hiển thị phản hồi</button>
+                                                                                <div class="replies-container" id="replies-container-{{ $commments->id }}" style="display: none;">
+                                                                                    @foreach ($commments->replies as $reply)
+                                                                                        <div style="margin-left: 30px">
+                                                                                            <p class="comment-author" style="width: max-content;">Admin</p>
+                                                                                            <p style="width: 1000px;">{{ $reply->rep_content }}</p>
+                                                                                        </div>
+                                                                                    @endforeach
+                                                                                </div>
                                                                             </p>
                                                                             @if(Auth::check() && Auth::user()->role_id == 1)
                                                                                 <button class="reply-button" data-comment-id="{{ $commments->id }}">Phản hồi</button>
@@ -799,6 +797,16 @@
                 const commentId = this.getAttribute('data-comment-id');
                 const replyInput = document.getElementById(`reply-input-${commentId}`);
                 replyInput.style.display = replyInput.style.display === 'none' ? 'block' : 'none';
+            });
+        });
+    </script>
+    <script>
+        document.querySelectorAll('.toggle-replies-button').forEach(button => {
+            button.addEventListener('click', function() {
+                const commentId = this.getAttribute('data-comment-id');
+                const repliesContainer = document.getElementById(`replies-container-${commentId}`);
+                repliesContainer.style.display = repliesContainer.style.display === 'none' ? 'block' : 'none';
+                this.textContent = repliesContainer.style.display === 'none' ? 'Hiển thị phản hồi' : 'Ẩn phản hồi';
             });
         });
     </script>
