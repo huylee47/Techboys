@@ -98,7 +98,7 @@ class CommentController extends Controller
             'rate' => $request->comment_rate,
             'file_id' => $request->file_id, // Ensure file_id is included
             'user_name' => $request->comment_user_name,
-           
+            'created_at' => $request->comment_created_at,
         ];
 
         $commentService->storeReply($data);
