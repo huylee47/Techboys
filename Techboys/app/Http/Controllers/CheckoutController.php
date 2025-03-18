@@ -106,20 +106,23 @@ class CheckoutController extends Controller
     
         if ($inputData['vnp_ResponseCode'] == '00') {
             $billData['payment_status'] = 1;
-    
+        
             $response = $this->checkoutService->storeBill(new checkoutRequest($billData));
-            // dd($response->getContent());
             $newBill = json_decode($response->getContent(), true);
-    
+        
+            if (!$newBill['success']) {
+                return view('client.payment.error', ['message' => $newBill['message']]);
+            }
+        
             Redis::del($redisKey);
-    
+        
             $this->checkoutService->handlePaymentSuccess($newBill['bill_id']);
-    
+        
             return view('client.payment.vnpay');
         } else {
-            // return $this->checkoutService->handlePaymentFail($billData['id']);
             return view('client.payment.error');
         }
+        
     }
     
     

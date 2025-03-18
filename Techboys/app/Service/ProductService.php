@@ -4,6 +4,7 @@ namespace App\Service;
 
 use App\Models\Brand;
 use App\Models\Color;
+use App\Models\Comment;
 use App\Models\Images;
 use App\Models\Product;
 use App\Models\ProductCategory;
@@ -189,8 +190,9 @@ class ProductService{
         $images = Images::where('product_id', $product->id)->get();
         $variants = ProductVariant::where('product_id', $product->id)->get();
         if ($product) {
+            $commment = Comment::where('product_id', $product->id)->get();
             $relatedProducts = Product::where('category_id', $product->category_id)->where('id', '!=', $product->id)->take(10)->get();
-            return view('client.product.detail', compact('product','relatedProducts','images', 'variants'));
+            return view('client.product.detail', compact('product','commment','relatedProducts','images', 'variants'));
         } else {
             abort(404);
         }
