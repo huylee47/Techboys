@@ -243,9 +243,18 @@
                             <span>Tất cả sản phẩm</span>
                         </button>
                         <ul id="menu-departments-menu" class="dropdown-menu yamm departments-menu-dropdown">
-                            <li class="highlight menu-item animate-dropdown">
-                                <a title="Value of the Day" href="home-v2.html">Value of the Day</a>
-                            </li>
+                            @foreach ($loadAll as $category)
+                                <li class="highlight menu-item animate-dropdown">
+                                    <a title="{{ $category->name }}" href="home-v2.html">{{ $category->name }}</a>
+                                </li>
+                            @endforeach
+
+
+
+
+
+
+
                             <li class="highlight menu-item animate-dropdown">
                                 <a title="Top 100 Offers" href="home-v3.html">Top 100 Offers</a>
                             </li>
