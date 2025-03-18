@@ -16,8 +16,8 @@ return new class extends Migration
             $table->foreignId('user_id')->nullable();
             $table->foreignId('product_id');
             $table->text('content');
-            $table->decimal('rate', 10, 2);
-            $table->foreignId('file_id')->nullable();;
+            $table->decimal('rate', 10, 2)->default(0);
+            $table->foreignId('file_id')->nullable();
             $table->foreignId('status_id')->default(1);
             $table->timestamps();
         });
