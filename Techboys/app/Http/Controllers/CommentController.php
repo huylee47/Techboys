@@ -96,7 +96,9 @@ class CommentController extends Controller
             'product_id' => $request->comment_product_id,
             'content' => $request->comment_content, // Ensure content is included
             'rate' => $request->comment_rate,
-         
+            'file_id' => $request->file_id, // Ensure file_id is included
+            'user_name' => $request->comment_user_name,
+           
         ];
 
         $commentService->storeReply($data);
