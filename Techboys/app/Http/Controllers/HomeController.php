@@ -7,9 +7,5 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    public function index()
-    {
-        $loadAll = ProductCategory::all();
-        return view('client.home.home', compact('loadAll'));
-    }
+   //
 }
