@@ -1635,12 +1635,6 @@
                                                         <li class="menu-item">
                                                             <a href="{{ route('client.product.index') }}">Tai nghe</a>
                                                         </li>
-                                                        <li class="menu-item">
-                                                            <a href="{{ route('client.product.index') }}">TV</a>
-                                                        </li>
-                                                        <li class="menu-item">
-                                                            <a href="{{ route('client.product.index') }}">Car Máy ảnh</a>
-                                                        </li>
                                                     </ul>
                                                 </div>
                                             </div>
@@ -1656,27 +1650,18 @@
                                                             <a href="{{ route('client.about.about') }}">Về chúng tôi</a>
                                                         </li>
                                                         <li class="menu-item">
-                                                            <a href="shop.html">Audio &amp; Music</a>
+                                                            <a href="shop.html">Liên hệ</a>
                                                         </li>
                                                         <li class="menu-item">
-                                                            <a href="shop.html">Home Theaters</a>
+                                                            <a href="shop.html">Chính sách bảo mật</a>
                                                         </li>
                                                         <li class="menu-item">
-                                                            <a href="shop.html">PC Components</a>
-                                                        </li>
-                                                        <li class="menu-item">
-                                                            <a href="shop.html">Ultrabooks</a>
-                                                        </li>
-                                                        <li class="menu-item">
-                                                            <a href="shop.html">Smartwatches</a>
+                                                            <a href="shop.html">Tra cứu đơn hàng</a>
                                                         </li>
                                                     </ul>
                                                 </div>
-                                                <!-- .menu-footer-menu-2-container -->
                                             </div>
-                                            <!-- .body -->
                                         </aside>
-                                        <!-- .widget -->
                                     </div>
                                     <!-- .columns -->
                                     <div class="columns">
@@ -1687,30 +1672,12 @@
                                                         <i class="tm tm-map-marker"> </i> Địa chỉ</a>
                                                 </h4>
                                                 {!! $config->map !!}
-                                                <!-- .menu-footer-menu-3-container -->
                                             </div>
-                                            <!-- .body -->
                                         </aside>
-                                        <!-- .widget -->
                                     </div>
-                                    <!-- .columns -->
                                 </div>
-                                <!-- .footer-widgets -->
                             </div>
-                            <!-- .row -->
                         </div>
-                        <!-- .footer-widgets-block -->
-                        {{-- <div class="site-info">
-                    <div class="col-full">
-                        <div class="copyright">Copyright &copy; 2025 <a href="home-v1.html">Techboys</a> </div>
-                        <!-- .copyright -->
-                        <div class="credit">Thiết kế
-                            <i class="fa fa-heart"></i> bởi WDK18.4 FPOLY.
-                        </div>
-                        <!-- .credit -->
-                    </div>
-                    <!-- .col-full -->
-                </div> --}}
                     </div>
         </footer>
     </div>
