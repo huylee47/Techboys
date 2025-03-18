@@ -553,34 +553,37 @@
                                                                                         alt=""
                                                                                         style="width: auto; max-height: 150px;">
                                                                                 @endif
-                                                                                <button class="toggle-replies-button" data-comment-id="{{ $commments->id }}">Hiển thị phản hồi</button>
-                                                                                <div class="replies-container" id="replies-container-{{ $commments->id }}" style="display: none;">
-                                                                                    @foreach ($commments->replies as $reply)
-                                                                                        <div style="margin-left: 30px">
-                                                                                            <p class="comment-author" style="width: max-content;">Admin</p>
-                                                                                            <p style="width: 1000px;">{{ $reply->rep_content }}</p>
-                                                                                        </div>
-                                                                                    @endforeach
-                                                                                </div>
+                                                                                @if($commments->replies->isNotEmpty() && $commments->replies->first()->rep_content)
+                                                                                    <button class="toggle-replies-button" data-comment-id="{{ $commments->id }}">Hiển thị phản hồi</button>
+                                                                                    <div class="replies-container" id="replies-container-{{ $commments->id }}" style="display: none;">
+                                                                                        @foreach ($commments->replies as $reply)
+                                                                                            <div style="margin-left: 30px">
+                                                                                                <p class="comment-author" style="width: max-content;">Admin</p>
+                                                                                                <p style="width: 1000px;">{{ $reply->rep_content }}</p>
+                                                                                            </div>
+                                                                                        @endforeach
+                                                                                    </div>
+                                                                                @else
+                                                                                <br>
+                                                                                    @if(Auth::check() && Auth::user()->role_id == 1)
+                                                                                        <button class="reply-button" data-comment-id="{{ $commments->id }}">Phản hồi</button>
+                                                                                    @endif
+                                                                                    <div class="reply-input" id="reply-input-{{ $commments->id }}" style="display: none;">
+                                                                                        <form method="post" action="{{ route('client.comment.reply') }}">
+                                                                                            @csrf
+                                                                                            <textarea rows="3" name="rep_content" placeholder="Nhập phản hồi"></textarea>
+                                                                                            <input type="hidden" name="comment_id" value="{{ $commments->id }}">
+                                                                                            <input type="hidden" name="comment_content" value="{{ $commments->content }}">
+                                                                                            <input type="hidden" name="comment_rate" value="{{ $commments->rate }}">
+                                                                                            <input type="hidden" name="comment_user_name" value="{{ $commments->user->name }}">
+                                                                                            <input type="hidden" name="comment_created_at" value="{{ $commments->created_at }}">
+                                                                                            <input type="hidden" name="comment_product_id" value="{{ $commments->product_id }}">
+                                                                                            <input type="hidden" name="file_id" value="{{ $commments->file_id }}">
+                                                                                            <button type="submit" class="submit-reply">Gửi</button>
+                                                                                        </form>
+                                                                                    </div>
+                                                                                @endif
                                                                             </p>
-                                                                            @if(Auth::check() && Auth::user()->role_id == 1)
-                                                                                <button class="reply-button" data-comment-id="{{ $commments->id }}">Phản hồi</button>
-                                                                            @endif
-                                                                            <div class="reply-input" id="reply-input-{{ $commments->id }}" style="display: none;">
-                                                                                <form method="post" action="{{ route('client.comment.reply') }}">
-                                                                                    @csrf
-                                                                                    <textarea rows="3" name="rep_content" placeholder="Nhập phản hồi"></textarea>
-                                                                                    <input type="hidden" name="comment_id" value="{{ $commments->id }}">
-                                                                                    <input type="hidden" name="comment_content" value="{{ $commments->content }}">
-                                                                                    <input type="hidden" name="comment_rate" value="{{ $commments->rate }}">
-                                                                                    <input type="hidden" name="comment_user_name" value="{{ $commments->user->name }}">
-                                                                                    <input type="hidden" name="comment_created_at" value="{{ $commments->created_at }}">
-                                                                                    <input type="hidden" name="comment_product_id" value="{{ $commments->product_id }}">
-                                                                                    <input type="hidden" name="file_id" value="{{ $commments->file_id }}">
-                                                                                    <button type="submit" class="submit-reply">Gửi</button>
-                                                                                </form>
-                                                                            </div>
-                                                                       
                                                                         </div>
                                                                     </div>
                                                                 </div>
