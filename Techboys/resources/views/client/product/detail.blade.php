@@ -538,7 +538,7 @@
                                                                                         style="width: auto; max-height: 150px;">
                                                                                 @endif
                                                                                 @foreach ($commments->replies as $reply)
-                                                                               <div>
+                                                                               <div style="margin-left: 30px">
                                                                                    <p class="comment-author" style="width: max-content;">
                                                                                         Admin
                                                                                     </p>
