@@ -546,6 +546,11 @@
                                                                                     @csrf
                                                                                     <textarea rows="3" name="rep_content" placeholder="Nhập phản hồi"></textarea>
                                                                                     <input type="hidden" name="comment_id" value="{{ $commments->id }}">
+                                                                                    <input type="hidden" name="comment_id" value="{{ $commments->content }}">
+                                                                                    <input type="hidden" name="comment_id" value="{{  $commments->rate }}">
+                                                                                    <input type="hidden" name="comment_id" value="{{  $commments->user->name}}">
+                                                                                    <input type="hidden" name="comment_id" value="{{  $commments->created_at}}">
+                                                                                    <input type="hidden" name="comment_id" value="{{  $commments->product_id}}">
                                                                                     <button type="submit" class="submit-reply">Gửi</button>
                                                                                 </form>
                                                                             </div>
