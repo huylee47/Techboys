@@ -538,14 +538,15 @@
                                                                                         style="width: auto; max-height: 150px;">
                                                                                 @endif
                                                                                 @foreach ($commments->replies as $reply)
-                                                                                <div class="reply" style="margin-left: 20px; padding-left: 10px; margin-bottom: 10px;">
+                                                                              
                                                                                     <p class="comment-author" style="width: max-content;">
                                                                                         Admin
                                                                                     </p>
+                                                                            
                                                                                     <div class="description">
                                                                                         <p style="width: 1000px;">{{ $reply->rep_content }}</p>
                                                                                     </div>
-                                                                                </div>
+                                                                             
                                                                             @endforeach
                                                                             </p>
                                                                             @if(Auth::check() && Auth::user()->role_id == 1)
