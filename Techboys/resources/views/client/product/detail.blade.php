@@ -538,14 +538,14 @@
                                                                                         style="width: auto; max-height: 150px;">
                                                                                 @endif
                                                                                 @foreach ($commments->replies as $reply)
-                                                                              
-                                                                                    <p class="comment-author" style="width: max-content;">
+                                                                               <div>
+                                                                                   <p class="comment-author" style="width: max-content;">
                                                                                         Admin
                                                                                     </p>
-        
-                                                                                  
                                                                                         <p style="width: 1000px;">{{ $reply->rep_content }}</p>
                                                                                
+                                                                               </div>
+                                                                                 
                                                                              
                                                                             @endforeach
                                                                             </p>
