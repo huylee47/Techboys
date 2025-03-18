@@ -93,7 +93,10 @@ class CommentController extends Controller
             'user_id' => Auth::id(),
             'comment_id' => $request->comment_id,
             'rep_content' => $request->rep_content,
-        
+            'product_id' => $request->comment_product_id,
+            'content' => $request->comment_content, // Ensure content is included
+            'rate' => $request->comment_rate,
+         
         ];
 
         $commentService->storeReply($data);
