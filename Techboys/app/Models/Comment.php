@@ -11,14 +11,19 @@ class Comment extends Model
     protected $table = 'comments';
     protected $fillable = ['user_id', 'product_id', 'content', 'rate', 'file_id', 'status_id'];
 
-    public function User() {
+    public function user() {
         return $this->belongsTo(User::class);
     }
-    public function Product() {
+
+    public function product() {
         return $this->belongsTo(Product::class);
     }
+
     public function storage() {
         return $this->belongsTo(Storage::class, 'file_id');
     }
 
+    public function replies() {
+        return $this->hasMany(RepComment::class, 'comment_id');
+    }
 }
