@@ -537,6 +537,16 @@
                                                                                         alt=""
                                                                                         style="width: auto; max-height: 150px;">
                                                                                 @endif
+                                                                                @foreach ($commments->replies as $reply)
+                                                                                <div class="reply">
+                                                                                    <p class="comment-author" style="width: max-content;">
+                                                                                        Admin
+                                                                                    </p>
+                                                                                    <div class="description">
+                                                                                        <p style="width: 1000px;">{{ $reply->rep_content }}</p>
+                                                                                    </div>
+                                                                                </div>
+                                                                            @endforeach
                                                                             </p>
                                                                             @if(Auth::check() && Auth::user()->role_id == 1)
                                                                                 <button class="reply-button" data-comment-id="{{ $commments->id }}">Phản hồi</button>
@@ -555,6 +565,7 @@
                                                                                     <button type="submit" class="submit-reply">Gửi</button>
                                                                                 </form>
                                                                             </div>
+                                                                       
                                                                         </div>
                                                                     </div>
                                                                 </div>
