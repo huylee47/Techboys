@@ -68,7 +68,7 @@ class CommentController extends Controller
             'user_id' => Auth::id(),
             'product_id' => $request->product_id,
             'content' => $request->comment,
-            'rate' => $request->rate,
+            'rate' => $request->rate, // Ensure rate is included
         ];
 
         if ($request->hasFile('media')) {
@@ -89,13 +89,11 @@ class CommentController extends Controller
 
     public function reply(Request $request, CommentService $commentService)
     {
-    
-
         $data = [
             'user_id' => Auth::id(),
             'comment_id' => $request->comment_id,
             'rep_content' => $request->rep_content,
-            'product_id' => Comment::find($request->comment_id)->product_id,
+        
         ];
 
         $commentService->storeReply($data);
