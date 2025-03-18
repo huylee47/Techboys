@@ -162,7 +162,7 @@
                             data-nav="flex-menu">
                             <ul id="menu-primary-menu" class="nav yamm">
                                 <li class="menu-item animate-dropdown">
-                                    <a title="about us" href="{{ route('about') }}">Về chúng tôi</a>
+                                    <a title="about us" href="{{ route('client.about.about') }}">Về chúng tôi</a>
                                 </li>
                                 <li class="menu-item animate-dropdown">
                                     <a title="Headphones Sale" href="product-category.html">Liên hệ</a>
@@ -1643,21 +1643,17 @@
                                                         </li>
                                                     </ul>
                                                 </div>
-                                                <!-- .menu-footer-menu-1-container -->
                                             </div>
-                                            <!-- .body -->
                                         </aside>
-                                        <!-- .widget -->
                                     </div>
-                                    <!-- .columns -->
                                     <div class="columns">
                                         <aside class="widget clearfix">
                                             <div class="body">
-                                                <h4 class="widget-title">&nbsp;</h4>
+                                                <h4 class="widget-title">Hỗ trợ - Dịch vụ</h4>
                                                 <div class="menu-footer-menu-2-container">
                                                     <ul id="menu-footer-menu-2" class="menu">
                                                         <li class="menu-item">
-                                                            <a href="shop.html">Printers &#038; Ink</a>
+                                                            <a href="{{ route('client.about.about') }}">Về chúng tôi</a>
                                                         </li>
                                                         <li class="menu-item">
                                                             <a href="shop.html">Audio &amp; Music</a>
