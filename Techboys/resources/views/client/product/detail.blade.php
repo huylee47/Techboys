@@ -542,10 +542,10 @@
                                                                                     <p class="comment-author" style="width: max-content;">
                                                                                         Admin
                                                                                     </p>
-                                                                            
-                                                                                    <div class="description">
+        
+                                                                                  
                                                                                         <p style="width: 1000px;">{{ $reply->rep_content }}</p>
-                                                                                    </div>
+                                                                               
                                                                              
                                                                             @endforeach
                                                                             </p>
