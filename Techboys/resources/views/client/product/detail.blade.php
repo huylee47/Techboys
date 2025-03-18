@@ -174,6 +174,19 @@
         .reply-input button:hover {
             background-color: #0056b3;
         }
+
+        .toggle-replies-button {
+            margin-top: 5px;
+            margin-left: 3px;
+            padding: 5px 15px;
+            border: none;
+            background: none;
+            color: #007bff;
+            cursor: pointer;
+            border-radius: 20px;
+        }
+
+     
     </style>
     <div id="page" class="hfeed site">
         <div id="content" class="site-content" tabindex="-1">
