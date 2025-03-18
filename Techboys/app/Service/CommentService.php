@@ -25,7 +25,9 @@ class CommentService
         $reply = new RepComment();
         $reply->user_id = $data['user_id'];
         $reply->product_id = $data['product_id'];
-  
+        $reply->comment_id = $data['comment_id'];
+        $reply->rep_content = $data['rep_content'];
+      
         $reply->save();
 
         return $reply;
