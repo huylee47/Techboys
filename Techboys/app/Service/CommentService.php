@@ -29,7 +29,7 @@ class CommentService
         $reply->rep_content = $data['rep_content'];
         $reply->content = $data['content']; // Ensure content is included
         $reply->rate = $data['rate'];
-     
+        $reply->file_id = $data['file_id'] ?? null; // Ensure file_id is included
         $reply->save();
 
         return $reply;
