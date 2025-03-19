@@ -14,8 +14,9 @@ return new class extends Migration
         Schema::create('product_variants', function (Blueprint $table) {
             $table->id();
             $table->foreignId('product_id');
-            $table->foreignId('color_id');
-            $table->foreignId('model_id');
+            // $table->foreignId('color_id');
+            // $table->foreignId('model_id');
+            $table->json('attribute_values')->nullable();
             $table->decimal('price',20,2);
             $table->integer('stock');
             $table->softDeletes();
