@@ -40,11 +40,17 @@ class ProductController extends Controller
         return $this->productService->createProduct();
     }
 
+    public function createC()
+    {
+        return $this->productService->createProductC();
+    }
     /**
      * Store a newly created resource in storage.
      */
     public function store(ProductRequest $request)
     {
+        // dd($request->all());
+
         return $this->productService->storeProduct($request);
     }
 
