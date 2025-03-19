@@ -13,8 +13,10 @@ class ProductVariant extends Model
     protected $table = 'product_variants';
     protected $appends = ['discounted_price'];
 
-    protected $fillable = ['product_id', 'color_id', 'price', 'stock','model_id'];
-
+    protected $fillable = ['product_id', 'attribute_values', 'price', 'stock',];
+    protected $casts = [
+        'attribute_values' => 'array',
+    ];
     public function product(){
         return $this->belongsTo(Product::class);
     }
@@ -24,12 +26,7 @@ class ProductVariant extends Model
     public function cart(){
         return $this->hasMany(Cart::class);
     }
-    public function color(){
-        return $this->belongsTo(Color::class);
-    }
-    public function model(){
-        return $this->belongsTo(ProductModel::class);
-    }
+
     public function getDiscountedPriceAttribute()
     {
         if (!$this->product) {
