@@ -2,6 +2,7 @@
 
 namespace App\Service;
 
+use App\Models\Attributes;
 use App\Models\Brand;
 use App\Models\Color;
 use App\Models\Comment;
@@ -30,13 +31,37 @@ class ProductService{
     }
     public function createProduct(){
         $brands = Brand::all();
-        $colors = Color::all();
-        $P_Models = ProductModel:: all();
         $categories = ProductCategory::all();
-        return view('admin.product.add',compact('brands','colors','P_Models','categories'));
+        $attributes = Attributes::with('values')->get();
+        return view('admin.product.add',compact('brands','categories','attributes'));
+    }
+    public function createProductC(){
+        $brands = Brand::all();
+        $categories = ProductCategory::all();
+        $attributes = Attributes::with('values')->get();
+        return view('admin.product.addC',compact('brands','categories','attributes'));
+    }
+    private function generateCombinations($arrays, $prefix = [])
+    {
+        $result = [];
+    
+        if (empty($arrays)) {
+            return [$prefix];
+        }
+    
+        $keys = array_keys($arrays);
+        $firstKey = array_shift($keys);
+        $remaining = array_intersect_key($arrays, array_flip($keys));
+    
+        foreach ($arrays[$firstKey] as $value) {
+            $newPrefix = array_merge($prefix, [$firstKey => $value]);
+            $result = array_merge($result, $this->generateCombinations($remaining, $newPrefix));
+        }
+    
+        return $result;
     }
     public function storeProduct($request){
-    
+        // dd($request->all());
         $imageName = null;
         if ($request->hasFile('img')) {
             $imageName = time() . '_' . uniqid() . '.' . $request->img->getClientOriginalExtension();
@@ -48,6 +73,8 @@ class ProductService{
             'name' => $request->name,
             'brand_id' => $request->brand_id,
             'purchases' => 0,
+            'base_price' => $request->base_price,
+            'is_featured' => $request->is_featured ?? 0,
             'img' => $imageName,
             'description' => $request->description,
             'category_id' => $request->category_id,
@@ -60,30 +87,44 @@ class ProductService{
         $image->image = $imageName;
         $image->save();
 
-        if ($request->has('color_id') && $request->has('model_id') && $request->has('price') && $request->has('stock')) {
-            foreach ($request->color_id as $key => $colorId) {
-                if (!empty($colorId) && !empty($request->model_id[$key]) && !empty($request->price[$key]) && !empty($request->stock[$key])) {
+        if ($request->is_featured == 1) {
+            foreach ($request->variants as $variantData) {
+                $attributeValues = [];
+                foreach ($variantData['attributes'] as $attributeName => $values) {
+                    $attributeValues[$attributeName] = is_array($values) ? $values : [$values];
+                }
+    
+                $combinations = $this->generateCombinations($attributeValues);
+    
+                foreach ($combinations as $combination) {
                     ProductVariant::create([
                         'product_id' => $product->id,
-                        'color_id' => $colorId,
-                        'model_id' => $request->model_id[$key],
-                        'price' => $request->price[$key],
-                        'stock' => $request->stock[$key] ?? 0,
+                        'stock' =>0,
+                        'attribute_values' => json_encode($combination, JSON_UNESCAPED_UNICODE),
+                        'price' => $variantData['price'] ?? $product->base_price,
                     ]);
                 }
             }
         }
-    
+
         return redirect()->route('admin.product.index')->with('success', 'Thêm sản phẩm thành công');
     }
     public function editProduct($request){
         $product = Product::where('id', $request->id)->first();
         $brands = Brand::all();
-        $colors = Color::all();
-        $P_Models = ProductModel:: all();
         $categories = ProductCategory::all();
         $variants = ProductVariant::where('product_id', $product->id)->get();
-        return view('admin.product.edit',compact('product','brands','colors','P_Models','categories','variants'));
+        $attributes = Attributes::with('values')->get();
+        $countVariants = $variants->count();
+        // return response()->json([
+        //     'product' => $product,
+        //     'brands' => $brands,
+        //     'categories' => $categories,
+        //     'variants' => $variants,
+        //     'attributes' => $attributes,
+        //     'countVariants' => $countVariants,
+        // ]);
+        return view('admin.product.edit', compact('product', 'brands', 'categories', 'variants', 'attributes', 'countVariants'));
     }
     public function updateProduct($request, $id)
     {
