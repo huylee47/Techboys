@@ -26,9 +26,9 @@
             <section class="section">
                 <div class="card">
                     <div class="card-body">
-                        <h5>Người bình luận: {{ $comment->user->name }}</h5>
+                       
                         <h5>Sản phẩm: {{ $comment->product->name }}</h5>
-                        <p>Nội dung: {{ $comment->content }}</p>
+                        <h5>Nội dung: {{ $comment->content }}</h5>
                         <form action="{{ route('admin.comment.reply') }}" method="POST">
                             @csrf
                             <input type="hidden" name="comment_id" value="{{ $comment->id }}">
