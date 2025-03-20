@@ -12,7 +12,7 @@
         <div class="page-title">
             <div class="row">
                 <div class="col-12 col-md-6 order-md-1 order-last">
-                    <h3>Danh sách sản phẩm tồn kho</h3>
+                    <h3>Danh sách sản phẩm tồn khoss</h3>
                 </div>
                 <div class="col-12 col-md-6 order-md-2 order-first">
                     <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
@@ -53,8 +53,11 @@
                             <tr>
                                 <td>{{ $index + 1 }}</td>
                                 <td>
-                                    <img src="{{ url('') }}/admin/assets/images/product/{{$stock->product->img}}" style="width: 100px; height: 130px;">
-                                </td>
+    <a href="#" data-bs-toggle="modal" data-bs-target="#stockModal{{$stock->id}}">
+        <img src="{{ url('') }}/admin/assets/images/product/{{$stock->product->img}}" 
+            style="width: 100px; height: 130px;">
+    </a>
+</td>
                                 <td>{{$stock->product->name}}</td>
                                 <td>{{$stock->color->name}}</td>
                                 <td>{{ number_format($stock->price, 0, ',', '.') }} đ</td>
@@ -68,4 +71,26 @@
         </section>
     </div>
 </div>
+@foreach ($stocks as $stock)
+<div class="modal fade" id="stockModal{{$stock->id}}" tabindex="-1" aria-labelledby="stockModalLabel{{$stock->id}}" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="stockModalLabel{{$stock->id}}">Thông tin tồn kho</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p><strong>Sản phẩm:</strong> {{$stock->product->name}}</p>
+                <p><strong>Màu sắc:</strong> {{$stock->color->name}}</p>
+                <p><strong>Giá:</strong> {{ number_format($stock->price, 0, ',', '.') }} đ</p>
+                <p><strong>Số lượng tồn kho:</strong> {{ $stock->calculated_stock }}</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+            </div>
+        </div>
+    </div>
+</div>
+@endforeach
+
 @endsection
