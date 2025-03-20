@@ -515,89 +515,91 @@
                                         </div>
                                         <!-- /.advanced-review -->
                                         @foreach ($commment as $commments)
-                                            <div id="comments">
-                                                <ol class="commentlist">
-                                                    <li id="li-comment-83"
-                                                        class="comment byuser comment-author-admin bypostauthor even thread-even depth-1">
-                                                        <div class="comment_container" id="comment-83">
-                                                            <div class="comment-text">
-                                                                <div class="comment-body">
+                                            @if ($commments->status_id == 1)
+                                                <div id="comments">
+                                                    <ol class="commentlist">
+                                                        <li id="li-comment-83"
+                                                            class="comment byuser comment-author-admin bypostauthor even thread-even depth-1">
+                                                            <div class="comment_container" id="comment-83">
+                                                                <div class="comment-text">
+                                                                    <div class="comment-body">
 
-                                                                    <div class="comment-content">
-                                                                        <p class="comment-author" style="width: max-content;">
-                                                                            {{ $commments->user->name  }}
-                                                                        </p>
-                                                                        <p class="comment-meta">
-                                                                            <time datetime="2017-06-21T08:05:40+00:00"
-                                                                                itemprop="datePublished"
-                                                                                class="woocommerce-review__published-date">{{ $commments->created_at }}</time>
-                                                                        <div class="star-rating">
-                                                                            <span
-                                                                                style="width:{{ $commments->rate * 20}}%">Rated
-                                                                                <strong class="rating">5</strong> out of
-                                                                                5</span>
-                                                                        </div>
-                                                                        </p>
-                                                                        <div class="description">
-                                                                            <p style="width: 1000px;">{{ $commments->content }}
+                                                                        <div class="comment-content">
+                                                                            <p class="comment-author" style="width: max-content;">
+                                                                                {{ $commments->user->name  }}
                                                                             </p>
-                                                                            <p>
-                                                                                @if($commments->storage && strtolower(pathinfo($commments->storage->file, PATHINFO_EXTENSION)) === 'mp4')
-                                                                                    <video width="auto" height="100" controls>
-                                                                                        <source src="{{ asset('admin/assets/images/comment/' . $commments->storage->file) }}"
-                                                                                            type="video/mp4">
-                                                                                        Trình duyệt của bạn không hỗ trợ thẻ video.
-                                                                                    </video>
-                                                                                @elseif($commments->storage)
-                                                                                    <img src="{{ asset('admin/assets/images/comment/' . $commments->storage->file) }}"
-                                                                                        alt=""
-                                                                                        style="width: auto; max-height: 150px;">
-                                                                                @endif
-                                                                                @if($commments->replies->isNotEmpty() && $commments->replies->first()->rep_content)
-                                                                                <br>
-                                                                                    <button class="toggle-replies-button" data-comment-id="{{ $commments->id }}">Hiển thị phản hồi</button>
-                                                                                    <div class="replies-container" id="replies-container-{{ $commments->id }}" style="display: none;">
-                                                                                        @foreach ($commments->replies as $reply)
-                                                                                            <div style="margin-left: 30px">
-                                                                                                <p class="comment-author" style="width: max-content;">Admin</p>
-                                                                                                <p style="width: 1000px;">{{ $reply->rep_content }}</p>
-                                                                                            </div>
-                                                                                        @endforeach
-                                                                                    </div>
-                                                                                @else
-                                                                                <br>
-                                                                                    @if(Auth::check() && Auth::user()->role_id == 1)
-                                                                                        <button class="reply-button" data-comment-id="{{ $commments->id }}">Phản hồi</button>
+                                                                            <p class="comment-meta">
+                                                                                <time datetime="2017-06-21T08:05:40+00:00"
+                                                                                    itemprop="datePublished"
+                                                                                    class="woocommerce-review__published-date">{{ $commments->created_at }}</time>
+                                                                            <div class="star-rating">
+                                                                                <span
+                                                                                    style="width:{{ $commments->rate * 20}}%">Rated
+                                                                                    <strong class="rating">5</strong> out of
+                                                                                    5</span>
+                                                                            </div>
+                                                                            </p>
+                                                                            <div class="description">
+                                                                                <p style="width: 1000px;">{{ $commments->content }}
+                                                                                </p>
+                                                                                <p>
+                                                                                    @if($commments->storage && strtolower(pathinfo($commments->storage->file, PATHINFO_EXTENSION)) === 'mp4')
+                                                                                        <video width="auto" height="100" controls>
+                                                                                            <source src="{{ asset('admin/assets/images/comment/' . $commments->storage->file) }}"
+                                                                                                type="video/mp4">
+                                                                                            Trình duyệt của bạn không hỗ trợ thẻ video.
+                                                                                        </video>
+                                                                                    @elseif($commments->storage)
+                                                                                        <img src="{{ asset('admin/assets/images/comment/' . $commments->storage->file) }}"
+                                                                                            alt=""
+                                                                                            style="width: auto; max-height: 150px;">
                                                                                     @endif
-                                                                                    <div class="reply-input" id="reply-input-{{ $commments->id }}" style="display: none;">
-                                                                                        <form method="post" action="{{ route('client.comment.reply') }}">
-                                                                                            @csrf
-                                                                                            <textarea rows="3" name="rep_content" placeholder="Nhập phản hồi"></textarea>
-                                                                                            <input type="hidden" name="comment_id" value="{{ $commments->id }}">
-                                                                                            <input type="hidden" name="comment_content" value="{{ $commments->content }}">
-                                                                                            <input type="hidden" name="comment_rate" value="{{ $commments->rate }}">
-                                                                                            <input type="hidden" name="comment_user_name" value="{{ $commments->user->name }}">
-                                                                                            <input type="hidden" name="comment_created_at" value="{{ $commments->created_at }}">
-                                                                                            <input type="hidden" name="comment_product_id" value="{{ $commments->product_id }}">
-                                                                                            <input type="hidden" name="file_id" value="{{ $commments->file_id }}">
-                                                                                            <button type="submit" class="submit-reply">Gửi</button>
-                                                                                        </form>
-                                                                                    </div>
-                                                                                @endif
-                                                                            </p>
+                                                                                    @if($commments->replies->isNotEmpty() && $commments->replies->first()->rep_content)
+                                                                                    <br>
+                                                                                        <button class="toggle-replies-button" data-comment-id="{{ $commments->id }}">Hiển thị phản hồi</button>
+                                                                                        <div class="replies-container" id="replies-container-{{ $commments->id }}" style="display: none;">
+                                                                                            @foreach ($commments->replies as $reply)
+                                                                                                <div style="margin-left: 30px">
+                                                                                                    <p class="comment-author" style="width: max-content;">Admin</p>
+                                                                                                    <p style="width: 1000px;">{{ $reply->rep_content }}</p>
+                                                                                                </div>
+                                                                                            @endforeach
+                                                                                        </div>
+                                                                                    @else
+                                                                                    <br>
+                                                                                        @if(Auth::check() && Auth::user()->role_id == 1)
+                                                                                            <button class="reply-button" data-comment-id="{{ $commments->id }}">Phản hồi</button>
+                                                                                        @endif
+                                                                                        <div class="reply-input" id="reply-input-{{ $commments->id }}" style="display: none;">
+                                                                                            <form method="post" action="{{ route('client.comment.reply') }}">
+                                                                                                @csrf
+                                                                                                <textarea rows="3" name="rep_content" placeholder="Nhập phản hồi"></textarea>
+                                                                                                <input type="hidden" name="comment_id" value="{{ $commments->id }}">
+                                                                                                <input type="hidden" name="comment_content" value="{{ $commments->content }}">
+                                                                                                <input type="hidden" name="comment_rate" value="{{ $commments->rate }}">
+                                                                                                <input type="hidden" name="comment_user_name" value="{{ $commments->user->name }}">
+                                                                                                <input type="hidden" name="comment_created_at" value="{{ $commments->created_at }}">
+                                                                                                <input type="hidden" name="comment_product_id" value="{{ $commments->product_id }}">
+                                                                                                <input type="hidden" name="file_id" value="{{ $commments->file_id }}">
+                                                                                                <button type="submit" class="submit-reply">Gửi</button>
+                                                                                            </form>
+                                                                                        </div>
+                                                                                    @endif
+                                                                                </p>
+                                                                            </div>
                                                                         </div>
                                                                     </div>
+                                                                    <!-- /.description -->
                                                                 </div>
-                                                                <!-- /.description -->
+                                                                <!-- /.comment-text -->
                                                             </div>
-                                                            <!-- /.comment-text -->
-                                                        </div>
-                                                        <!-- /.comment_container -->
-                                                    </li>
-                                                    <!-- /.comment -->
-                                                </ol>
-                                                <!-- /.commentlist -->
-                                            </div>
+                                                            <!-- /.comment_container -->
+                                                        </li>
+                                                        <!-- /.comment -->
+                                                    </ol>
+                                                    <!-- /.commentlist -->
+                                                </div>
+                                            @endif
                                         @endforeach
 
                                         <!-- /#comments -->
