@@ -44,6 +44,10 @@ class CommentController extends Controller
         $comment = Comment::with(['user', 'product', 'storage'])->findOrFail($id);
         return view('admin.comment.reply', compact('comment'));
     }
+    public function replyAdmin($id)
+    {
+       
+    }
     /**
      * Store a newly created resource in storage.
      */
