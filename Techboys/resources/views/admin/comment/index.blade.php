@@ -43,11 +43,11 @@
                             <thead>
                                 <tr>
                                     <th class="col-0">STT</th>
-                                    <th class="col-2">Tên người bình luận </th>
-                                    <th class="col-2">Sản phẩm</th>
+                                    <th class="col-1">Tên người bình luận </th>
+                                    <th class="col-1">Sản phẩm</th>
                                     <th class="col-3">Nội dung</th>
                                     <th class="col-1">Rate</th>
-                                    <th class="col-1">Rep </th>
+                                    <th class="col-2">Rep </th>
                                     <th class="col-1">Trạng thái</th>
                                     <th style="text-align: center" class="col-4">Chức năng</th>
 
