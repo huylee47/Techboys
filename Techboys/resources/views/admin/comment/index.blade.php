@@ -72,11 +72,14 @@
                                                     style="width: 150px; height: auto;">
                                             @endif
                                         </td>
+                                       
 
                                              <td>{{ $cmt->rate }}</td>
                                         
                                         <td class="text-center">
-                                          
+                                            @foreach ($cmt->replies as $reply)
+                                                <div>{{ $reply->rep_content }}</div>
+                                            @endforeach
                                         </td>
                                    
 
