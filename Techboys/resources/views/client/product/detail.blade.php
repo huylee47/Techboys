@@ -554,6 +554,7 @@
                                                                                         style="width: auto; max-height: 150px;">
                                                                                 @endif
                                                                                 @if($commments->replies->isNotEmpty() && $commments->replies->first()->rep_content)
+                                                                                <br>
                                                                                     <button class="toggle-replies-button" data-comment-id="{{ $commments->id }}">Hiển thị phản hồi</button>
                                                                                     <div class="replies-container" id="replies-container-{{ $commments->id }}" style="display: none;">
                                                                                         @foreach ($commments->replies as $reply)
