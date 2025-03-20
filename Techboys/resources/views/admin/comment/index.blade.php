@@ -62,13 +62,13 @@
                                         <td>{{ $cmt->content }}</td>
 
                                         <td class="text-center">
-                                            @if(strtolower(pathinfo($cmt->storage->file, PATHINFO_EXTENSION)) === 'mp4')
+                                            @if($cmt->storage && strtolower(pathinfo($cmt->storage->file, PATHINFO_EXTENSION)) === 'mp4')
                                                 <video width="150" height="100" controls>
                                                     <source src="{{ asset('admin/assets/images/comment/' . $cmt->storage->file) }}?t={{ time() }}"
                                                         type="video/mp4">
                                                     Trình duyệt của bạn không hỗ trợ thẻ video.
                                                 </video>
-                                            @else
+                                            @elseif($cmt->storage)
                                                 <img src="{{ asset('admin/assets/images/comment/' . $cmt->storage->file) }}" alt=""
                                                     style="width: 150px; height: auto;">
                                             @endif
