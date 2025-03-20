@@ -103,7 +103,7 @@
                                                 </button>
                                             </form>
                                           
-                                            <a href="" class="btn btn-primary">Rep</a>
+                                            <a href="{{ route('admin.comment.replyForm', ['id' => $cmt->id]) }}" class="btn btn-primary">Rep</a>
                                         </td>
                                        
                                     </tr>
