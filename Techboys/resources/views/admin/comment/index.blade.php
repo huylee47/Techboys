@@ -47,9 +47,9 @@
                                     <th class="col-1">Sản phẩm</th>
                                     <th class="col-3">Nội dung</th>
                                     <th class="col-1">Rate</th>
-                                    <th class="col-2">Rep </th>
+                                    <th class="col-3">Rep </th>
                                     <th class="col-1">Trạng thái</th>
-                                    <th style="text-align: center" class="col-4">Chức năng</th>
+                                    <th style="text-align: center" class="col-2">Chức năng</th>
 
                                 </tr>
                             </thead>
