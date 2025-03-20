@@ -39,10 +39,15 @@ class CommentController extends Controller
     {
         //
     }
-
+    public function replyForm($id)
+    {
+        $comment = Comment::with(['user', 'product', 'storage'])->findOrFail($id);
+        return view('admin.comment.reply', compact('comment'));
+    }
     /**
      * Store a newly created resource in storage.
      */
+    //client
     public function store(Request $request, CommentService $commentService)
     {
         if (!Auth::check()) {
@@ -87,11 +92,7 @@ class CommentController extends Controller
         return redirect()->back()->withInput()->with('success', 'Bình luận của bạn đã được gửi.');
     }
 
-    public function replyForm($id)
-    {
-        $comment = Comment::with(['user', 'product', 'storage'])->findOrFail($id);
-        return view('admin.comment.reply', compact('comment'));
-    }
+  
     public function reply(Request $request, CommentService $commentService)
     {
         $data = [
