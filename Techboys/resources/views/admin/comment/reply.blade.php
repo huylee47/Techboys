@@ -38,6 +38,7 @@
                             <input type="hidden" name="file_id" value="{{ $comment->file_id }}">
                             <textarea name="rep_content" class="form-control" placeholder="Nhập phản hồi"></textarea>
                             <button type="submit" class="btn btn-primary mt-2">Gửi</button>
+                            <a href="{{ route('admin.comment.index') }}" class="btn btn-secondary mt-2">Quay lại</a>
                         </form>
                     </div>
                 </div>
