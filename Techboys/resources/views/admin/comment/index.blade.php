@@ -42,12 +42,12 @@
                         <table class="table table-striped table-bordered" id="table1">
                             <thead>
                                 <tr>
-                                    <th class="col-1">STT</th>
-                                    <th class="col-3">Tên người bình luận </th>
+                                    <th class="col-0">STT</th>
+                                    <th class="col-2">Tên người bình luận </th>
                                     <th class="col-2">Sản phẩm</th>
                                     <th class="col-3">Nội dung</th>
-                                    <th class="col-1">Hình ảnh</th>
                                     <th class="col-1">Rate</th>
+                                    <th class="col-1">Rep </th>
                                     <th class="col-1">Trạng thái</th>
                                     <th style="text-align: center" class="col-4">Chức năng</th>
 
@@ -59,10 +59,9 @@
                                         <td>{{ ++$key }}</td>
                                         <td>{{ $cmt->user->name }}</td>
                                         <td>{{ $cmt->product->name }}</td>
-                                        <td>{{ $cmt->content }}</td>
-
-                                        <td class="text-center">
-                                            @if($cmt->storage && strtolower(pathinfo($cmt->storage->file, PATHINFO_EXTENSION)) === 'mp4')
+                                        <td>{{ $cmt->content }}
+                                            <br>
+                                              @if($cmt->storage && strtolower(pathinfo($cmt->storage->file, PATHINFO_EXTENSION)) === 'mp4')
                                                 <video width="150" height="100" controls>
                                                     <source src="{{ asset('admin/assets/images/comment/' . $cmt->storage->file) }}?t={{ time() }}"
                                                         type="video/mp4">
@@ -74,8 +73,12 @@
                                             @endif
                                         </td>
 
-
-                                        <td>{{ $cmt->rate }}</td>
+                                             <td>{{ $cmt->rate }}</td>
+                                        
+                                        <td class="text-center">
+                                          
+                                        </td>
+                                   
 
                                         <td>
                                             @if ($cmt->status_id == 1)
@@ -96,7 +99,10 @@
                                                     {{ $cmt->status_id == 1 ? 'Ẩn' : 'Hiện' }}
                                                 </button>
                                             </form>
+                                          
+                                            <a href="" class="btn btn-primary">Rep</a>
                                         </td>
+                                       
                                     </tr>
                                 @endforeach
 
