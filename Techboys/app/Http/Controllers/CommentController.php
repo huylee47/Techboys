@@ -41,12 +41,26 @@ class CommentController extends Controller
     }
     public function replyForm($id)
     {
-        $comment = Comment::with(['user', 'product', 'storage'])->findOrFail($id);
+        $comment = Comment::with([ 'product', 'storage'])->findOrFail($id);
         return view('admin.comment.reply', compact('comment'));
     }
-    public function replyAdmin($id)
+    public function replyAdmin(Request $request, CommentService $commentService)
     {
-       
+        $data = [
+            'user_id' => Auth::id(),
+            'comment_id' => $request->comment_id,
+            'rep_content' => $request->rep_content,
+            'product_id' => $request->product_id,
+            'content' => $request->content,
+            'rate' => $request->rate,
+            'file_id' => $request->file_id,
+            'user_name' => Auth::user()->name,
+            'created_at' => now(),
+        ];
+
+        $commentService->storeReply($data);
+
+        return redirect()->route('admin.comment.index')->with('success', 'Phản hồi của bạn đã được gửi.');
     }
     /**
      * Store a newly created resource in storage.
