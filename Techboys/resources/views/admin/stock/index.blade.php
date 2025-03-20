@@ -43,9 +43,7 @@
                                 <th class="col-1">STT</th>
                                 <th class="col-2">Ảnh hiển thị</th>
                                 <th class="col-1">Tên</th>
-                                <th class="col-1">Màu sắc</th>
                                 <th class="col-1">Giá</th>
-                                <th class="col-1">Số lượng tồn kho</th>
                             </tr>
                         </thead>
                         <tbody>
