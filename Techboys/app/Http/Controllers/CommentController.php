@@ -15,7 +15,7 @@ class CommentController extends Controller
      */
     public function index()
     {
-        $loadAll = Comment::with(['user', 'product','storage'])->get();
+        $loadAll = Comment::with(['user', 'product', 'storage', 'replies'])->get();
         return view('admin.comment.index', compact('loadAll'));
     }
     
