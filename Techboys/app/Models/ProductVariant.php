@@ -35,12 +35,12 @@ class ProductVariant extends Model
 
     public function getCalculatedStockAttribute()
     {
-        $billedStock = $this->billDetails()
+        $billedStock = BillDetails::where('variant_id', $this->id)
             ->whereHas('bill', function ($query) {
-                $query->where('status_id', 1); 
+                $query->where('status_id', 1);
             })
             ->sum('quantity');
 
-        return $this->stock + $billedStock; 
+        return $this->stock + $billedStock;
     }
 }
