@@ -87,23 +87,27 @@ class CommentController extends Controller
         return redirect()->back()->withInput()->with('success', 'Bình luận của bạn đã được gửi.');
     }
 
+    public function replyForm($id)
+    {
+        $comment = Comment::with(['user', 'product', 'storage'])->findOrFail($id);
+        return view('admin.comment.reply', compact('comment'));
+    }
+
     public function reply(Request $request, CommentService $commentService)
     {
         $data = [
             'user_id' => Auth::id(),
             'comment_id' => $request->comment_id,
             'rep_content' => $request->rep_content,
-            'product_id' => $request->comment_product_id,
-            'content' => $request->comment_content, // Ensure content is included
-            'rate' => $request->comment_rate,
-            'file_id' => $request->file_id, // Ensure file_id is included
-            'user_name' => $request->comment_user_name,
-            'created_at' => $request->comment_created_at,
+            'product_id' => $request->product_id,
+            'content' => $request->content,
+            'rate' => $request->rate,
+            'file_id' => $request->file_id,
         ];
 
         $commentService->storeReply($data);
 
-        return redirect()->back()->with('success', 'Phản hồi của bạn đã được gửi.');
+        return redirect()->route('admin.comment.index')->with('success', 'Phản hồi của bạn đã được gửi.');
     }
 
     /**
