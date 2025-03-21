@@ -83,9 +83,6 @@
                                             <a href="{{route('admin.product.destroy',['id' =>$product->id])}}"
                                                 onclick="return confirm('Bạn có chắc chắn xoá sản phẩm {{ $product->name }} không?')"
                                                 class="btn btn-danger">Xoá</a>
-                                            <a href="#" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#stockModal{{ $product->id }}">
-                                                Tồn kho
-                                            </a>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -95,26 +92,4 @@
                 </div>
             </section>
         </div>
-
-        @foreach ($products as $product)
-            <div class="modal fade" id="stockModal{{ $product->id }}" tabindex="-1"
-                 aria-labelledby="stockModalLabel{{ $product->id }}" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="stockModalLabel{{ $product->id }}">
-                                Tồn kho: {{ $product->name }}
-                            </h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <p>Số lượng tồn kho: <strong>{{ $product->variant->sum('stock') }}</strong> sản phẩm</p>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        @endforeach
     @endsection
