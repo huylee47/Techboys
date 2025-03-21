@@ -179,7 +179,8 @@ Route::middleware(['auth', 'auth.admin'])->group(function () {
             Route::get('/', [CommentController::class, 'index'])->name('admin.comment.index');
             Route::post('/block/{id}', [CommentController::class, 'block'])->name('admin.comment.block');
             Route::post('/open/{id}', [CommentController::class, 'open'])->name('admin.comment.open');
-
+            Route::get('/reply/{id}', [CommentController::class, 'replyForm'])->name('admin.comment.replyForm');
+            Route::post('/reply', [CommentController::class, 'replyAdmin'])->name('admin.comment.reply');
         });
         Route::prefix('/revenue')->group(function () {
             Route::get('/', [RevenueController::class, 'index'])->name('admin.revenue.revenue');
@@ -239,6 +240,7 @@ Route::get('/payment/cod/success', [CheckoutController::class, 'codSuccess'])->n
 
 //comment
 Route::post('/comment/store', [CommentController::class, 'store'])->name('client.comment.store');
+Route::post('/comment/reply', [CommentController::class, 'reply'])->name('client.comment.reply');
 
 
 
