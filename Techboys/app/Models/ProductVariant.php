@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -10,7 +11,10 @@ class ProductVariant extends Model
 {
     use HasFactory, SoftDeletes;
     protected $table = 'product_variants';
-    protected $fillable = ['product_id', 'color_id', 'price', 'stock', 'model_id'];
+
+    protected $appends = ['discounted_price'];
+
+    protected $fillable = ['product_id', 'color_id', 'price', 'stock','model_id'];
 
     public function product()
     {
@@ -33,14 +37,17 @@ class ProductVariant extends Model
         return $this->belongsTo(ProductModel::class);
     }
 
-    public function getCalculatedStockAttribute()
+    public function getDiscountedPriceAttribute()
     {
-        $billedStock = BillDetails::where('variant_id', $this->id)
-            ->whereHas('bill', function ($query) {
-                $query->where('status_id', 1);
-            })
-            ->sum('quantity');
-
-        return $this->stock + $billedStock;
+        if (!$this->product) {
+            return $this->price;
+        }
+    
+        $promotion = $this->product->promotion;
+        if ($promotion && now()->lt(Carbon::parse($promotion->end_date))) {
+            return round($this->price * (1 - $promotion->discount_percent / 100), 2);
+        }
+        return $this->price;
     }
+
 }

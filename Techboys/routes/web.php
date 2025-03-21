@@ -5,6 +5,7 @@ use App\Http\Controllers\BlogController;
 use App\Http\Controllers\BillController;
 use App\Http\Controllers\BillDetailsController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\ChatsController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\VoucherController;
@@ -14,19 +15,33 @@ use App\Http\Controllers\ProductCategoryController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ProductVariantController;
+use App\Http\Controllers\RevenueController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Cache;
+use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 // Client routes
-Route::get('/', function () {
+Route::middleware(['track.online'])->group(function(){
+    Route::get('/', function () {
     return view('client.home.home');
-})->name('home');
+    })->name('home');
+});
+Route::get('/online-users', function () {
+    // Đếm số lượng session còn trong cache
+    $onlineUsers = collect(Cache::getStore()->getPrefix())
+        ->filter(fn($key) => str_contains($key, 'user-online-'))
+        ->count();
 
-
+    return response()->json(['online' => $onlineUsers]);
+});
 
 Route::get('/blog', [BlogController::class, 'indexClient'])->name('blog');
 Route::get('blog/{slug}', [BlogController::class, 'DetailBlog'])->name('DetailBlog');
 
-
+// About
+Route::get('/about', function () {
+    return view('client.about.about');
+})->name('about');
 
 Route::get('test', function () {
     return view('admin.product.imageIndex');
@@ -50,7 +65,7 @@ Route::post('/login/Client', [UserController::class, 'loginClient'])->name('logi
 //contact client
 Route::get('/contact', function () {
     return view('client.contact.contact');
-});
+})->name('contact');
 Route::post('/contact', [ContactController::class, 'saveContact']);
 
 // Đăng ký
@@ -59,8 +74,7 @@ Route::prefix('/register')->group(function () {
     Route::post('/store', [UserController::class, 'store'])->name('client.log.store');
 });
 
-//comment
-Route::get('/show', [CommentController::class, 'show'])->name('comment.show');
+
 
 // Xác thực email
 Route::get('/veryfi-account/{email}', [UserController::class, 'veryfi'])->name('clinet.veryfi');
@@ -102,7 +116,7 @@ Route::middleware(['auth', 'auth.admin'])->group(function () {
             Route::post('/update/{id}', [VoucherController::class, 'update'])->name('admin.voucher.update');
             Route::get('/destroy/{id}', [VoucherController::class, 'destroy'])->name('admin.voucher.destroy');
         });
-
+        
         Route::prefix('/product')->group(function () {
             Route::get('/', [ProductController::class, 'index'])->name('admin.product.index');
             Route::get('/create', [ProductController::class, 'create'])->name('admin.product.create');
@@ -141,6 +155,8 @@ Route::middleware(['auth', 'auth.admin'])->group(function () {
             Route::get('/restore/{id}', [BillController::class, 'restore'])->name('admin.bill.restore');
             Route::get('/download.invoice/{id}', [BillController::class, 'download'])->name('admin.bill.download');
             Route::get('/bill-detail/{id}/show', [BillDetailsController::class, 'show'])->name('admin.bill.show');
+            Route::get('invoice/{id}',[BillController::class,'invoiceBill'])->name('admin.bill.invoice');
+            Route::get('cancel/{id}',[BillController::class,'cancelBill'])->name('admin.bill.cancel');
         });
 
         Route::prefix('/blogs')->group(function () {
@@ -163,12 +179,34 @@ Route::middleware(['auth', 'auth.admin'])->group(function () {
             Route::get('/', [CommentController::class, 'index'])->name('admin.comment.index');
             Route::post('/block/{id}', [CommentController::class, 'block'])->name('admin.comment.block');
             Route::post('/open/{id}', [CommentController::class, 'open'])->name('admin.comment.open');
+            Route::get('/reply/{id}', [CommentController::class, 'replyForm'])->name('admin.comment.replyForm');
+            Route::post('/reply', [CommentController::class, 'replyAdmin'])->name('admin.comment.reply');
+        });
+        Route::prefix('/revenue')->group(function () {
+            Route::get('/', [RevenueController::class, 'index'])->name('admin.revenue.revenue');
+            Route::get('/filter', [RevenueController::class, 'filterRevenue'])->name('admin.revenue.filter');
+        });
+        Route::prefix('/chats')->group(function (){
+            Route::get('/', [ChatsController::class, 'index'])->name('admin.messages');
+            Route::get('/{chatId}', [ChatsController::class, 'loadMessagesAdmin']);
+            Route::post('/{chatId}/send', [ChatsController::class,'sendMessageAdmin'])->name('admin.send.message');
+            // Route::post('/send', [ChatsController::class, 'sendMessageAdmin']);
+
+        });
+        Route::prefix('stock')->group(function () {
+            Route::get('/', [ProductVariantController::class, 'index'])->name('admin.stock.index');
         });
     });
 });
-
+Route::prefix('message')->group(function () {
+    Route::post('/send', [ChatsController::class, 'sendMessage'])->name('client.message.send');
+    Route::get('/load', [ChatsController::class, 'loadMessage'])->name('client.message.load');
+});
+// Products
 Route::prefix('products')->group(function () {
-    Route::get('/', [ProductController::class, 'index'])->name('client.product.index');
+    Route::get('/', [ProductController::class, 'productList'])->name('client.product.index');
+    Route::get('/search', [ProductController::class, 'search'])->name('client.product.search');
+    Route::get('/filter', [ProductController::class, 'filter'])->name('client.product.filter');
     Route::get('/{slug}', [ProductController::class, 'productDetails'])->name('client.product.show');
 });
 
@@ -181,6 +219,7 @@ Route::prefix('cart')->group(function () {
     Route::post('/applyVoucher', [CartController::class, 'applyVoucher'])->name('client.cart.applyVoucher');
     Route::post('/remove/{id}', [CartController::class, 'removeItem'])->name('client.cart.remove');
     // Route::get('/getCount', [CartController::class, 'getCartCount'])->name('client.cart.getCartCount');
+    Route::get('/count', [CartController::class, 'countItems'])->name('client.cart.count');
 });
 
 Route::prefix('checkout')->group(function () {
@@ -190,6 +229,25 @@ Route::prefix('checkout')->group(function () {
     Route::post('/store', [CheckoutController::class, 'storeBill'])->name('client.checkout.store');
 });
 
-Route::prefix('stock')->group(function () {
-    Route::get('/', [ProductVariantController::class, 'index'])->name('admin.stock.index');
+
+// CHECKOUT
+// Route::get('/vnpay-payment', function () {
+//     return view('client.payment.vnpay');
+// })->name('client.payment.vnpay');
+Route::get('/payment/vnpay/callback', [CheckoutController::class, 'vnpayCallback'])->name('client.payment.vnpay');
+Route::get('/payment/cod/success', [CheckoutController::class, 'codSuccess'])->name('client.payment.cod');
+
+
+//comment
+Route::post('/comment/store', [CommentController::class, 'store'])->name('client.comment.store');
+Route::post('/comment/reply', [CommentController::class, 'reply'])->name('client.comment.reply');
+
+
+
+Route::prefix('products')->group(function () {
+    Route::get('/', [ProductController::class, 'productList'])->name('client.product.index');
+    Route::get('/search', [ProductController::class, 'search'])->name('client.product.search');
+    Route::get('/filter', [ProductController::class, 'filter'])->name('client.product.filter');
+    Route::get('/{slug}', [ProductController::class, 'productDetails'])->name('client.product.show');
 });
+

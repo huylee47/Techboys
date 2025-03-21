@@ -3,7 +3,10 @@
 namespace App\Service;
 
 use App\Models\Cart;
+use App\Models\Promotion;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
+
 use Illuminate\Support\Str;
 
 
@@ -13,26 +16,31 @@ class CartService{
         public function __construct(CartPriceService $cartPriceService){
             $this->cartPriceService = $cartPriceService;
         }
-    public function getCartItems()
-    {
-        if (Auth::check()) {
-        $userId = Auth::id();
-        // $cartItems = Cart::where('user_id', $userId)->get();
-        $cartItems = Cart::where('user_id', $userId)->with('variant.product')->get();
-
-        } else {
-            $cartId = session()->get('cart_id');
-    
-            if (!$cartId) {
-                // return response()->json(['message' => 'Giỏ hàng trống'], 200);
-                return collect([]);
+        public function getCartItems()
+        {
+            if (Auth::check()) {
+                $userId = Auth::id();
+                Log::info('User ID: ' . $userId);
+        
+                $cartItems = Cart::where('user_id', $userId)
+                    ->with('variant.product')
+                    ->get();
+            } else {
+                $cartId = session()->get('cart_id');
+                Log::info('Session cart_id: ' . $cartId);
+        
+                if (!$cartId) {
+                    return collect([]);
+                }
+        
+                $cartItems = Cart::where('cart_id', $cartId)
+                    ->with('variant.product')
+                    ->get();
             }
-    
-            $cartItems = Cart::where('cart_id', $cartId)->with('variant.product')->get();
+        
+            return $cartItems;
         }
-    
-        return  $cartItems;
-    }
+        
     
     public function addToCart($request) {
         if (Auth::check()) {
@@ -69,10 +77,10 @@ class CartService{
                 'user_id' => $userId,
                 'cart_id' => $cartId,
                 'variant_id' => $request->variant_id,
-                'quantity' => $request->quantity,
+                'quantity' => 1,
             ]);
         }
-    
+        session()->put('cart_id', $cartId);
         return response()->json(['message' => 'Thêm vào giỏ hàng thành công']);
     }
     public function updateCart($request)
@@ -85,8 +93,12 @@ class CartService{
     
         $cart->quantity = $request->quantity;
         $cart->save();
-    
-        $totalPrice = $cart->variant->price * $cart->quantity;
+        $promotion = Promotion::where('product_id', $cart->variant->product->id)->first();
+        if ($promotion) {
+            $totalPrice = $cart->variant->discounted_price * $cart->quantity;
+        } else {
+            $totalPrice = $cart->variant->price * $cart->quantity;
+        }
     
         return [
             'total_price' => $totalPrice
@@ -106,12 +118,18 @@ class CartService{
     $cartItem->delete();
     $cartItems = $this->getCartItems();
     $totals = $this->cartPriceService->calculateCartTotals($cartItems);
+    $cartCount = $this->countItems();
     return response()->json([
         'success' => true,
         'message' => 'Xóa mặt hàng thành công!',
+        'cart_count' => $cartCount,
         'subtotal' => number_format($totals['total'], 0, ',', '.') .'đ',
         'total' => number_format($totals['total'], 0, ',', '.') .'đ',
         'discount_amount' => number_format($totals['discountAmount'], 0, ',', '.') .'đ',
     ]);
+}
+public function countItems(){
+    $cartItems = $this->getCartItems();
+    return $cartItems->count();
 }
 }

@@ -1,0 +1,113 @@
+#chat-icon {
+    display: none;
+}
+.real-time-icon {
+    position: fixed;
+    bottom: 80px;
+    right: 20px;
+    cursor: pointer;
+    z-index: 9999;
+    width: 50px;
+    height: 50px;
+    background-color: #007bff;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.real-time-icon i {
+    font-size: 28px;
+    color: white;
+}
+
+.real-time-box {
+    display: none;
+    position: fixed;
+    bottom: 80px;
+    right: 20px;
+    width: 350px;
+    background: white;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    z-index: 9999;
+}
+.real-time-title {
+    background: #007bff;
+    padding: 10px;
+    color: white;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    z-index: 9999;
+
+}
+.real-time-close {
+    float: right;
+    cursor: pointer;
+}
+.real-time-content {
+    height: 400px;
+    overflow-y: auto;
+    z-index: 9999;
+
+}
+.real-time-sent-content {
+    display: flex; 
+    align-items: center;
+    padding: 10px;
+    border-top: 1px solid #ddd;
+
+}
+.real-time-sent-content input {
+    flex: 1; /* Input sẽ chiếm toàn bộ không gian còn lại */
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+}
+.real-time-sent-content button {
+    margin-left: 10px;
+    padding: 5px 15px;
+    border: none;
+    background: #007bff;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.real-time-sent-content button:hover {
+    background: #0056b3;
+}
+
+.message {
+    display: flex;
+    margin-bottom: 10px;
+}
+.message:first-child {
+    margin-top: 10px;
+}
+.message.sent {
+    justify-content: flex-end;
+}
+
+.message.received {
+    justify-content: flex-start;
+}
+
+.message .content {
+    padding: 8px 12px;
+    border-radius: 8px;
+    max-width: 60%;
+    word-wrap: break-word;
+}
+
+.message.sent .content {
+    background-color: #007bff;
+    color: white;
+}
+
+.message.received .content {
+    background-color: #f1f1f1;
+    color: black;
+}

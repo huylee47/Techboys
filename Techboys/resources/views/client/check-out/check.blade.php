@@ -45,13 +45,20 @@
                                                         <p id="billing_first_name_field" class="form-row form-row-first validate-required woocommerce woocommerce-invalid-required-field">
                                                             <label class="" for="billing_first_name">Họ và Tên Người nhận
                                                                 <abbr title="required" class="required">*</abbr>
+                                                                @error('full_name')
+                                                                <span class="text-danger">{{ $message }}</span>
+                                                                @enderror
                                                             </label>
-                                                            <input type="text" value="" placeholder="" id="billing_first_name" name="full_name" class="input-text ">
+                                                            <input type="text" value="{{ auth()->check() ? auth()->user()->name : '' }}" placeholder="" id="billing_first_name" name="full_name" class="input-text ">
+
                                                         </p>
                                                         <div class="clear"></div>
                                                         <p id="billing_city_field" class="form-row form-row-last validate-required validate-city">
                                                             <label class="" for="billing_city">Thành phố
                                                                 <abbr title="required" class="required">*</abbr>
+                                                            @error('province_id')
+                                                                <span class="text-danger">{{ $message }}</span>
+                                                            @enderror                                                                
                                                             </label>
                                                             <select name="province_id" id="province">
                                                                 <option value="" selected disabled>Chọn tỉnh/thành phố</option>
@@ -59,35 +66,54 @@
                                                                     <option value="{{ $province->id }}">{{ $province->name }}</option>
                                                                 @endforeach
                                                             </select>
+
                                                         </p>
-                                                        <div class="clear"></div>
+                                                        
                                                         <p id="billing_district_field" class="form-row form-row-first validate-required validate-district">
                                                             <label class="" for="billing_district">Quận
                                                                 <abbr title="required" class="required">*</abbr>
+                                                            @error('district_id')
+                                                                <span class="text-danger">{{ $message }}</span>
+                                                            @enderror                                                                
                                                             </label>
                                                             <select name="district_id" id="district">
                                                                 <option value="" selected disabled>Chọn quận/huyện</option>
                                                             </select>
+
                                                         </p>
+                                                        
                                                         <p id="billing_ward_field" class="form-row form-row-last validate-required validate-ward">
-                                                            <label class="" for="billing_ward">Phường
+                                                            <label class="" for="billing_ward">Phường/Xã
                                                                 <abbr title="required" class="required">*</abbr>
+                                                            @error('ward_id')
+                                                                <span class="text-danger">{{ $message }}</span>
+                                                            @enderror                                                                
                                                             </label>
                                                             <select name="ward_id" id="ward">
                                                                 <option value="" selected disabled>Chọn phường/xã</option>
                                                             </select>
+
                                                         </p>
+                                                        
                                                         <p id="billing_phone_field" class="form-row form-row-first validate-required validate-phone">
-                                                            <label class="" for="billing_phone">Số điện thoại
+                                                            <label class="" for="billing_phone">Số điện thoại                                                            
                                                                 <abbr title="required" class="required">*</abbr>
+                                                                @error('phone')
+                                                                <span class="text-danger">{{ $message }}</span>
+                                                                @enderror
                                                             </label>
-                                                            <input type="tel" value="" placeholder="" id="billing_phone" name="phone" class="input-text ">
+                                                            <input type="tel" value="{{ auth()->check() ? auth()->user()->phone : '' }}" placeholder="" id="billing_phone" name="phone" class="input-text ">
+
                                                         </p>
                                                         <p id="billing_email_field" class="form-row form-row-last validate-required validate-email">
                                                             <label class="" for="billing_email">Email
                                                                 <abbr title="required" class="required">*</abbr>
+                                                                @error('email')
+                                                                <span class="text-danger">{{ $message }}</span>
+                                                                @enderror                                                                
                                                             </label>
-                                                            <input type="email" value="" placeholder="" id="billing_email" name="email" class="input-text ">
+                                                            <input type="email" value="{{ auth()->check() ? auth()->user()->email : '' }}" placeholder="" id="billing_email" name="email" class="input-text ">
+
                                                         </p>
                                                     </div>
                                                 </div>
@@ -100,8 +126,13 @@
                                             <div class="woocommerce-additional-fields">
                                                 <div class="woocommerce-additional-fields__field-wrapper">
                                                     <p id="order_comments_field" class="form-row notes">
-                                                        <label class="" for="order_comments">Địa chỉ chi tiết</label>
-                                                        <textarea cols="5" rows="2" placeholder="Viết địa chỉ chi tiết của quý khách" id="order_comments" class="input-text " name="address"></textarea>
+                                                        <label class="" for="order_comments">Địa chỉ chi tiết
+                                                            <abbr title="required" class="required">*</abbr>
+                                                        @error('address')
+                                                        <span class="text-danger">{{ $message }}</span>
+                                                        @enderror                                                            
+                                                        </label>
+                                                        <textarea cols="5" rows="2" placeholder="Viết địa chỉ chi tiết của quý khách" id="order_comments" class="input-text " name="address">{{ auth()->check() ? auth()->user()->address : '' }}</textarea>
                                                     </p>
                                                 </div>
                                                 <!-- .woocommerce-additional-fields__field-wrapper-->
@@ -135,7 +166,7 @@
                                                         </td>
                                                         <td class="product-total">
                                                             <span class="woocommerce-Price-amount amount">
-                                                                {{ number_format($item->variant->price * $item->quantity, 0, ',', '.') }}</span>
+                                                                {{ number_format($item->variant->discounted_price * $item->quantity, 0, ',', '.') }}</span>
                                                         </td>
                                                     </tr>
                                                     @endforeach
@@ -174,13 +205,8 @@
                                                         <input type="radio" data-order_button_text="" checked="checked" value="1" name="payment_method" class="input-radio" id="payment_method_bacs">
                                                         <label for="payment_method_bacs">VNPAY</label>
                                                     </li>
-                                                    <li class="wc_payment_method payment_method_cheque">
-                                                        <input type="radio" data-order_button_text="" value="2" name="payment_method" class="input-radio" id="payment_method_cheque">
-                                                        <label for="payment_method_cheque">MOMO</label>
-                                                        
-                                                    </li>
                                                     <li class="wc_payment_method payment_method_cod">
-                                                        <input type="radio" data-order_button_text="" value="3" name="payment_method" class="input-radio" id="payment_method_cod">
+                                                        <input type="radio" data-order_button_text="" value="2" name="payment_method" class="input-radio" id="payment_method_cod">
                                                         <label for="payment_method_cod">Ship COD</label>
                                                         
                                                     </li>
@@ -236,54 +262,66 @@
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script>
-    $(document).ready(function () {
+$(document).ready(function () {
     $('#province').change(function () {
         var province_id = $(this).val();
         console.log("Province ID: ", province_id);
+
+        $('#district').empty().append('<option value="" selected disabled>Chọn quận/huyện</option>');
+        $('#ward').empty().append('<option value="" selected disabled>Chọn phường/xã</option>');
+
         if (province_id) {
             $.ajax({
                 url: 'checkout/get-districts/' + province_id,
                 type: 'GET',
                 dataType: 'json',
                 success: function (data) {
-                    $('#district').empty().append('<option value="" selected disabled>Chọn quận/huyện</option>');
-                    $.each(data, function (key, value) {
-                        $('#district').append('<option value="' + value.id + '">' + value.name + '</option>');
-                    });
-                    console.log("Danh sách quận/huyện: ", data);
+                    if (data.length > 0) {
+                        $.each(data, function (key, value) {
+                            $('#district').append('<option value="' + value.id + '">' + value.name + '</option>');
+                        });
+                    } else {
+                        alert("Không tìm thấy quận/huyện cho tỉnh đã chọn!");
+                    }
+                },
+                error: function () {
+                    alert("Lỗi khi tải danh sách quận/huyện.");
                 }
             });
-        } else {
-            $('#district').empty().append('<option value="" selected disabled>Chọn quận/huyện</option>');
-            $('#ward').empty().append('<option value="" selected disabled>Chọn phường/xã</option>');
         }
     });
 
     $('#district').change(function () {
         var district_id = $(this).val();
         console.log("District ID: ", district_id);
+
+        $('#ward').empty().append('<option value="" selected disabled>Chọn phường/xã</option>');
+
         if (district_id) {
             $.ajax({
                 url: 'checkout/get-wards/' + district_id,
                 type: 'GET',
                 dataType: 'json',
                 success: function (data) {
-                    $('#ward').empty().append('<option value="" selected disabled>Chọn phường/xã</option>');
-                    $.each(data, function (key, value) {
-                        $('#ward').append('<option value="' + value.id + '">' + value.name + '</option>');
-                    });
-                    console.log("Danh sách phường/xã: ", data);
+                    if (data.length > 0) {
+                        $.each(data, function (key, value) {
+                            $('#ward').append('<option value="' + value.id + '">' + value.name + '</option>');
+                        });
+                    } else {
+                        alert("Không tìm thấy phường/xã cho quận/huyện đã chọn!");
+                    }
+                },
+                error: function () {
+                    alert("Lỗi khi tải danh sách phường/xã.");
                 }
             });
-        } else {
-            $('#ward').empty().append('<option value="" selected disabled>Chọn phường/xã</option>');
         }
     });
 
     $('#ward').change(function () {
-        var ward_id = $(this).val();
-        console.log("Ward ID: ", ward_id);
+        console.log("Ward ID: ", $(this).val());
     });
+
     var cartItems = @json($checkout['cartItems']);
     if (cartItems.length === 0) {
         $('#emptyCartModal').modal('show');
@@ -294,6 +332,10 @@
             e.preventDefault();
             $('#emptyCartModal').modal('show');
         }
+    });
+
+    $('#province, #district, #ward').change(function () {
+        $(this).siblings('.text-danger').remove();
     });
 });
 

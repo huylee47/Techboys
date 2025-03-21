@@ -14,8 +14,9 @@ return new class extends Migration
         Schema::create('chats', function (Blueprint $table) {
             $table->id();
             $table->foreignId('customer_id')->nullable();
-            $table->foreignId('staff_id')->nullable();;
-            $table->foreignId('status_id');
+            $table->foreignId('staff_id')->nullable();
+            $table->string('guest_id')->nullable();
+            $table->foreignId('status_id')->nullable()->default(1);
             $table->timestamps();
         });
     }
