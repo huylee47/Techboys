@@ -5,11 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Comment extends Model
+class RepComment extends Model
 {
     use HasFactory;
-    protected $table = 'comments';
-    protected $fillable = ['user_id', 'product_id', 'content', 'rate', 'file_id', 'status_id'];
+    protected $table = 'rep_comment'; // Update table name
+    protected $fillable = ['user_id', 'product_id', 'content', 'rate', 'file_id', 'rep_content', 'comment_id'];
+
+    public function comment() {
+        return $this->belongsTo(Comment::class, 'comment_id');
+    }
 
     public function user() {
         return $this->belongsTo(User::class);
@@ -21,9 +25,5 @@ class Comment extends Model
 
     public function storage() {
         return $this->belongsTo(Storage::class, 'file_id');
-    }
-
-    public function replies() {
-        return $this->hasMany(RepComment::class, 'comment_id');
     }
 }

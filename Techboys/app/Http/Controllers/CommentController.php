@@ -15,7 +15,7 @@ class CommentController extends Controller
      */
     public function index()
     {
-        $loadAll = Comment::with(['user', 'product','storage'])->get();
+        $loadAll = Comment::with(['user', 'product', 'storage', 'replies'])->get();
         return view('admin.comment.index', compact('loadAll'));
     }
     
@@ -39,10 +39,33 @@ class CommentController extends Controller
     {
         //
     }
+    public function replyForm($id)
+    {
+        $comment = Comment::with([ 'product', 'storage'])->findOrFail($id);
+        return view('admin.comment.reply', compact('comment'));
+    }
+    public function replyAdmin(Request $request, CommentService $commentService)
+    {
+        $data = [
+            'user_id' => Auth::id(),
+            'comment_id' => $request->comment_id,
+            'rep_content' => $request->rep_content,
+            'product_id' => $request->product_id,
+            'content' => $request->content,
+            'rate' => $request->rate,
+            'file_id' => $request->file_id,
+            'user_name' => Auth::user()->name,
+            'created_at' => now(),
+        ];
 
+        $commentService->storeReply($data);
+
+        return redirect()->route('admin.comment.index')->with('success', 'Phản hồi của bạn đã được gửi.');
+    }
     /**
      * Store a newly created resource in storage.
      */
+    //client
     public function store(Request $request, CommentService $commentService)
     {
         if (!Auth::check()) {
@@ -68,7 +91,7 @@ class CommentController extends Controller
             'user_id' => Auth::id(),
             'product_id' => $request->product_id,
             'content' => $request->comment,
-            'rate' => $request->rate,
+            'rate' => $request->rate, // Ensure rate is included
         ];
 
         if ($request->hasFile('media')) {
@@ -85,6 +108,26 @@ class CommentController extends Controller
         $commentService->storeComment($data);
 
         return redirect()->back()->withInput()->with('success', 'Bình luận của bạn đã được gửi.');
+    }
+
+  
+    public function reply(Request $request, CommentService $commentService)
+    {
+        $data = [
+            'user_id' => Auth::id(),
+            'comment_id' => $request->comment_id,
+            'rep_content' => $request->rep_content,
+            'product_id' => $request->comment_product_id,
+            'content' => $request->comment_content, // Ensure content is included
+            'rate' => $request->comment_rate,
+            'file_id' => $request->file_id, // Ensure file_id is included
+            'user_name' => $request->comment_user_name,
+            'created_at' => $request->comment_created_at,
+        ];
+
+        $commentService->storeReply($data);
+
+        return redirect()->back()->with('success', 'Phản hồi của bạn đã được gửi.');
     }
 
     /**

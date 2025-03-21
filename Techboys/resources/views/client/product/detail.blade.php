@@ -102,6 +102,94 @@
             background-color: #f2dede;
             border-color: #ebccd1;
         }
+
+        .reply-input {
+            margin-top: 10px;
+            margin-left: 20px;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background: none;
+        }
+
+        .reply-input textarea {
+            width: 100%;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .reply-input button {
+            margin-top: 5px;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+        }
+
+        .reply-button {
+            margin-top: 5px;
+            margin-left: 3px;
+            padding: 5px 15px;
+            border: none;
+            background: none;
+            color: #007bff;
+            cursor: pointer;
+            border-radius: 20px;
+        }
+
+        .reply-button:hover {
+            background: none; 
+            color: #007bff; 
+        }
+
+        .reply-input {
+            margin-top: 10px;
+            margin-left: 40px;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background: none;
+        }
+
+        .reply-input textarea {
+            width: 100%;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .reply-input button {
+            margin-top: 5px;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+        }
+
+        .reply-input button:hover {
+            background-color: #0056b3;
+        }
+
+        .toggle-replies-button {
+            margin-top: 5px;
+            margin-left: 3px;
+            padding: 5px 15px;
+            border: none;
+            background: none;
+            color: #007bff;
+            cursor: pointer;
+            border-radius: 20px;
+        }
+
+        .toggle-replies-button:hover {
+            background: none;
+            color: #007bff;
+        }
     </style>
     <div id="page" class="hfeed site">
         <div id="content" class="site-content" tabindex="-1">
@@ -360,57 +448,63 @@
                                                                 </div>
                                                             @endif
                                                             @if (Auth::check())
-                                                                <form novalidate="" class="comment-form" id="commentform"
-                                                                    method="post" action="{{ route('client.comment.store') }}"
-                                                                    enctype="multipart/form-data">
-                                                                    @csrf
-                                                                    <div class="comment-form-rating">
-                                                                        <label>Đánh giá của bạn</label>
-                                                                        <p class="stars">
-                                                                            <span>
-                                                                                <a href="#" class="star-1">1</a>
-                                                                                <a href="#" class="star-2">2</a>
-                                                                                <a href="#" class="star-3">3</a>
-                                                                                <a href="#" class="star-4">4</a>
-                                                                                <a href="#" class="star-5">5</a>
-                                                                            </span>
-                                                                        </p>
-                                                                        <input type="hidden" name="rate" id="rating-value"
-                                                                            value="0">
-                                                                        @error('rate')
-                                                                            @php $message = $message ?? ''; @endphp
-                                                                            <span class="text-danger">{{ $message }}</span>
-                                                                        @enderror
-                                                                    </div>
-                                                                    <p class="comment-form-comment">
-                                                                        <label for="comment">Bình luận của bạn</label>
-                                                                        <textarea aria-required="true" rows="8" cols="45"
-                                                                            name="comment" id="comment"></textarea>
-                                                                        @error('comment')
-                                                                            @php $message = $message ?? ''; @endphp
-                                                                            <span class="text-danger">{{ $message }}</span>
-                                                                        @enderror
-                                                                    </p>
-                                                                    <div class="col-md-6 mb-3">
-                                                                        <label for="media" class="form-label">Ảnh/Video</label>
-                                                                        <input class="form-control" type="file" id="media"
-                                                                            name="media" accept="image/*,video/*">
-                                                                        <div id="media-preview-container" class="mt-3"
-                                                                            style="display: flex; gap: 10px; flex-wrap: wrap;">
+                                                                @php
+                                                                    $existingComment = $commment->where('user_id', Auth::id())->first();
+                                                                @endphp
+                                                                @if ($existingComment)
+                                                                    <p>Bạn đã bình luận cho sản phẩm này, mỗi người chỉ được bình luận một lần cho một sản phẩm.</p>
+                                                                @else
+                                                                    <form novalidate="" class="comment-form" id="commentform"
+                                                                        method="post" action="{{ route('client.comment.store') }}"
+                                                                        enctype="multipart/form-data">
+                                                                        @csrf
+                                                                        <div class="comment-form-rating">
+                                                                            <label>Đánh giá của bạn</label>
+                                                                            <p class="stars">
+                                                                                <span>
+                                                                                    <a href="#" class="star-1">1</a>
+                                                                                    <a href="#" class="star-2">2</a>
+                                                                                    <a href="#" class="star-3">3</a>
+                                                                                    <a href="#" class="star-4">4</a>
+                                                                                    <a href="#" class="star-5">5</a>
+                                                                                </span>
+                                                                            </p>
+                                                                            <input type="hidden" name="rate" id="rating-value"
+                                                                                value="0">
+                                                                            @error('rate')
+                                                                                @php $message = $message ?? ''; @endphp
+                                                                                <span class="text-danger">{{ $message }}</span>
+                                                                            @enderror
                                                                         </div>
-                                                                    </div>
-                                                                    <p class="form-submit">
-                                                                        <input type="submit" value="Bình luận" class="submit"
-                                                                            id="submit" name="submit">
-                                                                        <input type="hidden" id="comment_post_ID"
-                                                                            value="{{ $product->id }}" name="product_id">
-                                                                        <input type="hidden" value="0" id="comment_parent"
-                                                                            name="comment_parent">
-                                                                        <input type="hidden" name="file_id" id="file_id"
-                                                                            value="">
-                                                                    </p>
-                                                                </form>
-
+                                                                        <p class="comment-form-comment">
+                                                                            <label for="comment">Bình luận của bạn</label>
+                                                                            <textarea aria-required="true" rows="8" cols="45"
+                                                                                name="comment" id="comment"></textarea>
+                                                                            @error('comment')
+                                                                                @php $message = $message ?? ''; @endphp
+                                                                                <span class="text-danger">{{ $message }}</span>
+                                                                            @enderror
+                                                                        </p>
+                                                                        <div class="col-md-6 mb-3">
+                                                                            <label for="media" class="form-label">Ảnh/Video</label>
+                                                                            <input class="form-control" type="file" id="media"
+                                                                                name="media" accept="image/*,video/*">
+                                                                            <div id="media-preview-container" class="mt-3"
+                                                                                style="display: flex; gap: 10px; flex-wrap: wrap;">
+                                                                            </div>
+                                                                        </div>
+                                                                        <p class="form-submit">
+                                                                            <input type="submit" value="Bình luận" class="submit"
+                                                                                id="submit" name="submit">
+                                                                            <input type="hidden" id="comment_post_ID"
+                                                                                value="{{ $product->id }}" name="product_id">
+                                                                            <input type="hidden" value="0" id="comment_parent"
+                                                                                name="comment_parent">
+                                                                            <input type="hidden" name="file_id" id="file_id"
+                                                                                value="">
+                                                                        </p>
+                                                                    </form>
+                                                                @endif
                                                             @else
                                                                 <p>Bạn phải <a href="{{ route('login.client') }}">đăng nhập</a>
                                                                     để bình luận.</p>
@@ -427,58 +521,91 @@
                                         </div>
                                         <!-- /.advanced-review -->
                                         @foreach ($commment as $commments)
-                                            <div id="comments">
-                                                <ol class="commentlist">
-                                                    <li id="li-comment-83"
-                                                        class="comment byuser comment-author-admin bypostauthor even thread-even depth-1">
-                                                        <div class="comment_container" id="comment-83">
-                                                            <div class="comment-text">
-                                                                <div class="comment-body">
+                                            @if ($commments->status_id == 1)
+                                                <div id="comments">
+                                                    <ol class="commentlist">
+                                                        <li id="li-comment-83"
+                                                            class="comment byuser comment-author-admin bypostauthor even thread-even depth-1">
+                                                            <div class="comment_container" id="comment-83">
+                                                                <div class="comment-text">
+                                                                    <div class="comment-body">
 
-                                                                    <div class="comment-content">
-                                                                        <p class="comment-author" style="width: max-content;">
-                                                                            {{ $commments->user->name ?? 'Anonymous' }}
-                                                                        </p>
-                                                                        <p class="comment-meta">
-                                                                            <time datetime="2017-06-21T08:05:40+00:00"
-                                                                                itemprop="datePublished"
-                                                                                class="woocommerce-review__published-date">{{ $commments->created_at }}</time>
-                                                                        <div class="star-rating">
-                                                                            <span
-                                                                                style="width:{{ $commments->rate * 20}}%">Rated
-                                                                                <strong class="rating">5</strong> out of
-                                                                                5</span>
-                                                                        </div>
-                                                                        </p>
-                                                                        <div class="description">
-                                                                            <p style="width: 1000px;">{{ $commments->content }}
+                                                                        <div class="comment-content">
+                                                                            <p class="comment-author" style="width: max-content;">
+                                                                                {{ $commments->user->name  }}
                                                                             </p>
-                                                                            <p>
-                                                                                @if($commments->storage && strtolower(pathinfo($commments->storage->file, PATHINFO_EXTENSION)) === 'mp4')
-                                                                                    <video width="auto" height="100" controls>
-                                                                                        <source src="{{ asset('admin/assets/images/comment/' . $commments->storage->file) }}"
-                                                                                            type="video/mp4">
-                                                                                        Trình duyệt của bạn không hỗ trợ thẻ video.
-                                                                                    </video>
-                                                                                @elseif($commments->storage)
-                                                                                    <img src="{{ asset('admin/assets/images/comment/' . $commments->storage->file) }}"
-                                                                                        alt=""
-                                                                                        style="width: auto; max-height: 150px;">
-                                                                                @endif
+                                                                            <p class="comment-meta">
+                                                                                <time datetime="2017-06-21T08:05:40+00:00"
+                                                                                    itemprop="datePublished"
+                                                                                    class="woocommerce-review__published-date">{{ $commments->created_at }}</time>
+                                                                            <div class="star-rating">
+                                                                                <span
+                                                                                    style="width:{{ $commments->rate * 20}}%">Rated
+                                                                                    <strong class="rating">5</strong> out of
+                                                                                    5</span>
+                                                                            </div>
                                                                             </p>
+                                                                            <div class="description">
+                                                                                <p style="width: 1000px;">{{ $commments->content }}
+                                                                                </p>
+                                                                                <p>
+                                                                                    @if($commments->storage && strtolower(pathinfo($commments->storage->file, PATHINFO_EXTENSION)) === 'mp4')
+                                                                                        <video width="auto" height="100" controls>
+                                                                                            <source src="{{ asset('admin/assets/images/comment/' . $commments->storage->file) }}"
+                                                                                                type="video/mp4">
+                                                                                            Trình duyệt của bạn không hỗ trợ thẻ video.
+                                                                                        </video>
+                                                                                    @elseif($commments->storage)
+                                                                                        <img src="{{ asset('admin/assets/images/comment/' . $commments->storage->file) }}"
+                                                                                            alt=""
+                                                                                            style="width: auto; max-height: 150px;">
+                                                                                    @endif
+                                                                                    @if($commments->replies->isNotEmpty() && $commments->replies->first()->rep_content)
+                                                                                    <br>
+                                                                                        <button class="toggle-replies-button" data-comment-id="{{ $commments->id }}">Hiển thị phản hồi</button>
+                                                                                        <div class="replies-container" id="replies-container-{{ $commments->id }}" style="display: none;">
+                                                                                            @foreach ($commments->replies as $reply)
+                                                                                                <div style="margin-left: 30px">
+                                                                                                    <p class="comment-author" style="width: max-content;">Admin</p>
+                                                                                                    <p style="width: 1000px;">{{ $reply->rep_content }}</p>
+                                                                                                </div>
+                                                                                            @endforeach
+                                                                                        </div>
+                                                                                    @else
+                                                                                    <br>
+                                                                                        @if(Auth::check() && Auth::user()->role_id == 1)
+                                                                                            <button class="reply-button" data-comment-id="{{ $commments->id }}">Phản hồi</button>
+                                                                                        @endif
+                                                                                        <div class="reply-input" id="reply-input-{{ $commments->id }}" style="display: none;">
+                                                                                            <form method="post" action="{{ route('client.comment.reply') }}">
+                                                                                                @csrf
+                                                                                                <textarea rows="3" name="rep_content" placeholder="Nhập phản hồi"></textarea>
+                                                                                                <input type="hidden" name="comment_id" value="{{ $commments->id }}">
+                                                                                                <input type="hidden" name="comment_content" value="{{ $commments->content }}">
+                                                                                                <input type="hidden" name="comment_rate" value="{{ $commments->rate }}">
+                                                                                                <input type="hidden" name="comment_user_name" value="{{ $commments->user->name }}">
+                                                                                                <input type="hidden" name="comment_created_at" value="{{ $commments->created_at }}">
+                                                                                                <input type="hidden" name="comment_product_id" value="{{ $commments->product_id }}">
+                                                                                                <input type="hidden" name="file_id" value="{{ $commments->file_id }}">
+                                                                                                <button type="submit" class="submit-reply">Gửi</button>
+                                                                                            </form>
+                                                                                        </div>
+                                                                                    @endif
+                                                                                </p>
+                                                                            </div>
                                                                         </div>
                                                                     </div>
+                                                                    <!-- /.description -->
                                                                 </div>
-                                                                <!-- /.description -->
+                                                                <!-- /.comment-text -->
                                                             </div>
-                                                            <!-- /.comment-text -->
-                                                        </div>
-                                                        <!-- /.comment_container -->
-                                                    </li>
-                                                    <!-- /.comment -->
-                                                </ol>
-                                                <!-- /.commentlist -->
-                                            </div>
+                                                            <!-- /.comment_container -->
+                                                        </li>
+                                                        <!-- /.comment -->
+                                                    </ol>
+                                                    <!-- /.commentlist -->
+                                                </div>
+                                            @endif
                                         @endforeach
 
                                         <!-- /#comments -->
@@ -690,6 +817,25 @@
             if (rating > 0) {
                 document.querySelector('.star-' + rating).classList.add('selected');
             }
+        });
+    </script>
+    <script>
+        document.querySelectorAll('.reply-button').forEach(button => {
+            button.addEventListener('click', function() {
+                const commentId = this.getAttribute('data-comment-id');
+                const replyInput = document.getElementById(`reply-input-${commentId}`);
+                replyInput.style.display = replyInput.style.display === 'none' ? 'block' : 'none';
+            });
+        });
+    </script>
+    <script>
+        document.querySelectorAll('.toggle-replies-button').forEach(button => {
+            button.addEventListener('click', function() {
+                const commentId = this.getAttribute('data-comment-id');
+                const repliesContainer = document.getElementById(`replies-container-${commentId}`);
+                repliesContainer.style.display = repliesContainer.style.display === 'none' ? 'block' : 'none';
+                this.textContent = repliesContainer.style.display === 'none' ? 'Hiển thị phản hồi' : 'Ẩn phản hồi';
+            });
         });
     </script>
 @endsection
