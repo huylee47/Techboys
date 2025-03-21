@@ -13,7 +13,7 @@ use App\Models\ProductCategory;
 use App\Models\ProductModel;
 use App\Models\ProductVariant;
 use Illuminate\Support\Str;
-
+use Illuminate\Support\Facades\DB;
 class ProductService{
     public function getAllProducts() {
         return Product::withTrashed()->orderBy('name', 'asc')->get();
@@ -61,64 +61,67 @@ class ProductService{
     
         return $result;
     }
-    public function storeProduct($request){
-        // dd($request->all());
-        $imageName = null;
-        if ($request->hasFile('img')) {
-            $imageName = time() . '_' . uniqid() . '.' . $request->img->getClientOriginalExtension();
-            $request->img->move(public_path('admin/assets/images/product'), $imageName);
-        }
 
-
-        $product = Product::create([
-            'name' => $request->name,
-            'brand_id' => $request->brand_id,
-            'purchases' => 0,
-            'base_price' => $request->base_price,
-            'is_featured' => $request->is_featured ?? 0,
-            'img' => $imageName,
-            'description' => $request->description,
-            'category_id' => $request->category_id,
-            'rate_average' => 0,
-            'slug' => Str::slug($request->name),
-        ]);
-
-        $image = Images::firstOrNew(['image' => $product->img]);
-        $image->product_id = $product->id;
-        $image->image = $imageName;
-        $image->save();
-
-        if ($request->is_featured == 1) {
-            foreach ($request->variants as $variantData) {
-                $attributeValues = [];
-                foreach ($variantData['attributes'] as $attributeName => $values) {
-                    $attributeValues[$attributeName] = is_array($values) ? $values : [$values];
-                }
     
-                $combinations = $this->generateCombinations($attributeValues);
+    public function storeProduct($request) {
+        DB::beginTransaction(); // Bắt đầu transaction
     
-                foreach ($combinations as $combination) {
-                      ProductVariant::create([
-                        'product_id' => $product->id,
-                        'stock' =>0,
-                        'attribute_values' => json_encode($combination, JSON_UNESCAPED_UNICODE),
-                        'price' => $variantData['price'] ?? $product->base_price,
-                    ]);
+        try {
+            $imageName = null;
+            if ($request->hasFile('img')) {
+                $imageName = time() . '_' . uniqid() . '.' . $request->img->getClientOriginalExtension();
+                $request->img->move(public_path('admin/assets/images/product'), $imageName);
+            }
+    
+            $product = Product::create([
+                'name' => $request->name,
+                'brand_id' => $request->brand_id,
+                'purchases' => 0,
+                'base_price' => $request->base_price,
+                'is_featured' => $request->is_featured ?? 0,
+                'img' => $imageName,
+                'description' => $request->description,
+                'category_id' => $request->category_id,
+                'rate_average' => 0,
+                'slug' => Str::slug($request->name),
+            ]);
+    
+            $image = Images::firstOrNew(['image' => $product->img]);
+            $image->product_id = $product->id;
+            $image->image = $imageName;
+            $image->save();
+    
+            if ($request->is_featured == 1) {
+                foreach ($request->variants as $variantData) {
+                    $attributeValues = [];
+                    foreach ($variantData['attributes'] as $attributeName => $values) {
+                        $attributeValues[$attributeName] = is_array($values) ? $values : [$values];
+                    }
+    
+                    $combinations = $this->generateCombinations($attributeValues);
+    
+                    foreach ($combinations as $combination) {
+                        ProductVariant::create([
+                            'product_id' => $product->id,
+                            'stock' => 0,
+                            'attribute_values' => json_encode($combination, JSON_UNESCAPED_UNICODE),
+                            'price' => $variantData['price'] ?? $product->base_price,
+                        ]);
+                    }
                 }
             }
-            $variants = ProductVariant::where('product_id', $product->id)->get();
+    
+            DB::commit(); // Xác nhận transaction nếu không có lỗi
+    
+            return redirect()->route('admin.product.index')->with('success', 'Thêm sản phẩm thành công');
+    
+        } catch (\Exception $e) {
+            DB::rollBack(); // Hoàn tác nếu có lỗi
+    
+            return redirect()->route('admin.product.create')->with('error', 'Lỗi: ' . $e->getMessage());
         }
-
-
-        // return response()->json([
-        //     'success' => true,
-        //     'message' => 'Thêm sản phẩm thành công',
-        //     'data' => $product,
-        //     'variants' => $variants
-
-        // ]);
-        return redirect()->route('admin.product.index')->with('success', 'Thêm sản phẩm thành công');
     }
+    
     public function editProduct($id)
     {
         $attributesList = Attributes::with('values')->get();
@@ -316,18 +319,52 @@ class ProductService{
         }
     }
 // CLIENT
-    public function getProductBySlug($slug) {
-        $product = Product::where('slug', $slug)->first();
-        $images = Images::where('product_id', $product->id)->get();
-        $variants = ProductVariant::where('product_id', $product->id)->get();
-        if ($product) {
-            $commment = Comment::where('product_id', $product->id)->get();
-            $relatedProducts = Product::where('category_id', $product->category_id)->where('id', '!=', $product->id)->take(10)->get();
-            return view('client.product.detail', compact('product','commment','relatedProducts','images', 'variants'));
-        } else {
-            abort(404);
+public function getProductBySlug($slug) {
+    $product = Product::where('slug', $slug)->first();
+    $images = Images::where('product_id', $product->id)->get();
+    $variants = ProductVariant::where('product_id', $product->id)->get();
+    $attributeValues = AttributesValue::all()->keyBy('id');
+    $defaultVariant = $variants->first();
+
+    // Gom nhóm biến thể theo thuộc tính giống nhau
+    $groupedVariants = [];
+
+    foreach ($variants as $variant) {
+        $attributes = json_decode($variant->attribute_values, true);
+        $groupKey = json_encode($attributes, JSON_UNESCAPED_UNICODE); // Chuỗi định danh nhóm
+
+        if (!isset($groupedVariants[$groupKey])) {
+            $groupedVariants[$groupKey] = [
+                'attributes' => $attributes,
+                'variants' => []
+            ];
         }
+
+        $groupedVariants[$groupKey]['variants'][] = $variant;
     }
+
+    if ($product) {
+        $comment = Comment::where('product_id', $product->id)->get();
+        $relatedProducts = Product::where('category_id', $product->category_id)
+            ->where('id', '!=', $product->id)
+            ->take(10)
+            ->get();
+         
+        // return response()->json([
+        //     'product' => $product,
+        //     'comment' => $comment,
+        //     'variants' => $variants,
+        //     'attributeValues' => $attributeValues,
+        //     'defaultVariant' => $defaultVariant,
+        //     'groupedVariants' => $groupedVariants,
+        // ]);
+            
+        return view('client.product.detail', compact('product', 'comment', 'relatedProducts', 'images', 'variants', 'attributeValues', 'defaultVariant', 'groupedVariants'));
+    } else {
+        abort(404);
+    }
+}
+
     public function getNewProducts(){
         return Product::with(['variant', 'promotion'])
             ->orderBy('created_at', 'desc')
