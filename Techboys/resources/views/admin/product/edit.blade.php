@@ -133,92 +133,43 @@
                                         </div>
                                         <input type="hidden" name="description" id="description"
                                             value="{{ old('description') }}">
-                                        @if ($countVariants > 0)
-                                            <div id="variant-container">
-                                                <h4>Thông tin biến thể</h4>
-                                                @foreach ($variants as $index => $variant)
-                                                    @php
-                                                        $decodedAttributes = json_decode(
-                                                            $variant->attribute_values,
-                                                            true,
-                                                        );
-                                                    @endphp
-                                                    <div class="row variant-item border p-3 mb-3"
-                                                        data-attributes='{{ json_encode($decodedAttributes) }}'>
-                                                        <div
-                                                            class="col-md-12 d-flex justify-content-between align-items-center">
-                                                            <h5>Biến thể {{ $index + 1 }}</h5>
-                                                            <button type="button"
-                                                                class="btn btn-danger btn-sm remove-variant">Xóa</button>
-                                                        </div>
-                                                        @foreach ($decodedAttributes as $attributeName => $attributeValue)
-                                                            @php
-                                                                $attribute = $attributes->firstWhere(
-                                                                    'name',
-                                                                    $attributeName,
-                                                                );
-                                                            @endphp
-                                                            @if ($attribute)
-                                                                <div class="col-md-6 mb-3">
-                                                                    <label class="form-label">{{ $attributeName }}</label>
-                                                                    <select
-                                                                        name="variants[{{ $index }}][attributes][{{ $attributeName }}]"
-                                                                        class="form-control single-select">
-                                                                        <option value="">Chọn</option>
-                                                                        @foreach ($attribute->values as $value)
-                                                                            <option value="{{ $value->id }}"
-                                                                                {{ $value->id == $attributeValue ? 'selected' : '' }}>
-                                                                                {{ $value->value }}
-                                                                            </option>
-                                                                        @endforeach
-                                                                    </select>
-                                                                </div>
-                                                            @endif
-                                                        @endforeach
-                                                        <div class="col-md-6 mb-3">
-                                                            <label class="form-label">Giá biến thể</label>
-                                                            <input type="text"
-                                                                name="variants[{{ $index }}][price]"
-                                                                class="form-control variant-price-input"
-                                                                value="{{ $variant->price }}" required>
-                                                        </div>
-                                                    </div>
-                                                @endforeach
-                                                <button type="button" class="btn btn-success mb-3" id="add-variant">Thêm
-                                                    biến thể</button>
-                                                <div id="variants"></div>
-                                            </div>
-                                        @else
-                                            <div class="mb-3 form-check">
-                                                <span>
-                                                    <h4 class="form-check-label">
-                                                        <input type="checkbox" id="is_featured" name="is_featured"
-                                                            value="1" class="form-check-input">
-                                                        Sản phẩm có biến thể?
-                                                    </h4>
-                                                </span>
+                                        {{-- Vrriant --}}
+                                        <div class="mb-3 form-check" id="emptyVariant" style="display: none;">
+                                            <input type="hidden" name="is_featured" value="0">
+                                            <input type="checkbox" id="is_featured" name="is_featured" value="1"
+                                                class="form-check-input" {{ $product->is_featured ? 'checked' : '' }}>
+
+                                            <label class="form-check-label">Sản phẩm có biến thể?</label>
+
+                                        </div>
+
+                                        <div id="variant-container" style="display: none;">
+                                            <h4>Thông tin biến thể</h4>
+
+                                            <!-- Chọn thuộc tính cho biến thể đầu tiên -->
+                                            <div class="mb-3" id="attribute-selection">
+                                                <label class="form-label">Chọn thuộc tính biến thể</label>
+                                                <select id="attribute-select" class="form-control selectpicker" multiple
+                                                    data-live-search="true" title="Chọn thuộc tính" data-max-options="2"
+                                                    data-max-options-text="Bạn chỉ có thể chọn tối đa 2 mục!">
+                                                    @foreach ($attributesList as $attribute)
+                                                        <option value="{{ $attribute->name }}">{{ $attribute->name }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
                                             </div>
 
-                                            <div id="variant-container" style="display: none;">
-                                                <h4>Thông tin biến thể</h4>
+                                            <button type="button" class="btn btn-success mb-3" id="add-variant">Tạo mới
+                                                biến thể</button>
+                                            <div id="variantsadd"></div>
 
-                                                <!-- Chọn thuộc tính cho biến thể đầu tiên -->
-                                                <div class="mb-3" id="attribute-selection">
-                                                    <label class="form-label">Chọn thuộc tính biến thể</label>
-                                                    <select id="attribute-select" class="form-control selectpicker"
-                                                        multiple data-live-search="true">
-                                                        @foreach ($attributes as $attribute)
-                                                            <option value="{{ $attribute->name }}">{{ $attribute->name }}
-                                                            </option>
-                                                        @endforeach
-                                                    </select>
-                                                </div>
-
-                                                <button type="button" class="btn btn-success mb-3" id="add-variant">Thêm
-                                                    biến thể</button>
-                                                <div id="variants"></div>
-                                            </div>
-                                        @endif
+                                        </div>
+                                        <div class="d-inline-block">
+                                            <button type="button" class="btn btn-success mb-3" id="update-variant">Thêm
+                                                biến thể</button>
+                                        </div>
+                                        <div id="variants"></div>
+                                        {{-- End Variant --}}
 
 
                                     </div>
@@ -269,6 +220,7 @@
                 }
             });
         </script>
+
         <script>
             document.getElementById('images').addEventListener('change', function(event) {
                 let previewContainer = document.getElementById('image-preview-container');
@@ -310,52 +262,95 @@
                 });
             });
         </script>
+
         <script>
             $(document).ready(function() {
-                let attributeData = {!! json_encode($attributes) !!};
-                let existingVariants = {!! json_encode($variants) !!};
-                let countVariants = {{ $countVariants }}
-                console.log(countVariants);
-                console.log(existingVariants);
-                console.log(attributeData);
-
-                // Ẩn/Hiện container biến thể
                 $('#is_featured').change(function() {
-                    $('#variant-container').toggle(this.checked);
+                    if (this.checked) {
+                        $('#variant-container').show();
+                        $('#attribute-selection').show();
+                    } else {
+                        $('#variant-container').hide();
+                        $('#attribute-selection').hide();
+                    }
                 });
 
                 function toggleRemoveButtons() {
-                    if ($('.variant-item').length > 1) {
+                    if ($('.variant-item').length > 0) {
                         $('.remove-variant').show();
+                        $('#emptyVariant').hide();
                     } else {
                         $('.remove-variant').hide();
+                        $('#emptyVariant').show();
+                        $('#update-variant').hide();
+
                     }
                 }
 
-                function generateVariantHtml(index, variant = null) {
-                    let selectedAttributes = variant ? variant.attributes : $('#attribute-select').val() || [];
+                let variantData = {!! json_encode($formattedVariants) !!};
+                let attributeData = {!! json_encode($attributes) !!};
+                let attributeArray = Array.isArray(attributeData) ? attributeData : Object.values(attributeData);
+                let variantAttributes = {!! json_encode($variantAttributes) !!};
+                let attributeNewData = {!! json_encode($attributesList) !!};
 
-                    if (!Array.isArray(selectedAttributes) || selectedAttributes.length === 0) {
-                        alert('Vui lòng chọn ít nhất một thuộc tính.');
-                        return '';
-                    }
 
-                    let variantHtml = `<div class="row variant-item border p-3 mb-3" data-attributes='${JSON.stringify(selectedAttributes)}'>
-            <h5>Biến thể ${index + 1}</h5>
-            <button type="button" class="btn btn-danger btn-sm remove-variant">Xóa</button>`;
+                console.log("thuộc tính hiện có :", variantAttributes);
+                console.log(variantData);
 
-                    selectedAttributes.forEach(attr => {
-                        let attribute = attributeData.find(a => a.name === attr);
-                        if (!attribute || !attribute.values) return;
 
-                        variantHtml +=
-                            `<div class="col-md-6 mb-3">
-                <label class="form-label">${attribute.name}</label>
-                <select name="variants[${index}][attributes][${attribute.name}]" class="form-control ${attribute.is_multiple == 1 ? 'selectpicker' : 'single-select'}" ${attribute.is_multiple == 1 ? 'multiple data-live-search="true"' : ''}>`;
+                variantData.forEach(variant => {
+                    variant.variable_attributes = variant.variable_attributes;
+                });
+
+                function loadExistingVariants() {
+                    $('#variants').empty();
+
+                    variantData.forEach((variant, index) => {
+                        appendVariantForm(index, variant);
+                    });
+
+                    $('.selectpicker').selectpicker();
+                    toggleRemoveButtons();
+                }
+
+                function appendVariantForm(index, variant = null) {
+                    let selectedAttributes = variant ? Object.keys(variant.variable_attributes) : [];
+                    let selectedValues = variant ? Object.values(variant.variable_attributes) : [];
+
+                    let variantHtml = `<div class="variant-item border p-3 mb-3">
+                <h5>Biến thể ${index + 1}</h5>
+                <button type="button" class="btn btn-danger btn-sm remove-variant">Xóa</button>`;
+
+                    let filteredAttributes = attributeArray.filter(attribute =>
+                        variantAttributes.some(attr => Object.keys(attr).includes(attribute.name))
+                    );
+                    console.log("variantAttributes:", variantAttributes);
+
+                    console.log("filteredAttributes:", filteredAttributes);
+
+                    filteredAttributes.forEach(attribute => {
+                        let selectedValueId = variant && selectedAttributes.includes(attribute.name) ?
+                            selectedValues[selectedAttributes.indexOf(attribute.name)] :
+                            null;
+
+                        console.log(`Thuộc tính: ${attribute.name}, Giá trị:`, selectedValueId);
+
+                        variantHtml += `<div class="mb-3">
+                    <label class="form-label">${attribute.name}</label>`;
+
+                        if (attribute.is_multiple == 1) {
+                            variantHtml += `<select name="variants[${index}][attributes][${attribute.name}][]" 
+                                        class="form-control selectpicker" multiple data-live-search="true">`;
+                        } else {
+                            variantHtml += `<select name="variants[${index}][attributes][${attribute.name}]" 
+                                        class="form-control single-select">
+                                        <option value="" disabled selected>Chọn</option>`;
+                        }
 
                         attribute.values.forEach(value => {
-                            let selected = variant && variant.selected_values && variant.selected_values
-                                .includes(value.id) ? 'selected' : '';
+                            let selected = (Array.isArray(selectedValueId) && selectedValueId.includes(
+                                    value.id.toString())) ?
+                                "selected" : "";
                             variantHtml +=
                                 `<option value="${value.id}" ${selected}>${value.value}</option>`;
                         });
@@ -363,162 +358,136 @@
                         variantHtml += `</select></div>`;
                     });
 
-                    variantHtml += `<div class="col-md-6 mb-3">
-                <label class="form-label">Giá biến thể</label>
-                <input type="text" name="variants[${index}][price]" class="form-control variant-price-input" required value="${variant ? variant.price : ''}">
-            </div>
-        </div>`;
+                    variantHtml += `
+                <div class="mb-3">
+                    <label class="form-label">Giá biến thể</label>
+                    <input type="number" name="variants[${index}][price]" class="form-control" value="${variant ? variant.price : ''}" required>
+                </div>
+                 </div>`;
 
-                    return variantHtml;
+                    $('#variants').prepend(variantHtml);
                 }
+                loadExistingVariants();
 
-                // Hiển thị biến thể hiện có
-                function loadExistingVariants() {
-                    $('#variants').empty();
-                    console.log(existingVariants);
-                    existingVariants.forEach((variant, index) => {
-                        let variantHtml = generateVariantHtml(index, {
-                            attributes: variant.attributes.map(attr => attr.name),
-                            selected_values: variant.values.map(value => value.id),
-                            price: variant.price
-                        });
-                        $('#variants').append(variantHtml);
-                    });
+                $('#update-variant').on('click', function() {
+                    let newIndex = $('.variant-item').length;
+                    let lastVariant = variantData.length > 0 ? variantData[variantData.length - 1] : null;
+
+                    // Lấy danh sách thuộc tính của biến thể cuối cùng
+                    let lastAttributes = lastVariant ? Object.keys(lastVariant.variable_attributes) : [];
+
+                    appendVariantForm(newIndex, null, lastAttributes);
+
                     $('.selectpicker').selectpicker();
                     toggleRemoveButtons();
-                    formatPriceInputs();
-                }
+                });
 
-                // Thêm mới biến thể
                 $('#add-variant').click(function() {
                     let index = $('.variant-item').length;
-                    let variantHtml = generateVariantHtml(index);
-                    if (variantHtml) {
-                        $('#variants').prepend(variantHtml);
-                        $('.selectpicker').selectpicker();
-                        toggleRemoveButtons();
-                        formatPriceInputs();
-                    }
-                });
+                    let selectedNewAttributes = [];
+                    if (index === 0) {
+                        selectedNewAttributes = $('#attribute-select').val() || [];
+                        console.log("Danh sách thuộc tính đã chọn:", selectedNewAttributes);
 
-                // Xóa biến thể
-                $(document).on('click', '.remove-variant', function() {
-                    $(this).closest('.variant-item').remove();
-                    toggleRemoveButtons();
-                });
-
-                // Định dạng giá nhập vào
-                function formatPriceInputs() {
-                    $('.variant-price-input').off('input').on('input', function(e) {
-                        let value = e.target.value.replace(/[^0-9]/g, '');
-                        e.target.value = new Intl.NumberFormat('vi-VN').format(value);
-                    });
-
-                    $('.variant-price-input').off('focusout').on('focusout', function(e) {
-                        e.target.value = e.target.value.replace(/\./g, '');
-                    });
-                }
-
-                // Khởi chạy khi trang tải
-                loadExistingVariants();
-                toggleRemoveButtons();
-                formatPriceInputs();
-            });
-        </script>
-        <script>
-            $(document).ready(function() {
-                let attributeData = {!! json_encode($attributes) !!};
-                let existingVariants = {!! json_encode($variants) !!};
-                let countVariants = {!! $countVariants !!};
-
-                function initializeVariants() {
-                    if (countVariants > 0) {
-                        existingVariants.forEach((variant, index) => {
-                            let variantHtml = `<div class="row variant-item border p-3 mb-3" data-attributes='${JSON.stringify(variant.attributes)}'>
-                                <div class="col-md-12 d-flex justify-content-between align-items-center">
-                                    <h5>Biến thể ${index + 1}</h5>
-                                    <button type="button" class="btn btn-danger btn-sm remove-variant">Xóa</button>
-                                </div>`;
-
-                            Object.keys(variant.attributes).forEach(attr => {
-                                let attribute = attributeData.find(a => a.name === attr);
-                                if (!attribute) return;
-
-                                variantHtml += `<div class="col-md-6 mb-3">
-                                    <label class="form-label">${attribute.name}</label>
-                                    <select name="variants[${index}][attributes][${attribute.name}]" class="form-control single-select">
-                                        <option value="">Chọn</option>`;
-                                attribute.values.forEach(value => {
-                                    let selected = variant.attributes[attr] == value.id ?
-                                        'selected' : '';
-                                    variantHtml +=
-                                        `<option value="${value.id}" ${selected}>${value.value}</option>`;
-                                });
-                                variantHtml += `</select></div>`;
-                            });
-
-                            variantHtml += `<div class="col-md-6 mb-3">
-                                <label class="form-label">Giá biến thể</label>
-                                <input type="text" name="variants[${index}][price]" class="form-control variant-price-input" value="${variant.price}" required>
-                            </div></div>`;
-
-                            $('#variants').prepend(variantHtml);
-                        });
+                        if (selectedNewAttributes.length === 0) {
+                            alert('Vui lòng chọn ít nhất một thuộc tính.');
+                            return;
+                        }
+                        $('#attribute-selection').hide();
                     } else {
-                        $('#attribute-selection').show();
+                        let firstVariantAttributes = $('.variant-item:first').attr('data-attributes');
+                        selectedNewAttributes = firstVariantAttributes ? JSON.parse(firstVariantAttributes) :
+                    [];
+                        console.log("Thuộc tính của biến thể đầu tiên:", selectedNewAttributes);
                     }
-                }
 
-                $('#add-variant').click(function() {
-                    let index = $('.variant-item').length;
-                    let selectedAttributes = index === 0 ? $('#attribute-select').val() || [] : JSON.parse($(
-                        '.variant-item:first').attr('data-attributes'));
-
-                    if (selectedAttributes.length === 0) {
-                        alert('Vui lòng chọn ít nhất một thuộc tính.');
+                    if (!Array.isArray(selectedNewAttributes)) {
+                        console.error("selectedNewAttributes không phải là một mảng:", selectedNewAttributes);
                         return;
                     }
 
-                    let variantHtml = `<div class="row variant-item border p-3 mb-3" data-attributes='${JSON.stringify(selectedAttributes)}'>
-                        <div class="col-md-12 d-flex justify-content-between align-items-center">
-                            <h5>Biến thể ${index + 1}</h5>
-                            <button type="button" class="btn btn-danger btn-sm remove-variant">Xóa</button>
-                        </div>`;
+                    let variantHtml = `<div class="variant-item border p-3 mb-3" data-attributes='${JSON.stringify(selectedNewAttributes)}'>
+                        <h5>Biến thể ${index + 1}</h5>
+                        <button type="button" class="btn btn-danger btn-sm remove-variant">Xóa</button>`;
 
-                    selectedAttributes.forEach(attr => {
-                        let attribute = attributeData.find(a => a.name === attr);
-                        if (!attribute) return;
+                    selectedNewAttributes.forEach(attr => {
+                        console.log("Tạo biến thể với thuộc tính:", attr);
+                        let attribute = attributeNewData.find(a => a.name === attr);
 
-                        variantHtml += `<div class="col-md-6 mb-3">
-                            <label class="form-label">${attribute.name}</label>
-                            <select name="variants[${index}][attributes][${attribute.name}]" class="form-control single-select">
-                                <option value="">Chọn</option>`;
+                        if (!attribute) {
+                            console.warn(`Không tìm thấy dữ liệu thuộc tính cho: ${attr}`);
+                            return;
+                        }
+
+                        if (!attribute.values || !Array.isArray(attribute.values)) {
+                            console.warn(`Thuộc tính ${attr} không có danh sách giá trị.`);
+                            return;
+                        }
+
+                        variantHtml += `<div class="mb-3">
+                        <label class="form-label">${attribute.name}</label>`;
+
+                        if (attribute.is_multiple == 1) {
+                            variantHtml +=
+                                `<select name="variants[${index}][attributes][${attribute.name}][]" class="form-control selectpicker" multiple data-live-search="true">`;
+                        } else {
+                            variantHtml += `<select name="variants[${index}][attributes][${attribute.name}]" class="form-control single-select">
+                                    <option value="">Chọn</option>`;
+                        }
+
                         attribute.values.forEach(value => {
                             variantHtml +=
                                 `<option value="${value.id}">${value.value}</option>`;
                         });
+
                         variantHtml += `</select></div>`;
                     });
 
-                    variantHtml += `<div class="col-md-6 mb-3">
-                        <label class="form-label">Giá biến thể</label>
-                        <input type="text" name="variants[${index}][price]" class="form-control variant-price-input" required>
-                    </div></div>`;
+                    variantHtml += `
+                    <div class="mb-3">
+                    <label class="form-label">Giá biến thể</label>
+                    <input type="number" name="variants[${index}][price]" class="form-control" required>
+                    </div>
+                    </div>`;
 
-                    $('#variants').prepend(variantHtml);
+                    $('#variantsadd').prepend(variantHtml);
+                    $('.selectpicker').selectpicker();
                     toggleRemoveButtons();
                 });
 
+
+                // Remove variant
                 $(document).on('click', '.remove-variant', function() {
+                    let removedAttributes = $(this).closest('.variant-item').find('select').map(function() {
+                        return $(this).val();
+                    }).get();
+
                     $(this).closest('.variant-item').remove();
+
+                    if ($('.variant-item').length === 0) {
+                        $('#is_featured').prop('checked', false).trigger('change');
+                        $('#attribute-selection').hide();
+
+                        $('.single-select, .selectpicker').each(function() {
+                            $(this).val('');
+                            $(this).find('option').prop('disabled', false);
+                        });
+                    } else {
+                        $('.single-select').each(function() {
+                            let select = $(this);
+                            let currentValue = select.val();
+
+                            if (removedAttributes.includes(currentValue)) {
+                                select.val('');
+                            }
+                        });
+                    }
+
+                    $('.selectpicker').selectpicker('refresh');
                     toggleRemoveButtons();
                 });
 
-                function toggleRemoveButtons() {
-                    $('.remove-variant').toggle($('.variant-item').length > 1);
-                }
 
-                initializeVariants();
                 toggleRemoveButtons();
             });
         </script>
