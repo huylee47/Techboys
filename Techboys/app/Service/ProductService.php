@@ -64,7 +64,7 @@ class ProductService{
 
     
     public function storeProduct($request) {
-        DB::beginTransaction(); // Bắt đầu transaction
+        DB::beginTransaction();
     
         try {
             $imageName = null;
@@ -111,12 +111,12 @@ class ProductService{
                 }
             }
     
-            DB::commit(); // Xác nhận transaction nếu không có lỗi
+            DB::commit();
     
             return redirect()->route('admin.product.index')->with('success', 'Thêm sản phẩm thành công');
     
         } catch (\Exception $e) {
-            DB::rollBack(); // Hoàn tác nếu có lỗi
+            DB::rollBack();
     
             return redirect()->route('admin.product.create')->with('error', 'Lỗi: ' . $e->getMessage());
         }
@@ -210,7 +210,7 @@ class ProductService{
         if ($isFeatured == 1) {
             $existingVariants = ProductVariant::where('product_id', $id)->get();
 
-            $newVariants = collect($request->input('variants', [])); // Dữ liệu từ form
+            $newVariants = collect($request->input('variants', []));
             // dd($newVariants);
             $attributes = AttributesValue::with('attribute')->get()->groupBy('attributes_id')->mapWithKeys(function ($values) {
                 return [$values->first()->attribute->name => [
@@ -324,24 +324,33 @@ public function getProductBySlug($slug) {
     $images = Images::where('product_id', $product->id)->get();
     $variants = ProductVariant::where('product_id', $product->id)->get();
     $attributeValues = AttributesValue::all()->keyBy('id');
-    $defaultVariant = $variants->first();
 
-    // Gom nhóm biến thể theo thuộc tính giống nhau
-    $groupedVariants = [];
-
-    foreach ($variants as $variant) {
+    $formattedVariants = $variants->map(function ($variant) use ($attributeValues) {
         $attributes = json_decode($variant->attribute_values, true);
-        $groupKey = json_encode($attributes, JSON_UNESCAPED_UNICODE); // Chuỗi định danh nhóm
 
-        if (!isset($groupedVariants[$groupKey])) {
-            $groupedVariants[$groupKey] = [
-                'attributes' => $attributes,
-                'variants' => []
+        $formattedAttributes = collect($attributes)->mapWithKeys(function ($attrValueId, $attrName) use ($attributeValues) {
+            return 
+            [
+                $attrName => $attributeValues[$attrValueId]->id ?? 'Không xác định',
+                // $attrid => $attributeValues[$attrValueId]->id ?? 'Không xác định'
+
             ];
-        }
+        })->toArray();
 
-        $groupedVariants[$groupKey]['variants'][] = $variant;
-    }
+        return [
+            'id' => $variant->id,
+            'product_id' => $variant->product_id,
+            'price' => $variant->price,
+            'discounted_price' => $variant->discounted_price,
+            'stock' => $variant->stock,
+            'created_at' => $variant->created_at,
+            'updated_at' => $variant->updated_at,
+            'deleted_at' => $variant->deleted_at,
+            'attributes' => $formattedAttributes,
+        ];
+    });
+
+    $defaultVariant = $formattedVariants->first();
 
     if ($product) {
         $comment = Comment::where('product_id', $product->id)->get();
@@ -349,21 +358,21 @@ public function getProductBySlug($slug) {
             ->where('id', '!=', $product->id)
             ->take(10)
             ->get();
-         
-        // return response()->json([
-        //     'product' => $product,
-        //     'comment' => $comment,
-        //     'variants' => $variants,
-        //     'attributeValues' => $attributeValues,
-        //     'defaultVariant' => $defaultVariant,
-        //     'groupedVariants' => $groupedVariants,
-        // ]);
-            
-        return view('client.product.detail', compact('product', 'comment', 'relatedProducts', 'images', 'variants', 'attributeValues', 'defaultVariant', 'groupedVariants'));
+
+        return response()->json([
+            'product' => $product,
+            'comment' => $comment,
+            'images' => $images,
+            'formattedVariants' => $formattedVariants,
+            'defaultVariant' => $defaultVariant,
+        ]);
     } else {
         abort(404);
     }
 }
+
+
+
 
     public function getNewProducts(){
         return Product::with(['variant', 'promotion'])
