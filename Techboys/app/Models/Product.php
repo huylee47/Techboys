@@ -38,10 +38,7 @@ class Product extends Model
         return $this->hasOne(Promotion::class);
     }
 
-    public function model()
-    {
-        return $this->belongsTo(ProductModel::class, 'model_id');
-    }
+
 
     public function getDiscountedPriceAttribute()
     {
