@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\Attributes;
+use App\Models\AttributesValue;
 use App\Models\Banner;
 use App\Models\Bill;
 use App\Models\BillDetails;
@@ -10,7 +12,7 @@ use App\Models\Brand;
 use App\Models\Cart;
 use App\Models\Chats;
 use App\Models\Checklog;
-use App\Models\Color;
+// use App\Models\Color;
 use App\Models\Comment;
 use App\Models\Config;
 use App\Models\Contact;
@@ -18,7 +20,7 @@ use App\Models\Images;
 use App\Models\Message;
 use App\Models\Product;
 use App\Models\ProductCategory;
-use App\Models\ProductModel;
+// use App\Models\ProductModel;
 use App\Models\ProductVariant;
 use App\Models\Promotion;
 use App\Models\Refund;
@@ -99,9 +101,9 @@ class DatabaseSeeder extends Seeder
         foreach ($dataArray['message'] as $data) {
             Message::create($data);
         }
-        foreach ($dataArray['product_models'] as $data) {
-            ProductModel::create($data);
-        }
+        // foreach ($dataArray['product_models'] as $data) {
+        //     ProductModel::create($data);
+        // }
         foreach ($dataArray['products'] as $data) {
             Product::create($data);
         }
@@ -110,6 +112,12 @@ class DatabaseSeeder extends Seeder
         }
         foreach ($dataArray['product_variants'] as $data) {
             ProductVariant::create($data);
+        }
+        foreach ($dataArray['attributes'] as $data) {
+            Attributes::create($data);
+        }
+        foreach ($dataArray['attributes_values'] as $data) {
+            AttributesValue::create($data);
         }
         foreach ($dataArray['promotion'] as $data) {
             Promotion::create($data);
@@ -132,9 +140,10 @@ class DatabaseSeeder extends Seeder
         foreach ($dataArray['role'] as $data) {
             Role::create($data);
         }
-        foreach ($dataArray['colors'] as $data) {
-            Color::create($data);
-        }
+
+        // foreach ($dataArray['colors'] as $data) {
+        //     Color::create($data);
+        // }
         
     }
 }

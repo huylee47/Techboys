@@ -884,6 +884,86 @@
             "updated_at": "2025-01-19 13:05:00"
         }
     ],
+    "attributes": [
+        {
+            "name": "màu",
+            "is_multiple": 1
+        },
+        {
+            "name": "model",
+            "is_multiple": 0
+        },
+        {
+            "name": "ram",
+            "is_multiple": 0
+        }
+    ],
+    "attributes_values": [
+        {
+            "attributes_id": 1,
+            "value": "Light Blue"
+        },
+        {
+            "attributes_id": 1,
+            "value": "Chery"
+        },
+        {
+            "attributes_id": 1,
+            "value": "Titan"
+        },
+        {
+            "attributes_id": 1,
+            "value": "Gold"
+        },
+        {
+            "attributes_id": 1,
+            "value": "Space Gray"
+        },
+        {
+            "attributes_id": 2,
+            "value": "4GB"
+        },
+        {
+            "attributes_id": 2,
+            "value": "6GB"
+        },
+        {
+            "attributes_id": 2,
+            "value": "8GB"
+        },
+        {
+            "attributes_id": 2,
+            "value": "12GB"
+        },
+        {
+            "attributes_id": 2,
+            "value": "16GB"
+        },
+        {
+            "attributes_id": 2,
+            "value": "32GB"
+        },
+        {
+            "attributes_id": 3,
+            "value": "64GB"
+        },
+        {
+            "attributes_id": 3,
+            "value": "128GB"
+        },
+        {
+            "attributes_id": 3,
+            "value": "256GB"
+        },
+        {
+            "attributes_id": 3,
+            "value": "512GB"
+        },
+        {
+            "attributes_id": 3,
+            "value": "1TB"
+        }
+    ],
     "products": [
         {
             "brand_id": 1,
@@ -892,6 +972,8 @@
             "name": "iPhone 13",
             "img": "iphone-13.jpg",
             "slug": "iphone-13",
+            "base_price": 12000000,
+            "is_featured": 1,
             "rate_average": 4.5,
             "description": "Điện thoại thông minh của Apple."
         },
@@ -902,6 +984,8 @@
             "name": "Samsung Galaxy S21",
             "img": "s21.jpg",
             "slug": "samsung-galaxy-s21",
+            "base_price": 12000000,
+            "is_featured": 1,
             "rate_average": 4.7,
             "description": "Điện thoại thông minh của Samsung."
         },
@@ -912,6 +996,8 @@
             "name": "Xiaomi Mi 11",
             "img": "xiaomi-mi11.jpg",
             "slug": "xiaomi-mi-11",
+            "base_price": 12000000,
+            "is_featured": 1,
             "rate_average": 4.6,
             "description": "Điện thoại thông minh của Xiaomi."
         },
@@ -922,6 +1008,8 @@
             "name": "iPhone 12",
             "img": "iphone-12.jpg",
             "slug": "iphone-12",
+            "base_price": 12000000,
+            "is_featured": 1,
             "rate_average": 4.3,
             "description": "Điện thoại thông minh của Apple."
         },
@@ -932,6 +1020,8 @@
             "name": "Oppo F19 Pro",
             "img": "oppo-f19-pro.jpg",
             "slug": "oppo-f19-pro",
+            "base_price": 12000000,
+            "is_featured": 1,
             "rate_average": 4.2,
             "description": "Điện thoại thông minh của Oppo."
         },
@@ -942,6 +1032,8 @@
             "name": "Samsung Galaxy Note 20",
             "img": "note-20.jpg",
             "slug": "samsung-galaxy-note-20",
+            "base_price": 12000000,
+            "is_featured": 1,
             "rate_average": 4.5,
             "description": "Điện thoại thông minh của Samsung."
         },
@@ -952,6 +1044,8 @@
             "name": "Xiaomi Mi 10T Pro",
             "img": "xiaomi-mi-10t-pro.jpg",
             "slug": "xiaomi-mi-10t-pro",
+            "base_price": 12000000,
+            "is_featured": 1,
             "rate_average": 4.4,
             "description": "Điện thoại thông minh của Xiaomi."
         },
@@ -962,6 +1056,8 @@
             "name": "Oppo A54",
             "img": "oppo-a54.jpg",
             "slug": "oppo-a54",
+            "base_price": 12000000,
+            "is_featured": 1,
             "rate_average": 4.1,
             "description": "Điện thoại thông minh của Oppo."
         },
@@ -972,6 +1068,8 @@
             "name": "Realme X7 Pro",
             "img": "realme-x7-pro.jpg",
             "slug": "realme-x7-pro",
+            "base_price": 12000000,
+            "is_featured": 1,
             "rate_average": 4.3,
             "description": "Điện thoại thông minh của Realme."
         },
@@ -982,6 +1080,8 @@
             "name": "iPhone 11",
             "img": "iphone-11.jpg",
             "slug": "iphone-11",
+            "base_price": 12000000,
+            "is_featured": 1,
             "rate_average": 4.5,
             "description": "Điện thoại thông minh của Apple."
         },
@@ -992,6 +1092,8 @@
             "name": "Samsung Galaxy Z Fold 2",
             "img": "z-fold-2.jpg",
             "slug": "samsung-galaxy-z-fold-2",
+            "base_price": 12000000,
+            "is_featured": 1,
             "rate_average": 4.6,
             "description": "Điện thoại thông minh gập màn hình của Samsung."
         },
@@ -1002,6 +1104,8 @@
             "name": "Xiaomi Redmi Note 9 Pro",
             "img": "xiaomi-redmi-note-9-pro.jpg",
             "slug": "xiaomi-redmi-note-9-pro",
+            "base_price": 12000000,
+            "is_featured": 1,
             "rate_average": 4.3,
             "description": "Điện thoại thông minh của Xiaomi."
         },
@@ -1012,6 +1116,8 @@
             "name": "Oppo A74",
             "img": "oppo-a74.jpg",
             "slug": "oppo-a74",
+            "base_price": 12000000,
+            "is_featured": 1,
             "rate_average": 4.1,
             "description": "Điện thoại thông minh của Oppo."
         },
@@ -1022,6 +1128,8 @@
             "name": "Realme 7 Pro",
             "img": "realme-7-pro.jpg",
             "slug": "realme-7-pro",
+            "base_price": 12000000,
+            "is_featured": 1,
             "rate_average": 4.4,
             "description": "Điện thoại thông minh của Realme."
         },
@@ -1032,6 +1140,8 @@
             "name": "Vivo Y31",
             "img": "vivo-y31.jpg",
             "slug": "vivo-y31",
+            "base_price": 12000000,
+            "is_featured": 1,
             "rate_average": 4.0,
             "description": "Điện thoại thông minh của Vivo."
         },
@@ -1042,6 +1152,8 @@
             "name": "Oppo A53s",
             "img": "oppo-a53s.jpg",
             "slug": "oppo-a53s",
+            "base_price": 12000000,
+            "is_featured": 1,
             "rate_average": 4.2,
             "description": "Điện thoại thông minh của Oppo."
         },
@@ -1052,6 +1164,8 @@
             "name": "Realme Narzo 50",
             "img": "realme-narzo-50.jpg",
             "slug": "realme-narzo-50",
+            "base_price": 12000000,
+            "is_featured": 1,
             "rate_average": 4.3,
             "description": "Điện thoại thông minh của Realme."
         },
@@ -1062,6 +1176,8 @@
             "name": "Vivo Y20s",
             "img": "vivo-y20s.jpg",
             "slug": "vivo-y20s",
+            "base_price": 12000000,
+            "is_featured": 1,
             "rate_average": 4.1,
             "description": "Điện thoại thông minh của Vivo."
         },
@@ -1072,6 +1188,8 @@
             "name": "iPhone 7",
             "img": "iphone-7.jpg",
             "slug": "iphone-7",
+            "base_price": 12000000,
+            "is_featured": 1,
             "rate_average": 4.0,
             "description": "Điện thoại thông minh của Apple."
         },
@@ -1082,6 +1200,8 @@
             "name": "Samsung Galaxy A50",
             "img": "A50.jpg",
             "slug": "samsung-galaxy-a50",
+            "base_price": 12000000,
+            "is_featured": 1,
             "rate_average": 4.5,
             "description": "Điện thoại thông minh tầm trung của Samsung."
         },
@@ -1092,6 +1212,8 @@
             "name": "iPhone 8 Plus",
             "img": "iphone-8-plus.jpg",
             "slug": "iphone-8-plus",
+            "base_price": 12000000,
+            "is_featured": 1,
             "rate_average": 4.2,
             "description": "Điện thoại thông minh của Apple với thiết kế sang trọng."
         },
@@ -1102,6 +1224,8 @@
             "name": "Xiaomi Redmi Note 10",
             "img": "xiaomi-redmi-note-10.jpg",
             "slug": "xiaomi-redmi-note-10",
+            "base_price": 12000000,
+            "is_featured": 1,
             "rate_average": 4.4,
             "description": "Điện thoại thông minh với màn hình AMOLED của Xiaomi."
         },
@@ -1112,6 +1236,8 @@
             "name": "Xiaomi Redmi K40",
             "img": "xiaomi-redmi-k40.jpg",
             "slug": "xiaomi-redmi-k40",
+            "base_price": 12000000,
+            "is_featured": 1,
             "rate_average": 4.5,
             "description": "Điện thoại thông minh của Xiaomi."
         },
@@ -1122,6 +1248,8 @@
             "name": "Oppo A94 5G",
             "img": "oppo-a94-5g.jpg",
             "slug": "oppo-a94-5g",
+            "base_price": 12000000,
+            "is_featured": 1,
             "rate_average": 4.2,
             "description": "Điện thoại Oppo hỗ trợ 5G với thiết kế đẹp."
         },
@@ -1132,6 +1260,8 @@
             "name": "Realme GT 5G",
             "img": "realme-gt-5g.jpg",
             "slug": "realme-gt-5g",
+            "base_price": 12000000,
+            "is_featured": 1,
             "rate_average": 4.6,
             "description": "Điện thoại chơi game với hỗ trợ 5G của Realme."
         },
@@ -1142,6 +1272,8 @@
             "name": "Vivo V21 5G",
             "img": "vivo-v21-5g.jpg",
             "slug": "vivo-v21-5g",
+            "base_price": 12000000,
+            "is_featured": 1,
             "rate_average": 4.3,
             "description": "Điện thoại Vivo hỗ trợ 5G và camera selfie tốt."
         },
@@ -1152,6 +1284,8 @@
             "name": "iPhone XS",
             "img": "iphone-xs.jpg",
             "slug": "iphone-xs",
+            "base_price": 12000000,
+            "is_featured": 1,
             "rate_average": 4.5,
             "description": "Điện thoại cao cấp của Apple với màn hình OLED."
         },
@@ -1162,6 +1296,8 @@
             "name": "Samsung Galaxy A12",
             "img": "samsung-galaxy-a12.jpg",
             "slug": "samsung-galaxy-a12",
+            "base_price": 12000000,
+            "is_featured": 1,
             "rate_average": 4.1,
             "description": "Điện thoại giá rẻ với màn hình lớn của Samsung."
         },
@@ -1172,6 +1308,8 @@
             "name": "Xiaomi Redmi Note 12 Pro",
             "img": "xiaomi-redmi-note-12-pro.jpg",
             "slug": "xiaomi-redmi-note-12-pro",
+            "base_price": 12000000,
+            "is_featured": 1,
             "rate_average": 4.5,
             "description": "Điện thoại tầm trung của Xiaomi với camera 64MP."
         },
@@ -1182,6 +1320,8 @@
             "name": "iPhone 12 Mini",
             "img": "iphone-12-mini.jpg",
             "slug": "iphone-12-mini",
+            "base_price": 12000000,
+            "is_featured": 1,
             "rate_average": 4.4,
             "description": "Điện thoại nhỏ gọn, thiết kế hiện đại của Apple."
         },
@@ -1192,6 +1332,8 @@
             "name": "Oppo A55",
             "img": "oppo-a55.jpg",
             "slug": "oppo-a55",
+            "base_price": 12000000,
+            "is_featured": 1,
             "rate_average": 4.3,
             "description": "Điện thoại giá rẻ với màn hình 6.5 inch của Oppo."
         },
@@ -1202,6 +1344,8 @@
             "name": "Samsung Galaxy A72 5G",
             "img": "samsung-galaxy-a72-5g.jpg",
             "slug": "samsung-galaxy-a72-5g",
+            "base_price": 12000000,
+            "is_featured": 1,
             "rate_average": 4.5,
             "description": "Điện thoại tầm trung hỗ trợ 5G của Samsung."
         },
@@ -1212,6 +1356,8 @@
             "name": "Xiaomi Mi 11 Lite 5G",
             "img": "xiaomi-mi-11-lite-5g.jpg",
             "slug": "xiaomi-mi-11-lite-5g",
+            "base_price": 12000000,
+            "is_featured": 1,
             "rate_average": 4.4,
             "description": "Điện thoại nhẹ và mỏng của Xiaomi với 5G."
         },
@@ -1222,6 +1368,8 @@
             "name": "Oppo A94 5G",
             "img": "oppo-a94-5g.jpg",
             "slug": "oppo-a94-5g",
+            "base_price": 12000000,
+            "is_featured": 1,
             "rate_average": 4.2,
             "description": "Điện thoại Oppo hỗ trợ 5G với thiết kế đẹp."
         },
@@ -1232,6 +1380,8 @@
             "name": "Realme GT 5G",
             "img": "realme-gt-5g.jpg",
             "slug": "realme-gt-5g",
+            "base_price": 12000000,
+            "is_featured": 1,
             "rate_average": 4.6,
             "description": "Điện thoại chơi game với hỗ trợ 5G của Realme."
         },
@@ -1242,6 +1392,8 @@
             "name": "Vivo V21 5G",
             "img": "vivo-v21-5g.jpg",
             "slug": "vivo-v21-5g",
+            "base_price": 12000000,
+            "is_featured": 1,
             "rate_average": 4.3,
             "description": "Điện thoại Vivo hỗ trợ 5G và camera selfie tốt."
         },
@@ -1252,6 +1404,8 @@
             "name": "iPhone XS",
             "img": "iphone-xs.jpg",
             "slug": "iphone-xs",
+            "base_price": 12000000,
+            "is_featured": 1,
             "rate_average": 4.5,
             "description": "Điện thoại cao cấp của Apple với màn hình OLED."
         },
@@ -1262,6 +1416,8 @@
             "name": "Samsung Galaxy A12",
             "img": "samsung-galaxy-a12.jpg",
             "slug": "samsung-galaxy-a12",
+            "base_price": 12000000,
+            "is_featured": 1,
             "rate_average": 4.1,
             "description": "Điện thoại giá rẻ với màn hình lớn của Samsung."
         },
@@ -1272,6 +1428,8 @@
             "name": "Xiaomi Redmi Note 12 Pro",
             "img": "xiaomi-redmi-note-12-pro.jpg",
             "slug": "xiaomi-redmi-note-12-pro",
+            "base_price": 12000000,
+            "is_featured": 1,
             "rate_average": 4.5,
             "description": "Điện thoại tầm trung của Xiaomi với camera 64MP."
         },
@@ -1282,6 +1440,8 @@
             "name": "iPhone 12 Mini",
             "img": "iphone-12-mini.jpg",
             "slug": "iphone-12-mini",
+            "base_price": 12000000,
+            "is_featured": 1,
             "rate_average": 4.4,
             "description": "Điện thoại nhỏ gọn, thiết kế hiện đại của Apple."
         },
@@ -1292,6 +1452,8 @@
             "name": "Oppo A55",
             "img": "oppo-a55.jpg",
             "slug": "oppo-a55",
+            "base_price": 12000000,
+            "is_featured": 1,
             "rate_average": 4.3,
             "description": "Điện thoại giá rẻ với màn hình 6.5 inch của Oppo."
         },
@@ -1302,6 +1464,8 @@
             "name": "Realme Narzo 31 Pro",
             "img": "realme-narzo-31-pro.jpg",
             "slug": "realme-narzo-31-pro",
+            "base_price": 12000000,
+            "is_featured": 1,
             "rate_average": 4.2,
             "description": "Điện thoại hiệu năng mạnh mẽ của Realme với màn hình 120Hz."
         },
@@ -1312,6 +1476,8 @@
             "name": "Vivo Y73",
             "img": "vivo-y73.jpg",
             "slug": "vivo-y73",
+            "base_price": 12000000,
+            "is_featured": 1,
             "rate_average": 4.4,
             "description": "Điện thoại thiết kế đẹp, hiệu suất ổn định của Vivo."
         },
@@ -1322,6 +1488,8 @@
             "name": "iPhone 15",
             "img": "iphone-15.jpg",
             "slug": "iphone-15",
+            "base_price": 12000000,
+            "is_featured": 1,
             "rate_average": 4.7,
             "description": "Điện thoại Apple với camera kép, hiệu suất mạnh mẽ."
         },
@@ -1332,6 +1500,8 @@
             "name": "Samsung Galaxy S20 FE",
             "img": "samsung-galaxy-s20-fe.jpg",
             "slug": "samsung-galaxy-s20-fe",
+            "base_price": 12000000,
+            "is_featured": 1,
             "rate_average": 4.6,
             "description": "Điện thoại flagship giá phải chăng của Samsung."
         },
@@ -1342,6 +1512,8 @@
             "name": "Xiaomi Redmi K43",
             "img": "xiaomi-redmi-k43.jpg",
             "slug": "xiaomi-redmi-k43",
+            "base_price": 12000000,
+            "is_featured": 1,
             "rate_average": 4.5,
             "description": "Điện thoại flagship với Snapdragon 870 của Xiaomi."
         },
@@ -1352,6 +1524,8 @@
             "name": "Oppo A73",
             "img": "oppo-a73.jpg",
             "slug": "oppo-a73",
+            "base_price": 12000000,
+            "is_featured": 1,
             "rate_average": 4.2,
             "description": "Điện thoại tầm trung của Oppo với màn hình AMOLED."
         },
@@ -1362,6 +1536,8 @@
             "name": "Realme X50 Pro",
             "img": "realme-x50-pro.jpg",
             "slug": "realme-x50-pro",
+            "base_price": 12000000,
+            "is_featured": 1,
             "rate_average": 4.8,
             "description": "Điện thoại 5G flagship của Realme với hiệu năng mạnh mẽ."
         },
@@ -1372,6 +1548,8 @@
             "name": "Vivo V2",
             "img": "vivo-v2.jpg",
             "slug": "vivo-v2",
+            "base_price": 12000000,
+            "is_featured": 1,
             "rate_average": 4.3,
             "description": "Điện thoại Vivo với camera selfie 44MP."
         },
@@ -1382,6 +1560,8 @@
             "name": "iPhone 16",
             "img": "iphone-16.jpg",
             "slug": "iphone-16",
+            "base_price": 12000000,
+            "is_featured": 1,
             "rate_average": 4.4,
             "description": "Điện thoại của Apple với hiệu năng tuyệt vời và camera tốt."
         }
@@ -1400,594 +1580,321 @@
     "product_variants": [
         {
             "product_id": 1,
-            "color_id": 1,
-            "model_id": 1,
+            "attribute_values": "{\"màu\":\"1\",\"model\":\"2\"}",
             "price": 12590000,
             "stock": 50
         },
         {
             "product_id": 1,
-            "color_id": 2,
-            "model_id": 1,
+            "attribute_values": "{\"màu\":\"2\",\"model\":\"3\"}",
             "price": 12590000,
             "stock": 50
         },
         {
             "product_id": 1,
-            "color_id": 2,
-            "model_id": 2,
+            "attribute_values": "{\"màu\":\"3\",\"model\":\"4\"}",
             "price": 13990000,
             "stock": 30
         },
         {
             "product_id": 1,
-            "color_id": 1,
-            "model_id": 2,
+            "attribute_values": "{\"màu\":\"4\",\"model\":\"5\"}",
             "price": 13990000,
             "stock": 30
         },
         {
             "product_id": 2,
-            "color_id": 3,
-            "model_id": 3,
+            "attribute_values": "{\"màu\":\"5\",\"model\":\"6\"}",
             "price": 10090000,
             "stock": 40
         },
         {
             "product_id": 3,
-            "color_id": 5,
-            "model_id": 3,
+            "attribute_values": "{\"màu\":\"1\",\"model\":\"2\"}",
             "price": 12590000,
             "stock": 35
         },
         {
             "product_id": 4,
-            "color_id": 5,
-            "model_id": 2,
+            "attribute_values": "{\"màu\":\"2\",\"model\":\"3\"}",
             "price": 10090000,
             "stock": 40
         },
         {
             "product_id": 5,
-            "color_id": 3,
-            "model_id": 2,
+            "attribute_values": "{\"màu\":\"3\",\"model\":\"4\"}",
             "price": 10090000,
             "stock": 20
         },
         {
             "product_id": 6,
-            "color_id": 2,
-            "model_id": 3,
+            "attribute_values": "{\"màu\":\"4\",\"model\":\"5\"}",
             "price": 10090000,
             "stock": 50
         },
         {
             "product_id": 7,
-            "color_id": 2,
-            "model_id": 3,
+            "attribute_values": "{\"màu\":\"5\",\"model\":\"6\"}",
             "price": 10090000,
             "stock": 50
         },
         {
             "product_id": 8,
-            "color_id": 2,
-            "model_id": 3,
+            "attribute_values": "{\"màu\":\"1\",\"model\":\"2\"}",
             "price": 10090000,
             "stock": 50
         },
         {
             "product_id": 9,
-            "color_id": 2,
-            "model_id": 3,
+            "attribute_values": "{\"màu\":\"2\",\"model\":\"3\"}",
             "price": 10090000,
             "stock": 50
         },
         {
             "product_id": 10,
-            "color_id": 2,
-            "model_id": 3,
+            "attribute_values": "{\"màu\":\"3\",\"model\":\"4\"}",
             "price": 10090000,
             "stock": 50
         },
         {
             "product_id": 11,
-            "color_id": 2,
-            "model_id": 3,
+            "attribute_values": "{\"màu\":\"4\",\"model\":\"5\"}",
             "price": 10090000,
             "stock": 50
         },
         {
             "product_id": 12,
-            "color_id": 2,
-            "model_id": 3,
+            "attribute_values": "{\"màu\":\"5\",\"model\":\"6\"}",
             "price": 10090000,
             "stock": 50
         },
         {
             "product_id": 13,
-            "color_id": 2,
-            "model_id": 3,
+            "attribute_values": "{\"màu\":\"1\",\"model\":\"2\"}",
             "price": 10090000,
             "stock": 50
         },
         {
             "product_id": 14,
-            "color_id": 2,
-            "model_id": 3,
+            "attribute_values": "{\"màu\":\"2\",\"model\":\"3\"}",
             "price": 10090000,
             "stock": 50
         },
         {
             "product_id": 15,
-            "color_id": 2,
-            "model_id": 3,
+            "attribute_values": "{\"màu\":\"3\",\"model\":\"4\"}",
             "price": 10090000,
             "stock": 50
         },
         {
             "product_id": 16,
-            "color_id": 2,
-            "model_id": 3,
+            "attribute_values": "{\"màu\":\"4\",\"model\":\"5\"}",
             "price": 10090000,
             "stock": 50
         },
         {
             "product_id": 17,
-            "color_id": 2,
-            "model_id": 3,
+            "attribute_values": "{\"màu\":\"5\",\"model\":\"6\"}",
             "price": 10090000,
             "stock": 50
         },
         {
             "product_id": 18,
-            "color_id": 2,
-            "model_id": 3,
+            "attribute_values": "{\"màu\":\"1\",\"model\":\"2\"}",
             "price": 10090000,
             "stock": 50
         },
         {
             "product_id": 19,
-            "color_id": 2,
-            "model_id": 3,
+            "attribute_values": "{\"màu\":\"2\",\"model\":\"3\"}",
             "price": 10090000,
             "stock": 50
         },
         {
             "product_id": 20,
-            "color_id": 2,
-            "model_id": 3,
+            "attribute_values": "{\"màu\":\"3\",\"model\":\"4\"}",
             "price": 10090000,
             "stock": 50
         },
         {
             "product_id": 21,
-            "color_id": 2,
-            "model_id": 3,
+            "attribute_values": "{\"màu\":\"4\",\"model\":\"5\"}",
             "price": 10090000,
             "stock": 50
         },
         {
             "product_id": 22,
-            "color_id": 2,
-            "model_id": 3,
+            "attribute_values": "{\"màu\":\"5\",\"model\":\"6\"}",
             "price": 10090000,
             "stock": 50
         },
         {
             "product_id": 23,
-            "color_id": 2,
-            "model_id": 3,
+            "attribute_values": "{\"màu\":\"1\",\"model\":\"2\"}",
             "price": 10090000,
             "stock": 50
         },
         {
             "product_id": 24,
-            "color_id": 2,
-            "model_id": 3,
+            "attribute_values": "{\"màu\":\"2\",\"model\":\"3\"}",
             "price": 10090000,
             "stock": 50
         },
         {
             "product_id": 25,
-            "color_id": 2,
-            "model_id": 3,
+            "attribute_values": "{\"màu\":\"3\",\"model\":\"4\"}",
             "price": 10090000,
             "stock": 50
         },
         {
             "product_id": 26,
-            "color_id": 2,
-            "model_id": 3,
+            "attribute_values": "{\"màu\":\"4\",\"model\":\"5\"}",
             "price": 10090000,
             "stock": 50
         },
         {
             "product_id": 27,
-            "color_id": 2,
-            "model_id": 3,
+            "attribute_values": "{\"màu\":\"5\",\"model\":\"6\"}",
             "price": 10090000,
             "stock": 50
         },
         {
             "product_id": 28,
-            "color_id": 2,
-            "model_id": 3,
+            "attribute_values": "{\"màu\":\"1\",\"model\":\"2\"}",
             "price": 10090000,
             "stock": 50
         },
         {
             "product_id": 29,
-            "color_id": 2,
-            "model_id": 3,
+            "attribute_values": "{\"màu\":\"2\",\"model\":\"3\"}",
             "price": 10090000,
             "stock": 50
         },
         {
             "product_id": 30,
-            "color_id": 2,
-            "model_id": 3,
+            "attribute_values": "{\"màu\":\"3\",\"model\":\"4\"}",
             "price": 10090000,
             "stock": 50
         },
         {
             "product_id": 31,
-            "color_id": 2,
-            "model_id": 3,
+            "attribute_values": "{\"màu\":\"4\",\"model\":\"5\"}",
             "price": 10090000,
             "stock": 50
         },
         {
             "product_id": 32,
-            "color_id": 2,
-            "model_id": 3,
+            "attribute_values": "{\"màu\":\"5\",\"model\":\"6\"}",
             "price": 10090000,
             "stock": 50
         },
         {
             "product_id": 33,
-            "color_id": 2,
-            "model_id": 3,
+            "attribute_values": "{\"màu\":\"1\",\"model\":\"2\"}",
             "price": 10090000,
             "stock": 50
         },
         {
             "product_id": 34,
-            "color_id": 2,
-            "model_id": 3,
+            "attribute_values": "{\"màu\":\"2\",\"model\":\"3\"}",
             "price": 10090000,
             "stock": 50
         },
         {
             "product_id": 35,
-            "color_id": 2,
-            "model_id": 3,
+            "attribute_values": "{\"màu\":\"3\",\"model\":\"4\"}",
             "price": 10090000,
             "stock": 50
         },
         {
             "product_id": 36,
-            "color_id": 2,
-            "model_id": 3,
+            "attribute_values": "{\"màu\":\"4\",\"model\":\"5\"}",
             "price": 10090000,
             "stock": 50
         },
         {
             "product_id": 37,
-            "color_id": 2,
-            "model_id": 3,
+            "attribute_values": "{\"màu\":\"5\",\"model\":\"6\"}",
             "price": 10090000,
             "stock": 50
         },
         {
             "product_id": 38,
-            "color_id": 2,
-            "model_id": 3,
+            "attribute_values": "{\"màu\":\"1\",\"model\":\"2\"}",
             "price": 10090000,
             "stock": 50
         },
         {
             "product_id": 39,
-            "color_id": 2,
-            "model_id": 3,
+            "attribute_values": "{\"màu\":\"2\",\"model\":\"3\"}",
             "price": 10090000,
             "stock": 50
         },
         {
             "product_id": 40,
-            "color_id": 2,
-            "model_id": 3,
+            "attribute_values": "{\"màu\":\"3\",\"model\":\"4\"}",
             "price": 10090000,
             "stock": 50
         },
         {
             "product_id": 41,
-            "color_id": 2,
-            "model_id": 3,
+            "attribute_values": "{\"màu\":\"4\",\"model\":\"5\"}",
             "price": 10090000,
             "stock": 50
         },
         {
             "product_id": 42,
-            "color_id": 2,
-            "model_id": 3,
+            "attribute_values": "{\"màu\":\"5\",\"model\":\"6\"}",
             "price": 10090000,
             "stock": 50
         },
         {
             "product_id": 43,
-            "color_id": 2,
-            "model_id": 3,
+            "attribute_values": "{\"màu\":\"1\",\"model\":\"2\"}",
             "price": 10090000,
             "stock": 50
         },
         {
             "product_id": 44,
-            "color_id": 2,
-            "model_id": 3,
+            "attribute_values": "{\"màu\":\"2\",\"model\":\"3\"}",
             "price": 10090000,
             "stock": 50
         },
         {
             "product_id": 45,
-            "color_id": 2,
-            "model_id": 3,
+            "attribute_values": "{\"màu\":\"3\",\"model\":\"4\"}",
             "price": 10090000,
             "stock": 50
         },
         {
             "product_id": 46,
-            "color_id": 2,
-            "model_id": 3,
+            "attribute_values": "{\"màu\":\"4\",\"model\":\"5\"}",
             "price": 10090000,
             "stock": 50
         },
         {
             "product_id": 47,
-            "color_id": 2,
-            "model_id": 3,
+            "attribute_values": "{\"màu\":\"5\",\"model\":\"6\"}",
             "price": 10090000,
             "stock": 50
         },
         {
             "product_id": 48,
-            "color_id": 2,
-            "model_id": 3,
+            "attribute_values": "{\"màu\":\"1\",\"model\":\"2\"}",
             "price": 10090000,
             "stock": 50
         },
         {
             "product_id": 49,
-            "color_id": 2,
-            "model_id": 3,
+            "attribute_values": "{\"màu\":\"2\",\"model\":\"3\"}",
             "price": 10090000,
             "stock": 50
         },
         {
             "product_id": 50,
-            "color_id": 2,
-            "model_id": 3,
+            "attribute_values": "{\"màu\":\"3\",\"model\":\"4\"}",
             "price": 10090000,
             "stock": 50
-        },
-        {
-            "product_id": 51,
-            "color_id": 2,
-            "model_id": 3,
-            "price": 10090000,
-            "stock": 50
-        },
-        {
-            "product_id": 52,
-            "color_id": 2,
-            "model_id": 3,
-            "price": 10090000,
-            "stock": 50
-        },
-        {
-            "product_id": 53,
-            "color_id": 2,
-            "model_id": 3,
-            "price": 10090000,
-            "stock": 50
-        },
-        {
-            "product_id": 54,
-            "color_id": 2,
-            "model_id": 3,
-            "price": 10090000,
-            "stock": 50
-        },
-        {
-            "product_id": 55,
-            "color_id": 2,
-            "model_id": 3,
-            "price": 10090000,
-            "stock": 50
-        },
-        {
-            "product_id": 56,
-            "color_id": 2,
-            "model_id": 3,
-            "price": 10090000,
-            "stock": 50
-        },
-        {
-            "product_id": 57,
-            "color_id": 2,
-            "model_id": 3,
-            "price": 10090000,
-            "stock": 50
-        },
-        {
-            "product_id": 58,
-            "color_id": 2,
-            "model_id": 3,
-            "price": 10090000,
-            "stock": 50
-        },
-        {
-            "product_id": 59,
-            "color_id": 2,
-            "model_id": 3,
-            "price": 10090000,
-            "stock": 50
-        },
-        {
-            "product_id": 60,
-            "color_id": 2,
-            "model_id": 3,
-            "price": 10090000,
-            "stock": 50
-        },
-        {
-            "product_id": 61,
-            "color_id": 2,
-            "model_id": 3,
-            "price": 10090000,
-            "stock": 50
-        },
-        {
-            "product_id": 62,
-            "color_id": 2,
-            "model_id": 3,
-            "price": 10090000,
-            "stock": 50
-        },
-        {
-            "product_id": 63,
-            "color_id": 2,
-            "model_id": 3,
-            "price": 10090000,
-            "stock": 50
-        },
-        {
-            "product_id": 64,
-            "color_id": 2,
-            "model_id": 3,
-            "price": 10090000,
-            "stock": 50
-        },
-        {
-            "product_id": 65,
-            "color_id": 2,
-            "model_id": 3,
-            "price": 10090000,
-            "stock": 50
-        },
-        {
-            "product_id": 66,
-            "color_id": 2,
-            "model_id": 3,
-            "price": 10090000,
-            "stock": 50
-        },
-        {
-            "product_id": 67,
-            "color_id": 2,
-            "model_id": 3,
-            "price": 10090000,
-            "stock": 50
-        },
-        {
-            "product_id": 68,
-            "color_id": 2,
-            "model_id": 3,
-            "price": 10090000,
-            "stock": 50
-        },
-        {
-            "product_id": 69,
-            "color_id": 2,
-            "model_id": 3,
-            "price": 10090000,
-            "stock": 50
-        },
-        {
-            "product_id": 70,
-            "color_id": 2,
-            "model_id": 3,
-            "price": 10090000,
-            "stock": 50
-        },
-        {
-            "product_id": 71,
-            "color_id": 2,
-            "model_id": 3,
-            "price": 10090000,
-            "stock": 50
-        },
-        {
-            "product_id": 72,
-            "color_id": 2,
-            "model_id": 3,
-            "price": 10090000,
-            "stock": 50
-        },
-        {
-            "product_id": 73,
-            "color_id": 2,
-            "model_id": 3,
-            "price": 10090000,
-            "stock": 50
-        },
-        {
-            "product_id": 74,
-            "color_id": 2,
-            "model_id": 3,
-            "price": 10090000,
-            "stock": 50
-        },
-        {
-            "product_id": 75,
-            "color_id": 2,
-            "model_id": 3,
-            "price": 10090000,
-            "stock": 50
-        }
-    ],
-    "colors": [
-        { "name": "Đỏ", "color_hex": "#FF0000" },
-        { "name": "Xanh lá đậm", "color_hex": "#2d3438" },
-        { "name": "Xanh lá", "color_hex": "#008000" },
-        { "name": "Xanh dương", "color_hex": "#0000FF" },
-        { "name": "Xanh dương đậm", "color_hex": "#2d3d55" },
-        { "name": "Cam", "color_hex": "#FFA500" },
-        { "name": "Tím", "color_hex": "#800080" },
-        { "name": "Hồng", "color_hex": "#FFC0CB" },
-        { "name": "Nâu", "color_hex": "#956b48" },
-        { "name": "Đen", "color_hex": "#000000" },
-        { "name": "Trắng", "color_hex": "#FFFFFF" },
-        { "name": "Xám", "color_hex": "#808080" },
-        { "name": "Bạc", "color_hex": "#C0C0C0" },
-        { "name": "Be", "color_hex": "#F5F5DC" },
-        { "name": "Đen melange", "color_hex": "#555555" },
-        { "name": "Ghi", "color_hex": "#7D7D7D" },
-        { "name": "Ghi đậm", "color_hex": "#505050" },
-        { "name": "Vàng", "color_hex": "#FFFF00" },
-        { "name": "Ghi sáng", "color_hex": "#D3D3D3" },
-        { "name": "Cam đỏ", "color_hex": "#FF4500" },
-        { "name": "Xanh dương nhạt", "color_hex": "#679bab" },
-        { "name": "Xanh bạc hà", "color_hex": "#98FF98" },
-        { "name": "Cam đậm", "color_hex": "#FF8C00" },
-        { "name": "Trắng Kể", "color_hex": "#F8F8FF" },
-        { "name": "Tím nhạt", "color_hex": "#5a5672" }
-    ],
-    "product_models": [
-        {
-            "id": 1,
-            "name": "64GB"
-        },
-        {
-            "id": 2,
-            "name": "128GB"
-        },
-        {
-            "id": 3,
-            "name": "256GB"
-        },
-        {
-            "id": 4,
-            "name": "512GB"
         }
     ],
     "promotion": [

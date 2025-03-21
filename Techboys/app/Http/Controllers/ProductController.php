@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ProductRequest;
 use App\Models\Brand;
-use App\Models\Color;
+// use App\Models\Color;
 use App\Models\Product;
-use App\Models\ProductModel;
+// use App\Models\ProductModel;
 use App\Models\ProductCategory;
 use App\Service\PhotoService;
 use Illuminate\Http\Request;
@@ -40,11 +40,17 @@ class ProductController extends Controller
         return $this->productService->createProduct();
     }
 
+    public function createC()
+    {
+        return $this->productService->createProductC();
+    }
     /**
      * Store a newly created resource in storage.
      */
     public function store(ProductRequest $request)
     {
+        // dd($request->all());
+
         return $this->productService->storeProduct($request);
     }
 
@@ -59,9 +65,9 @@ class ProductController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Request $request)
+    public function edit($id)
     {
-        return $this->productService->editProduct($request);
+        return $this->productService->editProduct($id);
     }
 
     /**
@@ -122,7 +128,7 @@ class ProductController extends Controller
     {
         // Lấy danh sách thương hiệu và model
         $brands = Brand::all();
-        $models = ProductModel::all();
+        
 
         // Tạo query sản phẩm
         $query = Product::query();
@@ -160,7 +166,7 @@ class ProductController extends Controller
         // Nếu là tìm kiếm bằng nút "Tìm kiếm", hiển thị trang search.blade.php
         $products = Product::where('name', 'LIKE', "%{$keyword}%")->paginate(12);
         $brands = Brand::all();
-        $models = ProductModel::all();
+        
 
         return view('client.product.search', compact('products', 'keyword', 'brands', 'models'));
     }
@@ -168,7 +174,7 @@ class ProductController extends Controller
     public function filter(Request $request)
     {
         $brands = Brand::all();
-        $models = ProductModel::all();
+        
 
         $query = Product::query();
 

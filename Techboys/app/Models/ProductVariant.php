@@ -9,32 +9,22 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class ProductVariant extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory,SoftDeletes;
     protected $table = 'product_variants';
-
     protected $appends = ['discounted_price'];
 
-    protected $fillable = ['product_id', 'color_id', 'price', 'stock','model_id'];
-
-    public function product()
-    {
+    protected $fillable = ['product_id', 'attribute_values', 'price', 'stock',];
+    protected $casts = [
+        'attribute_values' => 'array',
+    ];
+    public function product(){
         return $this->belongsTo(Product::class);
     }
-    public function billDetails()
-    {
+    public function billDetails(){
         return $this->hasMany(BillDetails::class);
-    }
-    public function cart()
-    {
+    }  
+    public function cart(){
         return $this->hasMany(Cart::class);
-    }
-    public function color()
-    {
-        return $this->belongsTo(Color::class);
-    }
-    public function model()
-    {
-        return $this->belongsTo(ProductModel::class);
     }
 
     public function getDiscountedPriceAttribute()
@@ -49,5 +39,7 @@ class ProductVariant extends Model
         }
         return $this->price;
     }
+    
+
 
 }

@@ -16,6 +16,8 @@ return new class extends Migration
             $table->string('name');
             $table->string('img')->nullable();
             $table->string('slug');
+            $table->decimal('base_price', 20, 2);
+            $table->tinyInteger('is_featured');
             $table->decimal('rate_average', 10, 2);
             $table->longText('description');
             $table->softDeletes();
