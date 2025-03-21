@@ -156,8 +156,10 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta2/dist/js/bootstrap-select.min.js"></script>
     <script src="{{ url('') }}/admin/assets/vendors/summernote/summernote-lite.min.js"></script>
     <script>
-        let table1 = document.querySelector('#table1');
-        let dataTable = new simpleDatatables.DataTable(table1);
+       let table1 = document.querySelector('#table1');
+        if (table1) {
+            let dataTable = new simpleDatatables.DataTable(table1);
+        }
     </script>
     @yield('scripts')
 </body>
