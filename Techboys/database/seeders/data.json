@@ -886,15 +886,15 @@
     ],
     "attributes": [
         {
-            "name": "Màu",
+            "name": "màu",
             "is_multiple": 1
         },
         {
-            "name": "Model",
+            "name": "model",
             "is_multiple": 0
         },
         {
-            "name": "Ram",
+            "name": "ram",
             "is_multiple": 0
         }
     ],
@@ -1580,319 +1580,319 @@
     "product_variants": [
         {
             "product_id": 1,
-            "attribute_values": "{\"màu\":\"1\",\"model\":\"2\",\"ram\":\"6\"}",
+            "attribute_values": "{\"màu\":\"1\",\"model\":\"2\"}",
             "price": 12590000,
             "stock": 50
         },
         {
             "product_id": 1,
-            "attribute_values": "{\"màu\":\"2\",\"model\":\"3\",\"ram\":\"7\"}",
+            "attribute_values": "{\"màu\":\"2\",\"model\":\"3\"}",
             "price": 12590000,
             "stock": 50
         },
         {
             "product_id": 1,
-            "attribute_values": "{\"màu\":\"3\",\"model\":\"4\",\"ram\":\"8\"}",
+            "attribute_values": "{\"màu\":\"3\",\"model\":\"4\"}",
             "price": 13990000,
             "stock": 30
         },
         {
             "product_id": 1,
-            "attribute_values": "{\"màu\":\"4\",\"model\":\"5\",\"ram\":\"9\"}",
+            "attribute_values": "{\"màu\":\"4\",\"model\":\"5\"}",
             "price": 13990000,
             "stock": 30
         },
         {
             "product_id": 2,
-            "attribute_values": "{\"màu\":\"5\",\"model\":\"6\",\"ram\":\"10\"}",
+            "attribute_values": "{\"màu\":\"5\",\"model\":\"6\"}",
             "price": 10090000,
             "stock": 40
         },
         {
             "product_id": 3,
-            "attribute_values": "{\"màu\":\"1\",\"model\":\"2\",\"ram\":\"11\"}",
+            "attribute_values": "{\"màu\":\"1\",\"model\":\"2\"}",
             "price": 12590000,
             "stock": 35
         },
         {
             "product_id": 4,
-            "attribute_values": "{\"màu\":\"2\",\"model\":\"3\",\"ram\":\"12\"}",
+            "attribute_values": "{\"màu\":\"2\",\"model\":\"3\"}",
             "price": 10090000,
             "stock": 40
         },
         {
             "product_id": 5,
-            "attribute_values": "{\"màu\":\"3\",\"model\":\"4\",\"ram\":\"13\"}",
+            "attribute_values": "{\"màu\":\"3\",\"model\":\"4\"}",
             "price": 10090000,
             "stock": 20
         },
         {
             "product_id": 6,
-            "attribute_values": "{\"màu\":\"4\",\"model\":\"5\",\"ram\":\"14\"}",
+            "attribute_values": "{\"màu\":\"4\",\"model\":\"5\"}",
             "price": 10090000,
             "stock": 50
         },
         {
             "product_id": 7,
-            "attribute_values": "{\"màu\":\"5\",\"model\":\"6\",\"ram\":\"15\"}",
+            "attribute_values": "{\"màu\":\"5\",\"model\":\"6\"}",
             "price": 10090000,
             "stock": 50
         },
         {
             "product_id": 8,
-            "attribute_values": "{\"màu\":\"1\",\"model\":\"2\",\"ram\":\"16\"}",
+            "attribute_values": "{\"màu\":\"1\",\"model\":\"2\"}",
             "price": 10090000,
             "stock": 50
         },
         {
             "product_id": 9,
-            "attribute_values": "{\"màu\":\"2\",\"model\":\"3\",\"ram\":\"6\"}",
+            "attribute_values": "{\"màu\":\"2\",\"model\":\"3\"}",
             "price": 10090000,
             "stock": 50
         },
         {
             "product_id": 10,
-            "attribute_values": "{\"màu\":\"3\",\"model\":\"4\",\"ram\":\"7\"}",
+            "attribute_values": "{\"màu\":\"3\",\"model\":\"4\"}",
             "price": 10090000,
             "stock": 50
         },
         {
             "product_id": 11,
-            "attribute_values": "{\"màu\":\"4\",\"model\":\"5\",\"ram\":\"8\"}",
+            "attribute_values": "{\"màu\":\"4\",\"model\":\"5\"}",
             "price": 10090000,
             "stock": 50
         },
         {
             "product_id": 12,
-            "attribute_values": "{\"màu\":\"5\",\"model\":\"6\",\"ram\":\"9\"}",
+            "attribute_values": "{\"màu\":\"5\",\"model\":\"6\"}",
             "price": 10090000,
             "stock": 50
         },
         {
             "product_id": 13,
-            "attribute_values": "{\"màu\":\"1\",\"model\":\"2\",\"ram\":\"10\"}",
+            "attribute_values": "{\"màu\":\"1\",\"model\":\"2\"}",
             "price": 10090000,
             "stock": 50
         },
         {
             "product_id": 14,
-            "attribute_values": "{\"màu\":\"2\",\"model\":\"3\",\"ram\":\"11\"}",
+            "attribute_values": "{\"màu\":\"2\",\"model\":\"3\"}",
             "price": 10090000,
             "stock": 50
         },
         {
             "product_id": 15,
-            "attribute_values": "{\"màu\":\"3\",\"model\":\"4\",\"ram\":\"12\"}",
+            "attribute_values": "{\"màu\":\"3\",\"model\":\"4\"}",
             "price": 10090000,
             "stock": 50
         },
         {
             "product_id": 16,
-            "attribute_values": "{\"màu\":\"4\",\"model\":\"5\",\"ram\":\"13\"}",
+            "attribute_values": "{\"màu\":\"4\",\"model\":\"5\"}",
             "price": 10090000,
             "stock": 50
         },
         {
             "product_id": 17,
-            "attribute_values": "{\"màu\":\"5\",\"model\":\"6\",\"ram\":\"14\"}",
+            "attribute_values": "{\"màu\":\"5\",\"model\":\"6\"}",
             "price": 10090000,
             "stock": 50
         },
         {
             "product_id": 18,
-            "attribute_values": "{\"màu\":\"1\",\"model\":\"2\",\"ram\":\"15\"}",
+            "attribute_values": "{\"màu\":\"1\",\"model\":\"2\"}",
             "price": 10090000,
             "stock": 50
         },
         {
             "product_id": 19,
-            "attribute_values": "{\"màu\":\"2\",\"model\":\"3\",\"ram\":\"16\"}",
+            "attribute_values": "{\"màu\":\"2\",\"model\":\"3\"}",
             "price": 10090000,
             "stock": 50
         },
         {
             "product_id": 20,
-            "attribute_values": "{\"màu\":\"3\",\"model\":\"4\",\"ram\":\"6\"}",
+            "attribute_values": "{\"màu\":\"3\",\"model\":\"4\"}",
             "price": 10090000,
             "stock": 50
         },
         {
             "product_id": 21,
-            "attribute_values": "{\"màu\":\"4\",\"model\":\"5\",\"ram\":\"7\"}",
+            "attribute_values": "{\"màu\":\"4\",\"model\":\"5\"}",
             "price": 10090000,
             "stock": 50
         },
         {
             "product_id": 22,
-            "attribute_values": "{\"màu\":\"5\",\"model\":\"6\",\"ram\":\"8\"}",
+            "attribute_values": "{\"màu\":\"5\",\"model\":\"6\"}",
             "price": 10090000,
             "stock": 50
         },
         {
             "product_id": 23,
-            "attribute_values": "{\"màu\":\"1\",\"model\":\"2\",\"ram\":\"9\"}",
+            "attribute_values": "{\"màu\":\"1\",\"model\":\"2\"}",
             "price": 10090000,
             "stock": 50
         },
         {
             "product_id": 24,
-            "attribute_values": "{\"màu\":\"2\",\"model\":\"3\",\"ram\":\"10\"}",
+            "attribute_values": "{\"màu\":\"2\",\"model\":\"3\"}",
             "price": 10090000,
             "stock": 50
         },
         {
             "product_id": 25,
-            "attribute_values": "{\"màu\":\"3\",\"model\":\"4\",\"ram\":\"11\"}",
+            "attribute_values": "{\"màu\":\"3\",\"model\":\"4\"}",
             "price": 10090000,
             "stock": 50
         },
         {
             "product_id": 26,
-            "attribute_values": "{\"màu\":\"4\",\"model\":\"5\",\"ram\":\"12\"}",
+            "attribute_values": "{\"màu\":\"4\",\"model\":\"5\"}",
             "price": 10090000,
             "stock": 50
         },
         {
             "product_id": 27,
-            "attribute_values": "{\"màu\":\"5\",\"model\":\"6\",\"ram\":\"13\"}",
+            "attribute_values": "{\"màu\":\"5\",\"model\":\"6\"}",
             "price": 10090000,
             "stock": 50
         },
         {
             "product_id": 28,
-            "attribute_values": "{\"màu\":\"1\",\"model\":\"2\",\"ram\":\"14\"}",
+            "attribute_values": "{\"màu\":\"1\",\"model\":\"2\"}",
             "price": 10090000,
             "stock": 50
         },
         {
             "product_id": 29,
-            "attribute_values": "{\"màu\":\"2\",\"model\":\"3\",\"ram\":\"15\"}",
+            "attribute_values": "{\"màu\":\"2\",\"model\":\"3\"}",
             "price": 10090000,
             "stock": 50
         },
         {
             "product_id": 30,
-            "attribute_values": "{\"màu\":\"3\",\"model\":\"4\",\"ram\":\"16\"}",
+            "attribute_values": "{\"màu\":\"3\",\"model\":\"4\"}",
             "price": 10090000,
             "stock": 50
         },
         {
             "product_id": 31,
-            "attribute_values": "{\"màu\":\"4\",\"model\":\"5\",\"ram\":\"6\"}",
+            "attribute_values": "{\"màu\":\"4\",\"model\":\"5\"}",
             "price": 10090000,
             "stock": 50
         },
         {
             "product_id": 32,
-            "attribute_values": "{\"màu\":\"5\",\"model\":\"6\",\"ram\":\"7\"}",
+            "attribute_values": "{\"màu\":\"5\",\"model\":\"6\"}",
             "price": 10090000,
             "stock": 50
         },
         {
             "product_id": 33,
-            "attribute_values": "{\"màu\":\"1\",\"model\":\"2\",\"ram\":\"8\"}",
+            "attribute_values": "{\"màu\":\"1\",\"model\":\"2\"}",
             "price": 10090000,
             "stock": 50
         },
         {
             "product_id": 34,
-            "attribute_values": "{\"màu\":\"2\",\"model\":\"3\",\"ram\":\"9\"}",
+            "attribute_values": "{\"màu\":\"2\",\"model\":\"3\"}",
             "price": 10090000,
             "stock": 50
         },
         {
             "product_id": 35,
-            "attribute_values": "{\"màu\":\"3\",\"model\":\"4\",\"ram\":\"10\"}",
+            "attribute_values": "{\"màu\":\"3\",\"model\":\"4\"}",
             "price": 10090000,
             "stock": 50
         },
         {
             "product_id": 36,
-            "attribute_values": "{\"màu\":\"4\",\"model\":\"5\",\"ram\":\"11\"}",
+            "attribute_values": "{\"màu\":\"4\",\"model\":\"5\"}",
             "price": 10090000,
             "stock": 50
         },
         {
             "product_id": 37,
-            "attribute_values": "{\"màu\":\"5\",\"model\":\"6\",\"ram\":\"12\"}",
+            "attribute_values": "{\"màu\":\"5\",\"model\":\"6\"}",
             "price": 10090000,
             "stock": 50
         },
         {
             "product_id": 38,
-            "attribute_values": "{\"màu\":\"1\",\"model\":\"2\",\"ram\":\"13\"}",
+            "attribute_values": "{\"màu\":\"1\",\"model\":\"2\"}",
             "price": 10090000,
             "stock": 50
         },
         {
             "product_id": 39,
-            "attribute_values": "{\"màu\":\"2\",\"model\":\"3\",\"ram\":\"14\"}",
+            "attribute_values": "{\"màu\":\"2\",\"model\":\"3\"}",
             "price": 10090000,
             "stock": 50
         },
         {
             "product_id": 40,
-            "attribute_values": "{\"màu\":\"3\",\"model\":\"4\",\"ram\":\"15\"}",
+            "attribute_values": "{\"màu\":\"3\",\"model\":\"4\"}",
             "price": 10090000,
             "stock": 50
         },
         {
             "product_id": 41,
-            "attribute_values": "{\"màu\":\"4\",\"model\":\"5\",\"ram\":\"16\"}",
+            "attribute_values": "{\"màu\":\"4\",\"model\":\"5\"}",
             "price": 10090000,
             "stock": 50
         },
         {
             "product_id": 42,
-            "attribute_values": "{\"màu\":\"5\",\"model\":\"6\",\"ram\":\"6\"}",
+            "attribute_values": "{\"màu\":\"5\",\"model\":\"6\"}",
             "price": 10090000,
             "stock": 50
         },
         {
             "product_id": 43,
-            "attribute_values": "{\"màu\":\"1\",\"model\":\"2\",\"ram\":\"7\"}",
+            "attribute_values": "{\"màu\":\"1\",\"model\":\"2\"}",
             "price": 10090000,
             "stock": 50
         },
         {
             "product_id": 44,
-            "attribute_values": "{\"màu\":\"2\",\"model\":\"3\",\"ram\":\"8\"}",
+            "attribute_values": "{\"màu\":\"2\",\"model\":\"3\"}",
             "price": 10090000,
             "stock": 50
         },
         {
             "product_id": 45,
-            "attribute_values": "{\"màu\":\"3\",\"model\":\"4\",\"ram\":\"9\"}",
+            "attribute_values": "{\"màu\":\"3\",\"model\":\"4\"}",
             "price": 10090000,
             "stock": 50
         },
         {
             "product_id": 46,
-            "attribute_values": "{\"màu\":\"4\",\"model\":\"5\",\"ram\":\"10\"}",
+            "attribute_values": "{\"màu\":\"4\",\"model\":\"5\"}",
             "price": 10090000,
             "stock": 50
         },
         {
             "product_id": 47,
-            "attribute_values": "{\"màu\":\"5\",\"model\":\"6\",\"ram\":\"11\"}",
+            "attribute_values": "{\"màu\":\"5\",\"model\":\"6\"}",
             "price": 10090000,
             "stock": 50
         },
         {
             "product_id": 48,
-            "attribute_values": "{\"màu\":\"1\",\"model\":\"2\",\"ram\":\"12\"}",
+            "attribute_values": "{\"màu\":\"1\",\"model\":\"2\"}",
             "price": 10090000,
             "stock": 50
         },
         {
             "product_id": 49,
-            "attribute_values": "{\"màu\":\"2\",\"model\":\"3\",\"ram\":\"13\"}",
+            "attribute_values": "{\"màu\":\"2\",\"model\":\"3\"}",
             "price": 10090000,
             "stock": 50
         },
         {
             "product_id": 50,
-            "attribute_values": "{\"màu\":\"3\",\"model\":\"4\",\"ram\":\"14\"}",
+            "attribute_values": "{\"màu\":\"3\",\"model\":\"4\"}",
             "price": 10090000,
             "stock": 50
         }
