@@ -134,7 +134,8 @@
                                             <div class="mb-3" id="attribute-selection">
                                                 <label class="form-label">Chọn thuộc tính biến thể</label>
                                                 <select id="attribute-select" class="form-control selectpicker" multiple
-                                                    data-live-search="true">
+                                                    data-live-search="true" title="Chọn thuộc tính" data-max-options="2"
+                        data-max-options-text="Bạn chỉ có thể chọn tối đa 2 mục!">
                                                     @foreach ($attributes as $attribute)
                                                         <option value="{{ $attribute->name }}">{{ $attribute->name }}
                                                         </option>
@@ -235,119 +236,139 @@
                 });
             });
         </script>
-        <script>
-            $(document).ready(function() {
-                $('#is_featured').change(function() {
-                    $('#variant-container').toggle(this.checked);
-                });
-
-                function toggleRemoveButtons() {
-                    if ($('.variant-item').length > 1) {
-                        $('.remove-variant').show();
-                    } else {
-                        $('.remove-variant').hide();
-                    }
+    <script>
+        $(document).ready(function() {
+            $('#is_featured').change(function() {
+                if (this.checked) {
+                    $('#variant-container').show();
+                    $('#attribute-selection').show();
+                } else {
+                    $('#variant-container').hide();
+                    $('#attribute-selection').hide();
                 }
+            });
 
-                let attributeData = {!! json_encode($attributes) !!}; // Chuyển từ PHP sang JavaScript
+            function toggleRemoveButtons() {
+                if ($('.variant-item').length > 0) {
+                    $('.remove-variant').show();
+                    $('#newVariant').hide();
 
-                $('#add-variant').click(function() {
-                    let index = $('.variant-item').length;
-                    let selectedAttributes = [];
+                } else {
+                    $('#newVariant').show();
+                    $('.remove-variant').hide();
+                }
+            }
 
-                    if (index === 0) {
-                        selectedAttributes = $('#attribute-select').val() || [];
-                        console.log("Danh sách thuộc tính đã chọn:", selectedAttributes);
+            let attributeData = {!! json_encode($attributes) !!};
 
-                        if (selectedAttributes.length === 0) {
-                            alert('Vui lòng chọn ít nhất một thuộc tính.');
-                            return;
-                        }
-                        $('#attribute-selection').hide();
-                    } else {
-                        let firstVariantAttributes = $('.variant-item:first').attr('data-attributes');
-                        selectedAttributes = firstVariantAttributes ? JSON.parse(firstVariantAttributes) : [];
-                        console.log("Thuộc tính của biến thể đầu tiên:", selectedAttributes);
-                    }
+            $('#add-variant').click(function() {
+                let index = $('.variant-item').length;
+                let selectedAttributes = [];
 
-                    if (!Array.isArray(selectedAttributes)) {
-                        console.error("selectedAttributes không phải là một mảng:", selectedAttributes);
+                if (index === 0) {
+                    selectedAttributes = $('#attribute-select').val() || [];
+                    console.log("Danh sách thuộc tính đã chọn:", selectedAttributes);
+
+                    if (selectedAttributes.length === 0) {
+                        alert('Vui lòng chọn ít nhất một thuộc tính.');
                         return;
                     }
+                    $('#attribute-selection').hide();
+                } else {
+                    let firstVariantAttributes = $('.variant-item:first').attr('data-attributes');
+                    selectedAttributes = firstVariantAttributes ? JSON.parse(firstVariantAttributes) : [];
+                    console.log("Thuộc tính của biến thể đầu tiên:", selectedAttributes);
+                }
 
-                    let variantHtml = `<div class="row variant-item border p-3 mb-3" data-attributes='${JSON.stringify(selectedAttributes)}'>
-                   <div class="col-md-12 d-flex justify-content-between align-items-center">
+                if (!Array.isArray(selectedAttributes)) {
+                    console.error("selectedAttributes không phải là một mảng:", selectedAttributes);
+                    return;
+                }
+
+                let variantHtml = `<div class="row variant-item border p-3 mb-3" data-attributes='${JSON.stringify(selectedAttributes)}'>
+                     <div class="col-md-12 d-flex justify-content-between align-items-center">
         <h5>Biến thể ${index + 1}</h5>
         <button type="button" class="btn btn-danger btn-sm remove-variant">Xóa</button>
          </div>`;
 
-                    selectedAttributes.forEach(attr => {
-                        console.log("Tạo biến thể với thuộc tính:", attr);
+                selectedAttributes.forEach(attr => {
+                    console.log("Tạo biến thể với thuộc tính:", attr);
 
-                        let attribute = attributeData.find(a => a.name === attr);
+                    let attribute = attributeData.find(a => a.name === attr);
 
-                        if (!attribute) {
-                            console.warn(`Không tìm thấy dữ liệu thuộc tính cho: ${attr}`);
-                            return;
-                        }
+                    if (!attribute) {
+                        console.warn(`Không tìm thấy dữ liệu thuộc tính cho: ${attr}`);
+                        return;
+                    }
 
-                        if (!attribute.values || !Array.isArray(attribute.values)) {
-                            console.warn(`Thuộc tính ${attr} không có danh sách giá trị.`);
-                            return;
-                        }
+                    if (!attribute.values || !Array.isArray(attribute.values)) {
+                        console.warn(`Thuộc tính ${attr} không có danh sách giá trị.`);
+                        return;
+                    }
 
-                        variantHtml += `<div class="col-md-6 mb-3">
-                    <label class="form-label">${attribute.name}</label>`;
+                    variantHtml += `<div class="col-md-6 mb-3">
+            <label class="form-label">${attribute.name}</label>`;
 
-                        if (attribute.is_multiple == 1) {
-                            variantHtml +=
-                                `<select name="variants[${index}][attributes][${attribute.name}][]" class="form-control selectpicker" multiple data-live-search="true">`;
-                        } else {
-                            variantHtml += `<select name="variants[${index}][attributes][${attribute.name}]" class="form-control single-select">
-                                    <option value="">Chọn</option>`;
-                        }
+                    if (attribute.is_multiple == 1) {
+                        variantHtml +=
+                            `<select name="variants[${index}][attributes][${attribute.name}][]" class="form-control selectpicker" multiple data-live-search="true">`;
+                    } else {
+                        variantHtml += `<select name="variants[${index}][attributes][${attribute.name}]" class="form-control single-select">
+                            <option value="">Chọn</option>`;
+                    }
 
-                        attribute.values.forEach(value => {
-                            variantHtml +=
+                    attribute.values.forEach(value => {
+                        variantHtml +=
                             `<option value="${value.id}">${value.value}</option>`;
-                        });
-
-                        variantHtml += `</select></div>`;
                     });
 
-                    variantHtml += `
-                <div class="col-md-6 mb-3">
-                    <label class="form-label">Giá biến thể</label>
-                    <input type="text" name="variants[${index}][price]" class="form-control variant-price-input" required>
-                </div>
-            </div>`;
-
-                    $('#variants').prepend(variantHtml);
-                    $('.selectpicker').selectpicker();
-                    toggleRemoveButtons();
-
-                    // Gán sự kiện format số cho input giá mới
-                    formatPriceInputs();
+                    variantHtml += `</select></div>`;
                 });
 
-                $(document).on('click', '.remove-variant', function() {
-                    $(this).closest('.variant-item').remove();
-                    toggleRemoveButtons();
-                });
+                variantHtml += `
+        <div class="col-md-6 mb-3">
+            <label class="form-label">Giá biến thể</label>
+            <input type="number" name="variants[${index}][price]" class="form-control" required>
+        </div>
+    </div>`;
 
-                function formatPriceInputs() {
-                    $('.variant-price-input').off('input').on('input', function(e) {
-                        let value = e.target.value.replace(/[^0-9]/g, '');
-                        e.target.value = new Intl.NumberFormat('vi-VN').format(value);
+                $('#variants').prepend(variantHtml);
+                $('.selectpicker').selectpicker();
+                toggleRemoveButtons();
+            });
+
+
+            $(document).on('click', '.remove-variant', function() {
+                let removedAttributes = $(this).closest('.variant-item').find('select').map(function() {
+                    return $(this).val();
+                }).get();
+
+                $(this).closest('.variant-item').remove();
+
+                if ($('.variant-item').length === 0) {
+                    $('#is_featured').prop('checked', false).trigger('change');
+                    $('#attribute-selection').hide();
+
+                    $('.single-select, .selectpicker').each(function() {
+                        $(this).val('');
+                        $(this).find('option').prop('disabled', false);
                     });
+                } else {
+                    $('.single-select').each(function() {
+                        let select = $(this);
+                        let currentValue = select.val();
 
-                    $('.variant-price-input').off('focusout').on('focusout', function(e) {
-                        e.target.value = e.target.value.replace(/\./g, '');
+                        if (removedAttributes.includes(currentValue)) {
+                            select.val('');
+                        }
                     });
                 }
 
+                $('.selectpicker').selectpicker('refresh');
                 toggleRemoveButtons();
-                formatPriceInputs(); // Gán sự kiện format số cho các input hiện có
             });
-        </script>
+
+            toggleRemoveButtons();
+        });
+    </script>
     @endsection
