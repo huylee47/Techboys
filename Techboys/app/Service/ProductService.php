@@ -347,16 +347,18 @@ public function getProductBySlug($slug) {
     $groupedAttributes = []; // Lưu danh sách nhóm thuộc tính
 
     if ($variants->isNotEmpty()) {
-        $formattedVariants = $variants->map(function ($variant) use ($attributeValues, &$groupedAttributes) {
+        $formattedVariants = $variants->map(function ($variant) use ($attributeValues, &$groupedAttributes): array {
             $attributes = json_decode($variant->attribute_values, true);
 
             $formattedAttributes = collect($attributes)->mapWithKeys(function ($attrValueId, $attrName) use ($attributeValues, &$groupedAttributes) {
                 $attributeValue = $attributeValues[$attrValueId]->value ?? 'Không xác định';
+                $attributeId = $attributeValues[$attrValueId]->attribute_id ?? null;
 
                 // Nhóm thuộc tính vào danh sách
-                $groupedAttributes[$attrName][] = $attributeValue;
+                $groupedAttributes[$attrName]['values'][] = ['id' => $attrValueId, 'value' => $attributeValue];
+                $groupedAttributes[$attrName]['id'] = $attributeId;
 
-                return [$attrName => $attributeValue];
+                return [$attrName => ['id' => $attrValueId, 'value' => $attributeValue]];
             })->toArray();
 
             return [
@@ -364,18 +366,20 @@ public function getProductBySlug($slug) {
                 'price' => $variant->price,
                 'discounted_price' => $variant->discounted_price,
                 'stock' => $variant->stock,
-                'attributes' => $formattedAttributes,
+                'attributes' => $formattedAttributes, // Chứa cả id và value
             ];
         });
-
+        // dd($formattedVariants);
         // Loại bỏ các giá trị trùng nhau trong từng nhóm thuộc tính
-        foreach ($groupedAttributes as $key => $values) {
-            $groupedAttributes[$key] = array_unique($values);
+        foreach ($groupedAttributes as $key => &$data) {
+            $data['values'] = collect($data['values'])->unique('id')->values()->toArray();
         }
 
         $defaultVariant = $formattedVariants->first();
-
-        return view('client.product.detail', compact('product', 'comment', 'images', 'formattedVariants', 'defaultVariant', 'relatedProducts', 'attributeValues', 'groupedAttributes'));
+        // return response()->json([
+        //     'formattedVariants' => $formattedVariants[1],
+        // ]);
+        return view('client.product.detail', compact('product', 'comment', 'images', 'formattedVariants', 'defaultVariant', 'relatedProducts', 'attributeValues', 'groupedAttributes','variants'));
     } else {
         $formattedVariants = [];
         $defaultVariant = [
@@ -387,6 +391,7 @@ public function getProductBySlug($slug) {
         return view('client.product.detail', compact('product', 'comment', 'images', 'formattedVariants', 'defaultVariant', 'relatedProducts', 'groupedAttributes'));
     }
 }
+
 
 
 
