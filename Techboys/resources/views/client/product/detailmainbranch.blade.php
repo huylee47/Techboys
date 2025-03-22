@@ -687,42 +687,7 @@
             <!-- .col-full -->
         </div>
     </div>
-    <script>
-        document.getElementById('media').addEventListener('change', function(event) {
-            let previewContainer = document.getElementById('media-preview-container');
-            previewContainer.innerHTML = '';
 
-            Array.from(event.target.files).forEach(file => {
-                let reader = new FileReader();
-                reader.onload = function(e) {
-                    let element;
-                    if (file.type.startsWith('image/')) {
-                        element = document.createElement('img');
-                        element.style.width = '100px';
-                        element.style.height = '100px';
-                        element.style.objectFit = 'cover';
-                        element.style.borderRadius = '5px';
-                    } else if (file.type.startsWith('video/')) {
-                        element = document.createElement('video');
-                        element.controls = true;
-                        element.style.width = '150px';
-                        element.style.height = '100px';
-                    }
-                    element.src = e.target.result;
-                    previewContainer.appendChild(element);
-                };
-                reader.readAsDataURL(file);
-            });
-        });
-
-        // Ensure the selected rating is displayed correctly on page load
-        document.addEventListener('DOMContentLoaded', function() {
-            let rating = document.getElementById('rating-value').value;
-            if (rating > 0) {
-                document.querySelector('.star-' + rating).classList.add('selected');
-            }
-        });
-    </script>
     <script>
         document.querySelectorAll(".choice").forEach(choice => {
             choice.addEventListener("click", function() {
@@ -839,61 +804,5 @@
             }
         });
     </script>
-    <script>
-        document.querySelectorAll('.stars a').forEach(star => {
-            star.addEventListener('click', function(event) {
-                event.preventDefault();
-                let rating = this.classList[0].split('-')[1];
-                document.getElementById('rating-value').value = rating;
-                document.querySelectorAll('.stars a').forEach(s => s.classList.remove('selected'));
-                this.classList.add('selected');
-            });
 
-            star.addEventListener('mouseover', function() {
-                document.querySelectorAll('.stars a').forEach(s => s.classList.remove('hover'));
-                this.classList.add('hover');
-            });
-
-            star.addEventListener('mouseout', function() {
-                document.querySelectorAll('.stars a').forEach(s => s.classList.remove('hover'));
-            });
-        });
-
-        document.querySelector('.stars').addEventListener('mouseout', function() {
-            let rating = document.getElementById('rating-value').value;
-            document.querySelectorAll('.stars a').forEach(s => s.classList.remove('selected'));
-            if (rating > 0) {
-                document.querySelector('.star-' + rating).classList.add('selected');
-            }
-        });
-
-        // Ensure the selected rating is displayed correctly on page load
-        document.addEventListener('DOMContentLoaded', function() {
-            let rating = document.getElementById('rating-value').value;
-            if (rating > 0) {
-                document.querySelector('.star-' + rating).classList.add('selected');
-            }
-        });
-    </script>
-    <script>
-        document.querySelectorAll('.reply-button').forEach(button => {
-            button.addEventListener('click', function() {
-                const commentId = this.getAttribute('data-comment-id');
-                const replyInput = document.getElementById(`reply-input-${commentId}`);
-                replyInput.style.display = replyInput.style.display === 'none' ? 'block' : 'none';
-            });
-        });
-    </script>
-    <script>
-        document.querySelectorAll('.toggle-replies-button').forEach(button => {
-            button.addEventListener('click', function() {
-                const commentId = this.getAttribute('data-comment-id');
-                const repliesContainer = document.getElementById(`replies-container-${commentId}`);
-                repliesContainer.style.display = repliesContainer.style.display === 'none' ? 'block' :
-                    'none';
-                this.textContent = repliesContainer.style.display === 'none' ? 'Hiển thị phản hồi' :
-                    'Ẩn phản hồi';
-            });
-        });
-    </script>
 @endsection
