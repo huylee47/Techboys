@@ -339,7 +339,6 @@ public function getProductBySlug($slug) {
     $variants = ProductVariant::where('product_id', $product->id)->get();
     $attributeValues = AttributesValue::all()->keyBy('id');
 
-    // Nếu có biến thể, lấy đầy đủ thông tin
     if ($variants->isNotEmpty()) {
         $formattedVariants = $variants->map(function ($variant) use ($attributeValues) {
             $attributes = json_decode($variant->attribute_values, true);
@@ -383,6 +382,7 @@ public function getProductBySlug($slug) {
         'formattedVariants' => $formattedVariants,
         'defaultVariant' => $defaultVariant,
     ]);
+    // return view('client.product.detail', compact('product', 'comment', 'images', 'formattedVariants', 'defaultVariant','relatedProducts'));
 }
 
 
