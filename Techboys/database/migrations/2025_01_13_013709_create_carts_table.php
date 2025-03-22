@@ -15,7 +15,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->nullable();
             $table->uuid('cart_id')->nullable();
-            $table->foreignId('variant_id');
+            $table->foreignId('product_id')->nullable();
+            $table->foreignId('variant_id')->nullable();
             $table->integer('quantity');
             $table->timestamps();
         });
