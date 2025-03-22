@@ -38,32 +38,47 @@ class CartController extends Controller
                 'voucher' => null
             ]);
         }
-    
+    // dd( $cartItems);
         foreach ($cartItems as $cart) {
-            $promotion = Promotion::where('product_id', $cart->variant->product->id)->first();
+            $promotion = Promotion::where('product_id', $cart->product_id)->first();
             if ($promotion && now()->lt(Carbon::parse($promotion->end_date))) {
-                $cart->discounted_price = $cart->variant->price * (1 - $promotion->discount_percent / 100);
+                if($cart->variant_id){
+                $cart->discounted_price = $cart->discounted_price  * (1 - $promotion->discount_percent / 100);
+                }
+                else{
+                    $cart->discounted_price = $cart->product->price * (1 - $promotion->discount_percent / 100);
+                }
             } else {
-                $cart->discounted_price = $cart->variant->price;
-            }
+                    $cart->discounted_price = $cart->product->price;
+                }
         }
     
         $totals = $this->cartPriceService->calculateCartTotals($cartItems);
         // dd($totals);
 
+    
+        // return response()->json([
+        //     'cartItems' => $cartItems,
+        //     'subtotal' => $totals['subtotal'],
+        //     'total' => $totals['total'],
+        //     'discountAmount' => $totals['discountAmount'],
+        //     'voucher' => $totals['voucher'],
+        // ]);
         return view('client.cart.cart', [
             'cartItems' => $cartItems,
             'subtotal' => $totals['subtotal'],
             'total' => $totals['total'],
             'discountAmount' => $totals['discountAmount'],
             'voucher' => $totals['voucher'],
+
         ]);
     }
     
     
     public function addToCart(Request $request)
     {
-        $this->cartService->addToCart($request);
+        // dd($request->all());
+        $result = $this->cartService->addToCart($request);
         return redirect()->route('client.cart.index')->with('success', 'Thêm sản phẩm thành công');
     }
     
@@ -101,7 +116,7 @@ class CartController extends Controller
             ], 400);
         }
 
-        $subtotal = $cartItems->sum(fn($cart) => $cart->variant->discounted_price * $cart->quantity);
+        $subtotal = $cartItems->sum(fn($cart) => $cart->discounted_price * $cart->quantity);
         $voucherResult = $this->cartPriceService->applyVoucherToCart($voucherCode, $subtotal);
 
         if (!$voucherResult['valid']) {
