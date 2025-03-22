@@ -338,7 +338,11 @@ public function getProductBySlug($slug) {
     $images = Images::where('product_id', $product->id)->get();
     $variants = ProductVariant::where('product_id', $product->id)->get();
     $attributeValues = AttributesValue::all()->keyBy('id');
-
+    $comment = Comment::where('product_id', $product->id)->get();
+    $relatedProducts = Product::where('category_id', $product->category_id)
+        ->where('id', '!=', $product->id)
+        ->take(10)
+        ->get();
     if ($variants->isNotEmpty()) {
         $formattedVariants = $variants->map(function ($variant) use ($attributeValues) {
             $attributes = json_decode($variant->attribute_values, true);
@@ -357,32 +361,28 @@ public function getProductBySlug($slug) {
                 'attributes' => $formattedAttributes,
             ];
         });
-
         $defaultVariant = $formattedVariants->first();
+        return view('client.product.detail', compact('product', 'comment', 'images', 'formattedVariants', 'defaultVariant','relatedProducts'));
     } else {
-        // Không có biến thể, chỉ lấy giá và tồn kho của sản phẩm
         $formattedVariants = [];
         $defaultVariant = [
             'price' => $product->base_price,
             'discounted_price' => $product->discounted_price,
-            'stock' => $product->stock ?? 0,
+            'stock' => $product->base_stock ?? 0,
         ];
+        return view('client.product.detail', compact('product', 'comment', 'images', 'formattedVariants', 'defaultVariant','relatedProducts'));
     }
 
-    $comment = Comment::where('product_id', $product->id)->get();
-    $relatedProducts = Product::where('category_id', $product->category_id)
-        ->where('id', '!=', $product->id)
-        ->take(10)
-        ->get();
 
-    return response()->json([
-        'product' => $product,
-        'comment' => $comment,
-        'images' => $images,
-        'formattedVariants' => $formattedVariants,
-        'defaultVariant' => $defaultVariant,
-    ]);
-    // return view('client.product.detail', compact('product', 'comment', 'images', 'formattedVariants', 'defaultVariant','relatedProducts'));
+
+    // return response()->json([
+    //     'product' => $product,
+    //     'comment' => $comment,
+    //     'images' => $images,
+    //     'formattedVariants' => $formattedVariants,
+    //     'defaultVariant' => $defaultVariant,
+    // ]);
+
 }
 
 
