@@ -385,34 +385,16 @@
             "updated_at": "2025-02-18 12:00:00"
         },
         {
-            "image": "image1.jpg",
+            "image": "iphone-13.jpg",
             "product_id": 1,
-            "created_at": "2025-01-19 12:00:00",
-            "updated_at": "2025-01-19 12:00:00"
-        },
-        {
-            "image": "image2.jpg",
-            "product_id": 1,
-            "created_at": "2025-01-19 12:00:00",
-            "updated_at": "2025-01-19 12:00:00"
+            "created_at": "2025-02-18 12:00:00",
+            "updated_at": "2025-02-18 12:00:00"
         },
         {
             "image": "s21.jpg",
             "product_id": 2,
             "created_at": "2025-02-18 12:00:00",
             "updated_at": "2025-02-18 12:00:00"
-        },
-        {
-            "image": "image3.jpg",
-            "product_id": 2,
-            "created_at": "2025-01-19 12:00:00",
-            "updated_at": "2025-01-19 12:00:00"
-        },
-        {
-            "image": "image4.jpg",
-            "product_id": 2,
-            "created_at": "2025-01-19 12:00:00",
-            "updated_at": "2025-01-19 12:00:00"
         },
         {
             "image": "xiaomi-mi11.jpg",
@@ -433,426 +415,276 @@
             "updated_at": "2025-02-18 12:00:00"
         },
         {
-            "image": "realme-8-pro.jpg",
+            "image": "note-20.jpg",
             "product_id": 6,
             "created_at": "2025-02-18 12:00:00",
             "updated_at": "2025-02-18 12:00:00"
         },
         {
-            "image": "vivo-v21.jpg",
+            "image": "xiaomi-mi-10t-pro.jpg",
             "product_id": 7,
             "created_at": "2025-02-18 12:00:00",
             "updated_at": "2025-02-18 12:00:00"
         },
         {
-            "image": "galaxy-a52.jpg",
+            "image": "oppo-a54.jpg",
             "product_id": 8,
             "created_at": "2025-02-18 12:00:00",
             "updated_at": "2025-02-18 12:00:00"
         },
         {
-            "image": "xiaomi-redmi-note-10.jpg",
+            "image": "realme-x7-pro.jpg",
             "product_id": 9,
             "created_at": "2025-02-18 12:00:00",
             "updated_at": "2025-02-18 12:00:00"
         },
         {
-            "image": "oppo-reno5.jpg",
+            "image": "iphone-11.jpg",
             "product_id": 10,
             "created_at": "2025-02-18 12:00:00",
             "updated_at": "2025-02-18 12:00:00"
         },
         {
-            "image": "realme-narzo-30-pro.jpg",
+            "image": "z-fold-2.jpg",
             "product_id": 11,
             "created_at": "2025-02-18 12:00:00",
             "updated_at": "2025-02-18 12:00:00"
         },
         {
-            "image": "vivo-y20.jpg",
+            "image": "xiaomi-redmi-note-9-pro.jpg",
             "product_id": 12,
             "created_at": "2025-02-18 12:00:00",
             "updated_at": "2025-02-18 12:00:00"
         },
         {
-            "image": "iphone-se-2020.jpg",
+            "image": "oppo-a74.jpg",
             "product_id": 13,
             "created_at": "2025-02-18 12:00:00",
             "updated_at": "2025-02-18 12:00:00"
         },
         {
-            "image": "note-20.jpg",
+            "image": "realme-7-pro.jpg",
             "product_id": 14,
             "created_at": "2025-02-18 12:00:00",
             "updated_at": "2025-02-18 12:00:00"
         },
         {
-            "image": "xiaomi-mi-10t-pro.jpg",
+            "image": "vivo-y31.jpg",
             "product_id": 15,
             "created_at": "2025-02-18 12:00:00",
             "updated_at": "2025-02-18 12:00:00"
         },
         {
-            "image": "oppo-a54.jpg",
+            "image": "oppo-a53s.jpg",
             "product_id": 16,
             "created_at": "2025-02-18 12:00:00",
             "updated_at": "2025-02-18 12:00:00"
         },
         {
-            "image": "realme-x7-pro.jpg",
+            "image": "realme-narzo-50.jpg",
             "product_id": 17,
             "created_at": "2025-02-18 12:00:00",
             "updated_at": "2025-02-18 12:00:00"
         },
         {
-            "image": "iphone-11.jpg",
+            "image": "vivo-y20s.jpg",
             "product_id": 18,
             "created_at": "2025-02-18 12:00:00",
             "updated_at": "2025-02-18 12:00:00"
         },
         {
-            "image": "z-fold-2.jpg",
+            "image": "iphone-7.jpg",
             "product_id": 19,
             "created_at": "2025-02-18 12:00:00",
             "updated_at": "2025-02-18 12:00:00"
         },
         {
-            "image": "xiaomi-redmi-note-9-pro.jpg",
+            "image": "A50.jpg",
             "product_id": 20,
             "created_at": "2025-02-18 12:00:00",
             "updated_at": "2025-02-18 12:00:00"
         },
         {
-            "image": "oppo-a74.jpg",
+            "image": "iphone-8-plus.jpg",
             "product_id": 21,
             "created_at": "2025-02-18 12:00:00",
             "updated_at": "2025-02-18 12:00:00"
         },
         {
-            "image": "realme-7-pro.jpg",
+            "image": "xiaomi-redmi-note-10.jpg",
             "product_id": 22,
             "created_at": "2025-02-18 12:00:00",
             "updated_at": "2025-02-18 12:00:00"
         },
         {
-            "image": "vivo-y31.jpg",
+            "image": "xiaomi-redmi-k40.jpg",
             "product_id": 23,
             "created_at": "2025-02-18 12:00:00",
             "updated_at": "2025-02-18 12:00:00"
         },
         {
-            "image": "iphone-xs-max.jpg",
+            "image": "oppo-a94-5g.jpg",
             "product_id": 24,
             "created_at": "2025-02-18 12:00:00",
             "updated_at": "2025-02-18 12:00:00"
         },
         {
-            "image": "galaxy-z-flip.jpg",
+            "image": "realme-gt-5g.jpg",
             "product_id": 25,
             "created_at": "2025-02-18 12:00:00",
             "updated_at": "2025-02-18 12:00:00"
         },
         {
-            "image": "poco-x3-pro.jpg",
+            "image": "vivo-v21-5g.jpg",
             "product_id": 26,
             "created_at": "2025-02-18 12:00:00",
             "updated_at": "2025-02-18 12:00:00"
         },
         {
-            "image": "oppo-f19.jpg",
+            "image": "iphone-xs.jpg",
             "product_id": 27,
             "created_at": "2025-02-18 12:00:00",
             "updated_at": "2025-02-18 12:00:00"
         },
         {
-            "image": "realme-gt.jpg",
+            "image": "samsung-galaxy-a12.jpg",
             "product_id": 28,
             "created_at": "2025-02-18 12:00:00",
             "updated_at": "2025-02-18 12:00:00"
         },
         {
-            "image": "vivo-v20.jpg",
+            "image": "xiaomi-redmi-note-12-pro.jpg",
             "product_id": 29,
             "created_at": "2025-02-18 12:00:00",
             "updated_at": "2025-02-18 12:00:00"
         },
         {
-            "image": "iphone-xr.jpg",
+            "image": "iphone-12-mini.jpg",
             "product_id": 30,
             "created_at": "2025-02-18 12:00:00",
             "updated_at": "2025-02-18 12:00:00"
         },
         {
-            "image": "samsung-galaxy-a72.jpg",
+            "image": "oppo-a55.jpg",
             "product_id": 31,
             "created_at": "2025-02-18 12:00:00",
             "updated_at": "2025-02-18 12:00:00"
         },
         {
-            "image": "xiaomi-redmi-k40.jpg",
+            "image": "samsung-galaxy-a72-5g.jpg",
             "product_id": 32,
             "created_at": "2025-02-18 12:00:00",
             "updated_at": "2025-02-18 12:00:00"
         },
         {
-            "image": "oppo-a53s.jpg",
+            "image": "xiaomi-mi-11-lite-5g.jpg",
             "product_id": 33,
             "created_at": "2025-02-18 12:00:00",
             "updated_at": "2025-02-18 12:00:00"
         },
         {
-            "image": "realme-narzo-50.jpg",
+            "image": "oppo-a94-5g.jpg",
             "product_id": 34,
             "created_at": "2025-02-18 12:00:00",
             "updated_at": "2025-02-18 12:00:00"
         },
         {
-            "image": "vivo-y20s.jpg",
+            "image": "realme-gt-5g.jpg",
             "product_id": 35,
             "created_at": "2025-02-18 12:00:00",
             "updated_at": "2025-02-18 12:00:00"
         },
         {
-            "image": "iphone-7.jpg",
+            "image": "vivo-v21-5g.jpg",
             "product_id": 36,
             "created_at": "2025-02-18 12:00:00",
             "updated_at": "2025-02-18 12:00:00"
         },
         {
-            "image": "samsung-galaxy-0.jpg",
+            "image": "iphone-xs.jpg",
             "product_id": 37,
             "created_at": "2025-02-18 12:00:00",
             "updated_at": "2025-02-18 12:00:00"
         },
         {
-            "image": "iphone-8-plus.jpg",
+            "image": "samsung-galaxy-a12.jpg",
             "product_id": 38,
             "created_at": "2025-02-18 12:00:00",
             "updated_at": "2025-02-18 12:00:00"
         },
         {
-            "image": "xiaomi-redmi-note-10.jpg",
+            "image": "xiaomi-redmi-note-12-pro.jpg",
             "product_id": 39,
             "created_at": "2025-02-18 12:00:00",
             "updated_at": "2025-02-18 12:00:00"
         },
         {
-            "image": "oppo-reno6.jpg",
+            "image": "iphone-12-mini.jpg",
             "product_id": 40,
             "created_at": "2025-02-18 12:00:00",
             "updated_at": "2025-02-18 12:00:00"
         },
         {
-            "image": "realme-X8-pro.jpg",
+            "image": "oppo-a55.jpg",
             "product_id": 41,
             "created_at": "2025-02-18 12:00:00",
             "updated_at": "2025-02-18 12:00:00"
         },
         {
-            "image": "vivo-v21e.jpg",
+            "image": "realme-narzo-31-pro.jpg",
             "product_id": 42,
             "created_at": "2025-02-18 12:00:00",
             "updated_at": "2025-02-18 12:00:00"
         },
         {
-            "image": "iphone-se-2021.jpg",
+            "image": "vivo-y73.jpg",
             "product_id": 43,
             "created_at": "2025-02-18 12:00:00",
             "updated_at": "2025-02-18 12:00:00"
         },
         {
-            "image": "samsung-galaxy-m32.jpg",
+            "image": "iphone-15.jpg",
             "product_id": 44,
             "created_at": "2025-02-18 12:00:00",
             "updated_at": "2025-02-18 12:00:00"
         },
         {
-            "image": "xiaomi-mi-11t-pro.jpg",
+            "image": "samsung-galaxy-s20-fe.jpg",
             "product_id": 45,
             "created_at": "2025-02-18 12:00:00",
             "updated_at": "2025-02-18 12:00:00"
         },
         {
-            "image": "oppo-find-x3-pro.jpg",
+            "image": "xiaomi-redmi-k43.jpg",
             "product_id": 46,
             "created_at": "2025-02-18 12:00:00",
             "updated_at": "2025-02-18 12:00:00"
         },
         {
-            "image": "realme-8-5g.jpg",
+            "image": "oppo-a73.jpg",
             "product_id": 47,
             "created_at": "2025-02-18 12:00:00",
             "updated_at": "2025-02-18 12:00:00"
         },
         {
-            "image": "vivo-x60-pro.jpg",
+            "image": "realme-x50-pro.jpg",
             "product_id": 48,
             "created_at": "2025-02-18 12:00:00",
             "updated_at": "2025-02-18 12:00:00"
         },
         {
-            "image": "iphone-11-pro-max.jpg",
+            "image": "vivo-v2.jpg",
             "product_id": 49,
             "created_at": "2025-02-18 12:00:00",
             "updated_at": "2025-02-18 12:00:00"
         },
         {
-            "image": "samsung-galaxy-a72-5g.jpg",
+            "image": "iphone-16.jpg",
             "product_id": 50,
             "created_at": "2025-02-18 12:00:00",
             "updated_at": "2025-02-18 12:00:00"
-        },
-        {
-            "image": "xiaomi-mi-11-lite-5g.jpg",
-            "product_id": 51,
-            "created_at": "2025-02-18 12:00:00",
-            "updated_at": "2025-02-18 12:00:00"
-        },
-        {
-            "image": "oppo-a94-5g.jpg",
-            "product_id": 52,
-            "created_at": "2025-02-18 12:00:00",
-            "updated_at": "2025-02-18 12:00:00"
-        },
-        {
-            "image": "realme-gt-5g.jpg",
-            "product_id": 53,
-            "created_at": "2025-02-18 12:00:00",
-            "updated_at": "2025-02-18 12:00:00"
-        },
-        {
-            "image": "vivo-v21-5g.jpg",
-            "product_id": 54,
-            "created_at": "2025-02-18 12:00:00",
-            "updated_at": "2025-02-18 12:00:00"
-        },
-        {
-            "image": "iphone-xs.jpg",
-            "product_id": 55,
-            "created_at": "2025-02-18 12:00:00",
-            "updated_at": "2025-02-18 12:00:00"
-        },
-        {
-            "image": "samsung-galaxy-a12.jpg",
-            "product_id": 56,
-            "created_at": "2025-02-18 12:00:00",
-            "updated_at": "2025-02-18 12:00:00"
-        },
-        {
-            "image": "xiaomi-redmi-note-12-pro.jpg",
-            "product_id": 57,
-            "created_at": "2025-02-18 12:00:00",
-            "updated_at": "2025-02-18 12:00:00"
-        },
-        {
-            "image": "iphone-12-mini.jpg",
-            "product_id": 58,
-            "created_at": "2025-02-18 12:00:00",
-            "updated_at": "2025-02-18 12:00:00"
-        },
-        {
-            "image": "oppo-a55.jpg",
-            "product_id": 59,
-            "created_at": "2025-02-18 12:00:00",
-            "updated_at": "2025-02-18 12:00:00"
-        },
-        {
-            "image": "realme-narzo-31-pro.jpg",
-            "product_id": 60,
-            "created_at": "2025-02-18 12:00:00",
-            "updated_at": "2025-02-18 12:00:00"
-        },
-        {
-            "image": "vivo-y73.jpg",
-            "product_id": 61,
-            "created_at": "2025-02-18 12:00:00",
-            "updated_at": "2025-02-18 12:00:00"
-        },
-        {
-            "image": "iphone-15.jpg",
-            "product_id": 62,
-            "created_at": "2025-02-18 12:00:00",
-            "updated_at": "2025-02-18 12:00:00"
-        },
-        {
-            "image": "samsung-galaxy-s20-fe.jpg",
-            "product_id": 63,
-            "created_at": "2025-02-18 12:00:00",
-            "updated_at": "2025-02-18 12:00:00"
-        },
-        {
-            "image": "xiaomi-redmi-k43.jpg",
-            "product_id": 64,
-            "created_at": "2025-02-18 12:00:00",
-            "updated_at": "2025-02-18 12:00:00"
-        },
-        {
-            "image": "oppo-a73.jpg",
-            "product_id": 65,
-            "created_at": "2025-02-18 12:00:00",
-            "updated_at": "2025-02-18 12:00:00"
-        },
-        {
-            "image": "realme-x50-pro.jpg",
-            "product_id": 66,
-            "created_at": "2025-02-18 12:00:00",
-            "updated_at": "2025-02-18 12:00:00"
-        },
-        {
-            "image": "vivo-v2.jpg",
-            "product_id": 67,
-            "created_at": "2025-02-18 12:00:00",
-            "updated_at": "2025-02-18 12:00:00"
-        },
-        {
-            "image": "iphone-16.jpg",
-            "product_id": 68,
-            "created_at": "2025-02-18 12:00:00",
-            "updated_at": "2025-02-18 12:00:00"
-        },
-        {
-            "image": "samsung-galaxy-m51.jpg",
-            "product_id": 69,
-            "created_at": "2025-02-18 12:00:00",
-            "updated_at": "2025-02-18 12:00:00"
-        },
-        {
-            "image": "xiaomi-mi-10.jpg",
-            "product_id": 70,
-            "created_at": "2025-02-18 12:00:00",
-            "updated_at": "2025-02-18 12:00:00"
-        },
-        {
-            "image": "oppo-reno4-pro.jpg",
-            "product_id": 71,
-            "created_at": "2025-02-18 12:00:00",
-            "updated_at": "2025-02-18 12:00:00"
-        },
-        {
-            "image": "realme-11-pro.jpg",
-            "product_id": 72,
-            "created_at": "2025-02-18 12:00:00",
-            "updated_at": "2025-02-18 12:00:00"
-        },
-        {
-            "image": "vivo-y51.jpg",
-            "product_id": 73,
-            "created_at": "2025-02-18 12:00:00",
-            "updated_at": "2025-02-18 12:00:00"
-        },
-        {
-            "image": "iphone-7-plus.jpg",
-            "product_id": 74,
-            "created_at": "2025-02-18 12:00:00",
-            "updated_at": "2025-02-18 12:00:00"
-        },
-        {
-            "image": "samsung-galaxy-note-10.jpg",
-            "product_id": 75,
-            "created_at": "2025-02-18 12:00:00",
-            "updated_at": "2025-02-18 12:00:00"
         }
-    ],
+        ],
 
     "message": [
         {
@@ -972,7 +804,8 @@
             "name": "iPhone 13",
             "img": "iphone-13.jpg",
             "slug": "iphone-13",
-            "base_price": 12000000,
+            "base_price": 0,
+            "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.5,
             "description": "Điện thoại thông minh của Apple."
@@ -984,7 +817,8 @@
             "name": "Samsung Galaxy S21",
             "img": "s21.jpg",
             "slug": "samsung-galaxy-s21",
-            "base_price": 12000000,
+            "base_price": 0,
+            "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.7,
             "description": "Điện thoại thông minh của Samsung."
@@ -996,7 +830,8 @@
             "name": "Xiaomi Mi 11",
             "img": "xiaomi-mi11.jpg",
             "slug": "xiaomi-mi-11",
-            "base_price": 12000000,
+            "base_price": 0,
+            "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.6,
             "description": "Điện thoại thông minh của Xiaomi."
@@ -1008,7 +843,8 @@
             "name": "iPhone 12",
             "img": "iphone-12.jpg",
             "slug": "iphone-12",
-            "base_price": 12000000,
+            "base_price": 0,
+            "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.3,
             "description": "Điện thoại thông minh của Apple."
@@ -1020,7 +856,8 @@
             "name": "Oppo F19 Pro",
             "img": "oppo-f19-pro.jpg",
             "slug": "oppo-f19-pro",
-            "base_price": 12000000,
+            "base_price": 0,
+            "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.2,
             "description": "Điện thoại thông minh của Oppo."
@@ -1032,7 +869,8 @@
             "name": "Samsung Galaxy Note 20",
             "img": "note-20.jpg",
             "slug": "samsung-galaxy-note-20",
-            "base_price": 12000000,
+            "base_price": 0,
+            "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.5,
             "description": "Điện thoại thông minh của Samsung."
@@ -1044,7 +882,8 @@
             "name": "Xiaomi Mi 10T Pro",
             "img": "xiaomi-mi-10t-pro.jpg",
             "slug": "xiaomi-mi-10t-pro",
-            "base_price": 12000000,
+            "base_price": 0,
+            "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.4,
             "description": "Điện thoại thông minh của Xiaomi."
@@ -1056,7 +895,8 @@
             "name": "Oppo A54",
             "img": "oppo-a54.jpg",
             "slug": "oppo-a54",
-            "base_price": 12000000,
+            "base_price": 0,
+            "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.1,
             "description": "Điện thoại thông minh của Oppo."
@@ -1068,7 +908,8 @@
             "name": "Realme X7 Pro",
             "img": "realme-x7-pro.jpg",
             "slug": "realme-x7-pro",
-            "base_price": 12000000,
+            "base_price": 0,
+            "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.3,
             "description": "Điện thoại thông minh của Realme."
@@ -1080,7 +921,8 @@
             "name": "iPhone 11",
             "img": "iphone-11.jpg",
             "slug": "iphone-11",
-            "base_price": 12000000,
+            "base_price": 0,
+            "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.5,
             "description": "Điện thoại thông minh của Apple."
@@ -1092,7 +934,8 @@
             "name": "Samsung Galaxy Z Fold 2",
             "img": "z-fold-2.jpg",
             "slug": "samsung-galaxy-z-fold-2",
-            "base_price": 12000000,
+            "base_price": 0,
+            "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.6,
             "description": "Điện thoại thông minh gập màn hình của Samsung."
@@ -1104,7 +947,8 @@
             "name": "Xiaomi Redmi Note 9 Pro",
             "img": "xiaomi-redmi-note-9-pro.jpg",
             "slug": "xiaomi-redmi-note-9-pro",
-            "base_price": 12000000,
+            "base_price": 0,
+            "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.3,
             "description": "Điện thoại thông minh của Xiaomi."
@@ -1116,7 +960,8 @@
             "name": "Oppo A74",
             "img": "oppo-a74.jpg",
             "slug": "oppo-a74",
-            "base_price": 12000000,
+            "base_price": 0,
+            "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.1,
             "description": "Điện thoại thông minh của Oppo."
@@ -1128,7 +973,8 @@
             "name": "Realme 7 Pro",
             "img": "realme-7-pro.jpg",
             "slug": "realme-7-pro",
-            "base_price": 12000000,
+            "base_price": 0,
+            "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.4,
             "description": "Điện thoại thông minh của Realme."
@@ -1140,7 +986,8 @@
             "name": "Vivo Y31",
             "img": "vivo-y31.jpg",
             "slug": "vivo-y31",
-            "base_price": 12000000,
+            "base_price": 0,
+            "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.0,
             "description": "Điện thoại thông minh của Vivo."
@@ -1152,7 +999,8 @@
             "name": "Oppo A53s",
             "img": "oppo-a53s.jpg",
             "slug": "oppo-a53s",
-            "base_price": 12000000,
+            "base_price": 0,
+            "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.2,
             "description": "Điện thoại thông minh của Oppo."
@@ -1164,7 +1012,8 @@
             "name": "Realme Narzo 50",
             "img": "realme-narzo-50.jpg",
             "slug": "realme-narzo-50",
-            "base_price": 12000000,
+            "base_price": 0,
+            "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.3,
             "description": "Điện thoại thông minh của Realme."
@@ -1176,7 +1025,8 @@
             "name": "Vivo Y20s",
             "img": "vivo-y20s.jpg",
             "slug": "vivo-y20s",
-            "base_price": 12000000,
+            "base_price": 0,
+            "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.1,
             "description": "Điện thoại thông minh của Vivo."
@@ -1188,7 +1038,8 @@
             "name": "iPhone 7",
             "img": "iphone-7.jpg",
             "slug": "iphone-7",
-            "base_price": 12000000,
+            "base_price": 0,
+            "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.0,
             "description": "Điện thoại thông minh của Apple."
@@ -1200,7 +1051,8 @@
             "name": "Samsung Galaxy A50",
             "img": "A50.jpg",
             "slug": "samsung-galaxy-a50",
-            "base_price": 12000000,
+            "base_price": 0,
+            "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.5,
             "description": "Điện thoại thông minh tầm trung của Samsung."
@@ -1212,7 +1064,8 @@
             "name": "iPhone 8 Plus",
             "img": "iphone-8-plus.jpg",
             "slug": "iphone-8-plus",
-            "base_price": 12000000,
+            "base_price": 0,
+            "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.2,
             "description": "Điện thoại thông minh của Apple với thiết kế sang trọng."
@@ -1224,7 +1077,8 @@
             "name": "Xiaomi Redmi Note 10",
             "img": "xiaomi-redmi-note-10.jpg",
             "slug": "xiaomi-redmi-note-10",
-            "base_price": 12000000,
+            "base_price": 0,
+            "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.4,
             "description": "Điện thoại thông minh với màn hình AMOLED của Xiaomi."
@@ -1236,7 +1090,8 @@
             "name": "Xiaomi Redmi K40",
             "img": "xiaomi-redmi-k40.jpg",
             "slug": "xiaomi-redmi-k40",
-            "base_price": 12000000,
+            "base_price": 0,
+            "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.5,
             "description": "Điện thoại thông minh của Xiaomi."
@@ -1248,7 +1103,8 @@
             "name": "Oppo A94 5G",
             "img": "oppo-a94-5g.jpg",
             "slug": "oppo-a94-5g",
-            "base_price": 12000000,
+            "base_price": 0,
+            "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.2,
             "description": "Điện thoại Oppo hỗ trợ 5G với thiết kế đẹp."
@@ -1260,7 +1116,8 @@
             "name": "Realme GT 5G",
             "img": "realme-gt-5g.jpg",
             "slug": "realme-gt-5g",
-            "base_price": 12000000,
+            "base_price": 0,
+            "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.6,
             "description": "Điện thoại chơi game với hỗ trợ 5G của Realme."
@@ -1272,7 +1129,8 @@
             "name": "Vivo V21 5G",
             "img": "vivo-v21-5g.jpg",
             "slug": "vivo-v21-5g",
-            "base_price": 12000000,
+            "base_price": 0,
+            "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.3,
             "description": "Điện thoại Vivo hỗ trợ 5G và camera selfie tốt."
@@ -1284,7 +1142,8 @@
             "name": "iPhone XS",
             "img": "iphone-xs.jpg",
             "slug": "iphone-xs",
-            "base_price": 12000000,
+            "base_price": 0,
+            "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.5,
             "description": "Điện thoại cao cấp của Apple với màn hình OLED."
@@ -1296,7 +1155,8 @@
             "name": "Samsung Galaxy A12",
             "img": "samsung-galaxy-a12.jpg",
             "slug": "samsung-galaxy-a12",
-            "base_price": 12000000,
+            "base_price": 0,
+            "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.1,
             "description": "Điện thoại giá rẻ với màn hình lớn của Samsung."
@@ -1308,7 +1168,8 @@
             "name": "Xiaomi Redmi Note 12 Pro",
             "img": "xiaomi-redmi-note-12-pro.jpg",
             "slug": "xiaomi-redmi-note-12-pro",
-            "base_price": 12000000,
+            "base_price": 0,
+            "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.5,
             "description": "Điện thoại tầm trung của Xiaomi với camera 64MP."
@@ -1320,7 +1181,8 @@
             "name": "iPhone 12 Mini",
             "img": "iphone-12-mini.jpg",
             "slug": "iphone-12-mini",
-            "base_price": 12000000,
+            "base_price": 0,
+            "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.4,
             "description": "Điện thoại nhỏ gọn, thiết kế hiện đại của Apple."
@@ -1332,7 +1194,8 @@
             "name": "Oppo A55",
             "img": "oppo-a55.jpg",
             "slug": "oppo-a55",
-            "base_price": 12000000,
+            "base_price": 0,
+            "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.3,
             "description": "Điện thoại giá rẻ với màn hình 6.5 inch của Oppo."
@@ -1344,7 +1207,8 @@
             "name": "Samsung Galaxy A72 5G",
             "img": "samsung-galaxy-a72-5g.jpg",
             "slug": "samsung-galaxy-a72-5g",
-            "base_price": 12000000,
+            "base_price": 0,
+            "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.5,
             "description": "Điện thoại tầm trung hỗ trợ 5G của Samsung."
@@ -1356,7 +1220,8 @@
             "name": "Xiaomi Mi 11 Lite 5G",
             "img": "xiaomi-mi-11-lite-5g.jpg",
             "slug": "xiaomi-mi-11-lite-5g",
-            "base_price": 12000000,
+            "base_price": 0,
+            "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.4,
             "description": "Điện thoại nhẹ và mỏng của Xiaomi với 5G."
@@ -1368,7 +1233,8 @@
             "name": "Oppo A94 5G",
             "img": "oppo-a94-5g.jpg",
             "slug": "oppo-a94-5g",
-            "base_price": 12000000,
+            "base_price": 0,
+            "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.2,
             "description": "Điện thoại Oppo hỗ trợ 5G với thiết kế đẹp."
@@ -1380,7 +1246,8 @@
             "name": "Realme GT 5G",
             "img": "realme-gt-5g.jpg",
             "slug": "realme-gt-5g",
-            "base_price": 12000000,
+            "base_price": 0,
+            "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.6,
             "description": "Điện thoại chơi game với hỗ trợ 5G của Realme."
@@ -1392,7 +1259,8 @@
             "name": "Vivo V21 5G",
             "img": "vivo-v21-5g.jpg",
             "slug": "vivo-v21-5g",
-            "base_price": 12000000,
+            "base_price": 0,
+            "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.3,
             "description": "Điện thoại Vivo hỗ trợ 5G và camera selfie tốt."
@@ -1404,7 +1272,8 @@
             "name": "iPhone XS",
             "img": "iphone-xs.jpg",
             "slug": "iphone-xs",
-            "base_price": 12000000,
+            "base_price": 0,
+            "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.5,
             "description": "Điện thoại cao cấp của Apple với màn hình OLED."
@@ -1416,7 +1285,8 @@
             "name": "Samsung Galaxy A12",
             "img": "samsung-galaxy-a12.jpg",
             "slug": "samsung-galaxy-a12",
-            "base_price": 12000000,
+            "base_price": 0,
+            "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.1,
             "description": "Điện thoại giá rẻ với màn hình lớn của Samsung."
@@ -1428,7 +1298,8 @@
             "name": "Xiaomi Redmi Note 12 Pro",
             "img": "xiaomi-redmi-note-12-pro.jpg",
             "slug": "xiaomi-redmi-note-12-pro",
-            "base_price": 12000000,
+            "base_price": 0,
+            "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.5,
             "description": "Điện thoại tầm trung của Xiaomi với camera 64MP."
@@ -1440,7 +1311,8 @@
             "name": "iPhone 12 Mini",
             "img": "iphone-12-mini.jpg",
             "slug": "iphone-12-mini",
-            "base_price": 12000000,
+            "base_price": 0,
+            "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.4,
             "description": "Điện thoại nhỏ gọn, thiết kế hiện đại của Apple."
@@ -1452,7 +1324,8 @@
             "name": "Oppo A55",
             "img": "oppo-a55.jpg",
             "slug": "oppo-a55",
-            "base_price": 12000000,
+            "base_price": 0,
+            "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.3,
             "description": "Điện thoại giá rẻ với màn hình 6.5 inch của Oppo."
@@ -1464,7 +1337,8 @@
             "name": "Realme Narzo 31 Pro",
             "img": "realme-narzo-31-pro.jpg",
             "slug": "realme-narzo-31-pro",
-            "base_price": 12000000,
+            "base_price": 0,
+            "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.2,
             "description": "Điện thoại hiệu năng mạnh mẽ của Realme với màn hình 120Hz."
@@ -1476,7 +1350,8 @@
             "name": "Vivo Y73",
             "img": "vivo-y73.jpg",
             "slug": "vivo-y73",
-            "base_price": 12000000,
+            "base_price": 0,
+            "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.4,
             "description": "Điện thoại thiết kế đẹp, hiệu suất ổn định của Vivo."
@@ -1488,7 +1363,8 @@
             "name": "iPhone 15",
             "img": "iphone-15.jpg",
             "slug": "iphone-15",
-            "base_price": 12000000,
+            "base_price": 0,
+            "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.7,
             "description": "Điện thoại Apple với camera kép, hiệu suất mạnh mẽ."
@@ -1500,7 +1376,8 @@
             "name": "Samsung Galaxy S20 FE",
             "img": "samsung-galaxy-s20-fe.jpg",
             "slug": "samsung-galaxy-s20-fe",
-            "base_price": 12000000,
+            "base_price": 0,
+            "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.6,
             "description": "Điện thoại flagship giá phải chăng của Samsung."
@@ -1512,7 +1389,8 @@
             "name": "Xiaomi Redmi K43",
             "img": "xiaomi-redmi-k43.jpg",
             "slug": "xiaomi-redmi-k43",
-            "base_price": 12000000,
+            "base_price": 0,
+            "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.5,
             "description": "Điện thoại flagship với Snapdragon 870 của Xiaomi."
@@ -1524,7 +1402,8 @@
             "name": "Oppo A73",
             "img": "oppo-a73.jpg",
             "slug": "oppo-a73",
-            "base_price": 12000000,
+            "base_price": 0,
+            "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.2,
             "description": "Điện thoại tầm trung của Oppo với màn hình AMOLED."
@@ -1536,7 +1415,8 @@
             "name": "Realme X50 Pro",
             "img": "realme-x50-pro.jpg",
             "slug": "realme-x50-pro",
-            "base_price": 12000000,
+            "base_price": 0,
+            "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.8,
             "description": "Điện thoại 5G flagship của Realme với hiệu năng mạnh mẽ."
@@ -1548,7 +1428,8 @@
             "name": "Vivo V2",
             "img": "vivo-v2.jpg",
             "slug": "vivo-v2",
-            "base_price": 12000000,
+            "base_price": 0,
+            "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.3,
             "description": "Điện thoại Vivo với camera selfie 44MP."
@@ -1560,7 +1441,8 @@
             "name": "iPhone 16",
             "img": "iphone-16.jpg",
             "slug": "iphone-16",
-            "base_price": 12000000,
+            "base_price": 0,
+            "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.4,
             "description": "Điện thoại của Apple với hiệu năng tuyệt vời và camera tốt."
