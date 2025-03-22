@@ -36,12 +36,6 @@ class ProductService{
         $attributes = Attributes::with('values')->get();
         return view('admin.product.add',compact('brands','categories','attributes'));
     }
-    public function createProductC(){
-        $brands = Brand::all();
-        $categories = ProductCategory::all();
-        $attributes = Attributes::with('values')->get();
-        return view('admin.product.addC',compact('brands','categories','attributes'));
-    }
     private function generateCombinations($arrays, $prefix = [])
     {
         $result = [];
@@ -77,8 +71,9 @@ class ProductService{
                 'name' => $request->name,
                 'brand_id' => $request->brand_id,
                 'purchases' => 0,
-                'base_price' => $request->base_price,
                 'is_featured' => $request->is_featured ?? 0,
+                'base_price' => $request->base_price,
+                'base_stock' => $request->base_stock,
                 'img' => $imageName,
                 'description' => $request->description,
                 'category_id' => $request->category_id,
@@ -112,8 +107,13 @@ class ProductService{
             }
     
             DB::commit();
+            return response()->json([
+                'success' => 'Thêm sản phẩm thành công.',
+                'product' => $product,
+                'variants' => ProductVariant::where('product_id', $product->id)->get(),
+            ]);
     
-            return redirect()->route('admin.product.index')->with('success', 'Thêm sản phẩm thành công');
+            // return redirect()->route('admin.product.index')->with('success', 'Thêm sản phẩm thành công');
     
         } catch (\Exception $e) {
             DB::rollBack();
@@ -187,7 +187,16 @@ class ProductService{
     }
     public function updateProduct($request, $id)
     {
+        // dd($request->all());
         $isFeatured = $request->is_featured;
+        if ($isFeatured == 0){
+            $base_stock = $request->base_stock;
+            $base_price = $request->base_price;
+        }
+        else{
+            $base_stock = 0;
+            $base_price = 0;
+        }
         $product = Product::where('id',$id)->first();
         if ($request->hasFile('img')) {
             $imageName = time() . '_' . uniqid() . '.' . $request->img->getClientOriginalExtension();
@@ -203,9 +212,14 @@ class ProductService{
 
         $product->update([
             'name' => $request->name,
-            'description' => $request->description,
-            'base_price' => $request->base_price,
+            'brand_id' => $request->brand_id,
             'is_featured' => $request->is_featured ?? 0,
+            'base_price' => $base_price,
+            'base_stock' => $base_stock,
+            'img' => $imageName,
+            'description' => $request->description,
+            'category_id' => $request->category_id,
+            'slug' => Str::slug($request->name),
         ]);
         if ($isFeatured == 1) {
             $existingVariants = ProductVariant::where('product_id', $id)->get();
@@ -267,14 +281,14 @@ class ProductService{
         else{
             ProductVariant::where('product_id', $id)->delete();
         }
-        // return response()->json([
-        //     'success' => 'Cập nhật biến thể thành công.',
-        //     'product' => $product,
-        //     'variants' => ProductVariant::where('product_id', $id)->get() ?? "Đã xoá các biến thể",
-        // ]);
+        return response()->json([
+            'success' => 'Cập nhật biến thể thành công.',
+            'product' => $product,
+            'variants' => ProductVariant::where('product_id', $id)->get() ?? "Xoá thất bại",
+        ]);
 
     
-        return redirect()->route('admin.product.index')->with('success', 'Sửa sản phẩm thành công');
+        // return redirect()->route('admin.product.index')->with('success', 'Sửa sản phẩm thành công');
     }
     public function destroyProduct($request) {
         $ids = is_array($request->id) ? $request->id : [$request->id];
@@ -320,56 +334,57 @@ class ProductService{
     }
 // CLIENT
 public function getProductBySlug($slug) {
-    $product = Product::where('slug', $slug)->first();
+    $product = Product::where('slug', $slug)->firstOrFail();
     $images = Images::where('product_id', $product->id)->get();
     $variants = ProductVariant::where('product_id', $product->id)->get();
     $attributeValues = AttributesValue::all()->keyBy('id');
 
-    $formattedVariants = $variants->map(function ($variant) use ($attributeValues) {
-        $attributes = json_decode($variant->attribute_values, true);
+    // Nếu có biến thể, lấy đầy đủ thông tin
+    if ($variants->isNotEmpty()) {
+        $formattedVariants = $variants->map(function ($variant) use ($attributeValues) {
+            $attributes = json_decode($variant->attribute_values, true);
 
-        $formattedAttributes = collect($attributes)->mapWithKeys(function ($attrValueId, $attrName) use ($attributeValues) {
-            return 
-            [
-                $attrName => $attributeValues[$attrValueId]->id ?? 'Không xác định',
-                // $attrid => $attributeValues[$attrValueId]->id ?? 'Không xác định'
+            $formattedAttributes = collect($attributes)->mapWithKeys(function ($attrValueId, $attrName) use ($attributeValues) {
+                return [
+                    $attrName => $attributeValues[$attrValueId]->id ?? 'Không xác định',
+                ];
+            })->toArray();
 
+            return [
+                'id' => $variant->id,
+                'price' => $variant->price,
+                'discounted_price' => $variant->discounted_price,
+                'stock' => $variant->stock,
+                'attributes' => $formattedAttributes,
             ];
-        })->toArray();
+        });
 
-        return [
-            'id' => $variant->id,
-            'product_id' => $variant->product_id,
-            'price' => $variant->price,
-            'discounted_price' => $variant->discounted_price,
-            'stock' => $variant->stock,
-            'created_at' => $variant->created_at,
-            'updated_at' => $variant->updated_at,
-            'deleted_at' => $variant->deleted_at,
-            'attributes' => $formattedAttributes,
-        ];
-    });
-
-    $defaultVariant = $formattedVariants->first();
-
-    if ($product) {
-        $comment = Comment::where('product_id', $product->id)->get();
-        $relatedProducts = Product::where('category_id', $product->category_id)
-            ->where('id', '!=', $product->id)
-            ->take(10)
-            ->get();
-
-        return response()->json([
-            'product' => $product,
-            'comment' => $comment,
-            'images' => $images,
-            'formattedVariants' => $formattedVariants,
-            'defaultVariant' => $defaultVariant,
-        ]);
+        $defaultVariant = $formattedVariants->first();
     } else {
-        abort(404);
+        // Không có biến thể, chỉ lấy giá và tồn kho của sản phẩm
+        $formattedVariants = [];
+        $defaultVariant = [
+            'price' => $product->base_price,
+            'discounted_price' => $product->discounted_price,
+            'stock' => $product->stock ?? 0,
+        ];
     }
+
+    $comment = Comment::where('product_id', $product->id)->get();
+    $relatedProducts = Product::where('category_id', $product->category_id)
+        ->where('id', '!=', $product->id)
+        ->take(10)
+        ->get();
+
+    return response()->json([
+        'product' => $product,
+        'comment' => $comment,
+        'images' => $images,
+        'formattedVariants' => $formattedVariants,
+        'defaultVariant' => $defaultVariant,
+    ]);
 }
+
 
 
 
