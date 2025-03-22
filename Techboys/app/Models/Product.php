@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -11,7 +12,7 @@ class Product extends Model
     use HasFactory, SoftDeletes;
 
     protected $table = 'products';
-    protected $fillable = ['name', 'brand_id', 'category_id','is_featured', 'base_price','purchases', 'img', 'slug', 'rate_average', 'description'];
+    protected $fillable = ['name', 'brand_id', 'category_id','is_featured', 'base_price','base_stock','purchases', 'img', 'slug', 'rate_average', 'description'];
 
     public function brand()
     {
@@ -42,10 +43,11 @@ class Product extends Model
 
     public function getDiscountedPriceAttribute()
     {
-        if ($this->promotion && $this->promotion->discount_percent > 0) {
-            $minPrice = $this->variant->min('price');
-            return $minPrice - ($minPrice * $this->promotion->discount_percent / 100);
+        $promotion = $this->promotion;
+        if ($promotion && now()->lt(Carbon::parse($promotion->end_date))) {
+            return round($this->base_price * (1 - $promotion->discount_percent / 100), 2);
         }
-        return null;
+        return $this->base_price;
     }
+    
 }
