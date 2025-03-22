@@ -51,18 +51,18 @@
                                                                         <a href="single-product-fullwidth.html">
                                                                             <img width="180" height="180"
                                                                                 alt="" class="wp-post-image"
-                                                                                src="{{ url('') }}/admin/assets/images/product/{{ $cart->variant->product->img }}">
+                                                                                src="{{ url('') }}/admin/assets/images/product/{{ $cart->product->img }}">
                                                                         </a>
                                                                         <div class="media-body align-self-center">
-                                                                            <a href="single-product-fullwidth.html">{{ $cart->variant->product->name }}
-                                                                                {{ $cart->variant->model->name }}
-                                                                                {{ $cart->variant->color->name }}
+                                                                            <a href="single-product-fullwidth.html">{{ $cart->product->name }}
+                                                                                {{-- {{ $cart->variant->model->name }}
+                                                                                {{ $cart->variant->color->name }} --}}
                                                                             </a>
                                                                             <p data-title="Stock" class="product-stock">
                                                                                 <span>Tồn Kho :</span>
                                                                                 <span
                                                                                     class="stock-quantity-{{ $cart->id }}">
-                                                                                    {{ $cart->variant->stock }}
+                                                                                    {{ $cart->stock }}
                                                                                 </span>
                                                                             </p>
                                                                         </div>
@@ -71,7 +71,7 @@
                                                                 <td data-title="Price" class="product-price">
                                                                     <span class="woocommerce-Price-amount amount">
                                                                         <span
-                                                                            class="woocommerce-Price-currencySymbol">{{ number_format($cart->variant->discounted_price , 0, ',', '.') }}
+                                                                            class="woocommerce-Price-currencySymbol">{{ number_format($cart->discounted_price , 0, ',', '.') }}
                                                                             đ</span>
                                                                     </span>
                                                                 </td>
@@ -83,13 +83,13 @@
                                                                             value="{{ $cart->quantity }}"
                                                                             class="input-text qty text update-cart"
                                                                             data-id="{{ $cart->id }}" min="1"
-                                                                            max="{{ $cart->variant->stock }}">
+                                                                            max="{{ $cart->stock }}">
                                                                     </div>
                                                                 </td>
                                                                 <td data-title="Total" class="product-subtotal">
                                                                     <span
                                                                         class="woocommerce-Price-amount amount total-price-{{ $cart->id }}">
-                                                                        {{ number_format($cart->variant->discounted_price * $cart->quantity, 0, ',', '.') }}
+                                                                        {{ number_format($cart->discounted_price * $cart->quantity, 0, ',', '.') }}
                                                                         đ
                                                                     </span>
                                                                     <a class="remove" href="#"
