@@ -36,15 +36,15 @@
                             </div>
                             <div class="card-body">
                                 {{-- Hiển thị thông báo lỗi --}}
-                                {{-- @if ($errors->any())
-                                <div class="alert alert-danger">
-                                    <ul>
-                                        @foreach ($errors->all() as $error)
-                                        <li>{{ $error }}</li>
-                                        @endforeach
-                                    </ul>
-                                </div>
-                                @endif --}}
+                                @if ($errors->any())
+                                    <div class="alert alert-danger">
+                                        <ul>
+                                            @foreach ($errors->all() as $error)
+                                                <li>{{ $error }}</li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                @endif
 
                                 <form action="{{ route('admin.product.update', ['id' => $product->id]) }}" method="POST"
                                     enctype="multipart/form-data">
@@ -86,7 +86,7 @@
                                                 </p>
                                             @endif
                                         </div>
-                                        <div class="col-md-4 mb-3">
+                                        <div class="col-md-6 mb-3">
                                             <label for="name" class="form-label">Tên Sản Phẩm</label>
                                             <input type="text" class="form-control" id="name" name="name"
                                                 value="{{ $product->name }}" required>
@@ -96,17 +96,8 @@
                                                 </p>
                                             @endif
                                         </div>
-                                        <div class="col-md-4 mb-3">
-                                            <label for="base_price" class="form-label">Giá gốc</label>
-                                            <input type="text" class="form-control" id="base_price" name="base_price"
-                                                value="{{ number_format($product->base_price, 0, ',', '.') }}">
-                                            @if ($errors->has('base_price'))
-                                                <p class="text-danger small ">
-                                                    <i>{{ $errors->first('base_price') }}</i>
-                                                </p>
-                                            @endif
-                                        </div>
-                                        <div class="col-md-4 mb-3">
+
+                                        <div class="col-md-6 mb-3">
                                             <label for="images" class="form-label">Ảnh Sản Phẩm</label>
                                             <input class="form-control" type="file" id="images" name="img"
                                                 accept="image/*">
@@ -142,10 +133,29 @@
                                             <label class="form-check-label">Sản phẩm có biến thể?</label>
 
                                         </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label for="base_price" class="form-label">Giá </label>
+                                            <input type="text" class="form-control" id="base_price" name="base_price"
+                                                value="{{ number_format($product->base_price, 2, '.', '') }}">
 
+                                            @if ($errors->has('base_price'))
+                                                <p class="text-danger small ">
+                                                    <i>{{ $errors->first('base_price') }}</i>
+                                                </p>
+                                            @endif
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label for="base_stock" class="form-label">Số lượng</label>
+                                            <input type="text" class="form-control" id="base_stock" name="base_stock"
+                                                value="{{ $product->base_stock }}">
+                                            @if ($errors->has('base_stock'))
+                                                <p class="text-danger small ">
+                                                    <i>{{ $errors->first('base_stock') }}</i>
+                                                </p>
+                                            @endif
+                                        </div>
                                         <div id="variant-container" style="display: none;">
                                             <h4>Thông tin biến thể</h4>
-
                                             <!-- Chọn thuộc tính cho biến thể đầu tiên -->
                                             <div class="mb-3" id="attribute-selection">
                                                 <label class="form-label">Chọn thuộc tính biến thể</label>
@@ -240,31 +250,61 @@
                     reader.readAsDataURL(file);
                 });
             });
+
             document.addEventListener("DOMContentLoaded", function() {
                 let priceInputs = document.querySelectorAll('input[name="base_price"]');
 
                 priceInputs.forEach(input => {
                     input.addEventListener('input', function(e) {
+                        let cursorPosition = e.target.selectionStart;
+                        let oldLength = e.target.value.length;
+
                         let value = e.target.value;
 
-                        value = value.replace(/[^0-9]/g, '');
+                        value = value.replace(/[^0-9.]/g, '');
+                        value = value.replace(/^(\d*\.)(.*)\./g, '$1$2');.
 
-                        value = new Intl.NumberFormat('vi-VN').format(value);
+                        let parts = value.split('.');
+                        parts[0] = parts[0].replace(/,/g, '');
+                        parts[0] = parts[0].length > 0 ? new Intl.NumberFormat('en-US').format(parts[
+                            0]) : '';
+
+                        if (parts[1] !== undefined) {
+                            parts[1] = parts[1].substring(0, 2);
+                            value = parts.join('.');
+                        } else {
+                            value = parts[0];
+                        }
 
                         e.target.value = value;
+
+                        let newLength = e.target.value.length;
+                        cursorPosition = cursorPosition + (newLength - oldLength);
+                        e.target.setSelectionRange(cursorPosition, cursorPosition);
                     });
                 });
 
                 document.querySelector("form").addEventListener("submit", function() {
                     priceInputs.forEach(input => {
-                        input.value = input.value.replace(/\./g, '');
+                        input.value = input.value.replace(/,/g, '');
                     });
                 });
             });
+        
         </script>
 
         <script>
             $(document).ready(function() {
+                function toggleBase() {
+                    if ($('#is_featured').prop('checked')) {
+                        $('input[name="base_price"]').closest('.mb-3').hide();
+                        $('input[name="base_stock"]').closest('.mb-3').hide();
+                    } else {
+                        $('input[name="base_price"]').closest('.mb-3').show();
+                        $('input[name="base_stock"]').closest('.mb-3').show();
+
+                    }
+                }
                 $('#is_featured').change(function() {
                     if (this.checked) {
                         $('#variant-container').show();
@@ -273,6 +313,8 @@
                         $('#variant-container').hide();
                         $('#attribute-selection').hide();
                     }
+                    toggleBase();
+
                 });
 
                 function toggleRemoveButtons() {
@@ -283,8 +325,9 @@
                         $('.remove-variant').hide();
                         $('#emptyVariant').show();
                         $('#update-variant').hide();
-
                     }
+                    toggleBase();
+
                 }
 
                 let variantData = {!! json_encode($formattedVariants) !!};
@@ -317,9 +360,11 @@
                     let selectedAttributes = variant ? Object.keys(variant.variable_attributes) : [];
                     let selectedValues = variant ? Object.values(variant.variable_attributes) : [];
 
-                    let variantHtml = `<div class="variant-item border p-3 mb-3">
-                <h5>Biến thể ${index + 1}</h5>
-                <button type="button" class="btn btn-danger btn-sm remove-variant">Xóa</button>`;
+                    let variantHtml = `<div class="row variant-item border p-3 mb-3">
+                <div class="col-md-12 d-flex justify-content-between align-items-center">
+            <h5>Biến thể ${index + 1}</h5>
+            <button type="button" class="btn btn-danger btn-sm remove-variant">Xóa</button>
+             </div>`;
 
                     let filteredAttributes = attributeArray.filter(attribute =>
                         variantAttributes.some(attr => Object.keys(attr).includes(attribute.name))
@@ -335,7 +380,7 @@
 
                         console.log(`Thuộc tính: ${attribute.name}, Giá trị:`, selectedValueId);
 
-                        variantHtml += `<div class="mb-3">
+                        variantHtml += `<div class="col-md-6 mb-3">
                     <label class="form-label">${attribute.name}</label>`;
 
                         if (attribute.is_multiple == 1) {
@@ -359,9 +404,9 @@
                     });
 
                     variantHtml += `
-                <div class="mb-3">
+                <div class="col-md-6 mb-3">
                     <label class="form-label">Giá biến thể</label>
-                    <input type="number" name="variants[${index}][price]" class="form-control" value="${variant ? variant.price : ''}" required>
+                    <input type="text" name="variants[${index}][price]" class="form-control" value="${variant ? variant.price : ''}" required>
                 </div>
                  </div>`;
 
@@ -406,9 +451,11 @@
                         return;
                     }
 
-                    let variantHtml = `<div class="variant-item border p-3 mb-3" data-attributes='${JSON.stringify(selectedNewAttributes)}'>
-                        <h5>Biến thể ${index + 1}</h5>
-                        <button type="button" class="btn btn-danger btn-sm remove-variant">Xóa</button>`;
+                    let variantHtml = `<div class="row variant-item border p-3 mb-3" data-attributes='${JSON.stringify(selectedNewAttributes)}'>
+                       <div class="col-md-12 d-flex justify-content-between align-items-center">
+            <h5>Biến thể ${index + 1}</h5>
+            <button type="button" class="btn btn-danger btn-sm remove-variant">Xóa</button>
+             </div>`;
 
                     selectedNewAttributes.forEach(attr => {
                         console.log("Tạo biến thể với thuộc tính:", attr);
@@ -424,7 +471,7 @@
                             return;
                         }
 
-                        variantHtml += `<div class="mb-3">
+                        variantHtml += `<div class="col-md-6 mb-3">
                         <label class="form-label">${attribute.name}</label>`;
 
                         if (attribute.is_multiple == 1) {
@@ -444,9 +491,9 @@
                     });
 
                     variantHtml += `
-                    <div class="mb-3">
+                    <div class="col-md-6 mb-3">
                     <label class="form-label">Giá biến thể</label>
-                    <input type="number" name="variants[${index}][price]" class="form-control" required>
+                    <input type="text" name="variants[${index}][price]" class="form-control" required>
                     </div>
                     </div>`;
 
