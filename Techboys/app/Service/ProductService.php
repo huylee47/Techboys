@@ -343,14 +343,20 @@ public function getProductBySlug($slug) {
         ->where('id', '!=', $product->id)
         ->take(10)
         ->get();
+
+    $groupedAttributes = []; // Lưu danh sách nhóm thuộc tính
+
     if ($variants->isNotEmpty()) {
-        $formattedVariants = $variants->map(function ($variant) use ($attributeValues) {
+        $formattedVariants = $variants->map(function ($variant) use ($attributeValues, &$groupedAttributes) {
             $attributes = json_decode($variant->attribute_values, true);
 
-            $formattedAttributes = collect($attributes)->mapWithKeys(function ($attrValueId, $attrName) use ($attributeValues) {
-                return [
-                    $attrName => $attributeValues[$attrValueId]->id ?? 'Không xác định',
-                ];
+            $formattedAttributes = collect($attributes)->mapWithKeys(function ($attrValueId, $attrName) use ($attributeValues, &$groupedAttributes) {
+                $attributeValue = $attributeValues[$attrValueId]->value ?? 'Không xác định';
+
+                // Nhóm thuộc tính vào danh sách
+                $groupedAttributes[$attrName][] = $attributeValue;
+
+                return [$attrName => $attributeValue];
             })->toArray();
 
             return [
@@ -361,8 +367,15 @@ public function getProductBySlug($slug) {
                 'attributes' => $formattedAttributes,
             ];
         });
+
+        // Loại bỏ các giá trị trùng nhau trong từng nhóm thuộc tính
+        foreach ($groupedAttributes as $key => $values) {
+            $groupedAttributes[$key] = array_unique($values);
+        }
+
         $defaultVariant = $formattedVariants->first();
-        return view('client.product.detail', compact('product', 'comment', 'images', 'formattedVariants', 'defaultVariant','relatedProducts'));
+
+        return view('client.product.detail', compact('product', 'comment', 'images', 'formattedVariants', 'defaultVariant', 'relatedProducts', 'attributeValues', 'groupedAttributes'));
     } else {
         $formattedVariants = [];
         $defaultVariant = [
@@ -370,20 +383,11 @@ public function getProductBySlug($slug) {
             'discounted_price' => $product->discounted_price,
             'stock' => $product->base_stock ?? 0,
         ];
-        return view('client.product.detail', compact('product', 'comment', 'images', 'formattedVariants', 'defaultVariant','relatedProducts'));
+
+        return view('client.product.detail', compact('product', 'comment', 'images', 'formattedVariants', 'defaultVariant', 'relatedProducts', 'groupedAttributes'));
     }
-
-
-
-    // return response()->json([
-    //     'product' => $product,
-    //     'comment' => $comment,
-    //     'images' => $images,
-    //     'formattedVariants' => $formattedVariants,
-    //     'defaultVariant' => $defaultVariant,
-    // ]);
-
 }
+
 
 
 
