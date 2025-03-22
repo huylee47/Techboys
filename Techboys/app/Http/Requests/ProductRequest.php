@@ -22,15 +22,20 @@ class ProductRequest extends FormRequest
     public function rules(): array
     {
         $rules = [
-            'name' => 'required|string|max:255|unique:products,name,'. $this->id,
+            'name' => 'required|string|max:255|unique:products,name,' . $this->id,
             'brand_id' => 'required',
             'category_id' => 'required',
             'description' => 'required',
             'img' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
         ];
-
+        if ($this->input('is_featured') == 0) {
+            $rules['base_price'] = 'required|min:1';
+            $rules['base_stock'] = 'required|min:0';
+        }
+    
         return $rules;
     }
+    
     public function messages()
     {
         return [
@@ -43,6 +48,13 @@ class ProductRequest extends FormRequest
             'img.image' => 'Ảnh không hợp lệ.',
             'img.mimes' => 'Ảnh phải có định dạng jpeg, png, jpg, gif.',
             'img.max' => 'Kích thước ảnh tối đa là 2MB.',
+            'base_price.required' => 'Giá gốc không được để trống.',
+            'base_price.numeric' => 'Giá gốc phải là số.',
+            'base_price.min' => 'Giá gốc không thể nhỏ hơn 1.',
+            'base_stock.required' => 'Số lượng không được để trống.',
+            'base_stock.numeric' => 'Số lượng phải là số.',
+            'base_stock.min' => 'Số lượng không thể nhỏ hơn 0.',
         ];
     }
+    
 }
