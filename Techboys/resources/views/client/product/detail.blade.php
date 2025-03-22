@@ -2,6 +2,7 @@
 
 @section('main')
     <style>
+        
         .commentlist .comment .star-rating {
             color: #ffcc00;
             margin-top: 5px;
@@ -331,68 +332,52 @@
                                                             <span
                                                                 class="woocommerce-Price-currencySymbol">$</span>997.00</span>
                                                     </ins> --}}
-                                                    {{-- @php
-                                                        $defaultVariant = $variants->sortBy('model.value')->first();
-                                                    @endphp --}}
 
-                                                    {{-- <div class="choice-group">
-                                                        <span class="label">Dung lượng</span>
+
+                                                    @if (!empty($formattedVariants) && count($formattedVariants) > 0)
+                                                    @foreach ($groupedAttributes as $attributeName => $values)
+                                                    <div class="choice-group">
+                                                        <span class="label">{{ $attributeName }}</span>
                                                         <div class="choice-buttons">
-                                                            @foreach ($variants->groupBy('model.name') as $modelName => $variantGroup)
-                                                                @php
-                                                                    $isActive =
-                                                                        $modelName == $defaultVariant->model->name
-                                                                            ? 'active'
-                                                                            : '';
-                                                                @endphp
-                                                                <div class="choice storage-choice {{ $isActive }}"
-                                                                    data-value="{{ $modelName }}"
-                                                                    data-price="{{ optional($variantGroup->first())->discounted_price }}"
-                                                                    data-model-value="{{ $variantGroup->first()->model->id }}"
-                                                                    data-stock="{{ $variantGroup->first()->stock }}">
-                                                                    {{ $modelName }}
+                                                            @foreach ($values as $value)
+                                                                <div class="choice storage-choice" 
+                                                                     data-value="{{ $value }}" 
+                                                                     data-attribute="{{ $attributeName }}"
+                                                                     @if(isset($defaultVariant['attributes'][$attributeName]) && $defaultVariant['attributes'][$attributeName] == $value) 
+                                                                        class="active" 
+                                                                     @endif>
+                                                                    {{ $value }}
                                                                 </div>
                                                             @endforeach
                                                         </div>
                                                     </div>
-                                                    --}}
-                                                    {{-- {{json_encode($defaultVariant)}} --}}
-                                                    <div class="choice-group">
-                                                        <span class="label">Chọn biến thể</span>
-                                                        <div class="choice-buttons">
-                                                            @if (!empty($formattedVariants) && count($formattedVariants) > 0)
-                                                                @foreach ($formattedVariants as $variant)
-                                                                    <div class="choice storage-choice 
-                                                                        {{ $variant['id'] == $defaultVariant['id'] ? 'active' : '' }}" 
-                                                                        data-value="{{ $variant['id'] }}"
-                                                                        data-price="{{ $variant['discounted_price'] }}"
-                                                                        data-model-value="{{ json_encode($variant['attributes']) }}"
-                                                                        data-stock="{{ $variant['stock'] }}">
-                                                                        {{ implode(' - ', array_values($variant['attributes'])) }}
-                                                                    </div>
-                                                                @endforeach
-                                                            @else
-                                                                <div class="choice storage-choice active" 
-                                                                    data-value="default"
-                                                                    data-price="{{ $defaultVariant['discounted_price'] }}"
-                                                                    data-stock="{{ $defaultVariant['stock'] }}">
-                                                                    Mặc định (Không có biến thể)
-                                                                </div>
-                                                            @endif
+                                                     @endforeach
+                                                
+                                                    @else
+                                                        <div class="choice storage-choice active" data-value="default"
+                                                            data-price="{{ $defaultVariant['discounted_price'] }}"
+                                                            data-stock="{{ $defaultVariant['stock'] }}">
+                                                            Mặc định (Không có biến thể)
                                                         </div>
-                                                    </div>
+                                                    @endif
 
-                                                    <p>Giá: <span id="price-display">{{$defaultVariant['discounted_price']}}</span></p>
-                                                    <p>Tồn kho: <span id="stock-display">$defaultVariant['stock']</span></p>
+
+                                                    <p>Giá: <span
+                                                            id="price-display">{{ $defaultVariant['discounted_price'] }}</span>
+                                                    </p>
+                                                    <p>Tồn kho: <span
+                                                            id="stock-display">{{ $defaultVariant['stock'] }}</span></p>
 
                                                     <!-- .single-product-header -->
 
                                                     <input type="hidden" name="quantity" value="1">
+                                                    <input type="hidden" name="product_id" value="{{ $product->id }}">
                                                     <input type="hidden" name="variant_id" id="variant_id" value="">
 
                                                     <!-- .quantity -->
 
-                                                    <button class="single_add_to_cart_button button alt" type="submit">Thêm
+                                                    <button class="single_add_to_cart_button button alt"
+                                                        type="submit">Thêm
                                                         vào giỏ hàng</button>
                                                     <p id="outOfStockMessage" class="text-danger small">Sản phẩm đã hết
                                                         hàng</p>
@@ -784,29 +769,30 @@
     </script>
 
     {{-- Huy --}}
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        let activeVariant = document.querySelector(".choice.storage-choice.active");
-        if (activeVariant) {
-            let price = activeVariant.getAttribute("data-price");
-            let stock = activeVariant.getAttribute("data-stock");
-
-            document.getElementById("price-display").innerText = price;
-            document.getElementById("stock-display").innerText = stock;
-        }
-
-        document.querySelectorAll(".choice.storage-choice").forEach(choice => {
-            choice.addEventListener("click", function() {
-                document.querySelectorAll(".choice.storage-choice").forEach(el => el.classList.remove("active"));
-                this.classList.add("active");
-
-                let price = this.getAttribute("data-price");
-                let stock = this.getAttribute("data-stock");
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            let activeVariant = document.querySelector(".choice.storage-choice.active");
+            if (activeVariant) {
+                let price = activeVariant.getAttribute("data-price");
+                let stock = activeVariant.getAttribute("data-stock");
 
                 document.getElementById("price-display").innerText = price;
                 document.getElementById("stock-display").innerText = stock;
+            }
+
+            document.querySelectorAll(".choice.storage-choice").forEach(choice => {
+                choice.addEventListener("click", function() {
+                    document.querySelectorAll(".choice.storage-choice").forEach(el => el.classList
+                        .remove("active"));
+                    this.classList.add("active");
+
+                    let price = this.getAttribute("data-price");
+                    let stock = this.getAttribute("data-stock");
+
+                    document.getElementById("price-display").innerText = price;
+                    document.getElementById("stock-display").innerText = stock;
+                });
             });
         });
-    });
-</script>
+    </script>
 @endsection
