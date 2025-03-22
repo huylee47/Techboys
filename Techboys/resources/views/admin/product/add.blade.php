@@ -78,7 +78,7 @@
                                                 </p>
                                             @endif
                                         </div>
-                                        <div class="col-md-4 mb-3">
+                                        <div class="col-md-6 mb-3">
                                             <label for="name" class="form-label">Tên Sản Phẩm</label>
                                             <input type="text" class="form-control" id="name" name="name"
                                                 value="{{ old('name') }}">
@@ -88,17 +88,7 @@
                                                 </p>
                                             @endif
                                         </div>
-                                        <div class="col-md-4 mb-3">
-                                            <label for="base_price" class="form-label">Giá gốc</label>
-                                            <input type="text" class="form-control" id="base_price" name="base_price"
-                                                value="{{ old('base_price') }}">
-                                            @if ($errors->has('base_price'))
-                                                <p class="text-danger small ">
-                                                    <i>{{ $errors->first('base_price') }}</i>
-                                                </p>
-                                            @endif
-                                        </div>
-                                        <div class="col-md-4 mb-3">
+                                        <div class="col-md-6 mb-3">
                                             <label for="images" class="form-label">Ảnh Sản Phẩm</label>
                                             <input class="form-control" type="file" id="images" name="img"
                                                 accept="image/*">
@@ -126,7 +116,27 @@
                                                 </h4>
                                             </span>
                                         </div>
-
+                                        <div class="col-md-6 mb-3">
+                                            <label for="base_price" class="form-label">Giá </label>
+                                            <input type="text" class="form-control" id="base_price" name="base_price"
+                                            value="{{ old('base_price') !== null ? number_format(old('base_price'), 2, '.', '') : '' }}"
+                                            >
+                                            @if ($errors->has('base_price'))
+                                                <p class="text-danger small ">
+                                                    <i>{{ $errors->first('base_price') }}</i>
+                                                </p>
+                                            @endif
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label for="base_stock" class="form-label">Số lượng</label>
+                                            <input type="text" class="form-control" id="base_stock" name="base_stock"
+                                                value="{{ old('base_stock') }}">
+                                            @if ($errors->has('base_stock'))
+                                                <p class="text-danger small ">
+                                                    <i>{{ $errors->first('base_stock') }}</i>
+                                                </p>
+                                            @endif
+                                        </div>
                                         <div id="variant-container" style="display: none;">
                                             <h4>Thông tin biến thể</h4>
 
@@ -135,7 +145,7 @@
                                                 <label class="form-label">Chọn thuộc tính biến thể</label>
                                                 <select id="attribute-select" class="form-control selectpicker" multiple
                                                     data-live-search="true" title="Chọn thuộc tính" data-max-options="2"
-                        data-max-options-text="Bạn chỉ có thể chọn tối đa 2 mục!">
+                                                    data-max-options-text="Bạn chỉ có thể chọn tối đa 2 mục!">
                                                     @foreach ($attributes as $attribute)
                                                         <option value="{{ $attribute->name }}">{{ $attribute->name }}
                                                         </option>
@@ -159,6 +169,7 @@
         </div>
     @endsection
     @section('scripts')
+        {{-- NOTEPAD --}}
         <script>
             $('#summernote').summernote({
                 tabsize: 2,
@@ -195,6 +206,7 @@
                 }
             });
         </script>
+        {{-- IMG --}}
         <script>
             document.getElementById('images').addEventListener('change', function(event) {
                 let previewContainer = document.getElementById('image-preview-container');
@@ -219,156 +231,197 @@
 
                 priceInputs.forEach(input => {
                     input.addEventListener('input', function(e) {
+                        let cursorPosition = e.target.selectionStart;
+                        let oldLength = e.target.value.length;
+
                         let value = e.target.value;
 
-                        value = value.replace(/[^0-9]/g, '');
+                        // Chỉ giữ lại số và một dấu .
+                        value = value.replace(/[^0-9.]/g, '');
+                        value = value.replace(/^(\d*\.)(.*)\./g, '$1$2'); // Chỉ giữ một dấu .
 
-                        value = new Intl.NumberFormat('vi-VN').format(value);
+                        // Không cho phép nhập số bắt đầu bằng .
+                        if (value.startsWith('.')) {
+                            value = '';
+                        }
+
+                        // Tách phần nguyên và phần thập phân
+                        let parts = value.split('.');
+                        parts[0] = parts[0].replace(/,/g, ''); // Xóa dấu , cũ trước khi định dạng
+                        parts[0] = parts[0].length > 0 ? new Intl.NumberFormat('en-US').format(parts[
+                            0]) : '';
+
+                        // Giới hạn tối đa 2 số sau dấu .
+                        if (parts[1] !== undefined) {
+                            parts[1] = parts[1].substring(0, 2);
+                            value = parts.join('.');
+                        } else {
+                            value = parts[0];
+                        }
 
                         e.target.value = value;
+
+                        // Điều chỉnh vị trí con trỏ sau khi định dạng
+                        let newLength = e.target.value.length;
+                        cursorPosition = cursorPosition + (newLength - oldLength);
+                        e.target.setSelectionRange(cursorPosition, cursorPosition);
                     });
                 });
 
+                // Xóa dấu , trước khi submit form
                 document.querySelector("form").addEventListener("submit", function() {
                     priceInputs.forEach(input => {
-                        input.value = input.value.replace(/\./g, '');
+                        input.value = input.value.replace(/,/g, '');
                     });
                 });
             });
         </script>
-    <script>
-        $(document).ready(function() {
-            $('#is_featured').change(function() {
-                if (this.checked) {
-                    $('#variant-container').show();
-                    $('#attribute-selection').show();
-                } else {
-                    $('#variant-container').hide();
-                    $('#attribute-selection').hide();
-                }
-            });
-
-            function toggleRemoveButtons() {
-                if ($('.variant-item').length > 0) {
-                    $('.remove-variant').show();
-                    $('#newVariant').hide();
-
-                } else {
-                    $('#newVariant').show();
-                    $('.remove-variant').hide();
-                }
-            }
-
-            let attributeData = {!! json_encode($attributes) !!};
-
-            $('#add-variant').click(function() {
-                let index = $('.variant-item').length;
-                let selectedAttributes = [];
-
-                if (index === 0) {
-                    selectedAttributes = $('#attribute-select').val() || [];
-                    console.log("Danh sách thuộc tính đã chọn:", selectedAttributes);
-
-                    if (selectedAttributes.length === 0) {
-                        alert('Vui lòng chọn ít nhất một thuộc tính.');
-                        return;
-                    }
-                    $('#attribute-selection').hide();
-                } else {
-                    let firstVariantAttributes = $('.variant-item:first').attr('data-attributes');
-                    selectedAttributes = firstVariantAttributes ? JSON.parse(firstVariantAttributes) : [];
-                    console.log("Thuộc tính của biến thể đầu tiên:", selectedAttributes);
-                }
-
-                if (!Array.isArray(selectedAttributes)) {
-                    console.error("selectedAttributes không phải là một mảng:", selectedAttributes);
-                    return;
-                }
-
-                let variantHtml = `<div class="row variant-item border p-3 mb-3" data-attributes='${JSON.stringify(selectedAttributes)}'>
-                     <div class="col-md-12 d-flex justify-content-between align-items-center">
-        <h5>Biến thể ${index + 1}</h5>
-        <button type="button" class="btn btn-danger btn-sm remove-variant">Xóa</button>
-         </div>`;
-
-                selectedAttributes.forEach(attr => {
-                    console.log("Tạo biến thể với thuộc tính:", attr);
-
-                    let attribute = attributeData.find(a => a.name === attr);
-
-                    if (!attribute) {
-                        console.warn(`Không tìm thấy dữ liệu thuộc tính cho: ${attr}`);
-                        return;
-                    }
-
-                    if (!attribute.values || !Array.isArray(attribute.values)) {
-                        console.warn(`Thuộc tính ${attr} không có danh sách giá trị.`);
-                        return;
-                    }
-
-                    variantHtml += `<div class="col-md-6 mb-3">
-            <label class="form-label">${attribute.name}</label>`;
-
-                    if (attribute.is_multiple == 1) {
-                        variantHtml +=
-                            `<select name="variants[${index}][attributes][${attribute.name}][]" class="form-control selectpicker" multiple data-live-search="true">`;
+        {{-- VARIANT --}}
+        <script>
+            $(document).ready(function() {
+                function toggleBasePrice() {
+                    if ($('#is_featured').prop('checked')) {
+                        $('input[name="base_price"]').closest('.mb-3').hide();
+                        $('input[name="base_stock"]').closest('.mb-3').hide();
                     } else {
-                        variantHtml += `<select name="variants[${index}][attributes][${attribute.name}]" class="form-control single-select">
-                            <option value="">Chọn</option>`;
+                        $('input[name="base_price"]').closest('.mb-3').show();
+                        $('input[name="base_stock"]').closest('.mb-3').show();
+
                     }
+                }
 
-                    attribute.values.forEach(value => {
-                        variantHtml +=
-                            `<option value="${value.id}">${value.value}</option>`;
-                    });
-
-                    variantHtml += `</select></div>`;
+                $('#is_featured').change(function() {
+                    if (this.checked) {
+                        $('#variant-container').show();
+                        $('#attribute-selection').show();
+                    } else {
+                        $('#variant-container').hide();
+                        $('#attribute-selection').hide();
+                    }
+                    toggleBasePrice();
                 });
 
-                variantHtml += `
-        <div class="col-md-6 mb-3">
-            <label class="form-label">Giá biến thể</label>
-            <input type="number" name="variants[${index}][price]" class="form-control" required>
-        </div>
-    </div>`;
+                function toggleRemoveButtons() {
+                    if ($('.variant-item').length > 0) {
+                        $('.remove-variant').show();
+                        $('#newVariant').hide();
 
-                $('#variants').prepend(variantHtml);
-                $('.selectpicker').selectpicker();
-                toggleRemoveButtons();
-            });
-
-
-            $(document).on('click', '.remove-variant', function() {
-                let removedAttributes = $(this).closest('.variant-item').find('select').map(function() {
-                    return $(this).val();
-                }).get();
-
-                $(this).closest('.variant-item').remove();
-
-                if ($('.variant-item').length === 0) {
-                    $('#is_featured').prop('checked', false).trigger('change');
-                    $('#attribute-selection').hide();
-
-                    $('.single-select, .selectpicker').each(function() {
-                        $(this).val('');
-                        $(this).find('option').prop('disabled', false);
-                    });
-                } else {
-                    $('.single-select').each(function() {
-                        let select = $(this);
-                        let currentValue = select.val();
-
-                        if (removedAttributes.includes(currentValue)) {
-                            select.val('');
-                        }
-                    });
+                    } else {
+                        $('#newVariant').show();
+                        $('.remove-variant').hide();
+                    }
                 }
 
-                $('.selectpicker').selectpicker('refresh');
+                let attributeData = {!! json_encode($attributes) !!};
+
+                $('#add-variant').click(function() {
+                    let index = $('.variant-item').length;
+                    let selectedAttributes = [];
+
+                    if (index === 0) {
+                        selectedAttributes = $('#attribute-select').val() || [];
+                        console.log("Danh sách thuộc tính đã chọn:", selectedAttributes);
+
+                        if (selectedAttributes.length === 0) {
+                            alert('Vui lòng chọn ít nhất một thuộc tính.');
+                            return;
+                        }
+                        $('#attribute-selection').hide();
+                    } else {
+                        let firstVariantAttributes = $('.variant-item:first').attr('data-attributes');
+                        selectedAttributes = firstVariantAttributes ? JSON.parse(firstVariantAttributes) : [];
+                        console.log("Thuộc tính của biến thể đầu tiên:", selectedAttributes);
+                    }
+
+                    if (!Array.isArray(selectedAttributes)) {
+                        console.error("selectedAttributes không phải là một mảng:", selectedAttributes);
+                        return;
+                    }
+
+                    let variantHtml = `<div class="row variant-item border p-3 mb-3" data-attributes='${JSON.stringify(selectedAttributes)}'>
+                         <div class="col-md-12 d-flex justify-content-between align-items-center">
+            <h5>Biến thể ${index + 1}</h5>
+            <button type="button" class="btn btn-danger btn-sm remove-variant">Xóa</button>
+             </div>`;
+
+                    selectedAttributes.forEach(attr => {
+                        console.log("Tạo biến thể với thuộc tính:", attr);
+
+                        let attribute = attributeData.find(a => a.name === attr);
+
+                        if (!attribute) {
+                            console.warn(`Không tìm thấy dữ liệu thuộc tính cho: ${attr}`);
+                            return;
+                        }
+
+                        if (!attribute.values || !Array.isArray(attribute.values)) {
+                            console.warn(`Thuộc tính ${attr} không có danh sách giá trị.`);
+                            return;
+                        }
+
+                        variantHtml += `<div class="col-md-6 mb-3">
+                <label class="form-label">${attribute.name}</label>`;
+
+                        if (attribute.is_multiple == 1) {
+                            variantHtml +=
+                                `<select name="variants[${index}][attributes][${attribute.name}][]" class="form-control selectpicker" multiple data-live-search="true">`;
+                        } else {
+                            variantHtml += `<select name="variants[${index}][attributes][${attribute.name}]" class="form-control single-select">
+                                <option value="">Chọn</option>`;
+                        }
+
+                        attribute.values.forEach(value => {
+                            variantHtml +=
+                                `<option value="${value.id}">${value.value}</option>`;
+                        });
+
+                        variantHtml += `</select></div>`;
+                    });
+
+                    variantHtml += `
+            <div class="col-md-6 mb-3">
+                <label class="form-label">Giá biến thể</label>
+                <input type="text" name="variants[${index}][price]" class="form-control" required>
+            </div>
+        </div>`;
+
+                    $('#variants').prepend(variantHtml);
+                    $('.selectpicker').selectpicker();
+                    toggleRemoveButtons();
+                });
+
+
+                $(document).on('click', '.remove-variant', function() {
+                    let removedAttributes = $(this).closest('.variant-item').find('select').map(function() {
+                        return $(this).val();
+                    }).get();
+
+                    $(this).closest('.variant-item').remove();
+
+                    if ($('.variant-item').length === 0) {
+                        $('#is_featured').prop('checked', false).trigger('change');
+                        $('#attribute-selection').hide();
+
+                        $('.single-select, .selectpicker').each(function() {
+                            $(this).val('');
+                            $(this).find('option').prop('disabled', false);
+                        });
+                    } else {
+                        $('.single-select').each(function() {
+                            let select = $(this);
+                            let currentValue = select.val();
+
+                            if (removedAttributes.includes(currentValue)) {
+                                select.val('');
+                            }
+                        });
+                    }
+
+                    $('.selectpicker').selectpicker('refresh');
+                    toggleRemoveButtons();
+                });
+
                 toggleRemoveButtons();
             });
-
-            toggleRemoveButtons();
-        });
-    </script>
+        </script>
     @endsection
