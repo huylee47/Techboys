@@ -55,8 +55,9 @@
                                                                         </a>
                                                                         <div class="media-body align-self-center">
                                                                             <a href="single-product-fullwidth.html">{{ $cart->product->name }}
-                                                                                {{-- {{ $cart->variant->model->name }}
-                                                                                {{ $cart->variant->color->name }} --}}
+                                                                                @if($cart->variant_id)
+                                                                                {{ $cart->attributes}}
+                                                                                @endif
                                                                             </a>
                                                                             <p data-title="Stock" class="product-stock">
                                                                                 <span>Tồn Kho :</span>
@@ -106,7 +107,7 @@
                                                             <div class="voucher">
                                                                 <label for="voucher_code">Voucher:</label>
                                                                 <input type="text" placeholder="Nhập voucher"
-                                                                    value="{{ old('voucher_code', session('voucher.code') ?? '') }}"
+                                                                    value=""
                                                                     id="voucher_code" class="input-text"
                                                                     name="voucher_code">
                                                                 <button type="submit" id="apply-voucher" class="button">Sử
@@ -211,201 +212,144 @@
                 <div class="modal-body">
                     <p>
                         Bạn đã mua quá số lượng tồn kho hiện tại.
-
                         Số lượng tồn kho hiện tại : <span id="maxStockValue"></span> sản phẩm
 
                     </p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
                 </div>
             </div>
         </div>
     </div>
     <!-- #content -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            function updateCart(cartId, quantity) {
-                let maxStock = parseInt($(".stock-quantity-" + cartId).text(), 10);
-                if (quantity > maxStock) {
-                    $("#maxStockValue").text(maxStock);
-                    $('#stockWarningModal').modal('show');
-                    $("#quantity-input-" + cartId).val(maxStock);
-                    return;
+
+@endsection
+@section('cartScripts')
+<script>
+    $(document).ready(function () {
+        let appliedVoucher = "";
+    
+        function updateCart(cartId, quantity, variantId = null, productId = null) {
+            let maxStock = parseInt($(".stock-quantity-" + cartId).text(), 10);
+            if (quantity > maxStock) {
+                $("#maxStockValue").text(maxStock);
+                $("#quantity-input-" + cartId).val(maxStock);
+                $("#stockWarningModal").modal("show");
+                return;
+            }
+    
+            let data = {
+                _token: "{{ csrf_token() }}",
+                id: cartId,
+                quantity: quantity
+            };
+    
+            if (variantId) {
+                data.variant_id = variantId;
+            } else if (productId) {
+                data.product_id = productId;
+            }
+    
+            $.ajax({
+                url: "{{ route('client.cart.update') }}",
+                method: "POST",
+                data: data,
+                success: function (response) {
+                    if (response.success) {
+                        $(".total-price-" + cartId).text(response.new_total_price);
+                        $(".subtotal-price").text(response.subtotal);
+                        $(".total-price").text(response.total);
+                        
+                        if (response.discount_amount) {
+                            $(".discount-amount").text(response.discount_amount);
+                        }
+                    } else {
+                        $("#maxStockValue").text(response.message);
+                        $("#stockWarningModal").modal("show");
+                    }
+                },
+                error: function () {
+                    $("#maxStockValue").text("Có lỗi xảy ra, vui lòng thử lại!");
+                    $("#stockWarningModal").modal("show");
                 }
-
-                $.ajax({
-                    url: "{{ route('client.cart.update') }}",
-                    method: "POST",
-                    data: {
-                        _token: "{{ csrf_token() }}",
-                        id: cartId,
-                        quantity: quantity
-                    },
-                    success: function(response) {
-                        if (response.success) {
-                            $(".total-price-" + cartId).text(response.new_total_price);
-                            $(".subtotal-price").text(response.subtotal);
-                            $(".total-price").text(response.total);
-
-                            if (response.discount_amount) {
-                                $(".discount-amount").text(response.discount_amount);
-                            }
-
-                            let voucherCode = $("#voucher_code").val();
-                            if (voucherCode) {
-                                applyVoucher(voucherCode);
-                            }
-                        } else {
-                            $("#maxStockValue").text(response.message);
-                            $('#stockWarningModal').modal('show');
-                        }
-                    },
-                    error: function() {
-                        $("#maxStockValue").text("Có lỗi xảy ra, vui lòng thử lại!");
-                        $('#stockWarningModal').modal('show');
-                    }
-                });
-            }
-
-            function applyVoucher(voucherCode) {
-                $.ajax({
-                    url: "{{ route('client.cart.applyVoucher') }}",
-                    method: "POST",
-                    data: {
-                        _token: "{{ csrf_token() }}",
-                        voucher_code: voucherCode
-                    },
-                    success: function(response) {
-                        if (response.success) {
-                            $(".subtotal-price").text(response.total_before_discount);
-                            $(".discount-amount").text(response.discount_amount);
-                            $(".total-price").text(response.total_after_discount);
-
-                            $("#voucher-error").text("");
-                            $("#voucher-success").text(response.message);
-                        } else {
-                            $("#voucher-error").text(response.message);
-                            $("#voucher-success").text("");
-
-                            $(".discount-amount").text("0");
-                            $(".total-price").text(response.total_before_discount);
-                        }
-                    },
-                    error: function(xhr) {
-                        let errorMessage = "Có lỗi xảy ra, vui lòng thử lại!";
-                        if (xhr.responseJSON && xhr.responseJSON.message) {
-                            errorMessage = xhr.responseJSON.message;
-                        }
-                        $("#voucher-error").text(errorMessage);
-                        $("#voucher-success").text("");
-                        $(".discount-amount").text("0");
-                        let subtotalText = $(".subtotal-price").text();
-                        $(".total-price").text(subtotalText);
-                    }
-                });
-            }
-
-            $(document).ready(function() {
-                $("#apply-voucher").click(function() {
-                    let voucherCode = $("#voucher_code").val().trim();
-                    if (voucherCode === "") {
-                        $("#voucher-error").text("Vui lòng nhập voucher");
-                        $("#voucher-success").text("");
-                        $(".discount-amount").text("0");
-                        let subtotalText = $(".subtotal-price").text();
-                        $(".total-price").text(subtotalText);
-                        return;
-                    }
-                    applyVoucher(voucherCode);
-                });
             });
-
-            function applyVoucher(voucherCode) {
-                $.ajax({
-                    url: "{{ route('client.cart.applyVoucher') }}",
-                    method: "POST",
-                    data: {
-                        _token: "{{ csrf_token() }}",
-                        voucher_code: voucherCode
-                    },
-                    success: function(response) {
-                        if (response.success) {
-                            $(".subtotal-price").text(response.total_before_discount);
-                            $(".discount-amount").text(response.discount_amount);
-                            $(".total-price").text(response.total_after_discount);
-
-                            $("#voucher-error").text("");
-                            $("#voucher-success").text(response.message);
-                        } else {
-                            $("#voucher-error").text(response.message);
-                            $("#voucher-success").text("");
-
-                            $(".discount-amount").text("0");
-                            $(".total-price").text(response.total_before_discount);
-                        }
-                    },
-                    error: function(xhr) {
-                        let errorMessage = "Có lỗi xảy ra, vui lòng thử lại!";
-                        if (xhr.responseJSON && xhr.responseJSON.message) {
-                            errorMessage = xhr.responseJSON.message;
-                        }
-                        $("#voucher-error").text(errorMessage);
-                        $("#voucher-success").text("");
-                        $(".discount-amount").text("0");
-                        let subtotalText = $(".subtotal-price").text();
-                        $(".total-price").text(subtotalText);
+        }
+    
+        function applyVoucher(voucherCode) {
+            $.ajax({
+                url: "{{ route('client.cart.applyVoucher') }}",
+                method: "POST",
+                data: {
+                    _token: "{{ csrf_token() }}",
+                    voucher_code: voucherCode,
+                },
+                success: function (response) {
+                    if (response.success) {
+                        $(".subtotal-price").text(response.total_before_discount);
+                        $(".discount-amount").text(response.discount_amount);
+                        $(".total-price").text(response.total_after_discount);
+    
+                        $("#voucher-error").text("");
+                        $("#voucher-success").text(response.message);
+                        appliedVoucher = voucherCode;
+                    } else {
+                        resetVoucher();
+                        $("#voucher-error").text(response.message);
                     }
-                });
-            }
-
-            $(document).ready(function() {
-                $("#apply-voucher").click(function() {
-                    let voucherCode = $("#voucher_code").val().trim();
-                    if (voucherCode === "") {
-                        $("#voucher-error").text("Vui lòng nhập voucher");
-                        $("#voucher-success").text("");
-                        $(".discount-amount").text("0");
-                        let subtotalText = $(".subtotal-price").text();
-                        $(".total-price").text(subtotalText);
-                        return;
-                    }
-                    applyVoucher(voucherCode);
-                });
+                },
+                error: function () {
+                    resetVoucher();
+                    $("#voucher-error").text("Có lỗi xảy ra, vui lòng thử lại!");
+                }
             });
-
-
-
-            $(".update-cart").on("change", function() {
-                let cartId = $(this).data("id");
-                let quantity = $(this).val();
-                updateCart(cartId, quantity);
-            });
-
-            $("#apply-voucher").on("click", function(e) {
-                e.preventDefault();
-                let voucherCode = $("#voucher_code").val();
-                applyVoucher(voucherCode);
-            });
+        }
+    
+        function resetVoucher() {
+            $(".discount-amount").text("0");
+            let subtotalText = $(".subtotal-price").text();
+            $(".total-price").text(subtotalText);
+            $("#voucher-success").text(""); // Ẩn thông báo thành công
+            appliedVoucher = "";
+        }
+    
+        $("#apply-voucher").on("click", function (e) {
+            e.preventDefault();
+            let voucherCode = $("#voucher_code").val().trim();
+            applyVoucher(voucherCode);
         });
-
-        $(document).on("click", ".remove", function(e) {
+    
+        $("#voucher_code").on("input", function () {
+            let currentVoucher = $(this).val().trim();
+            if (currentVoucher !== appliedVoucher) {
+                resetVoucher();
+            }
+        });
+    
+        $(".update-cart").on("change", function () {
+            let cartId = $(this).data("id");
+            let quantity = $(this).val();
+            let variantId = $(this).data("variant-id") || null;
+            let productId = $(this).data("product-id") || null;
+    
+            updateCart(cartId, quantity, variantId, productId);
+        });
+    
+        $(".remove").on("click", function (e) {
             e.preventDefault();
             var cartId = $(this).data("id");
             var row = $(this).closest("tr");
-
-            var removeUrl = "{{ route('client.cart.remove', ':id') }}".replace(':id', cartId);
-
+            
+            var removeUrl = "{{ route('client.cart.remove', ':id') }}".replace(":id", cartId);
+    
             $.ajax({
                 url: removeUrl,
                 method: "POST",
                 data: {
                     _token: "{{ csrf_token() }}"
                 },
-                success: function(response) {
+                success: function (response) {
                     if (response.success) {
-                        row.fadeOut(300, function() {
+                        row.fadeOut(300, function () {
                             $(this).remove();
                             if ($("tr.cart-item").length === 0) {
                                 $(".shop_table").html(
@@ -413,34 +357,22 @@
                                 );
                             }
                         });
-
                         $(".subtotal-price").text(response.subtotal);
                         $(".total-price").text(response.total);
-                        if (response.discount_amount) {
-                            $(".discount-amount").text(response.discount_amount);
-                        } else {
-                            $(".discount-amount").text("0");
-                        }
-
-                        updateCartCount();
+                        $(".discount-amount").text(response.discount_amount || "0");
                     } else {
                         alert(response.message);
                     }
                 },
-                error: function() {
+                error: function () {
                     alert("Có lỗi xảy ra, vui lòng thử lại!");
                 }
             });
         });
-
-        function updateCartCount() {
-            $.ajax({
-                url: "{{ route('client.cart.count') }}",
-                method: "GET",
-                success: function(response) {
-                    $(".count").text(response);
-                }
-            });
-        }
+    });
     </script>
+    
+    
+    
+
 @endsection
