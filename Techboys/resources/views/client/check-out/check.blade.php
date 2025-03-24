@@ -284,15 +284,12 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="emptyCartModalLabel">Cảnh báo</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+
                 </div>
                 <div class="modal-body">
                     Giỏ hàng của bạn đang trống. Vui lòng thêm sản phẩm trước khi đặt hàng.
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
                     <a href="{{ route('home') }}" class="btn btn-primary">Quay lại trang chủ</a>
                 </div>
             </div>
