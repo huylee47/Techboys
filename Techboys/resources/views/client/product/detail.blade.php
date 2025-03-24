@@ -358,6 +358,7 @@
                                                                             data-attribute="{{ $attributeName }}">
                                                                             {{ $value['value'] }}
                                                                         </div>
+
                                                                     @endforeach
                                                                 </div>
                                                             </div>
@@ -365,8 +366,8 @@
 
                                                         <!-- Hiển thị giá và tồn kho -->
                                                         <p>Số lượng tồn kho: <span
-                                                            id="stock-display">{{ $defaultVariant['stock'] }}</span>
-                                                    </p>
+                                                                id="stock-display">{{ $defaultVariant['stock'] }}</span>
+                                                        </p>
                                                         <p class="price">
                                                             <span class="woocommerce-Price-amount amount"
                                                                 id="price-display">
@@ -374,16 +375,15 @@
                                                                 đ
                                                             </span>
                                                         </p>
-
                                                     @else
-                                                        <div class="choice storage-choice active" data-value="default"
+                                                        {{-- <div class="choice storage-choice active" data-value="default"
                                                             data-price="{{ $defaultVariant['discounted_price'] }}"
                                                             data-stock="{{ $defaultVariant['stock'] }}">
                                                             Mặc định (Không có biến thể)
-                                                        </div>
-                                                        <p >Số lượng tồn kho: <span
-                                                            id="stock-display">{{ $defaultVariant['stock'] }}</span>
-                                                    </p>
+                                                        </div> --}}
+                                                        <p>Số lượng tồn kho: <span
+                                                                id="stock-display">{{ $defaultVariant['stock'] }}</span>
+                                                        </p>
                                                         <p class="price">
                                                             <span class="woocommerce-Price-amount amount"
                                                                 id="price-display">
@@ -392,23 +392,24 @@
                                                             </span>
                                                         </p>
 
-                                                    <br>
-
+                                                        <br>
                                                     @endif
                                                     <!-- .single-product-header -->
 
-                                                    <input type="hidden" name="quantity" value="1">
-                                                    <input type="hidden" name="product_id" value="{{ $product->id }}">
-                                                    <input type="hidden" name="variant_id" id="variant_id"
-                                                        value="">
                                                     <!-- .quantity -->
                                                     <div class="cart-button-container">
                                                         <input type="hidden" name="quantity" value="1">
-                                                        <input type="hidden" name="product_id" value="{{ $product->id }}">
-                                                        <input type="hidden" name="variant_id" id="variant_id" value="">
-                                                    
-                                                        <button class="single_add_to_cart_button button alt" type="submit">Thêm vào giỏ hàng</button>
-                                                        <p id="outOfStockMessage" class="text-danger small">Sản phẩm đã hết hàng</p>
+                                                        <input type="hidden" name="product_id"
+                                                            value="{{ $product->id }}">
+                                                            @if(!empty($variants) && isset($defaultVariant['id']))
+                                                            <input type="hidden" name="variant_id" id="variant-id" value="{{ $defaultVariant['id'] }}">
+                                                        @endif
+                                                        
+
+                                                        <button class="single_add_to_cart_button button alt"
+                                                            type="submit">Thêm vào giỏ hàng</button>
+                                                        <p id="outOfStockMessage" class="text-danger small">Sản phẩm đã
+                                                            hết hàng</p>
                                                     </div>
                                                     <!-- .cart -->
                                                 </div>
@@ -799,19 +800,50 @@
 
     {{-- Huy --}}
     <script>
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", function() {
     const variants = @json($formattedVariants);
     let selectedAttributes = {};
+    let selectedVariantId = @json($defaultVariant['id'] ?? null);
+
+    console.log("Mặc định :",selectedVariantId);
 
     const productPriceElement = document.getElementById("price-display");
     const stockQuantityElement = document.getElementById("stock-display");
+    const variantIdInput = document.getElementById("variant-id");
+    console.log("Mặc định input :",variantIdInput);
 
+
+
+    function updateVariantInfo() {
+        console.log("Kiểm tra biến thể...");
+        console.log("Thuộc tính đã chọn:", selectedAttributes);
+
+        let selectedVariant = variants.find(v =>
+            Object.keys(selectedAttributes).every(attr => v.attributes[attr]?.value === selectedAttributes[attr])
+        );
+
+        if (selectedVariant) {
+            console.log("Biến thể tìm thấy:", selectedVariant);
+            productPriceElement.innerText = new Intl.NumberFormat('vi-VN').format(selectedVariant.discounted_price) + " đ";
+            stockQuantityElement.innerText = selectedVariant.stock;
+
+            selectedVariantId = selectedVariant.id; // Cập nhật ID biến thể đã chọn
+            variantIdInput.value = selectedVariantId; // Cập nhật input ẩn
+            console.log("Sau khi chọn:",selectedVariantId);
+
+        } else {
+            console.warn("Không có biến thể phù hợp!");
+            productPriceElement.innerText = "Không có biến thể này!";
+            stockQuantityElement.innerText = "0";
+
+            selectedVariantId = null;
+            variantIdInput.value = "";
+        }
+    }
     function updateAvailableChoices() {
-        console.log(" Cập nhật danh sách lựa chọn...");
-
+        console.log("Cập nhật danh sách lựa chọn...");
         let firstGroup = document.querySelector(".choice-group:first-child");
         let firstAttribute = firstGroup.querySelector(".label").innerText.trim();
-
         let selectedFirstValue = selectedAttributes[firstAttribute];
 
         if (!selectedFirstValue) return;
@@ -820,7 +852,7 @@ document.addEventListener("DOMContentLoaded", function () {
             v.attributes[firstAttribute]?.value === selectedFirstValue
         );
 
-        console.log(" Biến thể hợp lệ sau khi lọc:", filteredVariants);
+        console.log("Biến thể hợp lệ sau khi lọc:", filteredVariants);
 
         let availableValues = {};
         filteredVariants.forEach(variant => {
@@ -867,27 +899,7 @@ document.addEventListener("DOMContentLoaded", function () {
         updateVariantInfo();
     }
 
-    function updateVariantInfo() {
-        console.log("Kiểm tra biến thể...");
-        console.log("Thuộc tính đã chọn:", selectedAttributes);
-
-        let selectedVariant = variants.find(v =>
-            Object.keys(selectedAttributes).every(attr => v.attributes[attr]?.value === selectedAttributes[attr])
-        );
-
-        if (selectedVariant) {
-            console.log(" Biến thể tìm thấy:", selectedVariant);
-            productPriceElement.innerText = new Intl.NumberFormat('vi-VN').format(selectedVariant.discounted_price) + " đ";
-            stockQuantityElement.innerText = selectedVariant.stock;
-        } else {
-            console.warn("Không có biến thể phù hợp!");
-            productPriceElement.innerText = "Không có biến thể này!";
-            stockQuantityElement.innerText = "0";
-        }
-    }
-
     function initializeDefaultSelection() {
-        // **Chọn phần tử đầu tiên của nhóm đầu tiên**
         let firstGroup = document.querySelector(".choice-group:first-child");
         if (firstGroup) {
             let firstChoice = firstGroup.querySelector(".choice");
@@ -895,7 +907,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 let attribute = firstGroup.querySelector(".label").innerText.trim();
                 selectedAttributes[attribute] = firstChoice.getAttribute("data-value");
 
-                // Loại bỏ class 'selected' khỏi các lựa chọn khác
                 firstGroup.querySelectorAll(".choice").forEach(c => c.classList.remove("selected"));
                 firstChoice.classList.add("selected");
             }
@@ -905,7 +916,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     document.querySelectorAll(".choice").forEach(choice => {
-        choice.addEventListener("click", function () {
+        choice.addEventListener("click", function() {
             let group = this.closest(".choice-group");
             let attribute = group.querySelector(".label").innerText.trim();
 
@@ -922,7 +933,7 @@ document.addEventListener("DOMContentLoaded", function () {
     updateVariantInfo();
 });
 
-</script>
+    </script>
 
 
 @endsection
