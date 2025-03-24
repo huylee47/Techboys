@@ -3,6 +3,7 @@
 namespace App\Service;
 
 use App\Mail\OrderDetailMail;
+use App\Models\AttributesValue;
 use App\Models\Bill;
 use App\Models\BillDetails;
 use App\Models\Cart;
@@ -28,7 +29,7 @@ class CheckoutService
     public function getCheckout()
     {
         $cartItems = $this->cartService->getCartItems();
-
+    
         if ($cartItems instanceof \Illuminate\Http\JsonResponse) {
             return [
                 'cartItems' => collect([]),
@@ -38,9 +39,30 @@ class CheckoutService
                 'voucher' => null,
             ];
         }
-
+    
+        // Lấy danh sách tất cả các giá trị thuộc tính để tránh truy vấn nhiều lần
+        $attributeValues = AttributesValue::all()->keyBy('id');
+    
+        foreach ($cartItems as $cart) {
+            // Nếu sản phẩm có biến thể, lấy thông tin thuộc tính
+            if ($cart->variant_id) {
+                $attributeJson = ProductVariant::where('id', $cart->variant_id)->value('attribute_values');
+                $attributeArray = json_decode($attributeJson, true) ?? [];
+    
+                // Chỉ lấy giá trị thuộc tính, bỏ qua tên thuộc tính
+                $attributeValuesList = collect($attributeArray)->map(function ($attrValueId) use ($attributeValues) {
+                    return $attributeValues[$attrValueId]->value ?? 'Không xác định';
+                })->toArray();
+    
+                // Tạo chuỗi chỉ chứa giá trị thuộc tính
+                $cart->attributes = implode(' ', $attributeValuesList);
+            } else {
+                $cart->attributes = '';
+            }
+        }
+    
         $totals = $this->cartPriceService->calculateCartTotals($cartItems);
-
+    
         return [
             'cartItems' => $cartItems,
             'subtotal' => $totals['subtotal'],
@@ -49,6 +71,7 @@ class CheckoutService
             'voucher' => $totals['voucher'],
         ];
     }
+    
 
     public function storeTemporaryBill($request)
     {
@@ -159,7 +182,7 @@ class CheckoutService
                 $variant = ProductVariant::find($cartItem->variant_id);
                 BillDetails::create([
                     'bill_id' => $bill->id,
-                    'variant_id' => $cartItem->variant_id,
+                    'variant_id' => $cartItem->variant_id ?? null,
                     'product_id' => $variant->product_id,
                     'quantity' => $cartItem->quantity,
                     'price' => $variant->price
