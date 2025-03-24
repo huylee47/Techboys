@@ -9,7 +9,7 @@ class Cart extends Model
 {
     use HasFactory;
     protected $table = 'carts';
-    protected $fillable = ['user_id','cart_id','variant_id', 'quantity'];
+    protected $fillable = ['user_id','cart_id','variant_id','product_id', 'quantity'];
 
     public function user(){
         return $this->belongsTo(User::class);
@@ -20,4 +20,18 @@ class Cart extends Model
     public function variant(){
         return $this->belongsTo(ProductVariant::class);
     }
+    public function product(){
+        return $this->belongsTo(Product::class);
+    }
+    public function getStockAttribute()
+{
+    return $this->variant ? $this->variant->stock : $this->product->base_stock;
+}
+public function getDiscountedPriceAttribute()
+{
+    return $this->variant ? $this->variant->discounted_price : $this->product->discounted_price;
+}
+
+
+
 }

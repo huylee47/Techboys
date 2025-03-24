@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('colors', function (Blueprint $table) {
+        Schema::create('attributes_values', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('color_hex');
+            $table->foreignId('attributes_id')->constrained()->onDelete('cascade');
+            $table->string('value');
             $table->timestamps();
         });
     }
@@ -24,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('colors');
+        Schema::dropIfExists('attributes_values');
     }
 };

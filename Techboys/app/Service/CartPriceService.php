@@ -26,11 +26,11 @@ class CartPriceService
         $subtotal = 0;
     
         foreach ($cartItems as $cart) {
-            $promotion = Promotion::where('product_id', $cart->variant->product->id)->first();
+            $promotion = Promotion::where('product_id', $cart->product_id)->first();
             if ($promotion && now()->lt(Carbon::parse($promotion->end_date))) {
-                $cart->discounted_price = $cart->variant->price * (1 - $promotion->discount_percent / 100);
+                $cart->discounted_price = $cart->discounted_price  * (1 - $promotion->discount_percent / 100);
             } else {
-                $cart->discounted_price = $cart->variant->price;
+                $cart->discounted_price ;
             }
     
             $subtotal += $cart->discounted_price * $cart->quantity;

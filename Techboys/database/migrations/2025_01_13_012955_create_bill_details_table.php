@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('bill_id');
             $table->foreignId('product_id');
-            $table->foreignId('variant_id');
+            $table->foreignId('variant_id')->nullable();
             $table->integer('quantity');
             $table->decimal('price', 10, 2);
             $table->timestamps();
