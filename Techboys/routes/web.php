@@ -155,7 +155,7 @@ Route::middleware(['auth', 'auth.admin'])->group(function () {
             Route::get('/restore/{id}', [BillController::class, 'restore'])->name('admin.bill.restore');
             Route::get('/download.invoice/{id}', [BillController::class, 'download'])->name('admin.bill.download');
             Route::get('/bill-detail/{id}/show', [BillDetailsController::class, 'show'])->name('admin.bill.show');
-            Route::post('invoice/{id}',[BillController::class,'invoiceBill'])->name('admin.bill.invoice');
+            Route::get('invoice/{id}',[BillController::class,'invoiceBill'])->name('admin.bill.invoice');
             Route::post('cancel/{id}',[BillController::class,'cancelBill'])->name('admin.bill.cancel');
         });
 
