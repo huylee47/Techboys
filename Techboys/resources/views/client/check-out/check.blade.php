@@ -180,7 +180,10 @@
                                                             <tr class="cart_item">
                                                                 <td class="product-name">
                                                                     <strong class="product-quantity">{{ $item->quantity }}
-                                                                        x </strong> {{ $item->product->name }}
+                                                                        x </strong> {{ $item->product->name }} 
+                                                                        @if($item->variant_id)
+                                                                        {{ $item->attributes}}
+                                                                        @endif
                                                                     <input type="hidden" name="variant_id"
                                                                         value="{{ $item->variant_id }}">
                                                                     <input type="hidden" name="quantity"
