@@ -208,30 +208,35 @@
         {
             "user_id": 1,
             "cart_id": null,
+            "product_id": 1,
             "variant_id": 2,
             "quantity": 3
         },
         {
             "user_id": 2,
             "cart_id": null,
+            "product_id": 1,
             "variant_id": 3,
             "quantity": 2
         },
         {
             "user_id": 3,
             "cart_id": null,
+            "product_id": 1,
             "variant_id": 1,
             "quantity": 1
         },
         {
             "user_id": 4,
             "cart_id": null,
+            "product_id": 1,
             "variant_id": 2,
             "quantity": 5
         },
         {
             "user_id": 1,
             "cart_id": null,
+            "product_id": 1,
             "variant_id": 4,
             "quantity": 3
         }
