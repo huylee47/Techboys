@@ -108,21 +108,21 @@ class BillController extends Controller
             DB::beginTransaction();
     
             // Lấy danh sách sản phẩm trong hóa đơn
-            $billDetails = BillDetails::where('bill_id', $id)->get();
+            // $billDetails = BillDetails::where('bill_id', $id)->get();
     
-            foreach ($billDetails as $billDetail) {
-                if ($billDetail->variant_id) {
-                    $variant = ProductVariant::find($billDetail->variant_id);
-                    if ($variant) {
-                        $variant->increment('stock', $billDetail->quantity);
-                    }
-                } else {
-                    $product = Product::find($billDetail->product_id);
-                    if ($product) {
-                        $product->increment('base_stock', $billDetail->quantity);
-                    }
-                }
-            }
+            // foreach ($billDetails as $billDetail) {
+            //     if ($billDetail->variant_id) {
+            //         $variant = ProductVariant::find($billDetail->variant_id);
+            //         if ($variant) {
+            //             $variant->increment('stock', $billDetail->quantity);
+            //         }
+            //     } else {
+            //         $product = Product::find($billDetail->product_id);
+            //         if ($product) {
+            //             $product->increment('base_stock', $billDetail->quantity);
+            //         }
+            //     }
+            // }
     
             // Cập nhật trạng thái hóa đơn thành "Đã huỷ" (giả sử status_id = 0 là "Đã huỷ")
             $bill->update([
