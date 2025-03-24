@@ -14,9 +14,11 @@ class BillDetailsController extends Controller
     public function show($id)
     {
         $bill = Bill::findOrFail($id);
-
         $billDetails = BillDetails::where('bill_id', $bill->id)->get();
         $productPromotions = Promotion::get();
+        
+        
+        
         $total = $billDetails->sum(function ($detail) {
             return $detail->quantity * $detail->price;
         });
@@ -24,9 +26,11 @@ class BillDetailsController extends Controller
         // return response()->json([
         //     'bill' => $bill,
         //     'billDetails' => $billDetails,
-        //     'total' => $bill->total,
+        //     'total' => $total,
         //     'payment_status' => $bill->payment_status,
+        //     'images' => $images,
         // ]);
+        
         return view('admin.bill.details', compact('billDetails', 'bill','productPromotions','total'));
     }
 }
