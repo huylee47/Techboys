@@ -118,14 +118,14 @@
         {
             "bill_id": 2,
             "product_id": 4,
-            "variant_id": 8,
+            "variant_id": 7,
             "quantity": 1,
             "price": 650000.0
         },
         {
             "bill_id": 3,
             "product_id": 5,
-            "variant_id": 10,
+            "variant_id": 8,
             "quantity": 5,
             "price": 100000.0
         }
@@ -1183,14 +1183,14 @@
             "brand_id": 1,
             "category_id": 1,
             "purchases": 130,
-            "name": "iPhone 12 Mini",
-            "img": "iphone-12-mini.jpg",
-            "slug": "iphone-12-mini",
+            "name": "iPhone 19 Mini",
+            "img": "iphone-19-mini.jpg",
+            "slug": "iphone-19-mini",
             "base_price": 0,
             "base_stock":0,
             "is_featured": 1,
-            "rate_average": 4.4,
-            "description": "Điện thoại nhỏ gọn, thiết kế hiện đại của Apple."
+            "rate_average": 4.6,
+            "description": "Điện thoại nhỏ gọn, thiết kế hiện đại của Apple 2077."
         },
         {
             "brand_id": 4,
