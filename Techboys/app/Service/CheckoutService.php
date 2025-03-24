@@ -130,42 +130,18 @@ class CheckoutService
             foreach ($cartItems as $cartItem) {
                 if ($cartItem->variant_id) {
                     $variant = ProductVariant::find($cartItem->variant_id);
-                    if (!$variant) {
+                    if (!$variant || $variant->stock < $cartItem->quantity) {
                         return response()->json([
                             'success' => false,
-                            'message' => 'Không tìm thấy biến thể sản phẩm!'
-                        ], 400);
-                    }
-                    if ($variant->stock == 0) {
-                        return response()->json([
-                            'success' => false,
-                            'message' => 'Sản phẩm "' . $variant->name . '" đã hết hàng!'
-                        ], 400);
-                    }
-                    if ($cartItem->quantity > $variant->stock) {
-                        return response()->json([
-                            'success' => false,
-                            'message' => 'Số lượng sản phẩm "' . $variant->name . '" vượt quá số lượng tồn kho!'
+                            'message' => 'Sản phẩm "' . ($variant->name ?? 'không xác định') . '" không đủ hàng!'
                         ], 400);
                     }
                 } else {
                     $product = Product::find($cartItem->product_id);
-                    if (!$product) {
+                    if (!$product || $product->base_stock < $cartItem->quantity) {
                         return response()->json([
                             'success' => false,
-                            'message' => 'Không tìm thấy sản phẩm!'
-                        ], 400);
-                    }
-                    if ($product->base_stock == 0) {
-                        return response()->json([
-                            'success' => false,
-                            'message' => 'Sản phẩm "' . $product->name . '" đã hết hàng!'
-                        ], 400);
-                    }
-                    if ($cartItem->quantity > $product->base_stock) {
-                        return response()->json([
-                            'success' => false,
-                            'message' => 'Số lượng sản phẩm "' . $product->name . '" vượt quá số lượng tồn kho!'
+                            'message' => 'Sản phẩm "' . ($product->name ?? 'không xác định') . '" không đủ hàng!'
                         ], 400);
                     }
                 }
@@ -203,22 +179,23 @@ class CheckoutService
                     $variant = ProductVariant::find($cartItem->variant_id);
                     BillDetails::create([
                         'bill_id' => $bill->id,
-                        'variant_id' => $cartItem->variant_id,
-                        'product_id' => $variant->product_id,
+                        'variant_id' => $cartItem->variant_id, // Chỉ lưu variant_id
                         'quantity' => $cartItem->quantity,
                         'price' => $variant->price
                     ]);
+            
                 } else {
                     $product = Product::find($cartItem->product_id);
                     BillDetails::create([
                         'bill_id' => $bill->id,
-                        'variant_id' => null,
                         'product_id' => $cartItem->product_id,
                         'quantity' => $cartItem->quantity,
                         'price' => $product->base_price
                     ]);
+            
                 }
             }
+            
     
             if ($voucher) {
                 $voucherModel = Voucher::where('code', $voucher->code)->first();
@@ -226,22 +203,6 @@ class CheckoutService
                     $voucherModel->decrement('quantity');
                 }
                 session()->forget('voucher');
-            }
-    
-            $billDetails = BillDetails::where('bill_id', $bill->id)->get();
-    
-            foreach ($billDetails as $billDetail) {
-                if ($billDetail->variant_id) {
-                    $variant = ProductVariant::find($billDetail->variant_id);
-                    if ($variant) {
-                        $variant->decrement('stock', $billDetail->quantity);
-                    }
-                } else {
-                    $product = Product::find($billDetail->product_id);
-                    if ($product) {
-                        $product->decrement('base_stock', $billDetail->quantity);
-                    }
-                }
             }
     
             DB::commit();
@@ -270,6 +231,7 @@ class CheckoutService
             ], 500);
         }
     }
+    
     
     
 
