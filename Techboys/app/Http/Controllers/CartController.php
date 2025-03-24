@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AttributesValue;
 use App\Models\Cart;
+use App\Models\ProductVariant;
 use App\Models\Promotion;
 use App\Service\CartService;
 use App\Service\CartPriceService;
@@ -38,47 +40,58 @@ class CartController extends Controller
                 'voucher' => null
             ]);
         }
-    // dd( $cartItems);
+    
+        // Lấy danh sách tất cả các giá trị thuộc tính để tránh truy vấn nhiều lần
+        $attributeValues = AttributesValue::all()->keyBy('id');
+    
         foreach ($cartItems as $cart) {
             $promotion = Promotion::where('product_id', $cart->product_id)->first();
             if ($promotion && now()->lt(Carbon::parse($promotion->end_date))) {
-                if($cart->variant_id){
-                $cart->discounted_price = $cart->discounted_price  * (1 - $promotion->discount_percent / 100);
-                }
-                else{
+                if ($cart->variant_id) {
+                    $cart->discounted_price = $cart->discounted_price * (1 - $promotion->discount_percent / 100);
+                } else {
                     $cart->discounted_price = $cart->product->price * (1 - $promotion->discount_percent / 100);
                 }
             } else {
-                    $cart->discounted_price = $cart->product->price;
-                }
+                $cart->discounted_price = $cart->product->price;
+            }
+    
+            // Nếu sản phẩm có biến thể, lấy thông tin thuộc tính
+            if ($cart->variant_id) {
+                $attributeJson = ProductVariant::where('id', $cart->variant_id)->value('attribute_values');
+                $attributeArray = json_decode($attributeJson, true) ?? [];
+    
+                // Chỉ lấy giá trị thuộc tính, bỏ qua tên thuộc tính
+                $attributeValuesList = collect($attributeArray)->map(function ($attrValueId) use ($attributeValues) {
+                    return $attributeValues[$attrValueId]->value ?? 'Không xác định';
+                })->toArray();
+    
+                // Tạo chuỗi chỉ chứa giá trị thuộc tính
+                $cart->attributes = implode(' ', $attributeValuesList);
+            } else {
+                $cart->attributes = '';
+            }
         }
     
         $totals = $this->cartPriceService->calculateCartTotals($cartItems);
-        // dd($totals);
-
     
-        // return response()->json([
-        //     'cartItems' => $cartItems,
-        //     'subtotal' => $totals['subtotal'],
-        //     'total' => $totals['total'],
-        //     'discountAmount' => $totals['discountAmount'],
-        //     'voucher' => $totals['voucher'],
-        // ]);
         return view('client.cart.cart', [
             'cartItems' => $cartItems,
             'subtotal' => $totals['subtotal'],
             'total' => $totals['total'],
             'discountAmount' => $totals['discountAmount'],
             'voucher' => $totals['voucher'],
-
         ]);
     }
+    
+    
     
     
     public function addToCart(Request $request)
     {
         // dd($request->all());
         $result = $this->cartService->addToCart($request);
+        // return response()->json($result);
         return redirect()->route('client.cart.index')->with('success', 'Thêm sản phẩm thành công');
     }
     
