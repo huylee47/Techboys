@@ -107,13 +107,13 @@ class ProductService{
             }
     
             DB::commit();
-            return response()->json([
-                'success' => 'Thêm sản phẩm thành công.',
-                'product' => $product,
-                'variants' => ProductVariant::where('product_id', $product->id)->get(),
-            ]);
+            // return response()->json([
+            //     'success' => 'Thêm sản phẩm thành công.',
+            //     'product' => $product,
+            //     'variants' => ProductVariant::where('product_id', $product->id)->get(),
+            // ]);
     
-            // return redirect()->route('admin.product.index')->with('success', 'Thêm sản phẩm thành công');
+            return redirect()->route('admin.product.index')->with('success', 'Thêm sản phẩm thành công');
     
         } catch (\Exception $e) {
             DB::rollBack();
@@ -281,14 +281,14 @@ class ProductService{
         else{
             ProductVariant::where('product_id', $id)->delete();
         }
-        return response()->json([
-            'success' => 'Cập nhật biến thể thành công.',
-            'product' => $product,
-            'variants' => ProductVariant::where('product_id', $id)->get() ?? "Xoá thất bại",
-        ]);
+        // return response()->json([
+        //     'success' => 'Cập nhật biến thể thành công.',
+        //     'product' => $product,
+        //     'variants' => ProductVariant::where('product_id', $id)->get() ?? "Xoá thất bại",
+        // ]);
 
     
-        // return redirect()->route('admin.product.index')->with('success', 'Sửa sản phẩm thành công');
+        return redirect()->route('admin.product.index')->with('success', 'Sửa sản phẩm thành công');
     }
     public function destroyProduct($request) {
         $ids = is_array($request->id) ? $request->id : [$request->id];
@@ -387,8 +387,8 @@ public function getProductBySlug($slug) {
             'discounted_price' => $product->discounted_price,
             'stock' => $product->base_stock ?? 0,
         ];
-
-        return view('client.product.detail', compact('product', 'comment', 'images', 'formattedVariants', 'defaultVariant', 'relatedProducts', 'groupedAttributes'));
+// dd($variants);
+        return view('client.product.detail', compact('product', 'comment', 'images', 'formattedVariants', 'defaultVariant', 'relatedProducts', 'groupedAttributes','variants'));
     }
 }
 
