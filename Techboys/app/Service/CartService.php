@@ -4,6 +4,7 @@ namespace App\Service;
 
 use App\Models\Cart;
 use App\Models\Promotion;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 
@@ -94,8 +95,8 @@ class CartService{
     
         $cart->quantity = $request->quantity;
         $cart->save();
-        $promotion = Promotion::where('product_id', $cart->variant->product->id)->first();
-        if ($promotion) {
+        $promotion = Promotion::where('product_id', $cart->product_id)->first();
+        if ($promotion && now()->lt(Carbon::parse($promotion->end_date))) {
             $totalPrice = $cart->discounted_price * $cart->quantity;
         } else {
             $totalPrice = $cart->discounted_price  * $cart->quantity;
