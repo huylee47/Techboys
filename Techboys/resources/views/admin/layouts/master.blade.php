@@ -153,6 +153,7 @@
 
     <script src="{{ url('') }}/admin/assets/js/main.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta2/dist/js/bootstrap-select.min.js"></script>
     <script src="{{ url('') }}/admin/assets/vendors/summernote/summernote-lite.min.js"></script>
     <script>
