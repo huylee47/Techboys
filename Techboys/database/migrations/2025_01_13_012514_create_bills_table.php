@@ -26,6 +26,7 @@ return new class extends Migration
             $table->tinyInteger('payment_method');
             $table->tinyInteger('payment_status')->default(0);
             $table->tinyInteger('status_id')->default(1);
+            $table->text('note')->nullable();
             $table->timestamps();
         }); 
     }

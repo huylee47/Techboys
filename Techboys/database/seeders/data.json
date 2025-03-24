@@ -26,7 +26,7 @@
             "user_id": 1,
             "full_name": "Nguyễn Văn A",
             "phone": "0901234567",
-            "total": 1200000.0,
+            "total": 25707000,
             "address": "123 Đường ABC, TP.HCM",
             "email": "nguyenvana@gmail.com",
             "province_id": 1,
@@ -40,7 +40,7 @@
             "user_id": 2,
             "full_name": "Lê Thị B",
             "phone": "0907654321",
-            "total": 1500000.0,
+            "total": 20291500,
             "address": "456 Đường XYZ, TP.HN",
             "email": "lethib@gmail.com",
             "province_id": 1,
@@ -54,7 +54,7 @@
             "user_id": 3,
             "full_name": "Trần Văn C",
             "phone": "0912345678",
-            "total": 800000.0,
+            "total": 	504500000,
             "address": "789 Đường LMN, TP.ĐN",
             "email": "tranvanc@gmail.com",
             "province_id": 1,
@@ -63,34 +63,6 @@
             "payment_method": 1,
             "payment_status": 1,
             "status_id": 3
-        },
-        {
-            "user_id": 4,
-            "full_name": "Phạm Thị D",
-            "phone": "0901122334",
-            "total": 2000000.0,
-            "address": "101 Đường PQR, TP.CN",
-            "email": "phamthid@gmail.com",
-            "province_id": 1,
-            "district_id": 5,
-            "ward_id": 6,
-            "payment_method": 2,
-            "payment_status": 0,
-            "status_id": 1
-        },
-        {
-            "user_id": 5,
-            "full_name": "Vũ Ngọc E",
-            "phone": "0911122334",
-            "total": 950000.0,
-            "address": "112 Đường STU, TP.HCM",
-            "email": "vungoce@gmail.com",
-            "province_id": 1,
-            "district_id": 7,
-            "ward_id": 7,
-            "payment_status": 2,
-            "payment_method": 0,
-            "status_id": 2
         }
     ],
     "bill_details": [
@@ -99,35 +71,35 @@
             "product_id": 1,
             "variant_id": 2,
             "quantity": 2,
-            "price": 600000.0
+            "price": 8813000
         },
         {
             "bill_id": 1,
             "product_id": 2,
             "variant_id": 4,
             "quantity": 1,
-            "price": 300000.0
+            "price": 9081000
         },
         {
             "bill_id": 2,
             "product_id": 3,
             "variant_id": 6,
-            "quantity": 3,
-            "price": 450000.0
+            "quantity": 1,
+            "price": 10701500
         },
         {
             "bill_id": 2,
             "product_id": 4,
-            "variant_id": 8,
+            "variant_id": 7,
             "quantity": 1,
-            "price": 650000.0
+            "price": 10090000
         },
         {
             "bill_id": 3,
             "product_id": 5,
-            "variant_id": 10,
+            "variant_id": 8,
             "quantity": 5,
-            "price": 100000.0
+            "price": 10090000
         }
     ],
     "blogs": [
@@ -1183,14 +1155,14 @@
             "brand_id": 1,
             "category_id": 1,
             "purchases": 130,
-            "name": "iPhone 12 Mini",
-            "img": "iphone-12-mini.jpg",
-            "slug": "iphone-12-mini",
+            "name": "iPhone 19 Mini",
+            "img": "iphone-19-mini.jpg",
+            "slug": "iphone-19-mini",
             "base_price": 0,
             "base_stock":0,
             "is_featured": 1,
-            "rate_average": 4.4,
-            "description": "Điện thoại nhỏ gọn, thiết kế hiện đại của Apple."
+            "rate_average": 4.6,
+            "description": "Điện thoại nhỏ gọn, thiết kế hiện đại của Apple 2077."
         },
         {
             "brand_id": 4,
