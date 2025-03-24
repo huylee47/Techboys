@@ -52,8 +52,6 @@ class CartController extends Controller
                 } else {
                     $cart->discounted_price = $cart->product->price * (1 - $promotion->discount_percent / 100);
                 }
-            } else {
-                $cart->discounted_price = $cart->product->price;
             }
     
             // Nếu sản phẩm có biến thể, lấy thông tin thuộc tính
@@ -75,6 +73,14 @@ class CartController extends Controller
     
         $totals = $this->cartPriceService->calculateCartTotals($cartItems);
     
+        // return response()->json([
+        //     'cartItems' => $cartItems,
+        //     'subtotal' => $totals['subtotal'],
+        //     'total' => $totals['total'],
+        //     'discountAmount' => $totals['discountAmount'],
+        //     'voucher' => $totals['voucher'],
+        // ]);
+        // dd($cartItems);
         return view('client.cart.cart', [
             'cartItems' => $cartItems,
             'subtotal' => $totals['subtotal'],
