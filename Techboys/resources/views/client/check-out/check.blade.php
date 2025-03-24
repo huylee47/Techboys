@@ -250,10 +250,9 @@
                                                         </li>
                                                     </ul>
                                                     <div class="form-row place-order">
-                                                        <button type="submit"class="button wc-forward text-center">Xác
-                                                            nhận đặt hàng</button>
-                                                        {{-- <a href="" ></a> --}}
+                                                        <button type="submit" class="btn btn-primary btn-block">Xác nhận đặt hàng</button>
                                                     </div>
+                                                    
                                                 </div>
                                                 <!-- /.woocommerce-checkout-payment -->
                                             </div>
