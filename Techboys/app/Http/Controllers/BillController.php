@@ -92,7 +92,7 @@ class BillController extends Controller
     }
     
     
-    public function cancelBill($request,$id) {
+    public function cancelBill(Request $request,$id) {
         $bill = Bill::find($id);
     
         if (!$bill) {
@@ -127,12 +127,12 @@ class BillController extends Controller
             // Cập nhật trạng thái hóa đơn thành "Đã huỷ" (giả sử status_id = 0 là "Đã huỷ")
             $bill->update([
                 'status_id' => 0,
-                'note = ' . $request->note
+                'note' => $request->note
             ]);
     
             DB::commit();
     
-            return redirect()->route('admin.bill.index')->with('success', 'Hoá đơn đã được huỷ và hàng đã hoàn lại kho!');
+            return redirect()->route('admin.bill.index')->with('success', 'Hoá đơn đã được huỷ thành công!');
         } catch (\Exception $e) {
             DB::rollBack();
             return redirect()->route('admin.bill.index')->with('error', 'Đã xảy ra lỗi khi huỷ hoá đơn!');
