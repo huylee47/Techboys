@@ -143,8 +143,7 @@
                                             <td><img src="{{ url('') }}/admin/assets/images/product/{{ $billDetail->product->img }}"
                                                     alt="{{ $billDetail->product->img }}" class="img-fluid"
                                                     style="max-width: 100px; height: auto;">
-                                                {{ $billDetail->product->name }} {{ $billDetail->variant->color->name }}
-                                                {{ $billDetail->variant->model->name }}</td>
+                                                {{ $billDetail->product->name }}</td>
                                             <td>{{ $billDetail->quantity }}</td>
                                             @php
                                                 $isPromotionActive = $productPromotions->contains(function (
