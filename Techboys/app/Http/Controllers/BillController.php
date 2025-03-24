@@ -92,7 +92,7 @@ class BillController extends Controller
     }
     
     
-    public function cancelBill($id) {
+    public function cancelBill($request,$id) {
         $bill = Bill::find($id);
     
         if (!$bill) {
@@ -125,7 +125,10 @@ class BillController extends Controller
             }
     
             // Cập nhật trạng thái hóa đơn thành "Đã huỷ" (giả sử status_id = 0 là "Đã huỷ")
-            $bill->update(['status_id' => 0]);
+            $bill->update([
+                'status_id' => 0,
+                'note = ' . $request->note
+            ]);
     
             DB::commit();
     
