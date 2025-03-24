@@ -20,8 +20,8 @@
                             <div class="card-header">
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div>
-                                        <h4 class="card-title">Chi Tiết Hóa Đơn </h4>
-                                        <span> Trạng thái đơn hàng :</span>
+                                        <h4 class="card-title">Chi Tiết Hóa Đơn</h4>
+                                        <span>Trạng thái đơn hàng:</span>
                                         @if ($bill->status_id == 1)
                                             <span class="badge bg-warning">Chờ xử lý đơn hàng</span>
                                         @elseif ($bill->status_id == 2)
@@ -46,38 +46,24 @@
                                             <span class="badge bg-warning">Chưa thanh toán</span>
                                         @endif
                                         @if ($bill->total < $total)
-                                            <span class="badge bg-success">Áp dụng voucher</span>
+                                            <span class="badge bg-success">Áp dụng voucher/Khuyến mại</span>
                                         @endif
-                                        {{-- {{$productPromotions}} --}}
                                     </div>
 
                                     <div class="ms-auto">
                                         <a class="btn btn-primary" href="{{ route('admin.bill.index') }}">Quay lại</a>
 
                                         @if ($bill->status_id == 1)
-                                            <a href="{{ route('admin.bill.invoice', $bill->id) }}"
-                                                class="btn btn-success">Xuất đơn</a>
+                                            <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exportModal">Xuất đơn</button>
                                             @if ($bill->payment_status != 1)
-                                                <a href="{{ route('admin.bill.cancel', $bill->id) }}"
-                                                    class="btn btn-danger">Huỷ đơn</a>
+                                                <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#cancelModal">Huỷ đơn</button>
                                             @endif
                                         @endif
                                     </div>
                                 </div>
-
-
                             </div>
-                            <div class="card-body">
-                                @if ($errors->any())
-                                    <div class="alert alert-danger">
-                                        <ul>
-                                            @foreach ($errors->all() as $error)
-                                                <li>{{ $error }}</li>
-                                            @endforeach
-                                        </ul>
-                                    </div>
-                                @endif
 
+                            <div class="card-body">
                                 {{-- Thông tin hóa đơn --}}
                                 <div class="row">
                                     @if (!empty($bill->order_id))
@@ -93,7 +79,6 @@
                                                 value="{{ $bill->phone }}" readonly>
                                         </div>
                                     @endif
-
 
                                     <div class="col-md-4 mb-3">
                                         <label for="full_name">Tên khách hàng</label>
@@ -120,8 +105,6 @@
                                         <input type="text" class="form-control" id="total"
                                             value="{{ number_format($bill->total, 0, ',', '.') }} đ" readonly>
                                     </div>
-
-
                                 </div>
 
                                 <h5 class="mt-4">Chi Tiết Hoá đơn</h5>
@@ -130,51 +113,103 @@
                                         <tr>
                                             <th>Tên Sản Phẩm</th>
                                             <th>Số Lượng</th>
-                                            <th>đơn giá</th>
-                                            <th>Tổng tiền sản phẩm</th>
-                                            <th>Khuyến mại (Promotions)</th>
+                                            <th>Đơn giá</th>
+                                            <th>Tổng tiền</th>
+                                            <th>Khuyến mại</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                        <tr>
-                                            @foreach ($billDetails as $billDetail)
-                                        <tr>
-                                            <td><img src="{{ url('') }}/admin/assets/images/product/{{ $billDetail->product->img }}"
-                                                    alt="{{ $billDetail->product->img }}" class="img-fluid"
-                                                    style="max-width: 100px; height: auto;">
-                                                {{ $billDetail->product->name }}</td>
-                                            <td>{{ $billDetail->quantity }}</td>
+                                        @foreach ($billDetails as $billDetail)
                                             @php
-                                                $isPromotionActive = $productPromotions->contains(function (
-                                                    $promotion,
-                                                ) use ($billDetail) {
+                                                $isPromotionActive = $productPromotions->contains(function ($promotion) use ($billDetail) {
                                                     return $promotion->product_id == $billDetail->product->id &&
                                                         $billDetail->created_at <= $promotion->end_date;
                                                 });
                                             @endphp
-                                            <td>{{ number_format($billDetail->price, 2) }} đ</td>
-                                            <td>{{ number_format($billDetail->price * $billDetail->quantity) }}</td>
-
-                                            <td>
-
-
-                                                {{ $isPromotionActive ? 'Có' : 'Không' }}
-                                            </td>
-
-                                        </tr>
+                                            <tr>
+                                                <td>
+                                                    <img src="{{ url('') }}/admin/assets/images/product/{{ $billDetail->product->img }}"
+                                                        alt="{{ $billDetail->product->img }}" class="img-fluid"
+                                                        style="max-width: 100px; height: auto;">
+                                                    {{ $billDetail->product->name }} {{ $billDetail->attributes }}
+                                                </td>
+                                                <td>{{ $billDetail->quantity }}</td>
+                                                <td>{{ number_format($billDetail->price) }} đ</td>
+                                                <td>{{ number_format($billDetail->price * $billDetail->quantity) }} đ</td>
+                                                <td>{{ $isPromotionActive ? 'Có' : 'Không' }}</td>
+                                            </tr>
                                         @endforeach
-                                        </tr>
-
-
-
-                                        </tr>
                                     </tbody>
                                 </table>
-
                             </div>
                         </div>
                     </div>
             </section>
         </div>
-    @endsection
+    </div>
+
+    {{-- Modal Xác Nhận Huỷ Đơn --}}
+    <div class="modal fade" id="cancelModal" tabindex="-1" aria-labelledby="cancelModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="cancelModalLabel">Xác Nhận Huỷ Đơn</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Bạn có chắc chắn muốn huỷ đơn hàng này không?</p>
+                    <form id="cancelForm" action="{{ route('admin.bill.cancel', $bill->id) }}" method="POST">
+                        @csrf
+                        <div class="mb-3">
+                            <label for="cancelNote" class="form-label">Ghi chú huỷ đơn <span class="text-danger">*</span></label>
+                            <textarea class="form-control" id="cancelNote" name="cancel_note" rows="3" required minlength="15" placeholder="Nhập lý do huỷ đơn..."></textarea>
+                            <div class="invalid-feedback">Ghi chú phải có ít nhất 15 ký tự.</div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                    <button type="submit" class="btn btn-danger" id="confirmCancel" disabled>Xác nhận huỷ</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{-- Modal Xác Nhận Xuất Đơn --}}
+    <div class="modal fade" id="exportModal" tabindex="-1" aria-labelledby="exportModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exportModalLabel">Xác Nhận Xuất Đơn</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Bạn có chắc chắn muốn xuất đơn hàng này không?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                    <a href="{{ route('admin.bill.invoice', $bill->id) }}" class="btn btn-success">Xác nhận xuất đơn</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const cancelNote = document.getElementById("cancelNote");
+            const confirmCancel = document.getElementById("confirmCancel");
+            const cancelForm = document.getElementById("cancelForm");
+    
+            cancelNote.addEventListener("input", function () {
+                if (cancelNote.value.trim().length >= 15) {
+                    confirmCancel.removeAttribute("disabled");
+                } else {
+                    confirmCancel.setAttribute("disabled", "true");
+                }
+            });
+    
+            confirmCancel.addEventListener("click", function () {
+                cancelForm.submit();
+            });
+        });
+    </script>
+@endsection
