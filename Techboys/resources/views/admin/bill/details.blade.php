@@ -105,6 +105,14 @@
                                         <input type="text" class="form-control" id="total"
                                             value="{{ number_format($bill->total, 0, ',', '.') }} đ" readonly>
                                     </div>
+                                    @if ($bill->status_id==0)
+                                        <div class="col-md-6 mb-3">
+                                        <label for="total">Lý do huỷ đơn hàng</label>
+                                        <input type="text" class="form-control" id="total"
+                                            value="{{$bill->note}}" readonly>
+                                    </div>
+                                    @endif
+
                                 </div>
 
                                 <h5 class="mt-4">Chi Tiết Hoá đơn</h5>
@@ -162,7 +170,7 @@
                         @csrf
                         <div class="mb-3">
                             <label for="cancelNote" class="form-label">Ghi chú huỷ đơn <span class="text-danger">*</span></label>
-                            <textarea class="form-control" id="cancelNote" name="cancel_note" rows="3" required minlength="15" placeholder="Nhập lý do huỷ đơn..."></textarea>
+                            <textarea class="form-control" id="cancelNote" name="note" rows="3" required minlength="15" placeholder="Nhập lý do huỷ đơn..."></textarea>
                             <div class="invalid-feedback">Ghi chú phải có ít nhất 15 ký tự.</div>
                         </div>
                     </form>
