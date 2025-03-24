@@ -108,6 +108,7 @@ class CheckoutController extends Controller
             $billData['payment_status'] = 1;
         
             $response = $this->checkoutService->storeBill(new checkoutRequest($billData));
+            // dd($response);
             $newBill = json_decode($response->getContent(), true);
         
             if (!$newBill['success']) {
