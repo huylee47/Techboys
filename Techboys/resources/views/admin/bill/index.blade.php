@@ -25,6 +25,22 @@
             </div>
         </div>
 
+        <!-- Dropdown lọc trạng thái đơn hàng -->
+        <div class="row mb-3">
+            <div class="col-md-4">
+                <select id="filter-status" class="form-select">
+                    <option value="" selected disabled>-- Chọn trạng thái --</option>
+                    <option value="" >Tất cả </option>
+                    <option value="1" {{ request('status') == '1' ? 'selected' : '' }}>Chờ xử lý</option>
+                    <option value="2" {{ request('status') == '2' ? 'selected' : '' }}>Đang giao</option>
+                    <option value="3" {{ request('status') == '3' ? 'selected' : '' }}>Đã giao</option>
+                    <option value="4" {{ request('status') == '4' ? 'selected' : '' }}>Đã nhận hàng</option>
+                    <option value="0" {{ request('status') == '0' ? 'selected' : '' }}>Đã huỷ</option>
+
+                </select>
+            </div>
+        </div>
+
         <section class="section">
             <div class="card">
                 <div class="card-body">
@@ -41,13 +57,14 @@
                         <thead>
                             <tr>
                                 <th class="col-1">STT</th>
+                                <th class="col-1">Thời gian tạo đơn</th>
                                 <th class="col-1">Mã đơn hàng</th>
                                 <th class="col-2">Tên khách hàng</th>
                                 <th class="col-1">Số điện thoại</th>
                                 <th class="col-1">Tổng tiền</th>
                                 <th class="col-1">PT Thanh toán</th>
                                 <th class="col-1">TT Đơn hàng</th>
-                                <th class="col-2">TT Thanh toán</th>
+                                <th class="col-1">TT Thanh toán</th>
                                 <th class="col-2">Chức năng</th>
                             </tr>
                         </thead>
@@ -55,6 +72,7 @@
                             @foreach ($bills as $bill)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $bill->created_at->format('d/m/Y H:i') }}</td>
                                     <td>{{$bill->order_id}}</td>
                                     <td>{{ $bill->full_name }}</td>
                                     <td>{{ $bill->phone }}</td>
@@ -89,13 +107,6 @@
                                     <td class="text-left">
                                         <a href="{{ route('admin.bill.download', $bill->id) }}" class="btn btn-primary">Tải về</a>
                                         <a href="{{ route('admin.bill.show', $bill->id) }}" class="btn btn-primary">Chi tiết</a>
-                                        <a href=""></a>
-                                        {{-- @if ($bill->status_id == 1)
-                                        <a href="{{ route('admin.bill.invoice', $bill->id) }}" class="btn btn-success">Xuất đơn</a>
-                                        @if($bill->payment_status != 1)
-                                        <a href="{{ route('admin.bill.cancel', $bill->id) }}" class="btn btn-danger">Huỷ đơn</a>
-                                        @endif
-                                        @endif --}}
                                     </td>
                                 </tr>
                             @endforeach
@@ -110,4 +121,18 @@
             </div>
         </section>
     </div>
+</div>
+
+<script>
+    document.getElementById('filter-status').addEventListener('change', function() {
+        let status = this.value;
+        let url = new URL(window.location.href);
+        if (status) {
+            url.searchParams.set('status', status);
+        } else {
+            url.searchParams.delete('status');
+        }
+        window.location.href = url.toString();
+    });
+</script>
 @endsection
