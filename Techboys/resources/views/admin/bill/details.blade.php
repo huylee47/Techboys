@@ -54,11 +54,12 @@
                                         <a class="btn btn-primary" href="{{ route('admin.bill.index') }}">Quay lại</a>
 
                                         @if ($bill->status_id == 1)
-                                            <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exportModal">Xuất đơn</button>
-                                            @if ($bill->payment_status != 1)
+                                            <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exportModal">Xác nhận đơn</button>
                                                 <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#cancelModal">Huỷ đơn</button>
-                                            @endif
+                                        @elseif($bill->status_id == 2)
+                                            <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#orderModal">Xác nhận giao hàng</button>
                                         @endif
+
                                     </div>
                                 </div>
                             </div>
@@ -122,8 +123,8 @@
                                             <th>Tên Sản Phẩm</th>
                                             <th>Số Lượng</th>
                                             <th>Đơn giá</th>
-                                            <th>Tổng tiền</th>
                                             <th>Khuyến mại</th>
+                                            <th>Tổng tiền sản phẩm</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -142,9 +143,10 @@
                                                     {{ $billDetail->product->name }} {{ $billDetail->attributes }}
                                                 </td>
                                                 <td>{{ $billDetail->quantity }}</td>
-                                                <td>{{ number_format($billDetail->price) }} đ</td>
-                                                <td>{{ number_format($billDetail->price * $billDetail->quantity) }} đ</td>
+                                                <td>{{ number_format($billDetail->price ) }} đ</td>
                                                 <td>{{ $isPromotionActive ? 'Có' : 'Không' }}</td>
+
+                                                <td>{{ $isPromotionActive ? number_format($billDetail->discounted_price * $billDetail->quantity) : number_format($billDetail->price * $billDetail->quantity)  }} đ</td>
                                             </tr>
                                         @endforeach
                                     </tbody>
@@ -161,7 +163,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="cancelModalLabel">Xác Nhận Huỷ Đơn</h5>
+                    <h5 class="modal-title" id="cancelModalLabel">Xác nhận Huỷ Đơn</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -188,7 +190,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exportModalLabel">Xác Nhận Xuất Đơn</h5>
+                    <h5 class="modal-title" id="exportModalLabel">Xác Nhận Đơn</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -196,11 +198,30 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                    <a href="{{ route('admin.bill.invoice', $bill->id) }}" class="btn btn-success">Xác nhận xuất đơn</a>
+                    <a href="{{ route('admin.bill.invoice', $bill->id) }}" class="btn btn-success">Xác nhận đơn</a>
                 </div>
             </div>
         </div>
     </div>
+        {{-- Modal Xác Nhận Giao hàng --}}
+        <div class="modal fade" id="orderModal" tabindex="-1" aria-labelledby="orderModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="orderModalLabel">Xác nhận giao hàng</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                       Xác nhận giao hàng thành công ?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                        <a href="{{ route('admin.bill.confirm', $bill->id) }}" class="btn btn-success">Xác nhận </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             const cancelNote = document.getElementById("cancelNote");
