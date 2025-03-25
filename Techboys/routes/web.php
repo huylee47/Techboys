@@ -35,18 +35,18 @@ Route::get('/online-users', function () {
     return response()->json(['online' => $onlineUsers]);
 });
 
+// Blog
 Route::get('/blog', [BlogController::class, 'indexClient'])->name('blog');
 Route::get('blog/{slug}', [BlogController::class, 'DetailBlog'])->name('DetailBlog');
 
 // About
 Route::get('/about', function () {
     return view('client.about.about');
-})->name('about');
+})->name('client.about.about');
 
 Route::get('test', function () {
     return view('admin.product.imageIndex');
 });
-
 
 Route::get('/login/admin', function () {
     return view('admin.log.login');
@@ -56,8 +56,6 @@ Route::get('/login/admin', function () {
 Route::get('login', function () {
     return view('client.login.index');
 })->name('login.client');
-
-
 
 Route::post('/login/Client', [UserController::class, 'loginClient'])->name('loginClient.auth');
 //banner client
