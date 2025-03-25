@@ -31,7 +31,7 @@
                                                     <th>Hành động</th>
                                                 </tr>
                                             </thead>
-                                            <tbody>
+                                            <tbody id="orderTableBody">
                                                 @foreach ($loadAll as $bill)
                                                     @if ($bill->user_id == auth()->id())
                                                         <tr>
@@ -74,3 +74,20 @@
         <!-- .col-full -->
     </div>
 @endsection
+
+
+<script>
+    function searchOrder() {
+        const searchValue = document.getElementById('searchOrder').value.toLowerCase();
+        const rows = document.querySelectorAll('#orderTableBody tr');
+
+        rows.forEach(row => {
+            const orderId = row.querySelector('td:first-child').textContent.toLowerCase();
+            if (orderId.includes(searchValue)) {
+                row.style.display = '';
+            } else {
+                row.style.display = 'none';
+            }
+        });
+    }
+</script>
