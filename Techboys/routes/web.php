@@ -19,9 +19,7 @@ use App\Http\Controllers\RevenueController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Cache;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
-Route::get('oder', function () {
-    return view('client.order.order');
-});
+
 
 // Client routes
 Route::middleware(['track.online'])->group(function(){
@@ -41,6 +39,14 @@ Route::get('/online-users', function () {
 // Blog
 Route::get('/blog', [BlogController::class, 'indexClient'])->name('blog');
 Route::get('blog/{slug}', [BlogController::class, 'DetailBlog'])->name('DetailBlog');
+
+//order
+Route::get('/client/orders', [BillController::class, 'indexClient'])->name('client.orders');
+
+//comment
+Route::post('/comment/store', [CommentController::class, 'store'])->name('client.comment.store');
+Route::post('/comment/reply', [CommentController::class, 'reply'])->name('client.comment.reply');
+
 
 // About
 Route::get('/about', function () {
@@ -253,4 +259,6 @@ Route::prefix('products')->group(function () {
     Route::get('/filter', [ProductController::class, 'filter'])->name('client.product.filter');
     Route::get('/{slug}', [ProductController::class, 'productDetails'])->name('client.product.show');
 });
+
+Route::get('/client/orders', [BillController::class, 'indexClient'])->name('client.orders');
 

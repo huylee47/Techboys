@@ -54,4 +54,9 @@ class Bill extends Model
     {
         return $this->belongsTo(Ward::class, 'ward_id');
     }
+
+    public function billDetails()
+    {
+        return $this->hasMany(BillDetails::class, 'bill_id');
+    }
 }
