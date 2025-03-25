@@ -27,10 +27,9 @@ class BillDetailsController extends Controller
                 if ($detail->variant_id) {
                     $detail->discounted_price = $detail->price * (1 - $promotion->discount_percent / 100);
                 } else {
-                    $detail->discounted_price = $detail->product->price * (1 - $promotion->discount_percent / 100);
+                    $detail->discounted_price = $detail->product->price *(1 - $promotion->discount_percent / 100);
                 }
             }
-    
             if ($detail->variant_id) {
                 $attributeJson = ProductVariant::where('id', $detail->variant_id)->value('attribute_values');
                 $attributeArray = json_decode($attributeJson, true) ?? [];
@@ -49,6 +48,8 @@ class BillDetailsController extends Controller
             return $detail->quantity * $detail->price;
         });
     
+        // dd($billDetails);
+        // return response()->json($billDetails);
         return view('admin.bill.details', compact('billDetails', 'bill', 'productPromotions', 'total'));
     }
     
