@@ -405,11 +405,9 @@
                                                             <input type="hidden" name="variant_id" id="variant-id" value="{{ $defaultVariant['id'] }}">
                                                         @endif
                                                         
-
                                                         <button class="single_add_to_cart_button button alt"
                                                             type="submit">Thêm vào giỏ hàng</button>
-                                                        <p id="outOfStockMessage" class="text-danger small">Sản phẩm đã
-                                                            hết hàng</p>
+
                                                     </div>
                                                     <!-- .cart -->
                                                 </div>
@@ -805,14 +803,13 @@ document.addEventListener("DOMContentLoaded", function() {
     let selectedAttributes = {};
     let selectedVariantId = @json($defaultVariant['id'] ?? null);
 
-    console.log("Mặc định :",selectedVariantId);
+    console.log("Mặc định :", selectedVariantId);
 
     const productPriceElement = document.getElementById("price-display");
     const stockQuantityElement = document.getElementById("stock-display");
     const variantIdInput = document.getElementById("variant-id");
-    console.log("Mặc định input :",variantIdInput);
-
-
+    const addToCartBtn = document.querySelector(".single_add_to_cart_button");
+    const outOfStockMessage = document.getElementById("outOfStockMessage");
 
     function updateVariantInfo() {
         console.log("Kiểm tra biến thể...");
@@ -827,19 +824,28 @@ document.addEventListener("DOMContentLoaded", function() {
             productPriceElement.innerText = new Intl.NumberFormat('vi-VN').format(selectedVariant.discounted_price) + " đ";
             stockQuantityElement.innerText = selectedVariant.stock;
 
-            selectedVariantId = selectedVariant.id; // Cập nhật ID biến thể đã chọn
-            variantIdInput.value = selectedVariantId; // Cập nhật input ẩn
-            console.log("Sau khi chọn:",selectedVariantId);
+            selectedVariantId = selectedVariant.id;
+            variantIdInput.value = selectedVariantId;
 
+            // Kiểm tra tồn kho
+            if (selectedVariant.stock > 0) {
+                addToCartBtn.disabled = false;
+                outOfStockMessage.style.display = "none";
+            } else {
+                addToCartBtn.disabled = true;
+                outOfStockMessage.style.display = "block";
+            }
         } else {
             console.warn("Không có biến thể phù hợp!");
             productPriceElement.innerText = "Không có biến thể này!";
             stockQuantityElement.innerText = "0";
-
             selectedVariantId = null;
             variantIdInput.value = "";
+            addToCartBtn.disabled = true;
+            outOfStockMessage.style.display = "block";
         }
     }
+
     function updateAvailableChoices() {
         console.log("Cập nhật danh sách lựa chọn...");
         let firstGroup = document.querySelector(".choice-group:first-child");

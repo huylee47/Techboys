@@ -78,7 +78,9 @@ class CheckoutService
     {
         $userId = Auth::id();
         $sessionId = session()->getId();
-        $tempBillId = now()->timestamp . ($userId ?? $sessionId);
+        $tempBillId = now()->format('Ymd') . ($userId ?? $sessionId) . rand(10, 99);
+
+
         $cartItems = $this->cartService->getCartItems();
         $totals = $this->cartPriceService->calculateCartTotals($cartItems);
 
@@ -142,7 +144,7 @@ class CheckoutService
     
             // Tạo bill
             $bill = Bill::create([
-                'order_id' => $tempBillId,
+                'order_id' => $tempBillId ??  now()->format('Ymd') . ($userId ?? $cartId) . rand(10, 99) ,
                 'user_id' => $userId ?? null,
                 'total' => $total,
                 'full_name' => $request->full_name,

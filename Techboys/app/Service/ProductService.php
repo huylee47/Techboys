@@ -61,6 +61,15 @@ class ProductService{
         DB::beginTransaction();
     
         try {
+            $isFeatured = $request->is_featured;
+            if ($isFeatured == 0){
+                $base_stock = $request->base_stock;
+                $base_price = $request->base_price;
+            }
+            else{
+                $base_stock = 0;
+                $base_price = 0;
+            }
             $imageName = null;
             if ($request->hasFile('img')) {
                 $imageName = time() . '_' . uniqid() . '.' . $request->img->getClientOriginalExtension();
@@ -72,8 +81,8 @@ class ProductService{
                 'brand_id' => $request->brand_id,
                 'purchases' => 0,
                 'is_featured' => $request->is_featured ?? 0,
-                'base_price' => $request->base_price,
-                'base_stock' => $request->base_stock,
+                'base_price' => $base_price,
+                'base_stock' => $base_stock,
                 'img' => $imageName,
                 'description' => $request->description,
                 'category_id' => $request->category_id,
@@ -117,8 +126,12 @@ class ProductService{
     
         } catch (\Exception $e) {
             DB::rollBack();
-    
-            return redirect()->route('admin.product.create')->with('error', 'Lỗi: ' . $e->getMessage());
+            return response()->json(
+                [
+                    'error' => 'Lỗi: ' . $e->getMessage(),
+                ]
+            );
+            // return redirect()->route('admin.product.create')->with('error', 'Lỗi: ' . $e->getMessage());
         }
     }
     
