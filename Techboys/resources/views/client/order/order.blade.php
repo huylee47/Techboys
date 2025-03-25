@@ -16,6 +16,7 @@
                                         <input type="text" id="searchOrder" placeholder="Tìm kiếm mã đơn hàng">
                                         <button class="btn btn-primary" onclick="searchOrder()">Tìm kiếm</button>
                                     </div>
+                                    <br>
                                     <!-- End of Search Order Number -->
                                     <table class="table table-bordered">
                                         <thead>
