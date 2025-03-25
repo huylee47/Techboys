@@ -19,9 +19,7 @@ use App\Http\Controllers\RevenueController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Cache;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
-Route::get('oder', function () {
-    return view('client.order.order');
-});
+
 
 // Client routes
 Route::middleware(['track.online'])->group(function(){
@@ -41,6 +39,9 @@ Route::get('/online-users', function () {
 // Blog
 Route::get('/blog', [BlogController::class, 'indexClient'])->name('blog');
 Route::get('blog/{slug}', [BlogController::class, 'DetailBlog'])->name('DetailBlog');
+
+//order
+Route::get('/client/orders', [BillController::class, 'indexClient'])->name('client.orders');
 
 // About
 Route::get('/about', function () {
