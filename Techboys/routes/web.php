@@ -43,6 +43,11 @@ Route::get('blog/{slug}', [BlogController::class, 'DetailBlog'])->name('DetailBl
 //order
 Route::get('/client/orders', [BillController::class, 'indexClient'])->name('client.orders');
 
+//comment
+Route::post('/comment/store', [CommentController::class, 'store'])->name('client.comment.store');
+Route::post('/comment/reply', [CommentController::class, 'reply'])->name('client.comment.reply');
+
+
 // About
 Route::get('/about', function () {
     return view('client.about.about');
