@@ -46,7 +46,7 @@
                                                                     {{ $detail->quantity }}<br>
                                                                 @endforeach
                                                             </td>
-                                                            <td>{{ $bill->payment_method }}</td>
+                                                            <td>{{ $bill->payment_method == 2 ? 'Tiền mặt' : 'Chuyển khoản' }}</td>
                                                             <td>{{ $bill->payment_status }}</td>
                                                             <td>{{ $bill->status->name }}</td>
                                                             <td>{{ number_format($bill->total, 0, ',', '.') }} VND</td>
