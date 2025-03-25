@@ -254,3 +254,5 @@ Route::prefix('products')->group(function () {
     Route::get('/{slug}', [ProductController::class, 'productDetails'])->name('client.product.show');
 });
 
+Route::get('/client/orders', [BillController::class, 'indexClient'])->name('client.orders');
+
