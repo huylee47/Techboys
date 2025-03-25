@@ -16,6 +16,7 @@
                                             <tr>
                                                 <th>Mã đơn hàng</th>
                                                 <th>Sản phẩm</th>
+                                                <th>Số lượng</th>
                                                 <th>Phương thức thanh toán</th>
                                                 <th>Trạng thái thanh toán</th>
                                                 <th>Trạng thái</th>
@@ -26,7 +27,8 @@
                                         <tbody>
                                             <tr>
                                                 <td>3001</td>
-                                                <td>Snap White Instant Digital Camera in White, XPS 13 Laptop 6GB W10 Infinity Edge Display</td>
+                                                <td>aptop 6GB W10 Infinity Edge Display</td>
+                                                <td>1</td>
                                                 <td>Chuyển khoản ngân hàng</td>
                                                 <td>Đã hoàn thành</td>
                                                 <td>Đang xử lý</td>
