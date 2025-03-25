@@ -208,5 +208,10 @@ class BillController extends Controller
     }
     
 
-    
+    //client
+    public function indexClient()
+    {
+        $loadAll = Bill::with(['billDetails.product', 'status'])->get();
+        return view('client.order.order', compact('loadAll'));
+    }
 }
