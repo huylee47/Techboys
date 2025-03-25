@@ -17,6 +17,8 @@
                                                 <th>Mã đơn hàng</th>
                                                 <th>Ngày</th>
                                                 <th>Trạng thái</th>
+                                                <th>Sản phẩm</th>
+                                                <th>Phương thức thanh toán</th>
                                                 <th>Tổng cộng</th>
                                                 <th>Hành động</th>
                                             </tr>
@@ -26,6 +28,8 @@
                                                 <td>3001</td>
                                                 <td>6 Tháng 11, 2017</td>
                                                 <td>Đang xử lý</td>
+                                                <td>Snap White Instant Digital Camera in White, XPS 13 Laptop 6GB W10 Infinity Edge Display</td>
+                                                <td>Chuyển khoản ngân hàng</td>
                                                 <td>$1,476.99</td>
                                                 <td><button class="btn btn-danger">Hủy đơn</button></td>
                                             </tr>
