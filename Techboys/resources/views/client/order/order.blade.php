@@ -33,24 +33,26 @@
                                             </thead>
                                             <tbody>
                                                 @foreach ($loadAll as $bill)
-                                                    <tr>
-                                                        <td>{{ $bill->order_id }}</td>
-                                                        <td>
-                                                            @foreach ($bill->billDetails as $detail)
-                                                                {{ $detail->product->name }}<br>
-                                                            @endforeach
-                                                        </td>
-                                                        <td>
-                                                            @foreach ($bill->billDetails as $detail)
-                                                                {{ $detail->quantity }}<br>
-                                                            @endforeach
-                                                        </td>
-                                                        <td>{{ $bill->payment_method }}</td>
-                                                        <td>{{ $bill->payment_status }}</td>
-                                                        <td>{{ $bill->status->name }}</td>
-                                                        <td>{{ number_format($bill->total, 0, ',', '.') }} VND</td>
-                                                        <td><button class="btn btn-danger">Hủy đơn</button></td>
-                                                    </tr>
+                                                    @if ($bill->user_id == auth()->id())
+                                                        <tr>
+                                                            <td>{{ $bill->order_id }}</td>
+                                                            <td>
+                                                                @foreach ($bill->billDetails as $detail)
+                                                                    {{ $detail->product->name }}<br>
+                                                                @endforeach
+                                                            </td>
+                                                            <td>
+                                                                @foreach ($bill->billDetails as $detail)
+                                                                    {{ $detail->quantity }}<br>
+                                                                @endforeach
+                                                            </td>
+                                                            <td>{{ $bill->payment_method }}</td>
+                                                            <td>{{ $bill->payment_status }}</td>
+                                                            <td>{{ $bill->status->name }}</td>
+                                                            <td>{{ number_format($bill->total, 0, ',', '.') }} VND</td>
+                                                            <td><button class="btn btn-danger">Hủy đơn</button></td>
+                                                        </tr>
+                                                    @endif
                                                 @endforeach
                                             </tbody>
                                         </table>
