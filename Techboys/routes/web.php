@@ -157,6 +157,8 @@ Route::middleware(['auth', 'auth.admin'])->group(function () {
             Route::get('/bill-detail/{id}/show', [BillDetailsController::class, 'show'])->name('admin.bill.show');
             Route::get('invoice/{id}',[BillController::class,'invoiceBill'])->name('admin.bill.invoice');
             Route::post('cancel/{id}',[BillController::class,'cancelBill'])->name('admin.bill.cancel');
+            Route::get('confirm/{id}',[BillController::class,'confirm'])->name('admin.bill.confirm');
+            // Route::post('complete/{id}',[BillController::class,'completeBill'])->name('admin.bill.complete');
         });
 
         Route::prefix('/blogs')->group(function () {
