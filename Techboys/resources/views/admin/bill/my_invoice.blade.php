@@ -95,11 +95,6 @@
             <p><strong>Ngày Tạo:</strong> {{ $bill->created_at->format('d/m/Y') }}</p>
             <p><strong>Địa Chỉ:</strong> {{ $bill->address }}</p>
             <p><strong>Phương Thức Thanh Toán:</strong> {{ $bill->payment_method == 1 ? 'VNPAY' : 'COD' }}</p>
-            <p><strong>Trạng Thái Thanh Toán:</strong> 
-                <span style="color: {{ $bill->payment_status == 1 ? 'green' : 'red' }}">
-                    {{ $bill->payment_status == 1 ? 'Đã thanh toán' : 'Chưa thanh toán' }}
-                </span>
-            </p>
         </div>
 
         <h3>Chi Tiết Đơn Hàng</h3>
@@ -109,17 +104,16 @@
                     <th>Sản Phẩm</th>
                     <th>Số Lượng</th>
                     <th>Đơn Giá</th>
-                    <th>Tổng</th>
                     <th>Khuyến Mại</th>
+                    <th>Tổng</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($billDetails as $billDetail)
                 <tr>
-                    <td>{{ $billDetail->product->name }} {{ $billDetail->variant->color->name }} {{ $billDetail->variant->model->name }}</td>
+                    <td>{{ $billDetail->product->name }} {{ $billDetail->attributes }}</td>
                     <td>{{ $billDetail->quantity }}</td>
                     <td>{{ number_format($billDetail->price, 0, ',', '.') }} đ</td>
-                    <td>{{ number_format($billDetail->price * $billDetail->quantity, 0, ',', '.') }} đ</td>
                     @php
                         $isPromotionActive = $productPromotions->contains(function ($promotion) use ($billDetail) {
                             return $promotion->product_id == $billDetail->product->id &&
@@ -127,11 +121,12 @@
                         });
                     @endphp
                     <td>{{ $isPromotionActive ? 'Có' : 'Không' }}</td>
+                    <td>{{ number_format(($isPromotionActive ? $billDetail->discounted_price : $billDetail->price) * $billDetail->quantity, 0, ',', '.') }} đ</td>
                 </tr>
                 @endforeach
                 <tr>
-                    <td colspan="3" class="total">Tổng cộng</td>
-                    <td colspan="2" class="total">{{ number_format($bill->total, 0, ',', '.') }} đ</td>
+                    <td colspan="4" class="total">Tổng cộng</td>
+                    <td class="total">{{ number_format($bill->total, 0, ',', '.') }} đ</td>
                 </tr>
             </tbody>
         </table>
