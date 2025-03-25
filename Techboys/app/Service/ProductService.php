@@ -266,7 +266,7 @@ class ProductService{
                 $combinations = $this->generateCombinations($variableAttributes);
 
                 foreach ($combinations as $combination) {
-                    $finalAttributes = array_merge($fixedAttributes, $combination);
+                    $finalAttributes = array_replace($fixedAttributes, $combination);
 
                     $existingVariant = $existingVariants->first(function ($variant) use ($finalAttributes) {
                         return json_decode($variant->attribute_values, true) == $finalAttributes;
