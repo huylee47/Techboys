@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('bills', function (Blueprint $table) {
             $table->id();
+            $table->string('order_id')->nullable();
             $table->foreignId('user_id')->nullable();
             $table->string('full_name');
             $table->string('phone');
@@ -25,6 +26,7 @@ return new class extends Migration
             $table->tinyInteger('payment_method');
             $table->tinyInteger('payment_status')->default(0);
             $table->tinyInteger('status_id')->default(1);
+            $table->text('note')->nullable();
             $table->timestamps();
         }); 
     }

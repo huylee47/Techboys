@@ -3,9 +3,11 @@
 namespace App\Service;
 
 use App\Mail\OrderDetailMail;
+use App\Models\AttributesValue;
 use App\Models\Bill;
 use App\Models\BillDetails;
 use App\Models\Cart;
+use App\Models\Product;
 use App\Models\ProductVariant;
 use App\Models\Voucher;
 use App\Service\CartService;
@@ -28,7 +30,7 @@ class CheckoutService
     public function getCheckout()
     {
         $cartItems = $this->cartService->getCartItems();
-
+    
         if ($cartItems instanceof \Illuminate\Http\JsonResponse) {
             return [
                 'cartItems' => collect([]),
@@ -38,9 +40,30 @@ class CheckoutService
                 'voucher' => null,
             ];
         }
-
+    
+        // Lấy danh sách tất cả các giá trị thuộc tính để tránh truy vấn nhiều lần
+        $attributeValues = AttributesValue::all()->keyBy('id');
+    
+        foreach ($cartItems as $cart) {
+            // Nếu sản phẩm có biến thể, lấy thông tin thuộc tính
+            if ($cart->variant_id) {
+                $attributeJson = ProductVariant::where('id', $cart->variant_id)->value('attribute_values');
+                $attributeArray = json_decode($attributeJson, true) ?? [];
+    
+                // Chỉ lấy giá trị thuộc tính, bỏ qua tên thuộc tính
+                $attributeValuesList = collect($attributeArray)->map(function ($attrValueId) use ($attributeValues) {
+                    return $attributeValues[$attrValueId]->value ?? 'Không xác định';
+                })->toArray();
+    
+                // Tạo chuỗi chỉ chứa giá trị thuộc tính
+                $cart->attributes = implode(' ', $attributeValuesList);
+            } else {
+                $cart->attributes = '';
+            }
+        }
+    
         $totals = $this->cartPriceService->calculateCartTotals($cartItems);
-
+    
         return [
             'cartItems' => $cartItems,
             'subtotal' => $totals['subtotal'],
@@ -49,6 +72,7 @@ class CheckoutService
             'voucher' => $totals['voucher'],
         ];
     }
+    
 
     public function storeTemporaryBill($request)
     {
@@ -88,39 +112,37 @@ class CheckoutService
     public function storeBill($request)
     {
         DB::beginTransaction();
-
+    
         try {
             $userId = Auth::id();
             $cartId = session()->get('cart_id');
             $tempBillId = $request->id;
-
-            if ($userId) {
-                $cartItems = Cart::where('user_id', $userId)->get();
-            } else {
-                $cartItems = Cart::where('cart_id', $cartId)->get();
-            }
-
-
+    
+            $cartItems = $userId 
+                ? Cart::where('user_id', $userId)->get() 
+                : Cart::where('cart_id', $cartId)->get();
+    
             if ($cartItems->isEmpty()) {
                 return response()->json([
                     'success' => false,
                     'message' => 'Giỏ hàng trống!'
                 ], 400);
             }
-
+    
             $totals = $this->cartPriceService->calculateCartTotals($cartItems);
             $total = $totals['total'];
             $voucher = $totals['voucher'];
-
+    
             if ($total <= 0) {
                 return response()->json([
                     'success' => false,
                     'message' => 'Tổng tiền không hợp lệ!'
                 ], 400);
             }
-
+    
+            // Tạo bill
             $bill = Bill::create([
-                'id' => $tempBillId,
+                'order_id' => $tempBillId,
                 'user_id' => $userId ?? null,
                 'total' => $total,
                 'full_name' => $request->full_name,
@@ -134,35 +156,51 @@ class CheckoutService
                 'payment_status' => 0,
                 'status_id' => 1,
             ]);
-
+    
             foreach ($cartItems as $cartItem) {
-                $variant = ProductVariant::find($cartItem->variant_id);
-
-                if (!$variant) {
-                    DB::rollBack();
-                    return response()->json([
-                        'success' => false,
-                        'message' => 'Không tìm thấy biến thể sản phẩm!'
-                    ], 400);
+                if ($cartItem->variant_id) {
+                    // Giảm stock an toàn với WHERE
+                    $updated = ProductVariant::where('id', $cartItem->variant_id)
+                        ->where('stock', '>=', $cartItem->quantity)
+                        ->decrement('stock', $cartItem->quantity);
+    
+                    if (!$updated) {
+                        return response()->json([
+                            'success' => false,
+                            'message' => 'Sản phẩm biến thể "' . $cartItem->variant_id . '" đã hết hàng!'
+                        ], 400);
+                    }
+    
+                    BillDetails::create([
+                        'bill_id' => $bill->id,
+                        'product_id' => $cartItem->product_id,
+                        'variant_id' => $cartItem->variant_id,
+                        'quantity' => $cartItem->quantity,
+                        'price' => ProductVariant::find($cartItem->variant_id)->price
+                    ]);
+                } else {
+                    // Giảm stock an toàn với WHERE
+                    $updated = Product::where('id', $cartItem->product_id)
+                        ->where('base_stock', '>=', $cartItem->quantity)
+                        ->decrement('base_stock', $cartItem->quantity);
+    
+                    if (!$updated) {
+                        return response()->json([
+                            'success' => false,
+                            'message' => 'Sản phẩm "' . $cartItem->product_id . '" đã hết hàng!'
+                        ], 400);
+                    }
+    
+                    BillDetails::create([
+                        'bill_id' => $bill->id,
+                        'product_id' => $cartItem->product_id,
+                        'quantity' => $cartItem->quantity,
+                        'price' => Product::find($cartItem->product_id)->base_price
+                    ]);
                 }
-
-                if ($cartItem->quantity > $variant->stock) {
-                    DB::rollBack();
-                    return response()->json([
-                        'success' => false,
-                        'message' => 'Số lượng sản phẩm "' . $variant->name . '" trong giỏ hàng vượt quá số lượng tồn kho!'
-                    ], 400);
-                }
-
-                BillDetails::create([
-                    'bill_id' => $bill->id,
-                    'variant_id' => $cartItem->variant_id,
-                    'product_id' => $variant->product_id,
-                    'quantity' => $cartItem->quantity,
-                    'price' => $variant->price
-                ]);
             }
-
+    
+            // Giảm số lượng voucher nếu có
             if ($voucher) {
                 $voucherModel = Voucher::where('code', $voucher->code)->first();
                 if ($voucherModel && $voucherModel->quantity > 0) {
@@ -170,20 +208,19 @@ class CheckoutService
                 }
                 session()->forget('voucher');
             }
-
-
+    
             DB::commit();
-            // Mail::to($bill->email)->send(new OrderDetailMail($bill));
+    
+            // Gửi email
             try {
                 Log::info('Đang gửi email cho: ' . $bill->email);
-                $billDetails = BillDetails::where('bill_id', $bill->id)->with('variant')->get(); 
-                Mail::to($bill->email)->send(new OrderDetailMail($bill,$billDetails));
+                $billDetails = BillDetails::where('bill_id', $bill->id)->with('variant')->get();
+                Mail::to($bill->email)->send(new OrderDetailMail($bill, $billDetails));
                 Log::info('Gửi email thành công!');
             } catch (\Exception $e) {
                 Log::error('Lỗi khi gửi email: ' . $e->getMessage());
             }
-            
-
+    
             return response()->json([
                 'success' => true,
                 'message' => 'Đặt hàng thành công!',
@@ -198,6 +235,10 @@ class CheckoutService
             ], 500);
         }
     }
+    
+    
+    
+    
 
 
 
@@ -224,14 +265,7 @@ class CheckoutService
                 ], 400);
             }
 
-            $billDetails = BillDetails::where('bill_id', $billId)->get();
 
-            foreach ($billDetails as $billDetail) {
-                $variant = ProductVariant::find($billDetail->variant_id);
-                if ($variant) {
-                    $variant->decrement('stock', $billDetail->quantity);
-                }
-            }
 
             $bill->update([
                 'payment_status' => 1
@@ -275,8 +309,12 @@ class CheckoutService
     
             foreach ($bill->billDetails as $billDetail) {
                 $variant = ProductVariant::find($billDetail->variant_id);
+                $product = Product::find($billDetail->product_id);
                 if ($variant) {
                     $variant->increment('stock', $billDetail->quantity);
+                }
+                else{
+                    $product->increment('base_stock', $billDetail->quantity);
                 }
             }
     
@@ -406,11 +444,11 @@ class CheckoutService
         
             foreach ($billDetails as $billDetail) {
                 $variant = ProductVariant::find($billDetail->variant_id);
+                $product = Product::find($billDetail->product_id);
                 if ($variant) {
                     Log::info("Trừ stock cho variant_id {$variant->id}, Số lượng: {$billDetail->quantity}");
-                    $variant->decrement('stock', $billDetail->quantity);
                 } else {
-                    Log::error("Không tìm thấy variant_id: " . $billDetail->variant_id);
+                    Log::error("Không tìm thấy product_id: " . $billDetail->product_id);
                 }
             }
         

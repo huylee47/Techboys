@@ -15,7 +15,7 @@ class Bill extends Model
 
     protected $table = 'bills';
 
-    protected $fillable = ['user_id',
+    protected $fillable = ['order_id','user_id',
      'full_name',
       'phone', 
       'total', 
@@ -26,7 +26,9 @@ class Bill extends Model
       'status_id',
       'province_id', 
       'district_id', 
-      'ward_id'];
+      'ward_id',
+        'note'
+    ];
 
     public function user()
     {

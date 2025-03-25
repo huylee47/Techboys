@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ProductRequest;
 use App\Models\Brand;
-use App\Models\Color;
+// use App\Models\Color;
 use App\Models\Product;
-use App\Models\ProductModel;
+// use App\Models\ProductModel;
 use App\Models\ProductCategory;
 use App\Service\PhotoService;
 use Illuminate\Http\Request;
@@ -40,11 +40,14 @@ class ProductController extends Controller
         return $this->productService->createProduct();
     }
 
+
     /**
      * Store a newly created resource in storage.
      */
     public function store(ProductRequest $request)
     {
+        // dd($request->all());
+
         return $this->productService->storeProduct($request);
     }
 
@@ -59,9 +62,9 @@ class ProductController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Request $request)
+    public function edit($id)
     {
-        return $this->productService->editProduct($request);
+        return $this->productService->editProduct($id);
     }
 
     /**
@@ -122,7 +125,7 @@ class ProductController extends Controller
     {
         // Lấy danh sách thương hiệu và model
         $brands = Brand::all();
-        $models = ProductModel::all();
+        
 
         // Tạo query sản phẩm
         $query = Product::query();
@@ -142,22 +145,25 @@ class ProductController extends Controller
         return view('client.product.list', compact('products', 'brands', 'models'));
     }
 
+
     public function search(Request $request)
     {
-        // Lấy từ khóa tìm kiếm đúng theo input của form
-        $keyword = trim($request->input('s')); // Thay đổi 'keyword' thành 's' cho đúng form
+        $keyword = trim($request->input('s'));
 
-        // Nếu không có từ khóa, trả về tất cả sản phẩm
         if (!$keyword) {
-            return redirect()->route('client.product.list')->with('error', 'Vui lòng nhập từ khóa tìm kiếm.');
+            return redirect()->route('client.product.index')->with('error', 'Vui lòng nhập từ khóa tìm kiếm.');
         }
 
-        // Chỉ tìm kiếm theo tên sản phẩm
-        $products = Product::where('name', 'LIKE', "%{$keyword}%")->paginate(12);
+        // Nếu là AJAX request (dropdown tìm kiếm)
+        if ($request->ajax()) {
+            $products = Product::where('name', 'LIKE', "%{$keyword}%")->limit(5)->get();
+            return response()->json($products);
+        }
 
-        // Lấy danh sách thương hiệu và model để hiển thị bộ lọc
+        // Nếu là tìm kiếm bằng nút "Tìm kiếm", hiển thị trang search.blade.php
+        $products = Product::where('name', 'LIKE', "%{$keyword}%")->paginate(12);
         $brands = Brand::all();
-        $models = ProductModel::all();
+        
 
         return view('client.product.search', compact('products', 'keyword', 'brands', 'models'));
     }
@@ -165,7 +171,7 @@ class ProductController extends Controller
     public function filter(Request $request)
     {
         $brands = Brand::all();
-        $models = ProductModel::all();
+        
 
         $query = Product::query();
 
@@ -173,8 +179,10 @@ class ProductController extends Controller
             $query->whereIn('brand_id', $request->brand_id);
         }
 
-        if ($request->has('model_id')) {
-            $query->whereIn('model_id', $request->model_id);
+        if ($request->has('model_id') && !empty($request->model_id)) {
+            $query->whereHas('variant', function ($q) use ($request) {
+                $q->whereIn('model_id', $request->model_id);
+            });
         }
 
         $products = $query->paginate(21)->appends($request->query());

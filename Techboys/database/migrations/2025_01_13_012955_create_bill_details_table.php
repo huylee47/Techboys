@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('bill_details', function (Blueprint $table) {
             $table->id();
             $table->foreignId('bill_id');
-            $table->foreignId('product_id');
-            $table->foreignId('variant_id');
+            $table->foreignId('product_id')->nullable();
+            $table->foreignId('variant_id')->nullable();
             $table->integer('quantity');
             $table->decimal('price', 10, 2);
             $table->timestamps();

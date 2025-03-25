@@ -2,15 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ProductVariant;
+use App\Models\Attributes;
 use Illuminate\Http\Request;
 
-class ProductVariantController extends Controller
+class AttributesController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     */
     public function index()
     {
-        $stocks = ProductVariant::where('stock', '>', 0)->get();
-        return view('admin.stock.index', compact('stocks'));
+        //
     }
 
     /**
@@ -32,7 +34,7 @@ class ProductVariantController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(ProductVariant $productVariant)
+    public function show(Attributes $attributes)
     {
         //
     }
@@ -40,7 +42,7 @@ class ProductVariantController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(ProductVariant $productVariant)
+    public function edit(Attributes $attributes)
     {
         //
     }
@@ -48,7 +50,7 @@ class ProductVariantController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, ProductVariant $productVariant)
+    public function update(Request $request, Attributes $attributes)
     {
         //
     }
@@ -56,7 +58,7 @@ class ProductVariantController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(ProductVariant $productVariant)
+    public function destroy(Attributes $attributes)
     {
         //
     }

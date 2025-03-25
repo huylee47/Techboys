@@ -49,15 +49,17 @@
                                     <th class="col-4">Chức năng</th>
                                 </tr>
                             </thead>
-                                 <p class="visually-hidden">{{$index=1}}</p>
-                                <tbody>
+                            <p class="visually-hidden">{{$index=1}}</p>
+                            <tbody>
                                 @foreach ($products as $product)
-
                                     <tr>
                                         <td>{{$index++}}</td>
                                         <td>
-                                            <img src="{{ url('') }}/admin/assets/images/product/{{$product->img}}" alt="{{$product->name}}" class="img-fluid" style="max-width: 100px; height: auto;">
-                                        </td>                                        
+                                            <img src="{{ url('') }}/admin/assets/images/product/{{$product->img}}" 
+                                                 alt="{{$product->name}}" 
+                                                 class="img-fluid" 
+                                                 style="max-width: 100px; height: auto;">
+                                        </td>
                                         <td>{{$product->name}}</td>
                                         <td>{{$product->brand->name}}</td>
                                         <td>{{$product->category->name}}</td>
@@ -73,22 +75,21 @@
                                             <a href="{{ $product->deleted_at ? route('admin.product.restore', $product->id) : route('admin.product.hide', $product->id) }}"
                                                 class="btn {{ $product->deleted_at ? 'btn-success' : 'btn-danger' }}">
                                                  {{ $product->deleted_at ? 'Hiện' : 'Ẩn' }}
-                                             </a>
+                                            </a>
                                             <a href="{{ route('admin.product.edit',['id' =>$product->id]) }}"
                                                 class="btn btn-warning">Sửa</a>
                                             <a href="{{route('admin.product.imageIndex',['productId' =>$product->id])}}"
                                                 class="btn btn-info">Kho ảnh</a>
                                             <a href="{{route('admin.product.destroy',['id' =>$product->id])}}"
-                                              onclick="alert('Bạn có chắc chắn xoá sản phẩm {{ $product->name }} Không ? ')"  class="btn btn-danger">Xoá</a>
+                                                onclick="return confirm('Bạn có chắc chắn xoá sản phẩm {{ $product->name }} không?')"
+                                                class="btn btn-danger">Xoá</a>
                                         </td>
                                     </tr>
                                 @endforeach
-
                             </tbody>
                         </table>
                     </div>
                 </div>
-
             </section>
         </div>
     @endsection

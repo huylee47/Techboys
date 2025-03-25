@@ -8,6 +8,7 @@
     <title>Techboys | Trang quản trị</title>
 
     <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ url('') }}/admin/assets/css/bootstrap.css">
     <link rel="stylesheet" href="{{ url('') }}/admin/assets/css/chat.css">
@@ -16,10 +17,10 @@
     <link rel="stylesheet" href="{{ url('') }}/admin/assets/vendors/perfect-scrollbar/perfect-scrollbar.css">
     <link rel="stylesheet" href="{{ url('') }}/admin/assets/vendors/bootstrap-icons/bootstrap-icons.css">
     <link rel="stylesheet" href="{{ url('') }}/admin/assets/css/app.css">
-    <link rel="shortcut icon" href="{{ url('') }}/admin/assets/images/favicon.svg" type="image/x-icon">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select/dist/css/bootstrap-select.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/admin/assets/styles/choices.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag@3.1.0/dist/css/multi-select-tag.css">
+    <link rel="stylesheet" href="{{ url('') }}/admin/assets/vendors/summernote/summernote-lite.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta2/dist/css/bootstrap-select.min.css">
     @yield('styles')
 </head>
 
@@ -38,10 +39,20 @@
                 <div class="sidebar-menu">
                     <ul class="menu">
                         <li class="sidebar-title">Menu</li>
-                        <li class="sidebar-item  {{-- {{ request()->routeIs('index') ? 'active' : '' }} --}}">
-                            <a href="" class='sidebar-link'>
+
+
+                        <li class="sidebar-item  {{ request()->routeIs('admin.index') ? 'active' : '' }}">
+                            <a href="{{route('admin.index')}}" class='sidebar-link'>
+
                                 <i class="bi bi-grid-fill"></i>
                                 <span>Tổng quan</span>
+                            </a>
+                        </li>
+
+                        <li class="sidebar-item  {{ request()->routeIs('admin.revenue*') ? 'active' : '' }}">
+                            <a href="{{route('admin.revenue.revenue')}}" class='sidebar-link'>
+                                <i class="bi bi-kanban-fill"></i>
+                                <span>Doanh thu</span>
                             </a>
                         </li>
                         <li class="sidebar-item {{ request()->routeIs('admin.category*') ? 'active' : '' }}">
@@ -56,16 +67,11 @@
                                 <span>Sản phẩm</span>
                             </a>
                         </li>
-                        <li class="sidebar-item {{ request()->routeIs('admin.blogs*') ? 'active' : '' }}">
-                            <a href="{{route('admin.blogs.index')}}" class='sidebar-link'>
-                                <i class="bi bi-file-earmark-spreadsheet-fill"></i>
-                                <span>Blogs</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item {{-- {{ request()->routeIs('admin.property-request.index') ? 'active' : '' }} --}}">
-                            <a href="" class='sidebar-link'>
+                        <li class="sidebar-item {{ request()->routeIs('admin.bill*') ? 'active' : '' }}">
+                            <a href="{{route('admin.bill.index')}}" class='sidebar-link'>
+
                                 <i class="bi bi-truck"></i>
-                                <span>Tình trạng đơn hàng</span>
+                                <span>Quản lý đơn hàng</span>
                             </a>
                         </li>
                         <li class="sidebar-item {{ request()->routeIs('admin.messages') ? 'active' : '' }}">
@@ -82,7 +88,7 @@
                                 <span>Voucher</span>
                             </a>
                         </li>
-                        <li class="sidebar-item {{ request()->routeIs('admin.user*') ? 'active' : '' }}"">
+                        <li class="sidebar-item {{ request()->routeIs('admin.user*') ? 'active' : '' }}">
                             <a href="{{route('admin.user.index')}}" class='sidebar-link'>
                                 <i class="bi bi-person"></i>
                                 <span>Tài khoản người dùng</span>
@@ -100,13 +106,26 @@
                                 <span>Phản hồi</span>
                             </a>
                         </li>
-                        <li class="sidebar-item {{ request()->routeIs('admin.banner*') ? 'active' : '' }}"">
-                            <a href="{{route('admin.banner.index')}}" class='sidebar-link'>
-                                <i class="bi bi-image"></i>
-                                <span>Banners</span>
+
+                        <li class="sidebar-item {{ request()->routeIs('admin.blogs*') ? 'active' : '' }} ">
+                            <a href="{{route('admin.blogs.index')}}" class='sidebar-link'>
+                                <i class="bi bi-justify-left"></i>
+                                <span>Blogs</span>
                             </a>
                         </li>
-
+                        <li class="sidebar-item {{ request()->routeIs('admin.banner*') ? 'active' : '' }}">
+                            <a href="{{route('admin.banner.index')}}" class='sidebar-link'>
+                                <i class="bi bi-bookmarks-fill"></i>
+                                <span>Banner</span>
+                            </a> <!-- Thêm thẻ đóng </a> vào đây -->
+                        </li>
+                        <li class="sidebar-item ">
+                            <a href="{{route('admin.stock.index')}}" class='sidebar-link'>
+                                <i class="bi bi-file-earmark-spreadsheet-fill"></i>
+                                <span>Sản phẩm tồn kho</span>
+                            </a>
+                        </li>
+                        
                     </ul>
                 </div>
                 <button class="sidebar-toggler btn x"><i data-feather="x"></i></button>
@@ -127,19 +146,22 @@
     </div>
     </div>
     <script src="{{ url('') }}/admin/assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
-    <script src="{{ url('') }}/admin/assets/js/bootstrap.bundle.min.js"></script>
     <script src="{{ url('') }}/admin/assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
     <script src="{{ url('') }}/admin/assets/vendors/apexcharts/apexcharts.js"></script>
     <script src="{{ url('') }}/admin/assets/vendors/jquery/jquery.min.js"></script>
     <script src="{{ url('') }}/admin/assets/vendors/simple-datatables/simple-datatables.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag@3.1.0/dist/js/multi-select-tag.js"></script>
-    <script>
-        // Simple Datatable
-        let table1 = document.querySelector('#table1');
-        let dataTable = new simpleDatatables.DataTable(table1);
-    </script>
+
     <script src="{{ url('') }}/admin/assets/js/main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta2/dist/js/bootstrap-select.min.js"></script>
+    <script src="{{ url('') }}/admin/assets/vendors/summernote/summernote-lite.min.js"></script>
+    <script>
+       let table1 = document.querySelector('#table1');
+        if (table1) {
+            let dataTable = new simpleDatatables.DataTable(table1);
+        }
+    </script>
     @yield('scripts')
 </body>
 

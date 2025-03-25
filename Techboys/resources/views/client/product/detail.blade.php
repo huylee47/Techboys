@@ -1,6 +1,195 @@
 @extends('client.layouts.master')
 
 @section('main')
+    <style>
+        .commentlist .comment .star-rating {
+            color: #ffcc00;
+            margin-top: 5px;
+            display: block;
+            /* Ensure it takes full width */
+        }
+
+        .commentlist .comment .comment-meta .star-rating {
+            display: inline-block;
+            /* Keep it in line with the date */
+            margin-top: 0;
+            /* Reset any top margin */
+            margin-left: 5px;
+            /* Add some spacing */
+        }
+
+        .commentlist {
+            list-style: none;
+            padding: 0;
+        }
+
+        .commentlist .comment {
+            margin-bottom: 20px;
+            padding: 15px;
+            /* border: 1px solid #e1e1e1; */
+            border-radius: 5px;
+            /* background-color: #f9f9f9; */
+        }
+
+        .commentlist .comment .comment-body {
+            display: flex;
+            align-items: flex-start;
+            /* Align items to the top */
+        }
+
+        .commentlist .comment .comment-avatar {
+            width: 50px;
+            margin-right: 15px;
+        }
+
+        .commentlist .comment .comment-avatar img {
+            width: 100%;
+            border-radius: 50%;
+        }
+
+        .commentlist .comment .comment-content {
+            flex-grow: 1;
+            max-width: 80%;
+            /* Adjust this value as needed */
+        }
+
+        .commentlist .comment .comment-author {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .commentlist .comment .comment-meta {
+            font-size: 12px;
+            color: #999;
+            margin-bottom: 5px;
+        }
+
+        .commentlist .comment .star-rating {
+            color: #ffcc00;
+            margin-top: 5px;
+            display: block;
+        }
+
+        .commentlist .comment img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+
+        .commentlist .comment video {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+
+        .alert {
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid transparent;
+            border-radius: 4px;
+        }
+
+        .alert-success {
+            color: #3c763d;
+            background-color: #dff0d8;
+            border-color: #d6e9c6;
+        }
+
+        .alert-danger {
+            color: #a94442;
+            background-color: #f2dede;
+            border-color: #ebccd1;
+        }
+
+        .reply-input {
+            margin-top: 10px;
+            margin-left: 20px;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background: none;
+        }
+
+        .reply-input textarea {
+            width: 100%;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .reply-input button {
+            margin-top: 5px;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+        }
+
+        .reply-button {
+            margin-top: 5px;
+            margin-left: 3px;
+            padding: 5px 15px;
+            border: none;
+            background: none;
+            color: #007bff;
+            cursor: pointer;
+            border-radius: 20px;
+        }
+
+        .reply-button:hover {
+            background: none;
+            color: #007bff;
+        }
+
+        .reply-input {
+            margin-top: 10px;
+            margin-left: 40px;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background: none;
+        }
+
+        .reply-input textarea {
+            width: 100%;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .reply-input button {
+            margin-top: 5px;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+        }
+
+        .reply-input button:hover {
+            background-color: #0056b3;
+        }
+
+        .toggle-replies-button {
+            margin-top: 5px;
+            margin-left: 3px;
+            padding: 5px 15px;
+            border: none;
+            background: none;
+            color: #007bff;
+            cursor: pointer;
+            border-radius: 20px;
+        }
+
+        .toggle-replies-button:hover {
+            background: none;
+            color: #007bff;
+        }
     </style>
     <div id="page" class="hfeed site">
         <div id="content" class="site-content" tabindex="-1">
@@ -85,8 +274,7 @@
                                                         class="techmarket-wc-product-gallery__image">
                                                         <img width="180" height="180"
                                                             src="{{ url('') }}/home/assets/images/products/sm-card-3.jpg"
-                                                            class="attachment-shop_thumbnail size-shop_thumbnail"
-                                                            alt="">
+                                                            class="attachment-shop_thumbnail size-shop_thumbnail" alt="">
                                                     </figure> --}}
                                                 </figure>
                                                 <!-- .techmarket-single-product-gallery-thumbnails__wrapper -->
@@ -101,38 +289,23 @@
                                             <h1 class="product_title entry-title">{{ $product->name }}</h1>
                                         </div>
                                         <!-- .single-product-header -->
-                                        <div class="single-product-meta">
-                                            <div class="brand">
-                                                <a href="#">
-                                                    <img alt="galaxy"
-                                                        src="{{ url('') }}/home/assets/images/brands/5.png">
-                                                </a>
-                                            </div>
-                                            <div class="cat-and-sku">
-                                                <span class="posted_in categories">
-                                                    <a rel="tag"
-                                                        href="product-category.html">{{ $product->category->name }} |</a>
-                                                    <a rel="tag"
-                                                        href="product-category.html">{{ $product->brand->name }}</a>
-                                                </span>
-                                            </div>
-                                            {{-- <div class="product-label">
-                                                <div class="ribbon label green-label">
-                                                    <span>A+</span>
-                                                </div>
-                                            </div> --}}
-                                        </div>
+
                                         <!-- .single-product-meta -->
                                         <div class="rating-and-sharing-wrapper">
                                             <div class="woocommerce-product-rating">
+                                                @php
+                                                    $averageRating = app(
+                                                        'App\Http\Controllers\CommentController',
+                                                    )->calculateAverageRating($product->id);
+                                                    $ratingCount = $comment->count();
+                                                @endphp
                                                 <div class="star-rating">
-                                                    <span style="width:100%">Đánh giá
-                                                        <strong class="rating">3.00</strong> out of 5 based on
-                                                        <span class="rating">1</span> customer rating</span>
+                                                    <span style="width:{{ ($averageRating / 5) * 100 }}%">Đánh giá
+                                                        <strong class="rating">{{ $averageRating }}</strong> out of 5 based
+                                                        on
+                                                        <span class="rating">{{ $ratingCount }}</span> customer
+                                                        rating</span>
                                                 </div>
-                                                <a rel="nofollow" class="woocommerce-review-link" href="#reviews">(<span
-                                                        class="count">1</span> customer
-                                                    review)</a>
                                             </div>
                                         </div>
                                         <!-- .rating-and-sharing-wrapper -->
@@ -158,220 +331,362 @@
                                                             <span
                                                                 class="woocommerce-Price-currencySymbol">$</span>997.00</span>
                                                     </ins> --}}
-                                                    @php
-                                                        $defaultVariant = $variants->sortBy('model.value')->first();
-                                                    @endphp
 
-                                                    <div class="choice-group">
-                                                        <span class="label">Dung lượng</span>
-                                                        <div class="choice-buttons">
-                                                            @foreach ($variants->groupBy('model.name') as $modelName => $variantGroup)
-                                                                @php
-                                                                    $isActive =
-                                                                        $modelName == $defaultVariant->model->name
-                                                                            ? 'active'
-                                                                            : '';
-                                                                @endphp
-                                                                <div class="choice storage-choice {{ $isActive }}"
-                                                                    data-value="{{ $modelName }}"
-                                                                    data-price="{{ optional($variantGroup->first())->discounted_price }}"
 
-                                                                    data-model-value="{{ $variantGroup->first()->model->id }}"
-                                                                    data-stock="{{ $variantGroup->first()->stock }}">
-                                                                    {{ $modelName }}
+                                                    @if (!empty($formattedVariants) && count($formattedVariants) > 0)
+                                                        @foreach ($groupedAttributes as $attributeName => $attributeData)
+                                                            <div class="choice-group">
+                                                                <span class="label">{{ $attributeName }}</span>
+                                                                <div class="choice-buttons">
+                                                                    @foreach ($attributeData['values'] as $value)
+                                                                        @php
+                                                                            // Kiểm tra nếu giá trị hiện tại trùng với defaultVariant
+                                                                            $isActive =
+                                                                                isset(
+                                                                                    $defaultVariant['attributes'][
+                                                                                        $attributeName
+                                                                                    ],
+                                                                                ) &&
+                                                                                $defaultVariant['attributes'][
+                                                                                    $attributeName
+                                                                                ]['id'] == $value['id'];
+                                                                        @endphp
+
+                                                                        <div class="choice {{ $isActive ? 'active' : '' }}"
+                                                                            data-value="{{ $value['value'] }}"
+                                                                            data-id="{{ $value['id'] }}"
+                                                                            data-attribute="{{ $attributeName }}">
+                                                                            {{ $value['value'] }}
+                                                                        </div>
+
+                                                                    @endforeach
                                                                 </div>
-                                                            @endforeach
-                                                        </div>
-                                                    </div>
+                                                            </div>
+                                                        @endforeach
 
-                                                    <div class="choice-group">
-                                                        <span class="label">Màu sắc</span>
-                                                        <div class="choice-buttons">
-                                                            @foreach ($variants->sortBy('color.name') as $variant)
-                                                                <div class="choice color-choice"
-                                                                    data-value="{{ $variant->color->name }}"
-                                                                    data-model="{{ $variant->model->name }}"
-                                                                    data-price="{{ optional($variantGroup->first())->discounted_price }}"
+                                                        <!-- Hiển thị giá và tồn kho -->
+                                                        <p>Số lượng tồn kho: <span
+                                                                id="stock-display">{{ $defaultVariant['stock'] }}</span>
+                                                        </p>
+                                                        <p class="price">
+                                                            <span class="woocommerce-Price-amount amount"
+                                                                id="price-display">
+                                                                {{ number_format($defaultVariant['discounted_price'], 0, ',', '.') }}
+                                                                đ
+                                                            </span>
+                                                        </p>
+                                                    @else
+                                                        {{-- <div class="choice storage-choice active" data-value="default"
+                                                            data-price="{{ $defaultVariant['discounted_price'] }}"
+                                                            data-stock="{{ $defaultVariant['stock'] }}">
+                                                            Mặc định (Không có biến thể)
+                                                        </div> --}}
+                                                        <p>Số lượng tồn kho: <span
+                                                                id="stock-display">{{ $defaultVariant['stock'] }}</span>
+                                                        </p>
+                                                        <p class="price">
+                                                            <span class="woocommerce-Price-amount amount"
+                                                                id="price-display">
+                                                                {{ number_format($defaultVariant['discounted_price'], 0, ',', '.') }}
+                                                                đ
+                                                            </span>
+                                                        </p>
 
-                                                                    data-stock="{{ $variant->stock }}"
-                                                                    style="display: none;">
-                                                                    <span>{{ $variant->color->name }}</span>
-                                                                </div>
-                                                            @endforeach
-                                                        </div>
-                                                    </div>
-                                                    <p>Số lượng tồn kho: <span
-                                                            id="stockQuantity">{{ $defaultVariant->stock }}</span></p>
-
-                                                    <p class="price">
-                                                        <span class="woocommerce-Price-amount amount" id="productPrice">
-                                                            {{ number_format($defaultVariant->discounted_price, 0, ',', '.') }} đ
-                                                        </span>
-                                                    </p>
-
-
-
+                                                        <br>
+                                                    @endif
                                                     <!-- .single-product-header -->
 
-                                                    <input type="hidden" name="quantity" value="1">
-                                                    <input type="hidden" name="variant_id" id="variant_id"
-                                                        value="">
-
                                                     <!-- .quantity -->
+                                                    <div class="cart-button-container">
+                                                        <input type="hidden" name="quantity" value="1">
+                                                        <input type="hidden" name="product_id"
+                                                            value="{{ $product->id }}">
+                                                            @if(!empty($variants) && isset($defaultVariant['id']))
+                                                            <input type="hidden" name="variant_id" id="variant-id" value="{{ $defaultVariant['id'] }}">
+                                                        @endif
+                                                        
 
-                                                    <button class="single_add_to_cart_button button alt"
-                                                        type="submit">Thêm vào giỏ hàng</button>
-                                                    <p id="outOfStockMessage" class="text-danger small">Sản phẩm đã hết
-                                                        hàng</p>
+                                                        <button class="single_add_to_cart_button button alt"
+                                                            type="submit">Thêm vào giỏ hàng</button>
+                                                        <p id="outOfStockMessage" class="text-danger small">Sản phẩm đã
+                                                            hết hàng</p>
+                                                    </div>
                                                     <!-- .cart -->
                                                 </div>
                                                 <!-- .product-actions -->
                                             </div>
                                         </form>
                                     </div>
-                                    </div>
-                                        <div class="tab-pane" id="tab-reviews" role="tabpanel">
-                                                <div class="techmarket-advanced-reviews" id="reviews">
-                                                    <div class="advanced-review row">
-                                                        <div class="advanced-review-rating">
-                                                            <h2 class="based-title">Đánh giá</h2>
-                                                            <div class="avg-rating">
-                                                                <span class="avg-rating-number">5.0</span>
-                                                                <div title="Rated 5.0 out of 5" class="star-rating">
-                                                                    <span style="width:100%"></span>
-                                                                </div>
+                                </div>
+                                <div class="tab-pane" id="tab-reviews" role="tabpanel">
+                                    <div class="techmarket-advanced-reviews" id="reviews">
+                                        <div class="advanced-review row">
+                                            <div class="advanced-review-rating">
+                                                <h2 class="based-title">Đánh giá</h2>
+                                                <div class="avg-rating">
+                                                    <span class="avg-rating-number">{{ $averageRating }}</span>
+                                                    <div title="Rated {{ $averageRating }} out of 5" class="star-rating">
+                                                        <span style="width:{{ ($averageRating / 5) * 100 }}%"></span>
+                                                    </div>
+                                                </div>
+                                                <!-- /.avg-rating -->
+                                                <div class="rating-histogram">
+                                                    @for ($i = 5; $i >= 1; $i--)
+                                                        @php
+                                                            $count = $comment->where('rate', $i)->count();
+                                                            $total = $comment->count();
+                                                            $percentage = $total > 0 ? ($count / $total) * 100 : 0;
+                                                        @endphp
+                                                        <div class="rating-bar">
+                                                            <div title="Rated {{ $i }} out of 5"
+                                                                class="star-rating">
+                                                                <span style="width:{{ ($i / 5) * 100 }}%"></span>
                                                             </div>
-                                                            <!-- /.avg-rating -->
-                                                            <div class="rating-histogram">
-                                                                <div class="rating-bar">
-                                                                    <div title="Rated 5 out of 5" class="star-rating">
-                                                                        <span style="width:100%"></span>
-                                                                    </div>
-                                                                    <div class="rating-count">1</div>
-                                                                    <div class="rating-percentage-bar">
-                                                                        <span class="rating-percentage" style="width:100%"></span>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="rating-bar">
-                                                                    <div title="Rated 4 out of 5" class="star-rating">
-                                                                        <span style="width:80%"></span>
-                                                                    </div>
-                                                                    <div class="rating-count zero">0</div>
-                                                                    <div class="rating-percentage-bar">
-                                                                        <span class="rating-percentage" style="width:0%"></span>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="rating-bar">
-                                                                    <div title="Rated 3 out of 5" class="star-rating">
-                                                                        <span style="width:60%"></span>
-                                                                    </div>
-                                                                    <div class="rating-count zero">0</div>
-                                                                    <div class="rating-percentage-bar">
-                                                                        <span class="rating-percentage" style="width:0%"></span>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="rating-bar">
-                                                                    <div title="Rated 2 out of 5" class="star-rating">
-                                                                        <span style="width:40%"></span>
-                                                                    </div>
-                                                                    <div class="rating-count zero">0</div>
-                                                                    <div class="rating-percentage-bar">
-                                                                        <span class="rating-percentage" style="width:0%"></span>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="rating-bar">
-                                                                    <div title="Rated 1 out of 5" class="star-rating">
-                                                                        <span style="width:20%"></span>
-                                                                    </div>
-                                                                    <div class="rating-count zero">0</div>
-                                                                    <div class="rating-percentage-bar">
-                                                                        <span class="rating-percentage" style="width:0%"></span>
-                                                                    </div>
-                                                                </div>
+                                                            <div class="rating-count">{{ $count }}</div>
+                                                            <div class="rating-percentage-bar">
+                                                                <span class="rating-percentage"
+                                                                    style="width:{{ $percentage }}%"></span>
                                                             </div>
-                                                            <!-- /.rating-histogram -->
                                                         </div>
-                                                        <!-- /.advanced-review-rating -->
-                                                        <div class="advanced-review-comment">
-                                                            <div id="review_form_wrapper">
-                                                                <div id="review_form">
-                                                                    <div class="comment-respond" id="respond">
-                                                                        <h3 class="comment-reply-title" id="reply-title">Thêm bình luận</h3>
-                                                                        <form novalidate="" class="comment-form" id="commentform" method="post" action="#">
-                                                                            <div class="comment-form-rating">
-                                                                                <label>Đánh giá của bạn</label>
-                                                                                <p class="stars">
-                                                                                    <span><a href="#" class="star-1">1</a><a href="#" class="star-2">2</a><a href="#" class="star-3">3</a><a href="#" class="star-4">4</a><a href="#" class="star-5">5</a></span>
+                                                    @endfor
+                                                </div>
+                                                <!-- /.rating-histogram -->
+                                            </div>
+                                            <!-- /.advanced-review-rating -->
+                                            <div class="advanced-review-comment">
+                                                <div id="review_form_wrapper">
+                                                    <div id="review_form">
+                                                        <div class="comment-respond" id="respond">
+                                                            <h3 class="comment-reply-title" id="reply-title">Thêm bình
+                                                                luận
+                                                            </h3>
+                                                            @if (session('success'))
+                                                                <div class="alert alert-success">
+                                                                    {{ session('success') }}
+                                                                </div>
+                                                            @endif
+                                                            @if (session('error'))
+                                                                <div class="alert alert-danger">
+                                                                    {{ session('error') }}
+                                                                </div>
+                                                            @endif
+                                                            @if (Auth::check())
+                                                                @php
+                                                                    $existingComment = $comment
+                                                                        ->where('user_id', Auth::id())
+                                                                        ->first();
+                                                                @endphp
+                                                                @if ($existingComment)
+                                                                    <p>Bạn đã bình luận cho sản phẩm này, mỗi người chỉ được
+                                                                        bình luận một lần cho một sản phẩm.</p>
+                                                                @else
+                                                                    <form novalidate="" class="comment-form"
+                                                                        id="commentform" method="post"
+                                                                        action="{{ route('client.comment.store') }}"
+                                                                        enctype="multipart/form-data">
+                                                                        @csrf
+                                                                        <div class="comment-form-rating">
+                                                                            <label>Đánh giá của bạn</label>
+                                                                            <p class="stars">
+                                                                                <span>
+                                                                                    <a href="#" class="star-1">1</a>
+                                                                                    <a href="#" class="star-2">2</a>
+                                                                                    <a href="#" class="star-3">3</a>
+                                                                                    <a href="#" class="star-4">4</a>
+                                                                                    <a href="#" class="star-5">5</a>
+                                                                                </span>
+                                                                            </p>
+                                                                            <input type="hidden" name="rate"
+                                                                                id="rating-value" value="0">
+                                                                            @error('rate')
+                                                                                @php $message = $message ?? ''; @endphp
+                                                                                <span
+                                                                                    class="text-danger">{{ $message }}</span>
+                                                                            @enderror
+                                                                        </div>
+                                                                        <p class="comment-form-comment">
+                                                                            <label for="comment">Bình luận của bạn</label>
+                                                                            <textarea aria-required="true" rows="8" cols="45" name="comment" id="comment"></textarea>
+                                                                            @error('comment')
+                                                                                @php $message = $message ?? ''; @endphp
+                                                                                <span
+                                                                                    class="text-danger">{{ $message }}</span>
+                                                                            @enderror
+                                                                        </p>
+                                                                        <div class="col-md-6 mb-3">
+                                                                            <label for="media"
+                                                                                class="form-label">Ảnh/Video</label>
+                                                                            <input class="form-control" type="file"
+                                                                                id="media" name="media"
+                                                                                accept="image/*,video/*">
+                                                                            <div id="media-preview-container"
+                                                                                class="mt-3"
+                                                                                style="display: flex; gap: 10px; flex-wrap: wrap;">
+                                                                            </div>
+                                                                        </div>
+                                                                        <p class="form-submit">
+                                                                            <input type="submit" value="Bình luận"
+                                                                                class="submit" id="submit"
+                                                                                name="submit">
+                                                                            <input type="hidden" id="comment_post_ID"
+                                                                                value="{{ $product->id }}"
+                                                                                name="product_id">
+                                                                            <input type="hidden" value="0"
+                                                                                id="comment_parent" name="comment_parent">
+                                                                            <input type="hidden" name="file_id"
+                                                                                id="file_id" value="">
+                                                                        </p>
+                                                                    </form>
+                                                                @endif
+                                                            @else
+                                                                <p>Bạn phải <a href="{{ route('login.client') }}">đăng
+                                                                        nhập</a>
+                                                                    để bình luận.</p>
+                                                            @endif
+                                                            <!-- /.comment-form -->
+                                                        </div>
+                                                        <!-- /.comment-respond -->
+                                                    </div>
+                                                    <!-- /#review_form -->
+                                                </div>
+                                                <!-- /#review_form_wrapper -->
+                                            </div>
+                                            <!-- /.advanced-review-comment -->
+                                        </div>
+                                        <!-- /.advanced-review -->
+                                        @foreach ($comment as $comments)
+                                            @if ($comments->status_id == 1)
+                                                <div id="comments">
+                                                    <ol class="commentlist">
+                                                        <li id="li-comment-83"
+                                                            class="comment byuser comment-author-admin bypostauthor even thread-even depth-1">
+                                                            <div class="comment_container" id="comment-83">
+                                                                <div class="comment-text">
+                                                                    <div class="comment-body">
+
+                                                                        <div class="comment-content">
+                                                                            <p class="comment-author"
+                                                                                style="width: max-content;">
+                                                                                {{ $comments->user->name }}
+                                                                            </p>
+                                                                            <p class="comment-meta">
+                                                                                <time datetime="2017-06-21T08:05:40+00:00"
+                                                                                    itemprop="datePublished"
+                                                                                    class="woocommerce-review__published-date">{{ $comments->created_at }}</time>
+                                                                            <div class="star-rating">
+                                                                                <span
+                                                                                    style="width:{{ $comments->rate * 20 }}%">Rated
+                                                                                    <strong class="rating">5</strong> out
+                                                                                    of
+                                                                                    5</span>
+                                                                            </div>
+                                                                            </p>
+                                                                            <div class="description">
+                                                                                <p style="width: 1000px;">
+                                                                                    {{ $comments->content }}
+                                                                                </p>
+                                                                                <p>
+                                                                                    @if ($comments->storage && strtolower(pathinfo($comments->storage->file, PATHINFO_EXTENSION)) === 'mp4')
+                                                                                        <video width="auto"
+                                                                                            height="100" controls>
+                                                                                            <source
+                                                                                                src="{{ asset('admin/assets/images/comment/' . $comments->storage->file) }}"
+                                                                                                type="video/mp4">
+                                                                                            Trình duyệt của bạn không hỗ trợ
+                                                                                            thẻ video.
+                                                                                        </video>
+                                                                                    @elseif($comments->storage)
+                                                                                        <img src="{{ asset('admin/assets/images/comment/' . $comments->storage->file) }}"
+                                                                                            alt=""
+                                                                                            style="width: auto; max-height: 150px;">
+                                                                                    @endif
+                                                                                    @if ($comments->replies->isNotEmpty() && $comments->replies->first()->rep_content)
+                                                                                        <br>
+                                                                                        <button
+                                                                                            class="toggle-replies-button"
+                                                                                            data-comment-id="{{ $comments->id }}">Hiển
+                                                                                            thị phản hồi</button>
+                                                                                        <div class="replies-container"
+                                                                                            id="replies-container-{{ $comments->id }}"
+                                                                                            style="display: none;">
+                                                                                            @foreach ($comments->replies as $reply)
+                                                                                                <div
+                                                                                                    style="margin-left: 30px">
+                                                                                                    <p class="comment-author"
+                                                                                                        style="width: max-content;">
+                                                                                                        Admin</p>
+                                                                                                    <p
+                                                                                                        style="width: 1000px;">
+                                                                                                        {{ $reply->rep_content }}
+                                                                                                    </p>
+                                                                                                </div>
+                                                                                            @endforeach
+                                                                                        </div>
+                                                                                    @else
+                                                                                        <br>
+                                                                                        @if (Auth::check() && Auth::user()->role_id == 1)
+                                                                                            <button class="reply-button"
+                                                                                                data-comment-id="{{ $comments->id }}">Phản
+                                                                                                hồi</button>
+                                                                                        @endif
+                                                                                        <div class="reply-input"
+                                                                                            id="reply-input-{{ $comments->id }}"
+                                                                                            style="display: none;">
+                                                                                            <form method="post"
+                                                                                                action="{{ route('client.comment.reply') }}">
+                                                                                                @csrf
+                                                                                                <textarea rows="3" name="rep_content" placeholder="Nhập phản hồi"></textarea>
+                                                                                                <input type="hidden"
+                                                                                                    name="comment_id"
+                                                                                                    value="{{ $comments->id }}">
+                                                                                                <input type="hidden"
+                                                                                                    name="comment_content"
+                                                                                                    value="{{ $comments->content }}">
+                                                                                                <input type="hidden"
+                                                                                                    name="comment_rate"
+                                                                                                    value="{{ $comments->rate }}">
+                                                                                                <input type="hidden"
+                                                                                                    name="comment_user_name"
+                                                                                                    value="{{ $comments->user->name }}">
+                                                                                                <input type="hidden"
+                                                                                                    name="comment_created_at"
+                                                                                                    value="{{ $comments->created_at }}">
+                                                                                                <input type="hidden"
+                                                                                                    name="comment_product_id"
+                                                                                                    value="{{ $comments->product_id }}">
+                                                                                                <input type="hidden"
+                                                                                                    name="file_id"
+                                                                                                    value="{{ $comments->file_id }}">
+                                                                                                <button type="submit"
+                                                                                                    class="submit-reply">Gửi</button>
+                                                                                            </form>
+                                                                                        </div>
+                                                                                    @endif
                                                                                 </p>
                                                                             </div>
-                                                                            <p class="comment-form-comment">
-                                                                                <label for="comment">Bình luận của bạn</label>
-                                                                                <textarea aria-required="true" rows="8" cols="45" name="comment" id="comment"></textarea>
-                                                                            </p>
-                                                                            <p class="comment-form-author">
-                                                                                <label for="author">Tên
-                                                                                </label>
-                                                                                <input type="text" aria-required="true" size="30" value="" name="author" id="author">
-                                                                            </p>
-                                                                            <div class="col-md-6 mb-3">
-                                                                                <label for="images" class="form-label">Ảnh </label>
-                                                                                <input class="form-control" type="file" id="images" name="image"
-                                                                                    accept="image/*">
-                                                                                <div id="image-preview-container" class="mt-3"
-                                                                                    style="display: flex; gap: 10px; flex-wrap: wrap;"></div>
-                                                                            </div>
-                                                                            <p class="form-submit">
-                                                                                <input type="submit" value="Bình luận" class="submit" id="submit" name="submit">
-                                                                                <input type="hidden" id="comment_post_ID" value="185" name="comment_post_ID">
-                                                                                <input type="hidden" value="0" id="comment_parent" name="comment_parent">
-                                                                            </p>
-                                                                        </form>
-                                                                        <!-- /.comment-form -->
+                                                                        </div>
                                                                     </div>
-                                                                    <!-- /.comment-respond -->
+                                                                    <!-- /.description -->
                                                                 </div>
-                                                                <!-- /#review_form -->
+                                                                <!-- /.comment-text -->
                                                             </div>
-                                                            <!-- /#review_form_wrapper -->
-                                                        </div>
-                                                        <!-- /.advanced-review-comment -->
-                                                    </div>
-                                                    <!-- /.advanced-review -->
-                                                    <div id="comments">
-                                                        <ol class="commentlist">
-                                                            <li id="li-comment-83" class="comment byuser comment-author-admin bypostauthor even thread-even depth-1">
-                                                                <div class="comment_container" id="comment-83">
-                                                                    <div class="comment-text">
-                                                                        <div class="star-rating">
-                                                                            <span style="width:100%">Rated
-                                                                                <strong class="rating">5</strong> out of 5</span>
-                                                                        </div>
-                                                                        <p class="meta">
-                                                                            <strong itemprop="author" class="woocommerce-review__author">first last</strong>
-                                                                            <span class="woocommerce-review__dash">&ndash;</span>
-                                                                            <time datetime="2017-06-21T08:05:40+00:00" itemprop="datePublished" class="woocommerce-review__published-date">June 21, 2017</time>
-                                                                        </p>
-                                                                        <div class="description">
-                                                                            <p>Wow great product</p>
-                                                                        </div>
-                                                                        <!-- /.description -->
-                                                                    </div>
-                                                                    <!-- /.comment-text -->
-                                                                </div>
-                                                                <!-- /.comment_container -->
-                                                            </li>
-                                                            <!-- /.comment -->
-                                                        </ol>
-                                                        <!-- /.commentlist -->
-                                                    </div>
-                                                    <!-- /#comments -->
+                                                            <!-- /.comment_container -->
+                                                        </li>
+                                                        <!-- /.comment -->
+                                                    </ol>
+                                                    <!-- /.commentlist -->
                                                 </div>
-                                                <!-- /.techmarket-advanced-reviews -->
-                                            </div>
-                                        <!-- .product-actions-wrapper -->
-                                    
-                                    <!-- .entry-summary -->
-                               
+                                            @endif
+                                        @endforeach
+
+                                        <!-- /#comments -->
+                                    </div>
+                                    <!-- /.techmarket-advanced-reviews -->
+                                </div>
+                                <!-- .product-actions-wrapper -->
+
+                                <!-- .entry-summary -->
+
                                 <!-- .single-product-wrapper -->
                                 {{-- OTHER --}}
                                 <!-- .brands-carousel -->
@@ -388,139 +703,237 @@
         </div>
     </div>
     <script>
-        document.getElementById('images').addEventListener('change', function (event) {
-            let previewContainer = document.getElementById('image-preview-container');
+        document.getElementById('media').addEventListener('change', function(event) {
+            let previewContainer = document.getElementById('media-preview-container');
             previewContainer.innerHTML = '';
 
             Array.from(event.target.files).forEach(file => {
                 let reader = new FileReader();
-                reader.onload = function (e) {
-                    let img = document.createElement('img');
-                    img.src = e.target.result;
-                    img.style.width = '100px';
-                    img.style.height = '100px';
-                    img.style.objectFit = 'cover';
-                    img.style.borderRadius = '5px';
-                    previewContainer.appendChild(img);
+                reader.onload = function(e) {
+                    let element;
+                    if (file.type.startsWith('image/')) {
+                        element = document.createElement('img');
+                        element.style.width = '100px';
+                        element.style.height = '100px';
+                        element.style.objectFit = 'cover';
+                        element.style.borderRadius = '5px';
+                    } else if (file.type.startsWith('video/')) {
+                        element = document.createElement('video');
+                        element.controls = true;
+                        element.style.width = '150px';
+                        element.style.height = '100px';
+                    }
+                    element.src = e.target.result;
+                    previewContainer.appendChild(element);
                 };
                 reader.readAsDataURL(file);
             });
         });
+
+        // Ensure the selected rating is displayed correctly on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            let rating = document.getElementById('rating-value').value;
+            if (rating > 0) {
+                document.querySelector('.star-' + rating).classList.add('selected');
+            }
+        });
     </script>
     <script>
+        document.querySelectorAll('.stars a').forEach(star => {
+            star.addEventListener('click', function(event) {
+                event.preventDefault();
+                let rating = this.classList[0].split('-')[1];
+                document.getElementById('rating-value').value = rating;
+                document.querySelectorAll('.stars a').forEach(s => s.classList.remove('selected'));
+                this.classList.add('selected');
+            });
+
+            star.addEventListener('mouseover', function() {
+                document.querySelectorAll('.stars a').forEach(s => s.classList.remove('hover'));
+                this.classList.add('hover');
+            });
+
+            star.addEventListener('mouseout', function() {
+                document.querySelectorAll('.stars a').forEach(s => s.classList.remove('hover'));
+            });
+        });
+
+        document.querySelector('.stars').addEventListener('mouseout', function() {
+            let rating = document.getElementById('rating-value').value;
+            document.querySelectorAll('.stars a').forEach(s => s.classList.remove('selected'));
+            if (rating > 0) {
+                document.querySelector('.star-' + rating).classList.add('selected');
+            }
+        });
+
+        // Ensure the selected rating is displayed correctly on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            let rating = document.getElementById('rating-value').value;
+            if (rating > 0) {
+                document.querySelector('.star-' + rating).classList.add('selected');
+            }
+        });
+    </script>
+
+    <script>
+        document.querySelectorAll('.reply-button').forEach(button => {
+            button.addEventListener('click', function() {
+                const commentId = this.getAttribute('data-comment-id');
+                const replyInput = document.getElementById(`reply-input-${commentId}`);
+                replyInput.style.display = replyInput.style.display === 'none' ? 'block' : 'none';
+            });
+        });
+    </script>
+
+    <script>
+        document.querySelectorAll('.toggle-replies-button').forEach(button => {
+            button.addEventListener('click', function() {
+                const commentId = this.getAttribute('data-comment-id');
+                const repliesContainer = document.getElementById(`replies-container-${commentId}`);
+                repliesContainer.style.display = repliesContainer.style.display === 'none' ? 'block' :
+                    'none';
+                this.textContent = repliesContainer.style.display === 'none' ? 'Hiển thị phản hồi' :
+                    'Ẩn phản hồi';
+            });
+        });
+    </script>
+
+    {{-- Huy --}}
+    <script>
+document.addEventListener("DOMContentLoaded", function() {
+    const variants = @json($formattedVariants);
+    let selectedAttributes = {};
+    let selectedVariantId = @json($defaultVariant['id'] ?? null);
+
+    console.log("Mặc định :",selectedVariantId);
+
+    const productPriceElement = document.getElementById("price-display");
+    const stockQuantityElement = document.getElementById("stock-display");
+    const variantIdInput = document.getElementById("variant-id");
+    console.log("Mặc định input :",variantIdInput);
+
+
+
+    function updateVariantInfo() {
+        console.log("Kiểm tra biến thể...");
+        console.log("Thuộc tính đã chọn:", selectedAttributes);
+
+        let selectedVariant = variants.find(v =>
+            Object.keys(selectedAttributes).every(attr => v.attributes[attr]?.value === selectedAttributes[attr])
+        );
+
+        if (selectedVariant) {
+            console.log("Biến thể tìm thấy:", selectedVariant);
+            productPriceElement.innerText = new Intl.NumberFormat('vi-VN').format(selectedVariant.discounted_price) + " đ";
+            stockQuantityElement.innerText = selectedVariant.stock;
+
+            selectedVariantId = selectedVariant.id; // Cập nhật ID biến thể đã chọn
+            variantIdInput.value = selectedVariantId; // Cập nhật input ẩn
+            console.log("Sau khi chọn:",selectedVariantId);
+
+        } else {
+            console.warn("Không có biến thể phù hợp!");
+            productPriceElement.innerText = "Không có biến thể này!";
+            stockQuantityElement.innerText = "0";
+
+            selectedVariantId = null;
+            variantIdInput.value = "";
+        }
+    }
+    function updateAvailableChoices() {
+        console.log("Cập nhật danh sách lựa chọn...");
+        let firstGroup = document.querySelector(".choice-group:first-child");
+        let firstAttribute = firstGroup.querySelector(".label").innerText.trim();
+        let selectedFirstValue = selectedAttributes[firstAttribute];
+
+        if (!selectedFirstValue) return;
+
+        let filteredVariants = variants.filter(v =>
+            v.attributes[firstAttribute]?.value === selectedFirstValue
+        );
+
+        console.log("Biến thể hợp lệ sau khi lọc:", filteredVariants);
+
+        let availableValues = {};
+        filteredVariants.forEach(variant => {
+            Object.keys(variant.attributes).forEach(attr => {
+                if (attr !== firstAttribute) {
+                    if (!availableValues[attr]) {
+                        availableValues[attr] = new Set();
+                    }
+                    availableValues[attr].add(variant.attributes[attr].value);
+                }
+            });
+        });
+
         document.querySelectorAll(".choice").forEach(choice => {
-            choice.addEventListener("click", function() {
-                let parent = this.parentElement;
-                parent.querySelectorAll(".choice").forEach(c => c.classList.remove("selected"));
-                this.classList.add("selected");
-            });
-        });
-    </script>
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const variants = @json($variants);
-            console.log(variants);
-            let selectedStorage = null;
-            let selectedColor = null;
+            let attribute = choice.getAttribute("data-attribute");
+            let value = choice.getAttribute("data-value");
 
-            const addToCartButton = document.querySelector(".single_add_to_cart_button");
-            const productPriceElement = document.getElementById("productPrice");
-            const variantIdInput = document.getElementById("variant_id");
-            const stockQuantityElement = document.getElementById("stockQuantity");
-            const outOfStockMessage = document.getElementById("outOfStockMessage");
-
-            function updateAddToCartButton(stock) {
-                if (stock === 0) {
-                    addToCartButton.style.display = "none";
-                    outOfStockMessage.style.display = "block";
-                } else {
-                    addToCartButton.style.display = "block";
-                    outOfStockMessage.style.display = "none";
-                }
+            if (attribute === firstAttribute) {
+                choice.style.display = "inline-block";
+                return;
             }
 
-            function updatePriceAndVariantId() {
-                if (selectedStorage && selectedColor) {
-                    const selectedVariant = variants.find(v =>
-                        v.model.name === selectedStorage && v.color.name === selectedColor
-                    );
-                    if (selectedVariant) {
-                        productPriceElement.innerText = new Intl.NumberFormat('vi-VN').format(selectedVariant
-                            .discounted_price) + " đ";
-                        variantIdInput.value = selectedVariant.id;
-                        stockQuantityElement.innerText = selectedVariant.stock;
-
-                        updateAddToCartButton(selectedVariant.stock);
-                    }
-                }
-            }
-
-            function showColorsForModel(model) {
-                let firstColorSelected = false;
-                document.querySelectorAll(".color-choice").forEach(color => {
-                    if (color.getAttribute("data-model") === model) {
-                        color.style.display = "block"; // Show the color choice
-                        if (!firstColorSelected) {
-                            color.classList.add("selected");
-                            selectedColor = color.getAttribute("data-value");
-                            firstColorSelected = true;
-                        }
-                    } else {
-                        color.style.display = "none"; // Hide irrelevant colors
-                        color.classList.remove("selected");
-                    }
-                });
-            }
-
-            // Add event listeners for color choices
-            document.querySelectorAll(".color-choice").forEach(choice => {
-                choice.addEventListener("click", function() {
-                    selectedColor = this.getAttribute("data-value");
-                    document.querySelectorAll(".color-choice").forEach(c => c.classList.remove(
-                        "selected"));
-                    this.classList.add("selected");
-                    updatePriceAndVariantId();
-                });
-            });
-
-            // Add event listeners for storage choices
-            document.querySelectorAll(".storage-choice").forEach(choice => {
-                choice.addEventListener("click", function() {
-                    selectedStorage = this.getAttribute("data-value");
-                    // const selectedPrice = this.getAttribute("data-price");
-                    const selectedPrice = parseFloat(this.getAttribute("data-price")) || 0;
-
-
-                    showColorsForModel(selectedStorage);
-                    productPriceElement.innerText = new Intl.NumberFormat('vi-VN').format(
-                        selectedPrice) + " đ";
-
-                    document.querySelectorAll(".storage-choice").forEach(item => item.classList
-                        .remove("active"));
-                    this.classList.add("active");
-
-                    updatePriceAndVariantId();
-                });
-            });
-
-            // Set the default model and show its colors
-            let minModelId = Math.min(...variants.map(v => v.model.id));
-            let defaultModelChoice = document.querySelector(`.storage-choice[data-model-value="${minModelId}"]`);
-
-            if (defaultModelChoice) {
-                defaultModelChoice.click(); // Simulate a click to trigger the filtering
+            if (availableValues[attribute] && availableValues[attribute].has(value)) {
+                choice.style.display = "inline-block";
             } else {
-                // Fallback in case no default model is found
-                const defaultModel = document.querySelector(".storage-choice.active");
-                if (defaultModel) {
-                    selectedStorage = defaultModel.getAttribute("data-value");
-                    const selectedPrice = defaultModel.getAttribute("data-price");
+                choice.style.display = "none";
+            }
+        });
 
-                    showColorsForModel(selectedStorage);
-                    productPriceElement.innerText = new Intl.NumberFormat('vi-VN').format(selectedPrice) + " đ";
-                    updatePriceAndVariantId();
+        document.querySelectorAll(".choice-group").forEach((group, index) => {
+            if (index > 0) {
+                let choices = group.querySelectorAll(".choice");
+                let firstVisibleChoice = Array.from(choices).find(choice => choice.style.display !== "none");
+                if (firstVisibleChoice) {
+                    let attribute = group.querySelector(".label").innerText.trim();
+                    selectedAttributes[attribute] = firstVisibleChoice.getAttribute("data-value");
+
+                    choices.forEach(c => c.classList.remove("selected"));
+                    firstVisibleChoice.classList.add("selected");
                 }
             }
         });
+
+        updateVariantInfo();
+    }
+
+    function initializeDefaultSelection() {
+        let firstGroup = document.querySelector(".choice-group:first-child");
+        if (firstGroup) {
+            let firstChoice = firstGroup.querySelector(".choice");
+            if (firstChoice) {
+                let attribute = firstGroup.querySelector(".label").innerText.trim();
+                selectedAttributes[attribute] = firstChoice.getAttribute("data-value");
+
+                firstGroup.querySelectorAll(".choice").forEach(c => c.classList.remove("selected"));
+                firstChoice.classList.add("selected");
+            }
+        }
+
+        updateAvailableChoices();
+    }
+
+    document.querySelectorAll(".choice").forEach(choice => {
+        choice.addEventListener("click", function() {
+            let group = this.closest(".choice-group");
+            let attribute = group.querySelector(".label").innerText.trim();
+
+            group.querySelectorAll(".choice").forEach(c => c.classList.remove("selected"));
+            this.classList.add("selected");
+
+            selectedAttributes[attribute] = this.getAttribute("data-value");
+
+            updateAvailableChoices();
+        });
+    });
+
+    initializeDefaultSelection();
+    updateVariantInfo();
+});
+
     </script>
+
+
 @endsection
