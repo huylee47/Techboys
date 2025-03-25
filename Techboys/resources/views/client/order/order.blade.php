@@ -11,14 +11,20 @@
                             <div class="woocommerce">
                                 <div class="woocommerce-order">
                                     <h2>Theo dõi đơn hàng</h2>
+                                    <!-- Search Order Number -->
+                                    <div class="search-order">
+                                        <input type="text" id="searchOrder" placeholder="Tìm kiếm mã đơn hàng">
+                                        <button class="btn btn-primary" onclick="searchOrder()">Tìm kiếm</button>
+                                    </div>
+                                    <!-- End of Search Order Number -->
                                     <table class="table table-bordered">
                                         <thead>
                                             <tr>
                                                 <th>Mã đơn hàng</th>
                                                 <th>Sản phẩm</th>
                                                 <th>Số lượng</th>
-                                                <th>Phương thức thanh toán</th>
-                                                <th>Trạng thái thanh toán</th>
+                                                <th>PT thanh toán</th>
+                                                <th>TT thanh toán</th>
                                                 <th>Trạng thái</th>
                                                 <th>Tổng cộng</th>
                                                 <th>Hành động</th>
