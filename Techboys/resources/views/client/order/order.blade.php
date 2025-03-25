@@ -24,8 +24,8 @@
                                                     <th>Mã đơn hàng</th>
                                                     <th>Sản phẩm</th>
                                                     <th>Số lượng</th>
-                                                    <th>PT thanh toán</th>
-                                                    <th>TT thanh toán</th>
+                                                    {{-- <th>PT thanh toán</th>
+                                                    <th>TT thanh toán</th> --}}
                                                     <th>Trạng thái</th>
                                                     <th>Tổng cộng</th>
                                                     <th>Hành động</th>
@@ -46,8 +46,8 @@
                                                                     {{ $detail->quantity }}<br>
                                                                 @endforeach
                                                             </td>
-                                                            <td>{{ $bill->payment_method == 2 ? 'Tiền mặt' : 'Chuyển khoản' }}</td>
-                                                            <td>{{ $bill->payment_status == 0 ? 'Chưa thanh toán' : 'Đã thanh toán' }}</td>
+                                                            {{-- <td>{{ $bill->payment_method == 2 ? 'Tiền mặt' : 'Chuyển khoản' }}</td>
+                                                            <td>{{ $bill->payment_status == 0 ? 'Chưa thanh toán' : 'Đã thanh toán' }}</td> --}}
                                                             <td>{{ $bill->status->name }}</td>
                                                             <td>{{ number_format($bill->total, 0, ',', '.') }} VND</td>
                                                             <td><button class="btn btn-danger">Hủy đơn</button></td>
