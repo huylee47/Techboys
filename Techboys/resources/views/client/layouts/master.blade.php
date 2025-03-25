@@ -182,7 +182,7 @@
                             <ul id="menu-secondary-menu" class="nav">
                                 <li
                                     class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2802 animate-dropdown">
-                                    <a title="Track Your Order" href="track-your-order.html">
+                                    <a title="Track Your Order" href="{{ route('client.orders') }}">
                                         <i class="tm tm-order-tracking"></i>Theo dõi đơn hàng</a>
                                 </li>
                                 <li class="menu-item">
@@ -411,8 +411,8 @@
             </div>
         </header>
         <!-- ============================= Header End ============================= -->
-        @yield('main');
-        @yield('loading');
+        @yield('main')
+        @yield('loading')
         <!-- Icon mở chat -->
         <div id="chat-icon" class="real-time-icon">
             {{-- <img src="{{ asset('images/messenger-icon.png') }}" width="50" height="50" alt="Chat"> --}}
