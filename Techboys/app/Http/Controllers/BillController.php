@@ -17,6 +17,7 @@ use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class BillController extends Controller
 {
@@ -211,7 +212,9 @@ class BillController extends Controller
     //client
     public function indexClient()
     {
-        $loadAll = Bill::with(['billDetails.product', 'status'])->get();
+        $loadAll = Bill::with(['billDetails.product', 'status'])
+                       ->where('user_id', Auth::id())
+                       ->get();
         return view('client.order.order', compact('loadAll'));
     }
 }
