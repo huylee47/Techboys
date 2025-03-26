@@ -39,8 +39,4 @@ class ProductVariant extends Model
     
         return $this->product ? $this->product->discounted_price : null;
     }
-    
-    
-
-
 }
