@@ -221,13 +221,20 @@ class BillController extends Controller
     public function searchOrder(Request $request)
     {
         $orderId = $request->input('order_id');
-        $searchedOrder = Bill::with(['billDetails.product', 'status'])
-                             ->where('order_id', $orderId)
-                             ->first();
+        $phone = $request->input('phone');
 
-        $loadAll = Bill::with(['billDetails.product', 'status'])
-                       ->where('user_id', Auth::id())
-                       ->get();
+        $query = Bill::with(['billDetails.product', 'status'])->where('order_id', $orderId);
+
+        // If the user is not logged in, validate the phone number
+        if (!Auth::check()) {
+            $query->where('phone', $phone);
+        }
+
+        $searchedOrder = $query->first();
+
+        $loadAll = Auth::check() ? Bill::with(['billDetails.product', 'status'])
+                                       ->where('user_id', Auth::id())
+                                       ->get() : [];
 
         return view('client.order.order', compact('searchedOrder', 'loadAll'));
     }
