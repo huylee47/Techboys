@@ -225,6 +225,10 @@ class BillController extends Controller
                              ->where('order_id', $orderId)
                              ->first();
 
-        
+        $loadAll = Bill::with(['billDetails.product', 'status'])
+                       ->where('user_id', Auth::id())
+                       ->get();
+
+        return view('client.order.order', compact('searchedOrder', 'loadAll'));
     }
 }
