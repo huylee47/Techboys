@@ -170,13 +170,19 @@ class ProductController extends Controller
     public function filter(Request $request)
     {
         $brands = Brand::all();
-
         $query = Product::query();
 
         if ($request->has('brand_id')) {
             $query->whereIn('brand_id', $request->brand_id);
         }
 
+        // Lọc theo khoảng giá với giá trị tối đa từ range slider
+        if ($request->has('price_range')) {
+            $maxPrice = (int) $request->price_range;
+            $query->whereHas('variants', function ($q) use ($maxPrice) {
+                $q->where('price', '<=', $maxPrice);
+            });
+        }
 
         $products = $query->paginate(21)->appends($request->query());
 
