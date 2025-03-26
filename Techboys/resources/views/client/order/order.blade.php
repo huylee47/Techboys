@@ -13,27 +13,30 @@
                                         <h2>Theo dõi đơn hàng</h2>
                                         <!-- Search Order Number -->
                                         <div class="search-order">
-                                            <input type="text" id="searchOrder" placeholder="Tìm kiếm mã đơn hàng">
-                                            <button class="btn btn-primary" onclick="searchOrder()">Tìm kiếm</button>
+                                            <form action="{{ route('client.orders.search') }}" method="GET">
+                                                <input type="text" name="order_id" placeholder="Nhập mã đơn hàng" required>
+                                                <button type="submit" class="btn btn-primary">Tìm kiếm</button>
+                                            </form>
                                         </div>
                                         <br>
                                         <!-- End of Search Order Number -->
-                                        <table class="table table-bordered">
-                                            <thead>
-                                                <tr>
-                                                    <th>Mã đơn hàng</th>
-                                                    <th>Sản phẩm</th>
-                                                    <th>Số lượng</th>
-                                                    {{-- <th>PT thanh toán</th>
-                                                    <th>TT thanh toán</th> --}}
-                                                    <th>Trạng thái</th>
-                                                    <th>Tổng cộng</th>
-                                                    <th>Hành động</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody id="orderTableBody">
-                                                @foreach ($loadAll as $bill)
-                                                    @if ($bill->user_id == auth()->id())
+                                       
+                                            <!-- Display all orders -->
+                                            <table class="table table-bordered">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Mã đơn hàng</th>
+                                                        <th>Sản phẩm</th>
+                                                        <th>Số lượng</th>
+                                                        {{-- <th>PT thanh toán</th>
+                                                        <th>TT thanh toán</th> --}}
+                                                        <th>Trạng thái</th>
+                                                        <th>Tổng cộng</th>
+                                                        <th>Hành động</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="orderTableBody">
+                                                    @foreach ($loadAll as $bill)
                                                         <tr>
                                                             <td>{{ $bill->order_id }}</td>
                                                             <td>
@@ -52,10 +55,10 @@
                                                             <td>{{ number_format($bill->total, 0, ',', '.') }} VND</td>
                                                             <td><button class="btn btn-danger">Hủy đơn</button></td>
                                                         </tr>
-                                                    @endif
-                                                @endforeach
-                                            </tbody>
-                                        </table>
+                                                    @endforeach
+                                                </tbody>
+                                            </table>
+                                        @endif
                                     </div>
                                     <!-- .woocommerce-order -->
                                 </div>
@@ -74,20 +77,3 @@
         <!-- .col-full -->
     </div>
 @endsection
-
-
-<script>
-    function searchOrder() {
-        const searchValue = document.getElementById('searchOrder').value.toLowerCase();
-        const rows = document.querySelectorAll('#orderTableBody tr');
-
-        rows.forEach(row => {
-            const orderId = row.querySelector('td:first-child').textContent.toLowerCase();
-            if (orderId.includes(searchValue)) {
-                row.style.display = '';
-            } else {
-                row.style.display = 'none';
-            }
-        });
-    }
-</script>
