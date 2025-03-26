@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('product_id')->constrained()->onDelete('cascade');
             // $table->foreignId('color_id');
             // $table->foreignId('model_id');
-            $table->string('attribute_values')->nullable();
+            $table->json('attribute_values')->nullable();
             $table->decimal('price',20,2);
             $table->integer('stock')->default(0);
             $table->softDeletes();
