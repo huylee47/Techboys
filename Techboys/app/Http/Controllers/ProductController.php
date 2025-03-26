@@ -123,11 +123,8 @@ class ProductController extends Controller
 
     public function productList(Request $request)
     {
-        // Lấy danh sách thương hiệu và model
         $brands = Brand::all();
         
-
-        // Tạo query sản phẩm
         $query = Product::query();
 
         if ($request->has('brand_id') && !empty($request->brand_id)) {
@@ -137,11 +134,7 @@ class ProductController extends Controller
         if ($request->has('model_id') && !empty($request->model_id)) {
             $query->whereIn('model_id', $request->model_id);
         }
-
-        // Phân trang sản phẩm
         $products = $query->paginate(21);
-
-        // Trả về view chính
         return view('client.product.list', compact('products', 'brands', 'models'));
     }
 
