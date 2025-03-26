@@ -162,7 +162,7 @@ class ProductController extends Controller
         // Nếu là tìm kiếm bằng nút "Tìm kiếm", hiển thị trang search.blade.php
         $products = Product::where('name', 'LIKE', "%{$keyword}%")->paginate(12);
         $brands = Brand::all();
-        
+
 
         return view('client.product.search', compact('products', 'keyword', 'brands'));
     }
