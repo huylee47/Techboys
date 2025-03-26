@@ -217,4 +217,14 @@ class BillController extends Controller
                        ->get();
         return view('client.order.order', compact('loadAll'));
     }
+
+    public function searchOrder(Request $request)
+    {
+        $orderId = $request->input('order_id');
+        $searchedOrder = Bill::with(['billDetails.product', 'status'])
+                             ->where('order_id', $orderId)
+                             ->first();
+
+        
+    }
 }
