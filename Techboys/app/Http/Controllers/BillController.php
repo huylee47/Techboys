@@ -232,6 +232,10 @@ class BillController extends Controller
 
         $searchedOrder = $query->first();
 
+        if (!$searchedOrder) {
+            return redirect()->route('client.orders')->with('error', 'Không tìm thấy đơn hàng phù hợp!');
+        }
+
         $loadAll = Auth::check() ? Bill::with(['billDetails.product', 'status'])
                                        ->where('user_id', Auth::id())
                                        ->get() : [];
