@@ -39,8 +39,6 @@ class Product extends Model
         return $this->hasOne(Promotion::class);
     }
 
-
-
     public function getDiscountedPriceAttribute()
     {
         $promotion = $this->promotion;
