@@ -91,7 +91,11 @@
                                                             <td>{{ $bill->payment_status == 0 ? 'Chưa thanh toán' : 'Đã thanh toán' }}</td> --}}
                                                             <td>{{ $bill->status->name }}</td>
                                                             <td>{{ number_format($bill->total, 0, ',', '.') }} VND</td>
-                                                            <td><button class="btn btn-danger">Hủy đơn</button></td>
+                                                            <td>
+                                                                @if($bill->status->id == 1)
+                                                                    <button class="btn btn-danger">Hủy đơn</button>
+                                                                @endif
+                                                            </td>
                                                         </tr>
                                                     @endforeach
                                                 </tbody>
