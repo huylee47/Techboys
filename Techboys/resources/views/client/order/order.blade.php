@@ -58,7 +58,7 @@
                                                     </tr>
                                                 </tbody>
                                             </table>
-                                        @else
+                                        @elseif(Auth::check() && isset($loadAll))
                                             <!-- Display all orders -->
                                             <table class="table table-bordered">
                                                 <thead>
@@ -96,6 +96,7 @@
                                                     @endforeach
                                                 </tbody>
                                             </table>
+                                        @else
                                         @endif
                                     </div>
                                     <!-- .woocommerce-order -->
