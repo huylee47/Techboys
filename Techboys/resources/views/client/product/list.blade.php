@@ -34,14 +34,10 @@
     </h4>
     <div class="collapse show" id="filter_price">
         <div class="range-slider">
-            <input type="range" id="min_price" name="min_price" min="100" max="100000000" step="1000" 
-                   value="{{ request()->min_price ?? 100 }}" 
-                   oninput="updatePriceRange()">
-            <input type="range" id="max_price" name="max_price" min="100" max="100000000" step="1000" 
-                   value="{{ request()->max_price ?? 100000000 }}" 
-                   oninput="updatePriceRange()">
+            <input type="range" id="price_range" name="price_range" min="1000" max="10000000" step="1000"
+                   value="{{ request()->price_range ?? 10000000 }}" oninput="updatePriceDisplay()">
             <p>Price: <span id="price_display">
-                {{ number_format(request()->min_price ?? 100) }} đ - {{ number_format(request()->max_price ?? 100000000) }} đ
+                {{ number_format(request()->price_range ?? 10000000, 0, ',', '.') }} đ
             </span></p>
         </div>
     </div>
@@ -128,10 +124,9 @@
     </div>
 </div>
 <script>
-function updatePriceRange() {
-    let minPrice = document.getElementById('min_price').value;
-    let maxPrice = document.getElementById('max_price').value;
-    document.getElementById('price_display').innerText = new Intl.NumberFormat('vi-VN').format(minPrice) + " đ - " + new Intl.NumberFormat('vi-VN').format(maxPrice) + " đ";
-}
+function updatePriceDisplay() {
+        let priceInput = document.getElementById("price_range").value;
+        document.getElementById("price_display").textContent = new Intl.NumberFormat('vi-VN').format(priceInput) + " đ";
+    }
 </script>
 @endsection
