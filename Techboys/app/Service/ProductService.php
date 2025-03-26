@@ -261,13 +261,14 @@ class ProductService{
                             $fixedAttributes[$attrName] = $value;
                         }
                     }
+
                 }
 
                 $combinations = $this->generateCombinations($variableAttributes);
-
+                // dd($combinations);
                 foreach ($combinations as $combination) {
-                    $finalAttributes = array_replace($fixedAttributes, $combination);
-
+                    $finalAttributes = array_merge($combination,$fixedAttributes);
+                    // dd($finalAttributes);
                     $existingVariant = $existingVariants->first(function ($variant) use ($finalAttributes) {
                         return json_decode($variant->attribute_values, true) == $finalAttributes;
                     });
