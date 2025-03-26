@@ -3,7 +3,6 @@
 @section('main')
 <div class="container margin_30">
     <div class="row">
-        <!-- Sidebar Bộ Lọc -->
         <aside class="col-lg-3">
             <div class="filter_col">
                 <form action="{{ route('client.product.filter') }}" method="GET" id="filter-form">
@@ -28,26 +27,25 @@
                         </div>
                     </div>
 
-                    <!-- Lọc theo model -->
-                    <div class="filter_type version_2">
-                        <h4>
-                            <a href="#filter_4" data-bs-toggle="collapse" class="opened">Models</a>
-                        </h4>
-                        <div class="collapse show" id="filter_4">
-                            <ul>
-                                @foreach($models as $model)
-                                <li>
-                                    <label class="container_check">
-                                        {{ $model->name }}
-                                        <input type="checkbox" name="model_id[]" value="{{ $model->id }}" 
-                                            {{ in_array($model->id, request()->model_id ?? []) ? 'checked' : '' }}>
-                                        <span class="checkmark"></span>
-                                    </label>
-                                </li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    </div>
+                    <!-- Bộ lọc theo giá -->
+<div class="filter_type version_2">
+    <h4>
+        <a href="#filter_price" data-bs-toggle="collapse" class="opened">Price</a>
+    </h4>
+    <div class="collapse show" id="filter_price">
+        <div class="range-slider">
+            <input type="range" id="min_price" name="min_price" min="100" max="100000000" step="1000" 
+                   value="{{ request()->min_price ?? 100 }}" 
+                   oninput="updatePriceRange()">
+            <input type="range" id="max_price" name="max_price" min="100" max="100000000" step="1000" 
+                   value="{{ request()->max_price ?? 100000000 }}" 
+                   oninput="updatePriceRange()">
+            <p>Price: <span id="price_display">
+                {{ number_format(request()->min_price ?? 100) }} đ - {{ number_format(request()->max_price ?? 100000000) }} đ
+            </span></p>
+        </div>
+    </div>
+</div>
 
                     <!-- Nút Lọc & Reset -->
                     <div class="buttons">
@@ -129,4 +127,11 @@
         </div>
     </div>
 </div>
+<script>
+function updatePriceRange() {
+    let minPrice = document.getElementById('min_price').value;
+    let maxPrice = document.getElementById('max_price').value;
+    document.getElementById('price_display').innerText = new Intl.NumberFormat('vi-VN').format(minPrice) + " đ - " + new Intl.NumberFormat('vi-VN').format(maxPrice) + " đ";
+}
+</script>
 @endsection
