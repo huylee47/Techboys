@@ -134,16 +134,13 @@ class ProductController extends Controller
         $minPrice = $request->min_price ?? 100;
         $maxPrice = $request->max_price ?? 100000000;
 
-        $query->whereHas('variants', function ($q) use ($minPrice, $maxPrice) {
+        $query->whereHas('variant', function ($q) use ($minPrice, $maxPrice) {
             $q->whereBetween('price', [$minPrice, $maxPrice]);
         });
 
         $products = $query->paginate(21)->appends($request->query());
-
         return view('client.product.list', compact('products', 'brands', 'minPrice', 'maxPrice'));
     }
-
-
 
     public function search(Request $request)
     {
@@ -176,10 +173,9 @@ class ProductController extends Controller
             $query->whereIn('brand_id', $request->brand_id);
         }
 
-        // Lọc theo khoảng giá với giá trị tối đa từ range slider
         if ($request->has('price_range')) {
             $maxPrice = (int) $request->price_range;
-            $query->whereHas('variants', function ($q) use ($maxPrice) {
+            $query->whereHas('variant', function ($q) use ($maxPrice) {
                 $q->where('price', '<=', $maxPrice);
             });
         }
