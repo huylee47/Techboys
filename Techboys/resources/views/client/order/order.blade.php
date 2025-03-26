@@ -23,6 +23,11 @@
                                         </div>
                                         <br>
                                         <!-- End of Search Order Number -->
+                                        @if(session('error'))
+                                            <div class="alert alert-danger">
+                                                {{ session('error') }}
+                                            </div>
+                                        @endif
                                         @if(isset($searchedOrder))
                                             <!-- Display search result -->
                                             <table class="table table-bordered">
