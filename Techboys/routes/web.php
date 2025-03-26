@@ -42,6 +42,7 @@ Route::get('blog/{slug}', [BlogController::class, 'DetailBlog'])->name('DetailBl
 
 //order
 Route::get('/client/orders', [BillController::class, 'indexClient'])->name('client.orders');
+Route::get('/client/orders/search', [BillController::class, 'searchOrder'])->name('client.orders.search');
 
 //comment
 Route::post('/comment/store', [CommentController::class, 'store'])->name('client.comment.store');
@@ -261,4 +262,5 @@ Route::prefix('products')->group(function () {
 });
 
 Route::get('/client/orders', [BillController::class, 'indexClient'])->name('client.orders');
+Route::get('/client/orders/search', [BillController::class, 'searchOrder'])->name('client.orders.search');
 
