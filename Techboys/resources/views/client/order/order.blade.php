@@ -20,7 +20,37 @@
                                         </div>
                                         <br>
                                         <!-- End of Search Order Number -->
-                                       
+                                        @if(isset($searchedOrder))
+                                            <!-- Display search result -->
+                                            <table class="table table-bordered">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Mã đơn hàng</th>
+                                                        <th>Sản phẩm</th>
+                                                        <th>Số lượng</th>
+                                                        <th>Trạng thái</th>
+                                                        <th>Tổng cộng</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>{{ $searchedOrder->order_id }}</td>
+                                                        <td>
+                                                            @foreach ($searchedOrder->billDetails as $detail)
+                                                                {{ $detail->product->name }}<br>
+                                                            @endforeach
+                                                        </td>
+                                                        <td>
+                                                            @foreach ($searchedOrder->billDetails as $detail)
+                                                                {{ $detail->quantity }}<br>
+                                                            @endforeach
+                                                        </td>
+                                                        <td>{{ $searchedOrder->status->name }}</td>
+                                                        <td>{{ number_format($searchedOrder->total, 0, ',', '.') }} VND</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        @else
                                             <!-- Display all orders -->
                                             <table class="table table-bordered">
                                                 <thead>
