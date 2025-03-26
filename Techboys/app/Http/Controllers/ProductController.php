@@ -124,19 +124,25 @@ class ProductController extends Controller
     public function productList(Request $request)
     {
         $brands = Brand::all();
-        
+
         $query = Product::query();
 
         if ($request->has('brand_id') && !empty($request->brand_id)) {
             $query->whereIn('brand_id', $request->brand_id);
         }
 
-        if ($request->has('model_id') && !empty($request->model_id)) {
-            $query->whereIn('model_id', $request->model_id);
-        }
-        $products = $query->paginate(21);
-        return view('client.product.list', compact('products', 'brands', 'models'));
+        $minPrice = $request->min_price ?? 100;
+        $maxPrice = $request->max_price ?? 100000000;
+
+        $query->whereHas('variants', function ($q) use ($minPrice, $maxPrice) {
+            $q->whereBetween('price', [$minPrice, $maxPrice]);
+        });
+
+        $products = $query->paginate(21)->appends($request->query());
+
+        return view('client.product.list', compact('products', 'brands', 'minPrice', 'maxPrice'));
     }
+
 
 
     public function search(Request $request)
@@ -158,13 +164,12 @@ class ProductController extends Controller
         $brands = Brand::all();
         
 
-        return view('client.product.search', compact('products', 'keyword', 'brands', 'models'));
+        return view('client.product.search', compact('products', 'keyword', 'brands'));
     }
 
     public function filter(Request $request)
     {
         $brands = Brand::all();
-        
 
         $query = Product::query();
 
@@ -172,14 +177,9 @@ class ProductController extends Controller
             $query->whereIn('brand_id', $request->brand_id);
         }
 
-        if ($request->has('model_id') && !empty($request->model_id)) {
-            $query->whereHas('variant', function ($q) use ($request) {
-                $q->whereIn('model_id', $request->model_id);
-            });
-        }
 
         $products = $query->paginate(21)->appends($request->query());
 
-        return view('client.product.list', compact('products', 'brands', 'models'));
+        return view('client.product.list', compact('products', 'brands'));
     }
 }
