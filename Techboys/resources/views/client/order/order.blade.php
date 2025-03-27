@@ -23,11 +23,15 @@
                                         </div>
                                         <br>
                                         <!-- End of Search Order Number -->
-                                        @if(session('error'))
-                                            <div class="alert alert-danger">
-                                                {{ session('error') }}
-                                            </div>
-                                        @endif
+                                        @if (session('success'))
+                            <div class="alert alert-success">
+                                {{ session('success') }}
+                            </div>
+                        @elseif (session('error'))
+                            <div class="alert alert-danger">
+                                {{ session('error') }}
+                            </div>
+                        @endif
                                         @if(isset($searchedOrder))
                                             <!-- Display search result -->
                                             <table class="table table-bordered">
@@ -56,7 +60,7 @@
                                                         <td>
                                                             @switch($searchedOrder->status_id)
                                                                 @case(0)
-                                                                    Hủy đơn
+                                                                    Đã hủy đơn
                                                                     @break
                                                                 @case(1)
                                                                     Đang xử lý
@@ -114,7 +118,7 @@
                                                             <td>
                                                                 @switch($bill->status_id)
                                                                     @case(0)
-                                                                        Hủy đơn
+                                                                    Đã hủy đơn
                                                                         @break
                                                                     @case(1)
                                                                         Đang xử lý
