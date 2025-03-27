@@ -35,6 +35,8 @@ Route::get('/online-users', function () {
 
     return response()->json(['online' => $onlineUsers]);
 });
+Route::get('/admin/get-latest-comments', [DashboardController::class, 'getLatestComments'])->name('admin.getLatestComments');
+
 
 // Blog
 Route::get('/blog', [BlogController::class, 'indexClient'])->name('blog');
