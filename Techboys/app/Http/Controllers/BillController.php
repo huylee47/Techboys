@@ -255,5 +255,27 @@ class BillController extends Controller
         return view('client.order.CancelOrder', compact('order'));
     }
 
+    public function submitCancelOrder(Request $request, $id)
+    {
+        $bill = Bill::find($id);
+
+       
+
+        try {
+            DB::beginTransaction();
+
+            // Update the order status and add the cancellation reason
+            $bill->update([
+                'status_id' => 4, // Assuming 0 is the "Cancelled" status
+                'note' => $request->cancel_reason,
+            ]);
+
+            DB::commit();
+            return redirect()->route('client.orders')->with('success', 'Đơn hàng đã được hủy thành công!');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->route('client.orders')->with('error', 'Đã xảy ra lỗi khi hủy đơn hàng!');
+        }
+    }
 
 }
