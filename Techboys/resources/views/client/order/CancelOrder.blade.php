@@ -33,7 +33,7 @@
                                             <input type="hidden" name="order_id" value="{{ $order->id }}">
                                             <div class="form-group">
                                                 <label for="cancel_reason">Lý do hủy đơn:</label>
-                                                <textarea id="cancel_reason" name="cancel_reason" class="form-control" rows="4" required></textarea>
+                                                <textarea id="cancel_reason" name="cancel_reason" class="form-control" rows="4" ></textarea>
                                                 @error('cancel_reason')
                                                     <span class="text-danger">{{ $message }}</span>
                                                 @enderror
