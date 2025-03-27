@@ -14,7 +14,6 @@
                                         <table class="table table-bordered">
                                             <thead>
                                                 <tr>
-                                                
                                                     <th>Tên sản phẩm</th>
                                                     <th>Số lượng</th>
                                                 </tr>
@@ -22,7 +21,6 @@
                                             <tbody>
                                                 @foreach ($order->billDetails as $detail)
                                                     <tr>
-                                                       
                                                         <td>{{ $detail->product->name }}</td>
                                                         <td>{{ $detail->quantity }}</td>
                                                     </tr>
@@ -37,6 +35,7 @@
                                                 <textarea id="cancel_reason" name="cancel_reason" class="form-control" rows="4" required></textarea>
                                             </div>
                                             <button type="submit" class="btn btn-danger">Hủy đơn</button>
+                                            <a href="{{ route('client.orders') }}" class="btn btn-secondary">Quay lại</a>
                                         </form>
                                     </div>
                                 </div>
