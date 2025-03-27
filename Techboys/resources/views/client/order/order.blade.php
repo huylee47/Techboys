@@ -87,13 +87,15 @@
                                                                     {{ $detail->quantity }}<br>
                                                                 @endforeach
                                                             </td>
-                                                            {{-- <td>{{ $bill->payment_method == 2 ? 'Tiền mặt' : 'Chuyển khoản' }}</td>
-                                                            <td>{{ $bill->payment_status == 0 ? 'Chưa thanh toán' : 'Đã thanh toán' }}</td> --}}
+                                                            {{-- <td>{{ $bill->payment_method == 2 ? 'Tiền mặt' : 'Chuyển khoản' }}
+                                                            </td>
+                                                            <td>{{ $bill->payment_status == 0 ? 'Chưa thanh toán' : 'Đã thanh toán'
+                                                                }}</td> --}}
                                                             <td>{{ $bill->status->name }}</td>
                                                             <td>{{ number_format($bill->total, 0, ',', '.') }} VND</td>
                                                             <td>
                                                                 @if($bill->status->id == 1)
-                                                                    <button class="btn btn-danger">Hủy đơn</button>
+                                                                <a href="{{ route('client.orders.cancel') }}">    <button class="btn btn-danger">Hủy đơn</button></a> 
                                                                 @endif
                                                             </td>
                                                         </tr>
