@@ -257,6 +257,10 @@ class BillController extends Controller
 
     public function submitCancelOrder(Request $request, $id)
     {
+        $request->validate([
+            'cancel_reason' => 'required|string|min:10|max:255',
+        ]);
+
         $bill = Bill::find($id);
 
         if (!$bill) {
@@ -273,7 +277,7 @@ class BillController extends Controller
 
             // Update the order status and add the cancellation reason
             $bill->update([
-                'status_id' => 4, // Assuming 0 is the "Cancelled" status
+                'status_id' => 4, // Assuming 4 is the "Cancelled" status
                 'note' => $request->cancel_reason,
             ]);
 
