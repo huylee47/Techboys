@@ -255,13 +255,6 @@ class BillController extends Controller
 
     public function submitCancelOrder(Request $request, $id)
     {
-        $request->validate([
-            'cancel_reason' => 'required|string|max:255',
-        ], [
-            'cancel_reason.required' => 'Vui lòng nhập lý do hủy đơn.',
-            'cancel_reason.max' => 'Lý do hủy đơn không được vượt quá 255 ký tự.',
-        ]);
-
         $bill = Bill::find($id);
         try {
             DB::beginTransaction();
