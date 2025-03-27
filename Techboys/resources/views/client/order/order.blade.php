@@ -53,7 +53,30 @@
                                                                 {{ $detail->quantity }}<br>
                                                             @endforeach
                                                         </td>
-                                                        <td>{{ $searchedOrder->status->name }}</td>
+                                                        <td>
+                                                            @switch($searchedOrder->status_id)
+                                                                @case(0)
+                                                                    Hủy đơn
+                                                                    @break
+                                                                @case(1)
+                                                                    Đang xử lý
+                                                                    @break
+                                                                @case(2)
+                                                                    Đang giao
+                                                                    @break
+                                                                @case(3)
+                                                                    Đã giao
+                                                                    @break
+                                                                @case(4)
+                                                                    Giao hàng thành công
+                                                                    @break
+                                                                @case(5)
+                                                                    Giao hàng thất bại
+                                                                    @break
+                                                                @default
+                                                                    Không xác định
+                                                            @endswitch
+                                                        </td>
                                                         <td>{{ number_format($searchedOrder->total, 0, ',', '.') }} VND</td>
                                                     </tr>
                                                 </tbody>
@@ -87,14 +110,34 @@
                                                                     {{ $detail->quantity }}<br>
                                                                 @endforeach
                                                             </td>
-                                                            {{-- <td>{{ $bill->payment_method == 2 ? 'Tiền mặt' : 'Chuyển khoản' }}
+
+                                                            <td>
+                                                                @switch($bill->status_id)
+                                                                    @case(0)
+                                                                        Hủy đơn
+                                                                        @break
+                                                                    @case(1)
+                                                                        Đang xử lý
+                                                                        @break
+                                                                    @case(2)
+                                                                        Đang giao
+                                                                        @break
+                                                                    @case(3)
+                                                                        Đã giao
+                                                                        @break
+                                                                    @case(4)
+                                                                        Giao hàng thành công
+                                                                        @break
+                                                                    @case(5)
+                                                                        Giao hàng thất bại
+                                                                        @break
+                                                                    @default
+                                                                        Không xác định
+                                                                @endswitch
                                                             </td>
-                                                            <td>{{ $bill->payment_status == 0 ? 'Chưa thanh toán' : 'Đã thanh toán'
-                                                                }}</td> --}}
-                                                            <td>{{ $bill->status->name }}</td>
                                                             <td>{{ number_format($bill->total, 0, ',', '.') }} VND</td>
                                                             <td>
-                                                                @if($bill->status->id == 1)
+                                                                @if($bill->status_id == 1)
                                                                     <form action="{{ route('client.orders.cancel') }}" method="POST">
                                                                         @csrf
                                                                         <input type="hidden" name="order_id" value="{{ $bill->id }}">
