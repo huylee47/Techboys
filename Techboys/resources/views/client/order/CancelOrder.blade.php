@@ -35,7 +35,7 @@
                                                 <label for="cancel_reason">Lý do hủy đơn:</label>
                                                 <textarea id="cancel_reason" name="cancel_reason" class="form-control" rows="4" required></textarea>
                                             </div>
-                                            <button type="submit" class="btn btn-danger">Hủy đơn</button>
+                                            <button type="submit" class="btn btn-danger" onclick="return confirm('Bạn có chắc chắn muốn hủy đơn hàng này?')">Hủy đơn</button>
                                             <a href="{{ route('client.orders') }}" class="btn btn-secondary">Quay lại</a>
                                         </form>
                                     </div>
