@@ -212,7 +212,7 @@ class BillController extends Controller
     //client
     public function indexClient()
     {
-        $loadAll = Bill::with(['billDetails.product', 'status'])
+        $loadAll = Bill::with(['billDetails.product'])
                        ->where('user_id', Auth::id())
                        ->get();
         return view('client.order.order', compact('loadAll'));
@@ -223,7 +223,7 @@ class BillController extends Controller
         $orderId = $request->input('order_id');
         $phone = $request->input('phone');
 
-        $query = Bill::with(['billDetails.product', 'status'])->where('order_id', $orderId);
+        $query = Bill::with(['billDetails.product',])->where('order_id', $orderId);
 
         // If the user is not logged in, validate the phone number
         if (!Auth::check()) {
@@ -236,7 +236,7 @@ class BillController extends Controller
             return redirect()->route('client.orders')->with('error', 'Không tìm thấy đơn hàng phù hợp!');
         }
 
-        $loadAll = Auth::check() ? Bill::with(['billDetails.product', 'status'])
+        $loadAll = Auth::check() ? Bill::with(['billDetails.product'])
                                        ->where('user_id', Auth::id())
                                        ->get() : [];
 
@@ -266,7 +266,7 @@ class BillController extends Controller
         try {
             DB::beginTransaction();
             $bill->update([
-                'status_id' => 4,
+                'status_id' => 0,
                 'note' => $request->cancel_reason,
             ]);
             DB::commit();
