@@ -251,10 +251,6 @@ Route::get('/payment/vnpay/callback', [CheckoutController::class, 'vnpayCallback
 Route::get('/payment/cod/success', [CheckoutController::class, 'codSuccess'])->name('client.payment.cod');
 
 
-//comment
-Route::post('/comment/store', [CommentController::class, 'store'])->name('client.comment.store');
-Route::post('/comment/reply', [CommentController::class, 'reply'])->name('client.comment.reply');
-
 
 
 Route::prefix('products')->group(function () {
