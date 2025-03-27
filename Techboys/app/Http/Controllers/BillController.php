@@ -242,7 +242,18 @@ class BillController extends Controller
 
         return view('client.order.order', compact('searchedOrder', 'loadAll'));
     }
-    public function CancelOrder(){
-        return view('client.order.CancelOrder');
+  
+
+    public function CancelOrder(Request $request)
+    {
+        $order = Bill::with('billDetails.product')->where('id', $request->id)->first();
+
+        if (!$order) {
+            return redirect()->route('client.orders')->with('error', 'Không tìm thấy đơn hàng!');
+        }
+
+        return view('client.order.CancelOrder', compact('order'));
     }
+
+
 }
