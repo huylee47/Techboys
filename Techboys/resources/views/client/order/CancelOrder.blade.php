@@ -28,17 +28,23 @@
                                             </tbody>
                                         </table>
                                         <p><strong>Mã đơn hàng:</strong> {{ $order->order_id }}</p>
-                                        <form action="{{ route('client.orders.cancel.submit', ['id' => $order->id]) }}" method="POST">
+                                        <form action="{{ route('client.orders.cancel.submit', ['id' => $order->id]) }}"
+                                            method="POST" onsubmit="return validateCancelReason()">
                                             @csrf
                                             <input type="hidden" name="order_id" value="{{ $order->id }}">
                                             <div class="form-group">
                                                 <label for="cancel_reason">Lý do hủy đơn:</label>
-                                                <textarea id="cancel_reason" name="cancel_reason" class="form-control" rows="4" ></textarea>
-                                            
+                                                <textarea id="cancel_reason" name="cancel_reason" class="form-control"
+                                                    rows="4"></textarea>
+                                                <small id="cancel_reason_error" class="text-danger"
+                                                    style="display: none; font-size: 1.2em;">Vui lòng nhập lý do hủy đơn.</small>
                                             </div>
-                                            <button type="submit" class="btn btn-danger" onclick="return confirm('Bạn có chắc chắn muốn hủy đơn hàng này?')">Hủy đơn</button>
+                                            <button type="submit" class="btn btn-danger"
+                                                onclick="return confirm('Bạn có chắc chắn muốn hủy đơn hàng này?')">Hủy
+                                                đơn</button>
                                             <a href="{{ route('client.orders') }}" class="btn btn-secondary">Quay lại</a>
                                         </form>
+
                                     </div>
                                 </div>
                             </div>
@@ -49,3 +55,15 @@
         </div>
     </div>
 @endsection
+<script>
+    function validateCancelReason() {
+        const reason = document.getElementById('cancel_reason').value.trim();
+        const errorElement = document.getElementById('cancel_reason_error');
+        if (!reason) {
+            errorElement.style.display = 'block';
+            return false;
+        }
+        errorElement.style.display = 'none';
+        return true;
+    }
+</script>
