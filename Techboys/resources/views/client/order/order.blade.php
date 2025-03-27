@@ -95,9 +95,11 @@
                                                             <td>{{ number_format($bill->total, 0, ',', '.') }} VND</td>
                                                             <td>
                                                                 @if($bill->status->id == 1)
-                                                                    <a href="{{ route('client.orders.cancel', ['id' => $bill->id]) }}">
-                                                                        <button class="btn btn-danger">Hủy đơn</button>
-                                                                    </a>
+                                                                    <form action="{{ route('client.orders.cancel') }}" method="POST">
+                                                                        @csrf
+                                                                        <input type="hidden" name="order_id" value="{{ $bill->id }}">
+                                                                        <button class="btn btn-danger" type="submit">Hủy đơn</button>
+                                                                    </form>
                                                                 @endif
                                                             </td>
                                                         </tr>
