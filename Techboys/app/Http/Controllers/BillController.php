@@ -246,7 +246,7 @@ class BillController extends Controller
 
     public function CancelOrder(Request $request)
     {
-        $order = Bill::with('billDetails.product')->where('id', $request->id)->first();
+        $order = Bill::with('billDetails.product')->where('id', $request->input('order_id'))->first();
 
         if (!$order) {
             return redirect()->route('client.orders')->with('error', 'Không tìm thấy đơn hàng!');
