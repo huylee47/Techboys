@@ -14,7 +14,7 @@
                                         <table class="table table-bordered">
                                             <thead>
                                                 <tr>
-                                                    <th>Hình ảnh</th>
+                                                
                                                     <th>Tên sản phẩm</th>
                                                     <th>Số lượng</th>
                                                 </tr>
@@ -22,9 +22,7 @@
                                             <tbody>
                                                 @foreach ($order->billDetails as $detail)
                                                     <tr>
-                                                        <td>
-                                                            <img src="{{ $detail->product->image }}" alt="{{ $detail->product->name }}" width="50">
-                                                        </td>
+                                                       
                                                         <td>{{ $detail->product->name }}</td>
                                                         <td>{{ $detail->quantity }}</td>
                                                     </tr>
