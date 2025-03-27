@@ -248,9 +248,7 @@ class BillController extends Controller
     {
         $order = Bill::with('billDetails.product')->where('id', $request->input('order_id'))->first();
 
-        if (!$order) {
-            return redirect()->route('client.orders')->with('error', 'Không tìm thấy đơn hàng!');
-        }
+       
 
         return view('client.order.CancelOrder', compact('order'));
     }
@@ -265,25 +263,12 @@ class BillController extends Controller
         ]);
 
         $bill = Bill::find($id);
-
-        if (!$bill) {
-            return redirect()->route('client.orders')->with('error', 'Không tìm thấy đơn hàng!');
-        }
-
-        // Ensure the order is in a cancellable state
-        if ($bill->status_id != 1) {
-            return redirect()->route('client.orders')->with('error', 'Đơn hàng không thể hủy!');
-        }
-
         try {
             DB::beginTransaction();
-
-            // Update the order status and add the cancellation reason
             $bill->update([
-                'status_id' => 4, // Assuming 4 is the "Cancelled" status
+                'status_id' => 4,
                 'note' => $request->cancel_reason,
             ]);
-
             DB::commit();
             return redirect()->route('client.orders')->with('success', 'Đơn hàng đã được hủy thành công!');
         } catch (\Exception $e) {
