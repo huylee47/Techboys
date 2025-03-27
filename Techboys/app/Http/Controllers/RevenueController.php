@@ -64,11 +64,25 @@ class RevenueController extends Controller
     $endDate = Carbon::parse($request->end_date)->endOfDay();
 
     $filteredRevenue = Bill::whereBetween('created_at', [$startDate, $endDate])
-        ->selectRaw('DATE(created_at) as date, SUM( CASE WHEN payment_status = 1 THEN total ELSE 0 END) as revenue')
-        ->groupBy('date')
-        ->orderBy('date')
-        ->pluck('revenue', 'date');
+    ->where('payment_status', 1)
+    ->selectRaw('DATE(created_at) as date, SUM(total) as revenue')
+    ->groupBy('date')
+    ->orderBy('date')
+    ->pluck('revenue', 'date');
 
-    return response()->json($filteredRevenue);
+    $totalRevenue = $filteredRevenue->sum();
+    $maxRevenueDay = $filteredRevenue->isEmpty() ? null : $filteredRevenue->keys()->last();
+    $maxRevenueValue = $filteredRevenue->isEmpty() ? 0 : $filteredRevenue->max();
+
+    $daysCount = $startDate->diffInDays($endDate);
+    $averageRevenuePerDay = $daysCount > 0 ? $totalRevenue / $daysCount : 0;
+
+    return response()->json([
+        'revenue_by_date' => $filteredRevenue,
+        'total_revenue' => $totalRevenue,
+        'max_revenue_day' => $maxRevenueDay,
+        'max_revenue_value' => $maxRevenueValue,
+        'average_revenue_per_day' => $averageRevenuePerDay
+    ]);
 }
 }
