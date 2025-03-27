@@ -42,13 +42,13 @@
                                         </div>
                                         <div class="col-md-8">
                                             <h6 class="text-muted font-semibold">Khách hàng đã đăng ký</h6>
-                                            <h6 class="font-extrabold mb-0">183.000</h6>
+                                            <h6 class="font-extrabold mb-0">{{ $registeredUsers }}</h6>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-6 col-lg-3 col-md-6">
+                        {{-- <div class="col-6 col-lg-3 col-md-6">
                             <div class="card">
                                 <div class="card-body px-3 py-4-5">
                                     <div class="row">
@@ -64,7 +64,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                         <div class="col-6 col-lg-3 col-md-6">
                             <div class="card">
                                 <div class="card-body px-3 py-4-5">
@@ -100,47 +100,71 @@
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4>Latest Comments</h4>
+                                    <h4>Bình luận gần đây</h4>
                                 </div>
                                 <div class="card-body">
                                     <div class="table-responsive">
                                         <table class="table table-hover table-lg">
                                             <thead>
                                                 <tr>
-                                                    <th>Name</th>
-                                                    <th>Comment</th>
+                                                    <th>Tên</th>
+                                                    <th>Bình luận</th>
+                                                    <th>Sản phẩm</th>
                                                 </tr>
                                             </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td class="col-3">
-                                                        <div class="d-flex align-items-center">
-                                                            <div class="avatar avatar-md">
-                                                                <img src="">
+                                            <tbody id="latest-comments">
+                                                @foreach($latestComments as $comment)
+                                                    <tr>
+                                                        <td class="col-3">
+                                                            <div class="d-flex align-items-center">
+                                                                <div class="avatar avatar-md">
+                                                                    <img src="{{ $comment['user']->avatar ?? 'default-avatar.png' }}" alt="User Avatar">
+                                                                </div>
+                                                                <p class="font-bold ms-3 mb-0">{{ $comment['user']->name }}</p>
                                                             </div>
-                                                            <p class="font-bold ms-3 mb-0">Si Cantik</p>
-                                                        </div>
-                                                    </td>
-                                                    <td class="col-auto">
-                                                        <p class=" mb-0">Congratulations on your graduation!</p>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="col-3">
-                                                        <div class="d-flex align-items-center">
-                                                            <div class="avatar avatar-md">
-                                                                <img src="">
-                                                            </div>
-                                                            <p class="font-bold ms-3 mb-0">Si Ganteng</p>
-                                                        </div>
-                                                    </td>
-                                                    <td class="col-auto">
-                                                        <p class=" mb-0">Wow amazing design! Can you make another
-                                                            tutorial for
-                                                            this design?</p>
-                                                    </td>
-                                                </tr>
+                                                        </td>
+                                                        <td class="col-auto">
+                                                            <p class="mb-0">{{ $comment['content'] }}</p>
+                                                        </td>
+                                                        <td class="col-auto">
+                                                            <p class="mb-0">{{ $comment['product']->name }}</p>
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
                                             </tbody>
+                                            <script>
+                                                function fetchLatestComments() {
+                                                    fetch("{{ route('admin.getLatestComments') }}")
+                                                        .then(response => response.json())
+                                                        .then(data => {
+                                                            let tbody = document.getElementById('latest-comments');
+                                                            tbody.innerHTML = '';
+                                                            data.forEach(comment => {
+                                                                let row = `
+                                                                    <tr>
+                                                                        <td class="col-3">
+                                                                            <div class="d-flex align-items-center">
+                                                                                <div class="avatar avatar-md">
+                                                                                    <img src="${comment.user.avatar ?? 'default-avatar.png'}" alt="User Avatar">
+                                                                                </div>
+                                                                                <p class="font-bold ms-3 mb-0">${comment.user.name}</p>
+                                                                            </div>
+                                                                        </td>
+                                                                        <td class="col-auto">
+                                                                            <p class="mb-0">${comment.content}</p>
+                                                                        </td>
+                                                                        <td class="col-auto">
+                                                                            <p class="mb-0">${comment.product.name}</p>
+                                                                        </td>
+                                                                    </tr>
+                                                                `;
+                                                                tbody.innerHTML += row;
+                                                            });
+                                                        });
+                                                }
+                                            
+                                                setInterval(fetchLatestComments, 5000);
+                                            </script>
                                         </table>
                                     </div>
                                 </div>
