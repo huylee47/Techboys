@@ -28,8 +28,9 @@
                                             </tbody>
                                         </table>
                                         <p><strong>Mã đơn hàng:</strong> {{ $order->order_id }}</p>
-                                        <form action="" method="POST">
+                                        <form action="{{ route('client.orders.cancel.submit', ['id' => $order->id]) }}" method="POST">
                                             @csrf
+                                            <input type="hidden" name="order_id" value="{{ $order->id }}">
                                             <div class="form-group">
                                                 <label for="cancel_reason">Lý do hủy đơn:</label>
                                                 <textarea id="cancel_reason" name="cancel_reason" class="form-control" rows="4" required></textarea>
