@@ -44,6 +44,7 @@ Route::get('blog/{slug}', [BlogController::class, 'DetailBlog'])->name('DetailBl
 Route::get('/client/orders', [BillController::class, 'indexClient'])->name('client.orders');
 Route::get('/client/orders/search', [BillController::class, 'searchOrder'])->name('client.orders.search');
 Route::get('/client/orders/cancel', [BillController::class, 'CancelOrder'])->name('client.orders.cancel');
+Route::post('/client/orders/cancel/{id}', [BillController::class, 'submitCancelOrder'])->name('client.orders.cancel.submit');
 
 
 //comment
@@ -265,4 +266,6 @@ Route::prefix('products')->group(function () {
 
 Route::get('/client/orders', [BillController::class, 'indexClient'])->name('client.orders');
 Route::get('/client/orders/search', [BillController::class, 'searchOrder'])->name('client.orders.search');
+Route::get('/client/orders/cancel', [BillController::class, 'CancelOrder'])->name('client.orders.cancel');
+Route::post('/client/orders/cancel/{id}', [BillController::class, 'submitCancelOrder'])->name('client.orders.cancel.submit');
 
