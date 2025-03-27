@@ -242,4 +242,7 @@ class BillController extends Controller
 
         return view('client.order.order', compact('searchedOrder', 'loadAll'));
     }
+    public function CancelOrder(){
+        return view('client.order.CancelOrder');
+    }
 }
