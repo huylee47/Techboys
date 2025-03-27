@@ -259,7 +259,14 @@ class BillController extends Controller
     {
         $bill = Bill::find($id);
 
-       
+        if (!$bill) {
+            return redirect()->route('client.orders')->with('error', 'Không tìm thấy đơn hàng!');
+        }
+
+        // Ensure the order is in a cancellable state
+        if ($bill->status_id != 1) {
+            return redirect()->route('client.orders')->with('error', 'Đơn hàng không thể hủy!');
+        }
 
         try {
             DB::beginTransaction();
