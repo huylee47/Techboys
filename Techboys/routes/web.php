@@ -263,9 +263,3 @@ Route::prefix('products')->group(function () {
     Route::get('/filter', [ProductController::class, 'filter'])->name('client.product.filter');
     Route::get('/{slug}', [ProductController::class, 'productDetails'])->name('client.product.show');
 });
-
-Route::get('/client/orders', [BillController::class, 'indexClient'])->name('client.orders');
-Route::get('/client/orders/search', [BillController::class, 'searchOrder'])->name('client.orders.search');
-Route::post('/client/orders/cancel', [BillController::class, 'CancelOrder'])->name('client.orders.cancel');
-Route::post('/client/orders/cancel/{id}', [BillController::class, 'submitCancelOrder'])->name('client.orders.cancel.submit');
-
