@@ -95,7 +95,9 @@
                                                             <td>{{ number_format($bill->total, 0, ',', '.') }} VND</td>
                                                             <td>
                                                                 @if($bill->status->id == 1)
-                                                                <a href="{{ route('client.orders.cancel') }}">    <button class="btn btn-danger">Hủy đơn</button></a> 
+                                                                    <a href="{{ route('client.orders.cancel', ['id' => $bill->id]) }}">
+                                                                        <button class="btn btn-danger">Hủy đơn</button>
+                                                                    </a>
                                                                 @endif
                                                             </td>
                                                         </tr>
