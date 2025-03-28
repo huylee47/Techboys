@@ -66,6 +66,12 @@
                                 <span>Sản phẩm</span>
                             </a>
                         </li>
+                        <li class="sidebar-item {{ request()->routeIs('admin.attributes*') ? 'active' : '' }} ">
+                            <a href="{{route('admin.attributes.index')}}" class='sidebar-link'>
+                                <i class="bi-palette-fill"></i>
+                                <span>Thuộc tính</span>
+                            </a>
+                        </li>
                         <li class="sidebar-item {{ request()->routeIs('admin.bill*') ? 'active' : '' }}">
                             <a href="{{route('admin.bill.index')}}" class='sidebar-link'>
 
