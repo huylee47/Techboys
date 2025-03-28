@@ -290,11 +290,28 @@
                     });
                 });
             });
-        
         </script>
 
         <script>
             $(document).ready(function() {
+                let maxOptions = $('#attribute-select').data('max-options') || 2;
+
+                $('#attribute-select').change(function() {
+                    let selectedCount = $(this).val() ? $(this).val().length : 0;
+
+                    if (selectedCount >= maxOptions) {
+                        $('#attribute-select option').each(function() {
+                            if (!$(this).is(':selected')) {
+                                $(this).prop('disabled', true);
+                            }
+                        });
+                    } else {
+                        $('#attribute-select option').prop('disabled', false);
+                    }
+
+                    $('.selectpicker').selectpicker('refresh');
+                });
+
                 function toggleBase() {
                     if ($('#is_featured').prop('checked')) {
                         $('input[name="base_price"]').closest('.mb-3').hide();
@@ -388,7 +405,7 @@
                                         class="form-control selectpicker" multiple data-live-search="true">`;
                         } else {
                             variantHtml += `<select name="variants[${index}][attributes][${attribute.name}]" 
-                                        class="form-control single-select">
+                                        class="form-control single-select" >
                                         <option value="" disabled selected>Chọn</option>`;
                         }
 
