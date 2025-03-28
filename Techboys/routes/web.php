@@ -55,9 +55,7 @@ Route::get('/about', function () {
     return view('client.about.about');
 })->name('client.about.about');
 
-Route::get('test', function () {
-    return view('admin.product.imageIndex');
-});
+
 
 Route::get('/login/admin', function () {
     return view('admin.log.login');
@@ -139,6 +137,11 @@ Route::middleware(['auth', 'auth.admin'])->group(function () {
             Route::get('/image/{productId}', [ProductController::class, 'imageIndex'])->name('admin.product.imageIndex');
             Route::post('/image/{productId}/store', [ProductController::class, 'imageStore'])->name('admin.product.imageStore');
             Route::get('/image/{productId}/destroy/{imageId}', [ProductController::class, 'imageDestroy'])->name('admin.product.imageDestroy');
+            Route::prefix('stock-variant')->group(function (){
+                Route::get('{id}',[ProductController::class, 'stock'])->name('admin.stock.index');
+                Route::post('update/{ProductId}', [ProductController::class,'updateStock'])->name('admin.stock.update');
+            });
+  
         });
 
         Route::prefix('/category')->group(function () {
@@ -203,9 +206,6 @@ Route::middleware(['auth', 'auth.admin'])->group(function () {
             Route::post('/{chatId}/send', [ChatsController::class,'sendMessageAdmin'])->name('admin.send.message');
             // Route::post('/send', [ChatsController::class, 'sendMessageAdmin']);
 
-        });
-        Route::prefix('stock')->group(function () {
-            Route::get('/', [ProductVariantController::class, 'index'])->name('admin.stock.index');
         });
     });
 });
