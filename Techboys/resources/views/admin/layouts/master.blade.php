@@ -118,12 +118,6 @@
                                 <span>Banner</span>
                             </a> <!-- Thêm thẻ đóng </a> vào đây -->
                         </li>
-                        <li class="sidebar-item ">
-                            <a href="{{route('admin.stock.index')}}" class='sidebar-link'>
-                                <i class="bi bi-file-earmark-spreadsheet-fill"></i>
-                                <span>Sản phẩm tồn kho</span>
-                            </a>
-                        </li>
                         
                     </ul>
                 </div>
