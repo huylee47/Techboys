@@ -36,15 +36,15 @@
                             </div>
                             <div class="card-body">
                                 {{-- Hiển thị thông báo lỗi --}}
-                                {{-- @if ($errors->any())
-                                <div class="alert alert-danger">
-                                    <ul>
-                                        @foreach ($errors->all() as $error)
-                                        <li>{{ $error }}</li>
-                                        @endforeach
-                                    </ul>
-                                </div>
-                                @endif --}}
+                                @if ($errors->any())
+                                    <div class="alert alert-danger">
+                                        <ul>
+                                            @foreach ($errors->all() as $error)
+                                                <li>{{ $error }}</li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                @endif
 
                                 <form action="{{ route('admin.product.store') }}" method="POST"
                                     enctype="multipart/form-data">
@@ -119,8 +119,7 @@
                                         <div class="col-md-6 mb-3">
                                             <label for="base_price" class="form-label">Giá </label>
                                             <input type="text" class="form-control" id="base_price" name="base_price"
-                                            value="{{ old('base_price') !== null ? number_format(old('base_price'), 2, '.', '') : '' }}"
-                                            >
+                                                value="{{ old('base_price') !== null ? number_format(old('base_price'), 2, '.', '') : '' }}">
                                             @if ($errors->has('base_price'))
                                                 <p class="text-danger small ">
                                                     <i>{{ $errors->first('base_price') }}</i>
@@ -236,7 +235,6 @@
 
                         let value = e.target.value;
 
-                        // Chỉ giữ lại số và một dấu .
                         value = value.replace(/[^0-9.]/g, '');
                         value = value.replace(/^(\d*\.)(.*)\./g, '$1$2'); // Chỉ giữ một dấu .
 
@@ -279,6 +277,24 @@
         {{-- VARIANT --}}
         <script>
             $(document).ready(function() {
+                let maxOptions = $('#attribute-select').data('max-options') || 2;
+
+                $('#attribute-select').change(function() {
+                    let selectedCount = $(this).val() ? $(this).val().length : 0;
+
+                    if (selectedCount >= maxOptions) {
+                        $('#attribute-select option').each(function() {
+                            if (!$(this).is(':selected')) {
+                                $(this).prop('disabled', true);
+                            }
+                        });
+                    } else {
+                        $('#attribute-select option').prop('disabled', false);
+                    }
+
+                    $('.selectpicker').selectpicker('refresh');
+                });
+
                 function toggleBasePrice() {
                     if ($('#is_featured').prop('checked')) {
                         $('input[name="base_price"]').closest('.mb-3').hide();
@@ -364,9 +380,10 @@
 
                         if (attribute.is_multiple == 1) {
                             variantHtml +=
-                                `<select name="variants[${index}][attributes][${attribute.name}][]" class="form-control selectpicker" multiple data-live-search="true">`;
+                                `<select name="variants[${index}][attributes][${attribute.name}][]" class="form-control selectpicker" multiple data-live-search="true"  >`;
                         } else {
-                            variantHtml += `<select name="variants[${index}][attributes][${attribute.name}]" class="form-control single-select">
+                            variantHtml += `<select name="variants[${index}][attributes][${attribute.name}]" class="form-control single-select" required oninvalid="this.setCustomValidity('Vui lòng chọn giá trị cho trường này!')" 
+        oninput="this.setCustomValidity('')">
                                 <option value="">Chọn</option>`;
                         }
 
@@ -381,7 +398,8 @@
                     variantHtml += `
             <div class="col-md-6 mb-3">
                 <label class="form-label">Giá biến thể</label>
-                <input type="text" name="variants[${index}][price]" class="form-control" required>
+                <input type="text" name="variants[${index}][price]" class="form-control" required oninvalid="this.setCustomValidity('Vui lòng chọn giá cho biến thể này!')" 
+        oninput="this.setCustomValidity('')>
             </div>
         </div>`;
 
@@ -422,6 +440,34 @@
                 });
 
                 toggleRemoveButtons();
+                $(document).on('input', 'input[name^="variants"][name$="[price]"]', function() {
+                    let value = $(this).val();
+
+                    value = value.replace(/[^0-9.,]/g, '');
+
+                    value = value.replace(/,/g, '');
+
+                    let parts = value.split('.');
+
+                    if (parts.length > 2) {
+                        value = parts[0] + '.' + parts[1].substring(0, 2);
+                    } else if (parts.length === 2) {
+                        parts[1] = parts[1].substring(0, 2);
+                        value = parts.join('.');
+                    }
+
+                    let integerPart = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+
+                    $(this).val(parts.length === 2 ? integerPart + '.' + parts[1] : integerPart);
+                });
+                $('form').on('submit', function() {
+    $('input[name^="variants"][name$="[price]"]').each(function() {
+        let rawValue = $(this).val();
+        let cleanedValue = rawValue.replace(/,/g, ''); // Loại bỏ dấu phẩy
+        $(this).val(cleanedValue);
+    });
+});
+
             });
         </script>
     @endsection
