@@ -170,6 +170,7 @@
                                     <input type="date" id="endDate" class="form-control" value="{{ date('Y-m-d') }}">
                                     <button id="filterButton" class="btn btn-primary">Lọc</button>
                                 </div>
+                                <div id="error-message" class="alert alert-danger d-none" role="alert"></div>
                                 <div class="card-body">
                                     <canvas id="revenueChart"></canvas>
                                     <script>
@@ -204,7 +205,37 @@
                                                     }
                                                 });
                                             }
+                                            
+                                            document.getElementById('filterButton').addEventListener('click', function (event) {
+                                            let startDate = document.getElementById('startDate').value;
+                                            let endDate = document.getElementById('endDate').value;
+                                            let today = new Date().toISOString().split('T')[0];
+                                            let errorMessageDiv = document.getElementById('error-message');
                                     
+                                            errorMessageDiv.classList.add('d-none');
+                                            errorMessageDiv.innerHTML = ""; 
+                                    
+                                            let errorMessages = [];
+                                    
+                                            if (!startDate || !endDate) {
+                                                errorMessages.push("Ngày bắt đầu hoặc ngày kết thúc không tồn tại! ");
+                                            }
+                                    
+                                            if (startDate > endDate) {
+                                                errorMessages.push("Ngày bắt đầu không thể lớn hơn ngày kết thúc!");
+                                            }
+                                    
+                                            if (startDate > today || endDate > today) {
+                                                errorMessages.push("Không thể chọn ngày trong tương lai!");
+                                            }
+                                    
+                                            if (errorMessages.length > 0) {
+                                                errorMessageDiv.innerHTML = errorMessages.join("<br>");
+                                                errorMessageDiv.classList.remove('d-none');
+                                                event.preventDefault();
+                                            }
+                                        });
+
                                             document.getElementById('filterButton').addEventListener('click', function () {
                                                 let startDate = document.getElementById('startDate').value;
                                                 let endDate = document.getElementById('endDate').value;
