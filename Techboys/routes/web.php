@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AttributesController;
 use App\Http\Controllers\BannerController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\BillController;
@@ -205,7 +206,14 @@ Route::middleware(['auth', 'auth.admin'])->group(function () {
             Route::get('/{chatId}', [ChatsController::class, 'loadMessagesAdmin']);
             Route::post('/{chatId}/send', [ChatsController::class,'sendMessageAdmin'])->name('admin.send.message');
             // Route::post('/send', [ChatsController::class, 'sendMessageAdmin']);
-
+        });
+        Route::prefix('attributes')->group( function(){
+            Route::get('/', [AttributesController::class, 'index'])->name('admin.attributes.index');
+            Route::get('/create', [AttributesController::class, 'create'])->name('admin.attributes.create');
+            Route::post('/data', [AttributesController::class, 'store'])->name('admin.attributes.store');
+            Route::get('/edit/{id}', [AttributesController::class, 'edit'])->name('admin.attributes.edit');
+        Route::post('/update/{id}', [AttributesController::class, 'update'])->name('admin.attributes.update');
+        Route::get('/delete/{id}', [AttributesController::class, 'destroy'])->name('admin.attributes.delete');
         });
     });
 });
