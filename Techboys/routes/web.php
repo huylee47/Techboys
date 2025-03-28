@@ -45,6 +45,10 @@ Route::get('blog/{slug}', [BlogController::class, 'DetailBlog'])->name('DetailBl
 
 //order
 Route::get('/client/orders', [BillController::class, 'indexClient'])->name('client.orders');
+Route::get('/client/orders/search', [BillController::class, 'searchOrder'])->name('client.orders.search');
+Route::post('/client/orders/cancel', [BillController::class, 'CancelOrder'])->name('client.orders.cancel');
+Route::post('/client/orders/cancel/{id}', [BillController::class, 'submitCancelOrder'])->name('client.orders.cancel.submit');
+
 
 //comment
 Route::post('/comment/store', [CommentController::class, 'store'])->name('client.comment.store');
@@ -68,8 +72,8 @@ Route::get('login', function () {
 })->name('login.client');
 
 Route::post('/login/Client', [UserController::class, 'loginClient'])->name('loginClient.auth');
-//banner client
-// Route::get('/', [BannerController::class, 'indexClient']);
+
+
 //contact client
 Route::get('/contact', function () {
     return view('client.contact.contact');
@@ -257,10 +261,6 @@ Route::get('/payment/vnpay/callback', [CheckoutController::class, 'vnpayCallback
 Route::get('/payment/cod/success', [CheckoutController::class, 'codSuccess'])->name('client.payment.cod');
 
 
-//comment
-Route::post('/comment/store', [CommentController::class, 'store'])->name('client.comment.store');
-Route::post('/comment/reply', [CommentController::class, 'reply'])->name('client.comment.reply');
-
 
 
 Route::prefix('products')->group(function () {
@@ -269,6 +269,3 @@ Route::prefix('products')->group(function () {
     Route::get('/filter', [ProductController::class, 'filter'])->name('client.product.filter');
     Route::get('/{slug}', [ProductController::class, 'productDetails'])->name('client.product.show');
 });
-
-Route::get('/client/orders', [BillController::class, 'indexClient'])->name('client.orders');
-

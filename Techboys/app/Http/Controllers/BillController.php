@@ -212,9 +212,69 @@ class BillController extends Controller
     //client
     public function indexClient()
     {
-        $loadAll = Bill::with(['billDetails.product', 'status'])
+        $loadAll = Bill::with(['billDetails.product'])
                        ->where('user_id', Auth::id())
                        ->get();
         return view('client.order.order', compact('loadAll'));
     }
+
+    public function searchOrder(Request $request)
+    {
+        $orderId = $request->input('order_id');
+        $phone = $request->input('phone');
+
+        $query = Bill::with(['billDetails.product',])->where('order_id', $orderId);
+
+        // If the user is not logged in, validate the phone number
+        if (!Auth::check()) {
+            $query->where('phone', $phone);
+        }
+
+        $searchedOrder = $query->first();
+
+        if (!$searchedOrder) {
+            return redirect()->route('client.orders')->with('error', 'Không tìm thấy đơn hàng phù hợp!');
+        }
+
+        $loadAll = Auth::check() ? Bill::with(['billDetails.product'])
+                                       ->where('user_id', Auth::id())
+                                       ->get() : [];
+
+        return view('client.order.order', compact('searchedOrder', 'loadAll'));
+    }
+  
+
+    public function CancelOrder(Request $request)
+    {
+        $order = Bill::with('billDetails.product')->where('id', $request->input('order_id'))->first();
+
+       
+
+        return view('client.order.CancelOrder', compact('order'));
+    }
+
+    public function submitCancelOrder(Request $request, $id)
+    {
+        $request->validate([
+            'cancel_reason' => 'required|string|max:255',
+        ], [
+            'cancel_reason.required' => 'Lý do hủy đơn không được để trống.',
+            'cancel_reason.max' => 'Lý do hủy đơn không được vượt quá 255 ký tự.',
+        ]);
+
+        $bill = Bill::find($id);
+        try {
+            DB::beginTransaction();
+            $bill->update([
+                'status_id' => 0,
+                'note' => $request->cancel_reason,
+            ]);
+            DB::commit();
+            return redirect()->route('client.orders')->with('success', 'Đơn hàng đã được hủy thành công!');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->route('client.orders')->with('error', 'Đã xảy ra lỗi khi hủy đơn hàng!');
+        }
+    }
+
 }
