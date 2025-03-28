@@ -2,17 +2,23 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AttributesRequest;
 use App\Models\Attributes;
+use App\Service\AttributesService;
 use Illuminate\Http\Request;
 
 class AttributesController extends Controller
 {
+    private $attributesService;
+    public function __construct( AttributesService $attributesService ){
+        $this->attributesService = $attributesService;
+    }
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        return $this->attributesService->index();
     }
 
     /**
@@ -20,15 +26,16 @@ class AttributesController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.attributes.add');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(AttributesRequest $request)
     {
-        //
+
+        return $this->attributesService->store($request);
     }
 
     /**
@@ -42,24 +49,24 @@ class AttributesController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Attributes $attributes)
+    public function edit( $id)
     {
-        //
+        return $this->attributesService->edit($id);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Attributes $attributes)
+    public function update(AttributesRequest $request)
     {
-        //
+        return $this->attributesService->update($request);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Attributes $attributes)
+    public function destroy($id)
     {
-        //
+        return $this->attributesService->destroy($id);
     }
 }
