@@ -399,7 +399,7 @@
             <div class="col-md-6 mb-3">
                 <label class="form-label">Giá biến thể</label>
                 <input type="text" name="variants[${index}][price]" class="form-control" required oninvalid="this.setCustomValidity('Vui lòng chọn giá cho biến thể này!')" 
-        oninput="this.setCustomValidity('')>
+        oninput="this.setCustomValidity('')">
             </div>
         </div>`;
 

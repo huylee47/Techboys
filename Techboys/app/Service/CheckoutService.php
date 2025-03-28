@@ -144,7 +144,7 @@ class CheckoutService
     
             // Tạo bill
             $bill = Bill::create([
-                'order_id' => $tempBillId ??  now()->format('Ymd') . ($userId ?? $cartId) . rand(10, 99) ,
+                'order_id' => $tempBillId ?? now()->format('Ymd') . ($userId ?? $cartId) . rand(10, 99),
                 'user_id' => $userId ?? null,
                 'total' => $total,
                 'full_name' => $request->full_name,
@@ -160,46 +160,15 @@ class CheckoutService
             ]);
     
             foreach ($cartItems as $cartItem) {
-                if ($cartItem->variant_id) {
-                    // Giảm stock an toàn với WHERE
-                    $updated = ProductVariant::where('id', $cartItem->variant_id)
-                        ->where('stock', '>=', $cartItem->quantity)
-                        ->decrement('stock', $cartItem->quantity);
-    
-                    if (!$updated) {
-                        return response()->json([
-                            'success' => false,
-                            'message' => 'Sản phẩm biến thể "' . $cartItem->variant_id . '" đã hết hàng!'
-                        ], 400);
-                    }
-    
-                    BillDetails::create([
-                        'bill_id' => $bill->id,
-                        'product_id' => $cartItem->product_id,
-                        'variant_id' => $cartItem->variant_id,
-                        'quantity' => $cartItem->quantity,
-                        'price' => ProductVariant::find($cartItem->variant_id)->price
-                    ]);
-                } else {
-                    // Giảm stock an toàn với WHERE
-                    $updated = Product::where('id', $cartItem->product_id)
-                        ->where('base_stock', '>=', $cartItem->quantity)
-                        ->decrement('base_stock', $cartItem->quantity);
-    
-                    if (!$updated) {
-                        return response()->json([
-                            'success' => false,
-                            'message' => 'Sản phẩm "' . $cartItem->product_id . '" đã hết hàng!'
-                        ], 400);
-                    }
-    
-                    BillDetails::create([
-                        'bill_id' => $bill->id,
-                        'product_id' => $cartItem->product_id,
-                        'quantity' => $cartItem->quantity,
-                        'price' => Product::find($cartItem->product_id)->base_price
-                    ]);
-                }
+                BillDetails::create([
+                    'bill_id' => $bill->id,
+                    'product_id' => $cartItem->product_id,
+                    'variant_id' => $cartItem->variant_id,
+                    'quantity' => $cartItem->quantity,
+                    'price' => $cartItem->variant_id 
+                        ? ProductVariant::find($cartItem->variant_id)->price 
+                        : Product::find($cartItem->product_id)->base_price
+                ]);
             }
     
             // Giảm số lượng voucher nếu có
@@ -237,6 +206,7 @@ class CheckoutService
             ], 500);
         }
     }
+    
     
     
     
