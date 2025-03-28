@@ -346,6 +346,71 @@ class ProductService{
             return redirect()->route('admin.product.imageIndex', $productId)->with('error', 'Ảnh không tồn tại');
         }
     }
+    public function getStockByProductId($productId)
+    {
+        $product = Product::where('id', $productId)->first();
+        $variants = ProductVariant::where('product_id', $productId)->get();
+        $attributeValues = AttributesValue::all()->keyBy('id');
+    
+        $pendingQuantities = DB::table('bill_details')
+            ->join('bills', 'bill_details.bill_id', '=', 'bills.id')
+            ->where('bills.status_id', 1) 
+            ->where('bill_details.product_id', $productId)
+            ->selectRaw('bill_details.variant_id, SUM(bill_details.quantity) as total_quantity')
+            ->groupBy('bill_details.variant_id')
+            ->pluck('total_quantity', 'bill_details.variant_id');
+    
+        if ($variants->isEmpty()) {
+            $productNoVariant = Product::where('id', $productId)->first();
+            $pendingStock = $pendingQuantities[null] ?? 0;
+            // dd($pendingStock);
+    
+            return view('admin.product.stock', [
+                'variants' => null,
+                'product' => $product,
+                'base_stock' => ($productNoVariant->base_stock ?? 0) + $pendingStock,
+            ]);
+        }
+    
+        foreach ($variants as $variant) {
+            $attributeJson = ProductVariant::where('id', $variant->id)->value('attribute_values');
+            $attributeArray = json_decode($attributeJson, true) ?? [];
+    
+            $attributeValuesList = collect($attributeArray)->map(function ($attrValueId) use ($attributeValues) {
+                return $attributeValues[$attrValueId]->value ?? 'Không xác định';
+            })->toArray();
+    
+            $variant->attribute_values = implode(' ', $attributeValuesList);
+    
+            // Cộng thêm số lượng chờ xử lý vào tồn kho
+            $variant->stock += $pendingQuantities[$variant->id] ?? 0;
+        }
+    
+        return view('admin.product.stock', compact('variants', 'product'));
+    }
+    
+    public function updateStock( $request,$productId)
+    {
+        if ($request->has('variant_id')) {
+            foreach ($request->variant_id as $variantId) {
+                $variant = ProductVariant::find($variantId);
+                if ($variant) {
+                    $variant->stock += $request->stock[$variantId] ?? 0;
+                    $variant->save();
+                }
+            }
+        } elseif ($request->has('product_id')) {
+            $product = Product::find($productId);
+            if ($product) {
+                $product->base_stock += $request->base_stock ?? 0;
+                $product->save();
+            }
+        }
+    
+        return redirect()->back()->with('success', 'Cập nhật tồn kho thành công!');
+    }
+    
+
 // CLIENT
 public function getProductBySlug($slug) {
     $product = Product::where('slug', $slug)->firstOrFail();
