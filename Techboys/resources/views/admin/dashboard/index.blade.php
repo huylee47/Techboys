@@ -107,8 +107,8 @@
                                         <table class="table table-hover table-lg">
                                             <thead>
                                                 <tr>
-                                                    <th>Tên</th>
-                                                    <th>Bình luận</th>
+                                                    <th>Khách hàng</th>
+                                                    <th>Nội dung bình luận</th>
                                                     <th>Sản phẩm</th>
                                                 </tr>
                                             </thead>
