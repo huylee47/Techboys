@@ -9,7 +9,7 @@
                 <div class="card-body">
                 <a href="{{route('admin.attributes.create')}}" class="btn btn-primary">Thêm thuộc tính</a>
 
-                    <table class="table table-striped mt-4">
+                    <table class="table table-striped mt-4" id="table1">
                         <thead>
                             <tr>
                                 <th>#</th>
