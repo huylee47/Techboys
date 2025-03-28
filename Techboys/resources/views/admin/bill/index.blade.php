@@ -104,9 +104,9 @@
                                             <span class="badge bg-warning">Chưa thanh toán</span>
                                         @endif
                                     </td>
-                                    <td class="text-left">
-                                        <a href="{{ route('admin.bill.download', $bill->id) }}" class="btn btn-primary">Tải về</a>
-                                        <a href="{{ route('admin.bill.show', $bill->id) }}" class="btn btn-primary">Chi tiết</a>
+                                    <td class="text-center">
+                                        <a href="{{ route('admin.bill.download', $bill->id) }}" class="bi-file-earmark-arrow-down-fill text-success fs-4 mx-2" title="Nhấn để tải hoá đơn"></a>
+                                        <a href="{{ route('admin.bill.show', $bill->id) }}" class="bi-plus-square-fill text-info fs-4 mx-2" title="Xem chi tiết"></a>
                                     </td>
                                 </tr>
                             @endforeach

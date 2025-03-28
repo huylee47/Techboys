@@ -87,7 +87,7 @@
                                             @if ($cmt->status_id == 1)
                                                 <span class="badge bg-success">Hiển thị</span>
                                             @else
-                                                <span class="badge bg-secondary">Đã ẩn</span>
+                                                <span class="badge bg-danger">Đã ẩn</span>
                                             @endif
                                         </td>
                                         <td class="text-center">
@@ -98,12 +98,12 @@
                                                 @csrf
                                                 <input type="hidden" class="form-control" name="id" value="{{ $cmt->id }}">
                                                 <button type="submit"
-                                                    class="btn btn-{{ $cmt->status == 1 ? 'danger' : 'success' }}">
-                                                    {{ $cmt->status_id == 1 ? 'Ẩn' : 'Hiện' }}
+                                                    class="{{ $cmt->status == 1 ? 'bi-eye-slash text-success' : 'bi-eye-fill text-danger' }}fs-4 mx-2" title="Nhấn để {{$cmt->status ==1 ? "hiện" : "ẩn "}} bình luận"
+                                                    >
                                                 </button>
                                             </form>
                                           
-                                            <a href="{{ route('admin.comment.replyForm', ['id' => $cmt->id]) }}" class="btn btn-primary">Rep</a>
+                                            <a href="{{ route('admin.comment.replyForm', ['id' => $cmt->id]) }}" class="bi-reply-fill" title="Nhấn để trả lời bình luận"></a>
                                         </td>
                                        
                                     </tr>

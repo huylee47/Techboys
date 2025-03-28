@@ -46,9 +46,10 @@
                                     {{ $variant->stock > 0 ? $variant->stock : 'Hết hàng' }}
                                 </td>
                                 <td>{{ $variant->created_at->format('Y-m-d') }}</td>
-                                <td>
-                                    <button class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#updateStockModal_{{ $variant->id }}">
-                                        Thêm số lượng
+                                <td class="text-center">
+                                    <button class="btn btn-sm btn-success " data-bs-toggle="modal" data-bs-target="#updateStockModal_{{ $variant->id }}">
+                                        </i> <span>Thêm số lượng</span>
+
                                     </button>
                                 </td>
                             </tr>
@@ -72,9 +73,9 @@
                                 {{ $base_stock > 0 ? $base_stock : 'Hết hàng' }}
                             </td>
                             <td>{{ $product->created_at->format('Y-m-d') }}</td>
-                            <td>
-                                <button class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#updateStockModal_{{ $product->id }}">
-                                    Thêm số lượng
+                            <td class="text-center">
+                                <button class="btn btn-sm btn-success " data-bs-toggle="modal" data-bs-target="#updateStockModal_{{ $product->id }}">
+                                   <span>Thêm số lượng</span>
                                 </button>
                             </td>
                         </tr>
