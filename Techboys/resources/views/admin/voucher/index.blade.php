@@ -41,15 +41,15 @@
                                 <tr>
                                     <th class="col-1">STT</th>
                                     <th class="col-1">Code</th>
-                                    <th class="col-1">Tên</th>
+                                    <th class="col-2">Tên</th>
                                     <th class="col-1">Giảm(%)</th>
                                     <th class="col-1">Giảm(VNĐ)</th>
                                     <th class="col-1">Giá tối thiểu để áp dụng voucher</th>
-                                    <th class="col-1">Giá tối đa để áp dụng voucher</th>
+                                    <th class="col-1">Giá giảm tối đa</th>
                                     {{-- <th class="col-1">Ngày hiệu lực</th>
                                 <th class="col-1">Ngày hết hạn</th>
                                 <th class="col-1">Số lượng dùng</th> --}}
-                                    <th class="col-2">Chức năng</th>
+                                    <th class="col-1">Chức năng</th>
                                 </tr>
                             </thead>
                             <tfoot>
@@ -82,12 +82,13 @@
                                     <td class="col-1">{{ $voucher->quantity }}</td> --}}
                                         <td class="text-center">
                                             <a href="{{ route('admin.voucher.edit', ['id' => $voucher['id']]) }}"
-                                                class="btn btn-warning">Sửa</a>
+                                                class="bi-pencil-fill text-warning  fs-4 mx-2"
+                                                title="Nhấn để sửa voucher"></a>
                                             <a href="{{ route('admin.voucher.show', ['id' => $voucher['id']]) }}"
-                                                class="btn btn-warning">chi tiết</a>
+                                                class="bi-eye-fill text-info fs-4 mx-2" title="Nhấn để xem voucher"></a>
                                             <a href="{{ route('admin.voucher.destroy', ['id' => $voucher['id']]) }}"
                                                 onclick="return confirm('Bạn có chắc chắn muốn xóa?')"
-                                                class="btn btn-info">Xóa</a>
+                                                class="bi-trash-fill text-danger fs-4 mx-2" title="Nhấn để xoá voucher"></a>
                                         </td>
                                     </tr>
                                 @endforeach
