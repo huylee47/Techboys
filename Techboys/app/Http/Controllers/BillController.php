@@ -119,6 +119,28 @@ class BillController extends Controller
             ]);
     
             foreach ($billDetails as $billDetail) {
+                if ($billDetail->variant_id) {
+                    // Trừ stock cho biến thể sản phẩm
+                    $updated = ProductVariant::where('id', $billDetail->variant_id)
+                        ->where('stock', '>=', $billDetail->quantity)
+                        ->decrement('stock', $billDetail->quantity);
+    
+                    if (!$updated) {
+                        DB::rollBack();
+                        return redirect()->route('admin.bill.index')->with('error', 'Sản phẩm biến thể không đủ hàng!');
+                    }
+                } else {
+                    // Trừ stock cho sản phẩm gốc
+                    $updated = Product::where('id', $billDetail->product_id)
+                        ->where('base_stock', '>=', $billDetail->quantity)
+                        ->decrement('base_stock', $billDetail->quantity);
+    
+                    if (!$updated) {
+                        DB::rollBack();
+                        return redirect()->route('admin.bill.index')->with('error', 'Sản phẩm không đủ hàng!');
+                    }
+                }
+    
                 $product = Product::find($billDetail->product_id);
                 if ($product) {
                     $product->increment('purchases', $billDetail->quantity);
@@ -132,6 +154,7 @@ class BillController extends Controller
             return redirect()->route('admin.bill.index')->with('error', 'Đã xảy ra lỗi khi xuất hoá đơn!');
         }
     }
+    
     
     
     public function cancelBill(Request $request,$id) {
