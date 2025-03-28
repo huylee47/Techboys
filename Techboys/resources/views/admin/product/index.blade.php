@@ -35,7 +35,7 @@
                                 {{ session('error') }}
                             </div>
                         @endif
-                        <a href="{{route('admin.product.create')}}" class="btn btn-primary">Thêm sản phẩm</a>
+                        <a href="{{ route('admin.product.create') }}" class="btn btn-primary">Thêm sản phẩm</a>
                         <table class="table table-striped table-bordered" id="table1">
                             <thead>
                                 <tr>
@@ -51,21 +51,20 @@
                                     <th class="col-2">Chức năng</th>
                                 </tr>
                             </thead>
-                            <p class="visually-hidden">{{$index=1}}</p>
+                            <p class="visually-hidden">{{ $index = 1 }}</p>
                             <tbody>
                                 @foreach ($products as $product)
                                     <tr>
-                                        <td>{{$index++}}</td>
+                                        <td>{{ $index++ }}</td>
                                         <td>
-                                            <img src="{{ url('') }}/admin/assets/images/product/{{$product->img}}" 
-                                                 alt="{{$product->name}}" 
-                                                 class="img-fluid" 
-                                                 style="max-width: 100px; height: auto;">
+                                            <img src="{{ url('') }}/admin/assets/images/product/{{ $product->img }}"
+                                                alt="{{ $product->name }}" class="img-fluid"
+                                                style="max-width: 100px; height: auto;">
                                         </td>
-                                        <td>{{$product->name}}</td>
-                                        <td>{{$product->brand->name}}</td>
-                                        <td>{{$product->category->name}}</td>
-                                        <td>{{$product->rate_average}}/5</td>
+                                        <td>{{ $product->name }}</td>
+                                        <td>{{ $product->brand->name }}</td>
+                                        <td>{{ $product->category->name }}</td>
+                                        <td>{{ $product->rate_average }}/5</td>
                                         <td class="text-center">
                                             @if ($product->deleted_at)
                                                 <span class="badge bg-danger">Đã ẩn</span>
@@ -80,20 +79,24 @@
                                                 <span class="badge bg-info">Không</span>
                                             @endif
                                         </td>
-                                        <td>{{$product->created_at->format('d/m/Y')}}</td>
+                                        <td>{{ $product->created_at->format('d/m/Y') }}</td>
                                         <td class="text-center">
                                             <a href="{{ $product->deleted_at ? route('admin.product.restore', $product->id) : route('admin.product.hide', $product->id) }}"
-                                                title="Nhấn để {{ $product->deleted_at ? "HIỆN" :"ẨN"  }} sản phẩm"  class=" {{ $product->deleted_at ? 'bi-eye-fill' : 'bi-eye-slash' }}">
+                                                title="Nhấn để {{ $product->deleted_at ? 'HIỆN' : 'ẨN' }} sản phẩm"
+                                                class=" {{ $product->deleted_at ? 'bi-eye-fill text-success' : 'bi-eye-slash text-danger' }} fs-4">
                                             </a>
-                                            <a href="{{ route('admin.product.edit',['id' =>$product->id]) }}"
-                                                class="bi-pencil-fill"  title="Nhấn để sửa sản phẩm"></a>
-                                            <a href="{{route('admin.product.imageIndex',['productId' =>$product->id])}}"
-                                                class="bi-images" title="Kho ảnh của sản phẩm {{$product->name}} "></a>
-                                            <a href="{{route('admin.product.destroy',['id' =>$product->id])}}"
+                                            <a href="{{ route('admin.product.edit', ['id' => $product->id]) }}"
+                                                class="bi-pencil-fill text-warning  fs-4"
+                                                title="Nhấn để sửa sản phẩm"></a>
+                                            <a href="{{ route('admin.product.imageIndex', ['productId' => $product->id]) }}"
+                                                class="bi-images fs-4" title="Kho ảnh của sản phẩm {{ $product->name }} "></a>
+                                            <a href="{{ route('admin.product.destroy', ['id' => $product->id]) }}"
                                                 onclick="return confirm('Bạn có chắc chắn xoá sản phẩm {{ $product->name }} không?')"
-                                                class="bi-trash-fill" title="Nhấn để xoá sản phẩm"></a>
-                                            <a href="{{route('admin.stock.index',['id' =>$product->id])}}"
-                                                class="bi-box-seam" title="Nhấn để cập nhập số lượng sản phẩm {{$product->name}}"></a>
+                                                class="bi-trash-fill text-danger fs-4"
+                                                title="Nhấn để xoá sản phẩm"></a>
+                                            <a href="{{ route('admin.stock.index', ['id' => $product->id]) }}"
+                                                class="bi-box-seam text-success fs-4"
+                                                title="Nhấn để cập nhập số lượng sản phẩm {{ $product->name }}"></a>
                                         </td>
                                     </tr>
                                 @endforeach
