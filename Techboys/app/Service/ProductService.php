@@ -4,6 +4,7 @@ namespace App\Service;
 
 use App\Models\Attributes;
 use App\Models\AttributesValue;
+use App\Models\BillDetails;
 use App\Models\Brand;
 use App\Models\Color;
 use App\Models\Comment;
@@ -352,23 +353,13 @@ class ProductService{
         $variants = ProductVariant::where('product_id', $productId)->get();
         $attributeValues = AttributesValue::all()->keyBy('id');
     
-        $pendingQuantities = DB::table('bill_details')
-            ->join('bills', 'bill_details.bill_id', '=', 'bills.id')
-            ->where('bills.status_id', 1) 
-            ->where('bill_details.product_id', $productId)
-            ->selectRaw('bill_details.variant_id, SUM(bill_details.quantity) as total_quantity')
-            ->groupBy('bill_details.variant_id')
-            ->pluck('total_quantity', 'bill_details.variant_id');
-    
         if ($variants->isEmpty()) {
             $productNoVariant = Product::where('id', $productId)->first();
-            $pendingStock = $pendingQuantities[null] ?? 0;
-            // dd($pendingStock);
-    
+            
             return view('admin.product.stock', [
                 'variants' => null,
                 'product' => $product,
-                'base_stock' => ($productNoVariant->base_stock ?? 0) + $pendingStock,
+                'base_stock' => $productNoVariant->base_stock ?? 0,
             ]);
         }
     
@@ -381,13 +372,11 @@ class ProductService{
             })->toArray();
     
             $variant->attribute_values = implode(' ', $attributeValuesList);
-    
-            // Cộng thêm số lượng chờ xử lý vào tồn kho
-            $variant->stock += $pendingQuantities[$variant->id] ?? 0;
         }
     
         return view('admin.product.stock', compact('variants', 'product'));
     }
+    
     
     public function updateStock( $request,$productId)
     {
@@ -423,7 +412,7 @@ public function getProductBySlug($slug) {
         ->take(10)
         ->get();
 
-    $groupedAttributes = []; // Lưu danh sách nhóm thuộc tính
+    $groupedAttributes = [];
 
     if ($variants->isNotEmpty()) {
         $formattedVariants = $variants->map(function ($variant) use ($attributeValues, &$groupedAttributes): array {
@@ -433,50 +422,52 @@ public function getProductBySlug($slug) {
                 $attributeValue = $attributeValues[$attrValueId]->value ?? 'Không xác định';
                 $attributeId = $attributeValues[$attrValueId]->attribute_id ?? null;
 
-                // Nhóm thuộc tính vào danh sách
                 $groupedAttributes[$attrName]['values'][] = ['id' => $attrValueId, 'value' => $attributeValue];
                 $groupedAttributes[$attrName]['id'] = $attributeId;
 
                 return [$attrName => ['id' => $attrValueId, 'value' => $attributeValue]];
             })->toArray();
 
+            $soldQuantity = BillDetails::where('variant_id', $variant->id)
+                ->whereHas('bill', function ($query) {
+                    $query->where('status_id', 1);
+                })
+                ->sum('quantity');
+
             return [
                 'id' => $variant->id,
                 'price' => $variant->price,
                 'discounted_price' => $variant->discounted_price,
-                'stock' => $variant->stock,
-                'attributes' => $formattedAttributes, // Chứa cả id và value
+                'stock' => max(0, $variant->stock - $soldQuantity),
+                'attributes' => $formattedAttributes,
             ];
         });
-        // dd($formattedVariants);
-        // Loại bỏ các giá trị trùng nhau trong từng nhóm thuộc tính
+
         foreach ($groupedAttributes as $key => &$data) {
             $data['values'] = collect($data['values'])->unique('id')->values()->toArray();
         }
 
         $defaultVariant = $formattedVariants->first();
-        // return response()->json([
-        //     'formattedVariants' => $formattedVariants[1],
-        // ]);
-        return view('client.product.detail', compact('product', 'comment', 'images', 'formattedVariants', 'defaultVariant', 'relatedProducts', 'attributeValues', 'groupedAttributes','variants'));
+        // return response()->json($defaultVariant);
+        return view('client.product.detail', compact('product', 'comment', 'images', 'formattedVariants', 'defaultVariant', 'relatedProducts', 'attributeValues', 'groupedAttributes', 'variants'));
     } else {
+        $soldQuantity = BillDetails::where('product_id', $product->id)
+            ->whereNull('variant_id')
+            ->whereHas('bill', function ($query) {
+                $query->where('status_id', 1);
+            })
+            ->sum('quantity');
+
         $formattedVariants = [];
         $defaultVariant = [
             'price' => $product->base_price,
             'discounted_price' => $product->discounted_price,
-            'stock' => $product->base_stock ?? 0,
+            'stock' => max(0, $product->base_stock - $soldQuantity),
         ];
-// dd($variants);
-        return view('client.product.detail', compact('product', 'comment', 'images', 'formattedVariants', 'defaultVariant', 'relatedProducts', 'groupedAttributes','variants'));
+        // return response()->json($defaultVariant);
+        return view('client.product.detail', compact('product', 'comment', 'images', 'formattedVariants', 'defaultVariant', 'relatedProducts', 'groupedAttributes', 'variants'));
     }
 }
-
-
-
-
-
-
-
     public function getNewProducts(){
         return Product::with(['variant', 'promotion'])
             ->orderBy('created_at', 'desc')
