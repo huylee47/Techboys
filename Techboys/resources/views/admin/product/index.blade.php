@@ -40,13 +40,15 @@
                             <thead>
                                 <tr>
                                     <th class="col-1">STT</th>
-                                    <th class="col-2">Ảnh hiển thị</th>
-                                    <th class="col-1">Tên</th>
+                                    <th class="col-1">Ảnh hiển thị</th>
+                                    <th class="col-2">Tên</th>
                                     <th class="col-1">Hãng</th>
                                     <th class="col-1">Danh mục</th>
                                     <th class="col-1">Đánh giá</th>
                                     <th class="col-1">Trạng thái</th>
-                                    <th class="col-4">Chức năng</th>
+                                    <th class="col-1">Biến thể?</th>
+                                    <th class="col-1">Ngày tạo</th>
+                                    <th class="col-2">Chức năng</th>
                                 </tr>
                             </thead>
                             <p class="visually-hidden">{{$index=1}}</p>
@@ -72,17 +74,26 @@
                                             @endif
                                         </td>
                                         <td class="text-center">
+                                            @if ($product->is_featured = 1)
+                                                <span class="badge bg-success">Có</span>
+                                            @else
+                                                <span class="badge bg-info">Không</span>
+                                            @endif
+                                        </td>
+                                        <td>{{$product->created_at->format('d/m/Y')}}</td>
+                                        <td class="text-center">
                                             <a href="{{ $product->deleted_at ? route('admin.product.restore', $product->id) : route('admin.product.hide', $product->id) }}"
-                                                class="btn {{ $product->deleted_at ? 'btn-success' : 'btn-danger' }}">
-                                                 {{ $product->deleted_at ? 'Hiện' : 'Ẩn' }}
+                                                title="Nhấn để {{ $product->deleted_at ? "HIỆN" :"ẨN"  }} sản phẩm"  class=" {{ $product->deleted_at ? 'bi-eye-fill' : 'bi-eye-slash' }}">
                                             </a>
                                             <a href="{{ route('admin.product.edit',['id' =>$product->id]) }}"
-                                                class="btn btn-warning">Sửa</a>
+                                                class="bi-pencil-fill"  title="Nhấn để sửa sản phẩm"></a>
                                             <a href="{{route('admin.product.imageIndex',['productId' =>$product->id])}}"
-                                                class="btn btn-info">Kho ảnh</a>
+                                                class="bi-images" title="Kho ảnh của sản phẩm {{$product->name}} "></a>
                                             <a href="{{route('admin.product.destroy',['id' =>$product->id])}}"
                                                 onclick="return confirm('Bạn có chắc chắn xoá sản phẩm {{ $product->name }} không?')"
-                                                class="btn btn-danger">Xoá</a>
+                                                class="bi-trash-fill" title="Nhấn để xoá sản phẩm"></a>
+                                            <a href="{{route('admin.stock.index',['id' =>$product->id])}}"
+                                                class="bi-box-seam" title="Nhấn để cập nhập số lượng sản phẩm {{$product->name}}"></a>
                                         </td>
                                     </tr>
                                 @endforeach
