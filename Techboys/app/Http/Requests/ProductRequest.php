@@ -60,7 +60,7 @@ class ProductRequest extends FormRequest
             $rules['variants.*.attributes.*'] = [
                 'required',
                 function ($attribute, $value, $fail) {
-                    if (trim($value) === '') {
+                    if (($value) == '') {
                         $fail('Tất cả các thuộc tính của biến thể phải được chọn.');
                     }
                 }
