@@ -166,8 +166,8 @@
                                     <h4>Biểu đồ doanh thu theo thời gian</h4>
                                 </div>
                                 <div class="d-flex gap-2 mb-3">
-                                    <input type="date" id="startDate" class="form-control" value="{{ date('Y-m-01') }}">
-                                    <input type="date" id="endDate" class="form-control" value="{{ date('Y-m-d') }}">
+                                    <input type="date" id="startDate" class="form-control" value="{{ date('Y-m-01') }}" max="{{ date('Y-m-d') }}">
+                                    <input type="date" id="endDate" class="form-control" value="{{ date('Y-m-d') }}" max="{{ date('Y-m-d') }}">
                                     <button id="filterButton" class="btn btn-primary">Lọc</button>
                                 </div>
                                 <div id="error-message" class="alert alert-danger d-none" role="alert"></div>
