@@ -4,12 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Comment;
 use App\Models\Product;
 class DashboardController extends Controller
 {
     public function index(){
+    $user = Auth::user();
     $latestComments = Comment::latest()->take(5)->get()->map(function ($comment) {
         return [
             'user' => User::find($comment->user_id),
@@ -28,7 +30,9 @@ class DashboardController extends Controller
     return view('admin.dashboard.index', [
         'onlineUsers' => count($onlineUsers),
         'registeredUsers' => User::where('role_id', 2)->count(),
-        'latestComments' => $latestComments
+        'latestComments' => $latestComments,
+        'user' => $user,
+        'now' => $now
     ]);
     }
 }

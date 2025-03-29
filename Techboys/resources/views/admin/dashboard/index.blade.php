@@ -177,14 +177,15 @@
                         <div class="card-body py-4 px-5">
                             <div class="d-flex align-items-center">
                                 <div class="avatar avatar-xl">
-                                    <img src="" alt="Face 1">
+                                    <img src="{{ $user->avatar ?? 'default-avatar.png' }}" alt="Avatar">
                                 </div>
                                 <div class="ms-3 name">
-                                    <h5 class="font-bold">John Duck</h5>
-                                    <h6 class="text-muted mb-0">@johnducky</h6>
+                                    <h5 class="font-bold">{{ $user->name }}</h5>
+                                    <h6 class="text-muted mb-0">@{{ $user->username }}</h6>
                                 </div>
                             </div>
                         </div>
+                        
                     </div>
                     {{-- <div class="card">
                         <div class="card-header">
