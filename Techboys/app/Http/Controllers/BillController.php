@@ -235,9 +235,20 @@ class BillController extends Controller
     //client
     public function indexClient()
     {
-        $loadAll = Bill::with(['billDetails.product'])
+        $loadAll = Bill::with(['billDetails.product', 'billDetails.variant'])
                        ->where('user_id', Auth::id())
                        ->get();
+
+        foreach ($loadAll as $bill) {
+            foreach ($bill->billDetails as $detail) {
+                if ($detail->variant_id) {
+                    $attributeJson = ProductVariant::where('id', $detail->variant_id)->value('attribute_values');
+                    $attributeArray = json_decode($attributeJson, true) ?? [];
+                    $detail->attributes = implode(', ', AttributesValue::whereIn('id', $attributeArray)->pluck('value')->toArray());
+                }
+            }
+        }
+
         return view('client.order.order', compact('loadAll'));
     }
 
@@ -246,7 +257,7 @@ class BillController extends Controller
         $orderId = $request->input('order_id');
         $phone = $request->input('phone');
 
-        $query = Bill::with(['billDetails.product',])->where('order_id', $orderId);
+        $query = Bill::with(['billDetails.product', 'billDetails.variant'])->where('order_id', $orderId);
 
         // If the user is not logged in, validate the phone number
         if (!Auth::check()) {
@@ -255,11 +266,17 @@ class BillController extends Controller
 
         $searchedOrder = $query->first();
 
-        if (!$searchedOrder) {
-            return redirect()->route('client.orders')->with('error', 'Không tìm thấy đơn hàng phù hợp!');
+        if ($searchedOrder) {
+            foreach ($searchedOrder->billDetails as $detail) {
+                if ($detail->variant_id) {
+                    $attributeJson = ProductVariant::where('id', $detail->variant_id)->value('attribute_values');
+                    $attributeArray = json_decode($attributeJson, true) ?? [];
+                    $detail->attributes = implode(', ', AttributesValue::whereIn('id', $attributeArray)->pluck('value')->toArray());
+                }
+            }
         }
 
-        $loadAll = Auth::check() ? Bill::with(['billDetails.product'])
+        $loadAll = Auth::check() ? Bill::with(['billDetails.product', 'billDetails.variant'])
                                        ->where('user_id', Auth::id())
                                        ->get() : [];
 
