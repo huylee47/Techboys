@@ -89,6 +89,7 @@
             </div>
         </div>
         <button type="submit">Cập Nhật</button>
+        <a href="{{ route('client.orders') }}" class="btn btn-secondary">Quay lại</a>
     </form>
 </div>
 @endsection
