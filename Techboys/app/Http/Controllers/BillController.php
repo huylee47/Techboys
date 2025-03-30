@@ -18,7 +18,6 @@ use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
-
 class BillController extends Controller
 {
     // public function index()
@@ -345,8 +344,18 @@ class BillController extends Controller
             return redirect()->route('client.orders')->with('error', 'Đã xảy ra lỗi khi xác nhận đơn hàng!');
         }
     }
-    public function editClient() {
-        return view('client.order.edit');
+    public function editClient(Request $request)
+    {
+        $orderId = $request->query('order_id');
+        $order = Bill::with('user')->find($orderId);
+
+        if (!$order) {
+            return redirect()->route('client.orders')->with('error', 'Không tìm thấy đơn hàng!');
+        }
+
+
+        return view('client.order.edit', compact('order'));
     }
 
+    
 }
