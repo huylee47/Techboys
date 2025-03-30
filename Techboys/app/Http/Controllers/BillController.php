@@ -286,6 +286,9 @@ class BillController extends Controller
         ]);
 
         $bill = Bill::find($id);
+        if ($bill->status_id != 1) {
+            return redirect()->route('client.orders')->with('error', 'Hoá đơn không hợp lệ để xác nhận!');
+        }
         try {
             DB::beginTransaction();
             $bill->update([
