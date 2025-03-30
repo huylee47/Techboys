@@ -345,5 +345,8 @@ class BillController extends Controller
             return redirect()->route('client.orders')->with('error', 'Đã xảy ra lỗi khi xác nhận đơn hàng!');
         }
     }
+    public function editClient() {
+        return view('client.order.edit');
+    }
 
 }
