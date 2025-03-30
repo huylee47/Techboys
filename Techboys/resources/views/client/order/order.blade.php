@@ -148,9 +148,8 @@
                                                                         <button class="btn btn-danger" type="submit">Hủy đơn</button>
                                                                     </form>
                                                                 @elseif($bill->status_id == 3)
-                                                                    <form action="" method="POST">
+                                                                    <form action="{{ route('client.orders.confirm', $bill->id) }}" method="POST">
                                                                         @csrf
-                                                                        <input type="hidden" name="order_id" value="{{ $bill->id }}">
                                                                         <button class="btn btn-success" type="submit">Xác nhận</button>
                                                                     </form>
                                                                 @endif
