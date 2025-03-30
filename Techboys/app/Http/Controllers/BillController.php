@@ -300,4 +300,30 @@ class BillController extends Controller
         }
     }
 
+    public function confirmClient(Request $request, $id) {
+        $bill = Bill::find($id);
+
+        if (!$bill) {
+            return redirect()->route('client.orders')->with('error', 'Không tìm thấy đơn hàng!');
+        }
+
+        if ($bill->status_id != 3) {
+            return redirect()->route('client.orders')->with('error', 'Hoá đơn không hợp lệ để xác nhận!');
+        }
+
+        try {
+            DB::beginTransaction();
+
+            $bill->update([
+                'status_id' => 4,
+            ]);
+
+            DB::commit();
+            return redirect()->route('client.orders')->with('success', 'Đơn hàng đã được xác nhận thành công!');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->route('client.orders')->with('error', 'Đã xảy ra lỗi khi xác nhận đơn hàng!');
+        }
+    }
+
 }
