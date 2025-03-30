@@ -182,7 +182,7 @@
                                                                                 <input type="hidden" name="order_id" value="{{ $bill->id }}">
                                                                                 <button class="btn btn-danger" type="submit">Hủy đơn</button>
                                                                             </form>
-                                                                            <form action="" method="GET">
+                                                                            <form action="{{ route('client.orders.edit') }}" method="GET">
                                                                                 <button class="btn btn-warning" type="submit">Sửa thông tin</button>
                                                                             </form>
                                                                         </div>
