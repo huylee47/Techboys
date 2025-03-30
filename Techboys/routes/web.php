@@ -48,7 +48,7 @@ Route::get('/client/orders', [BillController::class, 'indexClient'])->name('clie
 Route::get('/client/orders/search', [BillController::class, 'searchOrder'])->name('client.orders.search');
 Route::post('/client/orders/cancel', [BillController::class, 'CancelOrder'])->name('client.orders.cancel');
 Route::post('/client/orders/cancel/{id}', [BillController::class, 'submitCancelOrder'])->name('client.orders.cancel.submit');
-
+Route::post('/client/orders/confirm/{id}', [BillController::class, 'confirmClient'])->name('client.orders.confirm');
 
 //comment
 Route::post('/comment/store', [CommentController::class, 'store'])->name('client.comment.store');
