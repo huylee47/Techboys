@@ -37,13 +37,12 @@
     </style>
     <form action="" method="POST">
         @csrf
-        @method('PUT')
+        @method('POST')
         <div id="customer_details">
             <div>
                 <p>
-                    <label for="billing_first_name">Họ và Tên Người nhận
-                    </label>
-                    <input type="text" value="" id="billing_first_name" name="full_name" disabled>
+                    <label for="billing_first_name">Họ và Tên Người nhận</label>
+                    <input type="text" value="{{ $order->user->name }}" id="billing_first_name" name="full_name" disabled>
                 </p>
                 <div class="flex-row">
                     <p>
@@ -51,7 +50,8 @@
                             <abbr title="required" class="required">*</abbr>
                         </label>
                         <select name="province_id" id="province">
-                            <option value="" selected disabled>Chọn tỉnh/thành phố</option>
+                            <option value="" disabled>Chọn tỉnh/thành phố</option>
+                           
                         </select>
                     </p>
                     <p>
@@ -59,7 +59,8 @@
                             <abbr title="required" class="required">*</abbr>
                         </label>
                         <select name="district_id" id="district">
-                            <option value="" selected disabled>Chọn quận/huyện</option>
+                            <option value="" disabled>Chọn quận/huyện</option>
+                           
                         </select>
                     </p>
                 </div>
@@ -69,22 +70,22 @@
                             <abbr title="required" class="required">*</abbr>
                         </label>
                         <select name="ward_id" id="ward">
-                            <option value="" selected disabled>Chọn phường/xã</option>
+                            <option value="" disabled>Chọn phường/xã</option>
+                          
                         </select>
                     </p>
                     <p>
                         <label for="billing_phone">Số điện thoại
                             <abbr title="required" class="required">*</abbr>
                         </label>
-                        <input type="tel" value="" id="billing_phone" name="phone">
+                        <input type="tel" value="{{ $order->phone }}" id="billing_phone" name="phone">
                     </p>
                 </div>
-             
                 <p>
                     <label for="order_comments">Địa chỉ chi tiết
                         <abbr title="required" class="required">*</abbr>
                     </label>
-                    <textarea cols="5" rows="3" id="order_comments" name="address"></textarea>
+                    <textarea cols="5" rows="3" id="order_comments" name="address">{{ $order->address }}</textarea>
                 </p>
             </div>
         </div>
