@@ -52,7 +52,11 @@
                                                         <td>{{ $searchedOrder->order_id }}</td>
                                                         <td>
                                                             @foreach ($searchedOrder->billDetails as $detail)
-                                                                {{ $detail->product->name }}<br>
+                                                                {{ $detail->product->name }}
+                                                                @if($detail->variant_id)
+                                                                    ({{ $detail->attributes }})
+                                                                @endif
+                                                                <br>
                                                             @endforeach
                                                         </td>
                                                         <td>
@@ -127,7 +131,11 @@
                                                             <td>{{ $bill->order_id }}</td>
                                                             <td>
                                                                 @foreach ($bill->billDetails as $detail)
-                                                                    {{ $detail->product->name }}<br>
+                                                                    {{ $detail->product->name }}
+                                                                    @if($detail->variant_id)
+                                                                        ({{ $detail->attributes }})
+                                                                    @endif
+                                                                    <br>
                                                                 @endforeach
                                                             </td>
                                                             <td>
@@ -161,7 +169,6 @@
                                                                 @endswitch
                                                             </td>
                                                             <td>{{ number_format($bill->total, 0, ',', '.') }} VND</td>
-                                                          
                                                                 <td>
                                                                     @if($bill->status_id == 1)
                                                                         <form action="{{ route('client.orders.cancel') }}" method="POST">
@@ -175,8 +182,7 @@
                                                                             <button class="btn btn-success" type="submit">Xác nhận</button>
                                                                         </form>
                                                                     @endif
-                                                                </td>
-                                                          
+                                                                </td>        
                                                         </tr>
                                                     @endforeach
                                                 </tbody>
