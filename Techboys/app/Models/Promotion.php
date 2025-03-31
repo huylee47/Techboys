@@ -14,8 +14,8 @@ class Promotion extends Model
     public function status(){
         return $this->belongsTo(Status::class);
     }
-    public function products()
+    public function product()
     {
-        return $this->belongsToMany(Product::class, 'promotion_product', 'promotion_id', 'product_id');
+        return $this->belongsTo(Product::class);
     }
 }
