@@ -130,6 +130,12 @@
                                 <span>Sản phẩm tồn kho</span>
                             </a>
                         </li>
+                        <li class="sidebar-item ">
+                            <a href="{{route('admin.bill.create')}}" class='sidebar-link'>
+                                <i class="bi bi-file-earmark-spreadsheet-fill"></i>
+                                <span>Đặt hàng</span>
+                            </a>
+                        </li>
                     </ul>
                 </div>
                 <button class="sidebar-toggler btn x"><i data-feather="x"></i></button>
