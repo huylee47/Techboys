@@ -215,22 +215,22 @@
     ],
     "chats": [
         {
-            "customer_id": 1,
+            "customer_id": 6,
             "staff_id": 2,
             "status_id": 1,
             "created_at": "2025-01-19 10:00:00",
             "updated_at": "2025-01-19 10:00:00"
         },
         {
-            "customer_id": 3,
+            "customer_id": 7,
             "staff_id": 4,
             "status_id": 2,
             "created_at": "2025-01-19 11:30:00",
             "updated_at": "2025-01-19 11:30:00"
         },
         {
-            "customer_id": 2,
-            "staff_id": 5,
+            "customer_id": 8,
+            "staff_id": 1,
             "status_id": 3,
             "created_at": "2025-01-19 12:15:00",
             "updated_at": "2025-01-19 12:15:00"
@@ -243,7 +243,7 @@
             "updated_at": "2025-01-19 13:00:00"
         },
         {
-            "customer_id": 4,
+            "customer_id": 9,
             "staff_id": 2,
             "status_id": 2,
             "created_at": "2025-01-19 14:00:00",
@@ -660,31 +660,73 @@
     "message": [
         {
             "chat_id": 1,
-            "sender_id": 1,
-            "message": "Hello! How are you?",
-            "created_at": "2025-01-19 12:00:00",
-            "updated_at": "2025-01-19 12:00:00"
+            "sender_id": 6,
+            "message": "Xin chào , tôi cần tìm điện thoại khoảng 10tr",
+            "created_at": "2023-03-13 12:00:00",
+            "updated_at": "2025-03-13 12:00:00"
         },
         {
             "chat_id": 1,
             "sender_id": 2,
-            "message": "I'm good, thanks! How about you?",
-            "created_at": "2025-01-19 12:05:00",
-            "updated_at": "2025-01-19 12:05:00"
+            "message": "Chào Anh , chúng tôi có rất nhiều điện thoại phù hợp",
+            "created_at": "2025-03-13 12:05:00",
+            "updated_at": "2025-03-13 12:05:00"
         },
         {
             "chat_id": 2,
+            "sender_id": 7,
+            "message": "Xin chào , tôi muốn thay đổi thông tin đặt hàng",
+            "created_at": "2025-03-16 13:00:00",
+            "updated_at": "2025-03-16 13:00:00"
+        },
+        {
+            "chat_id": 2,
+            "sender_id": 4,
+            "message": "Chắc chắn rồi, vui lòng cho tôi xin số điện thoại của quý khách",
+            "created_at": "2025-03-16 13:05:00",
+            "updated_at": "2025-03-16 13:05:00"
+        },
+        {
+            "chat_id": 3,
+            "sender_id": 8,
+            "message": "Xin chào , tôi muốn biết khi nào sản phẩm sẽ dược giao",
+            "created_at": "2025-03-19 13:00:00",
+            "updated_at": "2025-03-19 13:00:00"
+        },
+        {
+            "chat_id": 3,
             "sender_id": 3,
-            "message": "Hey, I need help with my order.",
-            "created_at": "2025-01-19 13:00:00",
-            "updated_at": "2025-01-19 13:00:00"
+            "message": "Thưa quý khách , sản phẩm sẽ được giao từ 3-5 ngày ",
+            "created_at": "2025-03-19 13:05:00",
+            "updated_at": "2025-03-19 13:05:00"
         },
         {
-            "chat_id": 2,
+            "chat_id": 4,
+            "sender_id": 5,
+            "message": "Xin chào sốp",
+            "created_at": "2025-03-21 13:00:00",
+            "updated_at": "2025-03-21 13:00:00"
+        },
+        {
+            "chat_id": 4,
             "sender_id": 1,
-            "message": "Sure, how can I assist you?",
-            "created_at": "2025-01-19 13:05:00",
-            "updated_at": "2025-01-19 13:05:00"
+            "message": "Hê lô quý khách",
+            "created_at": "2025-03-21 13:05:00",
+            "updated_at": "2025-03-21 13:05:00"
+        },
+        {
+            "chat_id": 5,
+            "sender_id": 9,
+            "message": "Chủ sốp có ny chưa =))))",
+            "created_at": "2025-03-21 13:00:00",
+            "updated_at": "2025-03-21 13:00:00"
+        },
+        {
+            "chat_id": 5,
+            "sender_id": 2,
+            "message": "Ế toàn tập em ạ",
+            "created_at": "2025-03-21 14:05:00",
+            "updated_at": "2025-03-21 14:05:00"
         }
     ],
     "attributes": [
@@ -1828,7 +1870,7 @@
             "email": "admin@gmail.com",
             "email_verified_at": "2025-01-16T12:00:00",
             "username": "admin",
-            "password": "123456",
+            "password": "password123",
             "phone": "0901234567",
             "wallet": 10000,
             "address": "123 Đường ABC, TP.Hải Phòng",
@@ -1845,7 +1887,7 @@
             "password": "password123",
             "phone": "0901234567",
             "wallet": 100.5,
-            "address": "123 Đường ABC, TP.Hải Phòng",
+            "address": "87 Tô Hiệu , Lê Chân, TP.Hải Phòng",
             "gender": true,
             "dob": "1990-05-10",
             "status": 1,
@@ -1859,7 +1901,7 @@
             "password": "password123",
             "phone": "0901234567",
             "wallet": 100.5,
-            "address": "123 Đường ABC, TP.Hải Phòng",
+            "address": "815 Ngô Gia Tự , Hải An, TP.Hải Phòng",
             "gender": true,
             "dob": "1990-05-10",
             "status": 1,
@@ -1873,7 +1915,7 @@
             "password": "password123",
             "phone": "0901234567",
             "wallet": 100.5,
-            "address": "123 Đường ABC, TP.Hải Phòng",
+            "address": "11 Sở Dầu , Hồng Bàng , Hải Phòng",
             "gender": true,
             "dob": "1990-05-10",
             "status": 1,
@@ -1887,8 +1929,64 @@
             "password": "password123",
             "phone": "0901234567",
             "wallet": 100.5,
-            "address": "123 Đường ABC, TP.Hải Phòng",
+            "address": "Thuỷ Nguyêm, Hải Phòng",
             "gender": true,
+            "dob": "1990-05-10",
+            "status": 1,
+            "role_id": 2
+        },
+        {
+            "name": "Nguyễn Duy Hùng",
+            "email": "hung@gmail.com",
+            "email_verified_at": "2025-01-16T12:00:00",
+            "username": "nguyenvana",
+            "password": "password123",
+            "phone": "0123456789",
+            "wallet": 100.5,
+            "address": "23 Ngô Gia Tự ,Hải An, TP.Hải Phòng",
+            "gender": true,
+            "dob": "1990-05-10",
+            "status": 1,
+            "role_id": 2
+        },
+        {
+            "name": "Phạm Quang Núi",
+            "email": "nui@gmail.com",
+            "email_verified_at": "2025-01-16T12:00:00",
+            "username": "phamquangnui",
+            "password": "password123",
+            "phone": "0123456789",
+            "wallet": 100.5,
+            "address": "2 Trần Phú ,Ngô Quyền TP.Hải Phòng",
+            "gender": true,
+            "dob": "1990-05-10",
+            "status": 1,
+            "role_id": 2
+        },
+        {
+            "name": "Trần Ngọc Trang",
+            "email": "trang@gmail.com",
+            "email_verified_at": "2025-01-16T12:00:00",
+            "username": "ngoctrang",
+            "password": "password123",
+            "phone": "0123456789",
+            "wallet": 100.5,
+            "address": "357 Đông Khê ,Ngô Quyền TP.Hải Phòng",
+            "gender": false,
+            "dob": "1990-05-10",
+            "status": 1,
+            "role_id": 2
+        },
+        {
+            "name": "Trần Thị Hương",
+            "email": "huong@gmail.com",
+            "email_verified_at": "2025-01-16T12:00:00",
+            "username": "tranthihuong",
+            "password": "password123",
+            "phone": "0123456789",
+            "wallet": 100.5,
+            "address": "Lũng Đông , Hải An, TP.Hải Phòng",
+            "gender": false,
             "dob": "1990-05-10",
             "status": 1,
             "role_id": 2
