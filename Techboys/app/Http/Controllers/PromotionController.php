@@ -19,14 +19,15 @@ class PromotionController extends Controller
      */
     public function index()
     {
-        $promotions = Promotion::paginate(10);
-        return view('admin.promotions.index', compact('promotions'));
+    $promotions = Promotion::with('product')->paginate(10);
+    $products = Product::doesntHave('promotion')->get();
+    return view('admin.promotions.index', compact('promotions', 'products'));
     }
 
     public function create()
     {
         $products = Product::whereDoesntHave('promotion')->get();
-        return view('admin.promotions.create', compact('products'));
+        return view('admin.promotions.add', compact('products'));
     }
 
     /**
@@ -36,24 +37,20 @@ class PromotionController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'discount_percent' => 'required|numeric|min:1|max:100',
-            'start_date' => 'required|date',
-            'end_date' => 'required|date|after:start_date',
-            'product_ids' => 'required|array|min:1', 
-            'product_ids.*' => 'exists:products,id', 
+        'product_id' => 'required|exists:products,id',
+        'discount_percent' => 'required|numeric|min:1|max:100',
+        'end_date' => 'required|date|after:today',
         ]);
 
-        foreach ($request->product_ids as $product_id) {
-            Promotion::create([
-                'name' => $request->name,
-                'product_id' => $product_id,
-                'discount_percent' => $request->discount_percent,
-                'start_date' => $request->start_date,
-                'end_date' => $request->end_date,
-            ]);
-        }
+        Promotion::create([
+            'name' => $request->name,
+            'status_id' => 1, 
+            'product_id' => $request->product_id,
+            'discount_percent' => $request->discount_percent,
+            'end_date' => $request->end_date,
+        ]);
 
-        return redirect()->route('admin.promotions.index')->with('success', 'Khuyến mãi đã được tạo!');
+        return redirect()->route('admin.promotion.index')->with('success', 'Khuyến mãi đã được thêm thành công!');
     }
 
     /**
@@ -67,17 +64,34 @@ class PromotionController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Promotion $promotion)
+    public function edit($id)
     {
-        //
+        $promotion = Promotion::findOrFail($id);
+    $products = Product::all();
+    return view('admin.promotion.edit', compact('promotion', 'products'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Promotion $promotion)
+    public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'product_id' => 'required|exists:products,id',
+            'discount_percent' => 'required|numeric|min:1|max:100',
+            'end_date' => 'required|date|after:today',
+        ]);
+    
+        $promotion = Promotion::findOrFail($id);
+        $promotion->update([
+            'name' => $request->name,
+            'product_id' => $request->product_id,
+            'discount_percent' => $request->discount_percent,
+            'end_date' => $request->end_date,
+        ]);
+    
+        return redirect()->route('admin.promotion.index')->with('success', 'Khuyến mãi đã được cập nhật!');
     }
 
     /**
