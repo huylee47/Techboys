@@ -114,6 +114,8 @@ Route::post('/login/auth', [UserController::class, 'login'])->name('login.auth')
 
 Route::middleware(['auth', 'auth.admin'])->group(function () {
     Route::prefix('admin')->group(function () {
+Route::post('/logout', [UserController::class, 'logout'])->name('admin.logout');
+
         Route::get('/home', [DashboardController::class, 'index'])->name('admin.index');
         Route::get('/blog', function () {
             return view('admin.tag.edit');
