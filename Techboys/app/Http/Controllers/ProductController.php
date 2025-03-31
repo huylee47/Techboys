@@ -29,18 +29,11 @@ class ProductController extends Controller
         return view('admin.product.index', compact('products'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         return $this->productService->createProduct();
     }
 
-
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(ProductRequest $request)
     {
         // dd($request->all());
@@ -48,17 +41,11 @@ class ProductController extends Controller
         return $this->productService->storeProduct($request);
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(Request $request)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit($id)
     {
         return $this->productService->editProduct($id);
