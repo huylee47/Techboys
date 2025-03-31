@@ -162,11 +162,17 @@
                 messagesContainer.scrollTop = messagesContainer.scrollHeight;
             }
 
+            let isThrottled = false;
+
             function sendMessage() {
                 let messageInput = document.getElementById("message-input");
+                let sendButton = document.getElementById("send-message");
                 let message = messageInput.value.trim();
 
-                if (!message || !selectedChatId) return;
+                if (!message || !selectedChatId || isThrottled) return;
+
+                isThrottled = true; 
+                sendButton.disabled = true;
 
                 let sender = getSenderName({
                     role_id: 1
@@ -182,23 +188,36 @@
                 }).then(response => {
                     if (response.data.success) {
                         messageInput.value = "";
+
+                        // Hủy throttle sau 2 giây
+                        setTimeout(() => {
+                            isThrottled = false;
+                            sendButton.disabled = false;
+                        }, 2000);
                     } else {
                         console.error("Lỗi gửi tin nhắn:", response.data);
                         alert("Không thể gửi tin nhắn, thử lại!");
+                        isThrottled = false;
+                        sendButton.disabled = false;
                     }
                 }).catch(error => {
                     console.error("Lỗi kết nối:", error);
                     alert("Lỗi kết nối đến server!");
+                    isThrottled = false;
+                    sendButton.disabled = false;
                 });
             }
+
+
             document.getElementById("send-message").addEventListener("click", sendMessage);
 
             document.getElementById("message-input").addEventListener("keypress", function(event) {
-                if (event.key === "Enter") {
-                    event.preventDefault();
-                    sendMessage();
-                }
-            });
+    if (event.key === "Enter" && !isThrottled) {
+        event.preventDefault();
+        sendMessage();
+    }
+});
+
 
             document.querySelectorAll(".chat-item").forEach(item => {
                 let chatId = item.getAttribute("data-chat-id");
