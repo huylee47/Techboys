@@ -114,7 +114,10 @@ class UserController extends Controller
         $user = User::where('phone', $phone)->first();
 
         if ($user) {
-            return response()->json(['status' => 'exists', 'user' => $user]);
+            return response()->json([
+                'status' => 'exists',
+                'user' => $user
+            ]);
         } else {
             return response()->json(['status' => 'not_found']);
         }
