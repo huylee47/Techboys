@@ -53,7 +53,7 @@
             <!-- Chọn sản phẩm (Ẩn ban đầu) -->
             <div id="productSelection" class="d-none mt-4">
                 <h4>Chọn sản phẩm</h4>
-                <input type="text" id="productSearch" class="form-control" placeholder="Tìm kiếm sản phẩm">
+                <input type="text" id="productSearch" class="form-control" placeholder="Tìm kiếm sản phẩm" data-lightsearch>
                 <div id="productList" class="mt-3">
                     <!-- Danh sách sản phẩm sẽ được hiển thị ở đây -->
                 </div>
@@ -62,6 +62,7 @@
     </div>
 
     <script>
+        // Kiểm tra thông tin khách hàng theo số điện thoại
         document.getElementById('checkUser').addEventListener('click', function() {
             let phone = document.getElementById('userPhone').value;
 
@@ -88,5 +89,101 @@
                 }
             });
         });
+
+        // Tìm kiếm sản phẩm qua AJAX
+        document.getElementById('productSearch').addEventListener('input', function() {
+            let query = this.value;
+
+            if (query.length > 2) { // Chỉ gửi request khi người dùng nhập ít nhất 3 ký tự
+                fetch('{{ route('admin.product.search') }}?query=' + query)
+                    .then(response => response.json())
+                    .then(data => {
+                        let productList = document.getElementById('productList');
+                        productList.innerHTML = ''; // Xóa danh sách cũ
+
+                        if (data.length > 0) {
+                            data.forEach(product => {
+                                let productItem = document.createElement('div');
+                                productItem.classList.add('product-item');
+                                productItem.innerHTML = `
+                                    <div>${product.name}</div>
+                                    <button class="btn btn-primary add-product-btn" data-id="${product.id}">Chọn</button>
+                                `;
+                                productList.appendChild(productItem);
+                            });
+                        } else {
+                            productList.innerHTML = '<p>Không tìm thấy sản phẩm nào.</p>';
+                        }
+                    })
+                    .catch(error => console.error('Error:', error));
+            }
+        });
+
+        // Xử lý khi người dùng chọn sản phẩm
+        document.addEventListener('click', function(e) {
+            if (e.target && e.target.classList.contains('add-product-btn')) {
+                let productId = e.target.getAttribute('data-id');
+                console.log('Sản phẩm đã chọn có ID: ' + productId);
+                // Ở đây bạn có thể xử lý việc thêm sản phẩm vào đơn hàng
+                // Ví dụ: gửi ID sản phẩm vào form hoặc vào database
+            }
+        });
+
+        // Sử dụng DataLightSearch để tìm kiếm
+document.getElementById('productSearch').addEventListener('input', function() {
+    let query = this.value;
+
+    if (query.length > 2) { // Chỉ tìm khi có ít nhất 3 ký tự
+        fetch('{{ route('admin.product.search') }}?query=' + query)
+            .then(response => response.json())
+            .then(data => {
+                let productList = document.getElementById('productList');
+                productList.innerHTML = ''; // Xóa danh sách cũ
+
+                if (data.length > 0) {
+                    data.forEach(product => {
+                        let productItem = document.createElement('div');
+                        productItem.classList.add('product-item');
+                        productItem.innerHTML = `
+                            <div class="product-name">${product.name}</div>
+                            <button class="btn btn-primary add-product-btn" data-id="${product.id}">Chọn</button>
+                            <div class="product-variants" id="variants-${product.id}" style="display:none;">
+                                <!-- Các biến thể sẽ được hiển thị ở đây -->
+                            </div>
+                        `;
+                        productList.appendChild(productItem);
+
+                        // Hiển thị biến thể nếu có
+                        if (product.variants && product.variants.length > 0) {
+                            let variantsContainer = document.getElementById('variants-' + product.id);
+                            product.variants.forEach(variant => {
+                                let variantItem = document.createElement('div');
+                                variantItem.innerHTML = `
+                                    <div class="variant-name">${variant.name}</div>
+                                    <div class="variant-price">${variant.price} VND</div>
+                                `;
+                                variantsContainer.appendChild(variantItem);
+                            });
+
+                            // Hiển thị biến thể khi người dùng nhấn "Chọn"
+                            document.querySelector(`.add-product-btn[data-id="${product.id}"]`).addEventListener('click', function() {
+                                variantsContainer.style.display = 'block';
+                            });
+                        }
+                    });
+
+                    // Tạo đối tượng DataLightSearch cho sản phẩm tìm được
+                    new DataLightSearch({
+                        element: document.querySelector('#productSearch'),
+                        listItems: productList.querySelectorAll('.product-item'),
+                        searchField: 'product-name', // Cái này cần phải là tên field bạn muốn tìm kiếm
+                    });
+                } else {
+                    productList.innerHTML = '<p>Không tìm thấy sản phẩm nào.</p>';
+                }
+            })
+            .catch(error => console.error('Error:', error));
+    }
+});
     </script>
 @endsection
