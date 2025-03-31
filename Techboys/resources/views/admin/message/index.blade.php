@@ -142,7 +142,7 @@
                             `Chị ${msg.customer_name || "Không xác định"}`;
                     }
                 } else if (msg.guest_id) {
-                    return `Guest #${msg.chat_id}`;
+                    return `Guest ${msg.chat_id}`;
                 }
 
                 return "Không xác định";
