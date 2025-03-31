@@ -14,9 +14,15 @@ class ChatsService
 // ADMIN
 public function index()
 {
+    $adminId = Auth::id();
+
     $chats = Chats::with(['customer' => function ($query) {
         $query->where('role_id', 2);
     }])
+    ->where(function ($query) use ($adminId) {
+        $query->whereNull('staff_id')
+              ->orWhere('staff_id', $adminId);
+    })
     ->where(function ($query) {
         $query->whereHas('customer', function ($q) {
             $q->where('role_id', 2);
@@ -25,9 +31,9 @@ public function index()
     ->orderBy('created_at', 'desc')
     ->get();
 
-
     return view('admin.message.index', compact('chats'));
 }
+
 
 
 public function loadMessageAdmin($chatId)
@@ -46,9 +52,17 @@ public function loadMessageAdmin($chatId)
 
 public function sendMessageAdmin($request, $chatId)
 {
+    $adminId = Auth::id();
+
+    $chat = Chats::find($chatId);
+    if ($chat && is_null($chat->staff_id)) {
+        $chat->staff_id = $adminId;
+        $chat->save();
+    }
+
     $message = new Message();
     $message->chat_id = $chatId;
-    $message->sender_id = Auth::id();
+    $message->sender_id = $adminId;
     $message->guest_id = null;
     $message->message = $request->message;
     $message->save();
@@ -61,6 +75,7 @@ public function sendMessageAdmin($request, $chatId)
         'message' => $message
     ]);
 }
+
 // CLIENT
 public function sendMessage($request)
 {
