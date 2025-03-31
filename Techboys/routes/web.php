@@ -154,12 +154,15 @@ Route::middleware(['auth', 'auth.admin'])->group(function () {
             Route::post('/store', [UserController::class, 'store_user'])->name('admin.user.store');
             Route::post('/block/{id}', [UserController::class, 'block'])->name('admin.user.block');
             Route::post('/open/{id}', [UserController::class, 'open'])->name('admin.user.open');
+            Route::post('/check-customer', [UserController::class, 'checkUser'])->name('admin.user.check');
         });
 
         Route::prefix('/bill')->group(function () {
             Route::get('/', [BillController::class, 'index'])->name('admin.bill.index');
+            Route::get('/create', [BillController::class, 'create'])->name('admin.bill.create');
             Route::get('/hide/{id}', [BillController::class, 'hide'])->name('admin.bill.hide');
-            Route::get('/restore/{id}', [BillController::class, 'restore'])->name('admin.bill.restore');
+            Route::get('/restore/{id}', [BillController::class, 'restore'])->name('admin.bill.
+            restore');
             Route::get('/download.invoice/{id}', [BillController::class, 'download'])->name('admin.bill.download');
             Route::get('/bill-detail/{id}/show', [BillDetailsController::class, 'show'])->name('admin.bill.show');
             Route::get('invoice/{id}',[BillController::class,'invoiceBill'])->name('admin.bill.invoice');
