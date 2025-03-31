@@ -41,6 +41,19 @@ class ProductController extends Controller
         return $this->productService->storeProduct($request);
     }
 
+    public function searchProducts(Request $request)
+    {
+        $query = $request->input('query');
+
+        if (empty($query)) {
+            return response()->json([]);
+        }
+
+        $products = Product::where('name', 'like', "%$query%")->get();
+
+        return response()->json($products);
+    }
+
     public function show(Request $request)
     {
         //
@@ -99,7 +112,7 @@ class ProductController extends Controller
         return redirect()->route('admin.product.imageIndex', $projectId)->with('success', 'Ảnh đã được xóa thành công.');
     }
 
-    // CLIENT 
+    // ================================= CLIENT  ================================= 
     public function productDetails($request)
     {
         return $this->productService->getProductBySlug($request);
