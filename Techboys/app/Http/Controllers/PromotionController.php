@@ -19,16 +19,13 @@ class PromotionController extends Controller
      */
     public function index()
     {
-        $promotions = Promotion::with('products')->latest()->take(20)->get();
-        return view('admin.promotions.index', compact('promotions'));
+         $promotion = Promotion::latest()->take(20)->get();
+        return view('admin.promotions.index', compact('promotion'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        $products = Product::all();
+        $products = Product::whereDoesntHave('promotion')->get();
         return view('admin.promotions.create', compact('products'));
     }
 
@@ -39,16 +36,24 @@ class PromotionController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'discount' => 'required|numeric|min:0|max:100',
+            'discount_percent' => 'required|numeric|min:1|max:100',
             'start_date' => 'required|date',
             'end_date' => 'required|date|after:start_date',
-            'products' => 'required|array',
+            'product_ids' => 'required|array|min:1', 
+            'product_ids.*' => 'exists:products,id', 
         ]);
 
-        $promotion = Promotion::create($request->only(['name', 'discount', 'start_date', 'end_date']));
-        $promotion->products()->attach($request->products);
+        foreach ($request->product_ids as $product_id) {
+            Promotion::create([
+                'name' => $request->name,
+                'product_id' => $product_id,
+                'discount_percent' => $request->discount_percent,
+                'start_date' => $request->start_date,
+                'end_date' => $request->end_date,
+            ]);
+        }
 
-        return redirect()->route('admin.promotions.index')->with('success', 'Khuyến mãi đã được tạo.');
+        return redirect()->route('admin.promotions.index')->with('success', 'Khuyến mãi đã được tạo!');
     }
 
     /**
@@ -80,6 +85,9 @@ class PromotionController extends Controller
      */
     public function destroy(Promotion $promotion)
     {
-        //
+        {
+            $promotion->delete();
+            return redirect()->route('admin.promotions.index')->with('success', 'Khuyến mãi đã được xóa!');
+        }
     }
 }
