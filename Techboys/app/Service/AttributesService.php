@@ -77,7 +77,7 @@ class AttributesService{
             $attribute = Attributes::findOrFail($request->id);
             $attribute->update([
                 'name' => $request->name,
-                'is_multiple' => $request->is_multiple,
+                'is_multiple' => $attribute->is_multiple,
             ]);
             AttributesValue::where('attributes_id', $request->id)->delete();
             if (!empty($request->values)) {
@@ -93,6 +93,12 @@ class AttributesService{
         }
         catch (\Exception $e){
             DB::rollBack();
+            // return response()->json(
+            //     [
+            //        'success' => false,
+            //        'message' => 'Có lỗii xảy ra: '. $e->getMessage()
+            //     ], 500
+            // );
             return redirect()->route('admin.attributes.edit', $request->id)->with('error', 'Có lỗi xảy ra: '. $e->getMessage());
         }
     }

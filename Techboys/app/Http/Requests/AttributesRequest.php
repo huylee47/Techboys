@@ -21,12 +21,21 @@ class AttributesRequest extends FormRequest
      */
     public function rules(): array
     {
+        // Lấy ID từ route nếu có
+        $id = $this->route('id');
+
         return [
-            'name' => 'required|string|max:255|unique:attributes,name',
+            'name' => [
+                'required',
+                'string',
+                'max:255',
+                $id ? 'unique:attributes,name,' . $id : 'unique:attributes,name',
+            ],
             'values' => 'required|array|min:1',
             'values.*' => 'required|string|max:255',
         ];
     }
+
     public function messages(): array
     {
         return [

@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreignId('product_id')->nullable();
             $table->foreignId('variant_id')->nullable();
             $table->integer('quantity');
-            $table->decimal('price', 10, 2);
+            $table->bigInteger('price');
             $table->timestamps();
         });
     }

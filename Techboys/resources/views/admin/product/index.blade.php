@@ -23,19 +23,18 @@
                     </div>
                 </div>
             </div>
+
             <section class="section">
                 <div class="card">
                     <div class="card-body">
                         @if (session('success'))
-                            <div class="alert alert-success">
-                                {{ session('success') }}
-                            </div>
+                            <div class="alert alert-success">{{ session('success') }}</div>
                         @elseif (session('error'))
-                            <div class="alert alert-danger">
-                                {{ session('error') }}
-                            </div>
+                            <div class="alert alert-danger">{{ session('error') }}</div>
                         @endif
+
                         <a href="{{ route('admin.product.create') }}" class="btn btn-primary">Thêm sản phẩm</a>
+
                         <table class="table table-striped table-bordered" id="table1">
                             <thead>
                                 <tr>
@@ -58,8 +57,8 @@
                                         <td>{{ $index++ }}</td>
                                         <td>
                                             <img src="{{ url('') }}/admin/assets/images/product/{{ $product->img }}"
-                                                alt="{{ $product->name }}" class="img-fluid"
-                                                style="max-width: 100px; height: auto;">
+                                                 alt="{{ $product->name }}" class="img-fluid"
+                                                 style="max-width: 100px; height: auto;">
                                         </td>
                                         <td>{{ $product->name }}</td>
                                         <td>{{ $product->brand->name }}</td>
@@ -73,7 +72,7 @@
                                             @endif
                                         </td>
                                         <td class="text-center">
-                                            @if ($product->is_featured = 1)
+                                            @if ($product->is_featured == 1)
                                                 <span class="badge bg-success">Có</span>
                                             @else
                                                 <span class="badge bg-info">Không</span>
@@ -82,21 +81,23 @@
                                         <td>{{ $product->created_at->format('d/m/Y') }}</td>
                                         <td class="text-center">
                                             <a href="{{ $product->deleted_at ? route('admin.product.restore', $product->id) : route('admin.product.hide', $product->id) }}"
-                                                title="Nhấn để {{ $product->deleted_at ? 'HIỆN' : 'ẨN' }} sản phẩm"
-                                                class=" {{ $product->deleted_at ? 'bi-eye-fill text-success' : 'bi-eye-slash text-danger' }} fs-4">
+                                               title="Nhấn để {{ $product->deleted_at ? 'HIỆN' : 'ẨN' }} sản phẩm"
+                                               class="{{ $product->deleted_at ? 'bi-eye-fill text-success' : 'bi-eye-slash text-danger' }} fs-4">
                                             </a>
                                             <a href="{{ route('admin.product.edit', ['id' => $product->id]) }}"
-                                                class="bi-pencil-fill text-warning  fs-4"
-                                                title="Nhấn để sửa sản phẩm"></a>
+                                               class="bi-pencil-fill text-warning fs-4"
+                                               title="Nhấn để sửa sản phẩm"></a>
                                             <a href="{{ route('admin.product.imageIndex', ['productId' => $product->id]) }}"
-                                                class="bi-images fs-4" title="Kho ảnh của sản phẩm {{ $product->name }} "></a>
-                                            <a href="{{ route('admin.product.destroy', ['id' => $product->id]) }}"
-                                                onclick="return confirm('Bạn có chắc chắn xoá sản phẩm {{ $product->name }} không?')"
-                                                class="bi-trash-fill text-danger fs-4"
-                                                title="Nhấn để xoá sản phẩm"></a>
+                                               class="bi-images fs-4" title="Kho ảnh của sản phẩm {{ $product->name }}"></a>
+
+                                            <a href="#" class="bi-trash-fill text-danger fs-4 delete-btn"
+                                               data-id="{{ $product->id }}" 
+                                               data-name="{{ $product->name }}"
+                                               title="Nhấn để xoá sản phẩm"></a>
+
                                             <a href="{{ route('admin.stock.index', ['id' => $product->id]) }}"
-                                                class="bi-box-seam text-success fs-4"
-                                                title="Nhấn để cập nhập số lượng sản phẩm {{ $product->name }}"></a>
+                                               class="bi-box-seam text-success fs-4"
+                                               title="Nhấn để cập nhập số lượng sản phẩm {{ $product->name }}"></a>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -106,4 +107,47 @@
                 </div>
             </section>
         </div>
-    @endsection
+
+        <!-- Modal Xác Nhận Xóa -->
+        <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="deleteModalLabel">Xác nhận xóa sản phẩm</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        Bạn có chắc chắn muốn xóa sản phẩm <strong id="productName"></strong> không?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                        <form id="deleteForm" method="GET">
+                            <button type="submit" class="btn btn-danger">Xóa</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        @section('scripts')
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                let deleteModal = new bootstrap.Modal(document.getElementById('deleteModal'));
+                let productName = document.getElementById('productName');
+                let deleteForm = document.getElementById('deleteForm');
+
+                document.querySelectorAll('.delete-btn').forEach(button => {
+                    button.addEventListener('click', function () {
+                        let id = this.getAttribute('data-id');
+                        let name = this.getAttribute('data-name');
+
+                        productName.textContent = name;
+                        deleteForm.setAttribute('action', `/admin/product/destroy/${id}`);
+
+                        deleteModal.show();
+                    });
+                });
+            });
+        </script>
+        @endsection
+@endsection

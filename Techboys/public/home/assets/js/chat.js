@@ -92,14 +92,19 @@ document.addEventListener("DOMContentLoaded", async function() {
             });
     }
 
+    let isThrottled = false; // Trạng thái throttle
+
     function sendMessageToServer(message) {
+        if (isThrottled) return; // Nếu đang throttle, không gửi tin nhắn
+    
+        isThrottled = true; // Bắt đầu throttle
+        sendMessage.disabled = true; // Vô hiệu hóa nút gửi
+    
         axios.post(sendMessageUrl, {
                 message: message,
                 guest_id: guestId
             }, {
-                headers: {
-                    "X-CSRF-TOKEN": csrfToken
-                }
+                headers: { "X-CSRF-TOKEN": csrfToken }
             })
             .then(response => {
                 if (response.data.message === "Message sent successfully") {
@@ -108,12 +113,25 @@ document.addEventListener("DOMContentLoaded", async function() {
                     }
                     chatInput.value = "";
                     chatMessages.scrollTop = chatMessages.scrollHeight;
+    
+                    // Hủy throttle sau 2 giây
+                    setTimeout(() => {
+                        isThrottled = false;
+                        sendMessage.disabled = false;
+                    }, 2000);
                 } else {
                     console.error("Lỗi gửi tin nhắn:", response.data);
+                    isThrottled = false;
+                    sendMessage.disabled = false;
                 }
             })
-            .catch(error => console.error("Lỗi kết nối:", error));
+            .catch(error => {
+                console.error("Lỗi kết nối:", error);
+                isThrottled = false;
+                sendMessage.disabled = false;
+            });
     }
+    
 
     function displayMessage(sender, message, isSender) {
         let msgDiv = document.createElement("div");
@@ -129,7 +147,7 @@ document.addEventListener("DOMContentLoaded", async function() {
     }
 
     chatInput.addEventListener("keypress", function(event) {
-        if (event.key === "Enter" && !event.shiftKey) {
+        if (event.key === "Enter" && !event.shiftKey && !isThrottled) {
             event.preventDefault();
             let message = chatInput.value.trim();
             if (message) {
@@ -137,4 +155,5 @@ document.addEventListener("DOMContentLoaded", async function() {
             }
         }
     });
+    
 });

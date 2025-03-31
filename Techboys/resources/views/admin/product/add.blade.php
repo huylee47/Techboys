@@ -128,7 +128,7 @@
                                         </div>
                                         <div class="col-md-6 mb-3">
                                             <label for="base_stock" class="form-label">Số lượng</label>
-                                            <input type="text" class="form-control" id="base_stock" name="base_stock"
+                                            <input type="number" class="form-control" id="base_stock" name="base_stock" 
                                                 value="{{ old('base_stock') }}">
                                             @if ($errors->has('base_stock'))
                                                 <p class="text-danger small ">
@@ -235,39 +235,20 @@
 
                         let value = e.target.value;
 
-                        value = value.replace(/[^0-9.]/g, '');
-                        value = value.replace(/^(\d*\.)(.*)\./g, '$1$2'); // Chỉ giữ một dấu .
+                        value = value.replace(/\D/g, '');
 
-                        // Không cho phép nhập số bắt đầu bằng .
-                        if (value.startsWith('.')) {
-                            value = '';
-                        }
-
-                        // Tách phần nguyên và phần thập phân
-                        let parts = value.split('.');
-                        parts[0] = parts[0].replace(/,/g, ''); // Xóa dấu , cũ trước khi định dạng
-                        parts[0] = parts[0].length > 0 ? new Intl.NumberFormat('en-US').format(parts[
-                            0]) : '';
-
-                        // Giới hạn tối đa 2 số sau dấu .
-                        if (parts[1] !== undefined) {
-                            parts[1] = parts[1].substring(0, 2);
-                            value = parts.join('.');
-                        } else {
-                            value = parts[0];
-                        }
+                        // Thêm dấu phân tách hàng nghìn
+                        value = value.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 
                         e.target.value = value;
 
-                        // Điều chỉnh vị trí con trỏ sau khi định dạng
                         let newLength = e.target.value.length;
                         cursorPosition = cursorPosition + (newLength - oldLength);
                         e.target.setSelectionRange(cursorPosition, cursorPosition);
                     });
                 });
 
-                // Xóa dấu , trước khi submit form
-                document.querySelector("form").addEventListener("submit", function() {
+                document.querySelector('form').addEventListener('submit', function() {
                     priceInputs.forEach(input => {
                         input.value = input.value.replace(/,/g, '');
                     });
@@ -443,30 +424,21 @@
                 $(document).on('input', 'input[name^="variants"][name$="[price]"]', function() {
                     let value = $(this).val();
 
-                    value = value.replace(/[^0-9.,]/g, '');
+                    value = value.replace(/\D/g, '');
 
-                    value = value.replace(/,/g, '');
+                    value = value.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 
-                    let parts = value.split('.');
-
-                    if (parts.length > 2) {
-                        value = parts[0] + '.' + parts[1].substring(0, 2);
-                    } else if (parts.length === 2) {
-                        parts[1] = parts[1].substring(0, 2);
-                        value = parts.join('.');
-                    }
-
-                    let integerPart = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-
-                    $(this).val(parts.length === 2 ? integerPart + '.' + parts[1] : integerPart);
+                    $(this).val(value);
                 });
+
                 $('form').on('submit', function() {
-    $('input[name^="variants"][name$="[price]"]').each(function() {
-        let rawValue = $(this).val();
-        let cleanedValue = rawValue.replace(/,/g, ''); // Loại bỏ dấu phẩy
-        $(this).val(cleanedValue);
-    });
-});
+                    $('input[name^="variants"][name$="[price]"]').each(function() {
+                        let rawValue = $(this).val();
+                        let cleanedValue = rawValue.replace(/,/g,
+                            '');
+                        $(this).val(cleanedValue);
+                    });
+                });
 
             });
         </script>

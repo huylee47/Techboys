@@ -59,6 +59,8 @@ class AttributesController extends Controller
      */
     public function update(AttributesRequest $request)
     {
+
+        // dd($request->all());
         return $this->attributesService->update($request);
     }
 

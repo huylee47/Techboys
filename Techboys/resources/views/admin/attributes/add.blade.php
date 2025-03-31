@@ -46,7 +46,7 @@
                                 </div>
 
                                 <div class="col-md-6">
-                                    <label for="is_multiple" class="form-label">Cho phép thêm nhiều ?</label>
+                                    <label for="is_multiple" class="form-label">Cho phép thêm nhiều?</label>
                                     <select class="form-control @error('is_multiple') is-invalid @enderror"
                                         name="is_multiple">
                                         <option value="0" selected disabled>Chọn phương thức</option>
@@ -91,6 +91,26 @@
             </div>
         </section>
     </div>
+
+    <!-- Modal Xác Nhận Xóa -->
+    <div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="confirmDeleteModalLabel">Xác nhận xóa</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Bạn có chắc chắn muốn xóa giá trị này không?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                    <button type="button" class="btn btn-danger" id="confirmDelete">Xóa</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
         document.getElementById('add-value').addEventListener('click', function() {
             let container = document.getElementById('values-container');
@@ -101,12 +121,38 @@
                 <button type="button" class="btn btn-danger remove-value">X</button>
             `;
             container.appendChild(newInput);
+            updateRemoveButtons();
         });
+
+        let deleteTarget = null;
 
         document.addEventListener('click', function(e) {
             if (e.target.classList.contains('remove-value')) {
-                e.target.parentElement.remove();
+                deleteTarget = e.target.parentElement;
+                let modal = new bootstrap.Modal(document.getElementById('confirmDeleteModal'));
+                modal.show();
             }
         });
+
+        document.getElementById('confirmDelete').addEventListener('click', function() {
+            if (deleteTarget) {
+                deleteTarget.remove();
+                deleteTarget = null;
+                let modal = bootstrap.Modal.getInstance(document.getElementById('confirmDeleteModal'));
+                modal.hide();
+                updateRemoveButtons();
+            }
+        });
+
+        function updateRemoveButtons() {
+            let removeButtons = document.querySelectorAll('.remove-value');
+            if (removeButtons.length === 1) {
+                removeButtons[0].style.display = 'none';
+            } else {
+                removeButtons.forEach(button => button.style.display = 'inline-block');
+            }
+        }
+
+        updateRemoveButtons();
     </script>
 @endsection
