@@ -38,6 +38,11 @@ class BillController extends Controller
         $bills = $query->orderByDesc('created_at')->paginate(10);
         return view('admin.bill.index', compact('bills'));
     }
+
+    public function create(Request $request)
+    {
+        return view('admin.bill.create');
+    }
     
     public function hide($id)
     {
