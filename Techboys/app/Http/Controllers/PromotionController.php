@@ -68,7 +68,7 @@ class PromotionController extends Controller
     {
         $promotion = Promotion::findOrFail($id);
     $products = Product::all();
-    return view('admin.promotion.edit', compact('promotion', 'products'));
+    return view('admin.promotions.edit', compact('promotion', 'products'));
     }
 
     /**
@@ -97,11 +97,12 @@ class PromotionController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Promotion $promotion)
+    public function destroy($id)
     {
         {
+            $promotion = Promotion::findOrFail($id);
             $promotion->delete();
-            return redirect()->route('admin.promotions.index')->with('success', 'Khuyến mãi đã được xóa!');
+            return redirect()->route('admin.promotion.index')->with('success', 'Khuyến mãi đã được xóa!');
         }
     }
 }
