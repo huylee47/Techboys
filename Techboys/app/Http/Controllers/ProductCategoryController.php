@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
 use App\Models\ProductCategory;
 use Illuminate\Http\Request;
 
@@ -12,9 +13,11 @@ class ProductCategoryController extends Controller
      */
     public function index()
     {
-        //
-        $loadAll = ProductCategory::all();
-        return view('admin.category.index', compact('loadAll'));
+        $loadAll = ProductCategory::with('product')->get();
+
+        $usedCategoryArray = Product::pluck('category_id')->toArray();
+
+        return view('admin.category.index', compact('loadAll','usedCategoryArray'));
     }
 
     /**
