@@ -14,9 +14,10 @@ return new class extends Migration
         Schema::create('promotions', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->foreignId('status_id');
+            $table->boolean('status_id')->default(1);
             $table->foreignId('product_id');
-            $table->integer('discount_percent')->nullable();
+            $table->decimal('discount_percent')->nullable();
+            $table->timestamp('start_date'); 
             $table->timestamp('end_date'); 
             $table->timestamps();
         });
