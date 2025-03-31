@@ -51,7 +51,11 @@
                         </label>
                         <select name="province_id" id="province">
                             <option value="" disabled>Chọn tỉnh/thành phố</option>
-                           
+                            @foreach ($provinces as $province)
+                                <option value="{{ $province->id }}" {{ $province->id == $order->province_id ? 'selected' : '' }}>
+                                    {{ $province->name }}
+                                </option>
+                            @endforeach
                         </select>
                     </p>
                     <p>
@@ -60,7 +64,11 @@
                         </label>
                         <select name="district_id" id="district">
                             <option value="" disabled>Chọn quận/huyện</option>
-                           
+                            @foreach ($districts as $district)
+                                <option value="{{ $district->id }}" {{ $district->id == $order->district_id ? 'selected' : '' }}>
+                                    {{ $district->name }}
+                                </option>
+                            @endforeach
                         </select>
                     </p>
                 </div>
@@ -71,7 +79,11 @@
                         </label>
                         <select name="ward_id" id="ward">
                             <option value="" disabled>Chọn phường/xã</option>
-                          
+                            @foreach ($wards as $ward)
+                                <option value="{{ $ward->id }}" {{ $ward->id == $order->ward_id ? 'selected' : '' }}>
+                                    {{ $ward->name }}
+                                </option>
+                            @endforeach
                         </select>
                     </p>
                     <p>
