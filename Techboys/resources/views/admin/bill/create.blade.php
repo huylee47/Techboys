@@ -1,4 +1,5 @@
 @extends('admin.layouts.master')
+
 @section('main')
 <div id="main">
     <header class="mb-3">
@@ -6,6 +7,7 @@
             <i class="bi bi-justify fs-3"></i>
         </a>
     </header>
+
     <div class="page-heading">
         <div class="page-title">
             <div class="row">
@@ -25,134 +27,66 @@
                 </div>
             </div>
         </div>
+
         <div class="container mt-4">
             <h2 class="mb-4">Tạo Đơn Hàng</h2>
-            
+
+            <!-- Form nhập số điện thoại để kiểm tra khách hàng -->
             <div class="mb-3">
-                <label for="customerPhone" class="form-label">Số điện thoại khách hàng</label>
-                <input type="text" class="form-control" id="customerPhone" placeholder="Nhập số điện thoại">
-                <button class="btn btn-primary mt-2" id="checkCustomer">Kiểm tra</button>
+                <label for="userPhone" class="form-label">Số điện thoại khách hàng</label>
+                <input type="text" class="form-control" id="userPhone" placeholder="Nhập số điện thoại">
+                <button class="btn btn-primary mt-2" id="checkUser">Kiểm tra</button>
             </div>
-            
-            <div id="customerInfo" class="d-none">
+
+            <!-- Hiển thị thông tin khách hàng nếu có -->
+            <div id="userInfo" class="d-none">
                 <h5>Thông tin khách hàng</h5>
-                <p><strong>Tên:</strong> <span id="customerName"></span></p>
-                <p><strong>Email:</strong> <span id="customerEmail"></span></p>
+                <p><strong>Tên:</strong> <span id="userName"></span></p>
+                <p><strong>Email:</strong> <span id="userEmail"></span></p>
             </div>
-            
-            <div id="newCustomer" class="d-none">
-                <p>Không tìm thấy khách hàng. <a href="{{ route('admin.customer.create') }}">Thêm khách hàng mới</a></p>
+
+            <!-- Chuyển hướng nếu không tìm thấy khách hàng -->
+            <div id="newUser" class="d-none">
+                <p>Không tìm thấy khách hàng. <a href="{{ route('admin.user.create') }}">Thêm khách hàng mới</a></p>
             </div>
-            
-            <div class="mb-3">
-                <label for="productSelect" class="form-label">Chọn sản phẩm</label>
-                <select class="form-select" id="productSelect">
-                    <option value="">-- Chọn sản phẩm --</option>
-                    @foreach($products as $product)
-                        <option value="{{ $product->id }}" data-price="{{ $product->price }}">
-                            {{ $product->name }} - {{ number_format($product->price, 0, ',', '.') }}đ
-                        </option>
-                    @endforeach
-                </select>
-                <button class="btn btn-success mt-2" id="addProduct">Thêm vào đơn hàng</button>
-            </div>
-            
-            <div id="orderDetails" class="d-none">
-                <h5>Chi tiết đơn hàng</h5>
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th>Sản phẩm</th>
-                            <th>Giá</th>
-                            <th>Số lượng</th>
-                            <th>Thành tiền</th>
-                            <th>Hành động</th>
-                        </tr>
-                    </thead>
-                    <tbody id="orderList"></tbody>
-                </table>
-                <h4 class="text-end">Tổng tiền: <span id="totalPrice">0</span>đ</h4>
-                <button class="btn btn-primary" id="createOrder">Tạo đơn hàng</button>
+
+            <!-- Chọn sản phẩm (Ẩn ban đầu) -->
+            <div id="productSelection" class="d-none mt-4">
+                <h4>Chọn sản phẩm</h4>
+                <input type="text" id="productSearch" class="form-control" placeholder="Tìm kiếm sản phẩm">
+                <div id="productList" class="mt-3">
+                    <!-- Danh sách sản phẩm sẽ được hiển thị ở đây -->
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-<script>
-    let orderItems = [];
-    
-    document.getElementById('checkCustomer').addEventListener('click', function() {
-        let phone = document.getElementById('customerPhone').value;
-        fetch(`/admin/customers/check?phone=${phone}`)
+    <script>
+        document.getElementById('checkUser').addEventListener('click', function() {
+            let phone = document.getElementById('userPhone').value;
+
+            fetch('{{ route('admin.user.check') }}', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                },
+                body: JSON.stringify({ phone: phone })
+            })
             .then(response => response.json())
             .then(data => {
-                if (data.exists) {
-                    document.getElementById('customerInfo').classList.remove('d-none');
-                    document.getElementById('newCustomer').classList.add('d-none');
-                    document.getElementById('customerName').textContent = data.name;
-                    document.getElementById('customerEmail').textContent = data.email;
+                if (data.status === 'exists') {
+                    document.getElementById('userInfo').classList.remove('d-none');
+                    document.getElementById('newUser').classList.add('d-none');
+                    document.getElementById('userName').textContent = data.user.name;
+                    document.getElementById('userEmail').textContent = data.user.email;
+                    document.getElementById('productSelection').classList.remove('d-none');
                 } else {
-                    document.getElementById('customerInfo').classList.add('d-none');
-                    document.getElementById('newCustomer').classList.remove('d-none');
+                    document.getElementById('userInfo').classList.add('d-none');
+                    document.getElementById('newUser').classList.remove('d-none');
+                    document.getElementById('productSelection').classList.add('d-none');
                 }
             });
-    });
-
-    document.getElementById('addProduct').addEventListener('click', function() {
-        let productSelect = document.getElementById('productSelect');
-        let productId = productSelect.value;
-        let productName = productSelect.options[productSelect.selectedIndex].text;
-        let productPrice = parseInt(productSelect.options[productSelect.selectedIndex].getAttribute('data-price'));
-        
-        if (!productId) return;
-        
-        let existingItem = orderItems.find(item => item.id === productId);
-        if (existingItem) {
-            existingItem.quantity++;
-        } else {
-            orderItems.push({ id: productId, name: productName, price: productPrice, quantity: 1 });
-        }
-        
-        renderOrderList();
-    });
-    
-    function renderOrderList() {
-        let orderList = document.getElementById('orderList');
-        orderList.innerHTML = '';
-        let totalPrice = 0;
-        
-        orderItems.forEach((item, index) => {
-            let itemTotal = item.price * item.quantity;
-            totalPrice += itemTotal;
-            orderList.innerHTML += `
-                <tr>
-                    <td>${item.name}</td>
-                    <td>${item.price.toLocaleString()}đ</td>
-                    <td><input type="number" min="1" value="${item.quantity}" data-index="${index}" class="quantityInput"></td>
-                    <td>${itemTotal.toLocaleString()}đ</td>
-                    <td><button class="btn btn-danger btn-sm removeItem" data-index="${index}">Xóa</button></td>
-                </tr>
-            `;
         });
-        
-        document.getElementById('totalPrice').textContent = totalPrice.toLocaleString();
-        document.getElementById('orderDetails').classList.remove('d-none');
-        
-        document.querySelectorAll('.quantityInput').forEach(input => {
-            input.addEventListener('change', function() {
-                let index = this.getAttribute('data-index');
-                orderItems[index].quantity = parseInt(this.value);
-                renderOrderList();
-            });
-        });
-        
-        document.querySelectorAll('.removeItem').forEach(button => {
-            button.addEventListener('click', function() {
-                let index = this.getAttribute('data-index');
-                orderItems.splice(index, 1);
-                renderOrderList();
-            });
-        });
-    }
-</script>
+    </script>
 @endsection
