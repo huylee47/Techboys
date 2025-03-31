@@ -146,7 +146,7 @@
                                         </div>
                                         <div class="col-md-6 mb-3">
                                             <label for="base_stock" class="form-label">Số lượng</label>
-                                            <input type="text" class="form-control" id="base_stock" name="base_stock"
+                                            <input type="number" class="form-control" id="base_stock" name="base_stock"
                                                 value="{{ $product->base_stock }}">
                                             @if ($errors->has('base_stock'))
                                                 <p class="text-danger small ">
@@ -261,20 +261,9 @@
 
                         let value = e.target.value;
 
-                        value = value.replace(/[^0-9.]/g, '');
-                        value = value.replace(/^(\d*\.)(.*)\./g, '$1$2');.
+                        value = value.replace(/\D/g, '');
 
-                        let parts = value.split('.');
-                        parts[0] = parts[0].replace(/,/g, '');
-                        parts[0] = parts[0].length > 0 ? new Intl.NumberFormat('en-US').format(parts[
-                            0]) : '';
-
-                        if (parts[1] !== undefined) {
-                            parts[1] = parts[1].substring(0, 2);
-                            value = parts.join('.');
-                        } else {
-                            value = parts[0];
-                        }
+                        value = value.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 
                         e.target.value = value;
 
@@ -284,11 +273,19 @@
                     });
                 });
 
-                document.querySelector("form").addEventListener("submit", function() {
+                document.querySelector('form').addEventListener('submit', function() {
                     priceInputs.forEach(input => {
                         input.value = input.value.replace(/,/g, '');
                     });
                 });
+            });
+
+
+            document.querySelector("form").addEventListener("submit", function() {
+            priceInputs.forEach(input => {
+                input.value = input.value.replace(/,/g, '');
+            });
+            });
             });
         </script>
 
@@ -405,7 +402,8 @@
                                         class="form-control selectpicker" multiple data-live-search="true">`;
                         } else {
                             variantHtml += `<select name="variants[${index}][attributes][${attribute.name}]" 
-                                        class="form-control single-select" >
+                                        class="form-control single-select" required oninvalid="this.setCustomValidity('Vui lòng chọn giá trị cho trường này!')" 
+                     oninput="this.setCustomValidity('')">
                                         <option value="" disabled selected>Chọn</option>`;
                         }
 
@@ -423,7 +421,8 @@
                     variantHtml += `
                 <div class="col-md-6 mb-3">
                     <label class="form-label">Giá biến thể</label>
-                    <input type="text" name="variants[${index}][price]" class="form-control" value="${variant ? variant.price : ''}" required>
+                    <input type="text" name="variants[${index}][price]" class="form-control" value="${variant ? variant.price : ''}" required oninvalid="this.setCustomValidity('Vui lòng chọn giá cho biến thể này!')" 
+                 oninput="this.setCustomValidity('')">
                 </div>
                  </div>`;
 
@@ -435,7 +434,6 @@
                     let newIndex = $('.variant-item').length;
                     let lastVariant = variantData.length > 0 ? variantData[variantData.length - 1] : null;
 
-                    // Lấy danh sách thuộc tính của biến thể cuối cùng
                     let lastAttributes = lastVariant ? Object.keys(lastVariant.variable_attributes) : [];
 
                     appendVariantForm(newIndex, null, lastAttributes);
@@ -470,9 +468,9 @@
 
                     let variantHtml = `<div class="row variant-item border p-3 mb-3" data-attributes='${JSON.stringify(selectedNewAttributes)}'>
                        <div class="col-md-12 d-flex justify-content-between align-items-center">
-            <h5>Biến thể ${index + 1}</h5>
-            <button type="button" class="btn btn-danger btn-sm remove-variant">Xóa</button>
-             </div>`;
+                        <h5>Biến thể ${index + 1}</h5>
+                        <button type="button" class="btn btn-danger btn-sm remove-variant">Xóa</button>
+                        </div>`;
 
                     selectedNewAttributes.forEach(attr => {
                         console.log("Tạo biến thể với thuộc tính:", attr);
@@ -495,7 +493,8 @@
                             variantHtml +=
                                 `<select name="variants[${index}][attributes][${attribute.name}][]" class="form-control selectpicker" multiple data-live-search="true">`;
                         } else {
-                            variantHtml += `<select name="variants[${index}][attributes][${attribute.name}]" class="form-control single-select">
+                            variantHtml += `<select name="variants[${index}][attributes][${attribute.name}]" class="form-control single-select" required oninvalid="this.setCustomValidity('Vui lòng chọn giá trị cho trường này!')" 
+                            oninput="this.setCustomValidity('')">
                                     <option value="">Chọn</option>`;
                         }
 
@@ -510,7 +509,8 @@
                     variantHtml += `
                     <div class="col-md-6 mb-3">
                     <label class="form-label">Giá biến thể</label>
-                    <input type="text" name="variants[${index}][price]" class="form-control" required>
+                    <input type="text" name="variants[${index}][price]" class="form-control" required oninvalid="this.setCustomValidity('Vui lòng chọn giá cho biến thể này!')" 
+                    oninput="this.setCustomValidity('')">
                     </div>
                     </div>`;
 
@@ -553,6 +553,27 @@
 
 
                 toggleRemoveButtons();
+
+                $(document).on('input', 'input[name^="variants"][name$="[price]"]', function() {
+                    let value = $(this).val();
+
+
+                    value = value.replace(/\D/g, '');
+
+                    value = value.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+
+                    $(this).val(value);
+                });
+
+                $('form').on('submit', function() {
+                    $('input[name^="variants"][name$="[price]"]').each(function() {
+                        let rawValue = $(this).val();
+                        let cleanedValue = rawValue.replace(/,/g,
+                            '');
+                        $(this).val(cleanedValue);
+                    });
+                });
+
             });
         </script>
     @endsection
