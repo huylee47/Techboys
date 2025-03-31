@@ -42,7 +42,7 @@
                                         @endphp
 
                                         @if ($canDelete)
-                                            <a href="#" class="bi-trash-fill text-danger fs-4" data-id="{{ $attribute->id }}"></a>
+                                            <a href="#" class="bi-trash-fill text-danger fs-4 delete-btn" data-id="{{ $attribute->id }}"></a>
                                         @else
                                             <a class="bi-trash-fill text-secondary fs-4" disabled title="Thuộc tính đang được sử dụng , khônng thể xoá"></a>
                                         @endif
