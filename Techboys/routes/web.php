@@ -137,7 +137,7 @@ Route::middleware(['auth', 'auth.admin'])->group(function () {
             Route::get('/image/{productId}', [ProductController::class, 'imageIndex'])->name('admin.product.imageIndex');
             Route::post('/image/{productId}/store', [ProductController::class, 'imageStore'])->name('admin.product.imageStore');
             Route::get('/image/{productId}/destroy/{imageId}', [ProductController::class, 'imageDestroy'])->name('admin.product.imageDestroy');
-            // Route::get('product/search', [ProductController::class, 'adminSearch'])->name('admin.product.search');
+            Route::get('product/search', [ProductController::class, 'adminSearch'])->name('admin.product.search');
         });
 
         Route::prefix('/category')->group(function () {
