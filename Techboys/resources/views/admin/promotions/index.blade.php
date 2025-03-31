@@ -7,61 +7,69 @@
             </a>
         </header>
 
-        <div class="page-heading d-flex justify-content-between">
-            <h3>Quản lý khuyến mãi</h3>
-            <a href="{{ route('admin.promotion.create') }}" class="btn btn-primary">+ Thêm khuyến mãi</a>
-        </div>
+        <div class="page-heading">
+            <div class="page-title">
+                <div class="row">
+                    <div class="col-12 col-md-6 order-md-1 order-last">
+                        <h3>Danh sách khuyến mãi</h3>
+                    </div>
+                    <div class="col-12 col-md-6 order-md-2 order-first">
+                        <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Khuyến mãi</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
 
-        <div class="page-content">
-            <section class="row">
-                <div class="col-12">
-                    <div class="card">
-                        <div class="card-header">
-                            <h4>Sản phẩm đang khuyến mãi</h4>
-                        </div>
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table table-hover table-lg">
-                                    <thead>
-                                        <tr>
-                                            <th>STT</th>
-                                            <th>Sản phẩm</th>
-                                            <th>Khuyến mãi (%)</th>
-                                            <th>Giá trước-sau khuyến mãi</th>
-                                            <th>Bắt đầu</th>
-                                            <th>Kết thúc</th>
-                                            <th>Tùy chọn</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach($promotions as $index => $promotion)
-                                            <tr>
-                                                <td>{{ $index + 1 }}</td>
-                                                <td>{{ $promotion->product->name }}</td>
-                                                <td>{{ $promotion->discount_percent }}%</td>
-                                                <td>
-                                                    {{ number_format($promotion->product->base_price, 0, ',', '.') }} đ →
-                                                    <strong>{{ number_format($promotion->product->discounted_price, 0, ',', '.') }} đ</strong>
-                                                </td>
-                                                <td>{{ $promotion->start_date->format('d/m/Y') }}</td>
-                                                <td>{{ $promotion->end_date->format('d/m/Y') }}</td>
-                                                <td>
-                                                    <a href="{{ route('admin.promotion.edit', $promotion->id) }}" class="btn btn-warning btn-sm">Sửa</a>
-                                                    <form action="{{ route('admin.promotion.destroy', $promotion->id) }}" method="POST" class="d-inline">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button type="submit" class="btn btn-danger btn-sm">Xóa</button>
-                                                    </form>
-                                                </td>
-                                            </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
+            <section class="section">
+                <div class="card">
+                    <div class="card-body">
+                        @if (session('success'))
+                            <div class="alert alert-success">
+                                {{ session('success') }}
                             </div>
-                            <div class="mt-3">
-                                {{ $promotions->links() }} <!-- Pagination nếu có nhiều khuyến mãi -->
+                        @elseif (session('error'))
+                            <div class="alert alert-danger">
+                                {{ session('error') }}
                             </div>
-                        </div>
+                        @endif
+                        <a href="{{ route('admin.promotion.create') }}" class="btn btn-primary">Thêm khuyến mãi</a>
+                        <table class="table table-striped table-bordered" id="table1">
+                            <thead>
+                                <tr>
+                                    <th>STT</th>
+                                    <th>Sản phẩm</th>
+                                    <th>Phần trăm giảm</th>
+                                    <th>Giá trước-sau</th>
+                                    <th>Kết thúc</th>
+                                    <th>Chức năng</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($promotions as $index => $promotion)
+                                    <tr>
+                                        <td>{{ $index + 1 }}</td>
+                                        <td>{{ $promotion->product->name }}</td>
+                                        <td>{{ $promotion->discount_percent }}%</td>
+                                        <td>{{ number_format($promotion->product->price) }}đ - 
+                                            {{ number_format($promotion->product->price * (1 - $promotion->discount_percent / 100)) }}đ
+                                        </td>
+                                        <td>{{ date('d/m/Y', strtotime($promotion->end_date)) }}</td>
+
+                                        <td>
+                                            <a href="{{ route('admin.promotion.edit', $promotion->id) }}"
+                                                class="bi-pencil-fill text-warning fs-4" title="Sửa khuyến mãi"></a>
+                                            <a href="{{ route('admin.promotion.destroy', $promotion->id) }}"
+                                                class="bi-trash-fill text-danger fs-4" title="Xóa khuyến mãi"
+                                                onclick="return confirm('Bạn có chắc chắn muốn xóa khuyến mãi này?');"></a>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </section>
