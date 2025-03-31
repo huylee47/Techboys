@@ -17,7 +17,7 @@ return new class extends Migration
             // $table->foreignId('color_id');
             // $table->foreignId('model_id');
             $table->json('attribute_values')->nullable();
-            $table->decimal('price',20,2);
+            $table->bigInteger('price');
             $table->integer('stock')->default(0);
             $table->softDeletes();
             $table->timestamps();
