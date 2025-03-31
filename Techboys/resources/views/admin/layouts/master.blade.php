@@ -60,7 +60,7 @@
                                 <span>Danh mục</span>
                             </a>
                         </li>
-                        <li class="sidebar-item {{ request()->routeIs('admin.product*') ? 'active' : '' }}">
+                        <li class="sidebar-item {{ request()->routeIs('admin.product*') || request()->routeIs('admin.stock*') ? 'active' : '' }}">
                             <a href="{{route('admin.product.index')}}" class='sidebar-link'>
                                 <i class="bi bi-shop"></i>
                                 <span>Sản phẩm</span>
