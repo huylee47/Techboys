@@ -25,7 +25,7 @@
                                         </div>
                                         <div class="col-md-8">
                                             <h6 class="text-muted font-semibold">Người đang trực tuyến</h6>
-                                            <h6 class="font-extrabold mb-0" >{{ $onlineUsers }}</h6>
+                                            <h6 class="font-extrabold mb-0">{{ $onlineUsers }}</h6>
                                         </div>
                                     </div>
                                 </div>
@@ -41,30 +41,13 @@
                                             </div>
                                         </div>
                                         <div class="col-md-8">
-                                            <h6 class="text-muted font-semibold">Khách hàng đã đăng ký</h6>
-                                            <h6 class="font-extrabold mb-0">{{ $registeredUsers }}</h6>
+                                            <h6 class="text-muted font-semibold">Người dùng truy cập tháng này</h6>
+                                            <h6 class="font-extrabold mb-0">{{ $visitorsThisMonth }} </h6>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        {{-- <div class="col-6 col-lg-3 col-md-6">
-                            <div class="card">
-                                <div class="card-body px-3 py-4-5">
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <div class="stats-icon green">
-                                                <i class="iconly-boldAdd-User"></i>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-8">
-                                            <h6 class="text-muted font-semibold">Khách hàng chưa đăng ký</h6>
-                                            <h6 class="font-extrabold mb-0">80.000</h6>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> --}}
                         <div class="col-6 col-lg-3 col-md-6">
                             <div class="card">
                                 <div class="card-body px-3 py-4-5">
@@ -75,13 +58,31 @@
                                             </div>
                                         </div>
                                         <div class="col-md-8">
-                                            <h6 class="text-muted font-semibold">Khách hàng bỏ đăng ký</h6>
-                                            <h6 class="font-extrabold mb-0">112</h6>
+                                            <h6 class="text-muted font-semibold">Người dùng truy cập hôm nay </h6>
+                                            <h6 class="font-extrabold mb-0">{{$visitorsToday}}</h6>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        <div class="col-6 col-lg-3 col-md-6">
+                            <div class="card">
+                                <div class="card-body px-3 py-4-5">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="stats-icon green">
+                                                <i class="iconly-boldAdd-User"></i>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <h6 class="text-muted font-semibold">Khách hàng đăng ký tài khoản tháng này</h6>
+                                            <h6 class="font-extrabold mb-0">{{$registeredUsersMonth}}</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                     {{-- <div class="row">
                         <div class="col-12">
@@ -113,14 +114,16 @@
                                                 </tr>
                                             </thead>
                                             <tbody id="latest-comments">
-                                                @foreach($latestComments as $comment)
+                                                @foreach ($latestComments as $comment)
                                                     <tr>
                                                         <td class="col-3">
                                                             <div class="d-flex align-items-center">
                                                                 <div class="avatar avatar-md">
-                                                                    <img src="{{ $comment['user']->avatar ?? 'default-avatar.png' }}" alt="User Avatar">
+                                                                    <img src=" {{ asset('home/assets/images/user.png') }}"
+                                                                        alt="User Avatar">
                                                                 </div>
-                                                                <p class="font-bold ms-3 mb-0">{{ $comment['user']->name }}</p>
+                                                                <p class="font-bold ms-3 mb-0">{{ $comment['user']->name }}
+                                                                </p>
                                                             </div>
                                                         </td>
                                                         <td class="col-auto">
@@ -162,7 +165,7 @@
                                                             });
                                                         });
                                                 }
-                                            
+
                                                 setInterval(fetchLatestComments, 5000);
                                             </script>
                                         </table>
@@ -177,15 +180,20 @@
                         <div class="card-body py-4 px-5">
                             <div class="d-flex align-items-center">
                                 <div class="avatar avatar-xl">
-                                    <img src="{{ $user->avatar ?? 'default-avatar.png' }}" alt="Avatar">
+                                    <img src="{{ asset('admin/assets/images/faces/2.jpg') }}" alt="Avatar">
                                 </div>
                                 <div class="ms-3 name">
-                                    <h5 class="font-bold">{{ $user->name }}</h5>
-                                    <h6 class="text-muted mb-0">@{{ $user->username }}</h6>
+                                    <h6 class="font-bold">Xin chào ,{{ $user->name }}</h6>
                                 </div>
                             </div>
+                            <form action="{{ route('admin.logout') }}" method="POST" class="mt-3">
+                                @csrf
+                                <button type="submit" class="btn btn-danger w-50 ">
+                                    <i class="bi bi-box-arrow-right"></i> Đăng xuất
+                                </button>
+                            </form>
                         </div>
-                        
+
                     </div>
                     {{-- <div class="card">
                         <div class="card-header">
@@ -225,14 +233,14 @@
                             </div>
                         </div>
                     </div> --}}
-                    <div class="card">
+                    {{-- <div class="card">
                         <div class="card-header">
                             <h4>Visitors Profile</h4>
                         </div>
                         <div class="card-body">
                             <div id="chart-visitors-profile"></div>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
             </section>
         </div>
