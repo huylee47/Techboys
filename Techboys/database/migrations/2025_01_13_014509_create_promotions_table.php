@@ -17,7 +17,6 @@ return new class extends Migration
             $table->boolean('status_id')->default(1);
             $table->foreignId('product_id');
             $table->decimal('discount_percent')->nullable();
-            $table->timestamp('start_date'); 
             $table->timestamp('end_date'); 
             $table->timestamps();
         });
