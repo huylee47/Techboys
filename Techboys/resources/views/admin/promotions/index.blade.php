@@ -36,59 +36,10 @@
 
                                                 </tr>
                                             </thead>
-                                            <tbody id="latest-comments">
-                                                {{-- @foreach($latestComments as $comment)
-                                                    <tr>
-                                                        <td class="col-3">
-                                                            <div class="d-flex align-items-center">
-                                                                <div class="avatar avatar-md">
-                                                                    <img src="{{ $comment['user']->avatar ?? 'default-avatar.png' }}" alt="User Avatar">
-                                                                </div>
-                                                                <p class="font-bold ms-3 mb-0">{{ $comment['user']->name }}</p>
-                                                            </div>
-                                                        </td>
-                                                        <td class="col-auto">
-                                                            <p class="mb-0">{{ $comment['content'] }}</p>
-                                                        </td>
-                                                        <td class="col-auto">
-                                                            <p class="mb-0">{{ $comment['product']->name }}</p>
-                                                        </td>
-                                                    </tr>
-                                                @endforeach --}}
+                                            <tbody id="">
+                                                
                                             </tbody>
-                                            {{-- <script>
-                                                function fetchLatestComments() {
-                                                    fetch("{{ route('admin.getLatestComments') }}")
-                                                        .then(response => response.json())
-                                                        .then(data => {
-                                                            let tbody = document.getElementById('latest-comments');
-                                                            tbody.innerHTML = '';
-                                                            data.forEach(comment => {
-                                                                let row = `
-                                                                    <tr>
-                                                                        <td class="col-3">
-                                                                            <div class="d-flex align-items-center">
-                                                                                <div class="avatar avatar-md">
-                                                                                    <img src="${comment.user.avatar ?? 'default-avatar.png'}" alt="User Avatar">
-                                                                                </div>
-                                                                                <p class="font-bold ms-3 mb-0">${comment.user.name}</p>
-                                                                            </div>
-                                                                        </td>
-                                                                        <td class="col-auto">
-                                                                            <p class="mb-0">${comment.content}</p>
-                                                                        </td>
-                                                                        <td class="col-auto">
-                                                                            <p class="mb-0">${comment.product.name}</p>
-                                                                        </td>
-                                                                    </tr>
-                                                                `;
-                                                                tbody.innerHTML += row;
-                                                            });
-                                                        });
-                                                }
                                             
-                                                setInterval(fetchLatestComments, 5000);
-                                            </script> --}}
                                         </table>
                                     </div>
                                 </div>
