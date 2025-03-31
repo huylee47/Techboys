@@ -17,9 +17,9 @@
                     <div class="col-12 col-md-6 order-md-2 order-first">
                         <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="">Dashboard</a></li>
+                                <li class="breadcrumb-item"><a href="{{ route('admin.index') }}">Dashboard</a></li>
                                 <li class="breadcrumb-item active" aria-current="page"><a
-                                        href="{{ route('admin.promotion.index') }}">Danh sách khuyến mãi</a></li>
+                                        href="{{ route('admin.promotion.index') }}">Khuyến mãi</a></li>
 
                                 <li class="breadcrumb-item active" aria-current="page">Thêm khuyến mãi</li>
                             </ol>
