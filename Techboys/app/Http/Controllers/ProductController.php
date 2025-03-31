@@ -22,10 +22,7 @@ class ProductController extends Controller
         $this->productService = $productService;
         $this->photoService = $photoService;
     }
-    // ADMIN CTRL
-    /**
-     * Display a listing of the resource.
-     */
+    // ================================= ADMIN =================================
     public function index()
     {
         $products = $this->productService->getAllProducts();
