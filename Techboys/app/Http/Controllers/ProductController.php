@@ -41,7 +41,7 @@ class ProductController extends Controller
         return $this->productService->storeProduct($request);
     }
 
-    public function searchProducts(Request $request)
+    public function adminSearch(Request $request)
     {
         $query = $request->input('query');
 
