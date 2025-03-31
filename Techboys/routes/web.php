@@ -22,9 +22,9 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 
 // Client routes
-Route::middleware(['track.online'])->group(function(){
+Route::middleware(['track.online'])->group(function () {
     Route::get('/', function () {
-    return view('client.home.home');
+        return view('client.home.home');
     })->name('home');
 });
 Route::get('/online-users', function () {
@@ -123,7 +123,7 @@ Route::middleware(['auth', 'auth.admin'])->group(function () {
             Route::post('/update/{id}', [VoucherController::class, 'update'])->name('admin.voucher.update');
             Route::get('/destroy/{id}', [VoucherController::class, 'destroy'])->name('admin.voucher.destroy');
         });
-        
+
         Route::prefix('/product')->group(function () {
             Route::get('/', [ProductController::class, 'index'])->name('admin.product.index');
             Route::get('/create', [ProductController::class, 'create'])->name('admin.product.create');
@@ -137,6 +137,7 @@ Route::middleware(['auth', 'auth.admin'])->group(function () {
             Route::get('/image/{productId}', [ProductController::class, 'imageIndex'])->name('admin.product.imageIndex');
             Route::post('/image/{productId}/store', [ProductController::class, 'imageStore'])->name('admin.product.imageStore');
             Route::get('/image/{productId}/destroy/{imageId}', [ProductController::class, 'imageDestroy'])->name('admin.product.imageDestroy');
+            // Route::get('product/search', [ProductController::class, 'adminSearch'])->name('admin.product.search');
         });
 
         Route::prefix('/category')->group(function () {
@@ -165,9 +166,9 @@ Route::middleware(['auth', 'auth.admin'])->group(function () {
             restore');
             Route::get('/download.invoice/{id}', [BillController::class, 'download'])->name('admin.bill.download');
             Route::get('/bill-detail/{id}/show', [BillDetailsController::class, 'show'])->name('admin.bill.show');
-            Route::get('invoice/{id}',[BillController::class,'invoiceBill'])->name('admin.bill.invoice');
-            Route::post('cancel/{id}',[BillController::class,'cancelBill'])->name('admin.bill.cancel');
-            Route::get('confirm/{id}',[BillController::class,'confirm'])->name('admin.bill.confirm');
+            Route::get('invoice/{id}', [BillController::class, 'invoiceBill'])->name('admin.bill.invoice');
+            Route::post('cancel/{id}', [BillController::class, 'cancelBill'])->name('admin.bill.cancel');
+            Route::get('confirm/{id}', [BillController::class, 'confirm'])->name('admin.bill.confirm');
             // Route::post('complete/{id}',[BillController::class,'completeBill'])->name('admin.bill.complete');
         });
 
@@ -198,10 +199,10 @@ Route::middleware(['auth', 'auth.admin'])->group(function () {
             Route::get('/', [RevenueController::class, 'index'])->name('admin.revenue.revenue');
             Route::get('/filter', [RevenueController::class, 'filterRevenue'])->name('admin.revenue.filter');
         });
-        Route::prefix('/chats')->group(function (){
+        Route::prefix('/chats')->group(function () {
             Route::get('/', [ChatsController::class, 'index'])->name('admin.messages');
             Route::get('/{chatId}', [ChatsController::class, 'loadMessagesAdmin']);
-            Route::post('/{chatId}/send', [ChatsController::class,'sendMessageAdmin'])->name('admin.send.message');
+            Route::post('/{chatId}/send', [ChatsController::class, 'sendMessageAdmin'])->name('admin.send.message');
             // Route::post('/send', [ChatsController::class, 'sendMessageAdmin']);
 
         });
@@ -264,4 +265,3 @@ Route::prefix('products')->group(function () {
 });
 
 Route::get('/client/orders', [BillController::class, 'indexClient'])->name('client.orders');
-
