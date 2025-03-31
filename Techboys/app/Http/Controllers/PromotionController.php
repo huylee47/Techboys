@@ -19,8 +19,8 @@ class PromotionController extends Controller
      */
     public function index()
     {
-         $promotion = Promotion::latest()->take(20)->get();
-        return view('admin.promotions.index', compact('promotion'));
+        $promotions = Promotion::paginate(10);
+        return view('admin.promotions.index', compact('promotions'));
     }
 
     public function create()
