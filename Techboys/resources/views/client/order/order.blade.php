@@ -42,6 +42,9 @@
                                                         <th>Số lượng</th>
                                                         <th>Trạng thái</th>
                                                         <th>Tổng cộng</th>
+                                                        @auth
+                                                            <th>Hành động</th>
+                                                        @endauth
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -49,7 +52,11 @@
                                                         <td>{{ $searchedOrder->order_id }}</td>
                                                         <td>
                                                             @foreach ($searchedOrder->billDetails as $detail)
-                                                                {{ $detail->product->name }}<br>
+                                                                {{ $detail->product->name }}
+                                                                @if($detail->variant_id)
+                                                                    ({{ $detail->attributes }})
+                                                                @endif
+                                                                <br>
                                                             @endforeach
                                                         </td>
                                                         <td>
@@ -82,6 +89,27 @@
                                                             @endswitch
                                                         </td>
                                                         <td>{{ number_format($searchedOrder->total, 0, ',', '.') }} VND</td>
+                                                        @auth
+                                                            <td>
+                                                                @if($searchedOrder->status_id == 1)
+                                                                    <div style="display: flex; gap: 10px;">
+                                                                        <form action="{{ route('client.orders.cancel') }}" method="POST">
+                                                                            @csrf
+                                                                            <input type="hidden" name="order_id" value="{{ $searchedOrder->id }}">
+                                                                            <button class="btn btn-danger" type="submit">Hủy đơn</button>
+                                                                        </form>
+                                                                        <form action="" method="GET">
+                                                                            <button class="btn btn-warning" type="submit">Sửa thông tin</button>
+                                                                        </form>
+                                                                    </div>
+                                                                @elseif($searchedOrder->status_id == 3)
+                                                                    <form action="{{ route('client.orders.confirm', $searchedOrder->id) }}" method="POST">
+                                                                        @csrf
+                                                                        <button class="btn btn-success" type="submit">Xác nhận</button>
+                                                                    </form>
+                                                                @endif
+                                                            </td>
+                                                        @endauth
                                                     </tr>
                                                 </tbody>
                                             </table>
@@ -97,7 +125,9 @@
                                                         <th>TT thanh toán</th> --}}
                                                         <th>Trạng thái</th>
                                                         <th>Tổng cộng</th>
-                                                        <th>Hành động</th>
+                                                     
+                                                            <th>Hành động</th>
+                                                   
                                                     </tr>
                                                 </thead>
                                                 <tbody id="orderTableBody">
@@ -106,7 +136,11 @@
                                                             <td>{{ $bill->order_id }}</td>
                                                             <td>
                                                                 @foreach ($bill->billDetails as $detail)
-                                                                    {{ $detail->product->name }}<br>
+                                                                    {{ $detail->product->name }}
+                                                                    @if($detail->variant_id)
+                                                                        ({{ $detail->attributes }})
+                                                                    @endif
+                                                                    <br>
                                                                 @endforeach
                                                             </td>
                                                             <td>
@@ -140,15 +174,26 @@
                                                                 @endswitch
                                                             </td>
                                                             <td>{{ number_format($bill->total, 0, ',', '.') }} VND</td>
-                                                            <td>
-                                                                @if($bill->status_id == 1)
-                                                                    <form action="{{ route('client.orders.cancel') }}" method="POST">
-                                                                        @csrf
-                                                                        <input type="hidden" name="order_id" value="{{ $bill->id }}">
-                                                                        <button class="btn btn-danger" type="submit">Hủy đơn</button>
-                                                                    </form>
-                                                                @endif
-                                                            </td>
+                                                                <td>
+                                                                    @if($bill->status_id == 1)
+                                                                        <div style="display: flex; gap: 10px;">
+                                                                            <form action="{{ route('client.orders.cancel') }}" method="POST">
+                                                                                @csrf
+                                                                                <input type="hidden" name="order_id" value="{{ $bill->id }}">
+                                                                                <button class="btn btn-danger" type="submit">Hủy đơn</button>
+                                                                            </form>
+                                                                            <form action="{{ route('client.orders.edit') }}" method="GET">
+                                                                                <input type="hidden" name="order_id" value="{{ $bill->id }}">
+                                                                                <button class="btn btn-warning" type="submit">Sửa thông tin</button>
+                                                                            </form>
+                                                                        </div>
+                                                                    @elseif($bill->status_id == 3)
+                                                                        <form action="{{ route('client.orders.confirm', $bill->id) }}" method="POST">
+                                                                            @csrf
+                                                                            <button class="btn btn-success" type="submit">Xác nhận</button>
+                                                                        </form>
+                                                                    @endif
+                                                                </td>        
                                                         </tr>
                                                     @endforeach
                                                 </tbody>

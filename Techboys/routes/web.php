@@ -48,6 +48,9 @@ Route::get('/client/orders', [BillController::class, 'indexClient'])->name('clie
 Route::get('/client/orders/search', [BillController::class, 'searchOrder'])->name('client.orders.search');
 Route::post('/client/orders/cancel', [BillController::class, 'CancelOrder'])->name('client.orders.cancel');
 Route::post('/client/orders/cancel/{id}', [BillController::class, 'submitCancelOrder'])->name('client.orders.cancel.submit');
+Route::post('/client/orders/confirm/{id}', [BillController::class, 'confirmClient'])->name('client.orders.confirm');
+Route::get('/client/orders/edit', [BillController::class, 'editClient'])->name('client.orders.edit');
+
 
 
 //comment
@@ -59,6 +62,7 @@ Route::post('/comment/reply', [CommentController::class, 'reply'])->name('client
 Route::get('/about', function () {
     return view('client.about.about');
 })->name('client.about.about');
+
 
 
 
