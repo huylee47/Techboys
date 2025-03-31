@@ -36,7 +36,7 @@ class Product extends Model
 
     public function promotion()
     {
-        return $this->hasOne(Promotion::class);
+        return $this->hasOne(Promotion::class)->where('end_date', '>=', now());
     }
 
 
