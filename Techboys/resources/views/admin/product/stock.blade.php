@@ -6,23 +6,26 @@
                 <i class="bi bi-justify fs-3"></i>
             </a>
         </header>
-        <div class="page-heading">
-            <div class="page-title">
-                <div class="row">
-                    <div class="col-12 col-md-6 order-md-1 order-last">
-                        <h3><i class="bi bi-box-seam"></i> Tồn kho sản phẩm {{ $product->name }}</h3>
-                    </div>
-                    <div class="col-12 col-md-6 order-md-2 order-first">
-                        <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
-                            <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-                                <li class="breadcrumb-item"><a href="index.html">Sản phẩm</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Tồn kho</li>
-                            </ol>
-                        </nav>
-                    </div>
+        <div class="page-title">
+            <div class="row">
+                <div class="col-12 col-md-6 order-md-1 order-last">
+                    <h3><i class="bi bi-box-seam"></i> Tồn kho sản phẩm {{ $product->name }}</h3>
+                </div>
+                <div class="col-12 col-md-6 order-md-2 order-first">
+                    <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="{{route('admin.index')}}">Dashboard</a></li>
+                            <li class="breadcrumb-item"><a href="{{route('admin.product.index')}}">Sản phẩm</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Tồn kho</li>
+                        </ol>
+                    </nav>
                 </div>
             </div>
+        </div>
+        <section class="section">
+            <div class="card">
+        <div class="page-heading">
+
             <div class="container mt-4">
                 <h4 class="mb-3">Bảng tồn kho</h4>
 
@@ -84,6 +87,8 @@
                 @endif
             </div>
         </div>
+    </div>
+</section>
     </div>
 
     <!-- Modal cập nhật tồn kho -->
