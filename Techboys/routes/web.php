@@ -13,6 +13,7 @@ use App\Http\Controllers\VoucherController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductCategoryController;
+use App\Http\Controllers\PromotionController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ProductVariantController;
@@ -29,7 +30,7 @@ Route::middleware(['track.online'])->group(function(){
     })->name('home');
 });
 Route::get('/online-users', function () {
-    // Đếm số lượng session còn trong cache
+
     $onlineUsers = collect(Cache::getStore()->getPrefix())
         ->filter(fn($key) => str_contains($key, 'user-online-'))
         ->count();
@@ -219,6 +220,15 @@ Route::middleware(['auth', 'auth.admin'])->group(function () {
         Route::post('/update/{id}', [AttributesController::class, 'update'])->name('admin.attributes.update');
         Route::get('/delete/{id}', [AttributesController::class, 'destroy'])->name('admin.attributes.delete');
         });
+        Route::prefix('/promotion')->group(function () {
+            Route::get('/', [PromotionController::class, 'index'])->name('admin.promotion.index');
+            Route::get('/create', [PromotionController::class, 'create'])->name('admin.promotion.create');
+            Route::post('/store', [PromotionController::class, 'store'])->name('admin.promotion.store');
+            Route::get('/edit/{id}', [PromotionController::class, 'edit'])->name('admin.promotion.edit');
+            Route::post('/update/{id}', [PromotionController::class, 'update'])->name('admin.promotion.update');
+            Route::get('/destroy/{id}', [PromotionController::class, 'destroy'])->name('admin.promotion.destroy');
+        });
+        
     });
 });
 Route::prefix('message')->group(function () {
