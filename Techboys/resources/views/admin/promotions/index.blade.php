@@ -42,8 +42,9 @@
                                 <tr>
                                     <th>STT</th>
                                     <th>Sản phẩm</th>
+                                    <th>Giá gốc</th>
                                     <th>Phần trăm giảm</th>
-                                    <th>Giá trước-sau</th>
+                                    <th>Giá sau giảm</th>                                    
                                     <th>Kết thúc</th>
                                     <th>Chức năng</th>
                                 </tr>
@@ -53,9 +54,20 @@
                                     <tr>
                                         <td>{{ $index + 1 }}</td>
                                         <td>{{ $promotion->product->name }}</td>
+                                        <td>
+                                            @if($promotion->product && $promotion->product->variant->count())
+                                            {{ $promotion->product->variant->first()->price ?? 'Chưa có giá' }} 
+                                            @else
+                                                Chưa có giá
+                                            @endif
+                                        </td>
                                         <td>{{ $promotion->discount_percent }}%</td>
-                                        <td>{{ number_format($promotion->product->price) }}đ - 
-                                            {{ number_format($promotion->product->price * (1 - $promotion->discount_percent / 100)) }}đ
+                                        <td>
+                                            @if($promotion->product && $promotion->product->variant->first())
+                                                {{ number_format($promotion->product->variant->first()->price * (1 - $promotion->discount_percent / 100)) }} VNĐ
+                                            @else
+                                                Chưa có giá
+                                            @endif
                                         </td>
                                         <td>{{ date('d/m/Y', strtotime($promotion->end_date)) }}</td>
 
