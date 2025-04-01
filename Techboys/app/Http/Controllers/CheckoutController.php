@@ -4,13 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\checkoutRequest;
 use App\Models\Bill;
+use App\Models\DistrictGHN;
+use App\Models\WardGHN;
 use App\Service\AddressService;
 use App\Service\CheckoutService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redis;
-use Kjmtrue\VietnamZone\Models\District;
-use Kjmtrue\VietnamZone\Models\Ward;
 
 class CheckoutController extends Controller
 {
@@ -23,22 +23,31 @@ class CheckoutController extends Controller
     public function index()
     {
         $checkout = $this->checkoutService->getCheckout();
+        
         $provinces = $this->addressService->getProvinces();
         
         if (!$checkout || empty($checkout['cartItems'])) {
             return redirect()->back()->with('error', 'Không có dữ liệu giỏ hàng để thanh toán!');
         }
+        // dd($provinces);
+        // return response()->json([
+        //     'checkout' => $checkout,
+        //     'provinces' => $provinces,
+        //     'voucher' =>$checkout['voucher']['code'],
+        // ]);
         return view('client.check-out.check', compact('checkout', 'provinces'));
     }
     
     public function getDistricts($province_id)
     {
-        $districts = District::where('province_id', $province_id)->get();
-        return response()->json($districts);
+        // $districts = DistrictGHN::where('province_id', $province_id)->get();
+        // return response()->json($districts);
+        return $this->addressService->getDistricts($province_id);
     }
     public function getWards($district_id) {
-        $wards = Ward::where('district_id', $district_id)->get();
-        return response()->json($wards);
+        // $wards = WardGHN::where('district_id', $district_id)->get();
+        // return response()->json($wards);
+        return $this->addressService->getWards($district_id);
     }
     // public function storeBill(Request $request){
     //     // dd($request->all());
