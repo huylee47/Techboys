@@ -15,19 +15,23 @@ class Bill extends Model
 
     protected $table = 'bills';
 
-    protected $fillable = ['order_id','user_id',
-     'full_name',
-      'phone', 
-      'total', 
-      'address', 
-      'email', 
-      'payment_method',
-      'payment_status', 
-      'status_id',
-      'province_id', 
-      'district_id', 
-      'ward_id',
-        'note'
+    protected $fillable = [
+        'order_id',
+        'user_id',
+        'full_name',
+        'phone',
+        'total',
+        'address',
+        'email',
+        'payment_method',
+        'payment_status',
+        'status_id',
+        'province_id',
+        'district_id',
+        'ward_id',
+        'note',
+        'voucher_code',
+        'fee_shipping',
     ];
 
     public function user()
@@ -35,24 +39,20 @@ class Bill extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function status()
-    {
-        return $this->belongsTo(Status::class);
-    }
 
     public function province()
     {
-        return $this->belongsTo(Province::class, 'province_id');
+        return $this->belongsTo(ProvinceGHN::class, 'province_id');
     }
 
     public function district()
     {
-        return $this->belongsTo(District::class, 'district_id');
+        return $this->belongsTo(DistrictGHN::class, 'district_id');
     }
 
     public function ward()
     {
-        return $this->belongsTo(Ward::class, 'ward_id');
+        return $this->belongsTo(WardGHN::class, 'ward_id');
     }
 
     public function billDetails()
