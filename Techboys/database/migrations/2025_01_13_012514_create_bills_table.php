@@ -21,7 +21,10 @@ return new class extends Migration
             $table->text('address');
             $table->foreignId('province_id');
             $table->foreignId('district_id');
-            $table->foreignId('ward_id');
+            $table->string('ward_code'); 
+            $table->foreign('ward_code')
+            ->references('code')->on('ward_ghns')
+            ->onDelete('cascade');
             $table->string('email');
             $table->tinyInteger('payment_method');
             $table->tinyInteger('payment_status')->default(0);
