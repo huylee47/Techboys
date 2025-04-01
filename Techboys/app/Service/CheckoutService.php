@@ -94,7 +94,7 @@ class CheckoutService
             'email' => $request->email,
             'province_id' => $request->province_id,
             'district_id' => $request->district_id,
-            'ward_id' => $request->ward_id,
+            'ward_code' => $request->ward_code,
             'payment_method' => $request->payment_method,
             'payment_status' => 0,
             'status_id' => 1,
@@ -151,8 +151,8 @@ class CheckoutService
                 }
             }
     
-            $shippingFee = $this->calculateShippingFee( $request->district_id, $request->ward_id, $totalWeight);
-
+            $shippingFee = $this->calculateShippingFee( $request->district_id, $request->ward_code, $totalWeight);
+            // dd($this->calculateShippingFee( $request->district_id, $request->ward_code, $totalWeight));
             // dd($shippingFee);
             $totalWithShipping = $total + $shippingFee;
     
@@ -168,7 +168,7 @@ class CheckoutService
                 'email' => $request->email,
                 'province_id' => $request->province_id,
                 'district_id' => $request->district_id,
-                'ward_id' => $request->ward_id,
+                'ward_code' => $request->ward_code,
                 'payment_method' => $request->payment_method,
                 'payment_status' => 0,
                 'status_id' => 1,
