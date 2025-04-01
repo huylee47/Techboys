@@ -231,7 +231,7 @@ class CheckoutService
         $serviceId = $weight > 20000 ? 100039 : 53322;
     
         $data = [
-            'from_district_id' => 1444,
+            'from_district_id' => 1587,
             'service_id' => $serviceId,
             'to_district_id' => (int)$districtId,
             'to_ward_code' => (string) $wardId,
@@ -245,8 +245,8 @@ class CheckoutService
         ])->post($endpoint, $data);
     
          $result = $response->json();
-    
-        return $result['data']['total'] ?? 0;
+        // default fee_ship =20k
+        return $result['data']['total'] ?? 20000;
     }
 
 
