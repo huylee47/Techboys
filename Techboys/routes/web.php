@@ -49,7 +49,7 @@ Route::get('/client/orders/search', [BillController::class, 'searchOrder'])->nam
 Route::post('/client/orders/cancel', [BillController::class, 'CancelOrder'])->name('client.orders.cancel');
 Route::post('/client/orders/cancel/{id}', [BillController::class, 'submitCancelOrder'])->name('client.orders.cancel.submit');
 Route::post('/client/orders/confirm/{id}', [BillController::class, 'confirmClient'])->name('client.orders.confirm');
-Route::get('/client/orders/edit', [BillController::class, 'editClient'])->name('client.orders.edit');
+Route::get('/client/orders/detail', [BillController::class, 'detailClient'])->name('client.orders.detail');
 
 
 

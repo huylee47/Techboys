@@ -276,6 +276,8 @@ class BillController extends Controller
                     $detail->attributes = implode(', ', AttributesValue::whereIn('id', $attributeArray)->pluck('value')->toArray());
                 }
             }
+        } else {
+            return redirect()->route('client.orders')->with('error', 'Mã hóa đơn hoặc số điện thoại không chính xác!');
         }
 
         $loadAll = Auth::check() ? Bill::with(['billDetails.product', 'billDetails.variant'])
@@ -347,7 +349,7 @@ class BillController extends Controller
             return redirect()->route('client.orders')->with('error', 'Đã xảy ra lỗi khi xác nhận đơn hàng!');
         }
     }
-    public function editClient(Request $request)
+    public function detailClient(Request $request)
     {
         $orderId = $request->query('order_id');
         $order = Bill::with('user')->find($orderId);
@@ -359,8 +361,9 @@ class BillController extends Controller
         $provinces = Province::all();
         $districts = District::where('province_id', $order->province_id)->get();
         $wards = Ward::where('district_id', $order->district_id)->get();
+        $payment_method = $order->payment_method;
 
-        return view('client.order.edit', compact('order', 'provinces', 'districts', 'wards'));
+        return view('client.order.detail', compact('order', 'provinces', 'districts', 'wards', 'payment_method'));
     }
 
     
