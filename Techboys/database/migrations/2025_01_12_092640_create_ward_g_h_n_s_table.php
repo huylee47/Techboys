@@ -9,20 +9,26 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
+    public function up()
     {
-        Schema::create('roles', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
+        Schema::create('ward_ghns', function (Blueprint $table) {
+            $table->string('code')->primary();
+            $table->string('name');          
+            $table->unsignedBigInteger('district_id');
+        
             $table->timestamps();
         });
+        
     }
+    
 
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('roles');
+        if (!env('KEEP_GHN_DATA', false)) {
+            Schema::dropIfExists('ward_ghns');
+        }
     }
 };

@@ -78,7 +78,7 @@
                                                 </p>
                                             @endif
                                         </div>
-                                        <div class="col-md-6 mb-3">
+                                        <div class="col-md-4 mb-3">
                                             <label for="name" class="form-label">Tên Sản Phẩm</label>
                                             <input type="text" class="form-control" id="name" name="name"
                                                 value="{{ old('name') }}">
@@ -88,7 +88,17 @@
                                                 </p>
                                             @endif
                                         </div>
-                                        <div class="col-md-6 mb-3">
+                                        <div class="col-md-4 mb-3">
+                                            <label for="weight" class="form-label">Khối lượng (gram)</label>
+                                            <input type="number" class="form-control" id="weight" name="weight"
+                                                value="{{ old('weight') }}">
+                                            @if ($errors->has('weight'))
+                                                <p class="text-danger small ">
+                                                    <i>{{ $errors->first('weight') }}</i>
+                                                </p>
+                                            @endif
+                                        </div>
+                                        <div class="col-md-4 mb-3">
                                             <label for="images" class="form-label">Ảnh Sản Phẩm</label>
                                             <input class="form-control" type="file" id="images" name="img"
                                                 accept="image/*">

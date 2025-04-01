@@ -21,50 +21,6 @@
             "image": "banner1.jpg"
         }
     ],
-    "bills": [
-        {
-            "user_id": 1,
-            "full_name": "Nguyễn Văn A",
-            "phone": "0901234567",
-            "total": 25707000,
-            "address": "123 Đường ABC, TP.HCM",
-            "email": "nguyenvana@gmail.com",
-            "province_id": 1,
-            "district_id": 1,
-            "ward_id": 1,
-            "payment_method": 1,
-            "payment_status": 1,
-            "status_id": 1
-        },
-        {
-            "user_id": 2,
-            "full_name": "Lê Thị B",
-            "phone": "0907654321",
-            "total": 20291500,
-            "address": "456 Đường XYZ, TP.HN",
-            "email": "lethib@gmail.com",
-            "province_id": 1,
-            "district_id": 2,
-            "ward_id": 2,
-            "payment_method": 2,
-            "payment_status": 0,
-            "status_id": 2
-        },
-        {
-            "user_id": 3,
-            "full_name": "Trần Văn C",
-            "phone": "0912345678",
-            "total": 	50450000,
-            "address": "789 Đường LMN, TP.ĐN",
-            "email": "tranvanc@gmail.com",
-            "province_id": 1,
-            "district_id": 3,
-            "ward_id": 3,
-            "payment_method": 1,
-            "payment_status": 1,
-            "status_id": 3
-        }
-    ],
     "bill_details": [
         {
             "bill_id": 1,
@@ -821,6 +777,7 @@
             "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.5,
+            "weight": 300,
             "description": "Điện thoại thông minh của Apple."
         },
         {
@@ -834,6 +791,7 @@
             "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.7,
+            "weight": 300,
             "description": "Điện thoại thông minh của Samsung."
         },
         {
@@ -847,6 +805,7 @@
             "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.6,
+            "weight": 300,
             "description": "Điện thoại thông minh của Xiaomi."
         },
         {
@@ -860,6 +819,7 @@
             "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.3,
+            "weight": 300,
             "description": "Điện thoại thông minh của Apple."
         },
         {
@@ -873,6 +833,7 @@
             "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.2,
+            "weight": 300,
             "description": "Điện thoại thông minh của Oppo."
         },
         {
@@ -886,6 +847,7 @@
             "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.5,
+            "weight": 300,
             "description": "Điện thoại thông minh của Samsung."
         },
         {
@@ -899,6 +861,7 @@
             "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.4,
+            "weight": 300,
             "description": "Điện thoại thông minh của Xiaomi."
         },
         {
@@ -912,6 +875,7 @@
             "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.1,
+            "weight": 300,
             "description": "Điện thoại thông minh của Oppo."
         },
         {
@@ -925,6 +889,7 @@
             "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.3,
+            "weight": 300,
             "description": "Điện thoại thông minh của Realme."
         },
         {
@@ -938,6 +903,7 @@
             "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.5,
+            "weight": 300,
             "description": "Điện thoại thông minh của Apple."
         },
         {
@@ -951,6 +917,7 @@
             "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.6,
+            "weight": 300,
             "description": "Điện thoại thông minh gập màn hình của Samsung."
         },
         {
@@ -964,6 +931,7 @@
             "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.3,
+            "weight": 300,
             "description": "Điện thoại thông minh của Xiaomi."
         },
         {
@@ -977,6 +945,7 @@
             "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.1,
+            "weight": 300,
             "description": "Điện thoại thông minh của Oppo."
         },
         {
@@ -990,6 +959,7 @@
             "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.4,
+            "weight": 300,
             "description": "Điện thoại thông minh của Realme."
         },
         {
@@ -1003,6 +973,7 @@
             "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.0,
+            "weight": 300,
             "description": "Điện thoại thông minh của Vivo."
         },
         {
@@ -1016,6 +987,7 @@
             "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.2,
+            "weight": 300,
             "description": "Điện thoại thông minh của Oppo."
         },
         {
@@ -1029,6 +1001,7 @@
             "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.3,
+            "weight": 300,
             "description": "Điện thoại thông minh của Realme."
         },
         {
@@ -1042,6 +1015,7 @@
             "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.1,
+            "weight": 300,
             "description": "Điện thoại thông minh của Vivo."
         },
         {
@@ -1055,6 +1029,7 @@
             "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.0,
+            "weight": 300,
             "description": "Điện thoại thông minh của Apple."
         },
         {
@@ -1068,6 +1043,7 @@
             "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.5,
+            "weight": 300,
             "description": "Điện thoại thông minh tầm trung của Samsung."
         },
         {
@@ -1081,6 +1057,7 @@
             "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.2,
+            "weight": 300,
             "description": "Điện thoại thông minh của Apple với thiết kế sang trọng."
         },
         {
@@ -1094,6 +1071,7 @@
             "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.4,
+            "weight": 300,
             "description": "Điện thoại thông minh với màn hình AMOLED của Xiaomi."
         },
         {
@@ -1107,6 +1085,7 @@
             "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.5,
+            "weight": 300,
             "description": "Điện thoại thông minh của Xiaomi."
         },
         {
@@ -1120,6 +1099,7 @@
             "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.2,
+            "weight": 300,
             "description": "Điện thoại Oppo hỗ trợ 5G với thiết kế đẹp."
         },
         {
@@ -1133,6 +1113,7 @@
             "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.6,
+            "weight": 300,
             "description": "Điện thoại chơi game với hỗ trợ 5G của Realme."
         },
         {
@@ -1146,6 +1127,7 @@
             "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.3,
+            "weight": 300,
             "description": "Điện thoại Vivo hỗ trợ 5G và camera selfie tốt."
         },
         {
@@ -1159,6 +1141,7 @@
             "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.5,
+            "weight": 300,
             "description": "Điện thoại cao cấp của Apple với màn hình OLED."
         },
         {
@@ -1172,6 +1155,7 @@
             "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.1,
+            "weight": 300,
             "description": "Điện thoại giá rẻ với màn hình lớn của Samsung."
         },
         {
@@ -1185,6 +1169,7 @@
             "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.5,
+            "weight": 300,
             "description": "Điện thoại tầm trung của Xiaomi với camera 64MP."
         },
         {
@@ -1198,6 +1183,7 @@
             "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.6,
+            "weight": 300,
             "description": "Điện thoại nhỏ gọn, thiết kế hiện đại của Apple 2077."
         },
         {
@@ -1211,6 +1197,7 @@
             "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.3,
+            "weight": 300,
             "description": "Điện thoại giá rẻ với màn hình 6.5 inch của Oppo."
         },
         {
@@ -1224,6 +1211,7 @@
             "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.5,
+            "weight": 300,
             "description": "Điện thoại tầm trung hỗ trợ 5G của Samsung."
         },
         {
@@ -1237,6 +1225,7 @@
             "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.4,
+            "weight": 300,
             "description": "Điện thoại nhẹ và mỏng của Xiaomi với 5G."
         },
         {
@@ -1250,6 +1239,7 @@
             "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.2,
+            "weight": 300,
             "description": "Điện thoại Oppo hỗ trợ 5G với thiết kế đẹp."
         },
         {
@@ -1263,6 +1253,7 @@
             "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.6,
+            "weight": 300,
             "description": "Điện thoại chơi game với hỗ trợ 5G của Realme."
         },
         {
@@ -1276,6 +1267,7 @@
             "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.3,
+            "weight": 300,
             "description": "Điện thoại Vivo hỗ trợ 5G và camera selfie tốt."
         },
         {
@@ -1289,6 +1281,7 @@
             "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.5,
+            "weight": 300,
             "description": "Điện thoại cao cấp của Apple với màn hình OLED."
         },
         {
@@ -1302,6 +1295,7 @@
             "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.1,
+            "weight": 300,
             "description": "Điện thoại giá rẻ với màn hình lớn của Samsung."
         },
         {
@@ -1315,6 +1309,7 @@
             "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.5,
+            "weight": 300,
             "description": "Điện thoại tầm trung của Xiaomi với camera 64MP."
         },
         {
@@ -1328,6 +1323,7 @@
             "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.4,
+            "weight": 300,
             "description": "Điện thoại nhỏ gọn, thiết kế hiện đại của Apple."
         },
         {
@@ -1341,6 +1337,7 @@
             "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.3,
+            "weight": 300,
             "description": "Điện thoại giá rẻ với màn hình 6.5 inch của Oppo."
         },
         {
@@ -1354,6 +1351,7 @@
             "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.2,
+            "weight": 300,
             "description": "Điện thoại hiệu năng mạnh mẽ của Realme với màn hình 120Hz."
         },
         {
@@ -1367,6 +1365,7 @@
             "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.4,
+            "weight": 300,
             "description": "Điện thoại thiết kế đẹp, hiệu suất ổn định của Vivo."
         },
         {
@@ -1380,6 +1379,7 @@
             "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.7,
+            "weight": 300,
             "description": "Điện thoại Apple với camera kép, hiệu suất mạnh mẽ."
         },
         {
@@ -1393,6 +1393,7 @@
             "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.6,
+            "weight": 300,
             "description": "Điện thoại flagship giá phải chăng của Samsung."
         },
         {
@@ -1406,6 +1407,7 @@
             "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.5,
+            "weight": 300,
             "description": "Điện thoại flagship với Snapdragon 870 của Xiaomi."
         },
         {
@@ -1419,6 +1421,7 @@
             "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.2,
+            "weight": 300,
             "description": "Điện thoại tầm trung của Oppo với màn hình AMOLED."
         },
         {
@@ -1432,6 +1435,7 @@
             "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.8,
+            "weight": 300,
             "description": "Điện thoại 5G flagship của Realme với hiệu năng mạnh mẽ."
         },
         {
@@ -1445,6 +1449,7 @@
             "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.3,
+            "weight": 300,
             "description": "Điện thoại Vivo với camera selfie 44MP."
         },
         {
@@ -1458,6 +1463,7 @@
             "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.4,
+            "weight": 300,
             "description": "Điện thoại của Apple với hiệu năng tuyệt vời và camera tốt."
         }
     ],

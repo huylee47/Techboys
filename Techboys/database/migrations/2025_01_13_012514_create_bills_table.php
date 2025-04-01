@@ -21,11 +21,16 @@ return new class extends Migration
             $table->text('address');
             $table->foreignId('province_id');
             $table->foreignId('district_id');
-            $table->foreignId('ward_id');
+            $table->string('ward_code'); 
+            $table->foreign('ward_code')
+            ->references('code')->on('ward_ghns')
+            ->onDelete('cascade');
             $table->string('email');
             $table->tinyInteger('payment_method');
             $table->tinyInteger('payment_status')->default(0);
             $table->tinyInteger('status_id')->default(1);
+            $table->string('voucher_code')->nullable();
+            $table->integer('fee_shipping');
             $table->text('note')->nullable();
             $table->timestamps();
         }); 

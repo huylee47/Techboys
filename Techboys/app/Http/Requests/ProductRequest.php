@@ -25,6 +25,7 @@ class ProductRequest extends FormRequest
             'name' => 'required|string|max:255|unique:products,name,' . $this->id,
             'brand_id' => 'required',
             'category_id' => 'required',
+            'weight' => 'required|min:0',
             'description' => 'required',
             'img' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
         ];
@@ -83,6 +84,8 @@ class ProductRequest extends FormRequest
             'img.image' => 'Ảnh không hợp lệ.',
             'img.mimes' => 'Ảnh phải có định dạng jpeg, png, jpg, gif.',
             'img.max' => 'Kích thước ảnh tối đa là 2MB.',
+            'weight.required' => 'Trọng lượng sản phẩm không được để trống.',
+            'weight.min' => 'Trọng lượng sản phẩm phải lớn hơn 0 gram.',
     
             'base_price.required' => 'Giá gốc không được để trống.',
             'base_price.numeric' => 'Giá gốc phải là số.',

@@ -9,20 +9,25 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
+    public function up()
     {
-        Schema::create('status', function (Blueprint $table) {
-            $table->id();
+        Schema::create('province_ghns', function (Blueprint $table) {
+            $table->unsignedBigInteger('province_id')->primary(); 
             $table->string('name');
             $table->timestamps();
         });
+        
     }
+    
 
     /**
      * Reverse the migrations.
      */
-    public function down(): void
+    public function down()
     {
-        Schema::dropIfExists('statuses');
+        if (!env('KEEP_GHN_DATA', false)) {
+            Schema::dropIfExists('province_ghns');
+        }
     }
+    
 };

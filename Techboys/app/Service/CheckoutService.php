@@ -14,6 +14,7 @@ use App\Service\CartService;
 use App\Service\CartPriceService;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Redis;
@@ -78,7 +79,7 @@ class CheckoutService
     {
         $userId = Auth::id();
         $sessionId = session()->getId();
-        $tempBillId = now()->format('Ymd') . ($userId ?? $sessionId) . rand(10, 99);
+        $tempBillId =  $tempBillId ?? now()->format('Ymd') . ($userId ? "U" . $userId : "C" . substr($sessionId, -6)) . rand(10, 99);
 
 
         $cartItems = $this->cartService->getCartItems();
@@ -93,7 +94,7 @@ class CheckoutService
             'email' => $request->email,
             'province_id' => $request->province_id,
             'district_id' => $request->district_id,
-            'ward_id' => $request->ward_id,
+            'ward_code' => $request->ward_code,
             'payment_method' => $request->payment_method,
             'payment_status' => 0,
             'status_id' => 1,
@@ -142,23 +143,37 @@ class CheckoutService
                 ], 400);
             }
     
+            $totalWeight = 0;
+            foreach ($cartItems as $cartItem) {
+                $product = Product::find($cartItem->product_id);
+                if ($product) {
+                    $totalWeight += $product->weight * $cartItem->quantity;
+                }
+            }
+    
+            $shippingFee = $this->calculateShippingFee( $request->district_id, $request->ward_code, $totalWeight);
+            // dd($this->calculateShippingFee( $request->district_id, $request->ward_code, $totalWeight));
+            // dd($shippingFee);
+            $totalWithShipping = $total + $shippingFee;
+    
             // Tạo bill
             $bill = Bill::create([
-                'order_id' => $tempBillId ?? now()->format('Ymd') . ($userId ?? $cartId) . rand(10, 99),
+                'order_id' => $tempBillId ?? now()->format('Ymd') . ($userId ? "U" . $userId : "C" . substr($cartId, -6)) . rand(10, 99),
                 'user_id' => $userId ?? null,
-                'total' => $total,
+                'total' => $totalWithShipping,
+                'fee_shipping' => $shippingFee,
                 'full_name' => $request->full_name,
                 'address' => $request->address,
                 'phone' => $request->phone,
                 'email' => $request->email,
                 'province_id' => $request->province_id,
                 'district_id' => $request->district_id,
-                'ward_id' => $request->ward_id,
+                'ward_code' => $request->ward_code,
                 'payment_method' => $request->payment_method,
                 'payment_status' => 0,
                 'status_id' => 1,
+                'voucher_code' => $request->voucher
             ]);
-    
             foreach ($cartItems as $cartItem) {
                 BillDetails::create([
                     'bill_id' => $bill->id,
@@ -207,11 +222,32 @@ class CheckoutService
         }
     }
     
+    private function calculateShippingFee($districtId, $wardId, $weight)
+    {
+        $token = 'efbd95a6-0e9a-11f0-9f28-eacfdef119b3';
+        $shopId = 196270;
+        $endpoint = 'https://dev-online-gateway.ghn.vn/shiip/public-api/v2/shipping-order/fee';
     
+        $serviceId = $weight > 20000 ? 100039 : 53322;
     
+        $data = [
+            'from_district_id' => 1587,
+            'service_id' => $serviceId,
+            'to_district_id' => (int)$districtId,
+            'to_ward_code' => (string) $wardId,
+            'weight' => $weight
+        ];
     
+        $response = Http::withHeaders([
+            'Content-Type' => 'application/json',
+            'Token' => $token,
+            'ShopId' => $shopId
+        ])->post($endpoint, $data);
     
-
+         $result = $response->json();
+        // default fee_ship =20k
+        return $result['data']['total'] ?? 20000;
+    }
 
 
     public function handlePaymentSuccess($billId)
