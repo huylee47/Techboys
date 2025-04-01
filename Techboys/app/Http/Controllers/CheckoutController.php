@@ -55,6 +55,7 @@ class CheckoutController extends Controller
     // }
     public function storeBill(checkoutRequest $request)
     {
+        
         if ($request->payment_method == 1) {
             return $this->checkoutService->storeTemporaryBill($request);
         }
