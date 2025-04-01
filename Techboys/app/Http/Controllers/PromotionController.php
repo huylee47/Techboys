@@ -19,7 +19,7 @@ class PromotionController extends Controller
      */
     public function index()
     {
-    $promotions = Promotion::with('product')->paginate(10);
+    $promotions = Promotion::with(['product.variant'])->get();
     $products = Product::doesntHave('promotion')->get();
     return view('admin.promotions.index', compact('promotions', 'products'));
     }
