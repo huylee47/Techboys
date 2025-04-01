@@ -21,56 +21,6 @@
             "image": "banner1.jpg"
         }
     ],
-    "bills": [
-        {
-            "user_id": 1,
-            "full_name": "Nguyễn Văn A",
-            "phone": "0901234567",
-            "total": 25703000,
-            "address": "123 Đường ABC, TP.HCM",
-            "email": "nguyenvana@gmail.com",
-            "province_id": 1,
-            "district_id": 1,
-            "ward_id": 1,
-            "payment_method": 1,
-            "payment_status": 1,
-            "voucher_code":null,
-            "fee_shipping":20000,
-            "status_id": 1
-        },
-        {
-            "user_id": 2,
-            "full_name": "Lê Thị B",
-            "phone": "0907654321",
-            "total": 20291500,
-            "address": "456 Đường XYZ, TP.HN",
-            "email": "lethib@gmail.com",
-            "province_id": 1,
-            "district_id": 2,
-            "ward_id": 2,
-            "payment_method": 2,
-            "payment_status": 0,
-            "voucher_code":null,
-            "fee_shipping":20000,
-            "status_id": 2
-        },
-        {
-            "user_id": 3,
-            "full_name": "Trần Văn C",
-            "phone": "0912345678",
-            "total": 	50450000,
-            "address": "789 Đường LMN, TP.ĐN",
-            "email": "tranvanc@gmail.com",
-            "province_id": 1,
-            "district_id": 3,
-            "ward_id": 3,
-            "payment_method": 1,
-            "payment_status": 1,
-            "voucher_code":null,
-            "fee_shipping":20000,
-            "status_id": 3
-        }
-    ],
     "bill_details": [
         {
             "bill_id": 1,
