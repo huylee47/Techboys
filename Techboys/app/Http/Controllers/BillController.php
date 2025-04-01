@@ -276,6 +276,8 @@ class BillController extends Controller
                     $detail->attributes = implode(', ', AttributesValue::whereIn('id', $attributeArray)->pluck('value')->toArray());
                 }
             }
+        } else {
+            return redirect()->route('client.orders')->with('error', 'Mã hóa đơn hoặc số điện thoại không chính xác!');
         }
 
         $loadAll = Auth::check() ? Bill::with(['billDetails.product', 'billDetails.variant'])
