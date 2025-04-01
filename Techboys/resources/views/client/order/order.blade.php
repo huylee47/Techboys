@@ -14,7 +14,7 @@
                                         <!-- Search Order Number -->
                                         <div class="search-order">
                                             <form action="{{ route('client.orders.search') }}" method="GET">
-                                                <input type="text" name="order_id" placeholder="Nhập mã đơn hàng" required>
+                                                <input type="text" name="order_id" placeholder="Nhập mã đơn hàng" >
                                                 @guest
                                                     <input type="text" name="phone" placeholder="Nhập số điện thoại" required>
                                                 @endguest
