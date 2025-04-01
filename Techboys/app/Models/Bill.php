@@ -28,7 +28,7 @@ class Bill extends Model
         'status_id',
         'province_id',
         'district_id',
-        'ward_id',
+        'ward_code',
         'note',
         'voucher_code',
         'fee_shipping',
@@ -52,7 +52,7 @@ class Bill extends Model
 
     public function ward()
     {
-        return $this->belongsTo(WardGHN::class, 'ward_id');
+        return $this->belongsTo(WardGHN::class, 'ward_code');
     }
 
     public function billDetails()
