@@ -17,5 +17,6 @@ class WardGHN extends Model
     {
         return $this->belongsTo(DistrictGHN::class, 'district_id', 'district_id');
     }
+    
 }
 
