@@ -71,7 +71,7 @@
                                                                     <option value="" selected disabled>Chọn tỉnh/thành
                                                                         phố</option>
                                                                     @foreach ($provinces as $province)
-                                                                        <option value="{{ $province->id }}">
+                                                                        <option value="{{ $province->province_id }}">
                                                                             {{ $province->name }}</option>
                                                                     @endforeach
                                                                 </select>
@@ -227,6 +227,7 @@
                                                                 </strong>
                                                                 <input type="hidden" name="total"
                                                                     value="{{ $checkout['total'] }}">
+                                                                    <input type="text" name="voucher" value="{{$checkout['voucher']['code'] ?? null}}">
                                                             </td>
                                                         </tr>
                                                     </tfoot>
@@ -315,7 +316,7 @@
                         success: function(data) {
                             if (data.length > 0) {
                                 $.each(data, function(key, value) {
-                                    $('#district').append('<option value="' + value.id +
+                                    $('#district').append('<option value="' + value.district_id +
                                         '">' + value.name + '</option>');
                                 });
                             } else {
@@ -343,7 +344,7 @@
                         success: function(data) {
                             if (data.length > 0) {
                                 $.each(data, function(key, value) {
-                                    $('#ward').append('<option value="' + value.id +
+                                    $('#ward').append('<option value="' + value.code +
                                         '">' + value.name + '</option>');
                                 });
                             } else {
