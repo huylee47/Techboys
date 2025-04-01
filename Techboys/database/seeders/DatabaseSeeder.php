@@ -5,7 +5,6 @@ namespace Database\Seeders;
 use App\Models\Attributes;
 use App\Models\AttributesValue;
 use App\Models\Banner;
-use App\Models\Bill;
 use App\Models\BillDetails;
 use App\Models\Blog;
 use App\Models\Brand;
@@ -64,9 +63,7 @@ class DatabaseSeeder extends Seeder
         foreach ($dataArray['banners'] as $data) {
             Banner::create($data);
         }
-        foreach ($dataArray['bills'] as $data) {
-            Bill::create($data);
-        }
+
         foreach ($dataArray['bill_details'] as $data) {
             BillDetails::create($data);
         }
