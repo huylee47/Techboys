@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Middleware\CheckRole;
+use App\Http\Middleware\CountVisitors;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -17,7 +18,9 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             'auth.admin'=> CheckRole::class,
             'track.online'=> \App\Http\Middleware\TrackUserOnline::class,
+            'track.visitors' => CountVisitors::class,
         ]);
+        $middleware->append(CountVisitors::class);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //

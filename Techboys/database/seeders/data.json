@@ -21,87 +21,7 @@
             "image": "banner1.jpg"
         }
     ],
-    "bills": [
-        {
-            "user_id": 1,
-            "full_name": "Nguyễn Văn A",
-            "phone": "0901234567",
-            "total": 25707000,
-            "address": "123 Đường ABC, TP.HCM",
-            "email": "nguyenvana@gmail.com",
-            "province_id": 1,
-            "district_id": 1,
-            "ward_id": 1,
-            "payment_method": 1,
-            "payment_status": 1,
-            "status_id": 1
-        },
-        {
-            "user_id": 2,
-            "full_name": "Lê Thị B",
-            "phone": "0907654321",
-            "total": 20291500,
-            "address": "456 Đường XYZ, TP.HN",
-            "email": "lethib@gmail.com",
-            "province_id": 1,
-            "district_id": 2,
-            "ward_id": 2,
-            "payment_method": 2,
-            "payment_status": 0,
-            "status_id": 2
-        },
-        {
-            "user_id": 3,
-            "full_name": "Trần Văn C",
-            "phone": "0912345678",
-            "total": 	50450000,
-            "address": "789 Đường LMN, TP.ĐN",
-            "email": "tranvanc@gmail.com",
-            "province_id": 1,
-            "district_id": 3,
-            "ward_id": 3,
-            "payment_method": 1,
-            "payment_status": 1,
-            "status_id": 3
-        }
-    ],
-    "bill_details": [
-        {
-            "bill_id": 1,
-            "product_id": 1,
-            "variant_id": 2,
-            "quantity": 2,
-            "price": 12590000
-        },
-        {
-            "bill_id": 1,
-            "product_id": 2,
-            "variant_id": 4,
-            "quantity": 1,
-            "price": 10900000
-        },
-        {
-            "bill_id": 2,
-            "product_id": 3,
-            "variant_id": 6,
-            "quantity": 1,
-            "price": 12590000
-        },
-        {
-            "bill_id": 2,
-            "product_id": 4,
-            "variant_id": 7,
-            "quantity": 1,
-            "price": 10090000
-        },
-        {
-            "bill_id": 3,
-            "product_id": 5,
-            "variant_id": 8,
-            "quantity": 5,
-            "price": 10090000
-        }
-    ],
+
     "blogs": [
         {
             "title": "10 mẹo sử dụng smartphone hiệu quả",
@@ -215,22 +135,22 @@
     ],
     "chats": [
         {
-            "customer_id": 1,
+            "customer_id": 6,
             "staff_id": 2,
             "status_id": 1,
             "created_at": "2025-01-19 10:00:00",
             "updated_at": "2025-01-19 10:00:00"
         },
         {
-            "customer_id": 3,
+            "customer_id": 7,
             "staff_id": 4,
             "status_id": 2,
             "created_at": "2025-01-19 11:30:00",
             "updated_at": "2025-01-19 11:30:00"
         },
         {
-            "customer_id": 2,
-            "staff_id": 5,
+            "customer_id": 8,
+            "staff_id": 1,
             "status_id": 3,
             "created_at": "2025-01-19 12:15:00",
             "updated_at": "2025-01-19 12:15:00"
@@ -243,7 +163,7 @@
             "updated_at": "2025-01-19 13:00:00"
         },
         {
-            "customer_id": 4,
+            "customer_id": 9,
             "staff_id": 2,
             "status_id": 2,
             "created_at": "2025-01-19 14:00:00",
@@ -355,12 +275,6 @@
         }
     ],
     "images": [
-        {
-            "image": "iphone-13.jpg",
-            "product_id": 1,
-            "created_at": "2025-02-18 12:00:00",
-            "updated_at": "2025-02-18 12:00:00"
-        },
         {
             "image": "iphone-13.jpg",
             "product_id": 1,
@@ -666,31 +580,73 @@
     "message": [
         {
             "chat_id": 1,
-            "sender_id": 1,
-            "message": "Hello! How are you?",
-            "created_at": "2025-01-19 12:00:00",
-            "updated_at": "2025-01-19 12:00:00"
+            "sender_id": 6,
+            "message": "Xin chào , tôi cần tìm điện thoại khoảng 10tr",
+            "created_at": "2023-03-13 12:00:00",
+            "updated_at": "2025-03-13 12:00:00"
         },
         {
             "chat_id": 1,
             "sender_id": 2,
-            "message": "I'm good, thanks! How about you?",
-            "created_at": "2025-01-19 12:05:00",
-            "updated_at": "2025-01-19 12:05:00"
+            "message": "Chào Anh , chúng tôi có rất nhiều điện thoại phù hợp",
+            "created_at": "2025-03-13 12:05:00",
+            "updated_at": "2025-03-13 12:05:00"
         },
         {
             "chat_id": 2,
+            "sender_id": 7,
+            "message": "Xin chào , tôi muốn thay đổi thông tin đặt hàng",
+            "created_at": "2025-03-16 13:00:00",
+            "updated_at": "2025-03-16 13:00:00"
+        },
+        {
+            "chat_id": 2,
+            "sender_id": 4,
+            "message": "Chắc chắn rồi, vui lòng cho tôi xin số điện thoại của quý khách",
+            "created_at": "2025-03-16 13:05:00",
+            "updated_at": "2025-03-16 13:05:00"
+        },
+        {
+            "chat_id": 3,
+            "sender_id": 8,
+            "message": "Xin chào , tôi muốn biết khi nào sản phẩm sẽ dược giao",
+            "created_at": "2025-03-19 13:00:00",
+            "updated_at": "2025-03-19 13:00:00"
+        },
+        {
+            "chat_id": 3,
             "sender_id": 3,
-            "message": "Hey, I need help with my order.",
-            "created_at": "2025-01-19 13:00:00",
-            "updated_at": "2025-01-19 13:00:00"
+            "message": "Thưa quý khách , sản phẩm sẽ được giao từ 3-5 ngày ",
+            "created_at": "2025-03-19 13:05:00",
+            "updated_at": "2025-03-19 13:05:00"
         },
         {
-            "chat_id": 2,
+            "chat_id": 4,
+            "sender_id": 5,
+            "message": "Xin chào sốp",
+            "created_at": "2025-03-21 13:00:00",
+            "updated_at": "2025-03-21 13:00:00"
+        },
+        {
+            "chat_id": 4,
             "sender_id": 1,
-            "message": "Sure, how can I assist you?",
-            "created_at": "2025-01-19 13:05:00",
-            "updated_at": "2025-01-19 13:05:00"
+            "message": "Hê lô quý khách",
+            "created_at": "2025-03-21 13:05:00",
+            "updated_at": "2025-03-21 13:05:00"
+        },
+        {
+            "chat_id": 5,
+            "sender_id": 9,
+            "message": "Chủ sốp có ny chưa =))))",
+            "created_at": "2025-03-21 13:00:00",
+            "updated_at": "2025-03-21 13:00:00"
+        },
+        {
+            "chat_id": 5,
+            "sender_id": 2,
+            "message": "Ế toàn tập em ạ",
+            "created_at": "2025-03-21 14:05:00",
+            "updated_at": "2025-03-21 14:05:00"
         }
     ],
     "attributes": [
@@ -785,6 +741,7 @@
             "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.5,
+            "weight": 300,
             "description": "Điện thoại thông minh của Apple."
         },
         {
@@ -798,6 +755,7 @@
             "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.7,
+            "weight": 300,
             "description": "Điện thoại thông minh của Samsung."
         },
         {
@@ -811,6 +769,7 @@
             "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.6,
+            "weight": 300,
             "description": "Điện thoại thông minh của Xiaomi."
         },
         {
@@ -824,6 +783,7 @@
             "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.3,
+            "weight": 300,
             "description": "Điện thoại thông minh của Apple."
         },
         {
@@ -837,6 +797,7 @@
             "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.2,
+            "weight": 300,
             "description": "Điện thoại thông minh của Oppo."
         },
         {
@@ -850,6 +811,7 @@
             "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.5,
+            "weight": 300,
             "description": "Điện thoại thông minh của Samsung."
         },
         {
@@ -863,6 +825,7 @@
             "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.4,
+            "weight": 300,
             "description": "Điện thoại thông minh của Xiaomi."
         },
         {
@@ -876,6 +839,7 @@
             "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.1,
+            "weight": 300,
             "description": "Điện thoại thông minh của Oppo."
         },
         {
@@ -889,6 +853,7 @@
             "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.3,
+            "weight": 300,
             "description": "Điện thoại thông minh của Realme."
         },
         {
@@ -902,6 +867,7 @@
             "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.5,
+            "weight": 300,
             "description": "Điện thoại thông minh của Apple."
         },
         {
@@ -915,6 +881,7 @@
             "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.6,
+            "weight": 300,
             "description": "Điện thoại thông minh gập màn hình của Samsung."
         },
         {
@@ -928,6 +895,7 @@
             "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.3,
+            "weight": 300,
             "description": "Điện thoại thông minh của Xiaomi."
         },
         {
@@ -941,6 +909,7 @@
             "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.1,
+            "weight": 300,
             "description": "Điện thoại thông minh của Oppo."
         },
         {
@@ -954,6 +923,7 @@
             "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.4,
+            "weight": 300,
             "description": "Điện thoại thông minh của Realme."
         },
         {
@@ -967,6 +937,7 @@
             "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.0,
+            "weight": 300,
             "description": "Điện thoại thông minh của Vivo."
         },
         {
@@ -980,6 +951,7 @@
             "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.2,
+            "weight": 300,
             "description": "Điện thoại thông minh của Oppo."
         },
         {
@@ -993,6 +965,7 @@
             "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.3,
+            "weight": 300,
             "description": "Điện thoại thông minh của Realme."
         },
         {
@@ -1006,6 +979,7 @@
             "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.1,
+            "weight": 300,
             "description": "Điện thoại thông minh của Vivo."
         },
         {
@@ -1019,6 +993,7 @@
             "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.0,
+            "weight": 300,
             "description": "Điện thoại thông minh của Apple."
         },
         {
@@ -1032,6 +1007,7 @@
             "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.5,
+            "weight": 300,
             "description": "Điện thoại thông minh tầm trung của Samsung."
         },
         {
@@ -1045,6 +1021,7 @@
             "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.2,
+            "weight": 300,
             "description": "Điện thoại thông minh của Apple với thiết kế sang trọng."
         },
         {
@@ -1058,6 +1035,7 @@
             "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.4,
+            "weight": 300,
             "description": "Điện thoại thông minh với màn hình AMOLED của Xiaomi."
         },
         {
@@ -1071,6 +1049,7 @@
             "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.5,
+            "weight": 300,
             "description": "Điện thoại thông minh của Xiaomi."
         },
         {
@@ -1084,6 +1063,7 @@
             "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.2,
+            "weight": 300,
             "description": "Điện thoại Oppo hỗ trợ 5G với thiết kế đẹp."
         },
         {
@@ -1097,6 +1077,7 @@
             "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.6,
+            "weight": 300,
             "description": "Điện thoại chơi game với hỗ trợ 5G của Realme."
         },
         {
@@ -1110,6 +1091,7 @@
             "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.3,
+            "weight": 300,
             "description": "Điện thoại Vivo hỗ trợ 5G và camera selfie tốt."
         },
         {
@@ -1123,6 +1105,7 @@
             "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.5,
+            "weight": 300,
             "description": "Điện thoại cao cấp của Apple với màn hình OLED."
         },
         {
@@ -1136,6 +1119,7 @@
             "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.1,
+            "weight": 300,
             "description": "Điện thoại giá rẻ với màn hình lớn của Samsung."
         },
         {
@@ -1149,6 +1133,7 @@
             "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.5,
+            "weight": 300,
             "description": "Điện thoại tầm trung của Xiaomi với camera 64MP."
         },
         {
@@ -1162,6 +1147,7 @@
             "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.6,
+            "weight": 300,
             "description": "Điện thoại nhỏ gọn, thiết kế hiện đại của Apple 2077."
         },
         {
@@ -1175,6 +1161,7 @@
             "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.3,
+            "weight": 300,
             "description": "Điện thoại giá rẻ với màn hình 6.5 inch của Oppo."
         },
         {
@@ -1188,6 +1175,7 @@
             "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.5,
+            "weight": 300,
             "description": "Điện thoại tầm trung hỗ trợ 5G của Samsung."
         },
         {
@@ -1201,6 +1189,7 @@
             "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.4,
+            "weight": 300,
             "description": "Điện thoại nhẹ và mỏng của Xiaomi với 5G."
         },
         {
@@ -1214,6 +1203,7 @@
             "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.2,
+            "weight": 300,
             "description": "Điện thoại Oppo hỗ trợ 5G với thiết kế đẹp."
         },
         {
@@ -1227,6 +1217,7 @@
             "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.6,
+            "weight": 300,
             "description": "Điện thoại chơi game với hỗ trợ 5G của Realme."
         },
         {
@@ -1240,6 +1231,7 @@
             "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.3,
+            "weight": 300,
             "description": "Điện thoại Vivo hỗ trợ 5G và camera selfie tốt."
         },
         {
@@ -1253,6 +1245,7 @@
             "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.5,
+            "weight": 300,
             "description": "Điện thoại cao cấp của Apple với màn hình OLED."
         },
         {
@@ -1266,6 +1259,7 @@
             "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.1,
+            "weight": 300,
             "description": "Điện thoại giá rẻ với màn hình lớn của Samsung."
         },
         {
@@ -1279,6 +1273,7 @@
             "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.5,
+            "weight": 300,
             "description": "Điện thoại tầm trung của Xiaomi với camera 64MP."
         },
         {
@@ -1292,6 +1287,7 @@
             "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.4,
+            "weight": 300,
             "description": "Điện thoại nhỏ gọn, thiết kế hiện đại của Apple."
         },
         {
@@ -1305,6 +1301,7 @@
             "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.3,
+            "weight": 300,
             "description": "Điện thoại giá rẻ với màn hình 6.5 inch của Oppo."
         },
         {
@@ -1318,6 +1315,7 @@
             "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.2,
+            "weight": 300,
             "description": "Điện thoại hiệu năng mạnh mẽ của Realme với màn hình 120Hz."
         },
         {
@@ -1331,6 +1329,7 @@
             "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.4,
+            "weight": 300,
             "description": "Điện thoại thiết kế đẹp, hiệu suất ổn định của Vivo."
         },
         {
@@ -1344,6 +1343,7 @@
             "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.7,
+            "weight": 300,
             "description": "Điện thoại Apple với camera kép, hiệu suất mạnh mẽ."
         },
         {
@@ -1357,6 +1357,7 @@
             "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.6,
+            "weight": 300,
             "description": "Điện thoại flagship giá phải chăng của Samsung."
         },
         {
@@ -1370,6 +1371,7 @@
             "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.5,
+            "weight": 300,
             "description": "Điện thoại flagship với Snapdragon 870 của Xiaomi."
         },
         {
@@ -1383,6 +1385,7 @@
             "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.2,
+            "weight": 300,
             "description": "Điện thoại tầm trung của Oppo với màn hình AMOLED."
         },
         {
@@ -1396,6 +1399,7 @@
             "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.8,
+            "weight": 300,
             "description": "Điện thoại 5G flagship của Realme với hiệu năng mạnh mẽ."
         },
         {
@@ -1409,6 +1413,7 @@
             "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.3,
+            "weight": 300,
             "description": "Điện thoại Vivo với camera selfie 44MP."
         },
         {
@@ -1422,6 +1427,7 @@
             "base_stock":0,
             "is_featured": 1,
             "rate_average": 4.4,
+            "weight": 300,
             "description": "Điện thoại của Apple với hiệu năng tuyệt vời và camera tốt."
         }
     ],
@@ -1811,43 +1817,6 @@
             "updated_at": "2025-01-19 14:00:00"
         }
     ],
-    "role": [
-        {
-            "name": "Admin",
-            "created_at": "2025-01-19 12:00:00",
-            "updated_at": "2025-01-19 12:00:00"
-        },
-        {
-            "name": "Manager",
-            "created_at": "2025-01-19 12:00:00",
-            "updated_at": "2025-01-19 12:00:00"
-        },
-        {
-            "name": "User",
-            "created_at": "2025-01-19 12:00:00",
-            "updated_at": "2025-01-19 12:00:00"
-        }
-    ],
-    "status": [
-        {
-            "name": "Đang chờ xử lý"
-        },
-        {
-            "name": "Đang giao hàng"
-        },
-        {
-            "name": "Đã giao"
-        },
-        {
-            "name": "Đã hủy"
-        },
-        {
-            "name": "Hoàn tiền"
-        },
-        {
-            "name": "Đang hoàn tiền"
-        }
-    ],
     "storage": [
         {
             "file": "anhCmt1.jpg"
@@ -1871,8 +1840,9 @@
             "email": "admin@gmail.com",
             "email_verified_at": "2025-01-16T12:00:00",
             "username": "admin",
-            "password": "123456",
-            "phone": "12345678",
+
+            "password": "password123",
+            "phone": "0901234567",
             "wallet": 10000,
             "address": "123 Đường ABC, TP.Hải Phòng",
             "gender": true,
@@ -1888,7 +1858,7 @@
             "password": "password123",
             "phone": "0362145961",
             "wallet": 100.5,
-            "address": "123 Đường ABC, TP.Hải Phòng",
+            "address": "87 Tô Hiệu , Lê Chân, TP.Hải Phòng",
             "gender": true,
             "dob": "1990-05-10",
             "status": 1,
@@ -1902,7 +1872,7 @@
             "password": "password123",
             "phone": "2345678",
             "wallet": 100.5,
-            "address": "123 Đường ABC, TP.Hải Phòng",
+            "address": "815 Ngô Gia Tự , Hải An, TP.Hải Phòng",
             "gender": true,
             "dob": "1990-05-10",
             "status": 1,
@@ -1916,7 +1886,7 @@
             "password": "password123",
             "phone": "3456789",
             "wallet": 100.5,
-            "address": "123 Đường ABC, TP.Hải Phòng",
+            "address": "11 Sở Dầu , Hồng Bàng , Hải Phòng",
             "gender": true,
             "dob": "1990-05-10",
             "status": 1,
@@ -1930,8 +1900,64 @@
             "password": "password123",
             "phone": "5678910",
             "wallet": 100.5,
-            "address": "123 Đường ABC, TP.Hải Phòng",
+            "address": "Thuỷ Nguyêm, Hải Phòng",
             "gender": true,
+            "dob": "1990-05-10",
+            "status": 1,
+            "role_id": 2
+        },
+        {
+            "name": "Nguyễn Duy Hùng",
+            "email": "hung@gmail.com",
+            "email_verified_at": "2025-01-16T12:00:00",
+            "username": "nguyenvana",
+            "password": "password123",
+            "phone": "0123456789",
+            "wallet": 100.5,
+            "address": "23 Ngô Gia Tự ,Hải An, TP.Hải Phòng",
+            "gender": true,
+            "dob": "1990-05-10",
+            "status": 1,
+            "role_id": 2
+        },
+        {
+            "name": "Phạm Quang Núi",
+            "email": "nui@gmail.com",
+            "email_verified_at": "2025-01-16T12:00:00",
+            "username": "phamquangnui",
+            "password": "password123",
+            "phone": "0123456789",
+            "wallet": 100.5,
+            "address": "2 Trần Phú ,Ngô Quyền TP.Hải Phòng",
+            "gender": true,
+            "dob": "1990-05-10",
+            "status": 1,
+            "role_id": 2
+        },
+        {
+            "name": "Trần Ngọc Trang",
+            "email": "trang@gmail.com",
+            "email_verified_at": "2025-01-16T12:00:00",
+            "username": "ngoctrang",
+            "password": "password123",
+            "phone": "0123456789",
+            "wallet": 100.5,
+            "address": "357 Đông Khê ,Ngô Quyền TP.Hải Phòng",
+            "gender": false,
+            "dob": "1990-05-10",
+            "status": 1,
+            "role_id": 2
+        },
+        {
+            "name": "Trần Thị Hương",
+            "email": "huong@gmail.com",
+            "email_verified_at": "2025-01-16T12:00:00",
+            "username": "tranthihuong",
+            "password": "password123",
+            "phone": "0123456789",
+            "wallet": 100.5,
+            "address": "Lũng Đông , Hải An, TP.Hải Phòng",
+            "gender": false,
             "dob": "1990-05-10",
             "status": 1,
             "role_id": 2

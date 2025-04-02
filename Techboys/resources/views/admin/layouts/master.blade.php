@@ -60,10 +60,22 @@
                                 <span>Danh mục</span>
                             </a>
                         </li>
-                        <li class="sidebar-item {{ request()->routeIs('admin.product*') ? 'active' : '' }}">
+                        <li class="sidebar-item {{ request()->routeIs('admin.brand*') ? 'active' : '' }}">
+                            <a href="{{route('admin.brand.index')}}" class='sidebar-link'>
+                                <i class="bi bi-house-fill"></i>
+                                <span>Thương hiệu</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item {{ request()->routeIs('admin.product*') || request()->routeIs('admin.stock*') ? 'active' : '' }}">
                             <a href="{{route('admin.product.index')}}" class='sidebar-link'>
                                 <i class="bi bi-shop"></i>
                                 <span>Sản phẩm</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item {{ request()->routeIs('admin.attributes*') ? 'active' : '' }} ">
+                            <a href="{{route('admin.attributes.index')}}" class='sidebar-link'>
+                                <i class="bi-palette-fill"></i>
+                                <span>Thuộc tính</span>
                             </a>
                         </li>
                         <li class="sidebar-item {{ request()->routeIs('admin.bill*') ? 'active' : '' }}">
@@ -93,8 +105,8 @@
                                 <span>Tài khoản người dùng</span>
                             </a>
                         </li>
-                        <li class="sidebar-item {{-- {{ request()->routeIs('admin.property-request.index') ? 'active' : '' }} --}}">
-                            <a href="" class='sidebar-link'>
+                        <li class="sidebar-item {{ request()->routeIs('admin.promotion*') ? 'active' : '' }}">
+                            <a href="{{ route('admin.promotion.index') }}" class='sidebar-link'>
                                 <i class="bi bi-calendar-event"></i>
                                 <span>Sự kiện giảm giá</span>
                             </a>
@@ -118,24 +130,7 @@
                                 <span>Banner</span>
                             </a> <!-- Thêm thẻ đóng </a> vào đây -->
                         </li>
-                        <li class="sidebar-item ">
-                            <a href="{{route('admin.stock.index')}}" class='sidebar-link'>
-                                <i class="bi bi-file-earmark-spreadsheet-fill"></i>
-                                <span>Sản phẩm tồn kho</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item ">
-                            <a href="{{route('admin.stock.index')}}" class='sidebar-link'>
-                                <i class="bi bi-file-earmark-spreadsheet-fill"></i>
-                                <span>Sản phẩm tồn kho</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item ">
-                            <a href="{{route('admin.bill.create')}}" class='sidebar-link'>
-                                <i class="bi bi-file-earmark-spreadsheet-fill"></i>
-                                <span>Đặt hàng</span>
-                            </a>
-                        </li>
+
                     </ul>
                 </div>
                 <button class="sidebar-toggler btn x"><i data-feather="x"></i></button>

@@ -120,10 +120,14 @@
                                    $billDetail->created_at <= $promotion->end_date;
                         });
                     @endphp
-                    <td>{{ $isPromotionActive ? 'Có' : 'Không' }}</td>
-                    <td>{{ number_format(($isPromotionActive ? $billDetail->discounted_price : $billDetail->price) * $billDetail->quantity, 0, ',', '.') }} đ</td>
+                    <td class="total">{{ $isPromotionActive ? 'Có' : 'Không' }}</td>
+                    <td class="total">{{ number_format(($isPromotionActive ? $billDetail->discounted_price : $billDetail->price) * $billDetail->quantity, 0, ',', '.') }} đ</td>
                 </tr>
                 @endforeach
+                <tr>
+                    <td colspan="4" class="total">Phí vận chuyển</td>
+                    <td class="total">{{ number_format($bill->fee_shipping, 0, ',', '.') }} đ</td>
+                </tr>
                 <tr>
                     <td colspan="4" class="total">Tổng cộng</td>
                     <td class="total">{{ number_format($bill->total, 0, ',', '.') }} đ</td>

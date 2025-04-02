@@ -237,11 +237,19 @@
                                                                         class="woocommerce-LoopProduct-link">
                                                                         <img src="{{ url('') }}/admin/assets/images/product/{{ $np->img }}"
                                                                             width="100%" class="fixed-image" alt="">
-                                                                        <span class="price">
-                                                                            <ins>
-                                                                                <span class="amount">Chỉ từ  </span>
-                                                                            </ins>
-                                                                            <span class="amount">{{ number_format($np->variant->min('discounted_price'), 0, ',', '.') . ' đ' }}</span>
+
+                                                                            <span class="amount">
+                                                                                @if ($np->variant->count() > 0)
+                                                                                <span class="price">
+                                                                                    <ins>
+                                                                                        <span class="amount">Chỉ từ  </span>
+                                                                                    </ins>
+                                                                                    {{ number_format($np->variant->min('discounted_price'), 0, ',', '.') . ' đ' }}
+                                                                                @else
+                                                                                    {{ number_format($np->base_price, 0, ',', '.') . ' đ' }}
+                                                                                @endif
+                                                                            </span>
+                                                                            
                                                                         </span>
                                                                         <!-- /.price -->
                                                                         <h2 class="woocommerce-loop-product__title">

@@ -1,9 +1,11 @@
 <?php
 
+use App\Http\Controllers\AttributesController;
 use App\Http\Controllers\BannerController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\BillController;
 use App\Http\Controllers\BillDetailsController;
+use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\ChatsController;
 use App\Http\Controllers\CheckoutController;
@@ -12,6 +14,7 @@ use App\Http\Controllers\VoucherController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductCategoryController;
+use App\Http\Controllers\PromotionController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ProductVariantController;
@@ -28,13 +31,15 @@ Route::middleware(['track.online'])->group(function () {
     })->name('home');
 });
 Route::get('/online-users', function () {
-    // Đếm số lượng session còn trong cache
+
     $onlineUsers = collect(Cache::getStore()->getPrefix())
         ->filter(fn($key) => str_contains($key, 'user-online-'))
         ->count();
 
     return response()->json(['online' => $onlineUsers]);
 });
+Route::get('/admin/get-latest-comments', [DashboardController::class, 'getLatestComments'])->name('admin.getLatestComments');
+
 
 // Blog
 Route::get('/blog', [BlogController::class, 'indexClient'])->name('blog');
@@ -42,6 +47,13 @@ Route::get('blog/{slug}', [BlogController::class, 'DetailBlog'])->name('DetailBl
 
 //order
 Route::get('/client/orders', [BillController::class, 'indexClient'])->name('client.orders');
+Route::get('/client/orders/search', [BillController::class, 'searchOrder'])->name('client.orders.search');
+Route::post('/client/orders/cancel', [BillController::class, 'CancelOrder'])->name('client.orders.cancel');
+Route::post('/client/orders/cancel/{id}', [BillController::class, 'submitCancelOrder'])->name('client.orders.cancel.submit');
+Route::post('/client/orders/confirm/{id}', [BillController::class, 'confirmClient'])->name('client.orders.confirm');
+Route::get('/client/orders/detail', [BillController::class, 'detailClient'])->name('client.orders.detail');
+
+
 
 //comment
 Route::post('/comment/store', [CommentController::class, 'store'])->name('client.comment.store');
@@ -53,9 +65,8 @@ Route::get('/about', function () {
     return view('client.about.about');
 })->name('client.about.about');
 
-Route::get('test', function () {
-    return view('admin.product.imageIndex');
-});
+
+
 
 Route::get('/login/admin', function () {
     return view('admin.log.login');
@@ -67,8 +78,8 @@ Route::get('login', function () {
 })->name('login.client');
 
 Route::post('/login/Client', [UserController::class, 'loginClient'])->name('loginClient.auth');
-//banner client
-// Route::get('/', [BannerController::class, 'indexClient']);
+
+
 //contact client
 Route::get('/contact', function () {
     return view('client.contact.contact');
@@ -109,6 +120,8 @@ Route::post('/login/auth', [UserController::class, 'login'])->name('login.auth')
 
 Route::middleware(['auth', 'auth.admin'])->group(function () {
     Route::prefix('admin')->group(function () {
+Route::post('/logout', [UserController::class, 'logout'])->name('admin.logout');
+
         Route::get('/home', [DashboardController::class, 'index'])->name('admin.index');
         Route::get('/blog', function () {
             return view('admin.tag.edit');
@@ -138,6 +151,11 @@ Route::middleware(['auth', 'auth.admin'])->group(function () {
             Route::post('/image/{productId}/store', [ProductController::class, 'imageStore'])->name('admin.product.imageStore');
             Route::get('/image/{productId}/destroy/{imageId}', [ProductController::class, 'imageDestroy'])->name('admin.product.imageDestroy');
             Route::get('product/search', [ProductController::class, 'adminSearch'])->name('admin.product.search');
+            Route::prefix('stock-variant')->group(function (){
+                Route::get('{id}',[ProductController::class, 'stock'])->name('admin.stock.index');
+                Route::post('update/{ProductId}', [ProductController::class,'updateStock'])->name('admin.stock.update');
+            });
+  
         });
 
         Route::prefix('/category')->group(function () {
@@ -147,6 +165,14 @@ Route::middleware(['auth', 'auth.admin'])->group(function () {
             Route::get('/edit', [ProductCategoryController::class, 'edit'])->name('admin.category.edit');
             Route::post('/update/{id}', [ProductCategoryController::class, 'update'])->name('admin.category.update');
             Route::get('/destroy/{id}', [ProductCategoryController::class, 'destroy'])->name('admin.category.destroy');
+        });
+        Route::prefix('/brand')->group(function () {
+            Route::get('/', [BrandController::class, 'index'])->name('admin.brand.index');
+            Route::get('/create', [BrandController::class, 'create'])->name('admin.brand.create');
+            Route::post('/store', [BrandController::class,'store'])->name('admin.brand.store');
+            Route::get('/edit/{id}', [BrandController::class, 'edit'])->name('admin.brand.edit');
+            Route::post('/update/{id}', [BrandController::class, 'update'])->name('admin.brand.update');
+            Route::get('/destroy/{id}', [BrandController::class, 'destroy'])->name('admin.brand.destroy');
         });
 
         Route::prefix('/user')->group(function () {
@@ -204,11 +230,25 @@ Route::middleware(['auth', 'auth.admin'])->group(function () {
             Route::get('/{chatId}', [ChatsController::class, 'loadMessagesAdmin']);
             Route::post('/{chatId}/send', [ChatsController::class, 'sendMessageAdmin'])->name('admin.send.message');
             // Route::post('/send', [ChatsController::class, 'sendMessageAdmin']);
+        });
+        Route::prefix('attributes')->group( function(){
+            Route::get('/', [AttributesController::class, 'index'])->name('admin.attributes.index');
+            Route::get('/create', [AttributesController::class, 'create'])->name('admin.attributes.create');
+            Route::post('/data', [AttributesController::class, 'store'])->name('admin.attributes.store');
+            Route::get('/edit/{id}', [AttributesController::class, 'edit'])->name('admin.attributes.edit');
+        Route::post('/update/{id}', [AttributesController::class, 'update'])->name('admin.attributes.update');
+        Route::get('/delete/{id}', [AttributesController::class, 'destroy'])->name('admin.attributes.delete');
+        });
+        Route::prefix('/promotion')->group(function () {
+            Route::get('/', [PromotionController::class, 'index'])->name('admin.promotion.index');
+            Route::get('/create', [PromotionController::class, 'create'])->name('admin.promotion.create');
+            Route::post('/store', [PromotionController::class, 'store'])->name('admin.promotion.store');
+            Route::get('/edit/{id}', [PromotionController::class, 'edit'])->name('admin.promotion.edit');
+            Route::post('/update/{id}', [PromotionController::class, 'update'])->name('admin.promotion.update');
+            Route::delete('/destroy/{id}', [PromotionController::class, 'destroy'])->name('admin.promotion.destroy');
 
         });
-        Route::prefix('stock')->group(function () {
-            Route::get('/', [ProductVariantController::class, 'index'])->name('admin.stock.index');
-        });
+        
     });
 });
 Route::prefix('message')->group(function () {
@@ -251,10 +291,6 @@ Route::get('/payment/vnpay/callback', [CheckoutController::class, 'vnpayCallback
 Route::get('/payment/cod/success', [CheckoutController::class, 'codSuccess'])->name('client.payment.cod');
 
 
-//comment
-Route::post('/comment/store', [CommentController::class, 'store'])->name('client.comment.store');
-Route::post('/comment/reply', [CommentController::class, 'reply'])->name('client.comment.reply');
-
 
 
 Route::prefix('products')->group(function () {
@@ -263,5 +299,3 @@ Route::prefix('products')->group(function () {
     Route::get('/filter', [ProductController::class, 'filter'])->name('client.product.filter');
     Route::get('/{slug}', [ProductController::class, 'productDetails'])->name('client.product.show');
 });
-
-Route::get('/client/orders', [BillController::class, 'indexClient'])->name('client.orders');

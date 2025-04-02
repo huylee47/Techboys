@@ -2,6 +2,11 @@
 
 @section('main')
     <style>
+        .choice.blocked {
+            opacity: 0.3;
+            pointer-events: none;
+        }
+
         .commentlist .comment .star-rating {
             color: #ffcc00;
             margin-top: 5px;
@@ -358,7 +363,6 @@
                                                                             data-attribute="{{ $attributeName }}">
                                                                             {{ $value['value'] }}
                                                                         </div>
-
                                                                     @endforeach
                                                                 </div>
                                                             </div>
@@ -401,10 +405,11 @@
                                                         <input type="hidden" name="quantity" value="1">
                                                         <input type="hidden" name="product_id"
                                                             value="{{ $product->id }}">
-                                                            @if(!empty($variants) && isset($defaultVariant['id']))
-                                                            <input type="hidden" name="variant_id" id="variant-id" value="{{ $defaultVariant['id'] }}">
+                                                        @if (!empty($variants) && isset($defaultVariant['id']))
+                                                            <input type="hidden" name="variant_id" id="variant-id"
+                                                                value="{{ $defaultVariant['id'] }}">
                                                         @endif
-                                                        
+
                                                         <button class="single_add_to_cart_button button alt"
                                                             type="submit">Thêm vào giỏ hàng</button>
 
@@ -798,147 +803,201 @@
 
     {{-- Huy --}}
     <script>
-document.addEventListener("DOMContentLoaded", function() {
-    const variants = @json($formattedVariants);
-    let selectedAttributes = {};
-    let selectedVariantId = @json($defaultVariant['id'] ?? null);
+        document.addEventListener("DOMContentLoaded", function() {
+            const variants = @json($formattedVariants);
+            let selectedAttributes = {};
+            let selectedVariantId = @json($defaultVariant['id'] ?? null);
+            let productNoVariantStock = @json($product['base_stock'] ?? null);
+            console.log("Mặc định biến thể:", selectedVariantId);
+            console.log("Mặc định sp gốc:", productNoVariantStock);
 
-    console.log("Mặc định :", selectedVariantId);
+            const productPriceElement = document.getElementById("price-display");
+            const stockQuantityElement = document.getElementById("stock-display");
+            const variantIdInput = document.getElementById("variant-id");
+            const addToCartBtn = document.querySelector(".single_add_to_cart_button");
+            const outOfStockMessage = document.getElementById("outOfStockMessage");
 
-    const productPriceElement = document.getElementById("price-display");
-    const stockQuantityElement = document.getElementById("stock-display");
-    const variantIdInput = document.getElementById("variant-id");
-    const addToCartBtn = document.querySelector(".single_add_to_cart_button");
-    const outOfStockMessage = document.getElementById("outOfStockMessage");
 
-    function updateVariantInfo() {
-        console.log("Kiểm tra biến thể...");
-        console.log("Thuộc tính đã chọn:", selectedAttributes);
+            function updateVariantInfo() {
+                console.log("Kiểm tra biến thể...");
+                // console.log("Thuộc tính đã chọn:", selectedAttributes);
 
-        let selectedVariant = variants.find(v =>
-            Object.keys(selectedAttributes).every(attr => v.attributes[attr]?.value === selectedAttributes[attr])
-        );
+                let selectedVariant = variants.find(v =>
+                    Object.keys(selectedAttributes).every(attr => v.attributes[attr]?.value ===
+                        selectedAttributes[attr])
+                );
 
-        if (selectedVariant) {
-            console.log("Biến thể tìm thấy:", selectedVariant);
-            productPriceElement.innerText = new Intl.NumberFormat('vi-VN').format(selectedVariant.discounted_price) + " đ";
-            stockQuantityElement.innerText = selectedVariant.stock;
+                if (selectedVariant) {
+                    console.log("Biến thể tìm thấy:", selectedVariant);
+                    console.log("Thuộc tính đã chọn:", selectedAttributes);
 
-            selectedVariantId = selectedVariant.id;
-            variantIdInput.value = selectedVariantId;
 
-            // Kiểm tra tồn kho
-            if (selectedVariant.stock > 0) {
-                addToCartBtn.disabled = false;
-                outOfStockMessage.style.display = "none";
-            } else {
-                addToCartBtn.disabled = true;
-                outOfStockMessage.style.display = "block";
-            }
-        } else {
-            console.warn("Không có biến thể phù hợp!");
-            productPriceElement.innerText = "Không có biến thể này!";
-            stockQuantityElement.innerText = "0";
-            selectedVariantId = null;
-            variantIdInput.value = "";
-            addToCartBtn.disabled = true;
-            outOfStockMessage.style.display = "block";
-        }
-    }
-
-    function updateAvailableChoices() {
-        console.log("Cập nhật danh sách lựa chọn...");
-        let firstGroup = document.querySelector(".choice-group:first-child");
-        let firstAttribute = firstGroup.querySelector(".label").innerText.trim();
-        let selectedFirstValue = selectedAttributes[firstAttribute];
-
-        if (!selectedFirstValue) return;
-
-        let filteredVariants = variants.filter(v =>
-            v.attributes[firstAttribute]?.value === selectedFirstValue
-        );
-
-        console.log("Biến thể hợp lệ sau khi lọc:", filteredVariants);
-
-        let availableValues = {};
-        filteredVariants.forEach(variant => {
-            Object.keys(variant.attributes).forEach(attr => {
-                if (attr !== firstAttribute) {
-                    if (!availableValues[attr]) {
-                        availableValues[attr] = new Set();
+                    if (productPriceElement) {
+                        productPriceElement.innerText = new Intl.NumberFormat('vi-VN').format(selectedVariant
+                            .discounted_price) + " đ";
                     }
-                    availableValues[attr].add(variant.attributes[attr].value);
+                    if (stockQuantityElement) {
+                        stockQuantityElement.innerText = selectedVariant.stock;
+                    }
+
+                    selectedVariantId = selectedVariant.id;
+                    if (variantIdInput) {
+                        variantIdInput.value = selectedVariantId;
+                    }
+
+                    // Kiểm tra tồn kho
+                    if (selectedVariant.stock > 0) {
+                        if (addToCartBtn) addToCartBtn.disabled = false;
+                        if (outOfStockMessage) outOfStockMessage.style.display = "none";
+                    } else {
+                        if (addToCartBtn) addToCartBtn.disabled = true;
+                        if (outOfStockMessage) outOfStockMessage.style.display = "block";
+                    }
+                } else if (productNoVariantStock != null) {
+                    if (addToCartBtn) addToCartBtn.disabled = false;
+                    if (outOfStockMessage) outOfStockMessage.style.display = "none";
+                } else {
+                    console.warn("Không có biến thể phù hợp!");
+
+                    // if (productPriceElement) productPriceElement.innerText = "Không có biến thể này!";
+                    // if (stockQuantityElement) stockQuantityElement.innerText = "0";
+
+                    selectedVariantId = null;
+                    if (variantIdInput) variantIdInput.value = "";
+
+                    if (addToCartBtn) addToCartBtn.disabled = true;
+                    if (outOfStockMessage) outOfStockMessage.style.display = "block";
                 }
-            });
-        });
-
-        document.querySelectorAll(".choice").forEach(choice => {
-            let attribute = choice.getAttribute("data-attribute");
-            let value = choice.getAttribute("data-value");
-
-            if (attribute === firstAttribute) {
-                choice.style.display = "inline-block";
-                return;
             }
 
-            if (availableValues[attribute] && availableValues[attribute].has(value)) {
-                choice.style.display = "inline-block";
-            } else {
-                choice.style.display = "none";
-            }
-        });
 
-        document.querySelectorAll(".choice-group").forEach((group, index) => {
-            if (index > 0) {
-                let choices = group.querySelectorAll(".choice");
-                let firstVisibleChoice = Array.from(choices).find(choice => choice.style.display !== "none");
-                if (firstVisibleChoice) {
+            function updateAvailableChoices() {
+                console.log("Cập nhật danh sách lựa chọn...");
+
+                let firstGroup = document.querySelector(".choice-group:first-child");
+                if (!firstGroup) return;
+
+                let firstAttributeElement = firstGroup.querySelector(".label");
+                if (!firstAttributeElement) return;
+
+                let firstAttribute = firstAttributeElement.innerText.trim();
+
+                let filteredVariants = variants.filter(v =>
+                    Object.keys(selectedAttributes).every(attr =>
+                        selectedAttributes[attr] === undefined || v.attributes[attr]?.value ===
+                        selectedAttributes[attr]
+                    )
+                );
+
+                console.log("Biến thể hợp lệ sau khi lọc:", filteredVariants);
+
+                let availableValues = {};
+
+                filteredVariants.forEach(variant => {
+                    Object.keys(variant.attributes).forEach(attr => {
+                        if (!availableValues[attr]) {
+                            availableValues[attr] = new Set();
+                        }
+                        availableValues[attr].add(variant.attributes[attr].value);
+                    });
+                });
+
+                document.querySelectorAll(".choice").forEach(choice => {
+                    let attribute = choice.getAttribute("data-attribute");
+                    let value = choice.getAttribute("data-value");
+
+                    if (attribute === firstAttribute) {
+                        choice.style.display = "inline-block";
+                        choice.classList.remove("disabled");
+                        return;
+                    }
+
+                    if (availableValues[attribute] && availableValues[attribute].has(value)) {
+                        choice.style.display = "inline-block";
+                        choice.classList.remove("disabled");
+                        choice.classList.remove("blocked");
+                    } else {
+                        choice.style.display = "inline-block";
+                        choice.classList.add("disabled");
+                        choice.classList.add("blocked");
+                    }
+
+                    let isValidForSelectedColor = variants.some(v =>
+                        v.attributes[firstAttribute]?.value === selectedAttributes[firstAttribute] &&
+                        v.attributes[attribute]?.value === value
+                    );
+
+                    if (isValidForSelectedColor) {
+                        choice.classList.remove("disabled");
+                        choice.classList.remove("blocked");
+                    }
+                });
+
+                Object.keys(selectedAttributes).forEach(attr => {
+                    let currentChoice = document.querySelector(
+                    `.choice[data-attribute="${attr}"].selected`);
+
+                    if (currentChoice && currentChoice.classList.contains("blocked")) {
+                        let firstValidChoice = Array.from(document.querySelectorAll(
+                                `.choice[data-attribute="${attr}"]`))
+                            .find(choice => !choice.classList.contains("blocked"));
+
+                        if (firstValidChoice) {
+                            selectedAttributes[attr] = firstValidChoice.getAttribute("data-value");
+
+                            let group = firstValidChoice.closest(".choice-group");
+                            if (group) {
+                                group.querySelectorAll(".choice").forEach(c => c.classList.remove(
+                                    "selected"));
+                                firstValidChoice.classList.add("selected");
+                            }
+                        } else {
+                            delete selectedAttributes[attr];
+                        }
+                    }
+                });
+
+                updateVariantInfo();
+            }
+
+
+
+
+
+
+            function initializeDefaultSelection() {
+                let firstGroup = document.querySelector(".choice-group:first-child");
+                if (firstGroup) {
+                    let firstChoice = firstGroup.querySelector(".choice");
+                    if (firstChoice) {
+                        let attribute = firstGroup.querySelector(".label").innerText.trim();
+                        selectedAttributes[attribute] = firstChoice.getAttribute("data-value");
+
+                        firstGroup.querySelectorAll(".choice").forEach(c => c.classList.remove("selected"));
+                        firstChoice.classList.add("selected");
+                    }
+                }
+
+                updateAvailableChoices();
+            }
+
+            document.querySelectorAll(".choice").forEach(choice => {
+                choice.addEventListener("click", function() {
+                    let group = this.closest(".choice-group");
                     let attribute = group.querySelector(".label").innerText.trim();
-                    selectedAttributes[attribute] = firstVisibleChoice.getAttribute("data-value");
 
-                    choices.forEach(c => c.classList.remove("selected"));
-                    firstVisibleChoice.classList.add("selected");
-                }
-            }
+                    group.querySelectorAll(".choice").forEach(c => c.classList.remove("selected"));
+                    this.classList.add("selected");
+
+                    selectedAttributes[attribute] = this.getAttribute("data-value");
+
+                    updateAvailableChoices();
+                });
+            });
+
+            initializeDefaultSelection();
+            updateVariantInfo();
         });
-
-        updateVariantInfo();
-    }
-
-    function initializeDefaultSelection() {
-        let firstGroup = document.querySelector(".choice-group:first-child");
-        if (firstGroup) {
-            let firstChoice = firstGroup.querySelector(".choice");
-            if (firstChoice) {
-                let attribute = firstGroup.querySelector(".label").innerText.trim();
-                selectedAttributes[attribute] = firstChoice.getAttribute("data-value");
-
-                firstGroup.querySelectorAll(".choice").forEach(c => c.classList.remove("selected"));
-                firstChoice.classList.add("selected");
-            }
-        }
-
-        updateAvailableChoices();
-    }
-
-    document.querySelectorAll(".choice").forEach(choice => {
-        choice.addEventListener("click", function() {
-            let group = this.closest(".choice-group");
-            let attribute = group.querySelector(".label").innerText.trim();
-
-            group.querySelectorAll(".choice").forEach(c => c.classList.remove("selected"));
-            this.classList.add("selected");
-
-            selectedAttributes[attribute] = this.getAttribute("data-value");
-
-            updateAvailableChoices();
-        });
-    });
-
-    initializeDefaultSelection();
-    updateVariantInfo();
-});
-
     </script>
 
 

@@ -2,6 +2,7 @@
 
 namespace App\Service;
 
+use App\Events\NewBillCreated;
 use App\Mail\OrderDetailMail;
 use App\Models\AttributesValue;
 use App\Models\Bill;
@@ -14,6 +15,7 @@ use App\Service\CartService;
 use App\Service\CartPriceService;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Redis;
@@ -78,7 +80,7 @@ class CheckoutService
     {
         $userId = Auth::id();
         $sessionId = session()->getId();
-        $tempBillId = now()->format('Ymd') . ($userId ?? $sessionId) . rand(10, 99);
+        $tempBillId =  $tempBillId ?? now()->format('Ymd') . ($userId ? "U" . $userId : "C" . substr($sessionId, -6)) . rand(10, 99);
 
 
         $cartItems = $this->cartService->getCartItems();
@@ -93,7 +95,7 @@ class CheckoutService
             'email' => $request->email,
             'province_id' => $request->province_id,
             'district_id' => $request->district_id,
-            'ward_id' => $request->ward_id,
+            'ward_code' => $request->ward_code,
             'payment_method' => $request->payment_method,
             'payment_status' => 0,
             'status_id' => 1,
@@ -142,64 +144,47 @@ class CheckoutService
                 ], 400);
             }
     
+            $totalWeight = 0;
+            foreach ($cartItems as $cartItem) {
+                $product = Product::find($cartItem->product_id);
+                if ($product) {
+                    $totalWeight += $product->weight * $cartItem->quantity;
+                }
+            }
+    
+            $shippingFee = $this->calculateShippingFee( $total,$request->district_id, $request->ward_code, $totalWeight);
+            // dd($this->calculateShippingFee( $request->district_id, $request->ward_code, $totalWeight));
+            // dd($shippingFee);
+            $totalWithShipping = $total + $shippingFee;
+    
             // Tạo bill
             $bill = Bill::create([
-                'order_id' => $tempBillId ??  now()->format('Ymd') . ($userId ?? $cartId) . rand(10, 99) ,
+                'order_id' => $tempBillId ?? now()->format('Ymd') . ($userId ? "U" . $userId : "C" . substr($cartId, -6)) . rand(10, 99),
                 'user_id' => $userId ?? null,
-                'total' => $total,
+                'total' => $totalWithShipping,
+                'fee_shipping' => $shippingFee,
                 'full_name' => $request->full_name,
                 'address' => $request->address,
                 'phone' => $request->phone,
                 'email' => $request->email,
                 'province_id' => $request->province_id,
                 'district_id' => $request->district_id,
-                'ward_id' => $request->ward_id,
+                'ward_code' => $request->ward_code,
                 'payment_method' => $request->payment_method,
                 'payment_status' => 0,
                 'status_id' => 1,
+                'voucher_code' => $request->voucher
             ]);
-    
             foreach ($cartItems as $cartItem) {
-                if ($cartItem->variant_id) {
-                    // Giảm stock an toàn với WHERE
-                    $updated = ProductVariant::where('id', $cartItem->variant_id)
-                        ->where('stock', '>=', $cartItem->quantity)
-                        ->decrement('stock', $cartItem->quantity);
-    
-                    if (!$updated) {
-                        return response()->json([
-                            'success' => false,
-                            'message' => 'Sản phẩm biến thể "' . $cartItem->variant_id . '" đã hết hàng!'
-                        ], 400);
-                    }
-    
-                    BillDetails::create([
-                        'bill_id' => $bill->id,
-                        'product_id' => $cartItem->product_id,
-                        'variant_id' => $cartItem->variant_id,
-                        'quantity' => $cartItem->quantity,
-                        'price' => ProductVariant::find($cartItem->variant_id)->price
-                    ]);
-                } else {
-                    // Giảm stock an toàn với WHERE
-                    $updated = Product::where('id', $cartItem->product_id)
-                        ->where('base_stock', '>=', $cartItem->quantity)
-                        ->decrement('base_stock', $cartItem->quantity);
-    
-                    if (!$updated) {
-                        return response()->json([
-                            'success' => false,
-                            'message' => 'Sản phẩm "' . $cartItem->product_id . '" đã hết hàng!'
-                        ], 400);
-                    }
-    
-                    BillDetails::create([
-                        'bill_id' => $bill->id,
-                        'product_id' => $cartItem->product_id,
-                        'quantity' => $cartItem->quantity,
-                        'price' => Product::find($cartItem->product_id)->base_price
-                    ]);
-                }
+                BillDetails::create([
+                    'bill_id' => $bill->id,
+                    'product_id' => $cartItem->product_id,
+                    'variant_id' => $cartItem->variant_id,
+                    'quantity' => $cartItem->quantity,
+                    'price' => $cartItem->variant_id 
+                        ? ProductVariant::find($cartItem->variant_id)->price 
+                        : Product::find($cartItem->product_id)->base_price
+                ]);
             }
     
             // Giảm số lượng voucher nếu có
@@ -210,7 +195,8 @@ class CheckoutService
                 }
                 session()->forget('voucher');
             }
-    
+            event(new NewBillCreated($bill));
+
             DB::commit();
     
             // Gửi email
@@ -238,10 +224,47 @@ class CheckoutService
         }
     }
     
+    private function calculateShippingFee($total,$districtId, $wardId, $weight)
+    {
+        $token = 'efbd95a6-0e9a-11f0-9f28-eacfdef119b3';
+        $shopId = 196270;
+        $endpoint = 'https://dev-online-gateway.ghn.vn/shiip/public-api/v2/shipping-order/fee';
     
+        $serviceId = $weight > 20000 ? 100039 : 53322;
     
+        $data = [
+            'insurance_value'=> $total,
+            'from_district_id' => 1587,
+            'service_id' => $serviceId,
+            'to_district_id' => (int)$districtId,
+            'to_ward_code' => (string) $wardId,
+            'weight' => $weight
+        ];
     
-
+        $response = Http::withHeaders([
+            'Content-Type' => 'application/json',
+            'Token' => $token,
+            'ShopId' => $shopId
+        ])->post($endpoint, $data);
+    
+         $result = $response->json();
+        $fee = $result['data']['total'] ?? null;
+        if ($fee === null) {
+            if ($total > 50000000) {
+                $fee = 300000;
+            } elseif ($total > 20000000) {
+                $fee = 200000;
+            } elseif ($total > 10000000) {
+                $fee = 150000;
+            } elseif ($total > 5000000) {
+                $fee = 50000;
+            } else {
+                $fee = 20000;
+            }
+        }
+    
+        return $fee;
+    }
 
 
     public function handlePaymentSuccess($billId)

@@ -13,32 +13,134 @@
                                         <h2>Theo dõi đơn hàng</h2>
                                         <!-- Search Order Number -->
                                         <div class="search-order">
-                                            <input type="text" id="searchOrder" placeholder="Tìm kiếm mã đơn hàng">
-                                            <button class="btn btn-primary" onclick="searchOrder()">Tìm kiếm</button>
+                                            <form action="{{ route('client.orders.search') }}" method="GET">
+                                                <input type="text" name="order_id" placeholder="Nhập mã đơn hàng" >
+                                                @guest
+                                                    <input type="text" name="phone" placeholder="Nhập số điện thoại" required>
+                                                @endguest
+                                                <button type="submit" class="btn btn-primary">Tìm kiếm</button>
+                                            </form>
                                         </div>
                                         <br>
                                         <!-- End of Search Order Number -->
-                                        <table class="table table-bordered">
-                                            <thead>
-                                                <tr>
-                                                    <th>Mã đơn hàng</th>
-                                                    <th>Sản phẩm</th>
-                                                    <th>Số lượng</th>
-                                                    {{-- <th>PT thanh toán</th>
-                                                    <th>TT thanh toán</th> --}}
-                                                    <th>Trạng thái</th>
-                                                    <th>Tổng cộng</th>
-                                                    <th>Hành động</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody id="orderTableBody">
-                                                @foreach ($loadAll as $bill)
-                                                    @if ($bill->user_id == auth()->id())
+                                        @if (session('success'))
+                            <div class="alert alert-success">
+                                {{ session('success') }}
+                            </div>
+                        @elseif (session('error'))
+                            <div class="alert alert-danger">
+                                {{ session('error') }}
+                            </div>
+                        @endif
+                                        @if(isset($searchedOrder))
+                                            <!-- Display search result -->
+                                            <table class="table table-bordered">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Mã đơn hàng</th>
+                                                        <th>Sản phẩm</th>
+                                                        <th>Số lượng</th>
+                                                        <th>Trạng thái</th>
+                                                        <th>Tổng cộng</th>
+                                                        @auth
+                                                            <th>Hành động</th>
+                                                        @endauth
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>{{ $searchedOrder->order_id }}</td>
+                                                        <td>
+                                                            @foreach ($searchedOrder->billDetails as $detail)
+                                                                {{ $detail->product->name }}
+                                                                @if($detail->variant_id)
+                                                                    ({{ $detail->attributes }})
+                                                                @endif
+                                                                <br>
+                                                            @endforeach
+                                                        </td>
+                                                        <td>
+                                                            @foreach ($searchedOrder->billDetails as $detail)
+                                                                {{ $detail->quantity }}<br>
+                                                            @endforeach
+                                                        </td>
+                                                        <td>
+                                                            @switch($searchedOrder->status_id)
+                                                                @case(0)
+                                                                    Đã hủy đơn
+                                                                    @break
+                                                                @case(1)
+                                                                    Đang xử lý
+                                                                    @break
+                                                                @case(2)
+                                                                    Đang giao
+                                                                    @break
+                                                                @case(3)
+                                                                    Đã giao
+                                                                    @break
+                                                                @case(4)
+                                                                    Giao hàng thành công
+                                                                    @break
+                                                                @case(5)
+                                                                    Giao hàng thất bại
+                                                                    @break
+                                                                @default
+                                                                    Không xác định
+                                                            @endswitch
+                                                        </td>
+                                                        <td>{{ number_format($searchedOrder->total, 0, ',', '.') }} VND</td>
+                                                        @auth
+                                                            <td>
+                                                                @if($searchedOrder->status_id == 1)
+                                                                    <div style="display: flex; gap: 10px;">
+                                                                        <form action="{{ route('client.orders.cancel') }}" method="POST">
+                                                                            @csrf
+                                                                            <input type="hidden" name="order_id" value="{{ $searchedOrder->id }}">
+                                                                            <button class="btn btn-danger" type="submit">Hủy đơn</button>
+                                                                        </form>
+                                                                        <form action="" method="GET">
+                                                                            <button class="btn btn-warning" type="submit">Chi tiết</button>
+                                                                        </form>
+                                                                    </div>
+                                                                @elseif($searchedOrder->status_id == 3)
+                                                                    <form action="{{ route('client.orders.confirm', $searchedOrder->id) }}" method="POST">
+                                                                        @csrf
+                                                                        <button class="btn btn-success" type="submit">Xác nhận</button>
+                                                                    </form>
+                                                                @endif
+                                                            </td>
+                                                        @endauth
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        @elseif(Auth::check() && isset($loadAll))
+                                            <!-- Display all orders -->
+                                            <table class="table table-bordered">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Mã đơn hàng</th>
+                                                        <th>Sản phẩm</th>
+                                                        <th>Số lượng</th>
+                                                        {{-- <th>PT thanh toán</th>
+                                                        <th>TT thanh toán</th> --}}
+                                                        <th>Trạng thái</th>
+                                                        <th>Tổng cộng</th>
+                                                     
+                                                            <th>Hành động</th>
+                                                   
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="orderTableBody">
+                                                    @foreach ($loadAll as $bill)
                                                         <tr>
                                                             <td>{{ $bill->order_id }}</td>
                                                             <td>
                                                                 @foreach ($bill->billDetails as $detail)
-                                                                    {{ $detail->product->name }}<br>
+                                                                    {{ $detail->product->name }}
+                                                                    @if($detail->variant_id)
+                                                                        ({{ $detail->attributes }})
+                                                                    @endif
+                                                                    <br>
                                                                 @endforeach
                                                             </td>
                                                             <td>
@@ -46,16 +148,58 @@
                                                                     {{ $detail->quantity }}<br>
                                                                 @endforeach
                                                             </td>
-                                                            {{-- <td>{{ $bill->payment_method == 2 ? 'Tiền mặt' : 'Chuyển khoản' }}</td>
-                                                            <td>{{ $bill->payment_status == 0 ? 'Chưa thanh toán' : 'Đã thanh toán' }}</td> --}}
-                                                            <td>{{ $bill->status->name }}</td>
+
+                                                            <td>
+                                                                @switch($bill->status_id)
+                                                                    @case(0)
+                                                                    Đã hủy đơn
+                                                                        @break
+                                                                    @case(1)
+                                                                        Đang xử lý
+                                                                        @break
+                                                                    @case(2)
+                                                                        Đang giao
+                                                                        @break
+                                                                    @case(3)
+                                                                        Đã giao
+                                                                        @break
+                                                                    @case(4)
+                                                                        Giao hàng thành công
+                                                                        @break
+                                                                    @case(5)
+                                                                        Giao hàng thất bại
+                                                                        @break
+                                                                    @default
+                                                                        Không xác định
+                                                                @endswitch
+                                                            </td>
                                                             <td>{{ number_format($bill->total, 0, ',', '.') }} VND</td>
-                                                            <td><button class="btn btn-danger">Hủy đơn</button></td>
+                                                                <td>
+                                                                    @if($bill->status_id == 1)
+                                                                        <div style="display: flex; gap: 10px;">
+                                                                            <form action="{{ route('client.orders.cancel') }}" method="POST">
+                                                                                @csrf
+                                                                                <input type="hidden" name="order_id" value="{{ $bill->id }}">
+                                                                                <button class="btn btn-danger" type="submit">Hủy đơn</button>
+                                                                            </form>
+                                                                            <form action="{{ route('client.orders.detail') }}" method="GET">
+                                                                                <input type="hidden" name="order_id" value="{{ $bill->id }}">
+                                                                                <button class="btn btn-warning" type="submit">Chi tiết</button>
+                                                                            </form>
+                                                                        </div>
+                                                                    @elseif($bill->status_id == 3)
+                                                                        <form action="{{ route('client.orders.confirm', $bill->id) }}" method="POST">
+                                                                            @csrf
+                                                                            <button class="btn btn-success" type="submit">Xác nhận</button>
+                                                                        </form>
+                                                                    @endif
+                                                                </td>        
                                                         </tr>
-                                                    @endif
-                                                @endforeach
-                                            </tbody>
-                                        </table>
+                                                    @endforeach
+                                                </tbody>
+                                            </table>
+                                        @else
+                                        @endif
                                     </div>
                                     <!-- .woocommerce-order -->
                                 </div>
@@ -74,20 +218,3 @@
         <!-- .col-full -->
     </div>
 @endsection
-
-
-<script>
-    function searchOrder() {
-        const searchValue = document.getElementById('searchOrder').value.toLowerCase();
-        const rows = document.querySelectorAll('#orderTableBody tr');
-
-        rows.forEach(row => {
-            const orderId = row.querySelector('td:first-child').textContent.toLowerCase();
-            if (orderId.includes(searchValue)) {
-                row.style.display = '';
-            } else {
-                row.style.display = 'none';
-            }
-        });
-    }
-</script>

@@ -5,14 +5,12 @@ namespace Database\Seeders;
 use App\Models\Attributes;
 use App\Models\AttributesValue;
 use App\Models\Banner;
-use App\Models\Bill;
 use App\Models\BillDetails;
 use App\Models\Blog;
 use App\Models\Brand;
 use App\Models\Cart;
 use App\Models\Chats;
 use App\Models\Checklog;
-// use App\Models\Color;
 use App\Models\Comment;
 use App\Models\Config;
 use App\Models\Contact;
@@ -20,14 +18,11 @@ use App\Models\Images;
 use App\Models\Message;
 use App\Models\Product;
 use App\Models\ProductCategory;
-// use App\Models\ProductModel;
 use App\Models\ProductVariant;
 use App\Models\Promotion;
 use App\Models\Refund;
-use App\Models\Status;
 use App\Models\Storage;
 use App\Models\User;
-use App\Models\Role;
 use App\Models\Voucher;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -68,12 +63,7 @@ class DatabaseSeeder extends Seeder
         foreach ($dataArray['banners'] as $data) {
             Banner::create($data);
         }
-        foreach ($dataArray['bills'] as $data) {
-            Bill::create($data);
-        }
-        foreach ($dataArray['bill_details'] as $data) {
-            BillDetails::create($data);
-        }
+
         foreach ($dataArray['brand'] as $data) {
             Brand::create($data);
         }
@@ -128,18 +118,14 @@ class DatabaseSeeder extends Seeder
         foreach ($dataArray['storage'] as $data) {
             Storage::create($data);
         }
-        foreach ($dataArray['status'] as $data) {
-            Status::create($data);
-        }
+
         foreach ($dataArray['vouchers'] as $data) {
             Voucher::create($data);
         }
         foreach ($dataArray['blogs'] as $data) {
             Blog::create($data);
         }
-        foreach ($dataArray['role'] as $data) {
-            Role::create($data);
-        }
+
 
         // foreach ($dataArray['colors'] as $data) {
         //     Color::create($data);

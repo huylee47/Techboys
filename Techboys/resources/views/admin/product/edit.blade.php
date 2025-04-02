@@ -11,7 +11,7 @@
             <div class="page-title">
                 <div class="row">
                     <div class="col-12 col-md-6 order-md-1 order-last">
-                        <h3>Thêm Sản Phẩm</h3>
+                        <h3>Sửa sản Phẩm</h3>
                     </div>
                     <div class="col-12 col-md-6 order-md-2 order-first">
                         <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
@@ -20,7 +20,7 @@
                                 <li class="breadcrumb-item active" aria-current="page"><a
                                         href="{{ route('admin.product.index') }}">Danh sách Sản Phẩm</a></li>
 
-                                <li class="breadcrumb-item active" aria-current="page">Thêm Sản Phẩm</li>
+                                <li class="breadcrumb-item active" aria-current="page">Sửa sản Phẩm</li>
                             </ol>
                         </nav>
                     </div>
@@ -30,10 +30,23 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
-                            <div class="card-header">
-                                <h4 class="card-title">Thông Tin Sản Phẩm
-                                </h4>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="card-header">
+                                    <h4 class="card-title">Thông Tin Sản Phẩm
+                                    </h4>
+                                </div>
+                                <div class="ms-auto">
+                                    <a class="btn btn-primary" href="{{ route('admin.product.index') }}">Quay lại</a>
+                                    <button class="btn btn-danger">
+                                    <a href="#" class=" bi-trash-fill text-light  delete-btn"
+                                    data-id="{{ $product->id }}" 
+                                    data-name="{{ $product->name }}"
+                                    title="Nhấn để xoá sản phẩm"> Xoá </a>
+                                    </button>
+
+                                </div>
                             </div>
+
                             <div class="card-body">
                                 {{-- Hiển thị thông báo lỗi --}}
                                 @if ($errors->any())
@@ -86,7 +99,7 @@
                                                 </p>
                                             @endif
                                         </div>
-                                        <div class="col-md-6 mb-3">
+                                        <div class="col-md-4 mb-3">
                                             <label for="name" class="form-label">Tên Sản Phẩm</label>
                                             <input type="text" class="form-control" id="name" name="name"
                                                 value="{{ $product->name }}" required>
@@ -96,8 +109,17 @@
                                                 </p>
                                             @endif
                                         </div>
-
-                                        <div class="col-md-6 mb-3">
+                                        <div class="col-md-4 mb-3">
+                                            <label for="weight" class="form-label">Khối lượng (gram)</label>
+                                            <input type="number" class="form-control" id="weight" name="weight"
+                                                value="{{ $product->weight }}">
+                                            @if ($errors->has('weight'))
+                                                <p class="text-danger small ">
+                                                    <i>{{ $errors->first('weight') }}</i>
+                                                </p>
+                                            @endif
+                                        </div>
+                                        <div class="col-md-4 mb-3">
                                             <label for="images" class="form-label">Ảnh Sản Phẩm</label>
                                             <input class="form-control" type="file" id="images" name="img"
                                                 accept="image/*">
@@ -146,7 +168,7 @@
                                         </div>
                                         <div class="col-md-6 mb-3">
                                             <label for="base_stock" class="form-label">Số lượng</label>
-                                            <input type="text" class="form-control" id="base_stock" name="base_stock"
+                                            <input type="number" class="form-control" id="base_stock" name="base_stock"
                                                 value="{{ $product->base_stock }}">
                                             @if ($errors->has('base_stock'))
                                                 <p class="text-danger small ">
@@ -184,13 +206,32 @@
 
                                     </div>
                                     <br>
-                                    <button type="submit" class="btn btn-primary">Thêm Sản Phẩm</button>
+                                    <button type="submit" class="btn btn-primary">Sửa sản Phẩm</button>
                                 </form>
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
+        </div>
+        <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="deleteModalLabel">Xác nhận xóa sản phẩm</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        Bạn có chắc chắn muốn xóa sản phẩm <strong id="productName"></strong> không?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                        <form id="deleteForm" method="GET">
+                            <button type="submit" class="btn btn-danger">Xóa</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
     @endsection
     @section('scripts')
@@ -231,6 +272,26 @@
             });
         </script>
 
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        let deleteModal = new bootstrap.Modal(document.getElementById('deleteModal'));
+        let productName = document.getElementById('productName');
+        let deleteForm = document.getElementById('deleteForm');
+
+        document.querySelectorAll('.delete-btn').forEach(button => {
+            button.addEventListener('click', function () {
+                let id = this.getAttribute('data-id');
+                let name = this.getAttribute('data-name');
+
+                productName.textContent = name;
+                deleteForm.setAttribute('action', `/admin/product/destroy/${id}`);
+
+                deleteModal.show();
+            });
+        });
+    });
+</script>
+
         <script>
             document.getElementById('images').addEventListener('change', function(event) {
                 let previewContainer = document.getElementById('image-preview-container');
@@ -261,20 +322,9 @@
 
                         let value = e.target.value;
 
-                        value = value.replace(/[^0-9.]/g, '');
-                        value = value.replace(/^(\d*\.)(.*)\./g, '$1$2');.
+                        value = value.replace(/\D/g, '');
 
-                        let parts = value.split('.');
-                        parts[0] = parts[0].replace(/,/g, '');
-                        parts[0] = parts[0].length > 0 ? new Intl.NumberFormat('en-US').format(parts[
-                            0]) : '';
-
-                        if (parts[1] !== undefined) {
-                            parts[1] = parts[1].substring(0, 2);
-                            value = parts.join('.');
-                        } else {
-                            value = parts[0];
-                        }
+                        value = value.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 
                         e.target.value = value;
 
@@ -284,17 +334,42 @@
                     });
                 });
 
-                document.querySelector("form").addEventListener("submit", function() {
+                document.querySelector('form').addEventListener('submit', function() {
                     priceInputs.forEach(input => {
                         input.value = input.value.replace(/,/g, '');
                     });
                 });
             });
-        
+
+
+            document.querySelector("form").addEventListener("submit", function() {
+            priceInputs.forEach(input => {
+                input.value = input.value.replace(/,/g, '');
+            });
+            });
+            });
         </script>
 
         <script>
             $(document).ready(function() {
+                let maxOptions = $('#attribute-select').data('max-options') || 2;
+
+                $('#attribute-select').change(function() {
+                    let selectedCount = $(this).val() ? $(this).val().length : 0;
+
+                    if (selectedCount >= maxOptions) {
+                        $('#attribute-select option').each(function() {
+                            if (!$(this).is(':selected')) {
+                                $(this).prop('disabled', true);
+                            }
+                        });
+                    } else {
+                        $('#attribute-select option').prop('disabled', false);
+                    }
+
+                    $('.selectpicker').selectpicker('refresh');
+                });
+
                 function toggleBase() {
                     if ($('#is_featured').prop('checked')) {
                         $('input[name="base_price"]').closest('.mb-3').hide();
@@ -388,7 +463,8 @@
                                         class="form-control selectpicker" multiple data-live-search="true">`;
                         } else {
                             variantHtml += `<select name="variants[${index}][attributes][${attribute.name}]" 
-                                        class="form-control single-select">
+                                        class="form-control single-select" required oninvalid="this.setCustomValidity('Vui lòng chọn giá trị cho trường này!')" 
+                     oninput="this.setCustomValidity('')">
                                         <option value="" disabled selected>Chọn</option>`;
                         }
 
@@ -406,7 +482,8 @@
                     variantHtml += `
                 <div class="col-md-6 mb-3">
                     <label class="form-label">Giá biến thể</label>
-                    <input type="text" name="variants[${index}][price]" class="form-control" value="${variant ? variant.price : ''}" required>
+                    <input type="text" name="variants[${index}][price]" class="form-control" value="${variant ? variant.price : ''}" required oninvalid="this.setCustomValidity('Vui lòng chọn giá cho biến thể này!')" 
+                 oninput="this.setCustomValidity('')">
                 </div>
                  </div>`;
 
@@ -418,7 +495,6 @@
                     let newIndex = $('.variant-item').length;
                     let lastVariant = variantData.length > 0 ? variantData[variantData.length - 1] : null;
 
-                    // Lấy danh sách thuộc tính của biến thể cuối cùng
                     let lastAttributes = lastVariant ? Object.keys(lastVariant.variable_attributes) : [];
 
                     appendVariantForm(newIndex, null, lastAttributes);
@@ -453,9 +529,9 @@
 
                     let variantHtml = `<div class="row variant-item border p-3 mb-3" data-attributes='${JSON.stringify(selectedNewAttributes)}'>
                        <div class="col-md-12 d-flex justify-content-between align-items-center">
-            <h5>Biến thể ${index + 1}</h5>
-            <button type="button" class="btn btn-danger btn-sm remove-variant">Xóa</button>
-             </div>`;
+                        <h5>Biến thể ${index + 1}</h5>
+                        <button type="button" class="btn btn-danger btn-sm remove-variant">Xóa</button>
+                        </div>`;
 
                     selectedNewAttributes.forEach(attr => {
                         console.log("Tạo biến thể với thuộc tính:", attr);
@@ -478,7 +554,8 @@
                             variantHtml +=
                                 `<select name="variants[${index}][attributes][${attribute.name}][]" class="form-control selectpicker" multiple data-live-search="true">`;
                         } else {
-                            variantHtml += `<select name="variants[${index}][attributes][${attribute.name}]" class="form-control single-select">
+                            variantHtml += `<select name="variants[${index}][attributes][${attribute.name}]" class="form-control single-select" required oninvalid="this.setCustomValidity('Vui lòng chọn giá trị cho trường này!')" 
+                            oninput="this.setCustomValidity('')">
                                     <option value="">Chọn</option>`;
                         }
 
@@ -493,7 +570,8 @@
                     variantHtml += `
                     <div class="col-md-6 mb-3">
                     <label class="form-label">Giá biến thể</label>
-                    <input type="text" name="variants[${index}][price]" class="form-control" required>
+                    <input type="text" name="variants[${index}][price]" class="form-control" required oninvalid="this.setCustomValidity('Vui lòng chọn giá cho biến thể này!')" 
+                    oninput="this.setCustomValidity('')">
                     </div>
                     </div>`;
 
@@ -502,7 +580,75 @@
                     toggleRemoveButtons();
                 });
 
+                $(document).ready(function() {
+                    $(document).on('change', '.single-select', function() {
+                        let selectedValues = [];
+                        let duplicateFound = false;
 
+                        $('.variant-item').each(function() {
+                            let variantValues = [];
+                            $(this).find('.single-select').each(function() {
+                                let value = $(this).val();
+                                if (value) {
+                                    variantValues.push(value);
+                                }
+                            });
+
+                            selectedValues.forEach(function(existingValues) {
+                                if (variantValues.length === existingValues.length &&
+                                    variantValues.every((v, i) => v === existingValues[
+                                        i])) {
+                                    duplicateFound = true;
+                                    console.log("Trùng lặp giá trị:", variantValues);
+                                }
+                            });
+
+                            selectedValues.push(variantValues);
+                        });
+
+                        if (duplicateFound) {
+                            $('form button[type="submit"]').prop('disabled', true);
+                            console.log("Có giá trị trùng lặp, không thể gửi form.");
+                        } else {
+                            $('form button[type="submit"]').prop('disabled', false);
+                            console.log("Không có giá trị trùng lặp, form có thể gửi.");
+                        }
+                    });
+
+                    $('form').on('submit', function(e) {
+                        let selectedValues = [];
+                        let duplicateFound = false;
+
+                        $('.variant-item').each(function() {
+                            let variantValues = [];
+                            $(this).find('.single-select').each(function() {
+                                let value = $(this).val();
+                                if (value) {
+                                    variantValues.push(value);
+                                }
+                            });
+
+                            selectedValues.forEach(function(existingValues) {
+                                if (variantValues.length === existingValues.length &&
+                                    variantValues.every((v, i) => v === existingValues[
+                                        i])) {
+                                    duplicateFound = true;
+                                    alert(
+                                        "Có giá trị trùng lặp trong các biến thể, vui lòng chọn lại.");
+                                    e.preventDefault();
+                                }
+                            });
+
+                            selectedValues.push(variantValues);
+                        });
+
+                        if (duplicateFound) {
+                            e.preventDefault();
+                        }
+                    });
+                });
+
+ 
                 // Remove variant
                 $(document).on('click', '.remove-variant', function() {
                     let removedAttributes = $(this).closest('.variant-item').find('select').map(function() {
@@ -536,6 +682,27 @@
 
 
                 toggleRemoveButtons();
+
+                $(document).on('input', 'input[name^="variants"][name$="[price]"]', function() {
+                    let value = $(this).val();
+
+
+                    value = value.replace(/\D/g, '');
+
+                    value = value.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+
+                    $(this).val(value);
+                });
+
+                $('form').on('submit', function() {
+                    $('input[name^="variants"][name$="[price]"]').each(function() {
+                        let rawValue = $(this).val();
+                        let cleanedValue = rawValue.replace(/,/g,
+                            '');
+                        $(this).val(cleanedValue);
+                    });
+                });
+
             });
         </script>
     @endsection

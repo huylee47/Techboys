@@ -27,7 +27,7 @@ class checkoutRequest extends FormRequest
             'email'           => 'required|email|max:255',
             'province_id'     => 'required',
             'district_id'     => 'required',
-            'ward_id'         => 'required',
+            'ward_code'         => 'required|string',
             'address'         => 'required|string|max:500',
         ];
     }
@@ -42,7 +42,7 @@ class checkoutRequest extends FormRequest
             'address.required'        => 'Vui lòng nhập địa chỉ giao hàng.',
             'province_id.required'    => 'Vui lòng chọn tỉnh/thành phố.',
             'district_id.required'    => 'Vui lòng chọn quận/huyện.',
-            'ward_id.required'        => 'Vui lòng chọn phường/xã.',
+            'ward_code.required'        => 'Vui lòng chọn phường/xã.',
         ];
     }
 }

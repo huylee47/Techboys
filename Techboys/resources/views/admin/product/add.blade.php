@@ -36,15 +36,15 @@
                             </div>
                             <div class="card-body">
                                 {{-- Hiển thị thông báo lỗi --}}
-                                {{-- @if ($errors->any())
-                                <div class="alert alert-danger">
-                                    <ul>
-                                        @foreach ($errors->all() as $error)
-                                        <li>{{ $error }}</li>
-                                        @endforeach
-                                    </ul>
-                                </div>
-                                @endif --}}
+                                @if ($errors->any())
+                                    <div class="alert alert-danger">
+                                        <ul>
+                                            @foreach ($errors->all() as $error)
+                                                <li>{{ $error }}</li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                @endif
 
                                 <form action="{{ route('admin.product.store') }}" method="POST"
                                     enctype="multipart/form-data">
@@ -78,7 +78,7 @@
                                                 </p>
                                             @endif
                                         </div>
-                                        <div class="col-md-6 mb-3">
+                                        <div class="col-md-4 mb-3">
                                             <label for="name" class="form-label">Tên Sản Phẩm</label>
                                             <input type="text" class="form-control" id="name" name="name"
                                                 value="{{ old('name') }}">
@@ -88,7 +88,17 @@
                                                 </p>
                                             @endif
                                         </div>
-                                        <div class="col-md-6 mb-3">
+                                        <div class="col-md-4 mb-3">
+                                            <label for="weight" class="form-label">Khối lượng (gram)</label>
+                                            <input type="number" class="form-control" id="weight" name="weight"
+                                                value="{{ old('weight') }}">
+                                            @if ($errors->has('weight'))
+                                                <p class="text-danger small ">
+                                                    <i>{{ $errors->first('weight') }}</i>
+                                                </p>
+                                            @endif
+                                        </div>
+                                        <div class="col-md-4 mb-3">
                                             <label for="images" class="form-label">Ảnh Sản Phẩm</label>
                                             <input class="form-control" type="file" id="images" name="img"
                                                 accept="image/*">
@@ -119,8 +129,7 @@
                                         <div class="col-md-6 mb-3">
                                             <label for="base_price" class="form-label">Giá </label>
                                             <input type="text" class="form-control" id="base_price" name="base_price"
-                                            value="{{ old('base_price') !== null ? number_format(old('base_price'), 2, '.', '') : '' }}"
-                                            >
+                                                value="{{ old('base_price') !== null ? number_format(old('base_price'), 2, '.', '') : '' }}">
                                             @if ($errors->has('base_price'))
                                                 <p class="text-danger small ">
                                                     <i>{{ $errors->first('base_price') }}</i>
@@ -129,7 +138,7 @@
                                         </div>
                                         <div class="col-md-6 mb-3">
                                             <label for="base_stock" class="form-label">Số lượng</label>
-                                            <input type="text" class="form-control" id="base_stock" name="base_stock"
+                                            <input type="number" class="form-control" id="base_stock" name="base_stock"
                                                 value="{{ old('base_stock') }}">
                                             @if ($errors->has('base_stock'))
                                                 <p class="text-danger small ">
@@ -236,40 +245,20 @@
 
                         let value = e.target.value;
 
-                        // Chỉ giữ lại số và một dấu .
-                        value = value.replace(/[^0-9.]/g, '');
-                        value = value.replace(/^(\d*\.)(.*)\./g, '$1$2'); // Chỉ giữ một dấu .
+                        value = value.replace(/\D/g, '');
 
-                        // Không cho phép nhập số bắt đầu bằng .
-                        if (value.startsWith('.')) {
-                            value = '';
-                        }
-
-                        // Tách phần nguyên và phần thập phân
-                        let parts = value.split('.');
-                        parts[0] = parts[0].replace(/,/g, ''); // Xóa dấu , cũ trước khi định dạng
-                        parts[0] = parts[0].length > 0 ? new Intl.NumberFormat('en-US').format(parts[
-                            0]) : '';
-
-                        // Giới hạn tối đa 2 số sau dấu .
-                        if (parts[1] !== undefined) {
-                            parts[1] = parts[1].substring(0, 2);
-                            value = parts.join('.');
-                        } else {
-                            value = parts[0];
-                        }
+                        // Thêm dấu phân tách hàng nghìn
+                        value = value.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 
                         e.target.value = value;
 
-                        // Điều chỉnh vị trí con trỏ sau khi định dạng
                         let newLength = e.target.value.length;
                         cursorPosition = cursorPosition + (newLength - oldLength);
                         e.target.setSelectionRange(cursorPosition, cursorPosition);
                     });
                 });
 
-                // Xóa dấu , trước khi submit form
-                document.querySelector("form").addEventListener("submit", function() {
+                document.querySelector('form').addEventListener('submit', function() {
                     priceInputs.forEach(input => {
                         input.value = input.value.replace(/,/g, '');
                     });
@@ -279,6 +268,25 @@
         {{-- VARIANT --}}
         <script>
             $(document).ready(function() {
+
+                let maxOptions = $('#attribute-select').data('max-options') || 2;
+
+                $('#attribute-select').change(function() {
+                    let selectedCount = $(this).val() ? $(this).val().length : 0;
+
+                    if (selectedCount >= maxOptions) {
+                        $('#attribute-select option').each(function() {
+                            if (!$(this).is(':selected')) {
+                                $(this).prop('disabled', true);
+                            }
+                        });
+                    } else {
+                        $('#attribute-select option').prop('disabled', false);
+                    }
+
+                    $('.selectpicker').selectpicker('refresh');
+                });
+
                 function toggleBasePrice() {
                     if ($('#is_featured').prop('checked')) {
                         $('input[name="base_price"]').closest('.mb-3').hide();
@@ -313,6 +321,76 @@
                 }
 
                 let attributeData = {!! json_encode($attributes) !!};
+
+
+                $(document).ready(function() {
+                    $(document).on('change', '.single-select', function() {
+                        let selectedValues = [];
+                        let duplicateFound = false;
+
+                        $('.variant-item').each(function() {
+                            let variantValues = [];
+                            $(this).find('.single-select').each(function() {
+                                let value = $(this).val();
+                                if (value) {
+                                    variantValues.push(value);
+                                }
+                            });
+
+                            selectedValues.forEach(function(existingValues) {
+                                if (variantValues.length === existingValues.length &&
+                                    variantValues.every((v, i) => v === existingValues[
+                                        i])) {
+                                    duplicateFound = true;
+                                    console.log("Trùng lặp giá trị:", variantValues);
+                                }
+                            });
+
+                            selectedValues.push(variantValues);
+                        });
+
+                        if (duplicateFound) {
+                            $('form button[type="submit"]').prop('disabled', true);
+                            console.log("Có giá trị trùng lặp, không thể gửi form.");
+                        } else {
+                            $('form button[type="submit"]').prop('disabled', false);
+                            console.log("Không có giá trị trùng lặp, form có thể gửi.");
+                        }
+                    });
+
+                    $('form').on('submit', function(e) {
+                        let selectedValues = [];
+                        let duplicateFound = false;
+
+                        $('.variant-item').each(function() {
+                            let variantValues = [];
+                            $(this).find('.single-select').each(function() {
+                                let value = $(this).val();
+                                if (value) {
+                                    variantValues.push(value);
+                                }
+                            });
+
+                            selectedValues.forEach(function(existingValues) {
+                                if (variantValues.length === existingValues.length &&
+                                    variantValues.every((v, i) => v === existingValues[
+                                        i])) {
+                                    duplicateFound = true;
+                                    alert(
+                                        "Có giá trị trùng lặp trong các biến thể, vui lòng chọn lại.");
+                                    e.preventDefault();
+                                }
+                            });
+
+                            selectedValues.push(variantValues);
+                        });
+
+                        if (duplicateFound) {
+                            e.preventDefault();
+                        }
+                    });
+                });
+
 
                 $('#add-variant').click(function() {
                     let index = $('.variant-item').length;
@@ -364,9 +442,10 @@
 
                         if (attribute.is_multiple == 1) {
                             variantHtml +=
-                                `<select name="variants[${index}][attributes][${attribute.name}][]" class="form-control selectpicker" multiple data-live-search="true">`;
+                                `<select name="variants[${index}][attributes][${attribute.name}][]" class="form-control selectpicker" multiple data-live-search="true"  >`;
                         } else {
-                            variantHtml += `<select name="variants[${index}][attributes][${attribute.name}]" class="form-control single-select">
+                            variantHtml += `<select name="variants[${index}][attributes][${attribute.name}]" class="form-control single-select" required oninvalid="this.setCustomValidity('Vui lòng chọn giá trị cho trường này!')" 
+        oninput="this.setCustomValidity('')">
                                 <option value="">Chọn</option>`;
                         }
 
@@ -381,7 +460,8 @@
                     variantHtml += `
             <div class="col-md-6 mb-3">
                 <label class="form-label">Giá biến thể</label>
-                <input type="text" name="variants[${index}][price]" class="form-control" required>
+                <input type="text" name="variants[${index}][price]" class="form-control" required oninvalid="this.setCustomValidity('Vui lòng chọn giá cho biến thể này!')" 
+        oninput="this.setCustomValidity('')">
             </div>
         </div>`;
 
@@ -422,6 +502,25 @@
                 });
 
                 toggleRemoveButtons();
+                $(document).on('input', 'input[name^="variants"][name$="[price]"]', function() {
+                    let value = $(this).val();
+
+                    value = value.replace(/\D/g, '');
+
+                    value = value.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+
+                    $(this).val(value);
+                });
+
+                $('form').on('submit', function() {
+                    $('input[name^="variants"][name$="[price]"]').each(function() {
+                        let rawValue = $(this).val();
+                        let cleanedValue = rawValue.replace(/,/g,
+                            '');
+                        $(this).val(cleanedValue);
+                    });
+                });
+
             });
         </script>
     @endsection

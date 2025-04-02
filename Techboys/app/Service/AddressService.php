@@ -1,39 +1,55 @@
 <?php
 namespace App\Service;
 
-use Kjmtrue\VietnamZone\Models\Province;
-use Kjmtrue\VietnamZone\Models\District;
-use Kjmtrue\VietnamZone\Models\Ward;
+use App\Models\DistrictGHN;
+use App\Models\ProvinceGHN;
+use App\Models\WardGHN;
 
 class AddressService
 {
     public function getProvinces()
     {   
-        // filter City by id and Province by name
-        return Province::orderByRaw("
-            CASE 
-                WHEN name LIKE 'Thành phố%' THEN 1 
-                ELSE 2 
+        $specialCities = [
+            'Hà Nội' => 1,
+            'Hồ Chí Minh' => 2,
+            'Hải Phòng' => 3,
+            'Đà Nẵng' => 4,
+            'Huế' => 5,
+            'Cần Thơ' => 6,
+        ];
+    
+        return ProvinceGHN::orderByRaw(
+            "CASE 
+                WHEN name = 'Hà Nội' THEN 1
+                WHEN name = 'Hồ Chí Minh' THEN 2
+                WHEN name = 'Hải Phòng' THEN 3
+                WHEN name = 'Đà Nẵng' THEN 4
+                WHEN name = 'Huế' THEN 5
+                WHEN name = 'Cần Thơ' THEN 6
+                ELSE 7
             END, 
-            CASE 
-                WHEN name LIKE 'Thành phố%' THEN id 
-                ELSE NULL 
-            END ASC,
-            name ASC
-        ")->get();
+            name ASC"
+        )->get();
     }
+    
+    
     
     
 
     public function getDistricts($province_id)
     {
-        $districts = District::where('province_id', $province_id)->get();
+        $districts = DistrictGHN::where('province_id', $province_id)
+                             ->orderBy('name', 'ASC') 
+                             ->get();
         return response()->json($districts);
     }
-
+    
     public function getWards($district_id)
     {
-        $wards = Ward::where('district_id', $district_id)->get();
+        $wards = WardGHN::where('district_id', $district_id)
+                     ->orderBy('name', 'ASC')  // Sắp xếp theo tên
+                     ->get();
         return response()->json($wards);
     }
+    
 }

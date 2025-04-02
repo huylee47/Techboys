@@ -13,12 +13,14 @@ use App\Models\Promotion;
 use App\Models\User;
 use App\Models\Status;
 use App\Models\Voucher;
+use Kjmtrue\VietnamZone\Models\Province;
+use Kjmtrue\VietnamZone\Models\District;
+use Kjmtrue\VietnamZone\Models\Ward;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
-
 class BillController extends Controller
 {
     // public function index()
@@ -124,6 +126,28 @@ class BillController extends Controller
             ]);
     
             foreach ($billDetails as $billDetail) {
+                if ($billDetail->variant_id) {
+                    // Trừ stock cho biến thể sản phẩm
+                    $updated = ProductVariant::where('id', $billDetail->variant_id)
+                        ->where('stock', '>=', $billDetail->quantity)
+                        ->decrement('stock', $billDetail->quantity);
+    
+                    if (!$updated) {
+                        DB::rollBack();
+                        return redirect()->route('admin.bill.index')->with('error', 'Sản phẩm biến thể không đủ hàng!');
+                    }
+                } else {
+                    // Trừ stock cho sản phẩm gốc
+                    $updated = Product::where('id', $billDetail->product_id)
+                        ->where('base_stock', '>=', $billDetail->quantity)
+                        ->decrement('base_stock', $billDetail->quantity);
+    
+                    if (!$updated) {
+                        DB::rollBack();
+                        return redirect()->route('admin.bill.index')->with('error', 'Sản phẩm không đủ hàng!');
+                    }
+                }
+    
                 $product = Product::find($billDetail->product_id);
                 if ($product) {
                     $product->increment('purchases', $billDetail->quantity);
@@ -137,6 +161,7 @@ class BillController extends Controller
             return redirect()->route('admin.bill.index')->with('error', 'Đã xảy ra lỗi khi xuất hoá đơn!');
         }
     }
+    
     
     
     public function cancelBill(Request $request,$id) {
@@ -217,9 +242,134 @@ class BillController extends Controller
     //client
     public function indexClient()
     {
-        $loadAll = Bill::with(['billDetails.product', 'status'])
+        $loadAll = Bill::with(['billDetails.product', 'billDetails.variant'])
                        ->where('user_id', Auth::id())
                        ->get();
+
+        foreach ($loadAll as $bill) {
+            foreach ($bill->billDetails as $detail) {
+                if ($detail->variant_id) {
+                    $attributeJson = ProductVariant::where('id', $detail->variant_id)->value('attribute_values');
+                    $attributeArray = json_decode($attributeJson, true) ?? [];
+                    $detail->attributes = implode(', ', AttributesValue::whereIn('id', $attributeArray)->pluck('value')->toArray());
+                }
+            }
+        }
+
         return view('client.order.order', compact('loadAll'));
     }
+
+    public function searchOrder(Request $request)
+    {
+        $orderId = $request->input('order_id');
+        $phone = $request->input('phone');
+
+        $query = Bill::with(['billDetails.product', 'billDetails.variant'])->where('order_id', $orderId);
+
+        // If the user is not logged in, validate the phone number
+        if (!Auth::check()) {
+            $query->where('phone', $phone);
+        }
+
+        $searchedOrder = $query->first();
+
+        if ($searchedOrder) {
+            foreach ($searchedOrder->billDetails as $detail) {
+                if ($detail->variant_id) {
+                    $attributeJson = ProductVariant::where('id', $detail->variant_id)->value('attribute_values');
+                    $attributeArray = json_decode($attributeJson, true) ?? [];
+                    $detail->attributes = implode(', ', AttributesValue::whereIn('id', $attributeArray)->pluck('value')->toArray());
+                }
+            }
+        } else {
+            return redirect()->route('client.orders')->with('error', 'Mã hóa đơn hoặc số điện thoại không chính xác!');
+        }
+
+        $loadAll = Auth::check() ? Bill::with(['billDetails.product', 'billDetails.variant'])
+                                       ->where('user_id', Auth::id())
+                                       ->get() : [];
+
+        return view('client.order.order', compact('searchedOrder', 'loadAll'));
+    }
+  
+
+    public function CancelOrder(Request $request)
+    {
+        $order = Bill::with('billDetails.product')->where('id', $request->input('order_id'))->first();
+
+       
+
+        return view('client.order.CancelOrder', compact('order'));
+    }
+
+    public function submitCancelOrder(Request $request, $id)
+    {
+        $request->validate([
+            'cancel_reason' => 'required|string|max:255',
+        ], [
+            'cancel_reason.required' => 'Lý do hủy đơn không được để trống.',
+            'cancel_reason.max' => 'Lý do hủy đơn không được vượt quá 255 ký tự.',
+        ]);
+
+        $bill = Bill::find($id);
+        if ($bill->status_id != 1) {
+            return redirect()->route('client.orders')->with('error', 'Hoá đơn không hợp lệ để xác nhận!');
+        }
+        try {
+            DB::beginTransaction();
+            $bill->update([
+                'status_id' => 0,
+                'note' => $request->cancel_reason,
+            ]);
+            DB::commit();
+            return redirect()->route('client.orders')->with('success', 'Đơn hàng đã được hủy thành công!');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->route('client.orders')->with('error', 'Đã xảy ra lỗi khi hủy đơn hàng!');
+        }
+    }
+
+    public function confirmClient(Request $request, $id) {
+        $bill = Bill::find($id);
+
+        if (!$bill) {
+            return redirect()->route('client.orders')->with('error', 'Không tìm thấy đơn hàng!');
+        }
+
+        if ($bill->status_id != 3) {
+            return redirect()->route('client.orders')->with('error', 'Hoá đơn không hợp lệ để xác nhận!');
+        }
+
+        try {
+            DB::beginTransaction();
+
+            $bill->update([
+                'status_id' => 4,
+            ]);
+
+            DB::commit();
+            return redirect()->route('client.orders')->with('success', 'Đơn hàng đã được xác nhận thành công!');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->route('client.orders')->with('error', 'Đã xảy ra lỗi khi xác nhận đơn hàng!');
+        }
+    }
+    public function detailClient(Request $request)
+    {
+        $orderId = $request->query('order_id');
+        $order = Bill::with('user')->find($orderId);
+
+        if (!$order) {
+            return redirect()->route('client.orders')->with('error', 'Không tìm thấy đơn hàng!');
+        }
+
+        $provinces = Province::all();
+        $districts = District::where('province_id', $order->province_id)->get();
+        $wards = Ward::where('district_id', $order->district_id)->get();
+        $payment_method = $order->payment_method;
+
+        return view('client.order.detail', compact('order', 'provinces', 'districts', 'wards', 'payment_method'));
+    }
+
+    
 }

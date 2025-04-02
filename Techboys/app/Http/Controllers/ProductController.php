@@ -112,7 +112,14 @@ class ProductController extends Controller
         return redirect()->route('admin.product.imageIndex', $projectId)->with('success', 'Ảnh đã được xóa thành công.');
     }
 
-    // ================================= CLIENT  ================================= 
+    public function stock($productId){
+        return $this->productService->getStockByProductId($productId);
+    }
+    public function updateStock(Request $request, $productId){
+        // dd($request->all());
+        return $this->productService->updateStock($request,$productId);
+    }
+    // CLIENT 
     public function productDetails($request)
     {
         return $this->productService->getProductBySlug($request);

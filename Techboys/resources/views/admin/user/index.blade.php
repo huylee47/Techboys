@@ -81,8 +81,8 @@
                                           method="POST" style="display:inline;">
                                         @csrf                                    
                                         <input type="hidden" class="form-control" name="id" value="{{ $user->id }}">
-                                        <button type="submit" class="btn btn-{{ $user->status == 1 ? 'danger' : 'success' }}">
-                                            {{ $user->status == 1 ? 'Khóa' : 'Mở' }}
+                                        <button type="submit" class="{{ $user->status == 1 ? 'bi-lock' : 'bi-unlock' }}">
+                                            {{ $user->status == 1 ? 'Khóa tài khoản' : 'Mở tài khoản' }}
                                         </button>
                                     </form>
                                 </td>

@@ -71,7 +71,7 @@
                                                                     <option value="" selected disabled>Chọn tỉnh/thành
                                                                         phố</option>
                                                                     @foreach ($provinces as $province)
-                                                                        <option value="{{ $province->id }}">
+                                                                        <option value="{{ $province->province_id }}">
                                                                             {{ $province->name }}</option>
                                                                     @endforeach
                                                                 </select>
@@ -97,11 +97,11 @@
                                                                 class="form-row form-row-last validate-required validate-ward">
                                                                 <label class="" for="billing_ward">Phường/Xã
                                                                     <abbr title="required" class="required">*</abbr>
-                                                                    @error('ward_id')
+                                                                    @error('ward_code')
                                                                         <span class="text-danger">{{ $message }}</span>
                                                                     @enderror
                                                                 </label>
-                                                                <select name="ward_id" id="ward">
+                                                                <select name="ward_code" id="ward">
                                                                     <option value="" selected disabled>Chọn phường/xã
                                                                     </option>
                                                                 </select>
@@ -180,10 +180,10 @@
                                                             <tr class="cart_item">
                                                                 <td class="product-name">
                                                                     <strong class="product-quantity">{{ $item->quantity }}
-                                                                        x </strong> {{ $item->product->name }} 
-                                                                        @if($item->variant_id)
-                                                                        {{ $item->attributes}}
-                                                                        @endif
+                                                                        x </strong> {{ $item->product->name }}
+                                                                    @if ($item->variant_id)
+                                                                        {{ $item->attributes }}
+                                                                    @endif
                                                                     <input type="hidden" name="variant_id"
                                                                         value="{{ $item->variant_id }}">
                                                                     <input type="hidden" name="quantity"
@@ -227,6 +227,8 @@
                                                                 </strong>
                                                                 <input type="hidden" name="total"
                                                                     value="{{ $checkout['total'] }}">
+                                                                <input type="hidden" name="voucher"
+                                                                    value="{{ $checkout['voucher']['code'] ?? null }}">
                                                             </td>
                                                         </tr>
                                                     </tfoot>
@@ -250,9 +252,10 @@
                                                         </li>
                                                     </ul>
                                                     <div class="form-row place-order">
-                                                        <button type="submit" class="btn btn-primary btn-block">Xác nhận đặt hàng</button>
+                                                        <button type="submit" class="btn btn-primary btn-block">Xác nhận
+                                                            đặt hàng</button>
                                                     </div>
-                                                    
+
                                                 </div>
                                                 <!-- /.woocommerce-checkout-payment -->
                                             </div>
@@ -304,7 +307,7 @@
                 console.log("Province ID: ", province_id);
 
                 $('#district').empty().append(
-                '<option value="" selected disabled>Chọn quận/huyện</option>');
+                    '<option value="" selected disabled>Chọn quận/huyện</option>');
                 $('#ward').empty().append('<option value="" selected disabled>Chọn phường/xã</option>');
 
                 if (province_id) {
@@ -315,7 +318,8 @@
                         success: function(data) {
                             if (data.length > 0) {
                                 $.each(data, function(key, value) {
-                                    $('#district').append('<option value="' + value.id +
+                                    $('#district').append('<option value="' + value
+                                        .district_id +
                                         '">' + value.name + '</option>');
                                 });
                             } else {
@@ -343,7 +347,7 @@
                         success: function(data) {
                             if (data.length > 0) {
                                 $.each(data, function(key, value) {
-                                    $('#ward').append('<option value="' + value.id +
+                                    $('#ward').append('<option value="' + value.code +
                                         '">' + value.name + '</option>');
                                 });
                             } else {
