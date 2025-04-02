@@ -64,9 +64,6 @@ class DatabaseSeeder extends Seeder
             Banner::create($data);
         }
 
-        foreach ($dataArray['bill_details'] as $data) {
-            BillDetails::create($data);
-        }
         foreach ($dataArray['brand'] as $data) {
             Brand::create($data);
         }
