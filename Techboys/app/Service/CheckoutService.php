@@ -251,8 +251,10 @@ class CheckoutService
             if ($total > 50000000) {
                 $fee = 300000;
             } elseif ($total > 20000000) {
-                $fee = 100000;
+                $fee = 200000;
             } elseif ($total > 10000000) {
+                $fee = 150000;
+            } elseif ($total > 5000000) {
                 $fee = 50000;
             } else {
                 $fee = 20000;
