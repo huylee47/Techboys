@@ -75,16 +75,47 @@
                                             <a href="{{ route('admin.promotion.edit', $promotion->id) }}"
                                                 class="bi-pencil-fill text-warning fs-4" title="Sửa khuyến mãi"></a>
                                             <a href="javascript:void(0);" class="bi-trash-fill text-danger fs-4" title="Xóa khuyến mãi"
-                                                data-toggle="modal" data-target="#deleteConfirmationModal" 
-                                                onclick="setDeleteAction('{{ route('admin.promotion.destroy', $promotion->id) }}');"></a>
-                                                <script>
-                                                    function setDeleteAction(actionUrl) {
-                                                      document.getElementById('deleteForm').action = actionUrl;
+                                                onclick="openDeleteModal('{{ route('admin.promotion.destroy', $promotion->id) }}');">
+                                            </a>
+                                            
+                                            <script>
+                                                function openDeleteModal(actionUrl) {
+                                                    let deleteForm = document.getElementById('deleteForm');
+                                                    if (deleteForm) {
+                                                        deleteForm.action = actionUrl;
+                                                        let modal = new bootstrap.Modal(document.getElementById('deleteConfirmationModal'));
+                                                        modal.show();
+                                                    } else {
+                                                        console.error("Không tìm thấy form deleteForm!");
                                                     }
-                                                  </script>
+                                                }
+                                            </script>
                                         </td>
                                     </tr>
                                 @endforeach
+                                <div class="modal fade" id="deleteConfirmationModal" tabindex="-1" role="dialog">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title">Xác nhận xóa</h5>
+                                                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p>Bạn có chắc chắn muốn xóa khuyến mãi này không?</p>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <form id="deleteForm" method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                                                    <button type="submit" class="btn btn-danger">Xóa</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </tbody>
                         </table>
                     </div>
@@ -93,4 +124,3 @@
         </div>
     </div>
 @endsection
-@include('admin.modal.cf_dl_promotion')
