@@ -227,7 +227,7 @@
                                                                 </strong>
                                                                 <input type="hidden" name="total"
                                                                     value="{{ $checkout['total'] }}">
-                                                                <input type="text" name="voucher"
+                                                                <input type="hidden" name="voucher"
                                                                     value="{{ $checkout['voucher']['code'] ?? null }}">
                                                             </td>
                                                         </tr>
