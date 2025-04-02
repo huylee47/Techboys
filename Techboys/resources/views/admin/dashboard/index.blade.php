@@ -136,37 +136,37 @@
                                                 @endforeach
                                             </tbody>
                                             <script>
-                                                function fetchLatestComments() {
-                                                    fetch("{{ route('admin.getLatestComments') }}")
-                                                        .then(response => response.json())
-                                                        .then(data => {
-                                                            let tbody = document.getElementById('latest-comments');
-                                                            tbody.innerHTML = '';
-                                                            data.forEach(comment => {
-                                                                let row = `
-                                                                    <tr>
-                                                                        <td class="col-3">
-                                                                            <div class="d-flex align-items-center">
-                                                                                <div class="avatar avatar-md">
-                                                                                    <img src="${comment.user.avatar ?? 'default-avatar.png'}" alt="User Avatar">
-                                                                                </div>
-                                                                                <p class="font-bold ms-3 mb-0">${comment.user.name}</p>
-                                                                            </div>
-                                                                        </td>
-                                                                        <td class="col-auto">
-                                                                            <p class="mb-0">${comment.content}</p>
-                                                                        </td>
-                                                                        <td class="col-auto">
-                                                                            <p class="mb-0">${comment.product.name}</p>
-                                                                        </td>
-                                                                    </tr>
-                                                                `;
-                                                                tbody.innerHTML += row;
-                                                            });
-                                                        });
-                                                }
+                                                // function fetchLatestComments() {
+                                                //     fetch("{{ route('admin.getLatestComments') }}")
+                                                //         .then(response => response.json())
+                                                //         .then(data => {
+                                                //             let tbody = document.getElementById('latest-comments');
+                                                //             tbody.innerHTML = '';
+                                                //             data.forEach(comment => {
+                                                //                 let row = `
+                                                //                     <tr>
+                                                //                         <td class="col-3">
+                                                //                             <div class="d-flex align-items-center">
+                                                //                                 <div class="avatar avatar-md">
+                                                //                                     <img src="${comment.user.avatar ?? 'default-avatar.png'}" alt="User Avatar">
+                                                //                                 </div>
+                                                //                                 <p class="font-bold ms-3 mb-0">${comment.user.name}</p>
+                                                //                             </div>
+                                                //                         </td>
+                                                //                         <td class="col-auto">
+                                                //                             <p class="mb-0">${comment.content}</p>
+                                                //                         </td>
+                                                //                         <td class="col-auto">
+                                                //                             <p class="mb-0">${comment.product.name}</p>
+                                                //                         </td>
+                                                //                     </tr>
+                                                //                 `;
+                                                //                 tbody.innerHTML += row;
+                                                //             });
+                                                //         });
+                                                // }
 
-                                                setInterval(fetchLatestComments, 5000);
+                                                // setInterval(fetchLatestComments, 5000);
                                             </script>
                                         </table>
                                     </div>
@@ -199,21 +199,28 @@
                         <div class="card-header">
                             <h4>Hoá đơn được tạo gần đây</h4>
                         </div>
-                        <div class="card-content pb-4">
-                            <div class="recent-message d-flex px-4 py-3">
-                                <div class="avatar avatar-lg">
-                                    <img src="">
+                        <div class="card-content pb-4" id="recent-bills" style="max-height: 400px; overflow-y: auto;">
+                            @foreach ($recentBills as $bill)
+                                <div class="recent-message d-flex px-4 py-3 border-bottom">
+                                    <div class="avatar avatar-lg">
+                                        <img src="{{ asset('home/assets/images/user.png') }}" alt="User Avatar">
+                                    </div>
+                                    <div class="name ms-4">
+                                        <h5 class="mb-1">{{ $bill->full_name }}</h5>
+                                        <h6 class="text-muted mb-0">
+                                            Mã đơn: {{ $bill->order_id }} - Tổng: {{ number_format($bill->total) }}đ
+                                        </h6>
+                                        <small class="text-muted">{{ $bill->created_at->format('d/m/Y H:i') }}</small>
+                                    </div>
                                 </div>
-                                <div class="name ms-4">
-                                    <h5 class="mb-1">Hank Schrader</h5>
-                                    <h6 class="text-muted mb-0">@johnducky</h6>
-                                </div>
-                            </div>
-                            <div class="px-4">
-                                <button class='btn btn-block btn-xl btn-light-primary font-bold mt-3'>Quản lý đơn hàng</button>
-                            </div>
+                            @endforeach
+                        </div>
+                        <div class="px-4">
+                            <button class='btn btn-block btn-xl btn-light-primary font-bold mt-3'>Quản lý đơn hàng</button>
                         </div>
                     </div>
+                    
+
                     {{-- <div class="card">
                         <div class="card-header">
                             <h4>Visitors Profile</h4>
@@ -229,5 +236,44 @@
     @section('scripts')
     <script src="https://js.pusher.com/8.4.0/pusher.min.js"></script>
     @vite(['resources/js/app.js'])
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            Echo.channel('admin.newbill')
+                .listen("NewBillCreated", (event) => {
+                    console.log('Có đơn hàng mới:', event);
+    
+                    let recentBillsContainer = document.getElementById('recent-bills');
+    
+                    let newBillHtml = `
+                        <div class="recent-message d-flex px-4 py-3 border-bottom">
+                            <div class="avatar avatar-lg">
+                                <img src="{{ asset('home/assets/images/user.png') }}" alt="User Avatar">
+                            </div>
+                            <div class="name ms-4">
+                                <h5 class="mb-1">${event.full_name}</h5>
+                                <h6 class="text-muted mb-0">
+                                    Mã đơn: ${event.order_id} - Tổng: ${event.total.toLocaleString()}đ
+                                </h6>
+                                <small class="text-muted">${new Date().toLocaleString('vi-VN')}</small>
+                            </div>
+                        </div>
+                    `;
+    
+                    recentBillsContainer.insertAdjacentHTML('afterbegin', newBillHtml);
+    
+                    let bills = Array.from(recentBillsContainer.children);
+                    bills.sort((a, b) => {
+                        let timeA = new Date(a.querySelector("small").innerText);
+                        let timeB = new Date(b.querySelector("small").innerText);
+                        return timeB - timeA;
+                    });
+    
+                    recentBillsContainer.innerHTML = "";
+                    bills.forEach(bill => recentBillsContainer.appendChild(bill));
+    
+                    recentBillsContainer.scrollTop = 0;
+                });
+        });
+    </script>
     @endsection
 
