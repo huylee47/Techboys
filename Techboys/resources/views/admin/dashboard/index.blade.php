@@ -123,7 +123,7 @@
                                             </div>
                                         </div>
                                         <div class="col-md-8">
-                                            <h6 class="text-muted font-semibold">Khách hàng đăng ký tài khoản tháng này</h6>
+                                            <h6 class="text-muted font-semibold">Tài khoản đăng ký tháng này</h6>
                                             <h6 class="font-extrabold mb-0">{{ $registeredUsersMonth }}</h6>
                                         </div>
                                     </div>
