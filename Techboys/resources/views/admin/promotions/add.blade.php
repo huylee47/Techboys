@@ -49,27 +49,48 @@
                                         @csrf
                                         <div class="form-group">
                                             <label for="name">Tên khuyến mãi:</label>
-                                            <input type="text" name="name" id="name" class="form-control" required>
+                                            <input type="text" name="name" id="name" class="form-control" value="{{ old('name') }}">
                                         </div>
+                                        @if ($errors->has('name'))
+                                                <p class="text-danger small ">
+                                                    <i>{{ $errors->first('name') }}</i>
+                                                </p>
+                                            @endif
                                     
                                         <div class="form-group">
                                             <label for="product_id">Sản phẩm:</label>
-                                            <select name="product_id" id="product_id" class="form-control">
+                                            <select name="product_id" id="product_id" class="form-control selectpicker" data-live-search="true">
+                                                <option value="" disabled selected>Chọn sản phẩm </option>
                                                 @foreach ($products as $product)
                                                     <option value="{{ $product->id }}">{{ $product->name }}</option>
                                                 @endforeach
                                             </select>
+                                            @if ($errors->has('product_id'))
+                                                <p class="text-danger small ">
+                                                    <i>{{ $errors->first('product_id') }}</i>
+                                                </p>
+                                            @endif
                                         </div>
                                     
                                         <div class="form-group">
                                             <label for="discount_percent">Giảm giá (%):</label>
-                                            <input type="number" name="discount_percent" id="discount_percent" class="form-control" required min="1" max="100">
+                                            <input type="number" name="discount_percent" id="discount_percent" class="form-control"  min="1" max="100" value="{{ old(key: 'discount_percent') }}">
                                         </div>
+                                        @if ($errors->has('discount_percent'))
+                                                <p class="text-danger small ">
+                                                    <i>{{ $errors->first('discount_percent') }}</i>
+                                                </p>
+                                            @endif
                                     
                                         <div class="form-group">
                                             <label for="end_date">Ngày kết thúc:</label>
-                                            <input type="date" name="end_date" id="end_date" class="form-control" required>
+                                            <input type="date" name="end_date" id="end_date" class="form-control" >
                                         </div>
+                                        @if ($errors->has('end_date'))
+                                                <p class="text-danger small ">
+                                                    <i>{{ $errors->first('end_date') }}</i>
+                                                </p>
+                                            @endif
                                     
                                         <button type="submit" class="btn btn-primary">Lưu khuyến mãi</button>
                                     </form>
