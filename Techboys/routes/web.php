@@ -226,7 +226,8 @@ Route::middleware(['auth', 'auth.admin'])->group(function () {
             Route::post('/store', [PromotionController::class, 'store'])->name('admin.promotion.store');
             Route::get('/edit/{id}', [PromotionController::class, 'edit'])->name('admin.promotion.edit');
             Route::post('/update/{id}', [PromotionController::class, 'update'])->name('admin.promotion.update');
-            Route::get('/destroy/{id}', [PromotionController::class, 'destroy'])->name('admin.promotion.destroy');
+            Route::delete('/destroy/{id}', [PromotionController::class, 'destroy'])->name('admin.promotion.destroy');
+
         });
         
     });
