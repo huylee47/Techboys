@@ -26,7 +26,7 @@ class PromotionController extends Controller
 
     public function create()
     {
-        $products = Product::whereDoesntHave('promotion')->get();
+        $products = Product::whereDoesntHave('promotion')->orderBy('name', 'asc')->get();
         return view('admin.promotions.add', compact('products'));
     }
 
@@ -37,11 +37,27 @@ class PromotionController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
-        'product_id' => 'required|exists:products,id',
-        'discount_percent' => 'required|numeric|min:1|max:100',
-        'end_date' => 'required|date|after:today',
+            'product_id' => 'required|exists:products,id',
+            'discount_percent' => 'required|numeric|min:1|max:50',
+            'end_date' => 'required|date|after:' . now()->addDays(6)->toDateString(),
+        ], [
+            'name.required' => 'Vui lòng nhập tên khuyến mãi.',
+            'name.string' => 'Tên khuyến mãi phải là chuỗi ký tự.',
+            'name.max' => 'Tên khuyến mãi không được vượt quá 255 ký tự.',
+    
+            'product_id.required' => 'Vui lòng chọn một sản phẩm.',
+            'product_id.exists' => 'Sản phẩm đã chọn không hợp lệ.',
+    
+            'discount_percent.required' => 'Vui lòng nhập mức giảm giá.',
+            'discount_percent.numeric' => 'Mức giảm giá phải là một số.',
+            'discount_percent.min' => 'Mức giảm giá tối thiểu là 1%.',
+            'discount_percent.max' => 'Mức giảm giá tối đa là 50%.',
+    
+            'end_date.required' => 'Vui lòng chọn ngày kết thúc.',
+            'end_date.date' => 'Ngày kết thúc không hợp lệ.',
+            'end_date.after' => 'Ngày kết thúc phải cách ngày tạo ít nhất 1 tuần.',
         ]);
-
+    
         Promotion::create([
             'name' => $request->name,
             'status_id' => 1, 
@@ -49,9 +65,10 @@ class PromotionController extends Controller
             'discount_percent' => $request->discount_percent,
             'end_date' => $request->end_date,
         ]);
-
+    
         return redirect()->route('admin.promotion.index')->with('success', 'Khuyến mãi đã được thêm thành công!');
     }
+    
 
     /**
      * Display the specified resource.
@@ -78,15 +95,26 @@ class PromotionController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'product_id' => 'required|exists:products,id',
-            'discount_percent' => 'required|numeric|min:1|max:100',
-            'end_date' => 'required|date|after:today',
-        ]);
+            'discount_percent' => 'required|numeric|min:1|max:50',
+            'end_date' => 'required|date|after:' . now()->addDays(6)->toDateString(),
+        ], [
+            'name.required' => 'Vui lòng nhập tên khuyến mãi.',
+            'name.string' => 'Tên khuyến mãi phải là chuỗi ký tự.',
+            'name.max' => 'Tên khuyến mãi không được vượt quá 255 ký tự.',
+
+            'discount_percent.required' => 'Vui lòng nhập mức giảm giá.',
+            'discount_percent.numeric' => 'Mức giảm giá phải là một số.',
+            'discount_percent.min' => 'Mức giảm giá tối thiểu là 1%.',
+            'discount_percent.max' => 'Mức giảm giá tối đa là 50%.',
     
+            'end_date.required' => 'Vui lòng chọn ngày kết thúc.',
+            'end_date.date' => 'Ngày kết thúc không hợp lệ.',
+            'end_date.after' => 'Ngày kết thúc phải cách ngày tạo ít nhất 1 tuần.',
+        ]);
+        
         $promotion = Promotion::findOrFail($id);
         $promotion->update([
             'name' => $request->name,
-            'product_id' => $request->product_id,
             'discount_percent' => $request->discount_percent,
             'end_date' => $request->end_date,
         ]);
