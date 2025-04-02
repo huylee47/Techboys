@@ -60,6 +60,12 @@
                                 <span>Danh mục</span>
                             </a>
                         </li>
+                        <li class="sidebar-item {{ request()->routeIs('admin.brand*') ? 'active' : '' }}">
+                            <a href="{{route('admin.brand.index')}}" class='sidebar-link'>
+                                <i class="bi bi-house-fill"></i>
+                                <span>Thương hiệu</span>
+                            </a>
+                        </li>
                         <li class="sidebar-item {{ request()->routeIs('admin.product*') || request()->routeIs('admin.stock*') ? 'active' : '' }}">
                             <a href="{{route('admin.product.index')}}" class='sidebar-link'>
                                 <i class="bi bi-shop"></i>
@@ -99,8 +105,8 @@
                                 <span>Tài khoản người dùng</span>
                             </a>
                         </li>
-                        <li class="sidebar-item {{-- {{ request()->routeIs('admin.property-request.index') ? 'active' : '' }} --}}">
-                            <a href="" class='sidebar-link'>
+                        <li class="sidebar-item {{ request()->routeIs('admin.promotion*') ? 'active' : '' }}">
+                            <a href="{{ route('admin.promotion.index') }}" class='sidebar-link'>
                                 <i class="bi bi-calendar-event"></i>
                                 <span>Sự kiện giảm giá</span>
                             </a>

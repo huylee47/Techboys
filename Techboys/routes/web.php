@@ -5,6 +5,7 @@ use App\Http\Controllers\BannerController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\BillController;
 use App\Http\Controllers\BillDetailsController;
+use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\ChatsController;
 use App\Http\Controllers\CheckoutController;
@@ -163,6 +164,14 @@ Route::post('/logout', [UserController::class, 'logout'])->name('admin.logout');
             Route::get('/edit', [ProductCategoryController::class, 'edit'])->name('admin.category.edit');
             Route::post('/update/{id}', [ProductCategoryController::class, 'update'])->name('admin.category.update');
             Route::get('/destroy/{id}', [ProductCategoryController::class, 'destroy'])->name('admin.category.destroy');
+        });
+        Route::prefix('/brand')->group(function () {
+            Route::get('/', [BrandController::class, 'index'])->name('admin.brand.index');
+            Route::get('/create', [BrandController::class, 'create'])->name('admin.brand.create');
+            Route::post('/store', [BrandController::class,'store'])->name('admin.brand.store');
+            Route::get('/edit/{id}', [BrandController::class, 'edit'])->name('admin.brand.edit');
+            Route::post('/update/{id}', [BrandController::class, 'update'])->name('admin.brand.update');
+            Route::get('/destroy/{id}', [BrandController::class, 'destroy'])->name('admin.brand.destroy');
         });
 
         Route::prefix('/user')->group(function () {
