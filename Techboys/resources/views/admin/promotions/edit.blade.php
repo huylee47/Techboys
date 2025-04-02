@@ -49,29 +49,40 @@
                                             @csrf
                                             <div class="form-group">
                                                 <label for="name">Tên khuyến mãi:</label>
-                                                <input type="text" name="name" id="name" class="form-control" required value="{{ $promotion->name }}">
+                                                <input type="text" name="name" id="name" class="form-control"  value="{{ $promotion->name }}">
                                             </div>
+                                            @if ($errors->has('name'))
+                                            <p class="text-danger small ">
+                                                <i>{{ $errors->first('name') }}</i>
+                                            </p>
+                                            @endif
                                         
                                             <div class="form-group">
                                                 <label for="product_id">Sản phẩm:</label>
-                                                <select name="product_id" id="product_id" class="form-control">
-                                                    @foreach ($products as $product)
-                                                        <option value="{{ $product->id }}" {{ $product->id == $promotion->product_id ? 'selected' : '' }}>
-                                                            {{ $product->name }}
-                                                        </option>
-                                                    @endforeach
-                                                </select>
+                                                <input name="product_id" id="product_id" class="form-control" disabled value="{{$promotion->product->name }}">
+                                                    
+                                               
                                             </div>
                                         
                                             <div class="form-group">
                                                 <label for="discount_percent">Giảm giá (%):</label>
-                                                <input type="number" name="discount_percent" id="discount_percent" class="form-control" required min="1" max="100" value="{{ $promotion->discount_percent }}">
+                                                <input type="number" name="discount_percent" id="discount_percent" class="form-control"  min="1" max="100" value="{{ $promotion->discount_percent }}">
                                             </div>
+                                            @if ($errors->has('discount_percent'))
+                                            <p class="text-danger small ">
+                                                <i>{{ $errors->first('discount_percent') }}</i>
+                                            </p>
+                                        @endif
                                         
                                             <div class="form-group">
                                                 <label for="end_date">Ngày kết thúc:</label>
-                                                <input type="date" name="end_date" id="end_date" class="form-control" required value="{{ $promotion->end_date->format('Y-m-d') }}">
+                                                <input type="date" name="end_date" id="end_date" class="form-control"  value="{{ $promotion->end_date->format('Y-m-d') }}">
                                             </div>
+                                            @if ($errors->has('end_date'))
+                                            <p class="text-danger small ">
+                                                <i>{{ $errors->first('end_date') }}</i>
+                                            </p>
+                                        @endif
                                         
                                             <button type="submit" class="btn btn-primary">Cập nhật khuyến mãi</button>
                                         </form>
