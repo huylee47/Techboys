@@ -14,7 +14,7 @@
                                         <!-- Search Order Number -->
                                         <div class="search-order">
                                             <form action="{{ route('client.orders.search') }}" method="GET">
-                                                <input type="text" name="order_id" placeholder="Nhập mã đơn hàng" required>
+                                                <input type="text" name="order_id" placeholder="Nhập mã đơn hàng" >
                                                 @guest
                                                     <input type="text" name="phone" placeholder="Nhập số điện thoại" required>
                                                 @endguest
@@ -99,7 +99,7 @@
                                                                             <button class="btn btn-danger" type="submit">Hủy đơn</button>
                                                                         </form>
                                                                         <form action="" method="GET">
-                                                                            <button class="btn btn-warning" type="submit">Sửa thông tin</button>
+                                                                            <button class="btn btn-warning" type="submit">Chi tiết</button>
                                                                         </form>
                                                                     </div>
                                                                 @elseif($searchedOrder->status_id == 3)
@@ -182,9 +182,9 @@
                                                                                 <input type="hidden" name="order_id" value="{{ $bill->id }}">
                                                                                 <button class="btn btn-danger" type="submit">Hủy đơn</button>
                                                                             </form>
-                                                                            <form action="{{ route('client.orders.edit') }}" method="GET">
+                                                                            <form action="{{ route('client.orders.detail') }}" method="GET">
                                                                                 <input type="hidden" name="order_id" value="{{ $bill->id }}">
-                                                                                <button class="btn btn-warning" type="submit">Sửa thông tin</button>
+                                                                                <button class="btn btn-warning" type="submit">Chi tiết</button>
                                                                             </form>
                                                                         </div>
                                                                     @elseif($bill->status_id == 3)

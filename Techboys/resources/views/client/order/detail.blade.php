@@ -49,7 +49,7 @@
                         <label for="billing_city">Thành phố
                             <abbr title="required" class="required">*</abbr>
                         </label>
-                        <select name="province_id" id="province">
+                        <select name="province_id" id="province" disabled>
                             <option value="" disabled>Chọn tỉnh/thành phố</option>
                             @foreach ($provinces as $province)
                                 <option value="{{ $province->id }}" {{ $province->id == $order->province_id ? 'selected' : '' }}>
@@ -62,7 +62,7 @@
                         <label for="billing_district">Quận
                             <abbr title="required" class="required">*</abbr>
                         </label>
-                        <select name="district_id" id="district">
+                        <select name="district_id" id="district" disabled>
                             <option value="" disabled>Chọn quận/huyện</option>
                             @foreach ($districts as $district)
                                 <option value="{{ $district->id }}" {{ $district->id == $order->district_id ? 'selected' : '' }}>
@@ -77,7 +77,7 @@
                         <label for="billing_ward">Phường/Xã
                             <abbr title="required" class="required">*</abbr>
                         </label>
-                        <select name="ward_id" id="ward">
+                        <select name="ward_id" id="ward" disabled>
                             <option value="" disabled>Chọn phường/xã</option>
                             @foreach ($wards as $ward)
                                 <option value="{{ $ward->id }}" {{ $ward->id == $order->ward_id ? 'selected' : '' }}>
@@ -90,18 +90,27 @@
                         <label for="billing_phone">Số điện thoại
                             <abbr title="required" class="required">*</abbr>
                         </label>
-                        <input type="tel" value="{{ $order->phone }}" id="billing_phone" name="phone">
+                        <input type="tel" value="{{ $order->phone }}" id="billing_phone" name="phone" disabled>
+                    </p>
+                </div>
+                <div class="flex-row">
+                    <p>
+                        <label for="payment_method">Phương thức thanh toán</label>
+                        <input type="text" 
+                               value="{{ $order->payment_method == 1 ? 'Chuyển khoản' : ($order->payment_method == 2 ? 'Tiền mặt' : 'Không xác định') }}" 
+                               id="payment_method" 
+                               name="payment_method" 
+                               disabled>
                     </p>
                 </div>
                 <p>
                     <label for="order_comments">Địa chỉ chi tiết
                         <abbr title="required" class="required">*</abbr>
                     </label>
-                    <textarea cols="5" rows="3" id="order_comments" name="address">{{ $order->address }}</textarea>
+                    <textarea cols="5" rows="3" id="order_comments" name="address" disabled>{{ $order->address }}</textarea>
                 </p>
             </div>
         </div>
-        <button type="submit">Cập Nhật</button>
         <a href="{{ route('client.orders') }}" class="btn btn-secondary">Quay lại</a>
     </form>
 </div>
