@@ -1,5 +1,53 @@
 @extends('admin.layouts.master')
 @section('main')
+    <style>
+        .bell-shake {
+            animation: shake 0.8s ease-in-out infinite;
+        }
+
+        @keyframes shake {
+
+            0%,
+            100% {
+                transform: rotate(0deg);
+            }
+
+            20% {
+                transform: rotate(-15deg);
+            }
+
+            40% {
+                transform: rotate(15deg);
+            }
+
+            60% {
+                transform: rotate(-10deg);
+            }
+
+            80% {
+                transform: rotate(10deg);
+            }
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(-10px);
+            animation: fadeIn 0.8s forwards;
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+
     <div id="main">
         <header class="mb-3">
             <a href="#" class="burger-btn d-block d-xl-none">
@@ -59,7 +107,7 @@
                                         </div>
                                         <div class="col-md-8">
                                             <h6 class="text-muted font-semibold">Người dùng truy cập hôm nay </h6>
-                                            <h6 class="font-extrabold mb-0">{{$visitorsToday}}</h6>
+                                            <h6 class="font-extrabold mb-0">{{ $visitorsToday }}</h6>
                                         </div>
                                     </div>
                                 </div>
@@ -76,7 +124,7 @@
                                         </div>
                                         <div class="col-md-8">
                                             <h6 class="text-muted font-semibold">Khách hàng đăng ký tài khoản tháng này</h6>
-                                            <h6 class="font-extrabold mb-0">{{$registeredUsersMonth}}</h6>
+                                            <h6 class="font-extrabold mb-0">{{ $registeredUsersMonth }}</h6>
                                         </div>
                                     </div>
                                 </div>
@@ -144,23 +192,23 @@
                                                 //             tbody.innerHTML = '';
                                                 //             data.forEach(comment => {
                                                 //                 let row = `
-                                                //                     <tr>
-                                                //                         <td class="col-3">
-                                                //                             <div class="d-flex align-items-center">
-                                                //                                 <div class="avatar avatar-md">
-                                                //                                     <img src="${comment.user.avatar ?? 'default-avatar.png'}" alt="User Avatar">
-                                                //                                 </div>
-                                                //                                 <p class="font-bold ms-3 mb-0">${comment.user.name}</p>
-                                                //                             </div>
-                                                //                         </td>
-                                                //                         <td class="col-auto">
-                                                //                             <p class="mb-0">${comment.content}</p>
-                                                //                         </td>
-                                                //                         <td class="col-auto">
-                                                //                             <p class="mb-0">${comment.product.name}</p>
-                                                //                         </td>
-                                                //                     </tr>
-                                                //                 `;
+    //                     <tr>
+    //                         <td class="col-3">
+    //                             <div class="d-flex align-items-center">
+    //                                 <div class="avatar avatar-md">
+    //                                     <img src="${comment.user.avatar ?? 'default-avatar.png'}" alt="User Avatar">
+    //                                 </div>
+    //                                 <p class="font-bold ms-3 mb-0">${comment.user.name}</p>
+    //                             </div>
+    //                         </td>
+    //                         <td class="col-auto">
+    //                             <p class="mb-0">${comment.content}</p>
+    //                         </td>
+    //                         <td class="col-auto">
+    //                             <p class="mb-0">${comment.product.name}</p>
+    //                         </td>
+    //                     </tr>
+    //                 `;
                                                 //                 tbody.innerHTML += row;
                                                 //             });
                                                 //         });
@@ -196,11 +244,16 @@
 
                     </div>
                     <div class="card">
-                        <div class="card-header">
-                            <h4>Hoá đơn được tạo gần đây</h4>
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <h4 class="mb-0">Hoá đơn gần đây</h4>
+                            <button class="btn position-relative">
+                                <i id="notification-bell" class="bi bi-bell-fill text-warning fs-4"></i>
+                            </button>
                         </div>
+                        
                         <div class="card-content pb-4" id="recent-bills" style="max-height: 400px; overflow-y: auto;">
                             @foreach ($recentBills as $bill)
+                            <a href="{{route('admin.bill.show',['id'=>$bill->id])}}">
                                 <div class="recent-message d-flex px-4 py-3 border-bottom">
                                     <div class="avatar avatar-lg">
                                         <img src="{{ asset('home/assets/images/user.png') }}" alt="User Avatar">
@@ -208,18 +261,21 @@
                                     <div class="name ms-4">
                                         <h5 class="mb-1">{{ $bill->full_name }}</h5>
                                         <h6 class="text-muted mb-0">
-                                            Mã đơn: {{ $bill->order_id }} - Tổng: {{ number_format($bill->total) }}đ
+                                            Mã đơn: {{ $bill->order_id }} - Tổng:
+                                            {{ number_format($bill->total, 0, ',', '.') }}đ
                                         </h6>
                                         <small class="text-muted">{{ $bill->created_at->format('d/m/Y H:i') }}</small>
                                     </div>
                                 </div>
+                            </a>
                             @endforeach
                         </div>
                         <div class="px-4">
-                            <button class='btn btn-block btn-xl btn-light-primary font-bold mt-3'>Quản lý đơn hàng</button>
+                            <a href="{{route('admin.bill.index')}}">
+                            <button class='btn btn-block btn-xl btn-light-primary font-bold mt-3'>Quản lý đơn hàng</button></a>
                         </div>
                     </div>
-                    
+
 
                     {{-- <div class="card">
                         <div class="card-header">
@@ -234,18 +290,31 @@
         </div>
     @endsection
     @section('scripts')
-    <script src="https://js.pusher.com/8.4.0/pusher.min.js"></script>
-    @vite(['resources/js/app.js'])
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            Echo.channel('admin.newbill')
-                .listen("NewBillCreated", (event) => {
-                    console.log('Có đơn hàng mới:', event);
-    
-                    let recentBillsContainer = document.getElementById('recent-bills');
-    
-                    let newBillHtml = `
-                        <div class="recent-message d-flex px-4 py-3 border-bottom">
+        <script src="https://js.pusher.com/8.4.0/pusher.min.js"></script>
+        @vite(['resources/js/app.js'])
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                Pusher.logToConsole = true;
+
+                Echo.channel('admin.newbill')
+                    .listen("NewBillCreated", (event) => {
+                        console.log('Có đơn hàng mới:', event);
+
+                        let recentBillsContainer = document.getElementById('recent-bills');
+                        let bellIcon = document.getElementById('notification-bell');
+
+                        if (!recentBillsContainer || !bellIcon) {
+                            console.error("Không tìm thấy phần tử 'recent-bills' hoặc 'notification-bell'");
+                            return;
+                        }
+
+                        bellIcon.classList.add("bell-shake");
+                        setTimeout(() => {
+                            bellIcon.classList.remove("bell-shake");
+                        }, 1500);
+
+                        let newBillHtml = `
+                        <div class="recent-message d-flex px-4 py-3 border-bottom fade-in">
                             <div class="avatar avatar-lg">
                                 <img src="{{ asset('home/assets/images/user.png') }}" alt="User Avatar">
                             </div>
@@ -258,22 +327,11 @@
                             </div>
                         </div>
                     `;
-    
-                    recentBillsContainer.insertAdjacentHTML('afterbegin', newBillHtml);
-    
-                    let bills = Array.from(recentBillsContainer.children);
-                    bills.sort((a, b) => {
-                        let timeA = new Date(a.querySelector("small").innerText);
-                        let timeB = new Date(b.querySelector("small").innerText);
-                        return timeB - timeA;
-                    });
-    
-                    recentBillsContainer.innerHTML = "";
-                    bills.forEach(bill => recentBillsContainer.appendChild(bill));
-    
-                    recentBillsContainer.scrollTop = 0;
-                });
-        });
-    </script>
-    @endsection
 
+                        recentBillsContainer.insertAdjacentHTML('afterbegin', newBillHtml);
+
+                        recentBillsContainer.scrollTop = 0;
+                    });
+            });
+        </script>
+    @endsection
