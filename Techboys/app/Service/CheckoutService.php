@@ -151,7 +151,7 @@ class CheckoutService
                 }
             }
     
-            $shippingFee = $this->calculateShippingFee( $request->district_id, $request->ward_code, $totalWeight);
+            $shippingFee = $this->calculateShippingFee( $total,$request->district_id, $request->ward_code, $totalWeight);
             // dd($this->calculateShippingFee( $request->district_id, $request->ward_code, $totalWeight));
             // dd($shippingFee);
             $totalWithShipping = $total + $shippingFee;
@@ -222,7 +222,7 @@ class CheckoutService
         }
     }
     
-    private function calculateShippingFee($districtId, $wardId, $weight)
+    private function calculateShippingFee($total,$districtId, $wardId, $weight)
     {
         $token = 'efbd95a6-0e9a-11f0-9f28-eacfdef119b3';
         $shopId = 196270;
@@ -231,6 +231,7 @@ class CheckoutService
         $serviceId = $weight > 20000 ? 100039 : 53322;
     
         $data = [
+            'insurance_value'=> $total,
             'from_district_id' => 1587,
             'service_id' => $serviceId,
             'to_district_id' => (int)$districtId,
@@ -245,8 +246,20 @@ class CheckoutService
         ])->post($endpoint, $data);
     
          $result = $response->json();
-        // default fee_ship =20k
-        return $result['data']['total'] ?? 20000;
+        $fee = $result['data']['total'] ?? null;
+        if ($fee === null) {
+            if ($total > 50000000) {
+                $fee = 300000;
+            } elseif ($total > 20000000) {
+                $fee = 100000;
+            } elseif ($total > 10000000) {
+                $fee = 50000;
+            } else {
+                $fee = 20000;
+            }
+        }
+    
+        return $fee;
     }
 
 
