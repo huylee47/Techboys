@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Bill;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
@@ -44,7 +45,6 @@ class DashboardController extends Controller
             ])
             ->count();
         
-        // dd($registeredUsersMonth);
         
     
         $todayKey = 'daily_visitors_' . $now->format('Y_m_d');
@@ -59,7 +59,8 @@ class DashboardController extends Controller
         if ($visitorsLastMonth > 0) {
             $visitorGrowthPercentage = (($visitorsThisMonth - $visitorsLastMonth) / $visitorsLastMonth) * 100;
         }
-    
+        $recentBills = Bill::orderBy('created_at', 'desc')->take(10)->get();
+        
         return view('admin.dashboard.index', [
             'onlineUsers' => count($onlineUsers),
             'registeredUsersQuarter' => $registeredUsersQuarter,
@@ -70,6 +71,7 @@ class DashboardController extends Controller
             'visitorsLastMonth' => $visitorsLastMonth,
             'visitorGrowthPercentage' => round($visitorGrowthPercentage, 2),
             'user' => $user,
+            'recentBills' => $recentBills,
             'now' => $now
         ]);
     }
