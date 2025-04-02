@@ -2,6 +2,7 @@
 
 namespace App\Service;
 
+use App\Events\NewBillCreated;
 use App\Mail\OrderDetailMail;
 use App\Models\AttributesValue;
 use App\Models\Bill;
@@ -194,7 +195,8 @@ class CheckoutService
                 }
                 session()->forget('voucher');
             }
-    
+            event(new NewBillCreated($bill));
+
             DB::commit();
     
             // Gửi email
