@@ -138,7 +138,7 @@
                                         </div>
                                         <div class="col-md-6 mb-3">
                                             <label for="base_stock" class="form-label">Số lượng</label>
-                                            <input type="number" class="form-control" id="base_stock" name="base_stock" 
+                                            <input type="number" class="form-control" id="base_stock" name="base_stock"
                                                 value="{{ old('base_stock') }}">
                                             @if ($errors->has('base_stock'))
                                                 <p class="text-danger small ">
@@ -268,6 +268,7 @@
         {{-- VARIANT --}}
         <script>
             $(document).ready(function() {
+
                 let maxOptions = $('#attribute-select').data('max-options') || 2;
 
                 $('#attribute-select').change(function() {
@@ -320,6 +321,76 @@
                 }
 
                 let attributeData = {!! json_encode($attributes) !!};
+
+
+                $(document).ready(function() {
+                    $(document).on('change', '.single-select', function() {
+                        let selectedValues = [];
+                        let duplicateFound = false;
+
+                        $('.variant-item').each(function() {
+                            let variantValues = [];
+                            $(this).find('.single-select').each(function() {
+                                let value = $(this).val();
+                                if (value) {
+                                    variantValues.push(value);
+                                }
+                            });
+
+                            selectedValues.forEach(function(existingValues) {
+                                if (variantValues.length === existingValues.length &&
+                                    variantValues.every((v, i) => v === existingValues[
+                                        i])) {
+                                    duplicateFound = true;
+                                    console.log("Trùng lặp giá trị:", variantValues);
+                                }
+                            });
+
+                            selectedValues.push(variantValues);
+                        });
+
+                        if (duplicateFound) {
+                            $('form button[type="submit"]').prop('disabled', true);
+                            console.log("Có giá trị trùng lặp, không thể gửi form.");
+                        } else {
+                            $('form button[type="submit"]').prop('disabled', false);
+                            console.log("Không có giá trị trùng lặp, form có thể gửi.");
+                        }
+                    });
+
+                    $('form').on('submit', function(e) {
+                        let selectedValues = [];
+                        let duplicateFound = false;
+
+                        $('.variant-item').each(function() {
+                            let variantValues = [];
+                            $(this).find('.single-select').each(function() {
+                                let value = $(this).val();
+                                if (value) {
+                                    variantValues.push(value);
+                                }
+                            });
+
+                            selectedValues.forEach(function(existingValues) {
+                                if (variantValues.length === existingValues.length &&
+                                    variantValues.every((v, i) => v === existingValues[
+                                        i])) {
+                                    duplicateFound = true;
+                                    alert(
+                                        "Có giá trị trùng lặp trong các biến thể, vui lòng chọn lại.");
+                                    e.preventDefault();
+                                }
+                            });
+
+                            selectedValues.push(variantValues);
+                        });
+
+                        if (duplicateFound) {
+                            e.preventDefault();
+                        }
+                    });
+                });
+
 
                 $('#add-variant').click(function() {
                     let index = $('.variant-item').length;

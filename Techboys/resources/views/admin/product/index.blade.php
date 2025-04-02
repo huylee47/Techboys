@@ -90,10 +90,6 @@
                                             <a href="{{ route('admin.product.imageIndex', ['productId' => $product->id]) }}"
                                                class="bi-images fs-4" title="Kho ảnh của sản phẩm {{ $product->name }}"></a>
 
-                                            <a href="#" class="bi-trash-fill text-danger fs-4 delete-btn"
-                                               data-id="{{ $product->id }}" 
-                                               data-name="{{ $product->name }}"
-                                               title="Nhấn để xoá sản phẩm"></a>
 
                                             <a href="{{ route('admin.stock.index', ['id' => $product->id]) }}"
                                                class="bi-box-seam text-success fs-4"
@@ -107,47 +103,4 @@
                 </div>
             </section>
         </div>
-
-        <!-- Modal Xác Nhận Xóa -->
-        <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="deleteModalLabel">Xác nhận xóa sản phẩm</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        Bạn có chắc chắn muốn xóa sản phẩm <strong id="productName"></strong> không?
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
-                        <form id="deleteForm" method="GET">
-                            <button type="submit" class="btn btn-danger">Xóa</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        @section('scripts')
-        <script>
-            document.addEventListener("DOMContentLoaded", function () {
-                let deleteModal = new bootstrap.Modal(document.getElementById('deleteModal'));
-                let productName = document.getElementById('productName');
-                let deleteForm = document.getElementById('deleteForm');
-
-                document.querySelectorAll('.delete-btn').forEach(button => {
-                    button.addEventListener('click', function () {
-                        let id = this.getAttribute('data-id');
-                        let name = this.getAttribute('data-name');
-
-                        productName.textContent = name;
-                        deleteForm.setAttribute('action', `/admin/product/destroy/${id}`);
-
-                        deleteModal.show();
-                    });
-                });
-            });
-        </script>
-        @endsection
 @endsection
