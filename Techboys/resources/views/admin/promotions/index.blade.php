@@ -74,9 +74,14 @@
                                         <td>
                                             <a href="{{ route('admin.promotion.edit', $promotion->id) }}"
                                                 class="bi-pencil-fill text-warning fs-4" title="Sửa khuyến mãi"></a>
-                                            <a href="{{ route('admin.promotion.destroy', $promotion->id) }}"
-                                                class="bi-trash-fill text-danger fs-4" title="Xóa khuyến mãi"
-                                                onclick="return confirm('Bạn có chắc chắn muốn xóa khuyến mãi này?');"></a>
+                                            <a href="javascript:void(0);" class="bi-trash-fill text-danger fs-4" title="Xóa khuyến mãi"
+                                                data-toggle="modal" data-target="#deleteConfirmationModal" 
+                                                onclick="setDeleteAction('{{ route('admin.promotion.destroy', $promotion->id) }}');"></a>
+                                                <script>
+                                                    function setDeleteAction(actionUrl) {
+                                                      document.getElementById('deleteForm').action = actionUrl;
+                                                    }
+                                                  </script>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -88,3 +93,4 @@
         </div>
     </div>
 @endsection
+@include('admin.modal.cf_dl_promotion')
