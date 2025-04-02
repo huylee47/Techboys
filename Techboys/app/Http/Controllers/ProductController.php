@@ -22,28 +22,18 @@ class ProductController extends Controller
         $this->productService = $productService;
         $this->photoService = $photoService;
     }
-    // ADMIN CTRL
-    /**
-     * Display a listing of the resource.
-     */
+    // ================================= ADMIN =================================
     public function index()
     {
         $products = $this->productService->getAllProducts();
         return view('admin.product.index', compact('products'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         return $this->productService->createProduct();
     }
 
-
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(ProductRequest $request)
     {
         // dd($request->all());
@@ -51,17 +41,24 @@ class ProductController extends Controller
         return $this->productService->storeProduct($request);
     }
 
-    /**
-     * Display the specified resource.
-     */
+    public function adminSearch(Request $request)
+    {
+        $query = $request->input('query');
+
+        if (empty($query)) {
+            return response()->json([]);
+        }
+
+        $products = Product::where('name', 'like', "%$query%")->get();
+
+        return response()->json($products);
+    }
+
     public function show(Request $request)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit($id)
     {
         return $this->productService->editProduct($id);
@@ -114,6 +111,7 @@ class ProductController extends Controller
 
         return redirect()->route('admin.product.imageIndex', $projectId)->with('success', 'Ảnh đã được xóa thành công.');
     }
+
     public function stock($productId){
         return $this->productService->getStockByProductId($productId);
     }
@@ -131,7 +129,7 @@ class ProductController extends Controller
     {
         // Lấy danh sách thương hiệu và model
         $brands = Brand::all();
-        
+
 
         // Tạo query sản phẩm
         $query = Product::query();
@@ -169,7 +167,7 @@ class ProductController extends Controller
         // Nếu là tìm kiếm bằng nút "Tìm kiếm", hiển thị trang search.blade.php
         $products = Product::where('name', 'LIKE', "%{$keyword}%")->paginate(12);
         $brands = Brand::all();
-        
+
 
         return view('client.product.search', compact('products', 'keyword', 'brands', 'models'));
     }
@@ -177,7 +175,7 @@ class ProductController extends Controller
     public function filter(Request $request)
     {
         $brands = Brand::all();
-        
+
 
         $query = Product::query();
 
