@@ -21,43 +21,7 @@
             "image": "banner1.jpg"
         }
     ],
-    "bill_details": [
-        {
-            "bill_id": 1,
-            "product_id": 1,
-            "variant_id": 2,
-            "quantity": 2,
-            "price": 12590000
-        },
-        {
-            "bill_id": 1,
-            "product_id": 2,
-            "variant_id": 4,
-            "quantity": 1,
-            "price": 10900000
-        },
-        {
-            "bill_id": 2,
-            "product_id": 3,
-            "variant_id": 6,
-            "quantity": 1,
-            "price": 12590000
-        },
-        {
-            "bill_id": 2,
-            "product_id": 4,
-            "variant_id": 7,
-            "quantity": 1,
-            "price": 10090000
-        },
-        {
-            "bill_id": 3,
-            "product_id": 5,
-            "variant_id": 8,
-            "quantity": 5,
-            "price": 10090000
-        }
-    ],
+
     "blogs": [
         {
             "title": "10 mẹo sử dụng smartphone hiệu quả",
