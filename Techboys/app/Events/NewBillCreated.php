@@ -9,6 +9,7 @@ use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Broadcasting\PresenceChannel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Log;
 
 class NewBillCreated implements ShouldBroadcast
 {
@@ -47,6 +48,13 @@ class NewBillCreated implements ShouldBroadcast
      */
     public function broadcastWith()
     {
+        Log::info('Sự kiện NewBillCreated được phát:', [
+            'bill_id' => $this->bill->id,
+            'order_id' => $this->bill->order_id,
+            'total' => $this->bill->total,
+            'full_name' => $this->bill->full_name
+        ]);
+        
         return [
             'bill_id' => $this->bill->id,
             'order_id' => $this->bill->order_id,
