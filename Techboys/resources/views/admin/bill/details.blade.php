@@ -45,8 +45,8 @@
                                         @else
                                             <span class="badge bg-warning">Chưa thanh toán</span>
                                         @endif
-                                        @if ($bill->total < $total)
-                                            <span class="badge bg-success">Áp dụng voucher/Khuyến mại</span>
+                                        @if ($bill->voucher)
+                                            <span class="badge bg-success">Áp dụng Voucher</span>
                                         @endif
                                     </div>
 
@@ -96,8 +96,24 @@
                                         <input type="text" class="form-control" id="created_at"
                                             value="{{ $bill->created_at }}" readonly>
                                     </div>
+
                                     <div class="col-md-3 mb-3">
-                                        <label for="address">Địa chỉ</label>
+                                        <label for="address">Tỉnh/Thành phố</label>
+                                        <input type="text" class="form-control" id="address"
+                                            value="{{ $bill->province->name }}" readonly>
+                                    </div>
+                                    <div class="col-md-3 mb-3">
+                                        <label for="address">Quận/Huyện</label>
+                                        <input type="text" class="form-control" id="address"
+                                            value="{{ $bill->district->name }}" readonly>
+                                    </div>
+                                    <div class="col-md-3 mb-3">
+                                        <label for="address">Xã/Phường</label>
+                                        <input type="text" class="form-control" id="address"
+                                            value="{{ $bill->ward->name }}" readonly>
+                                    </div>
+                                    <div class="col-md-3 mb-3">
+                                        <label for="address">Địa chỉ chi tiết</label>
                                         <input type="text" class="form-control" id="address"
                                             value="{{ $bill->address }}" readonly>
                                     </div>
