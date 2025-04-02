@@ -84,7 +84,7 @@
                                     
                                         <div class="form-group">
                                             <label for="end_date">Ngày kết thúc:</label>
-                                            <input type="date" name="end_date" id="end_date" class="form-control" >
+                                            <input type="date" name="end_date" id="end_date" class="form-control" value="{{ old('end_date') }}" >
                                         </div>
                                         @if ($errors->has('end_date'))
                                                 <p class="text-danger small ">
