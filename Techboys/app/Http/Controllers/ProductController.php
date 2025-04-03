@@ -122,18 +122,30 @@ class ProductController extends Controller
 
     public function getVariants(Request $request)
     {
-        $productId = $request->input('product_id');
-        $product = Product::find($productId);
+        $request->validate([
+            'product_id' => 'required|exists:products,id'
+        ]);
 
-        if ($product) {
-            // Lấy tất cả biến thể của sản phẩm
-            $variants = $product->variants()->select('id', 'name', 'price')->get();
-            return response()->json(['variants' => $variants]);
-        }
+        $product = Product::with('variants')->find($request->product_id);
 
-        return response()->json(['variants' => []]);
+        return response()->json([
+            'product' => [
+                'name' => $product->name,
+                'base_price' => $product->base_price,
+                'base_stock' => $product->base_stock
+            ],
+            'variants' => $product->variants->map(function ($variant) {
+                return [
+                    'id' => $variant->id,
+                    'name' => $variant->name,
+                    'price' => $variant->price,
+                    'stock' => $variant->stock,
+                    'attributes' => $variant->attribute_values // Nếu có thông tin thuộc tính
+                ];
+            })
+        ]);
     }
-    
+
     // CLIENT 
     public function productDetails($request)
     {
