@@ -354,7 +354,7 @@ class BillController extends Controller
     }
     public function detailClient(Request $request)
     {
-        $orderId = $request->query('order_id');
+        $orderId = $request->input('order_id'); // Lấy từ POST request
         $order = Bill::with(['user', 'billDetails.product', 'billDetails.variant'])->find($orderId);
 
         if (!$order) {
