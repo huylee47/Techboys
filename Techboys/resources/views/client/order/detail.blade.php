@@ -116,6 +116,10 @@
                             <td>{{ number_format($detail->discounted_price * $detail->quantity, 0, ',', '.') }} VNĐ</td>
                         </tr>
                         @endforeach
+                        <tr>
+                            <td colspan="3" class="text-end"><strong>Tổng tiền (bao gồm phí vận chuyển):</strong></td>
+                            <td><strong>{{ number_format($order->total_amount, 0, ',', '.') }} VNĐ</strong></td>
+                        </tr>
                     </tbody>
                 </table>
                
