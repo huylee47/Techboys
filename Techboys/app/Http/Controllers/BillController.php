@@ -42,7 +42,6 @@ class BillController extends Controller
         return view('admin.bill.index', compact('bills'));
     }
 
-    // Hiển thị form tạo đơn hàng
     public function create()
     {
         $users = User::whereNotNull('phone')->get();
@@ -130,6 +129,7 @@ class BillController extends Controller
         }
 
         $variants = $product->variants->map(function ($variant) {
+            // Parse attribute_values từ JSON
             $attributes = json_decode($variant->attribute_values, true) ?? [];
             $variantName = implode(' / ', array_values($attributes));
 
@@ -143,7 +143,6 @@ class BillController extends Controller
 
         return response()->json([
             'product' => [
-                'name' => $product->name,
                 'base_price' => $product->base_price,
                 'base_stock' => $product->base_stock,
             ],
@@ -287,7 +286,6 @@ class BillController extends Controller
         }
         return 0;
     }
-
     // Lấy thông tin chi tiết sản phẩm khi chọn
     public function getProductDetails(Request $request)
     {
