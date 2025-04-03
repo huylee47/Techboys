@@ -12,7 +12,8 @@ class ConfigController extends Controller
      */
     public function index()
     {
-        //
+        $config = Config::first();
+        return view('admin.config.index', compact('config'));
     }
 
     /**
@@ -44,15 +45,23 @@ class ConfigController extends Controller
      */
     public function edit(Config $config)
     {
-        //
+        $config = Config::first();
+        return view('admin.config.edit', compact('config'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, Config $config)
     {
-        //
+        $request->validate([
+            'title' => 'required|string|max:100',
+            'address' => 'required|string|max:500',
+            'hotline' => 'required|string|max:10',
+            'facebook' => 'required|url',
+        ]);
+
+        $config = Config::first();
+        $config->update($request->all());
+
+        return redirect()->route('admin.config.index')->with('success', 'Cấu hình đã được cập nhật!');
     }
 
     /**
