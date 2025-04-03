@@ -37,7 +37,9 @@
                                         @if(isset($searchedOrder))
                                             <!-- Display search result -->
                                             <table class="table table-bordered">  
-                                                <h5>Nêu bạn muốn hủy đơn hàng vui lòng liên hệ với chúng tôi: 0901234567 </h5>
+                                                @if(!Auth::check())
+                                                    <h5>Nếu bạn muốn hủy đơn hàng vui lòng liên hệ với chúng tôi: 0901234567</h5>
+                                                @endif
                                                 <thead>
                                                     <tr>
                                                         @auth
