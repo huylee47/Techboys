@@ -54,44 +54,71 @@ class BillController extends Controller
     {
         $request->validate([
             'user_id' => 'required|exists:users,id',
-            'product_id' => 'required|exists:products,id',
-            'variant_id' => 'nullable|exists:product_variants,id',  // Cho phép chọn biến thể nếu có
-            'quantity' => 'required|integer|min:1',
-            'price' => 'required|numeric',
+            'products' => 'required|array|min:1',
+            'products.*.product_id' => 'required|exists:products,id',
+            'products.*.variant_id' => 'nullable|exists:product_variants,id',
+            'products.*.quantity' => 'required|integer|min:1',
+            'products.*.price' => 'required|numeric|min:0',
+            'payment_method' => 'required|in:cod,bank,vnpay',
+            'shipping_fee' => 'required|numeric|min:0',
         ]);
 
         DB::beginTransaction();
 
         try {
+            // Tính tổng tiền
+            $total = array_reduce($request->products, function ($carry, $item) {
+                return $carry + ($item['price'] * $item['quantity']);
+            }, 0) + $request->shipping_fee;
+
+            // Tạo đơn hàng
             $bill = Bill::create([
                 'user_id' => $request->user_id,
-                'status_id' => 1,  // Trạng thái ban đầu là "Chờ xác nhận"
-                'total' => $request->quantity * $request->price,
+                'status_id' => 1, // Chờ xác nhận
+                'payment_method' => $request->payment_method,
+                'shipping_fee' => $request->shipping_fee,
+                'total' => $total,
+                'note' => $request->note,
             ]);
 
-            // Thêm chi tiết hóa đơn
-            BillDetails::create([
-                'bill_id' => $bill->id,
-                'product_id' => $request->product_id,
-                'variant_id' => $request->variant_id,  // Nếu có
-                'quantity' => $request->quantity,
-                'price' => $request->price,
-            ]);
+            // Thêm sản phẩm vào đơn hàng
+            foreach ($request->products as $product) {
+                // Kiểm tra tồn kho
+                $stock = $product['variant_id']
+                    ? ProductVariant::find($product['variant_id'])->stock
+                    : Product::find($product['product_id'])->base_stock;
 
-            // Nếu có biến thể, giảm số lượng stock
-            if ($request->variant_id) {
-                $variant = ProductVariant::findOrFail($request->variant_id);
-                $variant->decrement('stock', $request->quantity);
-            } else {
-                $product = Product::findOrFail($request->product_id);
-                $product->decrement('base_stock', $request->quantity);
+                if ($stock < $product['quantity']) {
+                    throw new \Exception("Sản phẩm {$product['product_id']} không đủ tồn kho");
+                }
+
+                // Thêm vào chi tiết đơn hàng
+                BillDetails::create([
+                    'bill_id' => $bill->id,
+                    'product_id' => $product['product_id'],
+                    'variant_id' => $product['variant_id'],
+                    'quantity' => $product['quantity'],
+                    'price' => $product['price'],
+                ]);
+
+                // Trừ tồn kho
+                if ($product['variant_id']) {
+                    ProductVariant::where('id', $product['variant_id'])
+                        ->decrement('stock', $product['quantity']);
+                } else {
+                    Product::where('id', $product['product_id'])
+                        ->decrement('base_stock', $product['quantity']);
+                }
             }
 
             DB::commit();
-            return redirect()->route('admin.bill.index')->with('success', 'Đơn hàng đã được tạo thành công!');
+
+            return redirect()->route('admin.bill.index')
+                ->with('success', 'Đơn hàng đã được tạo thành công!');
         } catch (\Exception $e) {
             DB::rollBack();
-            return redirect()->route('admin.bill.index')->with('error', 'Có lỗi xảy ra khi tạo đơn hàng!');
+            return back()->withInput()
+                ->with('error', 'Lỗi khi tạo đơn hàng: ' . $e->getMessage());
         }
     }
 
