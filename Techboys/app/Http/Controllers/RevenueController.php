@@ -38,7 +38,7 @@ class RevenueController extends Controller
         ->sum('total');
     
 
-        $successfulOrders = Bill::where('payment_status', 1)->count();
+        $successfulOrders = Bill::where('payment_status', 1)->where('status_id', 4)->count();
 
         $cancelledOrders = Bill::where('status_id', 0)->count();
 
