@@ -14,14 +14,16 @@
                                         <!-- Search Order Number -->
                                         <div class="search-order">
                                             <form action="{{ route('client.orders.search') }}" method="GET">
-                                                <input type="text" name="order_id" placeholder="Nhập mã đơn hàng" required>
                                                 @guest
                                                     <input type="text" name="phone" placeholder="Nhập số điện thoại" required>
+                                                @else
+                                                    <input type="text" name="order_id" placeholder="Nhập mã đơn hàng" required>
                                                 @endguest
                                                 <button type="submit" class="btn btn-primary">Tìm kiếm</button>
                                             </form>
                                         </div>
                                         <br>
+                                      
                                         <!-- End of Search Order Number -->
                                         @if (session('success'))
                             <div class="alert alert-success">
@@ -34,22 +36,24 @@
                         @endif
                                         @if(isset($searchedOrder))
                                             <!-- Display search result -->
-                                            <table class="table table-bordered">
+                                            <table class="table table-bordered">  
+                                                <h5>Nêu bạn muốn hủy đơn hàng vui lòng liên hệ với chúng tôi: 0901234567 </h5>
                                                 <thead>
                                                     <tr>
+                                                        @auth
                                                         <th>Mã đơn hàng</th>
+                                                        @endauth   
                                                         <th>Sản phẩm</th>
                                                         <th>Số lượng</th>
                                                         <th>Trạng thái</th>
                                                         <th>Tổng cộng</th>
-                                                        @auth
-                                                            <th>Hành động</th>
-                                                        @endauth
+                                                            <th>Hành động</th>                                                      
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <tr>
+                                                    <tr> @auth
                                                         <td>{{ $searchedOrder->order_id }}</td>
+                                                        @endauth   
                                                         <td>
                                                             @foreach ($searchedOrder->billDetails as $detail)
                                                                 {{ $detail->product->name }}
@@ -99,18 +103,20 @@
                                                                             <button class="btn btn-danger" type="submit">Hủy đơn</button>
                                                                         </form>
                                                                     @endif
-                                                                    <form action="{{ route('client.orders.detail') }}" method="GET">
-                                                                        <input type="hidden" name="order_id" value="{{ $searchedOrder->id }}">
-                                                                        <button class="btn btn-warning" type="submit">Chi tiết</button>
-                                                                    </form>
+                                                                 
                                                                     @if($searchedOrder->status_id == 3)
                                                                         <form action="{{ route('client.orders.confirm', $searchedOrder->id) }}" method="POST">
                                                                             @csrf
                                                                             <button class="btn btn-success" type="submit">Xác nhận</button>
                                                                         </form>
                                                                     @endif
-                                                                </div>
-                                                            @endauth
+                                                            
+                                                            @endauth   
+                                                            <form action="{{ route('client.orders.detail') }}" method="GET">
+                                                                        <input type="hidden" name="order_id" value="{{ $searchedOrder->id }}">
+                                                                        <button class="btn btn-warning" type="submit">Chi tiết</button>
+                                                                    </form>
+                                                                    </div>
                                                         </td>
                                                     </tr>
                                                 </tbody>
