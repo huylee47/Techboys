@@ -2,7 +2,7 @@
 
 @section('main')
 <div class="container mt-5">
-    <h2 class="mb-4">Sửa Thông Tin Đặt Hàng</h2>
+    <h2 class="mb-4"> Thông Tin Đặt Hàng</h2>
     <style>
         input, select, textarea {
             width: 100%;
@@ -40,11 +40,12 @@
         @method('POST')
         <div id="customer_details">
             <div>
+                    <div class="flex-row">
                 <p>
                     <label for="billing_first_name">Họ và Tên Người nhận</label>
                     <input type="text" value="{{ $order->user->name }}" id="billing_first_name" name="full_name" disabled>
                 </p>              
-                <div class="flex-row">
+            
                     <p>
                         <label for="billing_phone">Số điện thoại
                             <abbr title="required" class="required">*</abbr>
@@ -61,8 +62,7 @@
                                name="payment_method" 
                                disabled>
                     </p>
-                </div>
-                <div class="flex-row">
+              
                     <p>
                         <label for="voucher">Voucher đã áp dụng</label>
                         <input type="text" 
