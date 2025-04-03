@@ -1131,6 +1131,9 @@
 .stats-icon.blue {
     background-color: #57caeb;
 }
+.stats-icon.yellow {
+    background-color: #ffd83a;
+}
 .stats-icon.red {
     background-color: #ff7976;
 }
