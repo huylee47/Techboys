@@ -302,11 +302,11 @@ class BillController extends Controller
     public function submitCancelOrder(Request $request, $id)
     {
         $request->validate([
-            'cancel_reason' => 'required|string|max:255|mix:10',
+            'cancel_reason' => 'required|string|max:255|min:10', // Changed 'mix:10' to 'min:10'
         ], [
             'cancel_reason.required' => 'Lý do hủy đơn không được để trống.',
             'cancel_reason.max' => 'Lý do hủy đơn không được vượt quá 255 ký tự.',
-            'cancel_reason.mix' => 'Lý do hủy đơn không được ít hơn 10 ký tự.',
+            'cancel_reason.min' => 'Lý do hủy đơn không được ít hơn 10 ký tự.', // Updated error message
         ]);
 
         $bill = Bill::find($id);
