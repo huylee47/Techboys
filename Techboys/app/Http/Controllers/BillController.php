@@ -21,6 +21,7 @@ use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+
 class BillController extends Controller
 {
     // public function index()
@@ -31,12 +32,12 @@ class BillController extends Controller
     public function index(Request $request)
     {
         $query = Bill::query();
-    
+
         // Lọc theo trạng thái nếu có request
         if ($request->has('status')) {
             $query->where('status_id', $request->status);
         }
-    
+
         $bills = $query->orderByDesc('created_at')->paginate(10);
         return view('admin.bill.index', compact('bills'));
     }
@@ -46,7 +47,7 @@ class BillController extends Controller
         $users = User::whereNotNull('phone')->get();
         return view('admin.bill.create', compact('users'));
     }
-    
+
     public function hide($id)
     {
         $bill = Bill::findOrFail($id);
@@ -69,7 +70,7 @@ class BillController extends Controller
         $billDetails = BillDetails::where('bill_id', $bill->id)->get();
         $productPromotions = Promotion::get();
         $attributeValues = AttributesValue::all()->keyBy('id');
-    
+
         foreach ($billDetails as $detail) {
             $promotion = Promotion::where('product_id', $detail->product_id)->first();
             if ($promotion && now()->lt(Carbon::parse($promotion->end_date))) {
@@ -77,62 +78,63 @@ class BillController extends Controller
             } else {
                 $detail->discounted_price = $detail->price;
             }
-    
+
             if ($detail->variant_id) {
                 $attributeJson = ProductVariant::where('id', $detail->variant_id)->value('attribute_values');
                 $attributeArray = json_decode($attributeJson, true) ?? [];
-    
+
                 $attributeValuesList = collect($attributeArray)->map(function ($attrValueId) use ($attributeValues) {
                     return $attributeValues[$attrValueId]->value ?? 'Không xác định';
                 })->toArray();
-    
+
                 $detail->attributes = implode(' ', $attributeValuesList);
             } else {
                 $detail->attributes = '';
             }
         }
-    
+
         $total = $billDetails->sum(function ($detail) {
             return $detail->quantity * $detail->discounted_price;
         });
-    
+
         $pdf = Pdf::loadView('admin.bill.my_invoice', compact('bill', 'billDetails', 'productPromotions', 'total'))->setPaper('a4')->setOption([
             'tempDir' => public_path(),
             'chroot' => public_path(),
         ]);
-    
+
         $fileName = 'bill_' . $bill->order_id . '_' . $bill->created_at->format('Ymd') . '.pdf';
         // return view('admin.bill.my_invoice',compact('bill', 'billDetails', 'productPromotions', 'total'));
         return $pdf->download($fileName);
     }
-    
-    public function invoiceBill($id) {
+
+    public function invoiceBill($id)
+    {
         $bill = Bill::find($id);
-        
+
         if (!$bill) {
             return redirect()->route('admin.bill.index')->with('error', 'Không tìm thấy hóa đơn!');
         }
-    
+
         if ($bill->status_id != 1) {
             return redirect()->route('admin.bill.index')->with('error', 'Hoá đơn không hợp lệ để xuất!');
         }
-    
+
         $billDetails = BillDetails::where('bill_id', $id)->get();
-    
+
         try {
             DB::beginTransaction();
-    
+
             $bill->update([
                 'status_id' => 2,
             ]);
-    
+
             foreach ($billDetails as $billDetail) {
                 if ($billDetail->variant_id) {
                     // Trừ stock cho biến thể sản phẩm
                     $updated = ProductVariant::where('id', $billDetail->variant_id)
                         ->where('stock', '>=', $billDetail->quantity)
                         ->decrement('stock', $billDetail->quantity);
-    
+
                     if (!$updated) {
                         DB::rollBack();
                         return redirect()->route('admin.bill.index')->with('error', 'Sản phẩm biến thể không đủ hàng!');
@@ -142,19 +144,19 @@ class BillController extends Controller
                     $updated = Product::where('id', $billDetail->product_id)
                         ->where('base_stock', '>=', $billDetail->quantity)
                         ->decrement('base_stock', $billDetail->quantity);
-    
+
                     if (!$updated) {
                         DB::rollBack();
                         return redirect()->route('admin.bill.index')->with('error', 'Sản phẩm không đủ hàng!');
                     }
                 }
-    
+
                 $product = Product::find($billDetail->product_id);
                 if ($product) {
                     $product->increment('purchases', $billDetail->quantity);
                 }
             }
-    
+
             DB::commit();
             return redirect()->route('admin.bill.index')->with('success', 'Hoá đơn đã được xuất!');
         } catch (\Exception $e) {
@@ -162,27 +164,28 @@ class BillController extends Controller
             return redirect()->route('admin.bill.index')->with('error', 'Đã xảy ra lỗi khi xuất hoá đơn!');
         }
     }
-    
-    
-    
-    public function cancelBill(Request $request,$id) {
+
+
+
+    public function cancelBill(Request $request, $id)
+    {
         $bill = Bill::find($id);
-    
+
         if (!$bill) {
             return redirect()->route('admin.bill.index')->with('error', 'Không tìm thấy hóa đơn!');
         }
-    
+
         // Kiểm tra chỉ cho phép hủy đơn nếu đang ở trạng thái "Chờ xác nhận"
         if ($bill->status_id != 1) {
             return redirect()->route('admin.bill.index')->with('error', 'Hoá đơn không hợp lệ để huỷ!');
         }
-    
+
         try {
             DB::beginTransaction();
-    
+
             // Lấy danh sách sản phẩm trong hóa đơn
             // $billDetails = BillDetails::where('bill_id', $id)->get();
-    
+
             // foreach ($billDetails as $billDetail) {
             //     if ($billDetail->variant_id) {
             //         $variant = ProductVariant::find($billDetail->variant_id);
@@ -196,56 +199,57 @@ class BillController extends Controller
             //         }
             //     }
             // }
-    
+
             // Cập nhật trạng thái hóa đơn thành "Đã huỷ" (giả sử status_id = 0 là "Đã huỷ")
             $bill->update([
                 'status_id' => 0,
                 'note' => $request->note
             ]);
-    
+
             DB::commit();
-    
+
             return redirect()->route('admin.bill.index')->with('success', 'Hoá đơn đã được huỷ thành công!');
         } catch (\Exception $e) {
             DB::rollBack();
             return redirect()->route('admin.bill.index')->with('error', 'Đã xảy ra lỗi khi huỷ hoá đơn!');
         }
     }
-    public function confirm($id){
-            $bill = Bill::find($id);
-            
-            if (!$bill) {
-                return redirect()->route('admin.bill.index')->with('error', 'Không tìm thấy hóa đơn!');
-            }
-        
-            if ($bill->status_id != 2) {
-                return redirect()->route('admin.bill.index')->with('error', 'Hoá đơn không hợp lệ!');
-            }
-        
-            $billDetails = BillDetails::where('bill_id', $id)->get();
-        
-            try {
-                DB::beginTransaction();
-        
-                $bill->update([
-                    'status_id' => 3,
-                ]);
-        
-                DB::commit();
-                return redirect()->route('admin.bill.index')->with('success', 'Hoá đơn đã được giao thành công!');
-            } catch (\Exception $e) {
-                DB::rollBack();
-                return redirect()->route('admin.bill.index')->with('error', 'Đã xảy ra lỗi khi xác nhận!');
-            }
+    public function confirm($id)
+    {
+        $bill = Bill::find($id);
+
+        if (!$bill) {
+            return redirect()->route('admin.bill.index')->with('error', 'Không tìm thấy hóa đơn!');
+        }
+
+        if ($bill->status_id != 2) {
+            return redirect()->route('admin.bill.index')->with('error', 'Hoá đơn không hợp lệ!');
+        }
+
+        $billDetails = BillDetails::where('bill_id', $id)->get();
+
+        try {
+            DB::beginTransaction();
+
+            $bill->update([
+                'status_id' => 3,
+            ]);
+
+            DB::commit();
+            return redirect()->route('admin.bill.index')->with('success', 'Hoá đơn đã được giao thành công!');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->route('admin.bill.index')->with('error', 'Đã xảy ra lỗi khi xác nhận!');
+        }
     }
-    
+
 
     //client
     public function indexClient()
     {
         $loadAll = Bill::with(['billDetails.product', 'billDetails.variant'])
-                       ->where('user_id', Auth::id())
-                       ->get();
+            ->where('user_id', Auth::id())
+            ->get();
 
         foreach ($loadAll as $bill) {
             foreach ($bill->billDetails as $detail) {
@@ -287,18 +291,18 @@ class BillController extends Controller
         }
 
         $loadAll = Auth::check() ? Bill::with(['billDetails.product', 'billDetails.variant'])
-                                       ->where('user_id', Auth::id())
-                                       ->get() : [];
+            ->where('user_id', Auth::id())
+            ->get() : [];
 
         return view('client.order.order', compact('searchedOrder', 'loadAll'));
     }
-  
+
 
     public function CancelOrder(Request $request)
     {
         $order = Bill::with('billDetails.product')->where('id', $request->input('order_id'))->first();
 
-       
+
 
         return view('client.order.CancelOrder', compact('order'));
     }
@@ -330,7 +334,8 @@ class BillController extends Controller
         }
     }
 
-    public function confirmClient(Request $request, $id) {
+    public function confirmClient(Request $request, $id)
+    {
         $bill = Bill::find($id);
 
         if (!$bill) {
@@ -371,6 +376,4 @@ class BillController extends Controller
 
         return view('client.order.detail', compact('order', 'provinces', 'districts', 'wards', 'payment_method'));
     }
-
-    
 }
