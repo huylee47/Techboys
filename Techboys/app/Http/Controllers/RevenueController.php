@@ -12,28 +12,33 @@ class RevenueController extends Controller
     public function index(){
 
         $revenueDay = Bill::whereDate('created_at', Carbon::today())
-         ->where('payment_status', 1) // Chỉ tính đơn đã thanh toán
-         ->sum('total');
-
-        $revenueWeek = Bill::whereBetween('created_at', [
-             Carbon::now()->startOfWeek(),
-             Carbon::now()->endOfWeek()
-         ])
-         ->where('payment_status', 1)
-         ->sum('total');
-
-        $revenueMonth = Bill::whereMonth('created_at', Carbon::now()->month)
         ->where('payment_status', 1)
+        ->where('status_id', 4)
         ->sum('total');
+    
+    $revenueWeek = Bill::whereBetween('created_at', [
+            Carbon::now()->startOfWeek(),
+            Carbon::now()->endOfWeek()
+        ])
+        ->where('payment_status', 1)
+        ->where('status_id', 4)
+        ->sum('total');
+    
+    $revenueMonth = Bill::whereMonth('created_at', Carbon::now()->month)
+        ->where('payment_status', 1)
+        ->where('status_id', 4)
+        ->sum('total');
+    
+    $revenueQuarter = Bill::whereBetween('created_at', [
+            Carbon::now()->startOfQuarter(),
+            Carbon::now()->endOfQuarter()
+        ])
+        ->where('payment_status', 1)
+        ->where('status_id', 4)
+        ->sum('total');
+    
 
-        $revenueQuarter = Bill::whereBetween('created_at', [
-             Carbon::now()->startOfQuarter(),
-             Carbon::now()->endOfQuarter()
-         ])
-         ->where('payment_status', 1)
-         ->sum('total');
-
-        $successfulOrders = Bill::where('payment_status', 1)->count();
+        $successfulOrders = Bill::where('payment_status', 1)->where('status_id', 4)->count();
 
         $cancelledOrders = Bill::where('status_id', 0)->count();
 
@@ -51,11 +56,12 @@ class RevenueController extends Controller
     $products = Product::whereIn('id', $bestSellingProducts->pluck('product_id'))
         ->get()
         ->keyBy('id');
-
+        $billShipping  = Bill::where('status_id',2)->count();
+        $billPending = Bill::where('status_id',1)->count();
     
         return view('admin.revenue.revenue', compact(
             'revenueDay', 'revenueWeek', 'revenueMonth', 'revenueQuarter',
-            'successfulOrders', 'cancelledOrders','monthlyRevenue','bestSellingProducts', 'products'
+            'successfulOrders', 'cancelledOrders','monthlyRevenue','bestSellingProducts', 'products','billShipping','billPending'
         ));
     }
     public function filterRevenue(Request $request)

@@ -29,6 +29,15 @@
             <section class="row">
                 <div class="col-12 col-lg-9">
                     <div class="row">
+                        <div class="d-flex gap-2 mb-3">
+                            <input type="date" id="startDate" class="form-control" value="{{ date('Y-m-01') }}" max="{{ date('Y-m-d') }}">
+                            <input type="date" id="endDate" class="form-control" value="{{ date('Y-m-d') }}" max="{{ date('Y-m-d') }}">
+                            <button id="filterButton" class="btn btn-primary">Lọc</button>
+                        </div>
+                        <div id="error-message" class="alert alert-danger d-none" role="alert"></div>
+                        <div class="card-body">
+                    </div>
+                    <div class="row">
                         <div class="col-6 col-lg-3 col-md-6">
                             <div class="card">
                                 <div class="card-body px-3 py-4-5">
@@ -52,11 +61,11 @@
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="stats-icon red">
-                                                <i class="iconly-boldProfile"></i>
+                                                <i class="iconly-boldClose-Square"></i>
                                             </div>
                                         </div>
                                         <div class="col-md-8">
-                                            <h6 class="text-muted font-semibold">Đơn hàng bị hủy</h6>
+                                            <h6 class="text-muted font-semibold">Đơn hàng bị huỷ bỏ</h6>
                                             <h6 class="font-extrabold mb-0">{{($cancelledOrders)}}</h6>
                                         </div>
                                     </div>
@@ -68,13 +77,49 @@
                                 <div class="card-body px-3 py-4-5">
                                     <div class="row">
                                         <div class="col-md-4">
-                                            <div class="stats-icon green">
+                                            <div class="stats-icon yellow">
                                                 <i class="iconly-boldGraph"></i>
                                             </div>
                                         </div>
                                         <div class="col-md-8">
-                                            <h6 class="text-muted font-semibold">Sản phẩm bán chạy</h6>
-                                            <h6 class="font-extrabold mb-0">#</h6>
+                                            <h6 class="text-muted font-semibold">Đơn hàng chờ duyệt</h6>
+                                            <h6 class="font-extrabold mb-0">{{$billPending}}</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6 col-lg-3 col-md-6">
+                            <div class="card">
+                                <div class="card-body px-3 py-4-5">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="stats-icon blue">
+                                                <i class="iconly-boldLocation"></i>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <h6 class="text-muted font-semibold">Đơn hàng đang giao</h6>
+                                            <h6 class="font-extrabold mb-0">{{$billShipping}}</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6 col-lg-3 col-md-6">
+                            <div class="card">
+                                <div class="card-body px-3 py-4-5">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="stats-icon blue">
+                                                <i class="iconly-boldActivity"></i>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <h6 class="text-muted font-semibold" id="revenueDayTitle">Doanh thu ngày hiện tại</h6>
+                                            <h6 class="font-extrabold mb-0" id="revenueDayValue">{{ number_format($revenueDay, 0, ',', '.') }} VNĐ</h6>
                                         </div>
                                     </div>
                                 </div>
@@ -86,19 +131,52 @@
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="stats-icon green">
-                                                <i class="iconly-boldBookmark"></i>
+                                                <i class="iconly-boldActivity"></i>
                                             </div>
                                         </div>
                                         <div class="col-md-8">
-                                            <h6 class="text-muted font-semibold">Danh mục bán chạy</h6>
-                                            <h6 class="font-extrabold mb-0">#</h6>
+                                            <h6 class="text-muted font-semibold" id="revenueWeekTitle">Doanh thu tuần hiện tại</h6>
+                                            <h6 class="font-extrabold mb-0" id="revenueWeekValue">{{ number_format($revenueWeek, 0, ',', '.') }} VNĐ</h6>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                                      
+                        <div class="col-6 col-lg-3 col-md-6">
+                            <div class="card">
+                                <div class="card-body px-3 py-4-5">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="stats-icon purple">
+                                                <i class="iconly-boldActivity"></i>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <h6 class="text-muted font-semibold" id="revenueMonthTitle">Doanh thu tháng hiện tại</h6>
+                                            <h6 class="font-extrabold mb-0" id="averageRevenueValue">{{ number_format($revenueMonth, 0, ',', '.') }} VNĐ</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6 col-lg-3 col-md-6">
+                            <div class="card">
+                                <div class="card-body px-3 py-4-5">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="stats-icon red">
+                                                <i class="iconly-boldActivity"></i>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <h6 class="text-muted font-semibold">Doanh thu quý hiện tại</h6>
+                                            <h6 class="font-extrabold mb-0">{{ number_format($revenueQuarter, 0, ',', '.') }} VNĐ</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>                 
 
                     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
@@ -108,13 +186,6 @@
                                 <div class="card-header">
                                     <h4>Biểu đồ doanh thu theo thời gian</h4>
                                 </div>
-                                <div class="d-flex gap-2 mb-3">
-                                    <input type="date" id="startDate" class="form-control" value="{{ date('Y-m-01') }}" max="{{ date('Y-m-d') }}">
-                                    <input type="date" id="endDate" class="form-control" value="{{ date('Y-m-d') }}" max="{{ date('Y-m-d') }}">
-                                    <button id="filterButton" class="btn btn-primary">Lọc</button>
-                                </div>
-                                <div id="error-message" class="alert alert-danger d-none" role="alert"></div>
-                                <div class="card-body">
                                     <canvas id="revenueChart"></canvas>
                                     <script>
                                         document.addEventListener("DOMContentLoaded", function () {
@@ -192,18 +263,18 @@
                                                         updateChart(labels, revenueData);
                                                     
 
-                                                        document.getElementById('revenueDayTitle').innerText = "Doanh thu theo lọc";
+                                                        document.getElementById('revenueDayTitle').innerText = "Tổng doanh thu sau khi lọc ngày";
                                                         document.getElementById('revenueDayValue').innerText =
                                                         new Intl.NumberFormat('vi-VN').format(data.total_revenue || 0) + " VNĐ";
 
 
-                                                        document.getElementById('revenueWeekTitle').innerText = "Ngày doanh thu top";
+                                                        document.getElementById('revenueWeekTitle').innerText = "Ngày cao nhất";
                                                         document.getElementById('revenueWeekValue').innerText =
                                                         data.max_revenue_day ? 
                                                         `${data.max_revenue_day} (${new Intl.NumberFormat('vi-VN').format(data.max_revenue_value || 0)} VNĐ)` 
                                                         : "Không có doanh thu";
 
-                                                        document.getElementById('revenueMonthTitle').innerText = "Doanh thu trung bình";
+                                                        document.getElementById('revenueMonthTitle').innerText = "Doanh thu trung bình sau khi lọc ";
                                                         document.getElementById('averageRevenueValue').innerText = 
                                                         new Intl.NumberFormat('vi-VN').format(data.average_revenue_per_day) + " VNĐ";
                                                 })
@@ -218,76 +289,7 @@
                         </div>
                     </div>
 
-                    <div class="row">
-                        <div class="col-6 col-lg-3 col-md-6">
-                            <div class="card">
-                                <div class="card-body px-3 py-4-5">
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <div class="stats-icon blue">
-                                                <i class="iconly-boldActivity"></i>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-8">
-                                            <h6 class="text-muted font-semibold" id="revenueDayTitle">Doanh thu ngày</h6>
-                                            <h6 class="font-extrabold mb-0" id="revenueDayValue">{{ number_format($revenueDay, 0, ',', '.') }} VNĐ</h6>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-6 col-lg-3 col-md-6">
-                            <div class="card">
-                                <div class="card-body px-3 py-4-5">
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <div class="stats-icon green">
-                                                <i class="iconly-boldActivity"></i>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-8">
-                                            <h6 class="text-muted font-semibold" id="revenueWeekTitle">Doanh thu tuần</h6>
-                                            <h6 class="font-extrabold mb-0" id="revenueWeekValue">{{ number_format($revenueWeek, 0, ',', '.') }} VNĐ</h6>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-6 col-lg-3 col-md-6">
-                            <div class="card">
-                                <div class="card-body px-3 py-4-5">
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <div class="stats-icon purple">
-                                                <i class="iconly-boldActivity"></i>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-8">
-                                            <h6 class="text-muted font-semibold" id="revenueMonthTitle">Doanh thu tháng</h6>
-                                            <h6 class="font-extrabold mb-0" id="averageRevenueValue">{{ number_format($revenueMonth, 0, ',', '.') }} VNĐ</h6>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-6 col-lg-3 col-md-6">
-                            <div class="card">
-                                <div class="card-body px-3 py-4-5">
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <div class="stats-icon red">
-                                                <i class="iconly-boldActivity"></i>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-8">
-                                            <h6 class="text-muted font-semibold">Doanh thu quý</h6>
-                                            <h6 class="font-extrabold mb-0">{{ number_format($revenueQuarter, 0, ',', '.') }} VNĐ</h6>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+
                     {{-- <div class="row">
                         <div class="col-12">
                             <div class="card">
