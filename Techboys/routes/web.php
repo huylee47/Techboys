@@ -181,7 +181,7 @@ Route::post('/logout', [UserController::class, 'logout'])->name('admin.logout');
             Route::post('/store', [UserController::class, 'store_user'])->name('admin.user.store');
             Route::post('/block/{id}', [UserController::class, 'block'])->name('admin.user.block');
             Route::post('/open/{id}', [UserController::class, 'open'])->name('admin.user.open');
-            Route::post('/check', [UserController::class, 'checkUser'])->name('admin.user.check');
+            Route::post('/check', [UserController::class, 'checkPhone'])->name('admin.user.check');
         });
 
         Route::prefix('/bill')->group(function () {
