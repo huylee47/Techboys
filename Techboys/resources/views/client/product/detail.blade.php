@@ -292,6 +292,8 @@
                                     <div class="summary entry-summary">
                                         <div class="single-product-header">
                                             <h1 class="product_title entry-title">{{ $product->name }}</h1>
+                                            <p >Lượt mua : {{$product->purchases}}</p>
+
                                         </div>
                                         <!-- .single-product-header -->
 
@@ -369,9 +371,11 @@
                                                         @endforeach
 
                                                         <!-- Hiển thị giá và tồn kho -->
+
                                                         <p>Số lượng tồn kho: <span
                                                                 id="stock-display">{{ $defaultVariant['stock'] }}</span>
                                                         </p>
+                                                        
                                                         <p class="price">
                                                             <span class="woocommerce-Price-amount amount"
                                                                 id="price-display">

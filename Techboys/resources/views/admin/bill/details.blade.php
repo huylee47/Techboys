@@ -118,7 +118,7 @@
                                             value="{{ $bill->address }}" readonly>
                                     </div>
                                     <div class="col-md-3 mb-3">
-                                        <label for="address">Voucher sử dụng</label>
+                                        <label for="address">Voucher sử dụng ?</label>
                                         <input type="text" class="form-control" id="address"
                                             value="{{ $bill->voucher_code ?? "Không sử dụng"}}" readonly>
                                     </div>
@@ -148,9 +148,9 @@
                                         <tr>
                                             <th>Tên Sản Phẩm</th>
                                             <th>Số Lượng</th>
-                                            <th>Đơn giá</th>
+                                            <th>Giá gốc</th>
                                             <th>Khuyến mại</th>
-                                            <th>Tổng tiền sản phẩm</th>
+                                            <th>Tổng tiền của sản phẩm </th>
                                         </tr>
                                     </thead>
                                     <tbody>

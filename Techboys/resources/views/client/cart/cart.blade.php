@@ -23,6 +23,8 @@
                                             <table class="shop_table shop_table_responsive cart">
                                                 @if ($cartItems->isEmpty())
                                                     <p class="text-center text-muted">Giỏ hàng trống</p>
+                                                    <a  class="button" href="{{route('home')}}">Tiếp tục mua hàng
+                                                </a>
                                                 @else
                                                     <thead>
                                                         <tr>
@@ -115,8 +117,8 @@
                                                             </div>
                                                             <p id="voucher-error" class="text-danger small"></p>
                                                             <p id="voucher-success" class="text-success small"></p>
-                                                            <input type="submit" value="Tiếp tục mua hàng"
-                                                                name="update_cart" class="button">
+                                                            <a  class="button" href="{{route('home')}}">Tiếp tục mua hàng
+                                                            </a>
                                                         </td>
                                                     </tr>
                                                 @endif
