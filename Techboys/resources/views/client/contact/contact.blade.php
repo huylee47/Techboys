@@ -11,7 +11,6 @@
                 </span>
                 Contact
             </nav>
-            <!-- .woocommerce-breadcrumb -->
             <div id="primary" class="content-area">
                 <main id="main" class="site-main">
                     <div class="type-page hentry">
@@ -19,7 +18,6 @@
                             <div class="stretch-full-width-map">
                                 <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d634.1549045120821!2d106.70951524863375!3d20.865679643682185!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x314a7bf67d69c9c7%3A0x4341c6cef1813f18!2zVHLGsOG7nW5nIENhbyDEkeG6s25nIEZQVCBQb2x5dGVjaG5pYw!5e0!3m2!1svi!2s!4v1740505370576!5m2!1svi!2s" height="514" style="border:0;" allowfullscreen="" ></iframe>
                             </div>
-                            <!-- .stretch-full-width-map -->
                             <div class="row contact-info">
                                 <div class="col-md-9 left-col">
                                     <div class="text-block">
@@ -171,13 +169,9 @@
                                                 </style>
                                                 
                                             </form>
-                                            <!-- .wpcf7-form -->
                                         </div>
-                                        <!-- .wpcf7 -->
                                     </div>
-                                    <!-- .contact-form7 -->
                                 </div>
-                                <!-- .col -->
                                 <div class="col-md-3 store-info">
                                     <div class="text-block">
                                         <h2 class="contact-page-title">Cửa hàng của chúng tôi</h2>
@@ -220,22 +214,13 @@
                                         <h3>Cơ hội nghề nghiệp</h3>
                                         <p class="inner-right-md">Nếu bạn quan tâm đến các cơ hội việc làm tại Techboys, vui lòng gửi email cho chúng tôi: <a href="techboyspoly@gmail.com">techboyspoly@gmail.com</a></p>
                                     </div>
-                                    <!-- .text-block -->
                                 </div>
-                                <!-- .col -->
                             </div>
-                            <!-- .contact-info -->
                         </div>
-                        <!-- .entry-content -->
                     </div>
-                    <!-- .hentry -->
                 </main>
-                <!-- #main -->
             </div>
-            <!-- #primary -->
         </div>
-        <!-- .row -->
     </div>
-    <!-- .col-full -->
 </div>
 @endsection
