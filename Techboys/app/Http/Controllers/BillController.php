@@ -45,7 +45,159 @@ class BillController extends Controller
     public function create()
     {
         $users = User::whereNotNull('phone')->get();
-        return view('admin.bill.create', compact('users'));
+        $products = Product::all();
+        return view('admin.bill.create', compact('users', 'products'));
+    }
+
+    // Tạo mới một đơn hàng với việc lựa chọn sản phẩm và biến thể
+    public function store(Request $request)
+    {
+        $request->validate([
+            'user_id' => 'required|exists:users,id',
+            'product_id' => 'required|exists:products,id',
+            'variant_id' => 'nullable|exists:product_variants,id',  // Cho phép chọn biến thể nếu có
+            'quantity' => 'required|integer|min:1',
+            'price' => 'required|numeric',
+        ]);
+
+        DB::beginTransaction();
+
+        try {
+            $bill = Bill::create([
+                'user_id' => $request->user_id,
+                'status_id' => 1,  // Trạng thái ban đầu là "Chờ xác nhận"
+                'total' => $request->quantity * $request->price,
+            ]);
+
+            // Thêm chi tiết hóa đơn
+            BillDetails::create([
+                'bill_id' => $bill->id,
+                'product_id' => $request->product_id,
+                'variant_id' => $request->variant_id,  // Nếu có
+                'quantity' => $request->quantity,
+                'price' => $request->price,
+            ]);
+
+            // Nếu có biến thể, giảm số lượng stock
+            if ($request->variant_id) {
+                $variant = ProductVariant::findOrFail($request->variant_id);
+                $variant->decrement('stock', $request->quantity);
+            } else {
+                $product = Product::findOrFail($request->product_id);
+                $product->decrement('base_stock', $request->quantity);
+            }
+
+            DB::commit();
+            return redirect()->route('admin.bill.index')->with('success', 'Đơn hàng đã được tạo thành công!');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->route('admin.bill.index')->with('error', 'Có lỗi xảy ra khi tạo đơn hàng!');
+        }
+    }
+
+    // Lấy thông tin chi tiết sản phẩm khi chọn
+    public function getProductDetails(Request $request)
+    {
+        $productId = $request->input('product_id');
+        $variantId = $request->input('variant_id');
+
+        $product = Product::with('variants')->find($productId);
+
+        if ($product) {
+            $price = $product->base_price;
+            if ($variantId) {
+                $variant = ProductVariant::find($variantId);
+                if ($variant) {
+                    $price = $variant->price;
+                }
+            }
+            return response()->json([
+                'product_name' => $product->name,
+                'price' => $price,
+                'variants' => $product->variants->map(function ($variant) {
+                    return [
+                        'id' => $variant->id,
+                        'name' => $variant->name,
+                        'price' => $variant->price,
+                    ];
+                }),
+            ]);
+        }
+
+        return response()->json(['error' => 'Sản phẩm không tồn tại'], 404);
+    }
+
+    // Cập nhật giỏ hàng khi người dùng thay đổi lựa chọn sản phẩm hoặc biến thể
+    public function updateCart(Request $request)
+    {
+        $request->validate([
+            'product_id' => 'required|exists:products,id',
+            'variant_id' => 'nullable|exists:product_variants,id',
+            'quantity' => 'required|integer|min:1',
+        ]);
+
+        $product = Product::find($request->product_id);
+        $variant = null;
+
+        if ($request->variant_id) {
+            $variant = ProductVariant::find($request->variant_id);
+        }
+
+        $price = $variant ? $variant->price : $product->base_price;
+        $total = $price * $request->quantity;
+
+        return response()->json([
+            'product_name' => $product->name,
+            'variant_name' => $variant ? $variant->name : null,
+            'price' => $price,
+            'total' => $total,
+        ]);
+    }
+
+    // Tạo hóa đơn từ giỏ hàng đã chọn
+    public function createBillFromCart(Request $request)
+    {
+        $cartItems = $request->input('cart_items'); // Một mảng các sản phẩm và biến thể được chọn từ giỏ hàng
+
+        DB::beginTransaction();
+
+        try {
+            $bill = Bill::create([
+                'user_id' => Auth::id(),
+                'status_id' => 1,  // "Chờ xác nhận"
+                'total' => 0,  // Tính sau
+            ]);
+
+            $total = 0;
+
+            foreach ($cartItems as $item) {
+                $price = $item['variant_id'] ? ProductVariant::find($item['variant_id'])->price : Product::find($item['product_id'])->base_price;
+                $total += $price * $item['quantity'];
+
+                BillDetails::create([
+                    'bill_id' => $bill->id,
+                    'product_id' => $item['product_id'],
+                    'variant_id' => $item['variant_id'],
+                    'quantity' => $item['quantity'],
+                    'price' => $price,
+                ]);
+
+                // Cập nhật số lượng kho
+                if ($item['variant_id']) {
+                    ProductVariant::find($item['variant_id'])->decrement('stock', $item['quantity']);
+                } else {
+                    Product::find($item['product_id'])->decrement('base_stock', $item['quantity']);
+                }
+            }
+
+            $bill->update(['total' => $total]);
+
+            DB::commit();
+            return redirect()->route('client.orders')->with('success', 'Đơn hàng đã được tạo thành công!');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->route('client.orders')->with('error', 'Có lỗi xảy ra khi tạo đơn hàng!');
+        }
     }
 
     public function hide($id)
