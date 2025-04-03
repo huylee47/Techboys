@@ -62,22 +62,28 @@
                     </p>
                     <p>
                         <label for="order_status">Trạng thái đơn</label>
-                        <input type="text"
-                               value="@if($order->status_id == 0)
-                                          Đã hủy đơn
-                                      @elseif($order->status_id == 1)
-                                          Đang xử lý
-                                      @elseif($order->status_id == 2)
-                                          Đang giao
-                                      @elseif($order->status_id == 3)
-                                          Đã giao
-                                      @elseif($order->status_id == 4)
-                                          Giao hàng thành công
-                                      @elseif($order->status_id == 5)
-                                          Giao hàng thất bại
-                                      @else
-                                          Không xác định
-                                      @endif" 
+                        <input type="text" value="@switch($order->status_id)
+@case(0)
+Đã hủy đơn
+                                                                        @break
+                                                                    @case(1)
+Đang xử lý
+                                                                        @break
+                                                                    @case(2)
+Đang giao
+                                                                        @break
+                                                                    @case(3)
+Đã giao
+                                                                        @break
+                                                                    @case(4)
+Giao hàng thành công
+                                                                        @break
+                                                                    @case(5)
+Giao hàng thất bại
+                                                                        @break
+                                                                    @default
+ Không xác định
+                                                                @endswitch"
                                id="order_status" 
                                name="order_status" 
                                disabled>
