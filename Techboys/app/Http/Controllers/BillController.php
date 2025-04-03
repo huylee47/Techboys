@@ -256,13 +256,15 @@ class BillController extends Controller
 
     public function searchOrder(Request $request)
     {
-        $orderId = $request->input('order_id');
-        $phone = $request->input('phone');
+        $query = Bill::with(['billDetails.product', 'billDetails.variant']);
 
-        $query = Bill::with(['billDetails.product', 'billDetails.variant'])->where('order_id', $orderId);
-
-        // If the user is not logged in, validate the phone number
-        if (!Auth::check()) {
+        if (Auth::check()) {
+            // Search by order ID for logged-in users
+            $orderId = $request->input('order_id');
+            $query->where('order_id', $orderId)->where('user_id', Auth::id());
+        } else {
+            // Search by phone for guests
+            $phone = $request->input('phone');
             $query->where('phone', $phone);
         }
 
@@ -277,7 +279,7 @@ class BillController extends Controller
                 }
             }
         } else {
-            return redirect()->route('client.orders')->with('error', 'Mã hóa đơn hoặc số điện thoại không chính xác!');
+            return redirect()->route('client.orders')->with('error', 'Thông tin tìm kiếm không chính xác!');
         }
 
         $loadAll = Auth::check() ? Bill::with(['billDetails.product', 'billDetails.variant'])
@@ -300,10 +302,11 @@ class BillController extends Controller
     public function submitCancelOrder(Request $request, $id)
     {
         $request->validate([
-            'cancel_reason' => 'required|string|max:255',
+            'cancel_reason' => 'required|string|max:255|min:10', // Changed 'mix:10' to 'min:10'
         ], [
             'cancel_reason.required' => 'Lý do hủy đơn không được để trống.',
             'cancel_reason.max' => 'Lý do hủy đơn không được vượt quá 255 ký tự.',
+            'cancel_reason.min' => 'Lý do hủy đơn không được ít hơn 10 ký tự.', // Updated error message
         ]);
 
         $bill = Bill::find($id);
@@ -340,6 +343,7 @@ class BillController extends Controller
 
             $bill->update([
                 'status_id' => 4,
+                'payment_status' => 1,
             ]);
 
             DB::commit();
@@ -351,19 +355,39 @@ class BillController extends Controller
     }
     public function detailClient(Request $request)
     {
-        $orderId = $request->query('order_id');
-        $order = Bill::with('user')->find($orderId);
+        $orderId = $request->input('order_id'); // Lấy từ POST request
+        $order = Bill::with(['user', 'billDetails.product', 'billDetails.variant'])->find($orderId);
 
         if (!$order) {
             return redirect()->route('client.orders')->with('error', 'Không tìm thấy đơn hàng!');
         }
 
-        $provinces = Province::all();
-        $districts = District::where('province_id', $order->province_id)->get();
-        $wards = Ward::where('district_id', $order->district_id)->get();
-        $payment_method = $order->payment_method;
+        $attributeValues = AttributesValue::all()->keyBy('id');
 
-        return view('client.order.detail', compact('order', 'provinces', 'districts', 'wards', 'payment_method'));
+        foreach ($order->billDetails as $detail) {
+            if ($detail->variant_id) {
+                $attributeJson = ProductVariant::where('id', $detail->variant_id)->value('attribute_values');
+                $attributeArray = json_decode($attributeJson, true) ?? [];
+                $detail->attributes = implode(', ', $attributeValues->only($attributeArray)->pluck('value')->toArray());
+            } else {
+                $detail->attributes = '';
+            }
+
+            // Calculate discounted price if a promotion exists
+            $promotion = Promotion::where('product_id', $detail->product_id)->first();
+            if ($promotion && now()->lt(Carbon::parse($promotion->end_date))) {
+                $detail->discounted_price = $detail->price * (1 - $promotion->discount_percent / 100);
+            } else {
+                $detail->discounted_price = $detail->price;
+            }
+        }
+
+        // Calculate total amount considering discounted prices
+        $order->total_amount = $order->billDetails->sum(function ($detail) {
+            return $detail->discounted_price * $detail->quantity;
+        }) + $order->fee_shipping;
+
+        return view('client.order.detail', compact('order'));
     }
 
     
