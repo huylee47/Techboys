@@ -88,14 +88,17 @@ class ConfigController extends Controller
         $config = Config::first();
     
         if ($request->hasFile('favicon')) {
-            $faviconPath = $request->file('favicon')->store('images', 'public');
-            $config->favicon = $faviconPath;
+            $faviconName = time() . '_favicon.' . $request->file('favicon')->getClientOriginalExtension();
+            $request->file('favicon')->move(public_path('admin/assets/images/config'), $faviconName);
+            $config->favicon = $faviconName; 
         }
-    
+        
         if ($request->hasFile('logo')) {
-            $logoPath = $request->file('logo')->store('images', 'public');
-            $config->logo = $logoPath;
+            $logoName = time() . '_logo.' . $request->file('logo')->getClientOriginalExtension();
+            $request->file('logo')->move(public_path('admin/assets/images/config'), $logoName);
+            $config->logo = $logoName; 
         }
+        
     
         $config->update([
             'title' => $request->title,
