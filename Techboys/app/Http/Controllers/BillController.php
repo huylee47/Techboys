@@ -352,16 +352,16 @@ class BillController extends Controller
     public function detailClient(Request $request)
     {
         $orderId = $request->query('order_id');
-        $order = Bill::with('user')->find($orderId);
+        $order = Bill::with(['user'])->find($orderId); // No need for voucher relationship
 
         if (!$order) {
             return redirect()->route('client.orders')->with('error', 'Không tìm thấy đơn hàng!');
         }
 
-      
         $payment_method = $order->payment_method;
+        $fee_shipping = $order->fee_shipping;
 
-        return view('client.order.detail', compact('order',  'payment_method'));
+        return view('client.order.detail', compact('order', 'payment_method', 'fee_shipping'));
     }
 
     
