@@ -155,7 +155,7 @@ Route::post('/logout', [UserController::class, 'logout'])->name('admin.logout');
                 Route::get('{id}',[ProductController::class, 'stock'])->name('admin.stock.index');
                 Route::post('update/{ProductId}', [ProductController::class,'updateStock'])->name('admin.stock.update');
             });
-            Route::get('variants', [ProductController::class, 'getVariants'])->name('admin.product.getVariants');
+            Route::get('/variants', [ProductController::class, 'getVariants'])->name('admin.product.getVariants');
         });
 
         Route::prefix('/category')->group(function () {
