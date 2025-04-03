@@ -43,49 +43,8 @@
                 <p>
                     <label for="billing_first_name">Họ và Tên Người nhận</label>
                     <input type="text" value="{{ $order->user->name }}" id="billing_first_name" name="full_name" disabled>
-                </p>
+                </p>              
                 <div class="flex-row">
-                    <p>
-                        <label for="billing_city">Thành phố
-                            <abbr title="required" class="required">*</abbr>
-                        </label>
-                        <select name="province_id" id="province" disabled>
-                            <option value="" disabled>Chọn tỉnh/thành phố</option>
-                            @foreach ($provinces as $province)
-                                <option value="{{ $province->id }}" {{ $province->id == $order->province_id ? 'selected' : '' }}>
-                                    {{ $province->name }}
-                                </option>
-                            @endforeach
-                        </select>
-                    </p>
-                    <p>
-                        <label for="billing_district">Quận
-                            <abbr title="required" class="required">*</abbr>
-                        </label>
-                        <select name="district_id" id="district" disabled>
-                            <option value="" disabled>Chọn quận/huyện</option>
-                            @foreach ($districts as $district)
-                                <option value="{{ $district->id }}" {{ $district->id == $order->district_id ? 'selected' : '' }}>
-                                    {{ $district->name }}
-                                </option>
-                            @endforeach
-                        </select>
-                    </p>
-                </div>
-                <div class="flex-row">
-                    <p>
-                        <label for="billing_ward">Phường/Xã
-                            <abbr title="required" class="required">*</abbr>
-                        </label>
-                        <select name="ward_id" id="ward" disabled>
-                            <option value="" disabled>Chọn phường/xã</option>
-                            @foreach ($wards as $ward)
-                                <option value="{{ $ward->id }}" {{ $ward->id == $order->ward_id ? 'selected' : '' }}>
-                                    {{ $ward->name }}
-                                </option>
-                            @endforeach
-                        </select>
-                    </p>
                     <p>
                         <label for="billing_phone">Số điện thoại
                             <abbr title="required" class="required">*</abbr>
