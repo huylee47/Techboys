@@ -155,7 +155,7 @@ Route::post('/logout', [UserController::class, 'logout'])->name('admin.logout');
                 Route::get('{id}',[ProductController::class, 'stock'])->name('admin.stock.index');
                 Route::post('update/{ProductId}', [ProductController::class,'updateStock'])->name('admin.stock.update');
             });
-  
+            Route::get('variants', [ProductController::class, 'getVariants'])->name('admin.product.getVariants');
         });
 
         Route::prefix('/category')->group(function () {
@@ -187,6 +187,7 @@ Route::post('/logout', [UserController::class, 'logout'])->name('admin.logout');
         Route::prefix('/bill')->group(function () {
             Route::get('/', [BillController::class, 'index'])->name('admin.bill.index');
             Route::get('/create', [BillController::class, 'create'])->name('admin.bill.create');
+            Route::post('/store', [BillController::class, 'store'])->name('admin.bill.store');
             Route::get('/hide/{id}', [BillController::class, 'hide'])->name('admin.bill.hide');
             Route::get('/restore/{id}', [BillController::class, 'restore'])->name('admin.bill.
             restore');
