@@ -354,16 +354,36 @@ class BillController extends Controller
     public function detailClient(Request $request)
     {
         $orderId = $request->query('order_id');
-        $order = Bill::with(['user'])->find($orderId); // No need for voucher relationship
+        $order = Bill::with(['user', 'billDetails.product', 'billDetails.variant'])->find($orderId);
 
         if (!$order) {
             return redirect()->route('client.orders')->with('error', 'Không tìm thấy đơn hàng!');
         }
 
-        $payment_method = $order->payment_method;
-        $fee_shipping = $order->fee_shipping;
+        $attributeValues = AttributesValue::all()->keyBy('id');
 
-        return view('client.order.detail', compact('order', 'payment_method', 'fee_shipping'));
+        foreach ($order->billDetails as $detail) {
+            if ($detail->variant_id) {
+                $attributeJson = ProductVariant::where('id', $detail->variant_id)->value('attribute_values');
+                $attributeArray = json_decode($attributeJson, true) ?? [];
+                $detail->attributes = implode(', ', $attributeValues->only($attributeArray)->pluck('value')->toArray());
+            } else {
+                $detail->attributes = '';
+            }
+        }
+
+        $order->product_name_with_attributes = $order->billDetails->map(function ($detail) {
+            $attributes = $detail->attributes ? ' (' . $detail->attributes . ')' : '';
+            return $detail->product->name . $attributes;
+        })->join(', ');
+
+        $order->original_price = $order->billDetails->sum(function ($detail) {
+            return $detail->price * $detail->quantity;
+        });
+
+        $order->total_amount = $order->original_price + $order->fee_shipping;
+
+        return view('client.order.detail', compact('order'));
     }
 
     
