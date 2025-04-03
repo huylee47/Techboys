@@ -155,6 +155,7 @@ Route::post('/logout', [UserController::class, 'logout'])->name('admin.logout');
                 Route::get('{id}',[ProductController::class, 'stock'])->name('admin.stock.index');
                 Route::post('update/{ProductId}', [ProductController::class,'updateStock'])->name('admin.stock.update');
             });
+            // Route::get('/variants', [ProductController::class, 'getVariants'])->name('admin.product.getVariants');
         });
 
         Route::prefix('/category')->group(function () {
@@ -195,14 +196,11 @@ Route::post('/logout', [UserController::class, 'logout'])->name('admin.logout');
             Route::get('confirm/{id}', [BillController::class, 'confirm'])->name('admin.bill.confirm');
             // Route::post('complete/{id}',[BillController::class,'completeBill'])->name('admin.bill.complete');
 
-            // Thêm các route mới cho chức năng tạo đơn hàng
             Route::get('/create', [BillController::class, 'create'])->name('admin.bill.create');
             Route::post('/store', [BillController::class, 'store'])->name('admin.bill.store');
-
-            // Thêm các route API phục vụ cho form tạo đơn hàng
             Route::get('/get-variants', [BillController::class, 'getVariants'])->name('admin.product.getVariants');
-            Route::get('/get-districts/{provinceId}', [BillController::class, 'getDistricts'])->name('admin.getDistricts');
-            Route::get('/get-wards/{districtId}', [BillController::class, 'getWards'])->name('admin.getWards');
+            Route::post('/check-voucher', [BillController::class, 'checkVoucher'])->name('admin.bill.checkVoucher');
+            Route::post('/get-user-by-phone', [BillController::class, 'getUserByPhone'])->name('admin.bill.getUserByPhone');
         });
 
         Route::prefix('/blogs')->group(function () {
