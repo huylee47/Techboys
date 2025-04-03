@@ -114,11 +114,12 @@
                                                                     @endif
                                                             
                                                             @endauth   
-                                                            <form action="{{ route('client.orders.detail') }}" method="GET">
-                                                                        <input type="hidden" name="order_id" value="{{ $searchedOrder->id }}">
-                                                                        <button class="btn btn-warning" type="submit">Chi tiết</button>
-                                                                    </form>
-                                                                    </div>
+                                                            <form action="{{ route('client.orders.detail') }}" method="POST">
+                                                                @csrf
+                                                                <input type="hidden" name="order_id" value="{{ $searchedOrder->id }}">
+                                                                <button class="btn btn-warning" type="submit">Chi tiết</button>
+                                                            </form>
+                                                            </div>
                                                         </td>
                                                     </tr>
                                                 </tbody>
@@ -192,7 +193,8 @@
                                                                                 <input type="hidden" name="order_id" value="{{ $bill->id }}">
                                                                                 <button class="btn btn-danger" type="submit">Hủy đơn</button>
                                                                             </form>
-                                                                            <form action="{{ route('client.orders.detail') }}" method="GET">
+                                                                            <form action="{{ route('client.orders.detail') }}" method="POST">
+                                                                                @csrf
                                                                                 <input type="hidden" name="order_id" value="{{ $bill->id }}">
                                                                                 <button class="btn btn-warning" type="submit">Chi tiết</button>
                                                                             </form>
