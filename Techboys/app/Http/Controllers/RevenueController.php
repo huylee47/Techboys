@@ -12,26 +12,31 @@ class RevenueController extends Controller
     public function index(){
 
         $revenueDay = Bill::whereDate('created_at', Carbon::today())
-         ->where('payment_status', 1) // Chỉ tính đơn đã thanh toán
-         ->sum('total');
-
-        $revenueWeek = Bill::whereBetween('created_at', [
-             Carbon::now()->startOfWeek(),
-             Carbon::now()->endOfWeek()
-         ])
-         ->where('payment_status', 1)
-         ->sum('total');
-
-        $revenueMonth = Bill::whereMonth('created_at', Carbon::now()->month)
         ->where('payment_status', 1)
+        ->where('status_id', 4)
         ->sum('total');
-
-        $revenueQuarter = Bill::whereBetween('created_at', [
-             Carbon::now()->startOfQuarter(),
-             Carbon::now()->endOfQuarter()
-         ])
-         ->where('payment_status', 1)
-         ->sum('total');
+    
+    $revenueWeek = Bill::whereBetween('created_at', [
+            Carbon::now()->startOfWeek(),
+            Carbon::now()->endOfWeek()
+        ])
+        ->where('payment_status', 1)
+        ->where('status_id', 4)
+        ->sum('total');
+    
+    $revenueMonth = Bill::whereMonth('created_at', Carbon::now()->month)
+        ->where('payment_status', 1)
+        ->where('status_id', 4)
+        ->sum('total');
+    
+    $revenueQuarter = Bill::whereBetween('created_at', [
+            Carbon::now()->startOfQuarter(),
+            Carbon::now()->endOfQuarter()
+        ])
+        ->where('payment_status', 1)
+        ->where('status_id', 4)
+        ->sum('total');
+    
 
         $successfulOrders = Bill::where('payment_status', 1)->count();
 
