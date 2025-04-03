@@ -40,12 +40,11 @@
         @method('POST')
         <div id="customer_details">
             <div>
-                    <div class="flex-row">
-                <p>
-                    <label for="billing_first_name">Họ và Tên Người nhận</label>
-                    <input type="text" value="{{ $order->user->name }}" id="billing_first_name" name="full_name" disabled>
-                </p>              
-            
+                <div class="flex-row">
+                    <p>
+                        <label for="billing_first_name">Họ và Tên Người nhận</label>
+                        <input type="text" value="{{ $order->user->name }}" id="billing_first_name" name="full_name" disabled>
+                    </p>              
                     <p>
                         <label for="billing_phone">Số điện thoại
                             <abbr title="required" class="required">*</abbr>
@@ -62,7 +61,6 @@
                                name="payment_method" 
                                disabled>
                     </p>
-              
                     <p>
                         <label for="voucher">Voucher đã áp dụng</label>
                         <input type="text" 
@@ -79,6 +77,35 @@
                                value="{{ number_format($order->fee_shipping, 0, ',', '.') }} VNĐ" 
                                id="shipping_fee" 
                                name="shipping_fee" 
+                               disabled>
+                    </p>
+              
+                
+                    <p>
+                        <label for="product_name">Tên sản phẩm </label>
+                        <input type="text" 
+                               value="{{ $order->product_name_with_attributes ?? 'Không xác định' }}" 
+                               id="product_name" 
+                               name="product_name" 
+                               disabled>
+                    </p>
+                      </div>
+                    <div class="flex-row">
+                    <p>
+                        <label for="original_price">Giá gốc</label>
+                        <input type="text" 
+                               value="{{ number_format($order->original_price, 0, ',', '.') }} VNĐ" 
+                               id="original_price" 
+                               name="original_price" 
+                               disabled>
+                    </p>
+            
+                    <p>
+                        <label for="total_amount">Tổng tiền</label>
+                        <input type="text" 
+                               value="{{ number_format($order->total_amount, 0, ',', '.') }} VNĐ" 
+                               id="total_amount" 
+                               name="total_amount" 
                                disabled>
                     </p>
                 </div>
