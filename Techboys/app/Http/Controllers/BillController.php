@@ -342,6 +342,7 @@ class BillController extends Controller
 
             $bill->update([
                 'status_id' => 4,
+                'payment_status' => 1,
             ]);
 
             DB::commit();
