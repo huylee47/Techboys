@@ -256,13 +256,15 @@ class BillController extends Controller
 
     public function searchOrder(Request $request)
     {
-        $orderId = $request->input('order_id');
-        $phone = $request->input('phone');
+        $query = Bill::with(['billDetails.product', 'billDetails.variant']);
 
-        $query = Bill::with(['billDetails.product', 'billDetails.variant'])->where('order_id', $orderId);
-
-        // If the user is not logged in, validate the phone number
-        if (!Auth::check()) {
+        if (Auth::check()) {
+            // Search by order ID for logged-in users
+            $orderId = $request->input('order_id');
+            $query->where('order_id', $orderId)->where('user_id', Auth::id());
+        } else {
+            // Search by phone for guests
+            $phone = $request->input('phone');
             $query->where('phone', $phone);
         }
 
@@ -277,7 +279,7 @@ class BillController extends Controller
                 }
             }
         } else {
-            return redirect()->route('client.orders')->with('error', 'Mã hóa đơn hoặc số điện thoại không chính xác!');
+            return redirect()->route('client.orders')->with('error', 'Thông tin tìm kiếm không chính xác!');
         }
 
         $loadAll = Auth::check() ? Bill::with(['billDetails.product', 'billDetails.variant'])
