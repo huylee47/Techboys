@@ -116,11 +116,16 @@ class UserController extends Controller
         if ($user) {
             return response()->json([
                 'status' => 'exists',
-                'user' => $user
+                'user' => [
+                    'name' => $user->name,
+                    'email' => $user->email,
+                    'phone' => $user->phone,
+                    'address' => $user->address,
+                ]
             ]);
-        } else {
-            return response()->json(['status' => 'not_found']);
         }
+
+        return response()->json(['status' => 'not_found']);
     }
 
     //client
