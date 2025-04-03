@@ -47,7 +47,6 @@
                     </p>              
                     <p>
                         <label for="billing_phone">Số điện thoại
-                            <abbr title="required" class="required">*</abbr>
                         </label>
                         <input type="tel" value="{{ $order->phone }}" id="billing_phone" name="phone" disabled>
                     </p>
@@ -81,7 +80,6 @@
                     </p> 
                      <p>
                     <label for="order_comments">Địa chỉ chi tiết
-                        <abbr title="required" class="required">*</abbr>
                     </label>
                     <input type="text" 
                     value="{{ $order->address }}" 
