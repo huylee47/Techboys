@@ -41,9 +41,10 @@ class BillController extends Controller
         return view('admin.bill.index', compact('bills'));
     }
 
-    public function create(Request $request)
+    public function create()
     {
-        return view('admin.bill.create');
+        $users = User::whereNotNull('phone')->get();
+        return view('admin.bill.create', compact('users'));
     }
     
     public function hide($id)
