@@ -370,18 +370,20 @@ class BillController extends Controller
             } else {
                 $detail->attributes = '';
             }
+
+            // Calculate discounted price if a promotion exists
+            $promotion = Promotion::where('product_id', $detail->product_id)->first();
+            if ($promotion && now()->lt(Carbon::parse($promotion->end_date))) {
+                $detail->discounted_price = $detail->price * (1 - $promotion->discount_percent / 100);
+            } else {
+                $detail->discounted_price = $detail->price;
+            }
         }
 
-        $order->product_name_with_attributes = $order->billDetails->map(function ($detail) {
-            $attributes = $detail->attributes ? ' (' . $detail->attributes . ')' : '';
-            return $detail->product->name . $attributes;
-        })->join(', ');
-
-        $order->original_price = $order->billDetails->sum(function ($detail) {
-            return $detail->price * $detail->quantity;
-        });
-
-        $order->total_amount = $order->original_price + $order->fee_shipping;
+        // Calculate total amount considering discounted prices
+        $order->total_amount = $order->billDetails->sum(function ($detail) {
+            return $detail->discounted_price * $detail->quantity;
+        }) + $order->fee_shipping;
 
         return view('client.order.detail', compact('order'));
     }
