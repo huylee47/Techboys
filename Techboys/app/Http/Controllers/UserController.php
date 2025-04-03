@@ -108,10 +108,9 @@ class UserController extends Controller
         return redirect()->route('admin.user.index')->with('success', 'tạo tài khoản thành công.');
     }
 
-    public function checkUser(Request $request)
+    public function checkPhone(Request $request)
     {
-        $phone = $request->input('phone');
-        $user = User::where('phone', $phone)->first();
+        $user = User::where('phone', $request->phone)->first();
 
         if ($user) {
             return response()->json([
@@ -119,13 +118,12 @@ class UserController extends Controller
                 'user' => [
                     'name' => $user->name,
                     'email' => $user->email,
-                    'phone' => $user->phone,
                     'address' => $user->address,
                 ]
             ]);
+        } else {
+            return response()->json(['status' => 'not_found']);
         }
-
-        return response()->json(['status' => 'not_found']);
     }
 
     //client
