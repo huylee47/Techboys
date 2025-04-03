@@ -11,21 +11,19 @@
             <div class="page-title">
                 <div class="row">
                     <div class="col-12 col-md-6 order-md-1 order-last">
-                        <h3>Danh sách khuyến mãi</h3>
+                        <h3>Cấu hình Website</h3>
                     </div>
                     <div class="col-12 col-md-6 order-md-2 order-first">
                         <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="{{ route('admin.index') }}">Dashboard</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Khuyến mãi</li>
+                                <li class="breadcrumb-item active" aria-current="page">Cấu hình</li>
                             </ol>
                         </nav>
                     </div>
                 </div>
             </div>
             <div class="container">
-                <h3>Cấu Hình Website</h3>
-                <a href="{{ route('admin.config.edit') }}" class="btn btn-primary">Chỉnh sửa</a>
                 <table class="table mt-3">
                     <tr>
                         <th>Favicon</th>
@@ -61,4 +59,7 @@
                     </tr>
                 </table>
             </div>
-
+        </div>
+        <a href="{{ route('admin.config.edit') }}" class="btn btn-primary">Chỉnh sửa</a>
+    </div>
+@endsection
