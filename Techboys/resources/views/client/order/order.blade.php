@@ -96,8 +96,8 @@
                                                         </td>
                                                         <td>{{ number_format($searchedOrder->total, 0, ',', '.') }} VND</td>
                                                         <td>
-                                                            @auth
-                                                                <div style="display: flex; gap: 10px;">
+                                                            <div style="display: flex; gap: 10px;">
+                                                                @auth
                                                                     @if($searchedOrder->status_id == 1)
                                                                         <form action="{{ route('client.orders.cancel') }}" method="POST">
                                                                             @csrf
@@ -105,20 +105,18 @@
                                                                             <button class="btn btn-danger" type="submit">Hủy đơn</button>
                                                                         </form>
                                                                     @endif
-                                                                 
                                                                     @if($searchedOrder->status_id == 3)
                                                                         <form action="{{ route('client.orders.confirm', $searchedOrder->id) }}" method="POST">
                                                                             @csrf
                                                                             <button class="btn btn-success" type="submit">Xác nhận</button>
                                                                         </form>
                                                                     @endif
-                                                            
-                                                            @endauth   
-                                                            <form action="{{ route('client.orders.detail') }}" method="POST">
-                                                                @csrf
-                                                                <input type="hidden" name="order_id" value="{{ $searchedOrder->id }}">
-                                                                <button class="btn btn-warning" type="submit">Chi tiết</button>
-                                                            </form>
+                                                                @endauth   
+                                                                <form action="{{ route('client.orders.detail') }}" method="POST">
+                                                                    @csrf
+                                                                    <input type="hidden" name="order_id" value="{{ $searchedOrder->id }}">
+                                                                    <button class="btn btn-warning" type="submit">Chi tiết</button>
+                                                                </form>
                                                             </div>
                                                         </td>
                                                     </tr>
@@ -185,27 +183,27 @@
                                                                 @endswitch
                                                             </td>
                                                             <td>{{ number_format($bill->total, 0, ',', '.') }} VND</td>
-                                                                <td>
+                                                            <td>
+                                                                <div style="display: flex; gap: 10px;">
                                                                     @if($bill->status_id == 1)
-                                                                        <div style="display: flex; gap: 10px;">
-                                                                            <form action="{{ route('client.orders.cancel') }}" method="POST">
-                                                                                @csrf
-                                                                                <input type="hidden" name="order_id" value="{{ $bill->id }}">
-                                                                                <button class="btn btn-danger" type="submit">Hủy đơn</button>
-                                                                            </form>
-                                                                            <form action="{{ route('client.orders.detail') }}" method="POST">
-                                                                                @csrf
-                                                                                <input type="hidden" name="order_id" value="{{ $bill->id }}">
-                                                                                <button class="btn btn-warning" type="submit">Chi tiết</button>
-                                                                            </form>
-                                                                        </div>
+                                                                        <form action="{{ route('client.orders.cancel') }}" method="POST">
+                                                                            @csrf
+                                                                            <input type="hidden" name="order_id" value="{{ $bill->id }}">
+                                                                            <button class="btn btn-danger" type="submit">Hủy đơn</button>
+                                                                        </form>
                                                                     @elseif($bill->status_id == 3)
                                                                         <form action="{{ route('client.orders.confirm', $bill->id) }}" method="POST">
                                                                             @csrf
                                                                             <button class="btn btn-success" type="submit">Xác nhận</button>
                                                                         </form>
-                                                                    @endif
-                                                                </td>        
+                                                                    @endif   
+                                                                    <form action="{{ route('client.orders.detail') }}" method="POST">
+                                                                        @csrf
+                                                                        <input type="hidden" name="order_id" value="{{ $bill->id }}">
+                                                                        <button class="btn btn-warning" type="submit">Chi tiết</button>
+                                                                    </form>
+                                                                </div>
+                                                            </td>        
                                                         </tr>
                                                     @endforeach
                                                 </tbody>
