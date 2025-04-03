@@ -358,12 +358,10 @@ class BillController extends Controller
             return redirect()->route('client.orders')->with('error', 'Không tìm thấy đơn hàng!');
         }
 
-        $provinces = Province::all();
-        $districts = District::where('province_id', $order->province_id)->get();
-        $wards = Ward::where('district_id', $order->district_id)->get();
+      
         $payment_method = $order->payment_method;
 
-        return view('client.order.detail', compact('order', 'provinces', 'districts', 'wards', 'payment_method'));
+        return view('client.order.detail', compact('order',  'payment_method'));
     }
 
     
