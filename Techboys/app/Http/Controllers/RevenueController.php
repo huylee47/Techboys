@@ -51,11 +51,12 @@ class RevenueController extends Controller
     $products = Product::whereIn('id', $bestSellingProducts->pluck('product_id'))
         ->get()
         ->keyBy('id');
-
+        $billShipping  = Bill::where('status_id',2)->count();
+        $billPending = Bill::where('status_id',1)->count();
     
         return view('admin.revenue.revenue', compact(
             'revenueDay', 'revenueWeek', 'revenueMonth', 'revenueQuarter',
-            'successfulOrders', 'cancelledOrders','monthlyRevenue','bestSellingProducts', 'products'
+            'successfulOrders', 'cancelledOrders','monthlyRevenue','bestSellingProducts', 'products','billShipping','billPending'
         ));
     }
     public function filterRevenue(Request $request)
