@@ -119,6 +119,21 @@ class ProductController extends Controller
         // dd($request->all());
         return $this->productService->updateStock($request,$productId);
     }
+
+    public function getVariants(Request $request)
+    {
+        $productId = $request->input('product_id');
+        $product = Product::find($productId);
+
+        if ($product) {
+            // Lấy tất cả biến thể của sản phẩm
+            $variants = $product->variants()->select('id', 'name', 'price')->get();
+            return response()->json(['variants' => $variants]);
+        }
+
+        return response()->json(['variants' => []]);
+    }
+    
     // CLIENT 
     public function productDetails($request)
     {
