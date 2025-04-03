@@ -52,17 +52,62 @@ class ConfigController extends Controller
     public function update(Request $request, Config $config)
     {
         $request->validate([
-            'title' => 'required|string|max:100',
-            'address' => 'required|string|max:500',
-            'hotline' => 'required|string|max:10',
+            'title' => 'required|string|max:70',
+            'address' => 'required|string|max:150',
+            'map' => 'required|string|max:500',
+            'hotline' => 'required|numeric|digits_between:8,10',
             'facebook' => 'required|url',
+            'favicon' => 'nullable|image|mimes:ico,png|max:1024', 
+            'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', 
+        ], [
+            'title.required' => 'Vui lòng nhập tiêu đề website.',
+            'title.max' => 'Tiêu đề không được dài quá 70 ký tự.',
+    
+            'address.required' => 'Vui lòng nhập địa chỉ.',
+            'address.max' => 'Địa chỉ không được dài quá 150 ký tự.',
+    
+            'map.required' => 'Vui lòng nhập mã nhúng Google Maps.',
+            'map.max' => 'Mã nhúng Google Maps không quá 500 ký tự.',
+    
+            'hotline.required' => 'Vui lòng nhập số hotline.',
+            'hotline.numeric' => 'Hotline chỉ được chứa số.',
+            'hotline.digits_between' => 'Hotline phải có từ 8 đến 10 chữ số.',
+    
+            'facebook.required' => 'Vui lòng nhập link Facebook.',
+            'facebook.url' => 'Link Facebook không hợp lệ.',
+    
+            'favicon.image' => 'Favicon phải là ảnh.',
+            'favicon.mimes' => 'Favicon chỉ chấp nhận .ico hoặc .png.',
+            'favicon.max' => 'Favicon tối đa 1MB.',
+    
+            'logo.image' => 'Logo phải là ảnh.',
+            'logo.mimes' => 'Logo chỉ chấp nhận các định dạng: jpeg, png, jpg, gif.',
+            'logo.max' => 'Logo tối đa 2MB.',
         ]);
-
+    
         $config = Config::first();
-        $config->update($request->all());
-
+    
+        if ($request->hasFile('favicon')) {
+            $faviconPath = $request->file('favicon')->store('images', 'public');
+            $config->favicon = $faviconPath;
+        }
+    
+        if ($request->hasFile('logo')) {
+            $logoPath = $request->file('logo')->store('images', 'public');
+            $config->logo = $logoPath;
+        }
+    
+        $config->update([
+            'title' => $request->title,
+            'address' => $request->address,
+            'map' => $request->map,
+            'hotline' => $request->hotline,
+            'facebook' => $request->facebook,
+        ]);
+    
         return redirect()->route('admin.config.index')->with('success', 'Cấu hình đã được cập nhật!');
     }
+    
 
     /**
      * Remove the specified resource from storage.
