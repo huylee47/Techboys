@@ -10,6 +10,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\ChatsController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\ConfigController;
 use App\Http\Controllers\VoucherController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProductController;
@@ -235,6 +236,7 @@ Route::post('/logout', [UserController::class, 'logout'])->name('admin.logout');
         Route::post('/update/{id}', [AttributesController::class, 'update'])->name('admin.attributes.update');
         Route::get('/delete/{id}', [AttributesController::class, 'destroy'])->name('admin.attributes.delete');
         });
+
         Route::prefix('/promotion')->group(function () {
             Route::get('/', [PromotionController::class, 'index'])->name('admin.promotion.index');
             Route::get('/create', [PromotionController::class, 'create'])->name('admin.promotion.create');
@@ -244,7 +246,11 @@ Route::post('/logout', [UserController::class, 'logout'])->name('admin.logout');
             Route::delete('/destroy/{id}', [PromotionController::class, 'destroy'])->name('admin.promotion.destroy');
 
         });
-        
+        Route::prefix('/config')->group(function () {
+    Route::get('/', [ConfigController::class, 'index'])->name('admin.config.index');
+    Route::get('/edit', [ConfigController::class, 'edit'])->name('admin.config.edit');
+    Route::post('/update', [ConfigController::class, 'update'])->name('admin.config.update');
+});
     });
 });
 Route::prefix('message')->group(function () {
