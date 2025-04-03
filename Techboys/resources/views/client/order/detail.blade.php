@@ -78,43 +78,47 @@
                                id="shipping_fee" 
                                name="shipping_fee" 
                                disabled>
-                    </p>
-              
-                
-                    <p>
-                        <label for="product_name">Tên sản phẩm </label>
-                        <input type="text" 
-                               value="{{ $order->product_name_with_attributes ?? 'Không xác định' }}" 
-                               id="product_name" 
-                               name="product_name" 
-                               disabled>
-                    </p>
-                      </div>
-                    <div class="flex-row">
-                    <p>
-                        <label for="original_price">Giá gốc</label>
-                        <input type="text" 
-                               value="{{ number_format($order->original_price, 0, ',', '.') }} VNĐ" 
-                               id="original_price" 
-                               name="original_price" 
-                               disabled>
-                    </p>
-            
-                    <p>
-                        <label for="total_amount">Tổng tiền</label>
-                        <input type="text" 
-                               value="{{ number_format($order->total_amount, 0, ',', '.') }} VNĐ" 
-                               id="total_amount" 
-                               name="total_amount" 
-                               disabled>
-                    </p>
-                </div>
-                <p>
+                    </p> 
+                     <p>
                     <label for="order_comments">Địa chỉ chi tiết
                         <abbr title="required" class="required">*</abbr>
                     </label>
-                    <textarea cols="5" rows="3" id="order_comments" name="address" disabled>{{ $order->address }}</textarea>
+                    <input type="text" 
+                    value="{{ $order->address }}" 
+                    id="order_comments" 
+                    name="address" 
+                    disabled>
                 </p>
+                </div> 
+              
+                <h4>Chi tiết sản phẩm</h4>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Tên sản phẩm</th>
+                            <th>Số lượng</th>
+                            <th>Khuyến mãi</th>
+                            <th>Tổng tiền</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($order->billDetails as $detail)
+                        <tr>
+                            <td>{{ $detail->product->name }}{{ $detail->attributes ? ' (' . $detail->attributes . ')' : '' }}</td>
+                            <td>{{ $detail->quantity }}</td>
+                            <td>
+                                @if (isset($detail->discounted_price) && $detail->discounted_price < $detail->price)
+                                    {{ round((1 - $detail->discounted_price / $detail->price) * 100, 2) }}%
+                                @else
+                                    Không áp dụng
+                                @endif
+                            </td>
+                            <td>{{ number_format($detail->discounted_price * $detail->quantity, 0, ',', '.') }} VNĐ</td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+               
             </div>
         </div>
         <a href="{{ route('client.orders') }}" class="btn btn-secondary">Quay lại</a>
