@@ -55,7 +55,7 @@ class ConfigController extends Controller
             'title' => 'required|string|max:70',
             'address' => 'required|string|max:150',
             'map' => 'required|string|max:500',
-            'hotline' => 'required|numeric|digits_between:8,10',
+            'hotline' => 'required|numeric|digits_between:8,11',
             'facebook' => 'required|url',
             'favicon' => 'nullable|image|mimes:ico,png|max:1024', 
             'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', 
@@ -71,7 +71,7 @@ class ConfigController extends Controller
     
             'hotline.required' => 'Vui lòng nhập số hotline.',
             'hotline.numeric' => 'Hotline chỉ được chứa số.',
-            'hotline.digits_between' => 'Hotline phải có từ 8 đến 10 chữ số.',
+            'hotline.digits_between' => 'Hotline phải có từ 8 đến 11 chữ số.',
     
             'facebook.required' => 'Vui lòng nhập link Facebook.',
             'facebook.url' => 'Link Facebook không hợp lệ.',
