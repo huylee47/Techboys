@@ -47,38 +47,73 @@
                                         <label for="favicon">Favicon:</label>
                                         <input type="file" name="favicon" id="favicon" class="form-control">
                                     </div>
+                                    @if ($errors->has('favicon'))
+                                            <p class="text-danger small ">
+                                                <i>{{ $errors->first('favicon') }}</i>
+                                            </p>
+                                            @endif
                                     
                                     <div class="form-group">
                                         <label for="logo">Logo:</label>
                                         <input type="file" name="logo" id="logo" class="form-control">
                                     </div>
-                                    
+                                    @if ($errors->has('logo'))
+                                            <p class="text-danger small ">
+                                                <i>{{ $errors->first('logo') }}</i>
+                                            </p>
+                                            @endif
+
                                     <div class="form-group">
                                         <label for="title">Tiêu đề Website:</label>
-                                        <input type="text" name="title" id="title" class="form-control" value="{{ $config->title }}">
+                                        <input type="text" name="title" id="title" class="form-control" value="{{ old('title', $config->title) }}">
                                     </div>
-                                    
+                                    @if ($errors->has('title'))
+                                            <p class="text-danger small ">
+                                                <i>{{ $errors->first('title') }}</i>
+                                            </p>
+                                            @endif
+
                                     <div class="form-group">
                                         <label for="address">Địa chỉ:</label>
-                                        <input type="text" name="address" id="address" class="form-control" value="{{ $config->address }}">
+                                        <input type="text" name="address" id="address" class="form-control" value="{{ old('address', $config->address) }}">
                                     </div>
-                                    
+                                    @if ($errors->has('address'))
+                                            <p class="text-danger small ">
+                                                <i>{{ $errors->first('address') }}</i>
+                                            </p>
+                                            @endif
+
                                     <div class="form-group">
                                         <label for="map">Bản đồ nhúng:</label>
                                         <textarea name="map" id="map" class="form-control" rows="4">{{ $config->map }}</textarea>
                                     </div>
-                                    
+                                    @if ($errors->has('map'))
+                                            <p class="text-danger small ">
+                                                <i>{{ $errors->first('map') }}</i>
+                                            </p>
+                                            @endif
+
                                     <div class="form-group">
                                         <label for="hotline">Hotline:</label>
-                                        <input type="text" name="hotline" id="hotline" class="form-control" value="{{ $config->hotline }}">
+                                        <input type="text" name="hotline" id="hotline" class="form-control" value="{{ old('hotline', $config->hotline) }}">
                                     </div>
-                                    
+                                    @if ($errors->has('hotline'))
+                                            <p class="text-danger small ">
+                                                <i>{{ $errors->first('hotline') }}</i>
+                                            </p>
+                                            @endif
+
                                     <div class="form-group">
                                         <label for="facebook">Facebook Page:</label>
-                                        <input type="text" name="facebook" id="facebook" class="form-control" value="{{ $config->facebook }}">
+                                        <input type="text" name="facebook" id="facebook" class="form-control" value="{{ old('facebook', $config->facebook) }}">
                                     </div>
-                                    
-                                    <button type="submit" class="btn btn-primary">Cập nhật Cấu Hình</button>
+                                    @if ($errors->has('facebook'))
+                                            <p class="text-danger small ">
+                                                <i>{{ $errors->first('facebook') }}</i>
+                                            </p>
+                                            @endif
+
+                                    <button type="submit" class="btn btn-primary">Cập nhật cấu hình</button>
                                 </form>
                             </div>
                         </div>
