@@ -62,6 +62,26 @@
                                disabled>
                     </p>
                 </div>
+                <div class="flex-row">
+                    <p>
+                        <label for="voucher">Voucher đã áp dụng</label>
+                        <input type="text" 
+                               value="{{ $order->voucher_code ?? 'Không áp dụng' }}" 
+                               id="voucher" 
+                               name="voucher" 
+                               disabled>
+                    </p>
+                </div>
+                <div class="flex-row">
+                    <p>
+                        <label for="shipping_fee">Phí vận chuyển</label>
+                        <input type="text" 
+                               value="{{ number_format($order->fee_shipping, 0, ',', '.') }} VNĐ" 
+                               id="shipping_fee" 
+                               name="shipping_fee" 
+                               disabled>
+                    </p>
+                </div>
                 <p>
                     <label for="order_comments">Địa chỉ chi tiết
                         <abbr title="required" class="required">*</abbr>
