@@ -8,6 +8,7 @@ use App\Models\Brand;
 use App\Models\Product;
 // use App\Models\ProductModel;
 use App\Models\ProductCategory;
+use App\Models\ProductVariant;
 use App\Service\PhotoService;
 use Illuminate\Http\Request;
 use App\Service\ProductService;
@@ -120,31 +121,30 @@ class ProductController extends Controller
         return $this->productService->updateStock($request,$productId);
     }
 
-    public function getVariants(Request $request)
-    {
-        $request->validate([
-            'product_id' => 'required|exists:products,id'
-        ]);
+    // public function getVariants(Request $request)
+    // {
+    //     $request->validate([
+    //         'product_id' => 'required|exists:products,id'
+    //     ]);
 
-        $product = Product::with('variants')->find($request->product_id);
+    //     $product = Product::find($request->product_id);
+    //     $variants = ProductVariant::where('product_id', $request->product_id)->get();
 
-        return response()->json([
-            'product' => [
-                'name' => $product->name,
-                'base_price' => $product->base_price,
-                'base_stock' => $product->base_stock
-            ],
-            'variants' => $product->variants->map(function ($variant) {
-                return [
-                    'id' => $variant->id,
-                    'name' => $variant->name,
-                    'price' => $variant->price,
-                    'stock' => $variant->stock,
-                    'attributes' => $variant->attribute_values // Nếu có thông tin thuộc tính
-                ];
-            })
-        ]);
-    }
+    //     return response()->json([
+    //         'product' => [
+    //             'base_price' => $product->base_price,
+    //             'base_stock' => $product->base_stock
+    //         ],
+    //         'variants' => $variants->map(function ($variant) {
+    //             return [
+    //                 'id' => $variant->id,
+    //                 'attribute_values' => $variant->attribute_values,
+    //                 'price' => $variant->price,
+    //                 'stock' => $variant->stock
+    //             ];
+    //         })
+    //     ]);
+    // }
 
     // CLIENT 
     public function productDetails($request)
