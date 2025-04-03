@@ -27,11 +27,13 @@
                 <table class="table mt-3">
                     <tr>
                         <th>Favicon</th>
-                        <td><img src="{{ asset($config->favicon) }}" width="32"></td>
+                        <td><img src="{{ asset('admin/assets/images/config/' . $config->favicon) }}" width="100"
+                            alt="Favicon Image" ></td>
                     </tr>
                     <tr>
                         <th>Logo</th>
-                        <td><img src="{{ asset($config->logo) }}" width="100"></td>
+                        <td ><img src="{{ asset('admin/assets/images/config/' . $config->logo) }}" width="100"
+                            alt="Logo Image" ></td>
                     </tr>
                     <tr>
                         <th>Tiêu đề trang web</th>
@@ -43,7 +45,7 @@
                     </tr>
                     <tr>
                         <th>Bản đồ</th>
-                        <td>{!! $config->map !!}</td>
+                        <div ><td>{!! $config->map !!}</td></div>
                     </tr>
                     <tr>
                         <th>Hotline</th>
