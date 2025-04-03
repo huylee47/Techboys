@@ -53,6 +53,38 @@
                 </div>
                 <div class="flex-row">
                     <p>
+                        <label for="order_id">Mã đơn hàng</label>
+                        <input type="text" 
+                               value="{{ $order->order_id }}" 
+                               id="order_id" 
+                               name="order_id" 
+                               disabled>
+                    </p>
+                    <p>
+                        <label for="order_status">Trạng thái đơn</label>
+                        <input type="text"
+                               value="@if($order->status_id == 0)
+                                          Đã hủy đơn
+                                      @elseif($order->status_id == 1)
+                                          Đang xử lý
+                                      @elseif($order->status_id == 2)
+                                          Đang giao
+                                      @elseif($order->status_id == 3)
+                                          Đã giao
+                                      @elseif($order->status_id == 4)
+                                          Giao hàng thành công
+                                      @elseif($order->status_id == 5)
+                                          Giao hàng thất bại
+                                      @else
+                                          Không xác định
+                                      @endif" 
+                               id="order_status" 
+                               name="order_status" 
+                               disabled>
+                    </p>
+                </div>
+                <div class="flex-row">
+                    <p>
                         <label for="payment_method">Phương thức thanh toán</label>
                         <input type="text" 
                                value="{{ $order->payment_method == 1 ? 'Chuyển khoản' : ($order->payment_method == 2 ? 'Tiền mặt' : 'Không xác định') }}" 
