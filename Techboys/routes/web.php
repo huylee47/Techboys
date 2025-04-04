@@ -256,6 +256,7 @@ Route::prefix('products')->group(function () {
     Route::get('/', [ProductController::class, 'productList'])->name('client.product.index');
     Route::get('/search', [ProductController::class, 'search'])->name('client.product.search');
     Route::get('/filter', [ProductController::class, 'filter'])->name('client.product.filter');
+    Route::get('/filter/search',[ProductController::class, 'filterSearch'])->name('client.product.filter.search');
     Route::get('/{slug}', [ProductController::class, 'productDetails'])->name('client.product.show');
 });
 
@@ -291,6 +292,7 @@ Route::get('/payment/cod/success', [CheckoutController::class, 'codSuccess'])->n
 
 Route::prefix('products')->group(function () {
     Route::get('/', [ProductController::class, 'productList'])->name('client.product.index');
+    Route::get('/category/{categoryId}', [ProductController::class, 'ListProductByCategoryId'])->name('client.category.products');
     Route::get('/search', [ProductController::class, 'search'])->name('client.product.search');
     Route::get('/filter', [ProductController::class, 'filter'])->name('client.product.filter');
     Route::get('/{slug}', [ProductController::class, 'productDetails'])->name('client.product.show');
