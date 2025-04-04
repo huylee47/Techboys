@@ -232,19 +232,18 @@
                                                     <a href="#" class="woocommerce-product-gallery__trigger">🔍</a>
                                                     <figure class="woocommerce-product-gallery__wrapper ">
                                                         @foreach ($images as $img)
-                                                            <div data-thumb="{{ url('') }}/admin/assets/images/product/{{ $img->image }}"
-                                                                class="woocommerce-product-gallery__image">
-                                                                <a href="{{ url('') }}/admin/assets/images/product/{{ $img->image }}"
-                                                                    tabindex="0">
-                                                                    <img width="400" height="400"
-                                                                        src="{{ url('') }}/admin/assets/images/product/{{ $img->image }}"
-                                                                        class="attachment-shop_single size-shop_single wp-post-image"
-                                                                        alt="">
-                                                                </a>
-                                                            </div>
-                                                        @endforeach
-
-
+                                                        <div data-thumb="{{ url('') }}/admin/assets/images/product/{{ $img->image }}"
+                                                            class="woocommerce-product-gallery__image">
+                                                            <a href="{{ url('') }}/admin/assets/images/product/{{ $img->image }}" tabindex="0">
+                                                                <img width="400" height="400"
+                                                                    src="{{ url('') }}/admin/assets/images/product/{{ $img->image }}"
+                                                                    class="attachment-shop_single size-shop_single wp-post-image"
+                                                                    alt=""
+                                                                    style="max-width: 100%; max-height: 400px; width: auto; height: auto; object-fit: contain; display: block; margin: 0 auto;">
+                                                            </a>
+                                                        </div>
+                                                    @endforeach
+                                                    
                                                         <div data-thumb="{{ url('') }}/home/assets/images/products/sm-card-3.jpg"
                                                             class="woocommerce-product-gallery__image">
                                                             <a href="{{ url('') }}/home/assets/images/products/big-card-2.jpg"
