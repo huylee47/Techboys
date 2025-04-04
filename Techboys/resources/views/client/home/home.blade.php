@@ -28,8 +28,8 @@
                                     <div class="media">
                                         <i class="feature-icon d-flex mr-3 tm tm-free-delivery"></i>
                                         <div class="media-body feature-text">
-                                            <h5 class="mt-0">Miễn phí vận chuyển</h5>
-                                            <span>tối đa 300km</span>
+                                            <h5 class="mt-0">Vận chuyển ưu đãi</h5>
+                                            <span>tối đa 300k</span>
                                         </div>
                                     </div>
                                 </div>
@@ -38,7 +38,7 @@
                                     <div class="media">
                                         <i class="feature-icon d-flex mr-3 tm tm-feedback"></i>
                                         <div class="media-body feature-text">
-                                            <h5 class="mt-0">99% Khách hàng</h5>
+                                            <h5 class="mt-0">90% Khách hàng</h5>
                                             <span>Hài lòng</span>
                                         </div>
                                     </div>
@@ -49,7 +49,7 @@
                                     <div class="media">
                                         <i class="feature-icon d-flex mr-3 tm tm-free-return"></i>
                                         <div class="media-body feature-text">
-                                            <h5 class="mt-0">30 ngày</h5>
+                                            <h5 class="mt-0">3 ngày</h5>
                                             <span>Đổi trả hàng miễn phí</span>
                                         </div>
                                     </div>
@@ -119,7 +119,7 @@
                                                                                 <span class="price">
                                                                                     <ins>
                                                                                         <span class="woocommerce-Price-amount amount">
-                                                                                            <span class="woocommerce-Price-currencySymbol">Chỉ với</span>
+                                                                                            <span class="woocommerce-Price-currencySymbol">Chỉ</span>
                                                                                             {{ number_format($dp->variant->min('discounted_price'), 0, ',', '.') }} đ
                                                                                         </span>
                                                                                     </ins>
