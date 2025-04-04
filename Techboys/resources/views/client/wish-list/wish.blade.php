@@ -255,7 +255,7 @@
                                                                 <a href="#">Ecommerce Pages</a>
                                                             </li>
                                                             <li class="menu-item">
-                                                                <a href="cart.html">Cart</a>
+                                                                <a href="{{ route('client.cart.index') }}">Cart</a>
                                                             </li>
                                                             <li class="menu-item">
                                                                 <a href="checkout.html">Checkout</a>
@@ -986,21 +986,14 @@
                         </li>
                     </ul>
                     <!-- .header-compare -->
-                    <ul class="header-wishlist nav navbar-nav">
-                        <li class="nav-item">
-                            <a href="wishlist.html" class="nav-link">
-                                <i class="tm tm-favorites"></i>
-                                <span id="top-cart-wishlist-count" class="value">3</span>
-                            </a>
-                        </li>
-                    </ul>
+
                     <!-- .header-wishlist -->
                     <ul id="site-header-cart" class="site-header-cart menu">
                         <li class="animate-dropdown dropdown ">
-                            <a class="cart-contents" href="cart.html" data-toggle="dropdown"
-                                title="View your shopping cart">
+                            <a class="cart-contents" href="{{ route('client.cart.index') }}" data-toggle="dropdown"
+                                title="Xem giỏ hàng">
                                 <i class="tm tm-shopping-bag"></i>
-                                <span class="count">2</span>
+                                <span class="count">{{ $cartCount }}</span>
                                 <span class="amount">
                                     <span class="price-label">Your Cart</span>&#036;136.99</span>
                             </a>
@@ -1047,7 +1040,8 @@
                                                         class="woocommerce-Price-currencySymbol">$</span>136.99</span>
                                             </p>
                                             <p class="woocommerce-mini-cart__buttons buttons">
-                                                <a href="cart.html" class="button wc-forward">View cart</a>
+                                                <a href="{{ route('client.cart.index') }}"
+                                                    class="button wc-forward">View cart</a>
                                                 <a href="checkout.html"
                                                     class="button checkout wc-forward">Checkout</a>
                                             </p>
@@ -1764,10 +1758,10 @@
                                 <!-- .widget -->
                             </div>
                             <!-- .site-search -->
-                            <a class="handheld-header-cart-link has-icon" href="cart.html"
-                                title="View your shopping cart">
+                            <a class="handheld-header-cart-link has-icon" href="{{ route('client.cart.index') }}"
+                                title="Xem giỏ hàng">
                                 <i class="tm tm-shopping-bag"></i>
-                                <span class="count">2</span>
+                                <span class="count">{{ $cartCount }}</span>
                             </a>
                         </div>
                         <!-- /.row -->
@@ -1860,7 +1854,8 @@
                                                     </td>
                                                     <td class="product-add-to-cart">
                                                         <a class="button add_to_cart_button button alt"
-                                                            href="cart.html"> Thêm vào giỏ hàng</a>
+                                                            href="{{ route('client.cart.index') }}"> Thêm vào giỏ
+                                                            hàng</a>
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -1899,7 +1894,8 @@
                                                     </td>
                                                     <td class="product-add-to-cart">
                                                         <a class="button add_to_cart_button button alt"
-                                                            href="cart.html"> Thêm vào giỏ hàng</a>
+                                                            href="{{ route('client.cart.index') }}"> Thêm vào giỏ
+                                                            hàng</a>
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -1938,7 +1934,8 @@
                                                     </td>
                                                     <td class="product-add-to-cart">
                                                         <a class="button add_to_cart_button button alt"
-                                                            href="cart.html"> Thêm vào giỏ hàng</a>
+                                                            href="{{ route('client.cart.index') }}"> Thêm vào giỏ
+                                                            hàng</a>
                                                     </td>
                                                 </tr>
                                             </tbody>
