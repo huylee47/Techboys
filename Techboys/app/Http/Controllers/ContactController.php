@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Contact;
+use App\Models\Config;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -56,7 +57,12 @@ class ContactController extends Controller
         $contact = Contact::findOrFail($id);
         return view('admin.contact.contact_detail', compact('contact'));
     }
-    
+    public function getMap()
+    {
+        $config = Config::first();
+
+        return view('client.contact.contact', compact('config'));
+    }
     /**
      * Show the form for editing the specified resource.
      */
