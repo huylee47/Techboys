@@ -27,32 +27,75 @@
                             </ul>
                         </div>
                     </div>
-
-                    <!-- Lọc theo model -->
                     <div class="filter_type version_2">
-                        <h4>
-                            <a href="#filter_4" data-bs-toggle="collapse" class="opened">Models</a>
-                        </h4>
-                        <div class="collapse show" id="filter_4">
+                        <h4><a href="#filter_2" data-bs-toggle="collapse" class="opened">Giá</a></h4>
+                        <div class="collapse show" id="filter_2">
                             <ul>
-                                @foreach($models as $model)
                                 <li>
                                     <label class="container_check">
-                                        {{ $model->name }}
-                                        <input type="checkbox" name="model_id[]" value="{{ $model->id }}" 
-                                            {{ in_array($model->id, request()->model_id ?? []) ? 'checked' : '' }}>
+                                        Dưới 2 triệu
+                                        <input type="checkbox" name="price_range[]" value="0-2000000" {{ in_array('0-2000000', request()->input('price_range', [])) ? 'checked' : '' }}>
                                         <span class="checkmark"></span>
                                     </label>
                                 </li>
-                                @endforeach
+                                <li>
+                                    <label class="container_check">
+                                        2 - 5 triệu
+                                        <input type="checkbox" name="price_range[]" value="2000000-5000000" {{ in_array('2000000-5000000', request()->input('price_range', [])) ? 'checked' : '' }}>
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </li>
+                                <li>
+                                    <label class="container_check">
+                                        5 - 10 triệu
+                                        <input type="checkbox" name="price_range[]" value="5000000-10000000" {{ in_array('5000000-10000000', request()->input('price_range', [])) ? 'checked' : '' }}>
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </li>
+                                <li>
+                                    <label class="container_check">
+                                        10 - 15 triệu
+                                        <input type="checkbox" name="price_range[]" value="10000000-15000000" {{ in_array('10000000-15000000', request()->input('price_range', [])) ? 'checked' : '' }}>
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </li>
+                                <li>
+                                    <label class="container_check">
+                                        15 - 20 triệu
+                                        <input type="checkbox" name="price_range[]" value="15000000-20000000" {{ in_array('15000000-20000000', request()->input('price_range', [])) ? 'checked' : '' }}>
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </li>
+                                <li>
+                                    <label class="container_check">
+                                        20 - 30 triệu
+                                        <input type="checkbox" name="price_range[]" value="20000000-30000000" {{ in_array('20000000-30000000', request()->input('price_range', [])) ? 'checked' : '' }}>
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </li>
+                                <li>
+                                    <label class="container_check">
+                                        30 - 50 triệu
+                                        <input type="checkbox" name="price_range[]" value="30000000-50000000" {{ in_array('30000000-50000000', request()->input('price_range', [])) ? 'checked' : '' }}>
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </li>
+                                <li>
+                                    <label class="container_check">
+                                        Trên 50 triệu
+                                        <input type="checkbox" name="price_range[]" value="50000000-100000000" {{ in_array('50000000-100000000', request()->input('price_range', [])) ? 'checked' : '' }}>
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </li>
                             </ul>
                         </div>
                     </div>
-
-                    <!-- Nút Lọc & Reset -->
+                    <!-- Lọc theo model -->
                     <div class="buttons">
-                        <button type="submit" class="btn_1">Filter</button>
-                        <a href="{{ route('client.product.index') }}" class="btn_1 gray">Reset</a>
+                        <input type="hidden" name="categoryId" value="{{$categoryId}}">
+
+                        <button type="submit" class="btn_1">Lọc</button>
+                        <a href="{{ route('client.category.products',['categoryId'=>$categoryId]) }}" class="btn_1 gray">Làm mới</a>
                     </div>
                 </form>
             </div>
@@ -66,9 +109,10 @@
                     <div class="grid_item">
                         <a href="{{ route('client.product.show', ['slug' => $product->slug]) }}">
                             <img src="{{ url('') }}/admin/assets/images/product/{{ $product->img }}" 
-                                 class="product-image fix-image"
-                                 style="width: 200px; height: 200px;">
+                                 class="product-image fix-image" 
+                                 style="max-width: 100%; max-height: 200px; width: auto; height: auto; object-fit: contain; display: block; margin: 0 auto;">
                         </a>
+                        
                         <a href="{{ route('client.product.show', ['slug' => $product->slug]) }}">
                             <h3>{{ $product->name }}</h3>
                         </a>

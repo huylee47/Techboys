@@ -240,7 +240,7 @@
                         <ul id="menu-departments-menu" class="dropdown-menu yamm departments-menu-dropdown">
                             @foreach ($categories as $category)
                                 <li class="highlight menu-item animate-dropdown">
-                                    <a title="{{ $category->name }}" href="{{ route('client.product.index') }}">{{ $category->name }}</a>
+                                    <a title="{{ $category->name }}" href="{{ route('client.category.products',['categoryId'=> $category->id]) }}">{{ $category->name }}</a>
                                 </li>
                             @endforeach
                         </ul>
