@@ -51,26 +51,33 @@
                                                                 </td>
                                                                 <td data-title="Product" class="product-name">
                                                                     <div class="media cart-item-product-detail">
-                                                                        <a href="{{ route('client.product.show', ['slug' =>  $cart->product->slug]) }}">
-                                                                            <img width="180" height="180"
-                                                                                alt="" class="wp-post-image"
-                                                                                src="{{ url('') }}/admin/assets/images/product/{{ $cart->product->img }}">
-                                                                        </a>
+                                                                        <!-- Thẻ div chứa ảnh -->
+
+                                                                        <div class="product-image-wrapper d-flex justify-content-start align-items-center" style="max-width: 100px; max-height: 100px; margin-left: 15px;">
+                                                                            <a href="{{ route('client.product.show', ['slug' =>  $cart->product->slug]) }}">
+                                                                                <img width="100" alt="" class="img-fluid align-self-center" style="max-width: 100%; max-height: 100px; object-fit: contain; "
+                                                                                    src="{{ url('') }}/admin/assets/images/product/{{ $cart->product->img }}">
+                                                                            </a>
+                                                                        </div>
+                                                                        
+                                                                        
+                                                                    
+                                                                        <!-- Thẻ div chứa thông tin sản phẩm -->
                                                                         <div class="media-body align-self-center">
                                                                             <a href="{{ route('client.product.show', ['slug' =>  $cart->product->slug]) }}">{{ $cart->product->name }}
                                                                                 @if($cart->variant_id)
-                                                                                {{ $cart->attributes}}
+                                                                                    {{ $cart->attributes }}
                                                                                 @endif
                                                                             </a>
                                                                             <p data-title="Stock" class="product-stock">
                                                                                 <span>Tồn Kho :</span>
-                                                                                <span
-                                                                                    class="stock-quantity-{{ $cart->id }}">
+                                                                                <span class="stock-quantity-{{ $cart->id }}">
                                                                                     {{ $cart->stock }}
                                                                                 </span>
                                                                             </p>
                                                                         </div>
                                                                     </div>
+                                                                    
                                                                 </td>
                                                                 <td data-title="Price" class="product-price">
                                                                     <span class="woocommerce-Price-amount amount">
