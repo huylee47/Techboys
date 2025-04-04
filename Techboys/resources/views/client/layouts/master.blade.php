@@ -300,14 +300,8 @@
                         <div class="handheld-header-links">
                             <ul class="columns-3">
                                 <li class="my-account">
-                                    <a href="login-and-register.html" class="has-icon">
+                                    <a href="{{ route('login.client') }}" class="has-icon">
                                         <i class="tm tm-login-register"></i>
-                                    </a>
-                                </li>
-                                <li class="wishlist">
-                                    <a href="wishlist.html" class="has-icon">
-                                        <i class="tm tm-favorites"></i>
-                                        <span class="count">3</span>
                                     </a>
                                 </li>
                                 <li class="compare">
