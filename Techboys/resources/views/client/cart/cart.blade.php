@@ -38,25 +38,26 @@
                                                     </thead>
                                                     <tbody>
                                                         @foreach ($cartItems as $cart)
+                                                       
                                                             <tr class="cart-item">
                                                                 <td class="product-remove">
                                                                 </td>
                                                                 <td class="product-thumbnail">
-                                                                    <a href="single-product-fullwidth.html">
+                                                                    <a href="{{ route('client.product.show', ['slug' =>  $cart->product->slug]) }}">
                                                                         <img width="180" height="180" alt=""
                                                                             class="wp-post-image"
-                                                                            src=" {{ asset('home/single-product-fullwidth.html') }}">
+                                                                            src=" ">
                                                                     </a>
                                                                 </td>
                                                                 <td data-title="Product" class="product-name">
                                                                     <div class="media cart-item-product-detail">
-                                                                        <a href="single-product-fullwidth.html">
+                                                                        <a href="{{ route('client.product.show', ['slug' =>  $cart->product->slug]) }}">
                                                                             <img width="180" height="180"
                                                                                 alt="" class="wp-post-image"
                                                                                 src="{{ url('') }}/admin/assets/images/product/{{ $cart->product->img }}">
                                                                         </a>
                                                                         <div class="media-body align-self-center">
-                                                                            <a href="single-product-fullwidth.html">{{ $cart->product->name }}
+                                                                            <a href="{{ route('client.product.show', ['slug' =>  $cart->product->slug]) }}">{{ $cart->product->name }}
                                                                                 @if($cart->variant_id)
                                                                                 {{ $cart->attributes}}
                                                                                 @endif
