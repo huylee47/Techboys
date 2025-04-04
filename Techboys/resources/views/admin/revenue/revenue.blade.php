@@ -187,101 +187,7 @@
                                     <h4>Biểu đồ doanh thu theo thời gian</h4>
                                 </div>
                                     <canvas id="revenueChart"></canvas>
-                                    <script>
-                                        document.addEventListener("DOMContentLoaded", function () {
-                                            let ctx = document.getElementById('revenueChart').getContext('2d');
-                                            let revenueChart;
-                                    
-                                            function updateChart(labels, data) {
-                                                if (revenueChart) {
-                                                    revenueChart.destroy();
-                                                }
-                                    
-                                                revenueChart = new Chart(ctx, {
-                                                    type: 'line',
-                                                    data: {
-                                                        labels: labels,
-                                                        datasets: [{
-                                                            label: 'Doanh thu (VNĐ)',
-                                                            data: data,
-                                                            borderColor: 'rgb(75, 192, 192)',
-                                                            backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                                                            borderWidth: 2
-                                                        }]
-                                                    },
-                                                    options: {
-                                                        responsive: true,
-                                                        scales: {
-                                                            y: {
-                                                                beginAtZero: true
-                                                            }
-                                                        }
-                                                    }
-                                                });
-                                            }
-                                            
-                                            document.getElementById('filterButton').addEventListener('click', function (event) {
-                                            let startDate = document.getElementById('startDate').value;
-                                            let endDate = document.getElementById('endDate').value;
-                                            let today = new Date().toISOString().split('T')[0];
-                                            let errorMessageDiv = document.getElementById('error-message');
-                                    
-                                            errorMessageDiv.classList.add('d-none');
-                                            errorMessageDiv.innerHTML = ""; 
-                                    
-                                            let errorMessages = [];
-                                    
-                                            if (!startDate || !endDate) {
-                                                errorMessages.push("Ngày bắt đầu hoặc ngày kết thúc không tồn tại! ");
-                                            }
-                                    
-                                            if (startDate > endDate) {
-                                                errorMessages.push("Ngày bắt đầu không thể lớn hơn ngày kết thúc!");
-                                            }
-                                    
-                                            if (startDate > today || endDate > today) {
-                                                errorMessages.push("Không thể chọn ngày trong tương lai!");
-                                            }
-                                    
-                                            if (errorMessages.length > 0) {
-                                                errorMessageDiv.innerHTML = errorMessages.join("<br>");
-                                                errorMessageDiv.classList.remove('d-none');
-                                                event.preventDefault();
-                                            }
-                                        });
 
-                                            document.getElementById('filterButton').addEventListener('click', function () {
-                                                let startDate = document.getElementById('startDate').value;
-                                                let endDate = document.getElementById('endDate').value;
-                                    
-                                                fetch(`{{ route('admin.revenue.filter') }}?start_date=${startDate}&end_date=${endDate}`)
-                                                    .then(response => response.json())
-                                                    .then(data => {
-                                                        let labels = Object.keys(data.revenue_by_date);
-                                                        let revenueData = Object.values(data.revenue_by_date);
-                                    
-                                                        updateChart(labels, revenueData);
-                                                    
-
-                                                        document.getElementById('revenueDayTitle').innerText = "Tổng doanh thu sau khi lọc ngày";
-                                                        document.getElementById('revenueDayValue').innerText =
-                                                        new Intl.NumberFormat('vi-VN').format(data.total_revenue || 0) + " VNĐ";
-
-
-                                                        document.getElementById('revenueWeekTitle').innerText = "Ngày cao nhất";
-                                                        document.getElementById('revenueWeekValue').innerText =
-                                                        data.max_revenue_day ? 
-                                                        `${data.max_revenue_day} (${new Intl.NumberFormat('vi-VN').format(data.max_revenue_value || 0)} VNĐ)` 
-                                                        : "Không có doanh thu";
-
-                                                        document.getElementById('revenueMonthTitle').innerText = "Doanh thu trung bình sau khi lọc ";
-                                                        document.getElementById('averageRevenueValue').innerText = 
-                                                        new Intl.NumberFormat('vi-VN').format(data.average_revenue_per_day) + " VNĐ";
-                                                })
-                                                    .catch(error => console.error('Error:', error));
-                                            });
-                                        });
-                                    </script>
                                     
                                     
                                 </div>
@@ -323,7 +229,7 @@
                             <h4>Sản phẩm bán chạy</h4>
                         </div>
                         <div class="card-body">
-                            <ul class="list-group">
+                            <ul class="list-group" id="bestSellingProducts">
                                 @foreach($bestSellingProducts as $item)
                                     <li class="list-group-item d-flex justify-content-between align-items-center">
                                         {{ $products[$item->product_id]->name ?? 'Sản phẩm không tồn tại' }}
@@ -331,10 +237,129 @@
                                     </li>
                                 @endforeach
                             </ul>
+                            
                         </div>
                     </div>
                 </div>
             </section>
         </div>
     </div>
+@endsection
+@section('scripts')
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        let ctx = document.getElementById('revenueChart').getContext('2d');
+        let revenueChart;
+
+        function updateChart(labels, data) {
+            if (revenueChart) {
+                revenueChart.destroy();
+            }
+
+            revenueChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Doanh thu (VNĐ)',
+                        data: data,
+                        borderColor: 'rgb(75, 192, 192)',
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        }
+        
+        document.getElementById('filterButton').addEventListener('click', function (event) {
+        let startDate = document.getElementById('startDate').value;
+        let endDate = document.getElementById('endDate').value;
+        let today = new Date().toISOString().split('T')[0];
+        let errorMessageDiv = document.getElementById('error-message');
+
+        errorMessageDiv.classList.add('d-none');
+        errorMessageDiv.innerHTML = ""; 
+
+        let errorMessages = [];
+
+        if (!startDate || !endDate) {
+            errorMessages.push("Ngày bắt đầu hoặc ngày kết thúc không tồn tại! ");
+        }
+
+        if (startDate > endDate) {
+            errorMessages.push("Ngày bắt đầu không thể lớn hơn ngày kết thúc!");
+        }
+
+        if (startDate > today || endDate > today) {
+            errorMessages.push("Không thể chọn ngày trong tương lai!");
+        }
+
+        if (errorMessages.length > 0) {
+            errorMessageDiv.innerHTML = errorMessages.join("<br>");
+            errorMessageDiv.classList.remove('d-none');
+            event.preventDefault();
+        }
+    });
+
+    document.getElementById('filterButton').addEventListener('click', function () {
+    let startDate = document.getElementById('startDate').value;
+    let endDate = document.getElementById('endDate').value;
+
+    fetch(`{{ route('admin.revenue.filter') }}?start_date=${startDate}&end_date=${endDate}`)
+        .then(response => response.json())
+        .then(data => {
+            let labels = Object.keys(data.revenue_by_date);
+            let revenueData = Object.values(data.revenue_by_date);
+
+            updateChart(labels, revenueData);
+
+            document.getElementById('revenueDayTitle').innerText = "Tổng doanh thu sau khi lọc ngày";
+            document.getElementById('revenueDayValue').innerText =
+                new Intl.NumberFormat('vi-VN').format(data.total_revenue || 0) + " VNĐ";
+
+            document.getElementById('revenueWeekTitle').innerText = "Ngày cao nhất";
+            document.getElementById('revenueWeekValue').innerText =
+                data.max_revenue_day ? 
+                `${data.max_revenue_day} (${new Intl.NumberFormat('vi-VN').format(data.max_revenue_value || 0)} VNĐ)` 
+                : "Không có doanh thu";
+
+            document.getElementById('revenueMonthTitle').innerText = "Doanh thu trung bình sau khi lọc";
+            document.getElementById('averageRevenueValue').innerText = 
+                new Intl.NumberFormat('vi-VN').format(data.average_revenue_per_day) + " VNĐ";
+
+            // Cập nhật danh sách sản phẩm bán chạy
+            let bestSellingProductsContainer = document.getElementById('bestSellingProducts');
+            bestSellingProductsContainer.innerHTML = ""; // Xóa nội dung cũ
+
+            if (data.best_selling_products.length > 0) {
+                data.best_selling_products.forEach(item => {
+                    let product = data.products[item.product_id]; // Lấy thông tin sản phẩm từ danh sách products
+
+                    if (product) {
+                        let productItem = document.createElement('li');
+                        productItem.className = "list-group-item d-flex justify-content-between align-items-center";
+                        productItem.innerHTML = `
+                            ${product.name}
+                            <span class="badge bg-primary rounded-pill">${item.total_sold}</span>
+                        `;
+                        bestSellingProductsContainer.appendChild(productItem);
+                    }
+                });
+            } else {
+                bestSellingProductsContainer.innerHTML = "<li class='list-group-item text-center'>Không có sản phẩm nào</li>";
+            }
+        })
+        .catch(error => console.error('Error:', error));
+});
+
+    });
+</script>
 @endsection
