@@ -87,6 +87,11 @@
                                             value="{{ $bill->full_name }}" readonly>
                                     </div>
                                     <div class="col-md-3 mb-3">
+                                        <label for="email">Số điện thoại</label>
+                                        <input type="text" class="form-control" id="email"
+                                            value="{{ $bill->phone }}" readonly>
+                                    </div>
+                                    <div class="col-md-3 mb-3">
                                         <label for="email">E-mail</label>
                                         <input type="text" class="form-control" id="email"
                                             value="{{ $bill->email }}" readonly>
@@ -133,7 +138,7 @@
                                             value="{{ number_format($bill->total, 0, ',', '.') }} đ" readonly>
                                     </div>
                                     @if ($bill->status_id==0)
-                                        <div class="col-md-4 mb-3">
+                                        <div class=" mb-3">
                                         <label for="total">Lý do huỷ đơn hàng</label>
                                         <input type="text" class="form-control" id="total"
                                             value="{{$bill->note}}" readonly>
