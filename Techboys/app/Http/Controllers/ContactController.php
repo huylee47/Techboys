@@ -51,6 +51,12 @@ class ContactController extends Controller
         //
     }
 
+    public function detail($id)
+    {
+        $contact = Contact::findOrFail($id);
+        return view('admin.contact.contact_detail', compact('contact'));
+    }
+    
     /**
      * Show the form for editing the specified resource.
      */
@@ -73,7 +79,7 @@ class ContactController extends Controller
     public function destroy(Contact $contact)
     {
         $contact->delete();
-    return redirect()->route('admin.contacts.index')->with('success', 'Đã xoá liên hệ!');
+    return redirect()->route('admin.contact.index')->with('success', 'Đã xoá liên hệ!');
 
     }
     public function saveContact(Request $request)
