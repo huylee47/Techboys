@@ -124,37 +124,30 @@ class ProductController extends Controller
         return $this->productService->updateStock($request, $productId);
     }
 
-    public function getVariants(Request $request)
-    {
-        $request->validate([
-            'product_id' => 'required|exists:products,id'
-        ]);
+    // public function getVariants(Request $request)
+    // {
+    //     $request->validate([
+    //         'product_id' => 'required|exists:products,id'
+    //     ]);
 
-        $product = Product::find($request->product_id);
+    //     $product = Product::find($request->product_id);
+    //     $variants = ProductVariant::where('product_id', $request->product_id)->get();
 
-        // Lấy tất cả biến thể của sản phẩm
-        $variants = ProductVariant::where('product_id', $request->product_id)
-            ->where('stock', '>', 0)
-            ->get();
-
-        return response()->json([
-            'product' => [
-                'base_price' => $product->base_price,
-                'base_stock' => $product->base_stock
-            ],
-            'variants' => $variants->map(function ($variant) {
-                $attributes = json_decode($variant->attribute_values, true) ?? [];
-                $variantName = !empty($attributes) ? implode(' / ', array_values($attributes)) : 'Mặc định';
-
-                return [
-                    'id' => $variant->id,
-                    'name' => $variantName,
-                    'price' => $variant->price,
-                    'stock' => $variant->stock
-                ];
-            })
-        ]);
-    }
+    //     return response()->json([
+    //         'product' => [
+    //             'base_price' => $product->base_price,
+    //             'base_stock' => $product->base_stock
+    //         ],
+    //         'variants' => $variants->map(function ($variant) {
+    //             return [
+    //                 'id' => $variant->id,
+    //                 'attribute_values' => $variant->attribute_values,
+    //                 'price' => $variant->price,
+    //                 'stock' => $variant->stock
+    //             ];
+    //         })
+    //     ]);
+    // }
 
     private function processProducts($products, $billId)
     {
