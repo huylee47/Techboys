@@ -156,6 +156,7 @@ Route::post('/logout', [UserController::class, 'logout'])->name('admin.logout');
                 Route::post('update/{ProductId}', [ProductController::class,'updateStock'])->name('admin.stock.update');
             });
             // Route::get('/variants', [ProductController::class, 'getVariants'])->name('admin.product.getVariants');
+            Route::get('/get-variants', [BillController::class, 'getVariants'])->name('admin.product.getVariants');
         });
 
         Route::prefix('/category')->group(function () {
@@ -198,9 +199,9 @@ Route::post('/logout', [UserController::class, 'logout'])->name('admin.logout');
 
             Route::get('/create', [BillController::class, 'create'])->name('admin.bill.create');
             Route::post('/store', [BillController::class, 'store'])->name('admin.bill.store');
-            Route::get('/get-variants', [BillController::class, 'getVariants'])->name('admin.product.getVariants');
-            Route::post('/check-voucher', [BillController::class, 'checkVoucher'])->name('admin.bill.checkVoucher');
-            Route::post('/get-user-by-phone', [BillController::class, 'getUserByPhone'])->name('admin.bill.getUserByPhone');
+            
+            // Route::post('/check-voucher', [BillController::class, 'checkVoucher'])->name('admin.bill.checkVoucher');
+            // Route::post('/get-user-by-phone', [BillController::class, 'getUserByPhone'])->name('admin.bill.getUserByPhone');
         });
 
         Route::prefix('/blogs')->group(function () {
