@@ -29,7 +29,9 @@
             <div class="sidebar-wrapper active">
                 <div class="sidebar-header">
                     <div class="site-branding">
-                            <img class="" src="{{ url('') }}/admin/assets/images/config/{{$config->logo}}" alt="Logo"  style="max-width: 200px;">
+                        <a href="{{ route('home') }}">
+                            <img src="{{ url('') }}/admin/assets/images/config/{{$config->logo}}" alt="Logo"  style="max-width: 200px;">
+                        </a>
                     </div>
                     
                 </div>
