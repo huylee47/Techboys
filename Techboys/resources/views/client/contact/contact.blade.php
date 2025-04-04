@@ -16,7 +16,7 @@
                     <div class="type-page hentry">
                         <div class="entry-content">
                             <div class="stretch-full-width-map">
-                                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d634.1549045120821!2d106.70951524863375!3d20.865679643682185!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x314a7bf67d69c9c7%3A0x4341c6cef1813f18!2zVHLGsOG7nW5nIENhbyDEkeG6s25nIEZQVCBQb2x5dGVjaG5pYw!5e0!3m2!1svi!2s!4v1740505370576!5m2!1svi!2s" height="514" style="border:0;" allowfullscreen="" ></iframe>
+                                {!! $config->map !!}
                             </div>
                             <div class="row contact-info">
                                 <div class="col-md-9 left-col">
@@ -27,15 +27,9 @@
                                     <div class="contact-form">
                                         <div role="form" class="wpcf7" id="wpcf7-f425-o1" lang="en-US" dir="ltr">
                                             <div class="screen-reader-response"></div>
-                                            <form class="wpcf7-form" novalidate="novalidate" action="" method="post">
+                                            <form class="wpcf7-form" novalidate="novalidate" action="{{ route('contact.save') }}" method="post">
                                                 @csrf
-                                                <div style="display: none;">
-                                                    <input type="hidden" name="_wpcf7" value="425" />
-                                                    <input type="hidden" name="_wpcf7_version" value="4.5.1" />
-                                                    <input type="hidden" name="_wpcf7_locale" value="en_US" />
-                                                    <input type="hidden" name="_wpcf7_unit_tag" value="wpcf7-f425-o1" />
-                                                    <input type="hidden" name="_wpnonce" value="e6363d91dd" />
-                                                </div>
+                                                
                                                 <div class="form-group row">
                                                     <div class="col-xs-12 col-md-6">
                                                         <label>Họ và tên
