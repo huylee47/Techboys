@@ -27,15 +27,9 @@
                                     <div class="contact-form">
                                         <div role="form" class="wpcf7" id="wpcf7-f425-o1" lang="en-US" dir="ltr">
                                             <div class="screen-reader-response"></div>
-                                            <form class="wpcf7-form" novalidate="novalidate" action="" method="post">
+                                            <form class="wpcf7-form" novalidate="novalidate" action="{{ route('contact.save') }}" method="post">
                                                 @csrf
-                                                <div style="display: none;">
-                                                    <input type="hidden" name="_wpcf7" value="425" />
-                                                    <input type="hidden" name="_wpcf7_version" value="4.5.1" />
-                                                    <input type="hidden" name="_wpcf7_locale" value="en_US" />
-                                                    <input type="hidden" name="_wpcf7_unit_tag" value="wpcf7-f425-o1" />
-                                                    <input type="hidden" name="_wpnonce" value="e6363d91dd" />
-                                                </div>
+                                                
                                                 <div class="form-group row">
                                                     <div class="col-xs-12 col-md-6">
                                                         <label>Họ và tên
