@@ -37,12 +37,24 @@
                                 </div>
                                 <div class="ms-auto">
                                     <a class="btn btn-primary" href="{{ route('admin.product.index') }}">Quay lại</a>
-                                    <button class="btn btn-danger">
-                                    <a href="#" class=" bi-trash-fill text-light  delete-btn"
-                                    data-id="{{ $product->id }}" 
-                                    data-name="{{ $product->name }}"
-                                    title="Nhấn để xoá sản phẩm"> Xoá </a>
-                                    </button>
+                                    @php
+                                        $isPending = $productIdPending->contains($product->id);
+                                    @endphp
+
+                                    @if ($isPending == 1)
+                                        <button class="btn btn-secondary" disabled
+                                            title="Sản phẩm đang được xử lý ở đơn hàng , không thể xoá">
+                                            <a class="bi-trash-fill text-light">Không thể xoá</a>
+                                        </button>
+                                    @else
+                                        <button class="btn btn-danger">
+                                            {{-- <h1>{{$isPending}}</h1> --}}
+                                            <a href="#" class=" bi-trash-fill text-light  delete-btn"
+                                                data-id="{{ $product->id }}" data-name="{{ $product->name }}"
+                                                title="Nhấn để xoá sản phẩm"> Xoá </a>
+                                        </button>
+                                    @endif
+
 
                                 </div>
                             </div>
@@ -272,25 +284,25 @@
             });
         </script>
 
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        let deleteModal = new bootstrap.Modal(document.getElementById('deleteModal'));
-        let productName = document.getElementById('productName');
-        let deleteForm = document.getElementById('deleteForm');
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                let deleteModal = new bootstrap.Modal(document.getElementById('deleteModal'));
+                let productName = document.getElementById('productName');
+                let deleteForm = document.getElementById('deleteForm');
 
-        document.querySelectorAll('.delete-btn').forEach(button => {
-            button.addEventListener('click', function () {
-                let id = this.getAttribute('data-id');
-                let name = this.getAttribute('data-name');
+                document.querySelectorAll('.delete-btn').forEach(button => {
+                    button.addEventListener('click', function() {
+                        let id = this.getAttribute('data-id');
+                        let name = this.getAttribute('data-name');
 
-                productName.textContent = name;
-                deleteForm.setAttribute('action', `/admin/product/destroy/${id}`);
+                        productName.textContent = name;
+                        deleteForm.setAttribute('action', `/admin/product/destroy/${id}`);
 
-                deleteModal.show();
+                        deleteModal.show();
+                    });
+                });
             });
-        });
-    });
-</script>
+        </script>
 
         <script>
             document.getElementById('images').addEventListener('change', function(event) {
@@ -634,7 +646,8 @@
                                         i])) {
                                     duplicateFound = true;
                                     alert(
-                                        "Có giá trị trùng lặp trong các biến thể, vui lòng chọn lại.");
+                                        "Có giá trị trùng lặp trong các biến thể, vui lòng chọn lại."
+                                    );
                                     e.preventDefault();
                                 }
                             });
@@ -648,7 +661,7 @@
                     });
                 });
 
- 
+
                 // Remove variant
                 $(document).on('click', '.remove-variant', function() {
                     let removedAttributes = $(this).closest('.variant-item').find('select').map(function() {
