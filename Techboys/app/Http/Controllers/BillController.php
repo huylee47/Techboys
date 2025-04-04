@@ -53,58 +53,59 @@ class BillController extends Controller
         return view('admin.bill.create', compact('users', 'products', 'vouchers'));
     }
 
-    // Xử lý tạo đơn hàng
     public function store(Request $request)
     {
         DB::beginTransaction();
 
         try {
-            // Validate dữ liệu đầu vào
+            // Validate request
             $validated = $request->validate([
-                'full_name' => 'required|string|max:255',
-                'phone' => 'required|string|max:20',
-                'email' => 'nullable|email|max:255',
-                'address' => 'nullable|string|max:255',
-                'user_id' => 'nullable|exists:users,id',
+                'user_id' => 'required|exists:users,id',
                 'products' => 'required|array|min:1',
                 'products.*.product_id' => 'required|exists:products,id',
                 'products.*.variant_id' => 'nullable|exists:product_variants,id',
                 'products.*.quantity' => 'required|integer|min:1',
                 'products.*.price' => 'required|numeric|min:0',
-                'payment_method' => 'required|in:1,2,3',
-                'voucher_code' => 'nullable|exists:vouchers,code',
-                'discount_value' => 'nullable|numeric|min:0',
-                'note' => 'nullable|string',
+                'payment_method' => 'required|in:cod,bank,vnpay',
+                'shipping_fee' => 'required|numeric|min:0',
             ]);
 
-            // Tìm hoặc tạo user mới
-            $user = $this->findOrCreateUser($validated);
+            // Calculate total
+            $subtotal = collect($validated['products'])->sum(function ($item) {
+                return $item['price'] * $item['quantity'];
+            });
 
-            // Tính toán tổng tiền
-            $subtotal = $this->calculateSubtotal($validated['products']);
-            $total = $this->calculateTotal($subtotal, $validated['discount_value'] ?? 0);
+            $total = $subtotal + $validated['shipping_fee'];
 
-            // Tạo đơn hàng
+            // Create bill
             $bill = Bill::create([
-                'user_id' => $user->id,
+                'user_id' => $validated['user_id'],
                 'status_id' => 1, // Trạng thái "Chờ xác nhận"
                 'payment_method' => $validated['payment_method'],
+                'shipping_fee' => $validated['shipping_fee'],
                 'total' => $total,
-                'discount' => $validated['discount_value'] ?? 0,
-                'voucher_code' => $validated['voucher_code'] ?? null,
-                'note' => $validated['note'] ?? null,
-                'full_name' => $validated['full_name'],
-                'phone' => $validated['phone'],
-                'email' => $validated['email'] ?? null,
-                'address' => $validated['address'] ?? null,
+                'note' => $request->note,
             ]);
 
-            // Thêm sản phẩm vào đơn hàng và cập nhật tồn kho
-            $this->processProducts($validated['products'], $bill->id);
+            // Add products and update stock
+            foreach ($validated['products'] as $product) {
+                // Update stock
+                if ($product['variant_id']) {
+                    ProductVariant::where('id', $product['variant_id'])
+                        ->decrement('stock', $product['quantity']);
+                } else {
+                    Product::where('id', $product['product_id'])
+                        ->decrement('base_stock', $product['quantity']);
+                }
 
-            // Cập nhật số lượng voucher nếu có
-            if (!empty($validated['voucher_code'])) {
-                $this->updateVoucherQuantity($validated['voucher_code']);
+                // Create bill detail
+                BillDetails::create([
+                    'bill_id' => $bill->id,
+                    'product_id' => $product['product_id'],
+                    'variant_id' => $product['variant_id'] ?? null,
+                    'quantity' => $product['quantity'],
+                    'price' => $product['price'],
+                ]);
             }
 
             DB::commit();
@@ -118,204 +119,29 @@ class BillController extends Controller
         }
     }
 
-    // API lấy thông tin biến thể sản phẩm
     public function getVariants(Request $request)
     {
-        $productId = $request->input('product_id');
-        $product = Product::with('variants')->find($productId);
+        $request->validate([
+            'product_id' => 'required|exists:products,id'
+        ]);
 
-        if (!$product) {
-            return response()->json(['error' => 'Sản phẩm không tồn tại'], 404);
-        }
-
-        $variants = $product->variants->map(function ($variant) {
-            // Parse attribute_values từ JSON
-            $attributes = json_decode($variant->attribute_values, true) ?? [];
-            $variantName = implode(' / ', array_values($attributes));
-
-            return [
-                'id' => $variant->id,
-                'name' => $variantName,
-                'price' => $variant->price,
-                'stock' => $variant->stock,
-            ];
-        });
+        $product = Product::find($request->product_id);
+        $variants = ProductVariant::where('product_id', $request->product_id)->get();
 
         return response()->json([
             'product' => [
                 'base_price' => $product->base_price,
-                'base_stock' => $product->base_stock,
+                'base_stock' => $product->base_stock
             ],
-            'variants' => $variants,
-        ]);
-    }
-
-    // API kiểm tra voucher
-    public function checkVoucher(Request $request)
-    {
-        $code = $request->input('code');
-        $subtotal = $request->input('subtotal');
-
-        $voucher = Voucher::where('code', $code)
-            ->where(function ($query) {
-                $query->where('end_date', '>', now())
-                    ->orWhereNull('end_date');
+            'variants' => $variants->map(function ($variant) {
+                return [
+                    'id' => $variant->id,
+                    'attribute_values' => $variant->attribute_values,
+                    'price' => $variant->price,
+                    'stock' => $variant->stock
+                ];
             })
-            ->first();
-
-        if (!$voucher) {
-            return response()->json([
-                'valid' => false,
-                'message' => 'Mã giảm giá không hợp lệ hoặc đã hết hạn'
-            ]);
-        }
-
-        if ($voucher->min_price > $subtotal) {
-            return response()->json([
-                'valid' => false,
-                'message' => 'Đơn hàng chưa đạt giá trị tối thiểu để áp dụng voucher'
-            ]);
-        }
-
-        $discount = $this->calculateDiscount($voucher, $subtotal);
-
-        return response()->json([
-            'valid' => true,
-            'discount' => $discount,
-            'discount_text' => number_format($discount) . ' đ',
-            'voucher_name' => $voucher->name
         ]);
-    }
-
-    // API tìm kiếm khách hàng bằng số điện thoại
-    public function getUserByPhone(Request $request)
-    {
-        $phone = $request->input('phone');
-        $user = User::where('phone', $phone)->first();
-
-        if (!$user) {
-            return response()->json(['found' => false]);
-        }
-
-        return response()->json([
-            'found' => true,
-            'user' => [
-                'id' => $user->id,
-                'name' => $user->name,
-                'email' => $user->email,
-                'address' => $user->address,
-            ]
-        ]);
-    }
-
-    // ========== CÁC PHƯƠNG THỨC HỖ TRỢ ==========
-
-    // Tìm hoặc tạo user mới
-    private function findOrCreateUser($data)
-    {
-        if (!empty($data['user_id'])) {
-            return User::find($data['user_id']);
-        }
-
-        return User::firstOrCreate(
-            ['phone' => $data['phone']],
-            [
-                'name' => $data['full_name'],
-                'email' => $data['email'] ?? null,
-                'password' => bcrypt(rand(100000, 999999)),
-                'address' => $data['address'] ?? null,
-            ]
-        );
-    }
-
-    // Tính tổng tiền hàng
-    private function calculateSubtotal($products)
-    {
-        return collect($products)->sum(function ($item) {
-            return $item['price'] * $item['quantity'];
-        });
-    }
-
-    // Tính tổng tiền sau giảm giá
-    private function calculateTotal($subtotal, $discount)
-    {
-        return $subtotal - $discount;
-    }
-
-    // Xử lý thêm sản phẩm vào đơn hàng và cập nhật tồn kho
-    private function processProducts($products, $billId)
-    {
-        foreach ($products as $product) {
-            // Cập nhật tồn kho
-            if ($product['variant_id']) {
-                ProductVariant::where('id', $product['variant_id'])
-                    ->decrement('stock', $product['quantity']);
-            } else {
-                Product::where('id', $product['product_id'])
-                    ->decrement('base_stock', $product['quantity']);
-            }
-
-            // Thêm chi tiết đơn hàng
-            BillDetails::create([
-                'bill_id' => $billId,
-                'product_id' => $product['product_id'],
-                'variant_id' => $product['variant_id'] ?? null,
-                'quantity' => $product['quantity'],
-                'price' => $product['price'],
-            ]);
-        }
-    }
-
-    // Cập nhật số lượng voucher
-    private function updateVoucherQuantity($voucherCode)
-    {
-        $voucher = Voucher::where('code', $voucherCode)->first();
-        if ($voucher && $voucher->quantity) {
-            $voucher->decrement('quantity');
-        }
-    }
-
-    // Tính toán giảm giá
-    private function calculateDiscount($voucher, $subtotal)
-    {
-        if ($voucher->discount_percent) {
-            $discount = $subtotal * $voucher->discount_percent / 100;
-            return min($discount, $voucher->max_discount);
-        } elseif ($voucher->discount_amount) {
-            return $voucher->discount_amount;
-        }
-        return 0;
-    }
-    // Lấy thông tin chi tiết sản phẩm khi chọn
-    public function getProductDetails(Request $request)
-    {
-        $productId = $request->input('product_id');
-        $variantId = $request->input('variant_id');
-
-        $product = Product::with('variants')->find($productId);
-
-        if ($product) {
-            $price = $product->base_price;
-            if ($variantId) {
-                $variant = ProductVariant::find($variantId);
-                if ($variant) {
-                    $price = $variant->price;
-                }
-            }
-            return response()->json([
-                'product_name' => $product->name,
-                'price' => $price,
-                'variants' => $product->variants->map(function ($variant) {
-                    return [
-                        'id' => $variant->id,
-                        'name' => $variant->name,
-                        'price' => $variant->price,
-                    ];
-                }),
-            ]);
-        }
-
-        return response()->json(['error' => 'Sản phẩm không tồn tại'], 404);
     }
 
     // Cập nhật giỏ hàng khi người dùng thay đổi lựa chọn sản phẩm hoặc biến thể
