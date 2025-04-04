@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProductRequest;
+use App\Models\BillDetails;
 use App\Models\Brand;
 // use App\Models\Color;
 use App\Models\Product;
@@ -113,12 +114,14 @@ class ProductController extends Controller
         return redirect()->route('admin.product.imageIndex', $projectId)->with('success', 'Ảnh đã được xóa thành công.');
     }
 
-    public function stock($productId){
+    public function stock($productId)
+    {
         return $this->productService->getStockByProductId($productId);
     }
-    public function updateStock(Request $request, $productId){
+    public function updateStock(Request $request, $productId)
+    {
         // dd($request->all());
-        return $this->productService->updateStock($request,$productId);
+        return $this->productService->updateStock($request, $productId);
     }
 
     public function getVariants(Request $request)
@@ -128,7 +131,11 @@ class ProductController extends Controller
         ]);
 
         $product = Product::find($request->product_id);
-        $variants = ProductVariant::where('product_id', $request->product_id)->get();
+
+        // Lấy tất cả biến thể của sản phẩm
+        $variants = ProductVariant::where('product_id', $request->product_id)
+            ->where('stock', '>', 0)
+            ->get();
 
         return response()->json([
             'product' => [
@@ -136,9 +143,12 @@ class ProductController extends Controller
                 'base_stock' => $product->base_stock
             ],
             'variants' => $variants->map(function ($variant) {
+                $attributes = json_decode($variant->attribute_values, true) ?? [];
+                $variantName = !empty($attributes) ? implode(' / ', array_values($attributes)) : 'Mặc định';
+
                 return [
                     'id' => $variant->id,
-                    'attribute_values' => $variant->attribute_values,
+                    'name' => $variantName,
                     'price' => $variant->price,
                     'stock' => $variant->stock
                 ];
@@ -146,6 +156,40 @@ class ProductController extends Controller
         ]);
     }
 
+    private function processProducts($products, $billId)
+    {
+        foreach ($products as $product) {
+            // Cập nhật tồn kho
+            if ($product['variant_id']) {
+                // Trừ stock cho biến thể sản phẩm (từ bảng product_variants)
+                $updated = ProductVariant::where('id', $product['variant_id'])
+                    ->where('stock', '>=', $product['quantity'])
+                    ->decrement('stock', $product['quantity']);
+
+                if (!$updated) {
+                    throw new \Exception("Sản phẩm biến thể không đủ hàng!");
+                }
+            } else {
+                // Trừ stock cho sản phẩm gốc (từ bảng products)
+                $updated = Product::where('id', $product['product_id'])
+                    ->where('base_stock', '>=', $product['quantity'])
+                    ->decrement('base_stock', $product['quantity']);
+
+                if (!$updated) {
+                    throw new \Exception("Sản phẩm không đủ hàng!");
+                }
+            }
+
+            // Thêm chi tiết đơn hàng
+            BillDetails::create([
+                'bill_id' => $billId,
+                'product_id' => $product['product_id'],
+                'variant_id' => $product['variant_id'] ?? null,
+                'quantity' => $product['quantity'],
+                'price' => $product['price'],
+            ]);
+        }
+    }
     // CLIENT 
     public function productDetails($request)
     {
