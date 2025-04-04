@@ -29,9 +29,9 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
     <link rel="stylesheet" type="text/css" href="{{ url('') }}/home/assets/css/colors/blue.css" media="all" />
     <link href="https://fonts.googleapis.com/css?family=Rubik:300,400,500,900" rel="stylesheet">
-    <link rel="shortcut icon" href="{{ url('') }}/admin/assets/images/config/{{$config->favicon}}">
+    <link rel="shortcut icon" href="{{ url('') }}/admin/assets/images/config/{{ $config->favicon }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="shortcut icon" href="{{ url('') }}/admin/assets/images/config/{{$config->favicon}}">
+    <link rel="shortcut icon" href="{{ url('') }}/admin/assets/images/config/{{ $config->favicon }}">
 
     <style>
         .user-menu {
@@ -106,7 +106,8 @@
                     <div class="row">
                         <div class="site-branding">
                             <a href="{{ route('home') }}" class="custom-logo-link" rel="home">
-                                <img src="{{ url('') }}/admin/assets/images/config/{{$config->logo}}" alt="">
+                                <img src="{{ url('') }}/admin/assets/images/config/{{ $config->logo }}"
+                                    alt="">
                             </a>
                         </div>
                         <!-- ====================== End Header Logo ====================== -->
@@ -359,10 +360,10 @@
                                 <!-- .widget -->
                             </div>
                             <!-- .site-search -->
-                            <a class="handheld-header-cart-link has-icon" href="cart.html"
-                                title="View your shopping cart">
+                            <a class="handheld-header-cart-link has-icon" href="{{ route('client.cart.index') }}"
+                                title="Xem giỏ hàng">
                                 <i class="tm tm-shopping-bag"></i>
-                                <span class="count">2</span>
+                                <span class="count">{{ $cartCount }}</span>
                             </a>
                         </div>
                     </div>
@@ -401,10 +402,10 @@
                                 <div class="footer-contact">
                                     <div class="footer-logo">
                                         <a href="{{ route('home') }}" class="custom-logo-link" rel="home">
-                                            <img src="{{ url('') }}/admin/assets/images/config/{{$config->logo}}"
+                                            <img src="{{ url('') }}/admin/assets/images/config/{{ $config->logo }}"
                                                 alt="">
                                         </a>
-                                        <span>{{$config->title}}</span>
+                                        <span>{{ $config->title }}</span>
                                     </div>
                                     <!-- .footer-logo -->
                                     <div class="contact-payment-wrap">
@@ -433,18 +434,17 @@
                                                     <div class="menu-footer-menu-1-container">
                                                         <ul id="menu-footer-menu-1" class="menu">
                                                             @foreach ($categories as $category)
-
-                                                            <li class="menu-item">
-                                                                <a title="{{ $category->name }}"
-                                                                    href="{{ route('client.category.products', ['categoryId' => $category->id]) }}">{{ $category->name }}</a>
-                                                            </li>
+                                                                <li class="menu-item">
+                                                                    <a title="{{ $category->name }}"
+                                                                        href="{{ route('client.category.products', ['categoryId' => $category->id]) }}">{{ $category->name }}</a>
+                                                                </li>
                                                             @endforeach
                                                         </ul>
                                                     </div>
                                                 </div>
                                             </aside>
                                         </div>
-                                
+
                                         <!-- Cột 2: Hỗ trợ - Dịch vụ -->
                                         <div class="col-md-4">
                                             <aside class="widget clearfix">
@@ -453,10 +453,11 @@
                                                     <div class="menu-footer-menu-2-container">
                                                         <ul id="menu-footer-menu-2" class="menu">
                                                             <li class="menu-item">
-                                                                <a href="{{ route('client.about.about') }}">Về chúng tôi</a>
+                                                                <a href="{{ route('client.about.about') }}">Về chúng
+                                                                    tôi</a>
                                                             </li>
                                                             <li class="menu-item">
-                                                                <a href="{{route('contact')}}">Liên hệ</a>
+                                                                <a href="{{ route('contact') }}">Liên hệ</a>
                                                             </li>
                                                             <li class="menu-item">
                                                                 <a href="{{ route('blog') }}">Tin tức</a>
@@ -467,13 +468,14 @@
                                                 </div>
                                             </aside>
                                         </div>
-                                
+
                                         <!-- Cột 3: Địa chỉ -->
                                         <div class="col-md-4 text-end">
                                             <aside class="widget clearfix">
                                                 <div class="body">
                                                     <h4 class="widget-title">
-                                                        <a href="https://caodang.fpt.edu.vn" class="footer-address-map-link">
+                                                        <a href="https://caodang.fpt.edu.vn"
+                                                            class="footer-address-map-link">
                                                             <i class="tm tm-map-marker"> </i> Địa chỉ
                                                         </a>
                                                     </h4>
@@ -483,7 +485,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                
+
                             </div>
                         </div>
                     </div>
