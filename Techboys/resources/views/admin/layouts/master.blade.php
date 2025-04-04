@@ -111,13 +111,19 @@
                                 <span>Sự kiện giảm giá</span>
                             </a>
                         </li>
-                        <li class="sidebar-item {{ request()->routeIs('admin.comment*') ? 'active' : '' }}"">
+                        <li class="sidebar-item {{ request()->routeIs('admin.comment*') ? 'active' : '' }}">
                             <a href="{{ route('admin.comment.index') }}" class='sidebar-link'>
                                 <i class="bi bi-chat-dots"></i>
                                 <span>Phản hồi</span>
                             </a>
                         </li>
-
+                        <li class="sidebar-item {{ request()->routeIs('admin.contact*') ? 'active' : '' }}">
+                            <a href="" class='sidebar-link'>
+                                {{-- {{ route('admin.contact.index') }} --}}
+                                <i class="bi bi-chat-quote-fill"></i>
+                                <span>Feedback</span>
+                            </a>
+                        </li>
                         <li class="sidebar-item {{ request()->routeIs('admin.blogs*') ? 'active' : '' }} ">
                             <a href="{{route('admin.blogs.index')}}" class='sidebar-link'>
                                 <i class="bi bi-justify-left"></i>
@@ -128,7 +134,13 @@
                             <a href="{{route('admin.banner.index')}}" class='sidebar-link'>
                                 <i class="bi bi-bookmarks-fill"></i>
                                 <span>Banner</span>
-                            </a> <!-- Thêm thẻ đóng </a> vào đây -->
+                            </a>
+                        </li>
+                        <li class="sidebar-item {{ request()->routeIs('admin.config*') ? 'active' : '' }}">
+                            <a href="{{route('admin.config.index')}}" class='sidebar-link'>
+                                <i class="bi bi-gear-fill"></i>
+                                <span>Hệ thống</span>
+                            </a> 
                         </li>
 
                         
