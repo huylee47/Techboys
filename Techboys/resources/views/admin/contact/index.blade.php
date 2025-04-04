@@ -54,8 +54,8 @@
                                     <td>{{ $contact->created_at->format('d/m/Y H:i') }}</td>
                                     <td class="text-center">
                                         <a href="{{ route('admin.contact.detail', $contact->id) }}" class="btn btn-info mb-1">Xem</a>
-                                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal" onclick="openDeleteModal('{{ route('admin.contact.destroy', $contact->id) }}')">
-                                        Xoá</button>
+                                        {{-- <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal" onclick="openDeleteModal('{{ route('admin.contact.destroy', $contact->id) }}')">
+                                        Xoá</button> --}}
                                     </td>
                                 </tr>
                             @endforeach
@@ -66,7 +66,7 @@
         </section>
     </div>
 </div>
-<script>
+{{-- <script>
     function openDeleteModal(actionUrl) {
         const form = document.getElementById('deleteForm');
         form.action = actionUrl;
@@ -93,5 +93,5 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> --}}
 @endsection
