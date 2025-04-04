@@ -3,7 +3,7 @@
 @section('main')
 <div id="main">
     <div class="container mt-4">
-        <h2 class="mb-4">Tạo Đơn Hàng Tại Quầy</h2>
+        <h2 class="mb-4">Tạo Đơn Hàng</h2>
         
         @if($errors->any())
             <div class="alert alert-danger">
@@ -14,6 +14,24 @@
                 </ul>
             </div>
         @endif
+
+        @if(session('success'))
+    <div class="alert alert-success alert-dismissible fade show">
+        {{ session('success') }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+@endif
+
+@if(session('error'))
+    <div class="alert alert-danger alert-dismissible fade show">
+        {{ session('error') }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+@endif
 
         <form action="{{ route('admin.bill.store') }}" method="POST" id="orderForm">
             @csrf
@@ -26,14 +44,13 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="form-group col-md-6">
-                            <label for="userPhone">Tìm kiếm khách hàng bằng SĐT</label>
-                            <select id="userPhone" class="form-control selectpicker" data-live-search="true" title="Nhập số điện thoại tìm kiếm...">
-                                <option value="">Nhập số điện thoại tìm kiếm...</option>
+                            <label for="userPhone">Chọn số điện thoại</label>
+                            <select id="userPhone" class="form-control selectpicker" data-live-search="true" required>
+                                <option value="">Chọn số điện thoại</option>
                                 @foreach($users as $user)
-                                    <option value="{{ $user->phone }}" 
-                                            data-userid="{{ $user->id }}"
-                                            data-name="{{ $user->name }}"
-                                            data-email="{{ $user->email }}"
+                                    <option value="{{ $user->id }}" 
+                                            data-name="{{ $user->name }}" 
+                                            data-email="{{ $user->email }}" 
                                             data-address="{{ $user->address }}">
                                         {{ $user->phone }} - {{ $user->name }}
                                     </option>
@@ -41,34 +58,26 @@
                             </select>
                             <input type="hidden" name="user_id" id="userId">
                         </div>
-                    </div>
-
-                    <div class="row mt-3">
-                        <div class="col-md-4">
+                        
+                        <div class="col-md-6">
                             <div class="form-group">
-                                <label for="full_name">Họ tên*</label>
-                                <input type="text" class="form-control" id="full_name" name="full_name" required>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="phone">Số điện thoại*</label>
-                                <input type="text" class="form-control" id="phone" name="phone" required>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="email">Email</label>
-                                <input type="email" class="form-control" id="email" name="email">
+                                <label for="name">Tên khách hàng:</label>
+                                <input type="text" class="form-control" id="name" readonly>
                             </div>
                         </div>
                     </div>
-
-                    <div class="row mt-3">
-                        <div class="col-md-12">
+                    
+                    <div class="row">
+                        <div class="col-md-6">
                             <div class="form-group">
-                                <label for="address">Địa chỉ</label>
-                                <input type="text" class="form-control" id="address" name="address">
+                                <label for="email">Email:</label>
+                                <input type="email" class="form-control" id="email" readonly>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="address">Địa chỉ:</label>
+                                <input type="text" class="form-control" id="address" readonly>
                             </div>
                         </div>
                     </div>
@@ -88,20 +97,17 @@
                                 <option value="">Chọn sản phẩm</option>
                                 @foreach($products as $product)
                                     <option value="{{ $product->id }}" 
-                                            data-name="{{ $product->name }}"
-                                            data-base-price="{{ $product->base_price }}"
-                                            data-base-stock="{{ $product->base_stock }}">
-                                        {{ $product->name }} ({{ number_format($product->base_price) }}đ)
+                                            data-name="{{ $product->name }}">
+                                        {{ $product->name }}
                                     </option>
                                 @endforeach
                             </select>
                         </div>
 
-                        <div class="form-group col-md-6" id="variantContainer">
+                        <div class="form-group col-md-6" id="variantContainer" style="display:none;">
                             <label for="variant">Chọn biến thể</label>
                             <select id="variant" class="form-control selectpicker" data-live-search="true">
-                                <option value="">Chọn biến thể (nếu có)</option>
-                                <!-- Biến thể sẽ được load bằng AJAX -->
+                                <option value="">Chọn biến thể</option>
                             </select>
                         </div>
                     </div>
@@ -109,27 +115,27 @@
                     <div class="row mt-3">
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label for="quantity">Số lượng*</label>
-                                <input type="number" class="form-control" id="quantity" min="1" value="1" required>
+                                <label for="quantity">Số lượng:</label>
+                                <input type="number" class="form-control" id="quantity" min="1" value="1">
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label for="price">Giá*</label>
+                                <label for="price">Giá:</label>
                                 <input type="text" class="form-control" id="price" readonly>
-                                <input type="hidden" id="priceValue" name="price">
+                                <input type="hidden" id="priceValue">
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label for="stock">Tồn kho</label>
+                                <label for="stock">Tồn kho:</label>
                                 <input type="text" class="form-control" id="stock" readonly>
                                 <input type="hidden" id="stockValue">
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label for="subtotal">Thành tiền</label>
+                                <label for="subtotal">Thành tiền:</label>
                                 <input type="text" class="form-control" id="subtotal" readonly>
                             </div>
                         </div>
@@ -162,16 +168,6 @@
                                 </tbody>
                                 <tfoot>
                                     <tr>
-                                        <th colspan="4" class="text-right">Tổng tiền hàng:</th>
-                                        <th id="subtotalAmount">0 đ</th>
-                                        <th></th>
-                                    </tr>
-                                    <tr id="discountRow" style="display:none;">
-                                        <th colspan="4" class="text-right">Giảm giá:</th>
-                                        <th id="discountAmount">0 đ</th>
-                                        <th></th>
-                                    </tr>
-                                    <tr>
                                         <th colspan="4" class="text-right">Tổng cộng:</th>
                                         <th id="totalAmount">0 đ</th>
                                         <th></th>
@@ -192,37 +188,26 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="payment_method">Phương thức thanh toán*</label>
+                                <label for="payment_method">Phương thức thanh toán:</label>
                                 <select class="form-control" id="payment_method" name="payment_method" required>
-                                    <option value="1">Tiền mặt</option>
-                                    <option value="2">Chuyển khoản</option>
-                                    <option value="3">Thẻ</option>
+                                    <option value="cod">Thanh toán khi nhận hàng (COD)</option>
+                                    <option value="bank">Chuyển khoản ngân hàng</option>
+                                    <option value="vnpay">VNPay</option>
                                 </select>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="voucher_code">Mã giảm giá</label>
-                                <select class="form-control selectpicker" id="voucher_code" name="voucher_code" data-live-search="true">
-                                    <option value="">Chọn mã giảm giá</option>
-                                    @foreach($vouchers as $voucher)
-                                        <option value="{{ $voucher->code }}" 
-                                                data-discount-percent="{{ $voucher->discount_percent }}"
-                                                data-discount-amount="{{ $voucher->discount_amount }}"
-                                                data-max-discount="{{ $voucher->max_discount }}"
-                                                data-min-price="{{ $voucher->min_price }}">
-                                            {{ $voucher->name }} ({{ $voucher->code }})
-                                        </option>
-                                    @endforeach
-                                </select>
-                                <input type="hidden" id="discount_value" name="discount_value" value="0">
+                                <label for="shipping_fee">Phí vận chuyển:</label>
+                                <input type="number" class="form-control" id="shipping_fee" name="shipping_fee" value="30000" min="0">
                             </div>
                         </div>
                     </div>
+                    
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label for="note">Ghi chú đơn hàng</label>
+                                <label for="note">Ghi chú đơn hàng:</label>
                                 <textarea class="form-control" id="note" name="note" rows="3"></textarea>
                             </div>
                         </div>
@@ -244,6 +229,10 @@
 @endsection
 
 @section('scripts')
+<!-- Select2 CSS & JS -->
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
 <!-- Bootstrap Selectpicker -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
@@ -253,156 +242,130 @@
 
 <script>
 $(document).ready(function() {
-    // Khởi tạo selectpicker với live search
-    $('.selectpicker').selectpicker({
-        liveSearch: true,
-        style: 'btn-default',
-        size: 10
-    });
+    // Khởi tạo selectpicker
+    $('.selectpicker').selectpicker();
     
     // Mảng lưu trữ sản phẩm đã chọn
     let selectedProducts = [];
     let currentProduct = null;
-    let currentDiscount = 0;
     
-    // ========== PHẦN KHÁCH HÀNG ==========
-    // Xử lý khi chọn khách hàng từ dropdown
-    $('#userPhone').on('changed.bs.select', function() {
+    // Xử lý khi chọn khách hàng
+    $('#userPhone').on('change', function() {
         const selectedOption = $(this).find('option:selected');
-        const phone = selectedOption.val();
-        
-        if (phone) {
-            // Nếu tìm thấy khách hàng
-            $('#full_name').val(selectedOption.data('name'));
-            $('#phone').val(phone);
-            $('#email').val(selectedOption.data('email'));
-            $('#address').val(selectedOption.data('address'));
-            $('#userId').val(selectedOption.data('userid'));
-        } else {
-            // Nếu không chọn khách hàng
-            $('#full_name').val('');
-            $('#phone').val('');
-            $('#email').val('');
-            $('#address').val('');
-            $('#userId').val('');
-        }
+        $('#name').val(selectedOption.data('name'));
+        $('#email').val(selectedOption.data('email'));
+        $('#address').val(selectedOption.data('address'));
+        $('#userId').val(selectedOption.val());
     });
     
-    // Cho phép nhập thủ công khi không chọn từ danh sách
-    $('#full_name, #phone, #email, #address').on('input', function() {
-        if ($(this).attr('id') === 'phone') {
-            // Khi nhập số điện thoại, tìm kiếm khách hàng
-            const phone = $(this).val();
-            if (phone.length >= 10) {
-                $.get('{{ route("admin.bill.getUserByPhone") }}', {phone: phone}, function(response) {
-                    if (response.found) {
-                        $('#full_name').val(response.user.name);
-                        $('#email').val(response.user.email);
-                        $('#address').val(response.user.address);
-                        $('#userId').val(response.user.id);
-                        $('#userPhone').selectpicker('val', phone);
-                    }
-                });
-            }
-        } else {
-            // Xóa user_id nếu nhập thủ công thông tin khác
-            $('#userId').val('');
-        }
-    });
-    
-    // ========== PHẦN SẢN PHẨM ==========
     // Xử lý khi chọn sản phẩm
     $('#product').on('changed.bs.select', function(e) {
-    const productId = $(this).val();
-    const $variantSelect = $('#variant');
-    
-    // Reset các giá trị
-    $variantSelect.empty().append('<option value="">Chọn biến thể (nếu có)</option>');
-    $('#price').val('');
-    $('#priceValue').val('');
-    $('#stock').val('');
-    $('#stockValue').val('');
-    $('#subtotal').val('');
-    
-    if (productId) {
-        const selectedOption = $(this).find('option:selected');
+        const productId = $(this).val();
+        const $variantContainer = $('#variantContainer');
+        const $variantSelect = $('#variant');
         
-        // Lưu thông tin sản phẩm hiện tại
-        currentProduct = {
-            id: productId,
-            name: selectedOption.data('name'),
-            base_price: selectedOption.data('base-price'),
-            base_stock: selectedOption.data('base-stock'),
-            variants: []
-        };
+        // Reset các giá trị
+        $variantSelect.empty().append('<option value="">Chọn biến thể</option>');
+        $variantContainer.hide();
+        $('#price').val('');
+        $('#priceValue').val('');
+        $('#stock').val('');
+        $('#stockValue').val('');
+        $('#subtotal').val('');
         
-        // Gọi AJAX lấy thông tin biến thể từ ProductVariant
-        $.ajax({
-            url: "{{ route('admin.product.getVariants') }}",
-            method: "GET",
-            data: { product_id: productId },
-            beforeSend: function() {
-                $variantSelect.prop('disabled', true);
-                $variantSelect.selectpicker('refresh');
-            },
-            success: function(response) {
-                // Lưu thông tin biến thể
-                currentProduct.variants = response.variants;
-                
-                // Thêm options biến thể
-                $.each(response.variants, function(index, variant) {
-                    $variantSelect.append(
-                        `<option value="${variant.id}" 
-                          data-price="${variant.price}" 
-                          data-stock="${variant.stock}"
-                          data-name="${variant.name}">
-                            ${variant.name} (${new Intl.NumberFormat().format(variant.price)}đ)
-                        </option>`
-                    );
-                });
-                
-                // Nếu sản phẩm không có biến thể, sử dụng giá và tồn kho mặc định
-                if (response.variants.length === 0) {
+        if (productId) {
+            const selectedOption = $(this).find('option:selected');
+            
+            // Lưu thông tin sản phẩm hiện tại
+            currentProduct = {
+                id: productId,
+                name: selectedOption.text().trim(),
+                variants: []
+            };
+            
+            // Gọi AJAX lấy thông tin sản phẩm và biến thể
+            $.ajax({
+                url: "{{ route('admin.product.getVariants') }}",
+                method: "GET",
+                data: { product_id: productId },
+                beforeSend: function() {
+                    $variantSelect.prop('disabled', true);
+                    $variantSelect.selectpicker('refresh');
+                },
+                success: function(response) {
+                    // Lưu thông tin sản phẩm gốc
+                    currentProduct.base_price = response.product.base_price;
+                    currentProduct.base_stock = response.product.base_stock;
+                    
+                    // Hiển thị giá và tồn kho mặc định (sản phẩm gốc)
                     $('#price').val(response.product.base_price.toLocaleString() + ' đ');
                     $('#priceValue').val(response.product.base_price);
                     $('#stock').val(response.product.base_stock);
                     $('#stockValue').val(response.product.base_stock);
+                    calculateSubtotal();
+                    
+                    if (response.variants && response.variants.length > 0) {
+                        // Lưu thông tin biến thể
+                        currentProduct.variants = response.variants;
+                        
+                        // Thêm options biến thể
+                        $.each(response.variants, function(index, variant) {
+                            // Parse attribute_values từ JSON
+                            let variantName = 'Không có thông tin';
+                            try {
+                                const attributes = JSON.parse(variant.attribute_values);
+                                variantName = Object.values(attributes).join(' / ');
+                            } catch (e) {
+                                console.error('Error parsing attribute_values:', e);
+                            }
+                            
+                            $variantSelect.append(
+                                `<option value="${variant.id}" 
+                                  data-price="${variant.price}" 
+                                  data-stock="${variant.stock}"
+                                  data-name="${variantName}">
+                                    ${variantName} (${new Intl.NumberFormat().format(variant.price)}đ)
+                                </option>`
+                            );
+                        });
+                        
+                        // Hiển thị container biến thể
+                        $variantContainer.show();
+                    }
+                    $variantSelect.prop('disabled', false);
+                    $variantSelect.selectpicker('refresh');
+                },
+                error: function(xhr) {
+                    console.error('Error loading variants:', xhr.responseText);
+                    $variantSelect.prop('disabled', false);
+                    $variantSelect.selectpicker('refresh');
                 }
-                
-                $variantSelect.prop('disabled', false);
-                $variantSelect.selectpicker('refresh');
-            },
-            error: function(xhr) {
-                console.error('Error loading variants:', xhr.responseText);
-                $variantSelect.prop('disabled', false);
-                $variantSelect.selectpicker('refresh');
-            }
-        });
-    } else {
-        currentProduct = null;
-    }
-});
-
-// Xử lý khi chọn biến thể
-$('#variant').on('changed.bs.select', function() {
-    const selectedOption = $(this).find('option:selected');
-    if (selectedOption.val()) {
-        // Sử dụng giá và tồn kho từ biến thể
-        $('#price').val(selectedOption.data('price').toLocaleString() + ' đ');
-        $('#priceValue').val(selectedOption.data('price'));
-        $('#stock').val(selectedOption.data('stock'));
-        $('#stockValue').val(selectedOption.data('stock'));
-    } else {
-        // Nếu không chọn biến thể, dùng giá và tồn kho sản phẩm gốc
-        if (currentProduct) {
-            $('#price').val(currentProduct.base_price.toLocaleString() + ' đ');
-            $('#priceValue').val(currentProduct.base_price);
-            $('#stock').val(currentProduct.base_stock);
-            $('#stockValue').val(currentProduct.base_stock);
+            });
+        } else {
+            currentProduct = null;
         }
-    }
-    calculateSubtotal();
-});
+    });
+    
+    // Xử lý khi chọn biến thể
+    $('#variant').on('changed.bs.select', function() {
+        const selectedOption = $(this).find('option:selected');
+        if (selectedOption.val()) {
+            // Cập nhật giá và tồn kho từ biến thể
+            $('#price').val(selectedOption.data('price').toLocaleString() + ' đ');
+            $('#priceValue').val(selectedOption.data('price'));
+            $('#stock').val(selectedOption.data('stock'));
+            $('#stockValue').val(selectedOption.data('stock'));
+        } else {
+            // Nếu không chọn biến thể, dùng giá và tồn kho sản phẩm gốc
+            if (currentProduct) {
+                $('#price').val(currentProduct.base_price.toLocaleString() + ' đ');
+                $('#priceValue').val(currentProduct.base_price);
+                $('#stock').val(currentProduct.base_stock);
+                $('#stockValue').val(currentProduct.base_stock);
+            }
+        }
+        calculateSubtotal();
+    });
     
     // Tính thành tiền
     function calculateSubtotal() {
@@ -431,66 +394,6 @@ $('#variant').on('changed.bs.select', function() {
         
         calculateSubtotal();
     });
-    
-    // Xử lý khi chọn voucher giảm giá
-    $('#voucher_code').on('changed.bs.select', function() {
-        const selectedOption = $(this).find('option:selected');
-        const subtotal = calculateSubtotal();
-        
-        if (!selectedOption.val()) {
-            // Nếu không chọn voucher
-            currentDiscount = 0;
-            $('#discountRow').hide();
-            $('#discount_value').val(0);
-            updateTotals();
-            return;
-        }
-        
-        const minPrice = selectedOption.data('min-price');
-        if (subtotal < minPrice) {
-            alert('Đơn hàng chưa đạt giá trị tối thiểu để áp dụng voucher này');
-            $(this).selectpicker('val', '');
-            return;
-        }
-        
-        // Tính toán giảm giá
-        const discountPercent = selectedOption.data('discount-percent');
-        const discountAmount = selectedOption.data('discount-amount');
-        const maxDiscount = selectedOption.data('max-discount');
-        
-        if (discountPercent) {
-            currentDiscount = subtotal * discountPercent / 100;
-            if (maxDiscount && currentDiscount > maxDiscount) {
-                currentDiscount = maxDiscount;
-            }
-        } else if (discountAmount) {
-            currentDiscount = discountAmount;
-        } else {
-            currentDiscount = 0;
-        }
-        
-        // Hiển thị thông tin giảm giá
-        $('#discountAmount').text(currentDiscount.toLocaleString() + ' đ');
-        $('#discount_value').val(currentDiscount);
-        $('#discountRow').show();
-        updateTotals();
-    });
-    
-    // Tính tổng tiền hàng từ các sản phẩm đã chọn
-    function calculateSubtotal() {
-        return selectedProducts.reduce((sum, product) => {
-            return sum + (product.price * product.quantity);
-        }, 0);
-    }
-    
-    // Cập nhật tổng tiền
-    function updateTotals() {
-        const subtotal = calculateSubtotal();
-        const total = subtotal - currentDiscount;
-        
-        $('#subtotalAmount').text(subtotal.toLocaleString() + ' đ');
-        $('#totalAmount').text(total.toLocaleString() + ' đ');
-    }
     
     // Thêm sản phẩm vào bảng
     $('#addProductBtn').on('click', function() {
@@ -551,6 +454,7 @@ $('#variant').on('changed.bs.select', function() {
         
         // Reset form chọn sản phẩm
         $('#product').val('').selectpicker('refresh');
+        $('#variantContainer').hide();
         $('#variant').val('').selectpicker('refresh');
         $('#price').val('');
         $('#priceValue').val('');
@@ -566,8 +470,11 @@ $('#variant').on('changed.bs.select', function() {
         const $tbody = $('#productsTable tbody');
         $tbody.empty();
         
+        let total = 0;
+        
         selectedProducts.forEach((product, index) => {
             const subtotal = product.price * product.quantity;
+            total += subtotal;
             
             $tbody.append(`
                 <tr>
@@ -585,8 +492,8 @@ $('#variant').on('changed.bs.select', function() {
             `);
         });
         
-        // Cập nhật tổng tiền
-        updateTotals();
+        // Cập nhật tổng tiền (chưa bao gồm phí vận chuyển)
+        $('#totalAmount').text(total.toLocaleString() + ' đ');
         
         // Thêm các trường input ẩn để submit
         updateHiddenInputs();
@@ -636,9 +543,9 @@ $('#variant').on('changed.bs.select', function() {
     
     // Xử lý submit form
     $('form').on('submit', function(e) {
-        if (!$('#phone').val()) {
+        if (!$('#userId').val()) {
             e.preventDefault();
-            alert('Vui lòng nhập số điện thoại khách hàng');
+            alert('Vui lòng chọn khách hàng');
             return false;
         }
         
@@ -647,16 +554,6 @@ $('#variant').on('changed.bs.select', function() {
             alert('Vui lòng thêm ít nhất một sản phẩm vào đơn hàng');
             return false;
         }
-        
-        // Tính tổng tiền cuối cùng
-        const subtotal = calculateSubtotal();
-        const total = subtotal - currentDiscount;
-        
-        $('<input>').attr({
-            type: 'hidden',
-            name: 'total',
-            value: total
-        }).appendTo('form');
     });
 });
 </script>
@@ -664,13 +561,15 @@ $('#variant').on('changed.bs.select', function() {
 
 @section('styles')
 <style>
-    .bootstrap-select .dropdown-toggle {
+    .select2-container--default .select2-selection--single {
         height: 38px;
         padding: 6px 12px;
     }
-    .bootstrap-select .dropdown-menu {
-        max-height: 300px;
-        overflow-y: auto;
+    .select2-container--default .select2-selection--single .select2-selection__arrow {
+        height: 36px;
+    }
+    .bootstrap-select .dropdown-toggle {
+        height: 38px;
     }
     #productsTable th {
         white-space: nowrap;
@@ -680,21 +579,6 @@ $('#variant').on('changed.bs.select', function() {
     }
     .form-control[readonly] {
         background-color: #f8f9fa;
-    }
-    #productsTable tfoot th {
-        font-weight: bold;
-        background-color: #f8f9fa;
-    }
-    .btn-success {
-        background-color: #28a745;
-        border-color: #28a745;
-    }
-    .btn-success:hover {
-        background-color: #218838;
-        border-color: #1e7e34;
-    }
-    #variantContainer {
-        display: block !important;
     }
 </style>
 @endsection
