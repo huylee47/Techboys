@@ -226,7 +226,7 @@ Route::post('/logout', [UserController::class, 'logout'])->name('admin.logout');
         });
         Route::prefix('/contact')->group(function () {
             Route::get('/', [ContactController::class, 'index'])->name('admin.contact.index');
-            Route::delete('/admin/contact/{contact}', [ContactController::class, 'destroy'])->name('admin.contact.destroy');
+            // Route::delete('/admin/contact/{contact}', [ContactController::class, 'destroy'])->name('admin.contact.destroy');
             Route::get('/{id}', [ContactController::class, 'detail'])->name('admin.contact.detail');
 
         });
