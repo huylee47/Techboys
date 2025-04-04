@@ -85,6 +85,8 @@ Route::post('/login/Client', [UserController::class, 'loginClient'])->name('logi
 Route::get('/contact', function () {
     return view('client.contact.contact');
 })->name('contact');
+Route::get('/contact', [ContactController::class, 'getMap'])->name('contact');
+
 Route::post('/contact/save', [ContactController::class, 'saveContact'])->name('contact.save');
 
 // Đăng ký
