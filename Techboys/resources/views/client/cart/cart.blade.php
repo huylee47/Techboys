@@ -309,7 +309,7 @@
                 },
                 error: function () {
                     resetVoucher();
-                    $("#voucher-error").text("Có lỗi xảy ra, vui lòng thử lại!");
+                    $("#voucher-error").text("Voucher không hợp lệ hoặc giá trị đơn hàng chưa đạt mức tối thiểu");
                 }
             });
         }

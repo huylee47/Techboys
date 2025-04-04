@@ -65,30 +65,47 @@ class RevenueController extends Controller
         ));
     }
     public function filterRevenue(Request $request)
-{
-    $startDate = Carbon::parse($request->start_date)->startOfDay();
-    $endDate = Carbon::parse($request->end_date)->endOfDay();
-
-    $filteredRevenue = Bill::whereBetween('created_at', [$startDate, $endDate])
-    ->where('payment_status', 1)
-    ->selectRaw('DATE(created_at) as date, SUM(total) as revenue')
-    ->groupBy('date')
-    ->orderBy('date')
-    ->pluck('revenue', 'date');
-
-    $totalRevenue = $filteredRevenue->sum();
-    $maxRevenueDay = $filteredRevenue->isEmpty() ? null : $filteredRevenue->keys()->last();
-    $maxRevenueValue = $filteredRevenue->isEmpty() ? 0 : $filteredRevenue->max();
-
-    $daysCount = $startDate->diffInDays($endDate);
-    $averageRevenuePerDay = $daysCount > 0 ? $totalRevenue / $daysCount : 0;
-
-    return response()->json([
-        'revenue_by_date' => $filteredRevenue,
-        'total_revenue' => $totalRevenue,
-        'max_revenue_day' => $maxRevenueDay,
-        'max_revenue_value' => $maxRevenueValue,
-        'average_revenue_per_day' => $averageRevenuePerDay
-    ]);
-}
+    {
+        $startDate = Carbon::parse($request->start_date)->startOfDay();
+        $endDate = Carbon::parse($request->end_date)->endOfDay();
+    
+        $filteredRevenue = Bill::whereBetween('created_at', [$startDate, $endDate])
+            ->where('payment_status', 1)
+            ->selectRaw('DATE(created_at) as date, SUM(total) as revenue')
+            ->groupBy('date')
+            ->orderBy('date')
+            ->pluck('revenue', 'date');
+    
+        $totalRevenue = $filteredRevenue->sum();
+        $maxRevenueDay = $filteredRevenue->isEmpty() ? null : $filteredRevenue->keys()->last();
+        $maxRevenueValue = $filteredRevenue->isEmpty() ? 0 : $filteredRevenue->max();
+    
+        $daysCount = $startDate->diffInDays($endDate);
+        $averageRevenuePerDay = $daysCount > 0 ? $totalRevenue / $daysCount : 0;
+    
+        $bestSellingProducts = BillDetails::whereHas('bill', function($query) use ($startDate, $endDate) {
+            $query->whereBetween('created_at', [$startDate, $endDate])
+                ->where('payment_status', 1);
+        })
+        ->select('product_id')
+        ->selectRaw('SUM(quantity) as total_sold')
+        ->groupBy('product_id')
+        ->orderByDesc('total_sold')
+        ->get();
+    
+        $products = Product::whereIn('id', $bestSellingProducts->pluck('product_id'))
+            ->get()
+            ->keyBy('id');
+    
+        return response()->json([
+            'revenue_by_date' => $filteredRevenue,
+            'total_revenue' => $totalRevenue,
+            'max_revenue_day' => $maxRevenueDay,
+            'max_revenue_value' => $maxRevenueValue,
+            'average_revenue_per_day' => $averageRevenuePerDay,
+            'best_selling_products' => $bestSellingProducts,
+            'products' => $products
+        ]);
+    }
+    
 }

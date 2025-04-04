@@ -172,7 +172,12 @@
                                                 <td>{{ number_format($billDetail->price ) }} đ</td>
                                                 <td>{{ $isPromotionActive ? 'Có' : 'Không' }}</td>
 
-                                                <td>{{ $isPromotionActive ? number_format($billDetail->discounted_price * $billDetail->quantity) : number_format($billDetail->price * $billDetail->quantity)  }} đ</td>
+                                                <td>@if ($isPromotionActive)
+                                                    {{ number_format($billDetail->variant ? $billDetail->variant->discounted_price * $billDetail->quantity : $billDetail->product->discounted_price * $billDetail->quantity) }} đ
+                                                @else
+                                                    {{ number_format($billDetail->variant ? $billDetail->price * $billDetail->quantity : $billDetail->product->base_price * $billDetail->quantity) }} đ
+                                                @endif
+                                                </td>
                                             </tr>
                                         @endforeach
                                     </tbody>
