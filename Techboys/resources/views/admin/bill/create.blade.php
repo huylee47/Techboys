@@ -313,105 +313,96 @@ $(document).ready(function() {
     // ========== PHẦN SẢN PHẨM ==========
     // Xử lý khi chọn sản phẩm
     $('#product').on('changed.bs.select', function(e) {
-        const productId = $(this).val();
-        const $variantSelect = $('#variant');
-        
-        // Reset các giá trị
-        $variantSelect.empty().append('<option value="">Chọn biến thể (nếu có)</option>');
-        $('#price').val('');
-        $('#priceValue').val('');
-        $('#stock').val('');
-        $('#stockValue').val('');
-        $('#subtotal').val('');
-        
-        if (productId) {
-            const selectedOption = $(this).find('option:selected');
-            
-            // Lưu thông tin sản phẩm hiện tại
-            currentProduct = {
-                id: productId,
-                name: selectedOption.data('name'),
-                base_price: selectedOption.data('base-price'),
-                base_stock: selectedOption.data('base-stock'),
-                variants: []
-            };
-            
-            // Gọi AJAX lấy thông tin biến thể
-            $.ajax({
-                url: "{{ route('admin.product.getVariants') }}",
-                method: "GET",
-                data: { product_id: productId },
-                beforeSend: function() {
-                    $variantSelect.prop('disabled', true);
-                    $variantSelect.selectpicker('refresh');
-                },
-                success: function(response) {
-                    // Lưu thông tin biến thể
-                    currentProduct.variants = response.variants;
-                    
-                    // Thêm options biến thể
-                    $.each(response.variants, function(index, variant) {
-                        // Parse attribute_values từ JSON
-                        let variantName = 'Không có thông tin';
-                        try {
-                            const attributes = JSON.parse(variant.attribute_values);
-                            variantName = Object.values(attributes).join(' / ');
-                        } catch (e) {
-                            console.error('Error parsing attribute_values:', e);
-                        }
-                        
-                        $variantSelect.append(
-                            `<option value="${variant.id}" 
-                              data-price="${variant.price}" 
-                              data-stock="${variant.stock}"
-                              data-name="${variantName}">
-                                ${variantName} (${new Intl.NumberFormat().format(variant.price)}đ)
-                            </option>`
-                        );
-                    });
-                    
-                    // Nếu sản phẩm không có biến thể, sử dụng giá và tồn kho mặc định
-                    if (response.variants.length === 0) {
-                        $('#price').val(currentProduct.base_price.toLocaleString() + ' đ');
-                        $('#priceValue').val(currentProduct.base_price);
-                        $('#stock').val(currentProduct.base_stock);
-                        $('#stockValue').val(currentProduct.base_stock);
-                    }
-                    
-                    $variantSelect.prop('disabled', false);
-                    $variantSelect.selectpicker('refresh');
-                },
-                error: function(xhr) {
-                    console.error('Error loading variants:', xhr.responseText);
-                    $variantSelect.prop('disabled', false);
-                    $variantSelect.selectpicker('refresh');
-                }
-            });
-        } else {
-            currentProduct = null;
-        }
-    });
+    const productId = $(this).val();
+    const $variantSelect = $('#variant');
     
-    // Xử lý khi chọn biến thể
-    $('#variant').on('changed.bs.select', function() {
+    // Reset các giá trị
+    $variantSelect.empty().append('<option value="">Chọn biến thể (nếu có)</option>');
+    $('#price').val('');
+    $('#priceValue').val('');
+    $('#stock').val('');
+    $('#stockValue').val('');
+    $('#subtotal').val('');
+    
+    if (productId) {
         const selectedOption = $(this).find('option:selected');
-        if (selectedOption.val()) {
-            // Cập nhật giá và tồn kho từ biến thể
-            $('#price').val(selectedOption.data('price').toLocaleString() + ' đ');
-            $('#priceValue').val(selectedOption.data('price'));
-            $('#stock').val(selectedOption.data('stock'));
-            $('#stockValue').val(selectedOption.data('stock'));
-        } else {
-            // Nếu không chọn biến thể, dùng giá và tồn kho sản phẩm gốc
-            if (currentProduct) {
-                $('#price').val(currentProduct.base_price.toLocaleString() + ' đ');
-                $('#priceValue').val(currentProduct.base_price);
-                $('#stock').val(currentProduct.base_stock);
-                $('#stockValue').val(currentProduct.base_stock);
+        
+        // Lưu thông tin sản phẩm hiện tại
+        currentProduct = {
+            id: productId,
+            name: selectedOption.data('name'),
+            base_price: selectedOption.data('base-price'),
+            base_stock: selectedOption.data('base-stock'),
+            variants: []
+        };
+        
+        // Gọi AJAX lấy thông tin biến thể từ ProductVariant
+        $.ajax({
+            url: "{{ route('admin.product.getVariants') }}",
+            method: "GET",
+            data: { product_id: productId },
+            beforeSend: function() {
+                $variantSelect.prop('disabled', true);
+                $variantSelect.selectpicker('refresh');
+            },
+            success: function(response) {
+                // Lưu thông tin biến thể
+                currentProduct.variants = response.variants;
+                
+                // Thêm options biến thể
+                $.each(response.variants, function(index, variant) {
+                    $variantSelect.append(
+                        `<option value="${variant.id}" 
+                          data-price="${variant.price}" 
+                          data-stock="${variant.stock}"
+                          data-name="${variant.name}">
+                            ${variant.name} (${new Intl.NumberFormat().format(variant.price)}đ)
+                        </option>`
+                    );
+                });
+                
+                // Nếu sản phẩm không có biến thể, sử dụng giá và tồn kho mặc định
+                if (response.variants.length === 0) {
+                    $('#price').val(response.product.base_price.toLocaleString() + ' đ');
+                    $('#priceValue').val(response.product.base_price);
+                    $('#stock').val(response.product.base_stock);
+                    $('#stockValue').val(response.product.base_stock);
+                }
+                
+                $variantSelect.prop('disabled', false);
+                $variantSelect.selectpicker('refresh');
+            },
+            error: function(xhr) {
+                console.error('Error loading variants:', xhr.responseText);
+                $variantSelect.prop('disabled', false);
+                $variantSelect.selectpicker('refresh');
             }
+        });
+    } else {
+        currentProduct = null;
+    }
+});
+
+// Xử lý khi chọn biến thể
+$('#variant').on('changed.bs.select', function() {
+    const selectedOption = $(this).find('option:selected');
+    if (selectedOption.val()) {
+        // Sử dụng giá và tồn kho từ biến thể
+        $('#price').val(selectedOption.data('price').toLocaleString() + ' đ');
+        $('#priceValue').val(selectedOption.data('price'));
+        $('#stock').val(selectedOption.data('stock'));
+        $('#stockValue').val(selectedOption.data('stock'));
+    } else {
+        // Nếu không chọn biến thể, dùng giá và tồn kho sản phẩm gốc
+        if (currentProduct) {
+            $('#price').val(currentProduct.base_price.toLocaleString() + ' đ');
+            $('#priceValue').val(currentProduct.base_price);
+            $('#stock').val(currentProduct.base_stock);
+            $('#stockValue').val(currentProduct.base_stock);
         }
-        calculateSubtotal();
-    });
+    }
+    calculateSubtotal();
+});
     
     // Tính thành tiền
     function calculateSubtotal() {
