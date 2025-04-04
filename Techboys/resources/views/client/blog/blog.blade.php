@@ -889,14 +889,8 @@
                         <div class="handheld-header-links">
                             <ul class="columns-3">
                                 <li class="my-account">
-                                    <a href="login-and-register.html" class="has-icon">
+                                    <a href="{{ route('login.client') }}" class="has-icon">
                                         <i class="tm tm-login-register"></i>
-                                    </a>
-                                </li>
-                                <li class="wishlist">
-                                    <a href="wishlist.html" class="has-icon">
-                                        <i class="tm tm-favorites"></i>
-                                        <span class="count">3</span>
                                     </a>
                                 </li>
                                 <li class="compare">
@@ -1914,7 +1908,7 @@
                                                 {{-- <div class="menu-footer-menu-3-container">
                                             <ul id="menu-footer-menu-3" class="menu">
                                                 <li class="menu-item">
-                                                    <a href="login-and-register.html">My Account</a>
+                                                    <a href="{{ route('login.client') }}">My Account</a>
                                                 </li>
                                                 <li class="menu-item">
                                                     <a href="track-your-order.html">Track Order</a>
@@ -1922,9 +1916,7 @@
                                                 <li class="menu-item">
                                                     <a href="shop.html">Shop</a>
                                                 </li>
-                                                <li class="menu-item">
-                                                    <a href="wishlist.html">Wishlist</a>
-                                                </li>
+
                                                 <li class="menu-item">
                                                     <a href="about.html">About Us</a>
                                                 </li>
