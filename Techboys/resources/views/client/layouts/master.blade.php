@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en-US" itemscope="itemscope" itemtype="http://schema.org/WebPage">
+
 <head>
     <meta charset="UTF-8">
     <meta name="csrf-token" content="{{ csrf_token() }}" />
     <meta name="chat-id" content="{{ $chatId ?? '' }}">
     <meta name="user-role" content="{{ auth()->check() ? auth()->user()->role_id : 0 }}">
+    <meta name="user-id" content="{{ auth()->check() ? auth()->user()->id : 0 }}">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
     <title>@yield('title')</title>
     <link rel="stylesheet" type="text/css" href="{{ url('') }}/home/assets/css/bootstrap.min.css"
@@ -73,6 +75,7 @@
     </style>
     @yield('styles')
 </head>
+
 <body class="page-template-default error-page woocommerce-active single-product full-width normal">
     <div id="page" class="hfeed site">
         {{-- Top Bar --}}
@@ -80,10 +83,12 @@
             <div class="col-full">
                 <ul id="menu-top-bar-left" class="nav justify-content-center">
                     <li class="menu-item animate-dropdown">
-                        <a title="Techboys - Always free delivery" href="contact-v1.html">Techboys &#8211; Lựa chọn tối ưu</a>
+                        <a title="Techboys - Always free delivery" href="contact-v1.html">Techboys &#8211; Lựa chọn tối
+                            ưu</a>
                     </li>
                     <li class="menu-item animate-dropdown">
-                        <a title="Sản phẩm chất lượng" href="{{ route('client.product.index') }}">Sản phẩm chất lượng</a>
+                        <a title="Sản phẩm chất lượng" href="{{ route('client.product.index') }}">Sản phẩm chất
+                            lượng</a>
                     </li>
                     <li class="menu-item animate-dropdown">
                         <a title="Hỗ trợ nhanh chóng" href="track-your-order.html">Hỗ trợ nhanh chóng</a>
@@ -240,7 +245,8 @@
                         <ul id="menu-departments-menu" class="dropdown-menu yamm departments-menu-dropdown">
                             @foreach ($categories as $category)
                                 <li class="highlight menu-item animate-dropdown">
-                                    <a title="{{ $category->name }}" href="{{ route('client.category.products',['categoryId'=> $category->id]) }}">{{ $category->name }}</a>
+                                    <a title="{{ $category->name }}"
+                                        href="{{ route('client.category.products', ['categoryId' => $category->id]) }}">{{ $category->name }}</a>
                                 </li>
                             @endforeach
                         </ul>
@@ -375,9 +381,10 @@
                                     <span class="tmhm-close">Close</span>
                                     <ul id="menu-departments-menu-1" class="nav">
                                         <li class="highlight menu-item animate-dropdown">
-                                             @foreach ($categories as $category)
+                                            @foreach ($categories as $category)
                                         <li class="highlight menu-item animate-dropdown">
-                                            <a title="{{ $category->name }}" href="{{ route('client.product.index') }}">{{ $category->name }}</a>
+                                            <a title="{{ $category->name }}"
+                                                href="{{ route('client.product.index') }}">{{ $category->name }}</a>
                                             @endforeach
                                     </ul>
                                 </div>
@@ -391,8 +398,8 @@
                                         <label class="screen-reader-text"
                                             for="woocommerce-product-search-field-0">Search for:</label>
                                         <input type="search" id="woocommerce-product-search-field-0"
-                                            class="search-field" placeholder="Nhập sản phẩm muốn tìm kiếm" value=""
-                                            name="s" />
+                                            class="search-field" placeholder="Nhập sản phẩm muốn tìm kiếm"
+                                            value="" name="s" />
                                         <input type="submit" value="Search" />
                                         <input type="hidden" name="post_type" value="product" />
                                     </form>
@@ -523,13 +530,15 @@
                                                 <div class="menu-footer-menu-1-container">
                                                     <ul id="menu-footer-menu-1" class="menu">
                                                         <li class="menu-item">
-                                                            <a href="{{ route('client.product.index') }}">Điện thoại</a>
+                                                            <a href="{{ route('client.product.index') }}">Điện
+                                                                thoại</a>
                                                         </li>
                                                         <li class="menu-item">
                                                             <a href="{{ route('client.product.index') }}">Laptop</a>
                                                         </li>
                                                         <li class="menu-item">
-                                                            <a href="{{ route('client.product.index') }}">Máy tính bảng</a>
+                                                            <a href="{{ route('client.product.index') }}">Máy tính
+                                                                bảng</a>
                                                         </li>
                                                         <li class="menu-item">
                                                             <a href="{{ route('client.product.index') }}">Tai nghe</a>
@@ -546,7 +555,8 @@
                                                 <div class="menu-footer-menu-2-container">
                                                     <ul id="menu-footer-menu-2" class="menu">
                                                         <li class="menu-item">
-                                                            <a href="{{ route('client.about.about') }}">Về chúng tôi</a>
+                                                            <a href="{{ route('client.about.about') }}">Về chúng
+                                                                tôi</a>
                                                         </li>
                                                         <li class="menu-item">
                                                             <a href="shop.html">Liên hệ</a>
@@ -607,7 +617,7 @@
     <script type="text/javascript" src="{{ url('') }}/home/assets/js/scripts.js"></script>
     <script src="https://js.pusher.com/8.4.0/pusher.min.js"></script>
 
-      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
@@ -619,21 +629,23 @@
         var guestId = "{{ session()->getId() }}";
         var userRole = document.querySelector('meta[name="user-role"]').getAttribute("content");
 
-         $(document).ready(function () {
-        $('#search').on('keyup', function () {
-            let query = $(this).val();
-            if (query.length > 0) {
-                $.ajax({
-                    url: "{{ route('client.product.search') }}",
-                    type: "GET",
-                    data: { s: query },
-                    success: function (data) {
-                        let dropdown = $('#search-dropdown');
-                        dropdown.empty(); // Xóa dữ liệu cũ
+        $(document).ready(function() {
+            $('#search').on('keyup', function() {
+                let query = $(this).val();
+                if (query.length > 0) {
+                    $.ajax({
+                        url: "{{ route('client.product.search') }}",
+                        type: "GET",
+                        data: {
+                            s: query
+                        },
+                        success: function(data) {
+                            let dropdown = $('#search-dropdown');
+                            dropdown.empty(); // Xóa dữ liệu cũ
 
-                        if (data.length > 0) {
-                            data.forEach(product => {
-                                dropdown.append(`
+                            if (data.length > 0) {
+                                data.forEach(product => {
+                                    dropdown.append(`
                                     <li class="list-group-item">
                                         <a href="/products/${product.slug}" class="d-flex align-items-center">
                                             <img src="{{ url('') }}/admin/assets/images/product/${product.img}" 
@@ -642,28 +654,51 @@
                                         </a>
                                     </li>
                                 `);
-                            });
-                            dropdown.show();
-                        } else {
-                            dropdown.hide();
+                                });
+                                dropdown.show();
+                            } else {
+                                dropdown.hide();
+                            }
                         }
-                    }
-                });
-            } else {
-                $('#search-dropdown').hide();
-            }
-        });
+                    });
+                } else {
+                    $('#search-dropdown').hide();
+                }
+            });
 
-        // Ẩn dropdown khi click ra ngoài
-        $(document).click(function (e) {
-            if (!$(e.target).closest("#search-form").length) {
-                $("#search-dropdown").hide();
-            }
+            $(document).click(function(e) {
+                if (!$(e.target).closest("#search-form").length) {
+                    $("#search-dropdown").hide();
+                }
+            });
         });
-    });
     </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Pusher.logToConsole = true;
+            console.log("Lắng nghe kênh: admin.blocked." + currentUserId);
+
+            window.Echo.channel('admin.blocked.' + currentUserId)
+                .listen("UserBlocked", (event) => {
+                    console.log("Tài khoản bị khóa:", event);
+
+                    if (event.userId == currentUserId) {
+                        window.location.href = "{{ route('home') }}";
+                    }
+                })
+                .error((error) => {
+                    console.error("Lỗi khi nhận sự kiện:", error);
+                });
+        });
+    </script>
+
+
+
+
+
     <script type="text/javascript" src="{{ url('') }}/home/assets/js/chat.js"></script>
     @yield('cartScripts');
 
 </body>
+
 </html>
