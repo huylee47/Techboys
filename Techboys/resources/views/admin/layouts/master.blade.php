@@ -28,12 +28,10 @@
         <div id="sidebar" class="active">
             <div class="sidebar-wrapper active">
                 <div class="sidebar-header">
-                    <div class="d-flex justify-content-between">
-                        <div class="logo">
-                            <a href="#"><img src="{{ url('') }}/admin/cassets/img/logo.png" alt="Logo"
-                                    srcset=""></a>
-                        </div>
+                    <div class="site-branding">
+                            <img class="" src="{{ url('') }}/admin/assets/images/config/{{$config->logo}}" alt="Logo"  style="max-width: 200px;">
                     </div>
+                    
                 </div>
                 <div class="sidebar-menu">
                     <ul class="menu">
