@@ -255,13 +255,13 @@
                                                                 <a href="#">Ecommerce Pages</a>
                                                             </li>
                                                             <li class="menu-item">
-                                                                <a href="cart.html">Cart</a>
+                                                                <a href="{{ route('client.cart.index') }}">Cart</a>
                                                             </li>
                                                             <li class="menu-item">
                                                                 <a href="checkout.html">Checkout</a>
                                                             </li>
                                                             <li class="menu-item">
-                                                                <a href="login-and-register.html">My Account</a>
+                                                                <a href="{{ route('client.edit') }}">My Account</a>
                                                             </li>
                                                             <li class="menu-item">
                                                                 <a href="compare.html">Compare</a>
@@ -383,7 +383,7 @@
                                     <!-- .dropdown-menu -->
                                 </li>
                                 <li class="menu-item">
-                                    <a title="My Account" href="login-and-register.html">
+                                    <a title="My Account" href="{{ route('login.client') }}">
                                         <i class="tm tm-login-register"></i>Register or Sign in</a>
                                 </li>
                                 <li class="techmarket-flex-more-menu-item dropdown">
@@ -986,21 +986,14 @@
                         </li>
                     </ul>
                     <!-- .header-compare -->
-                    <ul class="header-wishlist nav navbar-nav">
-                        <li class="nav-item">
-                            <a href="wishlist.html" class="nav-link">
-                                <i class="tm tm-favorites"></i>
-                                <span id="top-cart-wishlist-count" class="value">3</span>
-                            </a>
-                        </li>
-                    </ul>
+
                     <!-- .header-wishlist -->
                     <ul id="site-header-cart" class="site-header-cart menu">
                         <li class="animate-dropdown dropdown ">
-                            <a class="cart-contents" href="cart.html" data-toggle="dropdown"
-                                title="View your shopping cart">
+                            <a class="cart-contents" href="{{ route('client.cart.index') }}" data-toggle="dropdown"
+                                title="Xem giỏ hàng">
                                 <i class="tm tm-shopping-bag"></i>
-                                <span class="count">2</span>
+                                <span class="count">{{ $cartCount }}</span>
                                 <span class="amount">
                                     <span class="price-label">Your Cart</span>&#036;136.99</span>
                             </a>
@@ -1047,7 +1040,8 @@
                                                         class="woocommerce-Price-currencySymbol">$</span>136.99</span>
                                             </p>
                                             <p class="woocommerce-mini-cart__buttons buttons">
-                                                <a href="cart.html" class="button wc-forward">View cart</a>
+                                                <a href="{{ route('client.cart.index') }}"
+                                                    class="button wc-forward">View cart</a>
                                                 <a href="checkout.html"
                                                     class="button checkout wc-forward">Checkout</a>
                                             </p>
@@ -1127,14 +1121,8 @@
                         <div class="handheld-header-links">
                             <ul class="columns-3">
                                 <li class="my-account">
-                                    <a href="login-and-register.html" class="has-icon">
+                                    <a href="{{ route('login.client') }}" class="has-icon">
                                         <i class="tm tm-login-register"></i>
-                                    </a>
-                                </li>
-                                <li class="wishlist">
-                                    <a href="wishlist.html" class="has-icon">
-                                        <i class="tm tm-favorites"></i>
-                                        <span class="count">3</span>
                                     </a>
                                 </li>
                                 <li class="compare">
@@ -1764,10 +1752,10 @@
                                 <!-- .widget -->
                             </div>
                             <!-- .site-search -->
-                            <a class="handheld-header-cart-link has-icon" href="cart.html"
-                                title="View your shopping cart">
+                            <a class="handheld-header-cart-link has-icon" href="{{ route('client.cart.index') }}"
+                                title="Xem giỏ hàng">
                                 <i class="tm tm-shopping-bag"></i>
-                                <span class="count">2</span>
+                                <span class="count">{{ $cartCount }}</span>
                             </a>
                         </div>
                         <!-- /.row -->
@@ -1883,7 +1871,8 @@
                                                         </h2>
                                                     </a>
                                                     <div class="hover-area">
-                                                        <a class="button add_to_cart_button" href="cart.html"
+                                                        <a class="button add_to_cart_button"
+                                                            href="{{ route('client.cart.index') }}"
                                                             rel="nofollow">Thêm vào giỏ hàng</a>
                                                         <a class="add-to-compare-link" href="compare.html">Add to
                                                             compare</a>
@@ -1910,7 +1899,8 @@
                                                             Wi-Fi & GPS</h2>
                                                     </a>
                                                     <div class="hover-area">
-                                                        <a class="button add_to_cart_button" href="cart.html"
+                                                        <a class="button add_to_cart_button"
+                                                            href="{{ route('client.cart.index') }}"
                                                             rel="nofollow">Thêm vào giỏ hàng</a>
                                                         <a class="add-to-compare-link" href="compare.html">Add to
                                                             compare</a>
@@ -1937,7 +1927,8 @@
                                                             Controller</h2>
                                                     </a>
                                                     <div class="hover-area">
-                                                        <a class="button add_to_cart_button" href="cart.html"
+                                                        <a class="button add_to_cart_button"
+                                                            href="{{ route('client.cart.index') }}"
                                                             rel="nofollow">Thêm vào giỏ hàng</a>
                                                         <a class="add-to-compare-link" href="compare.html">Add to
                                                             compare</a>
@@ -1964,7 +1955,8 @@
                                                             LED-Lit Monitorss Buds</h2>
                                                     </a>
                                                     <div class="hover-area">
-                                                        <a class="button add_to_cart_button" href="cart.html"
+                                                        <a class="button add_to_cart_button"
+                                                            href="{{ route('client.cart.index') }}"
                                                             rel="nofollow">Thêm vào giỏ hàng</a>
                                                         <a class="add-to-compare-link" href="compare.html">Add to
                                                             compare</a>
@@ -1999,7 +1991,8 @@
                                                             Ultrabook 8GB 512SSD W10</h2>
                                                     </a>
                                                     <div class="hover-area">
-                                                        <a class="button add_to_cart_button" href="cart.html"
+                                                        <a class="button add_to_cart_button"
+                                                            href="{{ route('client.cart.index') }}"
                                                             rel="nofollow">Thêm vào giỏ hàng</a>
                                                         <a class="add-to-compare-link" href="compare.html">Add to
                                                             compare</a>
@@ -2026,7 +2019,8 @@
                                                             Reality 3D with Bluetooth Glasses</h2>
                                                     </a>
                                                     <div class="hover-area">
-                                                        <a class="button add_to_cart_button" href="cart.html"
+                                                        <a class="button add_to_cart_button"
+                                                            href="{{ route('client.cart.index') }}"
                                                             rel="nofollow">Thêm vào giỏ hàng</a>
                                                         <a class="add-to-compare-link" href="compare.html">Add to
                                                             compare</a>
@@ -2053,7 +2047,8 @@
                                                             Quality Monitor</h2>
                                                     </a>
                                                     <div class="hover-area">
-                                                        <a class="button add_to_cart_button" href="cart.html"
+                                                        <a class="button add_to_cart_button"
+                                                            href="{{ route('client.cart.index') }}"
                                                             rel="nofollow">Thêm vào giỏ hàng</a>
                                                         <a class="add-to-compare-link" href="compare.html">Add to
                                                             compare</a>
@@ -2088,7 +2083,8 @@
                                                             PureBass Headphones</h2>
                                                     </a>
                                                     <div class="hover-area">
-                                                        <a class="button add_to_cart_button" href="cart.html"
+                                                        <a class="button add_to_cart_button"
+                                                            href="{{ route('client.cart.index') }}"
                                                             rel="nofollow">Thêm vào giỏ hàng</a>
                                                         <a class="add-to-compare-link" href="compare.html">Add to
                                                             compare</a>
@@ -2115,7 +2111,8 @@
                                                             with Grey Suture Leather Strap</h2>
                                                     </a>
                                                     <div class="hover-area">
-                                                        <a class="button add_to_cart_button" href="cart.html"
+                                                        <a class="button add_to_cart_button"
+                                                            href="{{ route('client.cart.index') }}"
                                                             rel="nofollow">Thêm vào giỏ hàng</a>
                                                         <a class="add-to-compare-link" href="compare.html">Add to
                                                             compare</a>
@@ -2142,7 +2139,8 @@
                                                             splashproof portable speaker</h2>
                                                     </a>
                                                     <div class="hover-area">
-                                                        <a class="button add_to_cart_button" href="cart.html"
+                                                        <a class="button add_to_cart_button"
+                                                            href="{{ route('client.cart.index') }}"
                                                             rel="nofollow">Thêm vào giỏ hàng</a>
                                                         <a class="add-to-compare-link" href="compare.html">Add to
                                                             compare</a>
@@ -2169,7 +2167,8 @@
                                                             splashproof portable speaker</h2>
                                                     </a>
                                                     <div class="hover-area">
-                                                        <a class="button add_to_cart_button" href="cart.html"
+                                                        <a class="button add_to_cart_button"
+                                                            href="{{ route('client.cart.index') }}"
                                                             rel="nofollow">Thêm vào giỏ hàng</a>
                                                         <a class="add-to-compare-link" href="compare.html">Add to
                                                             compare</a>
@@ -2196,7 +2195,8 @@
                                                             SWR50</h2>
                                                     </a>
                                                     <div class="hover-area">
-                                                        <a class="button add_to_cart_button" href="cart.html"
+                                                        <a class="button add_to_cart_button"
+                                                            href="{{ route('client.cart.index') }}"
                                                             rel="nofollow">Thêm vào giỏ hàng</a>
                                                         <a class="add-to-compare-link" href="compare.html">Add to
                                                             compare</a>
@@ -2223,7 +2223,8 @@
                                                         </h2>
                                                     </a>
                                                     <div class="hover-area">
-                                                        <a class="button add_to_cart_button" href="cart.html"
+                                                        <a class="button add_to_cart_button"
+                                                            href="{{ route('client.cart.index') }}"
                                                             rel="nofollow">Thêm vào giỏ hàng</a>
                                                         <a class="add-to-compare-link" href="compare.html">Add to
                                                             compare</a>
@@ -2250,7 +2251,8 @@
                                                             NXTG</h2>
                                                     </a>
                                                     <div class="hover-area">
-                                                        <a class="button add_to_cart_button" href="cart.html"
+                                                        <a class="button add_to_cart_button"
+                                                            href="{{ route('client.cart.index') }}"
                                                             rel="nofollow">Thêm vào giỏ hàng</a>
                                                         <a class="add-to-compare-link" href="compare.html">Add to
                                                             compare</a>
@@ -2277,7 +2279,8 @@
                                                             With 4K</h2>
                                                     </a>
                                                     <div class="hover-area">
-                                                        <a class="button add_to_cart_button" href="cart.html"
+                                                        <a class="button add_to_cart_button"
+                                                            href="{{ route('client.cart.index') }}"
                                                             rel="nofollow">Thêm vào giỏ hàng</a>
                                                         <a class="add-to-compare-link" href="compare.html">Add to
                                                             compare</a>
@@ -2312,7 +2315,8 @@
                                                         </h2>
                                                     </a>
                                                     <div class="hover-area">
-                                                        <a class="button add_to_cart_button" href="cart.html"
+                                                        <a class="button add_to_cart_button"
+                                                            href="{{ route('client.cart.index') }}"
                                                             rel="nofollow">Thêm vào giỏ hàng</a>
                                                         <a class="add-to-compare-link" href="compare.html">Add to
                                                             compare</a>
@@ -2361,7 +2365,8 @@
                                                             NXTG</h2>
                                                     </a>
                                                     <div class="hover-area">
-                                                        <a class="button add_to_cart_button" href="cart.html"
+                                                        <a class="button add_to_cart_button"
+                                                            href="{{ route('client.cart.index') }}"
                                                             rel="nofollow">Thêm vào giỏ hàng</a>
                                                         <a class="add-to-compare-link" href="compare.html">Add to
                                                             compare</a>
@@ -2388,7 +2393,8 @@
                                                             LED-Lit Monitorss Buds</h2>
                                                     </a>
                                                     <div class="hover-area">
-                                                        <a class="button add_to_cart_button" href="cart.html"
+                                                        <a class="button add_to_cart_button"
+                                                            href="{{ route('client.cart.index') }}"
                                                             rel="nofollow">Thêm vào giỏ hàng</a>
                                                         <a class="add-to-compare-link" href="compare.html">Add to
                                                             compare</a>
@@ -2415,7 +2421,8 @@
                                                             With 4K</h2>
                                                     </a>
                                                     <div class="hover-area">
-                                                        <a class="button add_to_cart_button" href="cart.html"
+                                                        <a class="button add_to_cart_button"
+                                                            href="{{ route('client.cart.index') }}"
                                                             rel="nofollow">Thêm vào giỏ hàng</a>
                                                         <a class="add-to-compare-link" href="compare.html">Add to
                                                             compare</a>
@@ -2450,7 +2457,8 @@
                                                             PureBass Headphones</h2>
                                                     </a>
                                                     <div class="hover-area">
-                                                        <a class="button add_to_cart_button" href="cart.html"
+                                                        <a class="button add_to_cart_button"
+                                                            href="{{ route('client.cart.index') }}"
                                                             rel="nofollow">Thêm vào giỏ hàng</a>
                                                         <a class="add-to-compare-link" href="compare.html">Add to
                                                             compare</a>
@@ -2485,7 +2493,8 @@
                                                         </h2>
                                                     </a>
                                                     <div class="hover-area">
-                                                        <a class="button add_to_cart_button" href="cart.html"
+                                                        <a class="button add_to_cart_button"
+                                                            href="{{ route('client.cart.index') }}"
                                                             rel="nofollow">Thêm vào giỏ hàng</a>
                                                         <a class="add-to-compare-link" href="compare.html">Add to
                                                             compare</a>
@@ -2520,7 +2529,8 @@
                                                             Ultrabook 8GB 512SSD W10</h2>
                                                     </a>
                                                     <div class="hover-area">
-                                                        <a class="button add_to_cart_button" href="cart.html"
+                                                        <a class="button add_to_cart_button"
+                                                            href="{{ route('client.cart.index') }}"
                                                             rel="nofollow">Thêm vào giỏ hàng</a>
                                                         <a class="add-to-compare-link" href="compare.html">Add to
                                                             compare</a>
@@ -2547,7 +2557,8 @@
                                                             Wi-Fi & GPS</h2>
                                                     </a>
                                                     <div class="hover-area">
-                                                        <a class="button add_to_cart_button" href="cart.html"
+                                                        <a class="button add_to_cart_button"
+                                                            href="{{ route('client.cart.index') }}"
                                                             rel="nofollow">Thêm vào giỏ hàng</a>
                                                         <a class="add-to-compare-link" href="compare.html">Add to
                                                             compare</a>
@@ -2574,7 +2585,8 @@
                                                             splashproof portable speaker</h2>
                                                     </a>
                                                     <div class="hover-area">
-                                                        <a class="button add_to_cart_button" href="cart.html"
+                                                        <a class="button add_to_cart_button"
+                                                            href="{{ route('client.cart.index') }}"
                                                             rel="nofollow">Thêm vào giỏ hàng</a>
                                                         <a class="add-to-compare-link" href="compare.html">Add to
                                                             compare</a>
@@ -2601,7 +2613,8 @@
                                                             with Grey Suture Leather Strap</h2>
                                                     </a>
                                                     <div class="hover-area">
-                                                        <a class="button add_to_cart_button" href="cart.html"
+                                                        <a class="button add_to_cart_button"
+                                                            href="{{ route('client.cart.index') }}"
                                                             rel="nofollow">Thêm vào giỏ hàng</a>
                                                         <a class="add-to-compare-link" href="compare.html">Add to
                                                             compare</a>
@@ -2628,7 +2641,8 @@
                                                         </h2>
                                                     </a>
                                                     <div class="hover-area">
-                                                        <a class="button add_to_cart_button" href="cart.html"
+                                                        <a class="button add_to_cart_button"
+                                                            href="{{ route('client.cart.index') }}"
                                                             rel="nofollow">Thêm vào giỏ hàng</a>
                                                         <a class="add-to-compare-link" href="compare.html">Add to
                                                             compare</a>
@@ -2655,7 +2669,8 @@
                                                             splashproof portable speaker</h2>
                                                     </a>
                                                     <div class="hover-area">
-                                                        <a class="button add_to_cart_button" href="cart.html"
+                                                        <a class="button add_to_cart_button"
+                                                            href="{{ route('client.cart.index') }}"
                                                             rel="nofollow">Thêm vào giỏ hàng</a>
                                                         <a class="add-to-compare-link" href="compare.html">Add to
                                                             compare</a>
@@ -2682,7 +2697,8 @@
                                                         </h2>
                                                     </a>
                                                     <div class="hover-area">
-                                                        <a class="button add_to_cart_button" href="cart.html"
+                                                        <a class="button add_to_cart_button"
+                                                            href="{{ route('client.cart.index') }}"
                                                             rel="nofollow">Thêm vào giỏ hàng</a>
                                                         <a class="add-to-compare-link" href="compare.html">Add to
                                                             compare</a>
@@ -2709,7 +2725,8 @@
                                                             SWR50</h2>
                                                     </a>
                                                     <div class="hover-area">
-                                                        <a class="button add_to_cart_button" href="cart.html"
+                                                        <a class="button add_to_cart_button"
+                                                            href="{{ route('client.cart.index') }}"
                                                             rel="nofollow">Thêm vào giỏ hàng</a>
                                                         <a class="add-to-compare-link" href="compare.html">Add to
                                                             compare</a>
@@ -2736,7 +2753,8 @@
                                                             Quality Monitor</h2>
                                                     </a>
                                                     <div class="hover-area">
-                                                        <a class="button add_to_cart_button" href="cart.html"
+                                                        <a class="button add_to_cart_button"
+                                                            href="{{ route('client.cart.index') }}"
                                                             rel="nofollow">Thêm vào giỏ hàng</a>
                                                         <a class="add-to-compare-link" href="compare.html">Add to
                                                             compare</a>
@@ -2763,7 +2781,8 @@
                                                             Reality 3D with Bluetooth Glasses</h2>
                                                     </a>
                                                     <div class="hover-area">
-                                                        <a class="button add_to_cart_button" href="cart.html"
+                                                        <a class="button add_to_cart_button"
+                                                            href="{{ route('client.cart.index') }}"
                                                             rel="nofollow">Thêm vào giỏ hàng</a>
                                                         <a class="add-to-compare-link" href="compare.html">Add to
                                                             compare</a>
@@ -2790,7 +2809,8 @@
                                                             Controller</h2>
                                                     </a>
                                                     <div class="hover-area">
-                                                        <a class="button add_to_cart_button" href="cart.html"
+                                                        <a class="button add_to_cart_button"
+                                                            href="{{ route('client.cart.index') }}"
                                                             rel="nofollow">Thêm vào giỏ hàng</a>
                                                         <a class="add-to-compare-link" href="compare.html">Add to
                                                             compare</a>
@@ -3778,7 +3798,7 @@
                                         <div class="menu-footer-menu-3-container">
                                             <ul id="menu-footer-menu-3" class="menu">
                                                 <li class="menu-item">
-                                                    <a href="login-and-register.html">My Account</a>
+                                                    <a href="{{ route('client.edit') }}">My Account</a>
                                                 </li>
                                                 <li class="menu-item">
                                                     <a href="track-your-order.html">Track Order</a>
@@ -3786,9 +3806,7 @@
                                                 <li class="menu-item">
                                                     <a href="shop.html">Shop</a>
                                                 </li>
-                                                <li class="menu-item">
-                                                    <a href="wishlist.html">Wishlist</a>
-                                                </li>
+
                                                 <li class="menu-item">
                                                     <a href="about.html">About Us</a>
                                                 </li>

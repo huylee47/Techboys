@@ -10,7 +10,7 @@
                     <!-- Lọc theo thương hiệu -->
                     <div class="filter_type version_2">
                         <h4>
-                            <a href="#filter_2" data-bs-toggle="collapse" class="opened">Brands</a>
+                            <a href="#filter_2" data-bs-toggle="collapse" class="opened">Thương hiệu</a>
                         </h4>
                         <div class="collapse show" id="filter_2">
                             <ul>
