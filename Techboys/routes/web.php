@@ -85,7 +85,7 @@ Route::post('/login/Client', [UserController::class, 'loginClient'])->name('logi
 Route::get('/contact', function () {
     return view('client.contact.contact');
 })->name('contact');
-Route::post('/contact', [ContactController::class, 'saveContact']);
+Route::post('/contact/save', [ContactController::class, 'saveContact'])->name('contact.save');
 
 // Đăng ký
 Route::prefix('/register')->group(function () {
@@ -221,6 +221,12 @@ Route::post('/logout', [UserController::class, 'logout'])->name('admin.logout');
         Route::prefix('/revenue')->group(function () {
             Route::get('/', [RevenueController::class, 'index'])->name('admin.revenue.revenue');
             Route::get('/filter', [RevenueController::class, 'filterRevenue'])->name('admin.revenue.filter');
+        });
+        Route::prefix('/contact')->group(function () {
+            Route::get('/', [ContactController::class, 'index'])->name('admin.contact.index');
+            Route::delete('/admin/contact/{contact}', [ContactController::class, 'destroy'])->name('admin.contact.destroy');
+            Route::get('/contact/{id}', [ContactController::class, 'show'])->name('admin.contact.show');
+
         });
         Route::prefix('/chats')->group(function (){
             Route::get('/', [ChatsController::class, 'index'])->name('admin.messages');
