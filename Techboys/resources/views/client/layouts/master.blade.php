@@ -404,6 +404,7 @@
                                             <img src="{{ url('') }}/admin/assets/images/config/{{$config->logo}}"
                                                 alt="">
                                         </a>
+                                        <span>{{$config->title}}</span>
                                     </div>
                                     <!-- .footer-logo -->
                                     <div class="contact-payment-wrap">
