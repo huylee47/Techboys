@@ -53,6 +53,9 @@ class CheckoutController extends Controller
     //     // dd($request->all());
     //     return $this->checkoutService->storeBill($request);
     // }
+    public function calculateShippingFeeAjax(Request $request){
+        return $this->checkoutService->calculateShippingFeeAJAX($request);
+    }
     public function storeBill(checkoutRequest $request)
     {
         

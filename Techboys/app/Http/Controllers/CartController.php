@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\AttributesValue;
+use App\Models\BillDetails;
 use App\Models\Cart;
 use App\Models\ProductVariant;
 use App\Models\Promotion;
@@ -30,7 +31,7 @@ class CartController extends Controller
     public function showCart()
     {
         $cartItems = $this->cartService->getCartItems();
-    
+        // return response()->json($cartItems);
         if ($cartItems instanceof \Illuminate\Http\JsonResponse) {
             return view('client.cart.cart', [
                 'cartItems' => collect([]),
@@ -69,26 +70,43 @@ class CartController extends Controller
             } else {
                 $cart->attributes = '';
             }
+    
+            if ($cart->variant_id) {
+                $soldQuantity = BillDetails::where('variant_id', $cart->variant_id)
+                    ->whereHas('bill', function ($query) {
+                        $query->where('status_id', 1); // Chỉ lấy hóa đơn đã hoàn thành
+                    })
+                    ->sum('quantity');
+                $cart->stock = $cart->product->variant()->where('id', $cart->variant_id)->value('stock') - $soldQuantity;
+
+            } else {
+                $soldQuantity = BillDetails::where('product_id', $cart->product_id)
+                    ->whereNull('variant_id')
+                    ->whereHas('bill', function ($query) {
+                        $query->where('status_id', 1);
+                    })
+                    ->sum('quantity');
+                $cart->stock = $cart->product->base_stock - $soldQuantity;
+
+            }
         }
     
         $totals = $this->cartPriceService->calculateCartTotals($cartItems);
-    
         // return response()->json([
-        //     'cartItems' => $cartItems,
-        //     'subtotal' => $totals['subtotal'],
-        //     'total' => $totals['total'],
-        //     'discountAmount' => $totals['discountAmount'],
-        //     'voucher' => $totals['voucher'],
-        // ]);
-        // dd($cartItems);
+        //     'cartItems'=>$cartItems,
+        //     'soldPending'=>$soldQuantity,
+            
+        //  ]);
         return view('client.cart.cart', [
             'cartItems' => $cartItems,
             'subtotal' => $totals['subtotal'],
             'total' => $totals['total'],
             'discountAmount' => $totals['discountAmount'],
             'voucher' => $totals['voucher'],
+            'soldQuantity'=>(int)$soldQuantity,
         ]);
     }
+    
     
     
     

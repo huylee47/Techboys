@@ -295,43 +295,54 @@
         <script>
             document.addEventListener("DOMContentLoaded", function() {
                 Pusher.logToConsole = true;
-
+        
                 Echo.channel('admin.newbill')
                     .listen("NewBillCreated", (event) => {
                         console.log('Có đơn hàng mới:', event);
-
+        
+                        // Chạy âm thanh thông báo
+                        const audio = new Audio('https://audio-previews.elements.envatousercontent.com/files/107007232/preview.mp3');
+                        audio.play();
+        
                         let recentBillsContainer = document.getElementById('recent-bills');
                         let bellIcon = document.getElementById('notification-bell');
-
+        
                         if (!recentBillsContainer || !bellIcon) {
                             console.error("Không tìm thấy phần tử 'recent-bills' hoặc 'notification-bell'");
                             return;
                         }
-
+        
                         bellIcon.classList.add("bell-shake");
                         setTimeout(() => {
                             bellIcon.classList.remove("bell-shake");
                         }, 1500);
-
+        
+                        // Tạo HTML cho đơn hàng mới
                         let newBillHtml = `
-                        <div class="recent-message d-flex px-4 py-3 border-bottom fade-in">
-                            <div class="avatar avatar-lg">
-                                <img src="{{ asset('home/assets/images/user.png') }}" alt="User Avatar">
-                            </div>
-                            <div class="name ms-4">
-                                <h5 class="mb-1">${event.full_name}</h5>
-                                <h6 class="text-muted mb-0">
-                                    Mã đơn: ${event.order_id} - Tổng: ${event.total.toLocaleString()}đ
-                                </h6>
-                                <small class="text-muted">${new Date().toLocaleString('vi-VN')}</small>
-                            </div>
-                        </div>
-                    `;
-
+                            <a href="{{ url('admin/bill/bill-detail') }}/${event.bill_id}/show" class="text-decoration-none">
+                                <div class="recent-message d-flex px-4 py-3 border-bottom fade-in">
+                                    <div class="avatar avatar-lg">
+                                        <img src="{{ asset('home/assets/images/user.png') }}" alt="User Avatar">
+                                    </div>
+                                    <div class="name ms-4">
+                                        <h5 class="mb-1">${event.full_name}</h5>
+                                        <h6 class="text-muted mb-0">
+                                            Mã đơn: ${event.order_id} - Tổng: ${event.total.toLocaleString()}đ
+                                        </h6>
+                                        <small class="text-muted">${new Date().toLocaleString('vi-VN')}</small>
+                                    </div>
+                                </div>
+                            </a>
+                        `;
+        
+                        // Thêm đơn hàng mới vào danh sách
                         recentBillsContainer.insertAdjacentHTML('afterbegin', newBillHtml);
-
+        
+                        // Cuộn đến đầu danh sách
                         recentBillsContainer.scrollTop = 0;
                     });
             });
         </script>
+        
+        
     @endsection
