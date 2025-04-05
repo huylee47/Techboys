@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="{{ url('') }}/admin/assets/css/app.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/admin/assets/styles/choices.min.css">
     <link rel="stylesheet" href="{{ url('') }}/admin/assets/vendors/summernote/summernote-lite.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ url('') }}/home/assets/css/chat-bot.css" media="all" />
     {{-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"> --}}
     <link rel="stylesheet"
         href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta2/dist/css/bootstrap-select.min.css">
@@ -206,6 +207,23 @@
             </div>
         </div>
         @yield('main')
+                {{-- Modal ChatBot --}}
+                <div id="bot-chat-icon" class="bot-real-time-icon">
+                    <img src="{{ url('') }}/admin/assets/images/config/{{ $config->favicon }}" alt="" width="40px">
+                </div>
+            
+                <div id="bot-chat-modal" class="bot-real-time-box">
+                    <div class="bot-real-time-title">
+                        <span>Chat với Techboys AI</span>
+                        <span id="bot-close-chat" class="bot-real-time-close">&times;</span>
+                    </div>
+                    <div id="bot-chat-messages" class="bot-real-time-content">
+                    </div>
+                    <div class="bot-real-time-sent-content">
+                        <input type="text" id="bot-chat-input" placeholder="Nhập tin nhắn..." onkeydown="if(event.key === 'Enter') sendMessage()" />
+                        <button id="bot-send-message" onclick="sendMessage()">Gửi</button>
+                    </div>
+                </div>
         <footer>
             <div class="footer clearfix mb-0 text-muted">
                 <div class="float-start">
@@ -235,6 +253,38 @@
             let dataTable = new simpleDatatables.DataTable(table1);
         }
     </script>
+        <script>
+            $('#bot-chat-icon').click(function() {
+                $('#bot-chat-modal').toggle();
+                $(this).hide();
+            });
+    
+            $('#bot-close-chat').click(function() {
+                $('#bot-chat-modal').hide();
+                $('#bot-chat-icon').show();
+            });
+    
+            function sendMessage() {
+                var prompt = $('#bot-chat-input').val();
+                var chatMessages = $('#bot-chat-messages');
+                var sendButton = $('#bot-send-message');
+    
+                if (prompt.trim() === '') return;
+    
+                sendButton.prop('disabled', true);
+    
+                chatMessages.append('<div class="bot-user-message">' + prompt + '</div>');
+    
+                $.post('/ask-gemini', { _token: '{{ csrf_token() }}', prompt: prompt }, function(data) {
+                    chatMessages.append('<div class="bot-bot-message">' + data.response + '</div>');
+                    chatMessages.scrollTop(chatMessages[0].scrollHeight);
+                    console.log(data.response);
+                    sendButton.prop('disabled', false);
+                });
+    
+                $('#bot-chat-input').val('');
+            }
+        </script>
     @yield('scripts')
 </body>
 
