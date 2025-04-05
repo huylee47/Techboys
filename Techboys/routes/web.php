@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AIController;
 use App\Http\Controllers\AttributesController;
 use App\Http\Controllers\BannerController;
 use App\Http\Controllers\BlogController;
@@ -313,3 +314,5 @@ Route::prefix('products')->group(function () {
     Route::get('/filter', [ProductController::class, 'filter'])->name('client.product.filter');
     Route::get('/{slug}', [ProductController::class, 'productDetails'])->name('client.product.show');
 });
+Route::get('/chatbot', [AIController::class, 'askChatbot']);
+Route::post('/ask-gemini', [AIController::class, 'askGemini']);
