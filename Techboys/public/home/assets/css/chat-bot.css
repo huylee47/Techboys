@@ -98,6 +98,21 @@
     opacity: 0;
     animation: typingEffect 0.8s forwards;
 }
+.chat-title {
+    position: absolute;
+    right:  100%;
+    background-color: #3295fe;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 14px;
+    white-space: nowrap;
+    margin-bottom: 10px;
+    z-index: 9998;
+}
+.chat-title:hover {
+    background-color: #007bff4f;
+}
 
 @keyframes typingEffect {
     0% {
