@@ -48,7 +48,7 @@ class GeminiService
             }
         }
     
-        $friendlyPrompt = "Khách hàng hỏi: '{$prompt}'. Hãy viết một câu trả lời tự nhiên, thân thiện như một Bot chat hỗ trợ chăm sóc khách hàng của cửa hàng Techboys, không cần liên hệ đến sản phẩm nếu không cần thiết.";
+        $friendlyPrompt = "Khách hàng hỏi: '{$prompt}'. Hãy viết một câu trả lời tự nhiên, thân thiện như một Bot chat hỗ trợ chăm sóc khách hàng của cửa hàng Techboys, không liên hệ đến sản phẩm của cửa hàng , không cần thêm dạ , xin chào quý khách bắt dầu từ câu trả lời thứ 2 .";
     
         $response = Http::post($this->baseUrl . '?key=' . $this->apiKey, [
             'contents' => [
