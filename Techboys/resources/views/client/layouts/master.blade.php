@@ -395,12 +395,16 @@
         {{-- Modal ChatBot --}}
         <div id="bot-chat-icon" class="bot-real-time-icon">
             <img src="{{ url('') }}/admin/assets/images/config/{{ $config->favicon }}" alt="" width="40px">
+            <div id="chat-title" class="chat-title">
+                Cần trợ giúp, chat cùng Techboys AI ngay
+            </div>
         </div>
     
         <div id="bot-chat-modal" class="bot-real-time-box">
             <div class="bot-real-time-title">
                 <span>Chat với Techboys AI</span>
                 <span id="bot-close-chat" class="bot-real-time-close">&times;</span>
+                
             </div>
             <div id="bot-chat-messages" class="bot-real-time-content">
             </div>
