@@ -1,6 +1,10 @@
+#chat-icon {
+    display: none;
+}
+
 #bot-chat-icon {
     position: fixed;
-    bottom: 100px;
+    bottom: 150px;
     right: 20px;
     background-color: #6f6f6f75;
     padding: 10px;
@@ -8,15 +12,17 @@
     color: white;
     cursor: pointer;
     box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+    z-index: 9998;
 }
 
 #bot-chat-icon img {
-    font-size: 30px;
+    width: 30px;
+    height: 30px;
 }
 
 #bot-chat-modal {
     position: fixed;
-    bottom: 80px;
+    bottom: 130px;
     right: 20px;
     width: 350px;
     max-height: 500px;
@@ -25,6 +31,7 @@
     border-radius: 10px;
     display: none;
     box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+    z-index: 9997;
 }
 
 #bot-chat-modal .bot-real-time-title {
@@ -51,6 +58,7 @@
     padding: 10px;
     background-color: #f8f9fa;
     align-items: center;
+    border-top: 1px solid #ccc;
 }
 
 #bot-chat-modal input {
@@ -88,16 +96,31 @@
     max-width: 80%;
     word-wrap: break-word;
     opacity: 0;
-    animation: typingEffect 3s forwards;
+    animation: typingEffect 0.8s forwards;
+}
+.chat-title {
+    position: absolute;
+    right:  100%;
+    background-color: #3295fe;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 14px;
+    white-space: nowrap;
+    margin-bottom: 10px;
+    z-index: 9998;
+}
+.chat-title:hover {
+    background-color: #007bff4f;
 }
 
 @keyframes typingEffect {
     0% {
-        width: 0;
         opacity: 0;
+        transform: translateY(10px);
     }
     100% {
-        width: 100%;
         opacity: 1;
+        transform: translateY(0);
     }
 }
