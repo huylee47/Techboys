@@ -108,6 +108,15 @@
                                                                 @php
                                                                     $timeDiff =
                                                                         strtotime($dp->promotion->end_date) - time();
+                                                                    $promotion = $dp->where('id', $dp->id)->first();
+                                                                    $hasDiscount = $promotion ? true : false;
+                                                                    $discountedPrice = $hasDiscount
+                                                                        ? $dp->base_price *
+                                                                            (1 -
+                                                                                $promotion->promotion
+                                                                                    ->discount_percent /
+                                                                                    100)
+                                                                        : null;
                                                                 @endphp
 
                                                                 @if ($timeDiff > 0)
@@ -118,25 +127,47 @@
                                                                             <div class="sale-product-with-timer-header">
                                                                                 <div class="price-and-title">
                                                                                     <span class="price">
-                                                                                        <ins>
-                                                                                            <span
-                                                                                                class="woocommerce-Price-amount amount">
+                                                                                        @if ($dp->variant->count() > 0)
+                                                                                            <ins>
                                                                                                 <span
-                                                                                                    class="woocommerce-Price-currencySymbol">Chỉ</span>
-                                                                                                {{ number_format($dp->variant->min('discounted_price'), 0, ',', '.') }}
-                                                                                                đ
-                                                                                            </span>
-                                                                                        </ins>
-                                                                                        <del>
-                                                                                            <span
-                                                                                                class="woocommerce-Price-amount amount">
-                                                                                                <span
-                                                                                                    class="woocommerce-Price-currencySymbol">
-                                                                                                    {{ number_format($dp->variant->min('price'), 0, ',', '.') }}
+                                                                                                    class="woocommerce-Price-amount amount">
+                                                                                                    <span
+                                                                                                        class="woocommerce-Price-currencySymbol">Từ</span>
+                                                                                                    {{ number_format($dp->variant->min('discounted_price'), 0, ',', '.') }}
                                                                                                     đ
                                                                                                 </span>
-                                                                                            </span>
-                                                                                        </del>
+                                                                                            </ins>
+                                                                                            <del>
+                                                                                                <span
+                                                                                                    class="woocommerce-Price-amount amount">
+                                                                                                    <span
+                                                                                                        class="woocommerce-Price-currencySymbol">
+                                                                                                        {{ number_format($dp->variant->min('price'), 0, ',', '.') }}
+                                                                                                        đ
+                                                                                                    </span>
+                                                                                                </span>
+                                                                                            </del>
+                                                                                        @else
+                                                                                            <ins>
+                                                                                                <span
+                                                                                                    class="woocommerce-Price-amount amount">
+                                                                                                    <span
+                                                                                                        class="woocommerce-Price-currencySymbol">Từ</span>
+                                                                                                    {{ number_format($dp->discountedPrice, 0, ',', '.') }}
+                                                                                                    đ
+                                                                                                </span>
+                                                                                            </ins>
+                                                                                            <del>
+                                                                                                <span
+                                                                                                    class="woocommerce-Price-amount amount">
+                                                                                                    <span
+                                                                                                        class="woocommerce-Price-currencySymbol">
+                                                                                                        {{ number_format($dp->base_price, 0, ',', '.') }}
+                                                                                                        đ
+                                                                                                    </span>
+                                                                                                </span>
+                                                                                            </del>
+                                                                                        @endif
                                                                                     </span>
                                                                                     <!-- /.price -->
                                                                                     <h2
@@ -225,7 +256,8 @@
                                     <header class="section-header">
                                         <ul role="tablist" class="nav justify-content-end">
                                             <li class="nav-item">
-                                                <a class="nav-link active" href="#tab-59f89f0881f930" data-toggle="tab">Sản
+                                                <a class="nav-link active" href="#tab-59f89f0881f930"
+                                                    data-toggle="tab">Sản
                                                     phẩm mới</a>
                                             </li>
                                             {{-- <li class="nav-item">
@@ -248,6 +280,19 @@
                                                     <div class="woocommerce">
                                                         <div class="products">
                                                             @foreach ($newProduct as $np)
+                                                                @php
+                                                                    $promotion = $discountedProducts
+                                                                        ->where('id', $np->id)
+                                                                        ->first();
+                                                                    $hasDiscount = $promotion ? true : false;
+                                                                    $discountedPrice = $hasDiscount
+                                                                        ? $np->base_price *
+                                                                            (1 -
+                                                                                $promotion->promotion
+                                                                                    ->discount_percent /
+                                                                                    100)
+                                                                        : null;
+                                                                @endphp
                                                                 <div class="product">
                                                                     <a href="{{ route('client.product.show', ['slug' => $np->slug]) }}"
                                                                         class="woocommerce-LoopProduct-link">
@@ -263,7 +308,7 @@
                                                                                     </ins>
                                                                                     {{ number_format($np->variant->min('discounted_price'), 0, ',', '.') . ' đ' }}
                                                                                 @else
-                                                                                    {{ number_format($np->base_price, 0, ',', '.') . ' đ' }}
+                                                                                    {{ number_format($np->discountedPrice, 0, ',', '.') . ' đ' }}
                                                                             @endif
                                                                         </span>
 
@@ -290,7 +335,7 @@
                                             </div>
                                             <!-- .products-carousel -->
                                         </div>
-c
+                                        c
                                     </div>
                                     <!-- .tab-content -->
                                 </div>
@@ -417,7 +462,8 @@ c
                                                                             <div class="techmarket-product-rating">
 
                                                                                 br
-                                                                                <span class="review-count">({{$HeadPhoneProduct->purchases}})</span>
+                                                                                <span
+                                                                                    class="review-count">({{ $HeadPhoneProduct->purchases }})</span>
                                                                             </div>
                                                                             <!-- .techmarket-product-rating -->
                                                                         </a>
@@ -482,15 +528,15 @@ c
                                                                         alt="">
                                                                     <span class="price">
                                                                         @if ($hp->variant->count() > 0)
-                                                                        <span class="price">
-                                                                            <ins>
-                                                                                <span class="amount">Chỉ từ </span>
-                                                                            </ins>
-                                                                            {{ number_format($hp->variant->min('discounted_price'), 0, ',', '.') . ' đ' }}
-                                                                        @else
-                                                                            {{ number_format($hp->base_price, 0, ',', '.') . ' đ' }}
-                                                                    @endif
-                                                                    <br>
+                                                                            <span class="price">
+                                                                                <ins>
+                                                                                    <span class="amount">Chỉ từ </span>
+                                                                                </ins>
+                                                                                {{ number_format($hp->variant->min('discounted_price'), 0, ',', '.') . ' đ' }}
+                                                                            @else
+                                                                                {{ number_format($hp->base_price, 0, ',', '.') . ' đ' }}
+                                                                        @endif
+                                                                        <br>
                                                                         <span class="amount"> Lượt mua :
                                                                             {{ $hp->purchases }}</span>
                                                                     </span>
