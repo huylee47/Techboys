@@ -283,6 +283,8 @@ Route::prefix('cart')->group(function () {
     Route::post('/applyVoucher', [CartController::class, 'applyVoucher'])->name('client.cart.applyVoucher');
     Route::post('/remove/{id}', [CartController::class, 'removeItem'])->name('client.cart.remove');
     // Route::get('/getCount', [CartController::class, 'getCartCount'])->name('client.cart.getCartCount');
+    // routes/web.php
+    Route::post('/calculate-shipping-fee', [CheckoutController::class, 'calculateShippingFeeAjax'])->name('client.checkout.ShippingFeeAjax');
     Route::get('/count', [CartController::class, 'countItems'])->name('client.cart.count');
 });
 
