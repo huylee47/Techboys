@@ -72,7 +72,7 @@
                                                                             <p data-title="Stock" class="product-stock">
                                                                                 <span>Tồn Kho :</span>
                                                                                 <span class="stock-quantity-{{ $cart->id }}">
-                                                                                    {{ $cart->stock }}
+                                                                                    {{ $cart->stock - $soldQuantity}}
                                                                                 </span>
                                                                             </p>
                                                                         </div>
