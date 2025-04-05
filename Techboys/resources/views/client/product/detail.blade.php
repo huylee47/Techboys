@@ -195,6 +195,24 @@
             background: none;
             color: #007bff;
         }
+
+        .stars {
+            display: flex;
+            gap: 5px;
+            cursor: pointer;
+        }
+
+        .stars a {
+            font-size: 24px;
+            color: #ccc; /* Màu mặc định cho các ngôi sao */
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .stars a.selected,
+        .stars a.hover {
+            color: gold; /* Màu vàng cho ngôi sao được chọn hoặc hover */
+        }
     </style>
     <div id="page" class="hfeed site">
         <div id="content" class="site-content" tabindex="-1">
@@ -494,15 +512,13 @@
                                                                         @csrf
                                                                         <div class="comment-form-rating">
                                                                             <label>Đánh giá của bạn</label>
-                                                                            <p class="stars">
-                                                                                <span>
-                                                                                    <a href="#" class="star-1">1</a>
-                                                                                    <a href="#" class="star-2">2</a>
-                                                                                    <a href="#" class="star-3">3</a>
-                                                                                    <a href="#" class="star-4">4</a>
-                                                                                    <a href="#" class="star-5">5</a>
-                                                                                </span>
-                                                                            </p>
+                                                                            <div class="stars">
+                                                                                <a href="#" class="star-1">★</a>
+                                                                                <a href="#" class="star-2">★</a>
+                                                                                <a href="#" class="star-3">★</a>
+                                                                                <a href="#" class="star-4">★</a>
+                                                                                <a href="#" class="star-5">★</a>
+                                                                            </div>
                                                                             <input type="hidden" name="rate"
                                                                                 id="rating-value" value="0">
                                                                             @error('rate')
@@ -741,43 +757,61 @@
         document.addEventListener('DOMContentLoaded', function() {
             let rating = document.getElementById('rating-value').value;
             if (rating > 0) {
-                document.querySelector('.star-' + rating).classList.add('selected');
+                document.querySelectorAll('.stars a').forEach(s => s.classList.remove('selected'));
+                for (let i = 1; i <= rating; i++) {
+                    document.querySelector('.star-' + i).classList.add('selected');
+                }
             }
         });
     </script>
     <script>
-        document.querySelectorAll('.stars a').forEach(star => {
-            star.addEventListener('click', function(event) {
-                event.preventDefault();
-                let rating = this.classList[0].split('-')[1];
-                document.getElementById('rating-value').value = rating;
-                document.querySelectorAll('.stars a').forEach(s => s.classList.remove('selected'));
-                this.classList.add('selected');
+        document.addEventListener('DOMContentLoaded', function () {
+            const stars = document.querySelectorAll('.stars a');
+            const ratingInput = document.getElementById('rating-value');
+
+            stars.forEach((star, index) => {
+                star.addEventListener('click', function (event) {
+                    event.preventDefault();
+                    const rating = index + 1;
+                    ratingInput.value = rating;
+
+                    // Xóa trạng thái selected khỏi tất cả các ngôi sao
+                    stars.forEach(s => s.classList.remove('selected'));
+
+                    // Thêm trạng thái selected cho các ngôi sao từ 1 đến rating
+                    for (let i = 0; i < rating; i++) {
+                        stars[i].classList.add('selected');
+                    }
+                });
+
+                star.addEventListener('mouseover', function () {
+                    // Xóa trạng thái hover khỏi tất cả các ngôi sao
+                    stars.forEach(s => s.classList.remove('hover'));
+
+                    // Thêm trạng thái hover cho các ngôi sao từ 1 đến index
+                    for (let i = 0; i <= index; i++) {
+                        stars[i].classList.add('hover');
+                    }
+                });
+
+                star.addEventListener('mouseout', function () {
+                    // Xóa trạng thái hover khỏi tất cả các ngôi sao
+                    stars.forEach(s => s.classList.remove('hover'));
+
+                    // Giữ trạng thái selected cho các ngôi sao đã chọn
+                    const rating = parseInt(ratingInput.value, 10);
+                    for (let i = 0; i < rating; i++) {
+                        stars[i].classList.add('selected');
+                    }
+                });
             });
 
-            star.addEventListener('mouseover', function() {
-                document.querySelectorAll('.stars a').forEach(s => s.classList.remove('hover'));
-                this.classList.add('hover');
-            });
-
-            star.addEventListener('mouseout', function() {
-                document.querySelectorAll('.stars a').forEach(s => s.classList.remove('hover'));
-            });
-        });
-
-        document.querySelector('.stars').addEventListener('mouseout', function() {
-            let rating = document.getElementById('rating-value').value;
-            document.querySelectorAll('.stars a').forEach(s => s.classList.remove('selected'));
-            if (rating > 0) {
-                document.querySelector('.star-' + rating).classList.add('selected');
-            }
-        });
-
-        // Ensure the selected rating is displayed correctly on page load
-        document.addEventListener('DOMContentLoaded', function() {
-            let rating = document.getElementById('rating-value').value;
-            if (rating > 0) {
-                document.querySelector('.star-' + rating).classList.add('selected');
+            // Hiển thị trạng thái selected khi tải trang
+            const initialRating = parseInt(ratingInput.value, 10);
+            if (initialRating > 0) {
+                for (let i = 0; i < initialRating; i++) {
+                    stars[i].classList.add('selected');
+                }
             }
         });
     </script>
