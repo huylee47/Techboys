@@ -1,201 +1,7 @@
 @extends('client.layouts.master')
 
 @section('main')
-    <style>
-        .choice.blocked {
-            opacity: 0.3;
-            pointer-events: none;
-        }
-
-        .commentlist .comment .star-rating {
-            color: #ffcc00;
-            margin-top: 5px;
-            display: block;
-            /* Ensure it takes full width */
-        }
-
-        .commentlist .comment .comment-meta .star-rating {
-            display: inline-block;
-            /* Keep it in line with the date */
-            margin-top: 0;
-            /* Reset any top margin */
-            margin-left: 5px;
-            /* Add some spacing */
-        }
-
-        .commentlist {
-            list-style: none;
-            padding: 0;
-        }
-
-        .commentlist .comment {
-            margin-bottom: 20px;
-            padding: 15px;
-            /* border: 1px solid #e1e1e1; */
-            border-radius: 5px;
-            /* background-color: #f9f9f9; */
-        }
-
-        .commentlist .comment .comment-body {
-            display: flex;
-            align-items: flex-start;
-            /* Align items to the top */
-        }
-
-        .commentlist .comment .comment-avatar {
-            width: 50px;
-            margin-right: 15px;
-        }
-
-        .commentlist .comment .comment-avatar img {
-            width: 100%;
-            border-radius: 50%;
-        }
-
-        .commentlist .comment .comment-content {
-            flex-grow: 1;
-            max-width: 80%;
-            /* Adjust this value as needed */
-        }
-
-        .commentlist .comment .comment-author {
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
-
-        .commentlist .comment .comment-meta {
-            font-size: 12px;
-            color: #999;
-            margin-bottom: 5px;
-        }
-
-        .commentlist .comment .star-rating {
-            color: #ffcc00;
-            margin-top: 5px;
-            display: block;
-        }
-
-        .commentlist .comment img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 5px;
-            margin-top: 10px;
-        }
-
-        .commentlist .comment video {
-            max-width: 100%;
-            height: auto;
-            border-radius: 5px;
-            margin-top: 10px;
-        }
-
-        .alert {
-            padding: 10px;
-            margin-bottom: 20px;
-            border: 1px solid transparent;
-            border-radius: 4px;
-        }
-
-        .alert-success {
-            color: #3c763d;
-            background-color: #dff0d8;
-            border-color: #d6e9c6;
-        }
-
-        .alert-danger {
-            color: #a94442;
-            background-color: #f2dede;
-            border-color: #ebccd1;
-        }
-
-        .reply-input {
-            margin-top: 10px;
-            margin-left: 20px;
-            padding: 10px;
-            border: none;
-            border-radius: 5px;
-            background: none;
-        }
-
-        .reply-input textarea {
-            width: 100%;
-            padding: 5px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-
-        .reply-input button {
-            margin-top: 5px;
-            padding: 5px 10px;
-            border: none;
-            border-radius: 5px;
-            background-color: #007bff;
-            color: white;
-            cursor: pointer;
-        }
-
-        .reply-button {
-            margin-top: 5px;
-            margin-left: 3px;
-            padding: 5px 15px;
-            border: none;
-            background: none;
-            color: #007bff;
-            cursor: pointer;
-            border-radius: 20px;
-        }
-
-        .reply-button:hover {
-            background: none;
-            color: #007bff;
-        }
-
-        .reply-input {
-            margin-top: 10px;
-            margin-left: 40px;
-            padding: 10px;
-            border: none;
-            border-radius: 5px;
-            background: none;
-        }
-
-        .reply-input textarea {
-            width: 100%;
-            padding: 5px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-
-        .reply-input button {
-            margin-top: 5px;
-            padding: 5px 10px;
-            border: none;
-            border-radius: 5px;
-            background-color: #007bff;
-            color: white;
-            cursor: pointer;
-        }
-
-        .reply-input button:hover {
-            background-color: #0056b3;
-        }
-
-        .toggle-replies-button {
-            margin-top: 5px;
-            margin-left: 3px;
-            padding: 5px 15px;
-            border: none;
-            background: none;
-            color: #007bff;
-            cursor: pointer;
-            border-radius: 20px;
-        }
-
-        .toggle-replies-button:hover {
-            background: none;
-            color: #007bff;
-        }
-    </style>
+    <link rel="stylesheet" href="{{ asset('home/assets/css/detailProduct.css') }}">
     <div id="page" class="hfeed site">
         <div id="content" class="site-content" tabindex="-1">
             <div class="col-full">
@@ -493,15 +299,13 @@
                                                                         @csrf
                                                                         <div class="comment-form-rating">
                                                                             <label>Đánh giá của bạn</label>
-                                                                            <p class="stars">
-                                                                                <span>
-                                                                                    <a href="#" class="star-1">1</a>
-                                                                                    <a href="#" class="star-2">2</a>
-                                                                                    <a href="#" class="star-3">3</a>
-                                                                                    <a href="#" class="star-4">4</a>
-                                                                                    <a href="#" class="star-5">5</a>
-                                                                                </span>
-                                                                            </p>
+                                                                            <div class="stars">
+                                                                                <a href="#" class="star-1">★</a>
+                                                                                <a href="#" class="star-2">★</a>
+                                                                                <a href="#" class="star-3">★</a>
+                                                                                <a href="#" class="star-4">★</a>
+                                                                                <a href="#" class="star-5">★</a>
+                                                                            </div>
                                                                             <input type="hidden" name="rate"
                                                                                 id="rating-value" value="0">
                                                                             @error('rate')
@@ -740,43 +544,61 @@
         document.addEventListener('DOMContentLoaded', function() {
             let rating = document.getElementById('rating-value').value;
             if (rating > 0) {
-                document.querySelector('.star-' + rating).classList.add('selected');
+                document.querySelectorAll('.stars a').forEach(s => s.classList.remove('selected'));
+                for (let i = 1; i <= rating; i++) {
+                    document.querySelector('.star-' + i).classList.add('selected');
+                }
             }
         });
     </script>
     <script>
-        document.querySelectorAll('.stars a').forEach(star => {
-            star.addEventListener('click', function(event) {
-                event.preventDefault();
-                let rating = this.classList[0].split('-')[1];
-                document.getElementById('rating-value').value = rating;
-                document.querySelectorAll('.stars a').forEach(s => s.classList.remove('selected'));
-                this.classList.add('selected');
+        document.addEventListener('DOMContentLoaded', function () {
+            const stars = document.querySelectorAll('.stars a');
+            const ratingInput = document.getElementById('rating-value');
+
+            stars.forEach((star, index) => {
+                star.addEventListener('click', function (event) {
+                    event.preventDefault();
+                    const rating = index + 1;
+                    ratingInput.value = rating;
+
+                    // Xóa trạng thái selected khỏi tất cả các ngôi sao
+                    stars.forEach(s => s.classList.remove('selected'));
+
+                    // Thêm trạng thái selected cho các ngôi sao từ 1 đến rating
+                    for (let i = 0; i < rating; i++) {
+                        stars[i].classList.add('selected');
+                    }
+                });
+
+                star.addEventListener('mouseover', function () {
+                    // Xóa trạng thái hover khỏi tất cả các ngôi sao
+                    stars.forEach(s => s.classList.remove('hover'));
+
+                    // Thêm trạng thái hover cho các ngôi sao từ 1 đến index
+                    for (let i = 0; i <= index; i++) {
+                        stars[i].classList.add('hover');
+                    }
+                });
+
+                star.addEventListener('mouseout', function () {
+                    // Xóa trạng thái hover khỏi tất cả các ngôi sao
+                    stars.forEach(s => s.classList.remove('hover'));
+
+                    // Giữ trạng thái selected cho các ngôi sao đã chọn
+                    const rating = parseInt(ratingInput.value, 10);
+                    for (let i = 0; i < rating; i++) {
+                        stars[i].classList.add('selected');
+                    }
+                });
             });
 
-            star.addEventListener('mouseover', function() {
-                document.querySelectorAll('.stars a').forEach(s => s.classList.remove('hover'));
-                this.classList.add('hover');
-            });
-
-            star.addEventListener('mouseout', function() {
-                document.querySelectorAll('.stars a').forEach(s => s.classList.remove('hover'));
-            });
-        });
-
-        document.querySelector('.stars').addEventListener('mouseout', function() {
-            let rating = document.getElementById('rating-value').value;
-            document.querySelectorAll('.stars a').forEach(s => s.classList.remove('selected'));
-            if (rating > 0) {
-                document.querySelector('.star-' + rating).classList.add('selected');
-            }
-        });
-
-        // Ensure the selected rating is displayed correctly on page load
-        document.addEventListener('DOMContentLoaded', function() {
-            let rating = document.getElementById('rating-value').value;
-            if (rating > 0) {
-                document.querySelector('.star-' + rating).classList.add('selected');
+            // Hiển thị trạng thái selected khi tải trang
+            const initialRating = parseInt(ratingInput.value, 10);
+            if (initialRating > 0) {
+                for (let i = 0; i < initialRating; i++) {
+                    stars[i].classList.add('selected');
+                }
             }
         });
     </script>

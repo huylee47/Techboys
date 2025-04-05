@@ -72,6 +72,11 @@
             height: auto;
             float: left;
         }
+
+        .menu-item.active > a {
+            color: red !important;
+            font-weight: bold;
+        }
     </style>
     @yield('styles')
 </head>
@@ -114,16 +119,16 @@
                         <nav id="primary-navigation" class="primary-navigation" aria-label="Primary Navigation"
                             data-nav="flex-menu">
                             <ul id="menu-primary-menu" class="nav yamm">
-                                <li class="menu-item animate-dropdown">
+                                <li class="menu-item animate-dropdown {{ request()->routeIs('client.about.about') ? 'active' : '' }}">
                                     <a title="about us" href="{{ route('client.about.about') }}">Về chúng tôi</a>
                                 </li>
-                                <li class="menu-item animate-dropdown">
+                                <li class="menu-item animate-dropdown {{ request()->routeIs('contact') ? 'active' : '' }}">
                                     <a title="Headphones Sale" href="{{ route('contact') }}">Liên hệ</a>
                                 </li>
-                                <li class="sale-clr yamm-fw menu-item animate-dropdown">
+                                <li class="menu-item animate-dropdown {{ request()->routeIs('client.product.index') ? 'active' : '' }}">
                                     <a title="Super deals" href="{{ route('client.product.index') }}">Sản phẩm</a>
                                 </li>
-                                <li class="menu-item animate-dropdown">
+                                <li class="menu-item animate-dropdown {{ request()->routeIs('blog') ? 'active' : '' }}">
                                     <a title="Headphones Sale" href="{{ route('blog') }}">Blog</a>
                                 </li>
                                 <li class="techmarket-flex-more-menu-item dropdown">
