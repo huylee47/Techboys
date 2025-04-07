@@ -124,65 +124,6 @@ class ProductController extends Controller
         return $this->productService->updateStock($request, $productId);
     }
 
-    // public function getVariants(Request $request)
-    // {
-    //     $request->validate([
-    //         'product_id' => 'required|exists:products,id'
-    //     ]);
-
-    //     $product = Product::find($request->product_id);
-    //     $variants = ProductVariant::where('product_id', $request->product_id)->get();
-
-    //     return response()->json([
-    //         'product' => [
-    //             'base_price' => $product->base_price,
-    //             'base_stock' => $product->base_stock
-    //         ],
-    //         'variants' => $variants->map(function ($variant) {
-    //             return [
-    //                 'id' => $variant->id,
-    //                 'attribute_values' => $variant->attribute_values,
-    //                 'price' => $variant->price,
-    //                 'stock' => $variant->stock
-    //             ];
-    //         })
-    //     ]);
-    // }
-
-    private function processProducts($products, $billId)
-    {
-        foreach ($products as $product) {
-            // Cập nhật tồn kho
-            if ($product['variant_id']) {
-                // Trừ stock cho biến thể sản phẩm (từ bảng product_variants)
-                $updated = ProductVariant::where('id', $product['variant_id'])
-                    ->where('stock', '>=', $product['quantity'])
-                    ->decrement('stock', $product['quantity']);
-
-                if (!$updated) {
-                    throw new \Exception("Sản phẩm biến thể không đủ hàng!");
-                }
-            } else {
-                // Trừ stock cho sản phẩm gốc (từ bảng products)
-                $updated = Product::where('id', $product['product_id'])
-                    ->where('base_stock', '>=', $product['quantity'])
-                    ->decrement('base_stock', $product['quantity']);
-
-                if (!$updated) {
-                    throw new \Exception("Sản phẩm không đủ hàng!");
-                }
-            }
-
-            // Thêm chi tiết đơn hàng
-            BillDetails::create([
-                'bill_id' => $billId,
-                'product_id' => $product['product_id'],
-                'variant_id' => $product['variant_id'] ?? null,
-                'quantity' => $product['quantity'],
-                'price' => $product['price'],
-            ]);
-        }
-    }
     // CLIENT 
     public function productDetails($request)
     {
