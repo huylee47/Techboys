@@ -77,7 +77,7 @@
                                     <div class="row">
                                         <div class="col-md-6 mb-3">
                                             <label for="category_id" class="form-label">Danh mục sản phẩm</label>
-                                            <select class="form-select" id="category_id" name="category_id">
+                                            <select class="form-control selectpicker" data-live-search="true" id="category_id" name="category_id">
                                                 <option value="{{ $product->category_id }}" selected>
                                                     {{ $product->category->name }}</option>
 
@@ -95,7 +95,7 @@
                                         </div>
                                         <div class="col-md-6 mb-3">
                                             <label for="brand" class="form-label">Hãng</label>
-                                            <select class="form-select" id="brand_id" name="brand_id">
+                                            <select class="form-control selectpicker" data-live-search="true" id="brand_id" name="brand_id">
                                                 <option value="{{ $product->brand->id }}" selected>
                                                     {{ $product->brand->name }}</option>
 
@@ -514,7 +514,17 @@
                     $('.selectpicker').selectpicker();
                     toggleRemoveButtons();
                 });
+                $('#attribute-select').on('change', function() {
+                    let selectedAttributes = $('#attribute-select').val() || [];
+                    console.log("Danh sách thuộc tính đã chọn:", selectedAttributes);
 
+                    let multiSelectCount = selectedAttributes.filter(attrName => {
+                        let attr = attributeData.find(a => a.name === attrName);
+                        return attr && attr.is_multiple == 1;
+                    }).length;
+
+                    console.log(`Số lượng thuộc tính multi select được chọn: ${multiSelectCount}`);
+                });
                 $('#add-variant').click(function() {
                     let index = $('.variant-item').length;
                     let selectedNewAttributes = [];
@@ -590,6 +600,14 @@
                     $('#variantsadd').prepend(variantHtml);
                     $('.selectpicker').selectpicker();
                     toggleRemoveButtons();
+                    let multiSelectCountAfterAdd = $('#attribute-select').val().filter(attrName => {
+                        let attr = attributeData.find(a => a.name === attrName);
+                        return attr && attr.is_multiple == 1;
+                    }).length;
+
+                    if (multiSelectCountAfterAdd >= 2) {
+                        $('#add-variant').hide();
+                    }
                 });
 
                 $(document).ready(function() {
@@ -691,6 +709,8 @@
 
                     $('.selectpicker').selectpicker('refresh');
                     toggleRemoveButtons();
+                    $('#add-variant').show();
+
                 });
 
 
