@@ -38,18 +38,19 @@
                                                     <a href="#" class="woocommerce-product-gallery__trigger">🔍</a>
                                                     <figure class="woocommerce-product-gallery__wrapper ">
                                                         @foreach ($images as $img)
-                                                        <div data-thumb="{{ url('') }}/admin/assets/images/product/{{ $img->image }}"
-                                                            class="woocommerce-product-gallery__image">
-                                                            <a href="{{ url('') }}/admin/assets/images/product/{{ $img->image }}" tabindex="0">
-                                                                <img width="400" height="400"
-                                                                    src="{{ url('') }}/admin/assets/images/product/{{ $img->image }}"
-                                                                    class="attachment-shop_single size-shop_single wp-post-image"
-                                                                    alt=""
-                                                                    style="max-width: 100%; max-height: 400px; width: auto; height: auto; object-fit: contain; display: block; margin: 0 auto;">
-                                                            </a>
-                                                        </div>
-                                                    @endforeach
-                                                    
+                                                            <div data-thumb="{{ url('') }}/admin/assets/images/product/{{ $img->image }}"
+                                                                class="woocommerce-product-gallery__image">
+                                                                <a href="{{ url('') }}/admin/assets/images/product/{{ $img->image }}"
+                                                                    tabindex="0">
+                                                                    <img width="400" height="400"
+                                                                        src="{{ url('') }}/admin/assets/images/product/{{ $img->image }}"
+                                                                        class="attachment-shop_single size-shop_single wp-post-image"
+                                                                        alt=""
+                                                                        style="max-width: 100%; max-height: 400px; width: auto; height: auto; object-fit: contain; display: block; margin: 0 auto;">
+                                                                </a>
+                                                            </div>
+                                                        @endforeach
+
                                                         <div data-thumb="{{ url('') }}/home/assets/images/products/sm-card-3.jpg"
                                                             class="woocommerce-product-gallery__image">
                                                             <a href="{{ url('') }}/home/assets/images/products/big-card-2.jpg"
@@ -97,7 +98,7 @@
                                     <div class="summary entry-summary">
                                         <div class="single-product-header">
                                             <h1 class="product_title entry-title">{{ $product->name }}</h1>
-                                            <p >Lượt mua : {{$product->purchases}}</p>
+                                            <p>Lượt mua : {{ $product->purchases }}</p>
 
                                         </div>
                                         <!-- .single-product-header -->
@@ -180,7 +181,7 @@
                                                         <p>Số lượng tồn kho: <span
                                                                 id="stock-display">{{ $defaultVariant['stock'] }}</span>
                                                         </p>
-                                                        
+
                                                         <p class="price">
                                                             <span class="woocommerce-Price-amount amount"
                                                                 id="price-display">
@@ -552,12 +553,12 @@
         });
     </script>
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
+        document.addEventListener('DOMContentLoaded', function() {
             const stars = document.querySelectorAll('.stars a');
             const ratingInput = document.getElementById('rating-value');
 
             stars.forEach((star, index) => {
-                star.addEventListener('click', function (event) {
+                star.addEventListener('click', function(event) {
                     event.preventDefault();
                     const rating = index + 1;
                     ratingInput.value = rating;
@@ -571,7 +572,7 @@
                     }
                 });
 
-                star.addEventListener('mouseover', function () {
+                star.addEventListener('mouseover', function() {
                     // Xóa trạng thái hover khỏi tất cả các ngôi sao
                     stars.forEach(s => s.classList.remove('hover'));
 
@@ -581,7 +582,7 @@
                     }
                 });
 
-                star.addEventListener('mouseout', function () {
+                star.addEventListener('mouseout', function() {
                     // Xóa trạng thái hover khỏi tất cả các ngôi sao
                     stars.forEach(s => s.classList.remove('hover'));
 
@@ -642,7 +643,6 @@
             const addToCartBtn = document.querySelector(".single_add_to_cart_button");
             const outOfStockMessage = document.getElementById("outOfStockMessage");
 
-
             function updateVariantInfo() {
                 console.log("Kiểm tra biến thể...");
                 // console.log("Thuộc tính đã chọn:", selectedAttributes);
@@ -671,6 +671,7 @@
                     }
 
                     // Kiểm tra tồn kho
+
                     if (selectedVariant.stock > 0) {
                         if (addToCartBtn) addToCartBtn.disabled = false;
                         if (outOfStockMessage) outOfStockMessage.style.display = "none";
@@ -678,14 +679,11 @@
                         if (addToCartBtn) addToCartBtn.disabled = true;
                         if (outOfStockMessage) outOfStockMessage.style.display = "block";
                     }
-                } else if (productNoVariantStock != null) {
+                } else if (productNoVariantStock > 0) {
                     if (addToCartBtn) addToCartBtn.disabled = false;
                     if (outOfStockMessage) outOfStockMessage.style.display = "none";
                 } else {
                     console.warn("Không có biến thể phù hợp!");
-
-                    // if (productPriceElement) productPriceElement.innerText = "Không có biến thể này!";
-                    // if (stockQuantityElement) stockQuantityElement.innerText = "0";
 
                     selectedVariantId = null;
                     if (variantIdInput) variantIdInput.value = "";
@@ -760,7 +758,7 @@
 
                 Object.keys(selectedAttributes).forEach(attr => {
                     let currentChoice = document.querySelector(
-                    `.choice[data-attribute="${attr}"].selected`);
+                        `.choice[data-attribute="${attr}"].selected`);
 
                     if (currentChoice && currentChoice.classList.contains("blocked")) {
                         let firstValidChoice = Array.from(document.querySelectorAll(
