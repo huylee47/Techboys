@@ -25,13 +25,13 @@ class GeminiService
         }
     
         $matchingProducts = $query->get();
+        // return $matchingProducts;
     
         if ($matchingProducts->isNotEmpty()) {
             $productLines = $matchingProducts->map(function ($product) {
                 return "<a href='http://127.0.0.1:8000/products/{$product->slug}'>{$product->name}</a>";
             })->implode(', ');
-    
-            $contextPrompt = "Cửa hàng Techboys hiện đang bán các sản phẩm liên quan như: {$productLines}. Bạn hãy viết một câu trả lời xác nhận cửa hàng có bán, gợi ý sản phẩm phù hợp nhất với prompt sau: '{$prompt}', và kết thúc bằng một câu hỏi mở cho khách.";
+            $contextPrompt = "Cửa hàng Techboys hiện có bán đang bán các sản phẩm liên quan như: {$productLines}. Bạn hãy viết một câu trả lời xác nhận cửa hàng có bán, gợi ý sản phẩm phù hợp nhất với prompt sau: '{$prompt}',sau đó trả về {$productLines}  phù hợp nhất, và kết thúc bằng một câu hỏi mở cho khách.";
     
             $response = Http::post($this->baseUrl . '?key=' . $this->apiKey, [
                 'contents' => [
