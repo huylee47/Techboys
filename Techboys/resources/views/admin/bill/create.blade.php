@@ -47,7 +47,7 @@
                             <label for="userPhone">Chọn số điện thoại</label>
                             <select id="userPhone" class="form-control selectpicker" data-live-search="true" required>
                                 <option value="">Chọn số điện thoại</option>
-                                @foreach($users as $user)
+                                @foreach($users->take(5) as $user)
                                     <option value="{{ $user->id }}" 
                                             data-name="{{ $user->name }}" 
                                             data-email="{{ $user->email }}" 
@@ -95,7 +95,7 @@
                             <label for="product">Chọn sản phẩm</label>
                             <select id="product" class="form-control selectpicker" data-live-search="true">
                                 <option value="">Chọn sản phẩm</option>
-                                @foreach($products as $product)
+                                @foreach($products->take(5) as $product)
                                     <option value="{{ $product->id }}" 
                                             data-name="{{ $product->name }}">
                                         {{ $product->name }}
