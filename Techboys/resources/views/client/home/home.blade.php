@@ -335,7 +335,7 @@
                                             </div>
                                             <!-- .products-carousel -->
                                         </div>
-                                        c
+                                        
                                     </div>
                                     <!-- .tab-content -->
                                 </div>

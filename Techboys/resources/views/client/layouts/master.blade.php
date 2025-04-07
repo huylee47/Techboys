@@ -120,6 +120,9 @@
                         <nav id="primary-navigation" class="primary-navigation" aria-label="Primary Navigation"
                             data-nav="flex-menu">
                             <ul id="menu-primary-menu" class="nav yamm">
+                                <li class="menu-item animate-dropdown {{ request()->routeIs('client.home.home') ? 'active' : '' }}">
+                                    <a title="about us" href="{{ route('home') }}">Trang chủ</a>
+                                </li>
                                 <li class="menu-item animate-dropdown {{ request()->routeIs('client.about.about') ? 'active' : '' }}">
                                     <a title="about us" href="{{ route('client.about.about') }}">Về chúng tôi</a>
                                 </li>
