@@ -58,9 +58,12 @@ class BillController extends Controller
         DB::beginTransaction();
 
         try {
-            // Validate request
             $validated = $request->validate([
-                'user_id' => 'required|exists:users,id',
+                'user_id' => 'nullable|exists:users,id',
+                'full_name' => 'required|string|max:255',
+                'phone' => 'required|string|max:20',
+                'email' => 'nullable|email',
+                'address' => 'required|string',
                 'products' => 'required|array|min:1',
                 'products.*.product_id' => 'required|exists:products,id',
                 'products.*.variant_id' => 'nullable|exists:product_variants,id',
@@ -68,28 +71,33 @@ class BillController extends Controller
                 'products.*.price' => 'required|numeric|min:0',
                 'payment_method' => 'required|in:cod,bank,vnpay',
                 'shipping_fee' => 'required|numeric|min:0',
+                'note' => 'nullable|string',
             ]);
 
-            // Calculate total
+            // Tính tổng tiền
             $subtotal = collect($validated['products'])->sum(function ($item) {
                 return $item['price'] * $item['quantity'];
             });
 
             $total = $subtotal + $validated['shipping_fee'];
 
-            // Create bill
+            // Tạo đơn hàng
             $bill = Bill::create([
                 'user_id' => $validated['user_id'],
-                'status_id' => 1, // Trạng thái "Chờ xác nhận"
+                'full_name' => $validated['full_name'],
+                'phone' => $validated['phone'],
+                'email' => $validated['email'] ?? null,
+                'address' => $validated['address'],
+                'total' => $total,
                 'payment_method' => $validated['payment_method'],
                 'shipping_fee' => $validated['shipping_fee'],
-                'total' => $total,
-                'note' => $request->note,
+                'status_id' => 1, // Trạng thái "Chờ xác nhận"
+                'note' => $validated['note'] ?? null,
             ]);
 
-            // Add products and update stock
+            // Thêm sản phẩm vào đơn hàng và cập nhật tồn kho
             foreach ($validated['products'] as $product) {
-                // Update stock
+                // Cập nhật tồn kho
                 if ($product['variant_id']) {
                     ProductVariant::where('id', $product['variant_id'])
                         ->decrement('stock', $product['quantity']);
@@ -98,7 +106,7 @@ class BillController extends Controller
                         ->decrement('base_stock', $product['quantity']);
                 }
 
-                // Create bill detail
+                // Thêm chi tiết đơn hàng
                 BillDetails::create([
                     'bill_id' => $bill->id,
                     'product_id' => $product['product_id'],
@@ -117,7 +125,7 @@ class BillController extends Controller
             return back()->withInput()
                 ->with('error', 'Lỗi khi tạo đơn hàng: ' . $e->getMessage());
         }
-    }
+    }   
 
     public function getVariants(Request $request)
     {
