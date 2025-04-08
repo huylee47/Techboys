@@ -4,8 +4,7 @@
 <div id="main">
     <div class="container mt-4">
         <h2 class="mb-4">Tạo Đơn Hàng</h2>
-
-        {{-- Hiển thị lỗi --}}
+        
         @if($errors->any())
             <div class="alert alert-danger">
                 <ul>
@@ -16,135 +15,105 @@
             </div>
         @endif
 
-        {{-- Thông báo thành công --}}
         @if(session('success'))
-            <div class="alert alert-success alert-dismissible fade show">
-                {{ session('success') }}
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-        @endif
+    <div class="alert alert-success alert-dismissible fade show">
+        {{ session('success') }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+@endif
 
-        {{-- Thông báo lỗi --}}
-        @if(session('error'))
-            <div class="alert alert-danger alert-dismissible fade show">
-                {{ session('error') }}
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-        @endif
+@if(session('error'))
+    <div class="alert alert-danger alert-dismissible fade show">
+        {{ session('error') }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+@endif
 
         <form action="{{ route('admin.bill.store') }}" method="POST" id="orderForm">
             @csrf
-
-            {{-- THÔNG TIN KHÁCH HÀNG --}}
+            
+            <!-- Phần thông tin khách hàng -->
             <div class="card mb-4">
                 <div class="card-header bg-primary text-white">
                     <h5 class="mb-0">Thông tin khách hàng</h5>
                 </div>
                 <div class="card-body">
                     <div class="row">
-                        {{-- Chọn số điện thoại --}}
                         <div class="form-group col-md-6">
                             <label for="userPhone">Chọn số điện thoại</label>
                             <select id="userPhone" class="form-control selectpicker" data-live-search="true" required>
                                 <option value="">Chọn số điện thoại</option>
                                 @foreach($users->take(5) as $user)
-                                    <option value="{{ $user->id }}"
-                                            data-name="{{ $user->name }}"
-                                            data-email="{{ $user->email }}"
+                                    <option value="{{ $user->id }}" 
+                                            data-name="{{ $user->name }}" 
+                                            data-email="{{ $user->email }}" 
                                             data-address="{{ $user->address }}"
                                             data-phone="{{ $user->phone }}">
                                         {{ $user->phone }} - {{ $user->name }}
                                     </option>
                                 @endforeach
+                                <option value="new">+ Nhập số điện thoại mới</option>
                             </select>
                             <input type="hidden" name="user_id" id="userId">
                             <input type="hidden" name="phone" id="phone">
                         </div>
-
-                        {{-- Tên khách hàng --}}
-                        <div class="form-group col-md-6">
-                            <label for="full_name">Tên khách hàng:</label>
-                            <input type="text" class="form-control" id="full_name" name="full_name">
+                        <div class="form-group col-md-6" id="newPhoneGroup" style="display: none;">
+    <label for="newPhone">Số điện thoại mới</label>
+    <input type="text" class="form-control" id="newPhone" name="phone">
+</div>
+                        
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="name">Tên khách hàng:</label>
+                                <input type="text" class="form-control" id="full_name" name="full_name">
+                            </div>
                         </div>
                     </div>
-
+                    
                     <div class="row">
-                        {{-- Email --}}
-                        <div class="form-group col-md-6">
-                            <label for="email">Email:</label>
-                            <input type="email" class="form-control" id="email" name="email">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="email">Email:</label>
+                                <input type="email" class="form-control" id="email" name="email">
+                            </div>
                         </div>
-                        {{-- Địa chỉ --}}
-                        <div class="form-group col-md-6">
-                            <label for="address">Địa chỉ:</label>
-                            <input type="text" class="form-control" id="address" name="address">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="address">Địa chỉ:</label>
+                                <input type="text" class="form-control" id="address" name="address">
+                            </div>
                         </div>
+                        <input type="hidden" name="province_id" value="224">
+<input type="hidden" name="district_id" value="1587">
+<input type="hidden" name="ward_code" value="30301">
                     </div>
                 </div>
             </div>
-
-            {{-- ĐỊA CHỈ GIAO HÀNG --}}
-            <div class="card mb-4">
-                <div class="card-header bg-success text-white">
-                    <h5 class="mb-0">Thông tin địa chỉ giao hàng</h5>
-                </div>
-                <div class="card-body">
-                    <div class="row">
-                        {{-- Tỉnh/Thành phố --}}
-                        <div class="form-group col-md-4">
-                            <label for="province_id">Tỉnh/Thành phố:</label>
-                            <select id="province_id" class="form-control selectpicker" data-live-search="true" name="province_id" required>
-                                <option value="" selected disabled>Chọn tỉnh/thành phố</option>
-                                @foreach ($provinces as $province)
-                                    <option value="{{ $province->province_id }}">{{ $province->name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-
-                        {{-- Quận/Huyện --}}
-                        <div class="form-group col-md-4">
-                            <label for="district_id">Quận/Huyện:</label>
-                            <select name="district_id" id="district" class="form-control">
-                                <option value="" selected disabled>Chọn quận/huyện</option>
-                            </select>
-                        </div>
-
-                        {{-- Phường/Xã --}}
-                        <div class="form-group col-md-4">
-                            <label for="ward_code">Phường/Xã:</label>
-                            <select name="ward_code" id="ward" class="form-control">
-                                <option value="" selected disabled>Chọn phường/xã</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            {{-- SẢN PHẨM --}}
+            
+            <!-- Phần thông tin sản phẩm -->
             <div class="card mb-4">
                 <div class="card-header bg-primary text-white">
                     <h5 class="mb-0">Thông tin sản phẩm</h5>
                 </div>
                 <div class="card-body">
                     <div class="row">
-                        {{-- Chọn sản phẩm --}}
                         <div class="form-group col-md-6">
                             <label for="product">Chọn sản phẩm</label>
                             <select id="product" class="form-control selectpicker" data-live-search="true">
                                 <option value="">Chọn sản phẩm</option>
                                 @foreach($products->take(5) as $product)
-                                    <option value="{{ $product->id }}" data-name="{{ $product->name }}">
+                                    <option value="{{ $product->id }}" 
+                                            data-name="{{ $product->name }}">
                                         {{ $product->name }}
                                     </option>
                                 @endforeach
                             </select>
                         </div>
 
-                        {{-- Chọn biến thể --}}
                         <div class="form-group col-md-6" id="variantContainer" style="display:none;">
                             <label for="variant">Chọn biến thể</label>
                             <select id="variant" class="form-control selectpicker" data-live-search="true">
@@ -153,29 +122,35 @@
                         </div>
                     </div>
 
-                    {{-- Số lượng, Giá, Tồn kho, Thành tiền --}}
                     <div class="row mt-3">
-                        <div class="form-group col-md-3">
-                            <label for="quantity">Số lượng:</label>
-                            <input type="number" class="form-control" id="quantity" min="1" value="1">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="quantity">Số lượng:</label>
+                                <input type="number" class="form-control" id="quantity" min="1" value="1">
+                            </div>
                         </div>
-                        <div class="form-group col-md-3">
-                            <label for="price">Giá:</label>
-                            <input type="text" class="form-control" id="price" readonly>
-                            <input type="hidden" id="priceValue">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="price">Giá:</label>
+                                <input type="text" class="form-control" id="price" readonly>
+                                <input type="hidden" id="priceValue">
+                            </div>
                         </div>
-                        <div class="form-group col-md-3">
-                            <label for="stock">Tồn kho:</label>
-                            <input type="text" class="form-control" id="stock" readonly>
-                            <input type="hidden" id="stockValue">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="stock">Tồn kho:</label>
+                                <input type="text" class="form-control" id="stock" readonly>
+                                <input type="hidden" id="stockValue">
+                            </div>
                         </div>
-                        <div class="form-group col-md-3">
-                            <label for="subtotal">Thành tiền:</label>
-                            <input type="text" class="form-control" id="subtotal" readonly>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="subtotal">Thành tiền:</label>
+                                <input type="text" class="form-control" id="subtotal" readonly>
+                            </div>
                         </div>
                     </div>
-
-                    {{-- Nút thêm sản phẩm --}}
+                    
                     <div class="row mt-3">
                         <div class="col-md-12">
                             <button type="button" id="addProductBtn" class="btn btn-success">
@@ -183,8 +158,8 @@
                             </button>
                         </div>
                     </div>
-
-                    {{-- Bảng danh sách sản phẩm --}}
+                    
+                    <!-- Bảng sản phẩm đã chọn -->
                     <div class="row mt-3">
                         <div class="col-md-12">
                             <table class="table table-bordered" id="productsTable">
@@ -198,7 +173,9 @@
                                         <th width="10%">Thao tác</th>
                                     </tr>
                                 </thead>
-                                <tbody></tbody>
+                                <tbody>
+                                    <!-- Sản phẩm sẽ được thêm vào đây bằng JS -->
+                                </tbody>
                                 <tfoot>
                                     <tr>
                                         <th colspan="4" class="text-right">Tổng cộng:</th>
@@ -211,49 +188,54 @@
                     </div>
                 </div>
             </div>
-
-            {{-- THANH TOÁN --}}
+            
+            <!-- Phần thông tin thanh toán -->
             <div class="card mb-4">
-                <div class="card-header bg-primary text-white">
-                    <h5 class="mb-0">Thông tin thanh toán</h5>
-                </div>
-                <div class="card-body">
-                    <div class="row">
-                        {{-- Phương thức thanh toán --}}
-                        <div class="form-group col-md-6">
-                            <label for="payment_method">Phương thức thanh toán:</label>
-                            <select class="form-control" id="payment_method" name="payment_method" required>
-                                <option value="cod">Thanh toán khi nhận hàng (COD)</option>
-                                <option value="bank">Chuyển khoản ngân hàng</option>
-                                <option value="vnpay">VNPay</option>
-                            </select>
-                        </div>
-                        {{-- Phí vận chuyển --}}
-                        <div class="form-group col-md-6">
-                            <label for="shipping_fee">Phí vận chuyển:</label>
-                            <input type="number" class="form-control" id="shipping_fee" name="shipping_fee" value="0" min="0">
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        {{-- Mã giảm giá --}}
-                        <div class="form-group col-md-6">
-                            <label for="voucher_code">Mã giảm giá (Voucher):</label>
-                            <input type="text" class="form-control" id="voucher_code" name="voucher_code">
-                        </div>
-                    </div>
-
-                    {{-- Ghi chú --}}
-                    <div class="row">
-                        <div class="form-group col-md-6">
-                            <label for="note">Ghi chú đơn hàng:</label>
-                            <textarea class="form-control" id="note" name="note" rows="3"></textarea>
-                        </div>
-                    </div>
+    <div class="card-header bg-primary text-white">
+        <h5 class="mb-0">Thông tin thanh toán</h5>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="payment_method">Phương thức thanh toán:</label>
+                    <select class="form-control" id="payment_method" name="payment_method" required>
+                        <option value="cod">Thanh toán khi nhận hàng (COD)</option>
+                        <option value="bank">Chuyển khoản ngân hàng</option>
+                        <option value="vnpay">VNPay</option>
+                    </select>
                 </div>
             </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="shipping_fee">Phí vận chuyển:</label>
+                     <input type="number" class="form-control" id="shipping_fee" name="shipping_fee" value="0" min="0">
+                </div>
+            </div>
+        </div>
 
-            {{-- Nút hành động --}}
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="voucher_code">Mã giảm giá (Voucher):</label>
+                    <input type="text" class="form-control" id="voucher_code" name="voucher_code">
+                </div>
+            </div>
+            <div class="col-md-6">
+                </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="note">Ghi chú đơn hàng:</label>
+                    <textarea class="form-control" id="note" name="note" rows="3"></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+            
             <div class="text-center">
                 <button type="submit" class="btn btn-primary btn-lg">
                     <i class="fas fa-save"></i> Tạo đơn hàng
@@ -266,7 +248,6 @@
     </div>
 </div>
 @endsection
-
 
 @section('scripts')
 <!-- Select2 CSS & JS -->
@@ -282,93 +263,45 @@
 
 <script>
 $(document).ready(function() {
-            // Khởi tạo selectpicker
-            $('.selectpicker').selectpicker();
-
-            // Mảng lưu trữ sản phẩm đã chọn
-            let selectedProducts = [];
-            let currentProduct = null;
-
-            // Xử lý khi chọn khách hàng
-            $('#userPhone').on('changed.bs.select', function() {
-                const selectedOption = $(this).find('option:selected');
-                $('#full_name').val(selectedOption.data('name'));
-                $('#email').val(selectedOption.data('email'));
-                $('#address').val(selectedOption.data('address'));
-                $('#userId').val(selectedOption.val());
-                $('#phone').val(selectedOption.data('phone'));
-            });
-
-            // Hàm tải và hiển thị quận/huyện theo tỉnh/thành phố
-            $(document).ready(function() {
     // Khởi tạo selectpicker
     $('.selectpicker').selectpicker();
-
+    
     // Mảng lưu trữ sản phẩm đã chọn
     let selectedProducts = [];
     let currentProduct = null;
-
+    
     // Xử lý khi chọn khách hàng
     $('#userPhone').on('changed.bs.select', function() {
-        const selectedOption = $(this).find('option:selected');
-        $('#full_name').val(selectedOption.data('name'));
-        $('#email').val(selectedOption.data('email'));
-        $('#address').val(selectedOption.data('address'));
-        $('#userId').val(selectedOption.val());
-        $('#phone').val(selectedOption.data('phone'));
-    });
-
-    // Hàm tải và hiển thị quận/huyện theo tỉnh/thành phố
-     $('#province_id').change(function() {
-        var provinceId = $(this).val();
-        if (provinceId) {
-            $.ajax({
-                url: `/admin/bill/get-districts/${provinceId}`, // Sử dụng string interpolation
-                type: 'GET',
-                dataType: 'json',
-                success: function(data) {
-                    $('#district_id').empty().append('<option value="" selected disabled>Chọn quận/huyện</option>');
-                    $.each(data, function(key, value) {
-                        $('#district_id').append('<option value="' + value.district_id + '">' + value.name + '</option>');
-                    });
-                    $('#district_id').selectpicker('refresh');
-                    $('#ward_code').empty().append('<option value="" selected disabled>Chọn phường/xã</option>');
-                    $('#ward_code').selectpicker('refresh');
-                }
-            });
+    const selectedOption = $(this).find('option:selected');
+    const selectedValue = selectedOption.val();
+    
+    // Hiển thị/ẩn ô nhập số điện thoại mới
+    if (selectedValue === 'new') {
+        $('#newPhoneGroup').show();
+        $('#userId').val(''); // Không có user_id cho khách mới
+        $('#full_name').val('');
+        $('#email').val('');
+        $('#address').val('');
+    } else {
+        $('#newPhoneGroup').hide();
+        if (selectedValue) {
+            // Điền thông tin từ khách hàng đã có
+            $('#userId').val(selectedValue);
+            $('#full_name').val(selectedOption.data('name'));
+            $('#email').val(selectedOption.data('email'));
+            $('#address').val(selectedOption.data('address'));
+            $('#newPhone').val(selectedOption.data('phone'));
         } else {
-            $('#district_id').empty().append('<option value="" selected disabled>Chọn quận/huyện</option>');
-            $('#district_id').selectpicker('refresh');
-            $('#ward_code').empty().append('<option value="" selected disabled>Chọn phường/xã</option>');
-            $('#ward_code').selectpicker('refresh');
+            // Reset form nếu chọn option trống
+            $('#userId').val('');
+            $('#full_name').val('');
+            $('#email').val('');
+            $('#address').val('');
+            $('#newPhone').val('');
         }
-    });
+    }
+});
 
-    // Hàm tải và hiển thị phường/xã theo quận/huyện
-     $('#province_id').change(function() {
-        var provinceId = $(this).val();
-        if (provinceId) {
-            $.ajax({
-                url: `/admin/bill/get-districts/${provinceId}`, // Sử dụng string interpolation
-                type: 'GET',
-                dataType: 'json',
-                success: function(data) {
-                    $('#district_id').empty().append('<option value="" selected disabled>Chọn quận/huyện</option>');
-                    $.each(data, function(key, value) {
-                        $('#district_id').append('<option value="' + value.district_id + '">' + value.name + '</option>');
-                    });
-                    $('#district_id').selectpicker('refresh');
-                    $('#ward_code').empty().append('<option value="" selected disabled>Chọn phường/xã</option>');
-                    $('#ward_code').selectpicker('refresh');
-                }
-            });
-        } else {
-            $('#district_id').empty().append('<option value="" selected disabled>Chọn quận/huyện</option>');
-            $('#district_id').selectpicker('refresh');
-            $('#ward_code').empty().append('<option value="" selected disabled>Chọn phường/xã</option>');
-            $('#ward_code').selectpicker('refresh');
-        }
-    });
     
     // Xử lý khi chọn sản phẩm
     $('#product').on('changed.bs.select', function(e) {
@@ -655,11 +588,27 @@ $(document).ready(function() {
     
     // Xử lý submit form
     $('form').on('submit', function(e) {
-        if (!$('#userId').val()) {
-            e.preventDefault();
-            alert('Vui lòng chọn khách hàng');
-            return false;
-        }
+        const selectedOption = $('#userPhone').find('option:selected');
+    
+    // Kiểm tra nếu chọn "Nhập số điện thoại mới" mà không nhập số
+    if (selectedOption.val() === 'new' && !$('#newPhone').val()) {
+        e.preventDefault();
+        alert('Vui lòng nhập số điện thoại');
+        return false;
+    }
+    
+    // Kiểm tra nếu không chọn khách hàng và không nhập số mới
+    if (!selectedOption.val()) {
+        e.preventDefault();
+        alert('Vui lòng chọn hoặc nhập số điện thoại');
+        return false;
+    }
+
+        // if (!$('#userId').val()) {
+        //     e.preventDefault();
+        //     alert('Vui lòng chọn khách hàng');
+        //     return false;
+        // }
         
         if (selectedProducts.length === 0) {
             e.preventDefault();
