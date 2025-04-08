@@ -53,6 +53,12 @@ class BillController extends Controller
         return view('admin.bill.create', compact('users', 'products', 'vouchers'));
     }
 
+    /**
+     * Store a newly created bill in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function store(Request $request)
     {
         DB::beginTransaction();
@@ -70,34 +76,49 @@ class BillController extends Controller
                 'products.*.quantity' => 'required|integer|min:1',
                 'products.*.price' => 'required|numeric|min:0',
                 'payment_method' => 'required|in:cod,bank,vnpay',
-                'shipping_fee' => 'required|numeric|min:0',
+                'shipping_fee' => 'nullable|numeric|min:0', // Cho phép null ở validation
                 'note' => 'nullable|string',
             ]);
 
-            // Tính tổng tiền
+            // Gán giá trị mặc định cho shipping_fee nếu nó không được cung cấp
+            $shippingFee = $validated['shipping_fee'] ?? 0;
+
+            // Tính tổng tiền ban đầu (chưa áp dụng voucher, promotion)
             $subtotal = collect($validated['products'])->sum(function ($item) {
                 return $item['price'] * $item['quantity'];
             });
 
-            $total = $subtotal + $validated['shipping_fee'];
+            $total = $subtotal + $shippingFee;
 
-            // Tạo đơn hàng
+            // Create the bill
             $bill = Bill::create([
                 'user_id' => $validated['user_id'],
                 'full_name' => $validated['full_name'],
                 'phone' => $validated['phone'],
                 'email' => $validated['email'] ?? null,
                 'address' => $validated['address'],
-                'total' => $total,
+                'total' => $total, // Store initial total
                 'payment_method' => $validated['payment_method'],
                 'shipping_fee' => $validated['shipping_fee'],
-                'status_id' => 1, // Trạng thái "Chờ xác nhận"
+                'status_id' => 1, // "Pending" status
                 'note' => $validated['note'] ?? null,
+                'province_id' => null,
+                'district_id' => null,
+                'ward_code' => null,
             ]);
 
-            // Thêm sản phẩm vào đơn hàng và cập nhật tồn kho
+            // Add products to the bill and update stock
             foreach ($validated['products'] as $product) {
-                // Cập nhật tồn kho
+                $productModel = Product::findOrFail($product['product_id']);
+                $finalPrice = $product['price']; // Final price after promotion
+
+                // Check and apply promotion
+                $promotion = $productModel->promotion;
+                if ($promotion && now()->lt(Carbon::parse($promotion->end_date))) {
+                    $finalPrice = round($product['price'] * (1 - $promotion->discount_percent / 100), 2);
+                }
+
+                // Update stock
                 if ($product['variant_id']) {
                     ProductVariant::where('id', $product['variant_id'])
                         ->decrement('stock', $product['quantity']);
@@ -106,14 +127,40 @@ class BillController extends Controller
                         ->decrement('base_stock', $product['quantity']);
                 }
 
-                // Thêm chi tiết đơn hàng
+                // Create bill details
                 BillDetails::create([
                     'bill_id' => $bill->id,
                     'product_id' => $product['product_id'],
                     'variant_id' => $product['variant_id'] ?? null,
                     'quantity' => $product['quantity'],
-                    'price' => $product['price'],
+                    'price' => $product['price'], // Store original price
+                    'promotion_price' => $finalPrice, // Store price after promotion
                 ]);
+            }
+
+            // Handle voucher (if any)
+            if ($request->has('voucher_code')) {
+                $voucher = Voucher::where('code', $request->input('voucher_code'))
+                    ->where('start_date', '<=', now())
+                    ->where(function ($query) {
+                        $query->where('end_date', '>=', now())
+                            ->orWhereNull('end_date');
+                    })
+                    ->first();
+
+                if ($voucher) {
+                    $discountAmount = 0;
+                    if ($voucher->type === 'fixed') {
+                        $discountAmount = min($voucher->value, $bill->total);
+                    } elseif ($voucher->type === 'percentage') {
+                        $discountAmount = round($bill->total * ($voucher->value / 100), 2);
+                    }
+
+                    $bill->update([
+                        'voucher_code' => $voucher->code,
+                        'total' => max(0, $bill->total - $discountAmount),
+                    ]);
+                }
             }
 
             DB::commit();
@@ -125,8 +172,8 @@ class BillController extends Controller
             return back()->withInput()
                 ->with('error', 'Lỗi khi tạo đơn hàng: ' . $e->getMessage());
         }
-    }   
-
+    }
+    
     public function getVariants(Request $request)
     {
         $request->validate([
