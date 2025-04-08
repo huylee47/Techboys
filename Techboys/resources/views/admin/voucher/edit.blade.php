@@ -138,5 +138,13 @@
                     searchEnabled: true, // Bật tìm kiếm
                 });
             });
+            document.addEventListener('DOMContentLoaded', function() {
+                const discountAmountField = document.getElementById('discount_amount');
+                const maxDiscountField = document.getElementById('max_discount');
+
+                discountAmountField.addEventListener('input', function() {
+                    maxDiscountField.value = discountAmountField.value;
+                });
+            });
         </script>
     @endsection
