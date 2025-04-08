@@ -51,18 +51,20 @@
                                     <option value="{{ $user->id }}" 
                                             data-name="{{ $user->name }}" 
                                             data-email="{{ $user->email }}" 
-                                            data-address="{{ $user->address }}">
+                                            data-address="{{ $user->address }}"
+                                            data-phone="{{ $user->phone }}">
                                         {{ $user->phone }} - {{ $user->name }}
                                     </option>
                                 @endforeach
                             </select>
                             <input type="hidden" name="user_id" id="userId">
+                            <input type="hidden" name="phone" id="phone">
                         </div>
                         
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="name">Tên khách hàng:</label>
-                                <input type="text" class="form-control" id="name" readonly>
+                                <input type="text" class="form-control" id="full_name" name="full_name">
                             </div>
                         </div>
                     </div>
@@ -71,13 +73,13 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="email">Email:</label>
-                                <input type="email" class="form-control" id="email" readonly>
+                                <input type="email" class="form-control" id="email" name="email">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="address">Địa chỉ:</label>
-                                <input type="text" class="form-control" id="address" readonly>
+                                <input type="text" class="form-control" id="address" name="address">
                             </div>
                         </div>
                     </div>
@@ -181,39 +183,50 @@
             
             <!-- Phần thông tin thanh toán -->
             <div class="card mb-4">
-                <div class="card-header bg-primary text-white">
-                    <h5 class="mb-0">Thông tin thanh toán</h5>
-                </div>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="payment_method">Phương thức thanh toán:</label>
-                                <select class="form-control" id="payment_method" name="payment_method" required>
-                                    <option value="cod">Thanh toán khi nhận hàng (COD)</option>
-                                    <option value="bank">Chuyển khoản ngân hàng</option>
-                                    <option value="vnpay">VNPay</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="shipping_fee">Phí vận chuyển:</label>
-                                <input type="number" class="form-control" id="shipping_fee" name="shipping_fee" value="30000" min="0">
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label for="note">Ghi chú đơn hàng:</label>
-                                <textarea class="form-control" id="note" name="note" rows="3"></textarea>
-                            </div>
-                        </div>
-                    </div>
+    <div class="card-header bg-primary text-white">
+        <h5 class="mb-0">Thông tin thanh toán</h5>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="payment_method">Phương thức thanh toán:</label>
+                    <select class="form-control" id="payment_method" name="payment_method" required>
+                        <option value="cod">Thanh toán khi nhận hàng (COD)</option>
+                        <option value="bank">Chuyển khoản ngân hàng</option>
+                        <option value="vnpay">VNPay</option>
+                    </select>
                 </div>
             </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="shipping_fee">Phí vận chuyển:</label>
+                    <input type="number" class="form-control" id="shipping_fee" name="shipping_fee" value="0" min="0">
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="voucher_code">Mã giảm giá (Voucher):</label>
+                    <input type="text" class="form-control" id="voucher_code" name="voucher_code">
+                </div>
+            </div>
+            <div class="col-md-6">
+                </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="note">Ghi chú đơn hàng:</label>
+                    <textarea class="form-control" id="note" name="note" rows="3"></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
             
             <div class="text-center">
                 <button type="submit" class="btn btn-primary btn-lg">
@@ -250,12 +263,13 @@ $(document).ready(function() {
     let currentProduct = null;
     
     // Xử lý khi chọn khách hàng
-    $('#userPhone').on('change', function() {
+    $('#userPhone').on('changed.bs.select', function() {
         const selectedOption = $(this).find('option:selected');
-        $('#name').val(selectedOption.data('name'));
+        $('#full_name').val(selectedOption.data('name'));
         $('#email').val(selectedOption.data('email'));
         $('#address').val(selectedOption.data('address'));
         $('#userId').val(selectedOption.val());
+        $('#phone').val(selectedOption.data('phone'));
     });
     
     // Xử lý khi chọn sản phẩm
