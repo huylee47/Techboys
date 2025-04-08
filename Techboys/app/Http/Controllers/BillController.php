@@ -10,6 +10,7 @@ use App\Models\BillDetails;
 use App\Models\Product;
 use App\Models\ProductVariant;
 use App\Models\Promotion;
+use App\Models\ProvinceGHN;
 use App\Models\User;
 use App\Models\Status;
 use App\Models\Voucher;
@@ -21,6 +22,7 @@ use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use App\Service\AddressService;
 
 class BillController extends Controller
 {
@@ -29,6 +31,7 @@ class BillController extends Controller
     //     $bills = Bill::orderByDesc('created_at')->paginate(10);
     //     return view('admin.bill.index', compact('bills'));
     // }
+    private $addressService;
     public function index(Request $request)
     {
         $query = Bill::query();
@@ -49,16 +52,11 @@ class BillController extends Controller
         $vouchers = Voucher::where('end_date', '>', now())
             ->orWhereNull('end_date')
             ->get();
+        $provinces = ProvinceGHN::all();
 
-        return view('admin.bill.create', compact('users', 'products', 'vouchers'));
+        return view('admin.bill.create', compact('users', 'products', 'vouchers', 'provinces'));
     }
 
-    /**
-     * Store a newly created bill in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\RedirectResponse
-     */
     public function store(Request $request)
     {
         DB::beginTransaction();
@@ -70,97 +68,60 @@ class BillController extends Controller
                 'phone' => 'required|string|max:20',
                 'email' => 'nullable|email',
                 'address' => 'required|string',
+                'province_id' => 'required|exists:provinces,province_id', 
+                'district_id' => 'required|exists:districts,district_id', 
+                'ward_code' => 'required|exists:wards_ghns,code', 
                 'products' => 'required|array|min:1',
                 'products.*.product_id' => 'required|exists:products,id',
                 'products.*.variant_id' => 'nullable|exists:product_variants,id',
                 'products.*.quantity' => 'required|integer|min:1',
                 'products.*.price' => 'required|numeric|min:0',
-                'payment_method' => 'required|in:cod,bank,vnpay',
-                'shipping_fee' => 'nullable|numeric|min:0', // Cho phép null ở validation
+                'payment_method' => 'required|in:cod,bank,vnpay', // Keep as string for form
+                'fee_shipping' => 'nullable|numeric|min:0',
                 'note' => 'nullable|string',
             ]);
 
-            // Gán giá trị mặc định cho shipping_fee nếu nó không được cung cấp
-            $shippingFee = $validated['shipping_fee'] ?? 0;
+            // Ánh xạ giá trị chuỗi sang số nguyên for database
+            $paymentMethodMap = [
+                'cod' => 1,
+                'bank' => 2,
+                'vnpay' => 3,
+            ];
+            $paymentMethodValue = $paymentMethodMap[$validated['payment_method']] ?? 1;
 
-            // Tính tổng tiền ban đầu (chưa áp dụng voucher, promotion)
+            $shippingFee = $validated['fee_shipping'] ?? 0;
+
             $subtotal = collect($validated['products'])->sum(function ($item) {
                 return $item['price'] * $item['quantity'];
             });
 
             $total = $subtotal + $shippingFee;
 
-            // Create the bill
             $bill = Bill::create([
                 'user_id' => $validated['user_id'],
                 'full_name' => $validated['full_name'],
                 'phone' => $validated['phone'],
                 'email' => $validated['email'] ?? null,
                 'address' => $validated['address'],
-                'total' => $total, // Store initial total
-                'payment_method' => $validated['payment_method'],
-                'shipping_fee' => $validated['shipping_fee'],
-                'status_id' => 1, // "Pending" status
+                'total' => $total,
+                'payment_method' => $paymentMethodValue,
+                'fee_shipping' => $shippingFee,
+                'status_id' => 1,
                 'note' => $validated['note'] ?? null,
-                'province_id' => null,
-                'district_id' => null,
-                'ward_code' => null,
+                'province_id' => $validated['province_id'],
+                'district_id' => $validated['district_id'],
+                'ward_code' => $validated['ward_code'],
             ]);
 
-            // Add products to the bill and update stock
-            foreach ($validated['products'] as $product) {
-                $productModel = Product::findOrFail($product['product_id']);
-                $finalPrice = $product['price']; // Final price after promotion
-
-                // Check and apply promotion
-                $promotion = $productModel->promotion;
-                if ($promotion && now()->lt(Carbon::parse($promotion->end_date))) {
-                    $finalPrice = round($product['price'] * (1 - $promotion->discount_percent / 100), 2);
-                }
-
-                // Update stock
-                if ($product['variant_id']) {
-                    ProductVariant::where('id', $product['variant_id'])
-                        ->decrement('stock', $product['quantity']);
-                } else {
-                    Product::where('id', $product['product_id'])
-                        ->decrement('base_stock', $product['quantity']);
-                }
-
-                // Create bill details
+            // Create bill details
+            foreach ($validated['products'] as $productData) {
                 BillDetails::create([
                     'bill_id' => $bill->id,
-                    'product_id' => $product['product_id'],
-                    'variant_id' => $product['variant_id'] ?? null,
-                    'quantity' => $product['quantity'],
-                    'price' => $product['price'], // Store original price
-                    'promotion_price' => $finalPrice, // Store price after promotion
+                    'product_id' => $productData['product_id'],
+                    'variant_id' => $productData['variant_id'],
+                    'quantity' => $productData['quantity'],
+                    'price' => $productData['price'],
                 ]);
-            }
-
-            // Handle voucher (if any)
-            if ($request->has('voucher_code')) {
-                $voucher = Voucher::where('code', $request->input('voucher_code'))
-                    ->where('start_date', '<=', now())
-                    ->where(function ($query) {
-                        $query->where('end_date', '>=', now())
-                            ->orWhereNull('end_date');
-                    })
-                    ->first();
-
-                if ($voucher) {
-                    $discountAmount = 0;
-                    if ($voucher->type === 'fixed') {
-                        $discountAmount = min($voucher->value, $bill->total);
-                    } elseif ($voucher->type === 'percentage') {
-                        $discountAmount = round($bill->total * ($voucher->value / 100), 2);
-                    }
-
-                    $bill->update([
-                        'voucher_code' => $voucher->code,
-                        'total' => max(0, $bill->total - $discountAmount),
-                    ]);
-                }
             }
 
             DB::commit();
@@ -197,6 +158,15 @@ class BillController extends Controller
                 ];
             })
         ]);
+    }
+
+    public function getDistricts($province_id)
+    {
+        return $this->addressService->getDistricts($province_id);
+    }
+    public function getWards($district_id)
+    {
+        return $this->addressService->getWards($district_id);
     }
 
     // Cập nhật giỏ hàng khi người dùng thay đổi lựa chọn sản phẩm hoặc biến thể
