@@ -84,18 +84,18 @@
             <div class="col-full">
                 <ul id="menu-top-bar-left" class="nav justify-content-center">
                     <li class="menu-item animate-dropdown">
-                        <a title="Techboys - Always free delivery" href="contact-v1.html">Techboys &#8211; Lựa chọn tối
+                        <a title="Techboys - Always free delivery" href="#">Techboys &#8211; Lựa chọn tối
                             ưu</a>
                     </li>
                     <li class="menu-item animate-dropdown">
-                        <a title="Sản phẩm chất lượng" href="{{ route('client.product.index') }}">Sản phẩm chất
+                        <a title="Sản phẩm chất lượng" href="#">Sản phẩm chất
                             lượng</a>
                     </li>
                     <li class="menu-item animate-dropdown">
-                        <a title="Hỗ trợ nhanh chóng" href="track-your-order.html">Hỗ trợ nhanh chóng</a>
+                        <a title="Hỗ trợ nhanh chóng" href="#">Hỗ trợ nhanh chóng</a>
                     </li>
                     <li class="menu-item animate-dropdown">
-                        <a title="Không thu phụ phí" href="contact-v2.html">Không thu phụ phí</a>
+                        <a title="Không thu phụ phí" href="#">Không thu phụ phí</a>
                     </li>
                 </ul>
             </div>
@@ -117,6 +117,10 @@
                                 <li class="menu-item animate-dropdown {{ request()->routeIs('home') ? 'active' : '' }}">
                                     <a title="about us" href="{{ route('home') }}">Trang chủ</a>
                                 </li>
+                                 <li
+                                    class="menu-item animate-dropdown {{ request()->routeIs('client.product.index') ? 'active' : '' }}">
+                                    <a title="Super deals" href="{{ route('client.product.index') }}">Sản phẩm</a>
+                                </li>
                                 <li
                                     class="menu-item animate-dropdown {{ request()->routeIs('client.about.about') ? 'active' : '' }}">
                                     <a title="about us" href="{{ route('client.about.about') }}">Về chúng tôi</a>
@@ -125,10 +129,7 @@
                                     class="menu-item animate-dropdown {{ request()->routeIs('contact') ? 'active' : '' }}">
                                     <a title="Headphones Sale" href="{{ route('contact') }}">Liên hệ</a>
                                 </li>
-                                <li
-                                    class="menu-item animate-dropdown {{ request()->routeIs('client.product.index') ? 'active' : '' }}">
-                                    <a title="Super deals" href="{{ route('client.product.index') }}">Sản phẩm</a>
-                                </li>
+                               
                                 <li class="menu-item animate-dropdown {{ request()->routeIs('blog') ? 'active' : '' }}">
                                     <a title="Headphones Sale" href="{{ route('blog') }}">Blog</a>
                                 </li>
