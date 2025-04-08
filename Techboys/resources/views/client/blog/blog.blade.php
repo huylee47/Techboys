@@ -468,7 +468,7 @@
         </div>
         {{-- Modal ChatBot --}}
         <div id="bot-chat-icon" class="bot-real-time-icon">
-            <img src="{{ url('') }}/admin/assets/images/config/{{ $config->favicon }}" alt="" width="40px">
+            <img src="{{ url('') }}/admin/assets/images/config/{{ $config->favicon }}" alt="" width="30px">
             <div id="chat-title" class="chat-title">
                 Cần trợ giúp, chat cùng Techboys AI ngay
             </div>
@@ -523,7 +523,7 @@
                                 <div class="footer-widgets">
                                     <div class="row">
                                         <!-- Cột 1: Các danh mục -->
-                                        <div class="col-md-4">
+                                        <div class="col-md-3">
                                             <aside class="widget clearfix">
                                                 <div class="body">
                                                     <h4 class="widget-title">Các danh mục</h4>
@@ -566,7 +566,7 @@
                                         </div>
 
                                         <!-- Cột 3: Địa chỉ -->
-                                        <div class="col-md-4 text-end">
+                                        <div class="col-md-5 ">
                                             <aside class="widget clearfix">
                                                 <div class="body">
                                                     <h4 class="widget-title">
@@ -579,6 +579,7 @@
                                                 </div>
                                             </aside>
                                         </div>
+                                        
                                     </div>
                                 </div>
 
