@@ -366,12 +366,13 @@ $(document).ready(function() {
                             
                             $variantSelect.append(
                                 `<option value="${variant.id}" 
-                                  data-price="${variant.price}" 
+                                  data-price="${variant.discounted_price}" 
                                   data-stock="${variant.stock}"
                                   data-name="${variantName}">
-                                    ${variantName} (${new Intl.NumberFormat().format(variant.price)}đ)
+                                    ${variantName} (${new Intl.NumberFormat().format(variant.discounted_price)}đ)
                                 </option>`
                             );
+                            console.log(variant.discounted_price);
                         });
                         
                         // Hiển thị container biến thể
@@ -604,11 +605,11 @@ $(document).ready(function() {
         return false;
     }
 
-        // if (!$('#userId').val()) {
-        //     e.preventDefault();
-        //     alert('Vui lòng chọn khách hàng');
-        //     return false;
-        // }
+        if (!$('#userId').val()) {
+            e.preventDefault();
+            alert('Vui lòng chọn khách hàng');
+            return false;
+        }
         
         if (selectedProducts.length === 0) {
             e.preventDefault();
