@@ -200,6 +200,8 @@ Route::post('/logout', [UserController::class, 'logout'])->name('admin.logout');
             Route::get('/create', [BillController::class, 'create'])->name('admin.bill.create');
             Route::post('/store', [BillController::class, 'store'])->name('admin.bill.store');
             Route::get('/get-variants', [BillController::class, 'getVariants'])->name('admin.product.getVariants');
+            Route::get('/get-districts/{province_id}', [BillController::class, 'getDistricts'])->name('admin.bill.getDistricts');
+            Route::get('/get-wards/{district_id}', [BillController::class, 'getWards'])->name('admin.bill.getWards');
         });
 
         Route::prefix('/blogs')->group(function () {
