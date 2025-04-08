@@ -235,11 +235,11 @@
                                         <p></p>
                                     @else
                                         <footer class="section-footer">
-                                            <nav class="custom-slick-pagination">
-                                                <a class="slider-prev left" href="#"
+                                            <nav class="custom-slick-pagination d-flex justify-content-center align-items-center">
+                                                <a class="slider-prev left mx-3" href="#"
                                                     data-target="#sale-with-timer-carousel .products">
                                                     <i class="tm tm-arrow-left"></i>Trước đó</a>
-                                                <a class="slider-next right" href="#"
+                                                <a class="slider-next right mx-3" href="#"
                                                     data-target="#sale-with-timer-carousel .products">Xem tiếp<i
                                                         class="tm tm-arrow-right"></i></a>
                                             </nav>
@@ -360,7 +360,7 @@
                             <!-- .section-header -->
                             <div class="product-categories-1 product-categories-carousel" data-ride="tm-slick-carousel"
                                 data-wrap=".products"
-                                data-slick="{&quot;slidesToShow&quot;:5,&quot;slidesToScroll&quot;:1,&quot;dots&quot;:false,&quot;arrows&quot;:true,&quot;prevArrow&quot;:&quot;&lt;a href=\&quot;#\&quot;&gt;&lt;i class=\&quot;tm tm-arrow-left\&quot;&gt;&lt;\/i&gt;&lt;\/a&gt;&quot;,&quot;nextArrow&quot;:&quot;&lt;a href=\&quot;#\&quot;&gt;&lt;i class=\&quot;tm tm-arrow-right\&quot;&gt;&lt;\/i&gt;&lt;\/a&gt;&quot;,&quot;appendArrows&quot;:&quot;#categories-carousel-1 .custom-slick-nav&quot;,&quot;responsive&quot;:[{&quot;breakpoint&quot;:1200,&quot;settings&quot;:{&quot;slidesToShow&quot;:2,&quot;slidesToScroll&quot;:2}},{&quot;breakpoint&quot;:1400,&quot;settings&quot;:{&quot;slidesToShow&quot;:4,&quot;slidesToScroll&quot;:4}}]}">
+                                data-slick="{&quot;slidesToShow&quot;:5,&quot;slidesToScroll&quot;:1,&quot;dots&quot;:false,&quot;arrows&quot;:true,&quot;prevArrow&quot;:&quot;&lt;a href=\&quot;#\&quot;&gt;&lt;i class=\&quot;tm tm-arrow-left\&quot;&gt;&lt;\/i&gt;&quot;,&quot;nextArrow&quot;:&quot;&lt;a href=\&quot;#\&quot;&gt;&lt;i class=\&quot;tm tm-arrow-right\&quot;&gt;&lt;\/i&gt;&quot;,&quot;appendArrows&quot;:&quot;#categories-carousel-1 .custom-slick-nav&quot;,&quot;responsive&quot;:[{&quot;breakpoint&quot;:1200,&quot;settings&quot;:{&quot;slidesToShow&quot;:2,&quot;slidesToScroll&quot;:2}},{&quot;breakpoint&quot;:1400,&quot;settings&quot;:{&quot;slidesToShow&quot;:4,&quot;slidesToScroll&quot;:4}}]}">
                                 <div class="woocommerce columns-5">
                                     <div class="products">
                                         @foreach ($categories as $category)
@@ -423,12 +423,12 @@
                                                                                 100)
                                                                     : null;
                                                             @endphp
-                                                            <div class="landscape-product-card product">
+                                                            <div class="landscape-product-card product" style="height: 350px;">
 
                                                                 <div class="media">
                                                                     <a class="woocommerce-LoopProduct-link"
                                                                         href="{{ route('client.product.show', ['slug' => $HeadPhoneProduct->slug]) }}">
-                                                                        <img class="wp-post-image"
+                                                                        <img class="wp-post-image" style="height: 200px; object-fit: cover;"
                                                                             src="{{ url('') }}/admin/assets/images/product/{{ $HeadPhoneProduct->img }}"
                                                                             alt="{{ $HeadPhoneProduct->name }}">
                                                                     </a>
@@ -457,13 +457,10 @@
                                                                             <h2 class="woocommerce-loop-product__title">
                                                                                 {{ $HeadPhoneProduct->name }}
                                                                             </h2>
-                                                                            <div class="ribbon green-label">
-                                                                            </div>
-                                                                            <div class="techmarket-product-rating">
 
-                                                                                br
+                                                                            <div class="techmarket-product-rating">
                                                                                 <span
-                                                                                    class="review-count">({{ $HeadPhoneProduct->purchases }})</span>
+                                                                                    class="review-count">Đã bán ({{ $HeadPhoneProduct->purchases }})</span>
                                                                             </div>
                                                                             <!-- .techmarket-product-rating -->
                                                                         </a>
@@ -479,15 +476,10 @@
                                                                 <!-- .media -->
                                                             </div>
                                                         @endforeach
-
-
-                                                        <!-- .woocommerce-LoopProduct-link -->
-
                                                         <!-- .woocommerce-LoopProduct-link -->
                                                     </div>
                                                     <!-- .products -->
                                                 </div>
-
                                                 <!-- .woocommerce -->
                                             </div>
                                             <!-- .container-fluid -->
@@ -504,12 +496,9 @@
                         <section class="section-hot-new-arrivals section-products-carousel-tabs techmarket-tabs">
                             <div class="section-products-carousel-tabs-wrap">
                                 <header class="section-header">
-                                    <h2 class="section-title">Sản phẩm bán chạy</h2>
-                                    <ul role="tablist" class="nav justify-content-end">
-                                        <li class="nav-item"><a class="nav-link active" href="#tab-59f89f08825d50"
-                                                data-toggle="tab">Top 20</a></li>
-                                    </ul>
+                                    <h2 class="section-title">Sản phẩm bán chạy</h2>  
                                 </header>
+                                <br>
                                 <!-- .section-header -->
                                 <div class="tab-content">
                                     <div id="tab-59f89f08825d50" class="tab-pane active" role="tabpanel">
@@ -572,7 +561,7 @@
                         <div class="banners">
                             <div class="row">
                                 <div class="banner banner-long text-in-right">
-                                    <a href="shop.html">
+                                    <a href="{{ route('client.product.index') }}">
                                         <div style="background-size: cover; background-position: center center; background-image: url( admin/assets/images/banner/image.png ); height: 290px;"
                                             class="banner-bg">
                                             {{-- <div class="caption">
@@ -592,7 +581,7 @@
                                 </div>
                                 <!-- /.banner -->
                                 <div class="banner banner-short text-in-left">
-                                    <a href="shop.html">
+                                    <a href="{{ route('client.product.index') }}">
                                         <div style="background-size: cover; background-position: center center; background-image: url( admin/assets/images/banner/image1.png); height: 290px; width: 290px"
                                             class="banner-bg">
                                             {{-- <div class="caption">
