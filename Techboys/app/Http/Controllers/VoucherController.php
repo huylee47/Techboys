@@ -132,7 +132,7 @@ class VoucherController extends Controller
     public function update(Request $request)
     {
         $request->validate([
-            'code' => 'required|max:255|unique:vouchers,code',
+            'code' => 'required|max:255',
             'name' => 'required|max:255',
             'min_price' => 'required|nullable|numeric|min:0',
             'max_discount' => 'required|nullable|numeric|min:0',
@@ -144,7 +144,6 @@ class VoucherController extends Controller
         ], [
             'code.required' => 'Vui lòng nhập mã voucher.',
             'code.max' => 'Mã voucher không được vượt quá 255 ký tự.',
-            'code.unique' => 'Mã voucher này đã tồn tại. Vui lòng nhập mã khác.',
             'name.required' => 'Vui lòng nhập tên voucher.',
             'name.max' => 'Tên voucher không được vượt quá 255 ký tự.',
             'min_price.min' => 'Giá tối thiểu phải là một số dương.',
