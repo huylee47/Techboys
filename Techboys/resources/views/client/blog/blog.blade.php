@@ -370,7 +370,7 @@
             <div class="col-full">
                 <div class="row">
                     <nav class="woocommerce-breadcrumb">
-                        <a href="home-v1.html">Home</a>
+                        <a href="home-v1.html">Trang chủ</a>
                         <span class="delimiter">
                             <i class="fa fa-angle-right"></i>
                         </span>
@@ -383,7 +383,7 @@
                                 <article class="post format-image hentry">
                                     <div class="media-attachment">
                                         <div class="post-thumbnail">
-                                            <a href="blog-single.html">
+                                            <a href="{{ route('DetailBlog', $blog->slug) }}">
                                                 <img width="460" height="244" alt=""
                                                     class="wp-post-image"
                                                     src="{{ url('admin/assets/images/blog') . '/' . $blog->image }}">
@@ -394,11 +394,11 @@
                                     <div class="content-body">
                                         <header class="entry-header">
                                             <h1 class="entry-title">
-                                                <a rel="bookmark" href="blog-single.html">{{ $blog->title }}</a>
+                                                <a rel="bookmark" href="{{ route('DetailBlog', $blog->slug) }}">{{ $blog->title }}</a>
                                             </h1>
                                             <div class="entry-meta">
                                                 <span class="posted-on">
-                                                    <a rel="bookmark" href="blog-single.html">
+                                                    <a rel="bookmark" href="{{ route('DetailBlog', $blog->slug) }}">
                                                         <time datetime="2017-03-23T08:06:09+00:00"
                                                             class="entry-date published">{{ $blog->published_at }}</time>
                                                     </a>
