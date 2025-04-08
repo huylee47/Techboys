@@ -66,7 +66,7 @@
                                                 name="min_price" placeholder="Nhập giá" value="{{ old('min_price') }}">
                                         </div>
                                         <div class="col-md-6 mb-3">
-                                            <label for="description">Giá tối đa để áp dụng voucher</label>
+                                            <label for="description">Giá giảm tối đar</label>
                                             <input type="number" class="form-control" id="max_discount" aria-describedby=""
                                                 name="max_discount" placeholder="Nhập giá"
                                                 value="{{ old('max_discount') }}">
