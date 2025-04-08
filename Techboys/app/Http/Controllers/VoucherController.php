@@ -32,7 +32,7 @@ class VoucherController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'code' => 'required|max:255',
+            'code' => 'required|max:255|unique:vouchers,code',
             'name' => 'required|max:255',
             'min_price' => 'required|nullable|numeric|min:0',
             'max_discount' => 'required|nullable|numeric|min:0',
@@ -42,51 +42,51 @@ class VoucherController extends Controller
             'discount_percent' => 'nullable|numeric|min:0|max:100',
             'discount_amount' => 'nullable|numeric|min:0',
         ], [
-            'code.required' => 'Vui lòng nhập code.',
-            'code.max' => 'Code không được vượt quá 255 ký tự.',
-            'code.unique' => 'Code này đã tồn tại. Vui lòng nhập code khác.',
-            'name.required' => 'Vui lòng nhập tên.',
-            'name.max' => 'Tên không được vượt quá 255 ký tự.',
+            'code.required' => 'Vui lòng nhập mã voucher.',
+            'code.max' => 'Mã voucher không được vượt quá 255 ký tự.',
+            'code.unique' => 'Mã voucher này đã tồn tại. Vui lòng nhập mã khác.',
+            'name.required' => 'Vui lòng nhập tên voucher.',
+            'name.max' => 'Tên voucher không được vượt quá 255 ký tự.',
             'min_price.min' => 'Giá tối thiểu phải là một số dương.',
             'min_price.required' => 'Vui lòng nhập giá tối thiểu.',
-            'max_discount.min' => 'Giá tối đa phải là một số dương.',
-            'max_discount.required' => 'Vui lòng nhập giá tối đa.',
-            'max_discount.after' => 'Giá tối đa phải lớn hơn hoặc bằng giá tối thiểu.',
+            'max_discount.min' => 'Giá giảm tối đa phải là một số dương.',
+            'max_discount.required' => 'Vui lòng nhập giá giảm tối đa.',
+            'max_discount.after' => 'Giá giảm tối đa phải lớn hơn hoặc bằng giá tối thiểu.',
             'start_date.required' => 'Vui lòng chọn ngày bắt đầu.',
             'start_date.date' => 'Ngày bắt đầu phải là ngày hợp lệ.',
             'end_date.required' => 'Vui lòng chọn ngày kết thúc.',
             'end_date.date' => 'Ngày kết thúc phải là ngày hợp lệ.',
             'end_date.after' => 'Ngày kết thúc phải sau ngày bắt đầu.',
             'quantity.required' => 'Vui lòng nhập số lượng.',
-            'quantity.numeric' => 'Số lượng phải là số.',
+            'quantity.numeric' => 'Số lượng phải là một số.',
             'quantity.min' => 'Số lượng phải ít nhất là 1.',
             'discount_percent.min' => 'Giảm(%) phải là một số dương.',
-            'discount_percent.max' => 'Giảm(%) phải là nhỏ hơn 100.',
-            'discount_amount.min' => 'Giảm(Đ) phải là một số dương.'
+            'discount_percent.max' => 'Giảm(%) phải nhỏ hơn hoặc bằng 100.',
+            'discount_amount.min' => 'Giảm(VNĐ) phải là một số dương.'
         ]);
 
         if (empty($request->discount_percent) && empty($request->discount_amount)) {
             return redirect()->back()
-                ->withErrors(['error' => 'Bạn phải điền ít nhất một trong hai trường: giảm(%) hoặc giảm(Đ)'])
+                ->withErrors(['error' => 'Bạn phải điền ít nhất một trong hai trường: giảm(%) hoặc giảm(VNĐ).'])
                 ->withInput();
         }
 
         if (!empty($request->discount_percent) && !empty($request->discount_amount)) {
             return redirect()->back()
-                ->withErrors(['error' => 'Bạn chỉ được điền một trong hai trường: giảm(%) hoặc giảm(Đ)'])
+                ->withErrors(['error' => 'Bạn chỉ được điền một trong hai trường: giảm(%) hoặc giảm(VNĐ).'])
                 ->withInput();
         }
 
         if (!empty($request->discount_percent)) {
             if (($request->min_price) > ($request->max_discount)) {
                 return redirect()->back()
-                    ->withErrors(['error' => 'Giá tối thiểu phải nhỏ hơn giá tối đa.'])
+                    ->withErrors(['error' => 'Giá tối thiểu phải nhỏ hơn giá giảm tối đa.'])
                     ->withInput();
             }
         } else {
             if (!empty($request->max_discount)) {
                 return redirect()->back()
-                    ->withErrors(['error' => 'Không được nhập Giá giảm tối đa khi đã nhập Giảm(VNĐ).'])
+                    ->withErrors(['error' => 'Không được nhập giá giảm tối đa khi đã nhập giảm(VNĐ).'])
                     ->withInput();
             }
         }
@@ -132,7 +132,7 @@ class VoucherController extends Controller
     public function update(Request $request)
     {
         $request->validate([
-            'code' => 'required|max:255',
+            'code' => 'required|max:255|unique:vouchers,code',
             'name' => 'required|max:255',
             'min_price' => 'required|nullable|numeric|min:0',
             'max_discount' => 'required|nullable|numeric|min:0',
@@ -142,51 +142,51 @@ class VoucherController extends Controller
             'discount_percent' => 'nullable|numeric|min:0|max:100',
             'discount_amount' => 'nullable|numeric|min:0',
         ], [
-            'code.required' => 'Vui lòng nhập code.',
-            'code.max' => 'Code không được vượt quá 255 ký tự.',
-            'code.unique' => 'Code này đã tồn tại. Vui lòng nhập code khác.',
-            'name.required' => 'Vui lòng nhập tên.',
-            'name.max' => 'Tên không được vượt quá 255 ký tự.',
+            'code.required' => 'Vui lòng nhập mã voucher.',
+            'code.max' => 'Mã voucher không được vượt quá 255 ký tự.',
+            'code.unique' => 'Mã voucher này đã tồn tại. Vui lòng nhập mã khác.',
+            'name.required' => 'Vui lòng nhập tên voucher.',
+            'name.max' => 'Tên voucher không được vượt quá 255 ký tự.',
             'min_price.min' => 'Giá tối thiểu phải là một số dương.',
             'min_price.required' => 'Vui lòng nhập giá tối thiểu.',
-            'max_discount.min' => 'Giá tối đa phải là một số dương.',
-            'max_discount.required' => 'Vui lòng nhập giá tối đa.',
-            'max_discount.after' => 'Giá tối đa phải lớn hơn hoặc bằng giá tối thiểu.',
+            'max_discount.min' => 'Giá giảm tối đa phải là một số dương.',
+            'max_discount.required' => 'Vui lòng nhập giá giảm tối đa.',
+            'max_discount.after' => 'Giá giảm tối đa phải lớn hơn hoặc bằng giá tối thiểu.',
             'start_date.required' => 'Vui lòng chọn ngày bắt đầu.',
             'start_date.date' => 'Ngày bắt đầu phải là ngày hợp lệ.',
             'end_date.required' => 'Vui lòng chọn ngày kết thúc.',
             'end_date.date' => 'Ngày kết thúc phải là ngày hợp lệ.',
             'end_date.after' => 'Ngày kết thúc phải sau ngày bắt đầu.',
             'quantity.required' => 'Vui lòng nhập số lượng.',
-            'quantity.numeric' => 'Số lượng phải là số.',
+            'quantity.numeric' => 'Số lượng phải là một số.',
             'quantity.min' => 'Số lượng phải ít nhất là 1.',
             'discount_percent.min' => 'Giảm(%) phải là một số dương.',
-            'discount_percent.max' => 'Giảm(%) phải là nhỏ hơn 100.',
-            'discount_amount.min' => 'Giảm(Đ) phải là một số dương.'
+            'discount_percent.max' => 'Giảm(%) phải nhỏ hơn hoặc bằng 100.',
+            'discount_amount.min' => 'Giảm(VNĐ) phải là một số dương.'
         ]);
 
         if (empty($request->discount_percent) && empty($request->discount_amount)) {
             return redirect()->back()
-                ->withErrors(['error' => 'Bạn phải điền ít nhất một trong hai trường: giảm(%) hoặc giảm(Đ)'])
+                ->withErrors(['error' => 'Bạn phải điền ít nhất một trong hai trường: giảm(%) hoặc giảm(VNĐ).'])
                 ->withInput();
         }
 
         if (!empty($request->discount_percent) && !empty($request->discount_amount)) {
             return redirect()->back()
-                ->withErrors(['error' => 'Bạn chỉ được điền một trong hai trường: giảm(%) hoặc giảm(Đ)'])
+                ->withErrors(['error' => 'Bạn chỉ được điền một trong hai trường: giảm(%) hoặc giảm(VNĐ).'])
                 ->withInput();
         }
 
         if (!empty($request->discount_percent)) {
             if (($request->min_price) > ($request->max_discount)) {
                 return redirect()->back()
-                    ->withErrors(['error' => 'Giá tối thiểu phải nhỏ hơn giá tối đa.'])
+                    ->withErrors(['error' => 'Giá tối thiểu phải nhỏ hơn giá giảm tối đa.'])
                     ->withInput();
             }
         } else {
             if (!empty($request->max_discount)) {
                 return redirect()->back()
-                    ->withErrors(['error' => 'Không được nhập Giá giảm tối đa khi giảm(%) để trống.'])
+                    ->withErrors(['error' => 'Không được nhập giá giảm tối đa khi đã nhập giảm(VNĐ).'])
                     ->withInput();
             }
         }
