@@ -76,10 +76,19 @@ class VoucherController extends Controller
                 ->withErrors(['error' => 'Bạn chỉ được điền một trong hai trường: giảm(%) hoặc giảm(Đ)'])
                 ->withInput();
         }
-        if(($request->min_price) > ($request->max_discount)){
-            return redirect()->back()
-                ->withErrors(['error' => 'Giá tối thiểu phải nhỏ hơn giá tối đa.'])
-                ->withInput();
+
+        if (!empty($request->discount_percent)) {
+            if (($request->min_price) > ($request->max_discount)) {
+                return redirect()->back()
+                    ->withErrors(['error' => 'Giá tối thiểu phải nhỏ hơn giá tối đa.'])
+                    ->withInput();
+            }
+        } else {
+            if (!empty($request->max_discount)) {
+                return redirect()->back()
+                    ->withErrors(['error' => 'Không được nhập Giá giảm tối đa khi đã nhập Giảm(VNĐ).'])
+                    ->withInput();
+            }
         }
 
         Voucher::create([
@@ -167,11 +176,21 @@ class VoucherController extends Controller
                 ->withErrors(['error' => 'Bạn chỉ được điền một trong hai trường: giảm(%) hoặc giảm(Đ)'])
                 ->withInput();
         }
-        if(($request->min_price) > ($request->max_discount)){
-            return redirect()->back()
-                ->withErrors(['error' => 'Giá tối thiểu phải nhỏ hơn giá tối đa.'])
-                ->withInput();
+
+        if (!empty($request->discount_percent)) {
+            if (($request->min_price) > ($request->max_discount)) {
+                return redirect()->back()
+                    ->withErrors(['error' => 'Giá tối thiểu phải nhỏ hơn giá tối đa.'])
+                    ->withInput();
+            }
+        } else {
+            if (!empty($request->max_discount)) {
+                return redirect()->back()
+                    ->withErrors(['error' => 'Không được nhập Giá giảm tối đa khi giảm(%) để trống.'])
+                    ->withInput();
+            }
         }
+
         Voucher::find($request->id)->update([
             'code' => $request->code,
             'name' => $request->name,
