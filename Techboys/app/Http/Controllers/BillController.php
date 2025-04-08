@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\BillRequest;
+use App\Models\Attributes;
 use App\Models\AttributesValue;
 use App\Models\Bill;
 use App\Models\BillDetails;
@@ -54,7 +55,6 @@ class BillController extends Controller
         return view('admin.bill.create', compact('users', 'products', 'vouchers'));
     }
 
- 
     public function store(Request $request)
     {
         DB::beginTransaction();
@@ -74,7 +74,7 @@ class BillController extends Controller
                 'products.*.variant_id' => 'nullable|exists:product_variants,id',
                 'products.*.quantity' => 'required|integer|min:1',
                 'products.*.price' => 'required|numeric|min:0',
-                'payment_method' => 'required|in:cod,bank,vnpay', // Keep as string for form
+                'payment_method' => 'required|in:cod,bank,vnpay', 
                 'fee_shipping' => 'nullable|numeric|min:0',
                 'note' => 'nullable|string',
             ]);
@@ -94,16 +94,24 @@ class BillController extends Controller
 
             $total = $subtotal + $shippingFee;
 
+            $loggedInAdminId = auth()->id();
+            $userId = $validated['user_id'];
+            // $cartId = session()->getId(); /
+
+            $orderId = now()->format('Ymd') . ("U" . $userId) . rand(10, 99);
+
             $bill = Bill::create([
-                'user_id' => $validated['user_id'],
+                'order_id' => $orderId,
+                'user_id' => $userId ?? $loggedInAdminId,
                 'full_name' => $validated['full_name'],
                 'phone' => $validated['phone'],
                 'email' => $validated['email'] ?? null,
                 'address' => $validated['address'],
                 'total' => $total,
-                'payment_method' => $paymentMethodValue,
+                'payment_method' => 0,
+                'payment_status' => 1,
                 'fee_shipping' => $shippingFee,
-                'status_id' => 1,
+                'status_id' => 3,
                 'note' => $validated['note'] ?? null,
                 'province_id' => $validated['province_id'],
                 'district_id' => $validated['district_id'],
@@ -131,7 +139,7 @@ class BillController extends Controller
                 ->with('error', 'Lỗi khi tạo đơn hàng: ' . $e->getMessage());
         }
     }
-    
+
     public function getVariants(Request $request)
     {
         $request->validate([
@@ -141,21 +149,63 @@ class BillController extends Controller
         $product = Product::find($request->product_id);
         $variants = ProductVariant::where('product_id', $request->product_id)->get();
 
-        return response()->json([
-            'product' => [
-                'base_price' => $product->base_price,
-                'base_stock' => $product->base_stock
-            ],
-            'variants' => $variants->map(function ($variant) {
+        $attributeValues = AttributesValue::all()->keyBy('id');
+        $attributes = Attributes::all()->keyBy('id'); // Lấy tên Attribute
+
+        $groupedAttributes = [];
+
+        if ($variants->isNotEmpty()) {
+            $formattedVariants = $variants->map(function ($variant) use ($attributeValues, $attributes, &$groupedAttributes) {
+                $attributesData = json_decode($variant->attribute_values, true);
+
+                $formattedAttributes = collect($attributesData)->mapWithKeys(function ($attrValueId, $attrName) use ($attributeValues, $attributes, &$groupedAttributes) {
+                    $attributeValue = $attributeValues[$attrValueId]->value ?? 'Không xác định';
+                    $attributeId = $attributeValues[$attrValueId]->attribute_id ?? null;
+                    $attributeName = $attributes[$attributeId]->name ?? $attrName;
+
+                    // Gom nhóm các thuộc tính để trả về danh sách các attribute
+                    $groupedAttributes[$attributeName]['id'] = $attributeId;
+                    $groupedAttributes[$attributeName]['values'][] = [
+                        'id' => $attrValueId,
+                        'value' => $attributeValue
+                    ];
+
+                    return [$attributeName => [
+                        'id' => $attrValueId,
+                        'value' => $attributeValue
+                    ]];
+                });
+
                 return [
                     'id' => $variant->id,
-                    'attribute_values' => $variant->attribute_values,
+                    'attributes' => $formattedAttributes,
                     'price' => $variant->price,
-                    'stock' => $variant->stock
+                    'stock' => $variant->stock,
+                    'discounted_price' => $variant->discounted_price
                 ];
-            })
-        ]);
+            });
+
+            return response()->json([
+                'product' => [
+                    'base_price' => $product->base_price,
+                    'base_stock' => $product->base_stock
+                ],
+                'variants' => $formattedVariants,
+                'attributes' => collect($groupedAttributes)->map(function ($attr, $name) {
+                    return [
+                        'id' => $attr['id'],
+                        'name' => $name,
+                        'values' => $attr['values']
+                    ];
+                })->values()
+            ]); 
+        }
+
+        return response()->json([
+            'message' => 'No variants found for this product.'
+        ], 404);
     }
+
 
     // Cập nhật giỏ hàng khi người dùng thay đổi lựa chọn sản phẩm hoặc biến thể
     public function updateCart(Request $request)
