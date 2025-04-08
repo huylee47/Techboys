@@ -22,7 +22,6 @@ use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
-use App\Service\AddressService;
 
 class BillController extends Controller
 {
@@ -31,7 +30,6 @@ class BillController extends Controller
     //     $bills = Bill::orderByDesc('created_at')->paginate(10);
     //     return view('admin.bill.index', compact('bills'));
     // }
-    private $addressService;
     public function index(Request $request)
     {
         $query = Bill::query();
@@ -52,11 +50,11 @@ class BillController extends Controller
         $vouchers = Voucher::where('end_date', '>', now())
             ->orWhereNull('end_date')
             ->get();
-        $provinces = ProvinceGHN::all();
 
-        return view('admin.bill.create', compact('users', 'products', 'vouchers', 'provinces'));
+        return view('admin.bill.create', compact('users', 'products', 'vouchers'));
     }
 
+ 
     public function store(Request $request)
     {
         DB::beginTransaction();
@@ -68,9 +66,9 @@ class BillController extends Controller
                 'phone' => 'required|string|max:20',
                 'email' => 'nullable|email',
                 'address' => 'required|string',
-                'province_id' => 'required|exists:provinces,province_id', 
-                'district_id' => 'required|exists:districts,district_id', 
-                'ward_code' => 'required|exists:wards_ghns,code', 
+                'province_id' => 'required|exists:province_ghns,province_id',
+                'district_id' => 'required|exists:district_ghns,district_id',
+                'ward_code' => 'required|exists:ward_ghns,code',
                 'products' => 'required|array|min:1',
                 'products.*.product_id' => 'required|exists:products,id',
                 'products.*.variant_id' => 'nullable|exists:product_variants,id',
@@ -81,7 +79,6 @@ class BillController extends Controller
                 'note' => 'nullable|string',
             ]);
 
-            // Ánh xạ giá trị chuỗi sang số nguyên for database
             $paymentMethodMap = [
                 'cod' => 1,
                 'bank' => 2,
@@ -158,15 +155,6 @@ class BillController extends Controller
                 ];
             })
         ]);
-    }
-
-    public function getDistricts($province_id)
-    {
-        return $this->addressService->getDistricts($province_id);
-    }
-    public function getWards($district_id)
-    {
-        return $this->addressService->getWards($district_id);
     }
 
     // Cập nhật giỏ hàng khi người dùng thay đổi lựa chọn sản phẩm hoặc biến thể
