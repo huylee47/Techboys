@@ -197,13 +197,17 @@ class BillController extends Controller
                         'name' => $name,
                         'values' => $attr['values']
                     ];
-                })->values()
+                })->values(),
+                'has_variants' => true
             ]); 
         }
-
         return response()->json([
-            'message' => 'No variants found for this product.'
-        ], 404);
+            'product' => [
+                'base_price' => $product->base_price,
+                'base_stock' => $product->base_stock
+            ],
+            'has_variants' => false
+        ]);
     }
 
 
