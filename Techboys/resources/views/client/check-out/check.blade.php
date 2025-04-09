@@ -221,6 +221,7 @@
                                                             <th>Phí vận chuyển </th>
                                                             <td>
                                                                 <p id="shipping-fee">0</p>
+                                                                <input type="hidden"  name="fee_shipping">
                                                             </td>
                                                         </tr>
                                                         <tr class="order-total">
@@ -416,7 +417,7 @@
                                 $('#final-total').text(
                                     new Intl.NumberFormat('vi-VN').format(finalTotal) + ' ₫'
                                 );
-
+                                $('input[name="fee_shipping"]').val(data.shippingFee);
                                 $('#final-total-wrapper').fadeIn();
                             }
                         },
