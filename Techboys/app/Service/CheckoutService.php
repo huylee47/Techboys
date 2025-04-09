@@ -93,8 +93,9 @@ class CheckoutService
 
         $cartItems = $this->cartService->getCartItems();
         $totals = $this->cartPriceService->calculateCartTotals($cartItems);
+        
+        $billData = [            
 
-        $billData = [
             'id' => $tempBillId,
             'user_id' => $userId ?? null,
             'full_name' => $request->full_name,
@@ -106,9 +107,10 @@ class CheckoutService
             'ward_code' => $request->ward_code,
             'payment_method' => $request->payment_method,
             'payment_status' => 0,
+            'fee_shipping' => (int)$request->fee_shipping,
             'status_id' => 1,
             'cart_items' => $cartItems,
-            'total' => $totals['total']
+            'total' => $totals['total'] + (int)$request->fee_shipping,
         ];
 
         $redisKey = $userId ? 'temp_bill_' . $userId : 'temp_bill_session_' . $sessionId;
