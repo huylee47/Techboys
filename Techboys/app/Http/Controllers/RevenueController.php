@@ -71,6 +71,7 @@ class RevenueController extends Controller
     
         $filteredRevenue = Bill::whereBetween('created_at', [$startDate, $endDate])
             ->where('payment_status', 1)
+            ->where('status_id', 4)
             ->selectRaw('DATE(created_at) as date, SUM(total) as revenue')
             ->groupBy('date')
             ->orderBy('date')
@@ -85,7 +86,8 @@ class RevenueController extends Controller
     
         $bestSellingProducts = BillDetails::whereHas('bill', function($query) use ($startDate, $endDate) {
             $query->whereBetween('created_at', [$startDate, $endDate])
-                ->where('payment_status', 1);
+                ->where('payment_status', 1)
+                ->where('status_id', 4);
         })
         ->select('product_id')
         ->selectRaw('SUM(quantity) as total_sold')
