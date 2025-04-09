@@ -32,7 +32,7 @@ class VoucherController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'code' => 'required|max:255',
+            'code' => 'required|max:255|unique:vouchers,code',
             'name' => 'required|max:255',
             'min_price' => 'required|nullable|numeric|min:0',
             'max_discount' => 'required|nullable|numeric|min:0',
@@ -76,7 +76,8 @@ class VoucherController extends Controller
                 ->withErrors(['error' => 'Bạn chỉ được điền một trong hai trường: giảm(%) hoặc giảm(Đ)'])
                 ->withInput();
         }
-        if(($request->min_price) > ($request->max_discount)){
+
+        if (!empty($request->discount_percent) && ($request->min_price > $request->max_discount)) {
             return redirect()->back()
                 ->withErrors(['error' => 'Giá tối thiểu phải nhỏ hơn giá tối đa.'])
                 ->withInput();
@@ -123,7 +124,7 @@ class VoucherController extends Controller
     public function update(Request $request)
     {
         $request->validate([
-            'code' => 'required|max:255',
+            'code' => 'required|max:255|unique:vouchers,code,' . $request->id,
             'name' => 'required|max:255',
             'min_price' => 'required|nullable|numeric|min:0',
             'max_discount' => 'required|nullable|numeric|min:0',
@@ -167,11 +168,13 @@ class VoucherController extends Controller
                 ->withErrors(['error' => 'Bạn chỉ được điền một trong hai trường: giảm(%) hoặc giảm(Đ)'])
                 ->withInput();
         }
-        if(($request->min_price) > ($request->max_discount)){
+
+        if (!empty($request->discount_percent) && ($request->min_price > $request->max_discount)) {
             return redirect()->back()
                 ->withErrors(['error' => 'Giá tối thiểu phải nhỏ hơn giá tối đa.'])
                 ->withInput();
         }
+
         Voucher::find($request->id)->update([
             'code' => $request->code,
             'name' => $request->name,

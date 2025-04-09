@@ -9,16 +9,11 @@
     <meta name="user-id" content="{{ auth()->check() ? auth()->user()->id : 0 }}">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
     <title>@yield('title')</title>
-    <link rel="stylesheet" type="text/css" href="{{ url('') }}/home/assets/css/bootstrap.min.css"
-        media="all" />
-    <link rel="stylesheet" type="text/css" href="{{ url('') }}/home/assets/css/font-awesome.min.css"
-        media="all" />
-    <link rel="stylesheet" type="text/css" href="{{ url('') }}/home/assets/css/bootstrap-grid.min.css"
-        media="all" />
-    <link rel="stylesheet" type="text/css" href="{{ url('') }}/home/assets/css/bootstrap-reboot.min.css"
-        media="all" />
-    <link rel="stylesheet" type="text/css" href="{{ url('') }}/home/assets/css/font-techmarket.css"
-        media="all" />
+    <link rel="stylesheet" type="text/css" href="{{ url('') }}/home/assets/css/bootstrap.min.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="{{ url('') }}/home/assets/css/font-awesome.min.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="{{ url('') }}/home/assets/css/bootstrap-grid.min.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="{{ url('') }}/home/assets/css/bootstrap-reboot.min.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="{{ url('') }}/home/assets/css/font-techmarket.css" media="all" />
     <link rel="stylesheet" type="text/css" href="{{ url('') }}/home/assets/css/slick.css" media="all" />
     <link rel="stylesheet" type="text/css" href="{{ url('') }}/home/assets/css/techmarket-font-awesome.css"
         media="all" />
@@ -74,7 +69,7 @@
             float: left;
         }
 
-        .menu-item.active > a {
+        .menu-item.active>a {
             color: red !important;
             font-weight: bold;
         }
@@ -89,18 +84,18 @@
             <div class="col-full">
                 <ul id="menu-top-bar-left" class="nav justify-content-center">
                     <li class="menu-item animate-dropdown">
-                        <a title="Techboys - Always free delivery" href="contact-v1.html">Techboys &#8211; Lựa chọn tối
+                        <a title="Techboys - Always free delivery" href="#">Techboys &#8211; Lựa chọn tối
                             ưu</a>
                     </li>
                     <li class="menu-item animate-dropdown">
-                        <a title="Sản phẩm chất lượng" href="{{ route('client.product.index') }}">Sản phẩm chất
+                        <a title="Sản phẩm chất lượng" href="#">Sản phẩm chất
                             lượng</a>
                     </li>
                     <li class="menu-item animate-dropdown">
-                        <a title="Hỗ trợ nhanh chóng" href="track-your-order.html">Hỗ trợ nhanh chóng</a>
+                        <a title="Hỗ trợ nhanh chóng" href="#">Hỗ trợ nhanh chóng</a>
                     </li>
                     <li class="menu-item animate-dropdown">
-                        <a title="Không thu phụ phí" href="contact-v2.html">Không thu phụ phí</a>
+                        <a title="Không thu phụ phí" href="#">Không thu phụ phí</a>
                     </li>
                 </ul>
             </div>
@@ -112,32 +107,34 @@
                     <div class="row">
                         <div class="site-branding">
                             <a href="{{ route('home') }}" class="custom-logo-link" rel="home">
-                                <img src="{{ url('') }}/admin/assets/images/config/{{ $config->logo }}"
-                                    alt="">
+                                <img src="{{ url('') }}/admin/assets/images/config/{{ $config->logo }}" alt="">
                             </a>
                         </div>
                         <!-- ====================== End Header Logo ====================== -->
                         <nav id="primary-navigation" class="primary-navigation" aria-label="Primary Navigation"
                             data-nav="flex-menu">
                             <ul id="menu-primary-menu" class="nav yamm">
-                                <li class="menu-item animate-dropdown {{ request()->routeIs('client.home.home') ? 'active' : '' }}">
+                                <li class="menu-item animate-dropdown {{ request()->routeIs('home') ? 'active' : '' }}">
                                     <a title="about us" href="{{ route('home') }}">Trang chủ</a>
                                 </li>
-                                <li class="menu-item animate-dropdown {{ request()->routeIs('client.about.about') ? 'active' : '' }}">
-                                    <a title="about us" href="{{ route('client.about.about') }}">Về chúng tôi</a>
-                                </li>
-                                <li class="menu-item animate-dropdown {{ request()->routeIs('contact') ? 'active' : '' }}">
-                                    <a title="Headphones Sale" href="{{ route('contact') }}">Liên hệ</a>
-                                </li>
-                                <li class="menu-item animate-dropdown {{ request()->routeIs('client.product.index') ? 'active' : '' }}">
+                                 <li
+                                    class="menu-item animate-dropdown {{ request()->routeIs('client.product.index') ? 'active' : '' }}">
                                     <a title="Super deals" href="{{ route('client.product.index') }}">Sản phẩm</a>
                                 </li>
+                                <li
+                                    class="menu-item animate-dropdown {{ request()->routeIs('client.about.about') ? 'active' : '' }}">
+                                    <a title="about us" href="{{ route('client.about.about') }}">Về chúng tôi</a>
+                                </li>
+                                <li
+                                    class="menu-item animate-dropdown {{ request()->routeIs('contact') ? 'active' : '' }}">
+                                    <a title="Headphones Sale" href="{{ route('contact') }}">Liên hệ</a>
+                                </li>
+                               
                                 <li class="menu-item animate-dropdown {{ request()->routeIs('blog') ? 'active' : '' }}">
                                     <a title="Headphones Sale" href="{{ route('blog') }}">Blog</a>
                                 </li>
                                 <li class="techmarket-flex-more-menu-item dropdown">
-                                    <a title="..." href="#" data-toggle="dropdown"
-                                        class="dropdown-toggle">...</a>
+                                    <a title="..." href="#" data-toggle="dropdown" class="dropdown-toggle">...</a>
                                     <ul class="overflow-items dropdown-menu"></ul>
                                 </li>
                             </ul>
@@ -171,19 +168,19 @@
                                                 <li>
                                                     <a href="{{ route('client.edit') }}">
                                                         <img src="{{ asset('home/assets/images/profile.png') }}">
-                                                        <p>Thông tin</p>
+                                                        <p style="margin-top: 3px">Thông tin</p>
                                                     </a>
                                                 </li>
                                                 <li>
                                                     <a href="{{ route('client.changePassword') }}">
                                                         <img src="{{ asset('home/assets/images/setting.png') }}">
-                                                        <p>Đổi mật khẩu</p>
+                                                        <p style="margin-top: 3px">Đổi mật khẩu</p>
                                                     </a>
                                                 </li>
                                                 <li>
                                                     <a href="{{ route('client.logout') }}">
                                                         <img src="{{ asset('home/assets/images/logout.png') }}">
-                                                        <p>Đăng xuất</p>
+                                                        <p style="margin-top: 3px">Đăng xuất</p>
                                                     </a>
                                                 </li>
                                             </ul>
@@ -217,9 +214,8 @@
 
                     <form class="navbar-search" method="get" action="{{ route('client.product.search') }}">
                         <div class="input-group">
-                            <input type="text" id="search"
-                                class="form-control search-field product-search-field" name="s"
-                                placeholder="Nhập sản phẩm muốn tìm" required />
+                            <input type="text" id="search" class="form-control search-field product-search-field"
+                                name="s" placeholder="Nhập sản phẩm muốn tìm" required />
                             <div class="input-group-btn input-group-append">
                                 <button type="submit" class="btn btn-primary">
                                     <i class="fa fa-search"></i>
@@ -231,8 +227,7 @@
                     <!-- .header-wishlist -->
                     <ul id="site-header-cart" class="site-header-cart menu">
                         <li class="animate-dropdown dropdown ">
-                            <a class="cart-contents" href="" data-toggle="dropdown"
-                                title="Kiểm tra giỏ hàng của bạn">
+                            <a class="cart-contents" href="{{ route('client.cart.index') }}">
                                 <i class="tm tm-shopping-bag"></i>
                                 <span class="count">{{ $cartCount }}</span>
                                 <span class="amount">
@@ -286,8 +281,7 @@
                                         points="132.04 2.09 127.09 7.88 130.78 7.88 130.78 8.69 126.4 8.69 124.42 11 123.29 11 132.65 0 133.04 0 133.04 11 132.04 11 132.04 2.09" />
                                     <polygon class="cls-1"
                                         points="120.97 2.04 116.98 6.15 116.98 6.19 116.97 6.17 116.95 6.19 116.95 6.15 112.97 2.04 112.97 11 112 11 112 0 112.32 0 116.97 4.8 121.62 0 121.94 0 121.94 11 120.97 11 120.97 2.04" />
-                                    <ellipse class="cls-3" cx="116.3" cy="22.81" rx="5.15"
-                                        ry="5.18" />
+                                    <ellipse class="cls-3" cx="116.3" cy="22.81" rx="5.15" ry="5.18" />
                                     <rect class="cls-2" x="99.13" y="0.44" width="5.87" height="27.12" />
                                     <polygon class="cls-1"
                                         points="85.94 27.56 79.92 27.56 79.92 0.44 85.94 0.44 85.94 16.86 96.35 16.86 96.35 21.84 85.94 21.84 85.94 27.56" />
@@ -327,8 +321,7 @@
                     <!-- /.row -->
                     <div class="techmarket-sticky-wrap">
                         <div class="row">
-                            <nav id="handheld-navigation" class="handheld-navigation"
-                                aria-label="Handheld Navigation">
+                            <nav id="handheld-navigation" class="handheld-navigation" aria-label="Handheld Navigation">
                                 <button class="btn navbar-toggler" type="button">
                                     <i class="tm tm-departments-thin"></i>
                                     <span>Menu</span>
@@ -338,9 +331,9 @@
                                     <ul id="menu-departments-menu-1" class="nav">
                                         <li class="highlight menu-item animate-dropdown">
                                             @foreach ($categories as $category)
-                                        <li class="highlight menu-item animate-dropdown">
-                                            <a title="{{ $category->name }}"
-                                                href="{{ route('client.product.index') }}">{{ $category->name }}</a>
+                                                <li class="highlight menu-item animate-dropdown">
+                                                    <a title="{{ $category->name }}"
+                                                        href="{{ route('client.product.index') }}">{{ $category->name }}</a>
                                             @endforeach
                                     </ul>
                                 </div>
@@ -354,8 +347,8 @@
                                         <label class="screen-reader-text"
                                             for="woocommerce-product-search-field-0">Search for:</label>
                                         <input type="search" id="woocommerce-product-search-field-0"
-                                            class="search-field" placeholder="Nhập sản phẩm muốn tìm kiếm"
-                                            value="" name="s" />
+                                            class="search-field" placeholder="Nhập sản phẩm muốn tìm kiếm" value=""
+                                            name="s" />
                                         <input type="submit" value="Search" />
                                         <input type="hidden" name="post_type" value="product" />
                                     </form>
@@ -402,17 +395,18 @@
                 Cần trợ giúp, chat cùng Techboys AI ngay
             </div>
         </div>
-    
+
         <div id="bot-chat-modal" class="bot-real-time-box">
             <div class="bot-real-time-title">
                 <span>Chat với Techboys AI</span>
                 <span id="bot-close-chat" class="bot-real-time-close">&times;</span>
-                
+
             </div>
             <div id="bot-chat-messages" class="bot-real-time-content">
             </div>
             <div class="bot-real-time-sent-content">
-                <input type="text" id="bot-chat-input" placeholder="Nhập tin nhắn..." onkeydown="if(event.key === 'Enter') sendMessage()" />
+                <input type="text" id="bot-chat-input" placeholder="Nhập tin nhắn..."
+                    onkeydown="if(event.key === 'Enter') sendMessage()" />
                 <button id="bot-send-message" onclick="sendMessage()">Gửi</button>
             </div>
         </div>
@@ -516,11 +510,11 @@
         </footer>
     </div>
     <script>
-        document.querySelector('.user-menu-toggle').addEventListener('click', function() {
+        document.querySelector('.user-menu-toggle').addEventListener('click', function () {
             var dropdownMenu = document.getElementById('userDropdownMenu');
             dropdownMenu.style.display = dropdownMenu.style.display === 'block' ? 'none' : 'block';
         });
-        window.addEventListener('click', function(e) {
+        window.addEventListener('click', function (e) {
             if (!e.target.matches('.user-menu-toggle') && !e.target.closest('.user-menu')) {
                 document.getElementById('userDropdownMenu').style.display = 'none';
             }
@@ -554,8 +548,8 @@
         var guestId = "{{ session()->getId() }}";
         var userRole = document.querySelector('meta[name="user-role"]').getAttribute("content");
 
-        $(document).ready(function() {
-            $('#search').on('keyup', function() {
+        $(document).ready(function () {
+            $('#search').on('keyup', function () {
                 let query = $(this).val();
                 if (query.length > 0) {
                     $.ajax({
@@ -564,7 +558,7 @@
                         data: {
                             s: query
                         },
-                        success: function(data) {
+                        success: function (data) {
                             let dropdown = $('#search-dropdown');
                             dropdown.empty(); // Xóa dữ liệu cũ
 
@@ -591,7 +585,7 @@
                 }
             });
 
-            $(document).click(function(e) {
+            $(document).click(function (e) {
                 if (!$(e.target).closest("#search-form").length) {
                     $("#search-dropdown").hide();
                 }
@@ -599,7 +593,7 @@
         });
     </script>
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
+        document.addEventListener("DOMContentLoaded", function () {
             // Pusher.logToConsole = true;
             console.log("Lắng nghe kênh: admin.blocked." + currentUserId);
 
@@ -617,12 +611,12 @@
         });
     </script>
     <script>
-        $('#bot-chat-icon').click(function() {
+        $('#bot-chat-icon').click(function () {
             $('#bot-chat-modal').toggle();
             $(this).hide();
         });
 
-        $('#bot-close-chat').click(function() {
+        $('#bot-close-chat').click(function () {
             $('#bot-chat-modal').hide();
             $('#bot-chat-icon').show();
         });
@@ -638,7 +632,7 @@
 
             chatMessages.append('<div class="bot-user-message">' + prompt + '</div>');
 
-            $.post('/ask-gemini', { _token: '{{ csrf_token() }}', prompt: prompt }, function(data) {
+            $.post('/ask-gemini', { _token: '{{ csrf_token() }}', prompt: prompt }, function (data) {
                 chatMessages.append('<div class="bot-bot-message">' + data.response + '</div>');
                 chatMessages.scrollTop(chatMessages[0].scrollHeight);
                 console.log(data.response);
