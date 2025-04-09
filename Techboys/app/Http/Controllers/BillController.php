@@ -74,17 +74,17 @@ class BillController extends Controller
                 'products.*.variant_id' => 'nullable|exists:product_variants,id',
                 'products.*.quantity' => 'required|integer|min:1',
                 'products.*.price' => 'required|numeric|min:0',
-                'payment_method' => 'required|in:cod,bank,vnpay', 
+                'payment_method' => 'required|in:cod,direct', 
                 'fee_shipping' => 'nullable|numeric|min:0',
                 'note' => 'nullable|string',
             ]);
 
             $paymentMethodMap = [
-                'cod' => 1,
-                'bank' => 2,
-                'vnpay' => 3,
+                'cod' => 1, 
+                'direct' => 2, 
             ];
             $paymentMethodValue = $paymentMethodMap[$validated['payment_method']] ?? 1;
+            $paymentStatus = ($validated['payment_method'] === 'direct') ? 1 : 0;
 
             $shippingFee = $validated['fee_shipping'] ?? 0;
 
@@ -109,7 +109,7 @@ class BillController extends Controller
                 'address' => $validated['address'],
                 'total' => $total,
                 'payment_method' => 0,
-                'payment_status' => 1,
+                'payment_status' => $paymentStatus,
                 'fee_shipping' => $shippingFee,
                 'status_id' => 3,
                 'note' => $validated['note'] ?? null,
