@@ -15,6 +15,7 @@ use App\Models\ProvinceGHN;
 use App\Models\User;
 use App\Models\Status;
 use App\Models\Voucher;
+use App\Service\VoucherService as ServiceVoucherService;
 use Kjmtrue\VietnamZone\Models\Province;
 use Kjmtrue\VietnamZone\Models\District;
 use Kjmtrue\VietnamZone\Models\Ward;
@@ -26,6 +27,13 @@ use Illuminate\Support\Facades\Auth;
 
 class BillController extends Controller
 {
+
+    protected $voucherService;
+
+    public function __construct(ServiceVoucherService $voucherService)
+    {
+        $this->voucherService = $voucherService;
+    }
     // public function index()
     // {
     //     $bills = Bill::orderByDesc('created_at')->paginate(10);
@@ -74,31 +82,48 @@ class BillController extends Controller
                 'products.*.variant_id' => 'nullable|exists:product_variants,id',
                 'products.*.quantity' => 'required|integer|min:1',
                 'products.*.price' => 'required|numeric|min:0',
-                'payment_method' => 'required|in:cod,direct', 
-                'fee_shipping' => 'nullable|numeric|min:0',
+                'payment_method' => 'required|in:cod,direct',
+                'shipping_fee' => 'nullable|numeric|min:0',
+                'voucher_code' => 'nullable|string|exists:vouchers,code',
                 'note' => 'nullable|string',
             ]);
 
             $paymentMethodMap = [
-                'cod' => 1, 
-                'direct' => 2, 
+                'cod' => 1,
+                'direct' => 2,
             ];
             $paymentMethodValue = $paymentMethodMap[$validated['payment_method']] ?? 1;
+
             $paymentStatus = ($validated['payment_method'] === 'direct') ? 1 : 0;
 
-            $shippingFee = $validated['fee_shipping'] ?? 0;
+            $shippingFee = $validated['shipping_fee'] ?? 0;
 
             $subtotal = collect($validated['products'])->sum(function ($item) {
                 return $item['price'] * $item['quantity'];
             });
 
-            $total = $subtotal + $shippingFee;
+            $discountAmount = 0;
+            $voucherCode = $validated['voucher_code'] ?? null;
+            $voucher = null;
+
+            // Áp dụng mã giảm giá nếu có
+            if ($voucherCode) {
+                $voucherResult = $this->voucherService->applyVoucher($voucherCode, $subtotal);
+
+                if ($voucherResult['valid']) {
+                    $discountAmount = $voucherResult['discountAmount'];
+                    $voucher = $voucherResult['voucher'];
+                }
+            }
+
+            $total = $subtotal + $shippingFee - $discountAmount;
+
+            dd($total);
 
             $loggedInAdminId = auth()->id();
             $userId = $validated['user_id'];
-            // $cartId = session()->getId(); /
 
-            $orderId = now()->format('Ymd') . ("U" . $userId) . rand(10, 99);
+            $orderId = now()->format('Ymd') . ($userId ? "U" . $userId : "A" . $loggedInAdminId) . rand(10, 99);
 
             $bill = Bill::create([
                 'order_id' => $orderId,
@@ -108,17 +133,18 @@ class BillController extends Controller
                 'email' => $validated['email'] ?? null,
                 'address' => $validated['address'],
                 'total' => $total,
-                'payment_method' => 0,
+                'payment_method' => $paymentMethodValue,
                 'payment_status' => $paymentStatus,
+                'status_id' => ($validated['payment_method'] === 'cod') ? 3 : 4,
+                'voucher_code' => $voucherCode,
+                'discount_amount' => $discountAmount,
                 'fee_shipping' => $shippingFee,
-                'status_id' => 3,
                 'note' => $validated['note'] ?? null,
                 'province_id' => $validated['province_id'],
                 'district_id' => $validated['district_id'],
                 'ward_code' => $validated['ward_code'],
             ]);
 
-            // Create bill details
             foreach ($validated['products'] as $productData) {
                 BillDetails::create([
                     'bill_id' => $bill->id,
@@ -129,54 +155,21 @@ class BillController extends Controller
                 ]);
             }
 
+            if ($voucher && $discountAmount > 0) {
+                $voucherModel = Voucher::where('code', $voucher->code)->first();
+                if ($voucherModel && $voucherModel->quantity > 0) {
+                    $voucherModel->decrement('quantity');
+                }
+            }
+
             DB::commit();
 
             return redirect()->route('admin.bill.index')
-                ->with('success', 'Đơn hàng được tạo thành công!');
+                ->with('success', 'Đơn hàng được tạo thành công!' . ($voucher && $discountAmount > 0 ? ' Đã áp dụng mã giảm giá.' : ''));
         } catch (\Exception $e) {
             DB::rollBack();
             return back()->withInput()
                 ->with('error', 'Lỗi khi tạo đơn hàng: ' . $e->getMessage());
-        }
-    }
-
-    public function applyVoucher(Request $request)
-    {
-        $request->validate([
-            'voucher_code' => 'required|string|exists:vouchers,code',
-            'subtotal' => 'required|numeric|min:0',
-        ]);
-
-        $voucherCode = $request->voucher_code;
-        $subtotal = $request->subtotal;
-        $voucher = Voucher::where('code', $voucherCode)->first();
-
-        if ($voucher) {
-            if ($subtotal >= $voucher->min_price) {
-                $discountAmount = 0;
-                if ($voucher->discount_percent !== null) {
-                    $discountAmount = min(($subtotal * $voucher->discount_percent) / 100, $voucher->max_discount);
-                } elseif ($voucher->discount_amount !== null) {
-                    $discountAmount = min($voucher->discount_amount, $voucher->max_discount);
-                }
-
-                return response()->json([
-                    'success' => true,
-                    'message' => 'Mã giảm giá đã được áp dụng!',
-                    'discount_amount' => $discountAmount,
-                    'total_after_discount' => $subtotal - $discountAmount,
-                ]);
-            } else {
-                return response()->json([
-                    'success' => false,
-                    'message' => 'Đơn hàng chưa đạt giá trị tối thiểu để áp dụng mã giảm giá này.',
-                ]);
-            }
-        } else {
-            return response()->json([
-                'success' => false,
-                'message' => 'Mã giảm giá không hợp lệ.',
-            ]);
         }
     }
 
@@ -190,7 +183,7 @@ class BillController extends Controller
         $variants = ProductVariant::where('product_id', $request->product_id)->get();
 
         $attributeValues = AttributesValue::all()->keyBy('id');
-        $attributes = Attributes::all()->keyBy('id'); // Lấy tên Attribute
+        $attributes = Attributes::all()->keyBy('id');
 
         $groupedAttributes = [];
 
@@ -203,7 +196,6 @@ class BillController extends Controller
                     $attributeId = $attributeValues[$attrValueId]->attribute_id ?? null;
                     $attributeName = $attributes[$attributeId]->name ?? $attrName;
 
-                    // Gom nhóm các thuộc tính để trả về danh sách các attribute
                     $groupedAttributes[$attributeName]['id'] = $attributeId;
                     $groupedAttributes[$attributeName]['values'][] = [
                         'id' => $attrValueId,
@@ -239,7 +231,7 @@ class BillController extends Controller
                     ];
                 })->values(),
                 'has_variants' => true
-            ]); 
+            ]);
         }
         return response()->json([
             'product' => [
@@ -250,6 +242,21 @@ class BillController extends Controller
         ]);
     }
 
+    public function applyVoucher(Request $request)
+    {
+        $voucherCode = $request->input('voucher_code');
+        $subtotal = $request->input('subtotal');
+
+        $result = $this->voucherService->applyVoucher($voucherCode, $subtotal);
+
+        return response()->json([
+            'success' => $result['valid'],
+            'message' => $result['message'],
+            'discount_amount' => $result['discountAmount'],
+            'total_after_discount' => $result['newTotal'],
+            'voucher' => $result['voucher'] ?? null
+        ]);
+    }
 
     // Cập nhật giỏ hàng khi người dùng thay đổi lựa chọn sản phẩm hoặc biến thể
     public function updateCart(Request $request)
