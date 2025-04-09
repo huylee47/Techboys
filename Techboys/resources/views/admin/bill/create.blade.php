@@ -219,6 +219,11 @@
                             <div class="form-group">
                                 <label for="voucher_code">Mã giảm giá (Voucher):</label>
                                 <input type="text" class="form-control" id="voucher_code" name="voucher_code">
+                                <div class="input-group-append">
+                                        <button type="button" class="btn btn-outline-secondary" id="applyVoucherBtn">Áp dụng</button>
+                                </div>
+                                <small id="voucher_message" class="form-text text-muted"></small>
+                                <input type="hidden" id="discount_amount_hidden" name="discount_amount" value="0">
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -410,6 +415,108 @@ $(document).ready(function() {
         calculateSubtotal();
     });
 
+    $('#applyVoucherBtn').on('click', function() {
+        const voucherCode = $('#voucher_code').val();
+        const subtotal = calculateCurrentSubtotal(); // Hàm này bạn cần viết
+
+        if (voucherCode) {
+            $.ajax({
+                url: "{{ route('admin.bill.applyVoucher') }}",
+                method: 'POST',
+                data: {
+                    _token: "{{ csrf_token() }}",
+                    voucher_code: voucherCode,
+                    subtotal: subtotal
+                },
+                dataType: 'json',
+                success: function(response) {
+                    $('#voucher_message').removeClass('text-danger text-success');
+                    if (response.success) {
+                        $('#voucher_message').addClass('text-success').text(response.message);
+                        $('#discount_amount_hidden').val(response.discount_amount);
+                        updateTotalAmountWithDiscount(response.total_after_discount);
+                        updateProductPricesWithDiscount(response.discount_amount / calculateTotalQuantity()); // Chia đều mức giảm (ví dụ)
+                    } else {
+                        $('#voucher_message').addClass('text-danger').text(response.message);
+                        $('#discount_amount_hidden').val(0);
+                        updateTotalAmountWithDiscount(subtotal);
+                        resetProductPrices();
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error('Lỗi áp dụng voucher:', error);
+                    $('#voucher_message').removeClass('text-success').addClass('text-danger').text('Có lỗi xảy ra khi áp dụng mã giảm giá.');
+                    $('#discount_amount_hidden').val(0);
+                    updateTotalAmountWithDiscount(subtotal);
+                    resetProductPrices();
+                }
+            });
+        } else {
+            $('#voucher_message').removeClass('text-success text-danger').text('');
+            $('#discount_amount_hidden').val(0);
+            updateTotalAmountWithDiscount(subtotal);
+            resetProductPrices();
+        }
+    });
+
+    function calculateCurrentSubtotal() {
+        let total = 0;
+        $('#productsTable tbody tr').each(function() {
+            const price = parseFloat($(this).find('td:eq(2)').text().replace(' đ', '').replace(/,/g, '')) || 0;
+            const quantity = parseInt($(this).find('td:eq(3)').text()) || 0;
+            total += price * quantity;
+        });
+        return total;
+    }
+
+    function calculateTotalQuantity() {
+        let totalQuantity = 0;
+        $('#productsTable tbody tr').each(function() {
+            totalQuantity += parseInt($(this).find('td:eq(3)').text()) || 0;
+        });
+        return totalQuantity || 1; // Tránh chia cho 0
+    }
+
+    function updateProductPricesWithDiscount(discountPerItem) {
+    $('#productsTable tbody tr').each(function() {
+        const originalPrice = parseFloat($(this).data('base-price'));
+        const quantity = parseInt($(this).find('td:eq(3)').text()) || 0;
+        const newPrice = Math.max(0, originalPrice - discountPerItem); // Đảm bảo giá không âm
+
+        if (!isNaN(newPrice)) {
+            $(this).find('td:eq(2)').text(newPrice.toLocaleString() + ' đ');
+            $(this).find('td:eq(4)').text((newPrice * quantity).toLocaleString() + ' đ');
+        } else {
+            console.error("Lỗi: Giá mới không phải là số", originalPrice, discountPerItem);
+        }
+    });
+    recalculateTotalAmount();
+}
+
+    function resetProductPrices() {
+        $('#productsTable tbody tr').each(function() {
+            const originalPrice = parseFloat($(this).data('base-price'));
+            $(this).find('td:eq(2)').text(originalPrice.toLocaleString() + ' đ');
+            const quantity = parseInt($(this).find('td:eq(3)').text()) || 0;
+            $(this).find('td:eq(4)').text((originalPrice * quantity).toLocaleString() + ' đ');
+        });
+        recalculateTotalAmount();
+    }
+
+    function updateTotalAmountWithDiscount(newTotal) {
+        $('#totalAmount').text(newTotal.toLocaleString() + ' đ');
+    }
+
+    function recalculateTotalAmount() {
+        let total = 0;
+        $('#productsTable tbody tr').each(function() {
+            const price = parseFloat($(this).find('td:eq(2)').text().replace(' đ', '').replace(/,/g, '')) || 0;
+            const quantity = parseInt($(this).find('td:eq(3)').text()) || 0;
+            total += price * quantity;
+        });
+        $('#totalAmount').text(total.toLocaleString() + ' đ');
+    }
+
     // Calculate subtotal
     function calculateSubtotal() {
         const price = parseFloat($('#priceValue').val()) || 0;
@@ -515,25 +622,25 @@ $(document).ready(function() {
 
         let total = 0;
 
-        selectedProducts.forEach((product, index) => {
-            const subtotal = product.price * product.quantity;
-            total += subtotal;
+    selectedProducts.forEach((product, index) => {
+        const subtotal = product.price * product.quantity;
+        total += subtotal;
 
-            $tbody.append(`
-                <tr>
-                    <td>${product.productName}</td>
-                    <td>${product.variantName}</td>
-                    <td>${product.price.toLocaleString()} đ</td>
-                    <td>${product.quantity}</td>
-                    <td>${subtotal.toLocaleString()} đ</td>
-                    <td class="text-center">
-                        <button type="button" class="btn btn-sm btn-danger remove-product" data-index="${index}">
-                            <i class="fas fa-trash"></i>
-                        </button>
-                    </td>
-                </tr>
-            `);
-        });
+        $tbody.append(`
+            <tr data-base-price="${product.price}">
+                <td>${product.productName}</td>
+                <td>${product.variantName}</td>
+                <td>${product.price.toLocaleString()} đ</td>
+                <td>${product.quantity}</td>
+                <td>${subtotal.toLocaleString()} đ</td>
+                <td class="text-center">
+                    <button type="button" class="btn btn-sm btn-danger remove-product" data-index="${index}">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </td>
+            </tr>
+        `);
+    });
 
         // Update total amount (excluding shipping fee)
         $('#totalAmount').text(total.toLocaleString() + ' đ');
