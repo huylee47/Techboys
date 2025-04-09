@@ -1,0 +1,249 @@
+body {
+    background: #eef2ff;
+    min-height: 100vh;
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-image: 
+        radial-gradient(circle at 50% 0%, rgba(99, 102, 241, 0.03), transparent 50%),
+        radial-gradient(circle at 0% 50%, rgba(79, 70, 229, 0.03), transparent 50%),
+        radial-gradient(circle at 100% 50%, rgba(124, 58, 237, 0.03), transparent 50%);
+}
+
+.login-container {
+    min-height: 100vh;
+    padding: 40px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: 
+        linear-gradient(135deg, rgba(255, 255, 255, 0.5) 0%, rgba(238, 242, 255, 0.5) 100%),
+        radial-gradient(circle at top right, rgba(99, 102, 241, 0.05), transparent 50%),
+        radial-gradient(circle at bottom left, rgba(124, 58, 237, 0.05), transparent 50%);
+    backdrop-filter: blur(8px);
+}
+
+.login-wrapper {
+    display: flex;
+    backdrop-filter: blur(8px);
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 24px;
+    box-shadow: 
+        0 20px 40px rgba(79, 70, 229, 0.1),
+        0 0 0 1px rgba(79, 70, 229, 0.05);
+    max-width: 1100px;
+    width: 100%;
+    margin: 0 40px;
+    overflow: hidden;
+}
+
+.login-image {
+    flex: 1.2;
+    background: linear-gradient(135deg, rgba(15, 23, 42, 0.95) 0%, rgba(30, 41, 59, 0.95) 100%),
+        url('https://images.unsplash.com/photo-1623126908029-58cb08a2b272?ixlib=rb-4.0.3') center/cover;
+    padding: 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: white;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.login-image::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('https://images.unsplash.com/photo-1623126908029-58cb08a2b272?ixlib=rb-4.0.3') center/cover;
+    opacity: 0.1;
+}
+
+.login-image h2 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    position: relative;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.login-image p {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    position: relative;
+    opacity: 0.9;
+}
+
+.login-box {
+    flex: 1;
+    padding: 80px 60px;
+    background: linear-gradient(145deg, #ffffff, #f8fafc);
+    box-shadow: none;
+    margin: 0;
+    border-radius: 24px;
+}
+
+.login-title {
+    color: #1a1a1a;
+    font-size: 2.5rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 50px;
+    letter-spacing: -0.5px;
+}
+
+.form-group {
+    position: relative;
+    margin-bottom: 30px;
+    padding: 0 20px;
+}
+
+.form-control {
+    width: calc(100% - 60px);
+    border-radius: 16px;
+    padding: 20px 28px;
+    border: 2px solid #e2e8f0;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    background: #ffffff;
+    color: #1e293b;
+    font-weight: 500;
+}
+
+.form-control:focus {
+    border-color: #4f46e5;
+    background: #ffffff;
+    box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.1);
+    outline: none;
+    transform: translateY(-1px);
+}
+
+.form-control::placeholder {
+    color: #94a3b8;
+    font-weight: 400;
+}
+
+.form-control-icon {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 20px;
+    color: #6366f1;
+    opacity: 0.8;
+    font-size: 1.2rem;
+    pointer-events: none;
+    transition: all 0.3s ease;
+}
+
+.form-control:focus + .form-control-icon {
+    color: #4f46e5;
+    opacity: 1;
+    transform: translateY(-50%) scale(1.1);
+}
+
+.btn-login {
+    width: calc(100% - 40px);
+    padding: 20px;
+    border-radius: 16px;
+    background: linear-gradient(135deg, #4f46e5 0%, #6366f1 50%, #7c3aed 100%);
+    border: none;
+    color: white;
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin: 15px 20px 30px;
+    transition: all 0.4s ease;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 10px 20px -10px rgba(79, 70, 229, 0.5);
+}
+
+.btn-login:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 15px 25px -10px rgba(79, 70, 229, 0.6);
+    background: linear-gradient(135deg, #4338ca 0%, #4f46e5 50%, #6d28d9 100%);
+}
+
+.btn-login:active {
+    transform: translateY(0);
+    box-shadow: 0 5px 15px -5px rgba(79, 70, 229, 0.4);
+}
+
+.alert {
+    border-radius: 12px;
+    margin-bottom: 25px;
+    padding: 15px;
+    font-size: 0.95rem;
+}
+
+.alert-success {
+    background: #ecfdf5;
+    color: #065f46;
+    border: 1px solid #a7f3d0;
+}
+
+.alert-danger {
+    background: #fef2f2;
+    color: #991b1b;
+    border: 1px solid #fecaca;
+}
+
+.auth-links {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.auth-links p {
+    margin: 10px 0;
+    color: #4b5563;
+}
+
+.auth-links a {
+    color: #4f46e5;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+.auth-links a:hover {
+    color: #7c3aed;
+    text-decoration: underline;
+}
+
+.auth-links a.home-link {
+    display: inline-block;
+    color: #4f46e5;
+    padding: 8px 20px;
+    border: 2px solid #4f46e5;
+    border-radius: 12px;
+    margin-top: 10px;
+    transition: all 0.3s ease;
+}
+
+.auth-links a.home-link:hover {
+    background: #4f46e5;
+    color: white;
+    text-decoration: none;
+    transform: translateY(-1px);
+}
+
+@media (max-width: 768px) {
+    .login-wrapper {
+        flex-direction: column;
+        margin: 20px;
+    }
+
+    .login-image {
+        padding: 40px 20px;
+    }
+
+    .login-box {
+        padding: 40px 20px;
+    }
+
+    .login-title {
+        font-size: 2rem;
+        margin-bottom: 30px;
+    }
+}
