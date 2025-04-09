@@ -510,7 +510,7 @@
                                                     <div class="products">
                                                         @foreach ($hotproducts as $hp)
                                                             <div class="product">
-                                                                <a href="single-product-fullwidth.html"
+                                                                <a href="{{ route('client.product.show', ['slug' => $hp->slug]) }}"
                                                                     class="woocommerce-LoopProduct-link">
                                                                     <img src="{{ url('') }}/admin/assets/images/product/{{ $hp->img }}"
                                                                         width="100%" class="fixed-image"
