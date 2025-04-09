@@ -166,11 +166,13 @@
                                 <thead class="bg-light">
                                     <tr>
                                         <th width="25%">Sản phẩm</th>
-                                        <th width="25%">Biến thể</th>
-                                        <th width="15%">Giá</th>
-                                        <th width="10%">SL</th>
-                                        <th width="15%">Thành tiền</th>
-                                        <th width="10%">Thao tác</th>
+    <th width="20%">Biến thể</th>
+    <th width="15%">Giá gốc</th>
+    <th width="10%">SL</th>
+    <th width="15%">Giá đã giảm</th>
+    <th width="15%">Giá được giảm</th>
+    <th width="15%">Thành tiền</th>
+    <th width="10%">Thao tác</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -711,37 +713,42 @@ function resetPricesToOriginal() {
     }
 
     // Render products table
+    // Render products table
     function renderProductsTable() {
-    const $tbody = $('#productsTable tbody');
-    $tbody.empty();
+        const $tbody = $('#productsTable tbody');
+        $tbody.empty();
 
-    let total = 0;
+        let total = 0;
 
-    selectedProducts.forEach((product, index) => {
-        // Sử dụng discountedPrice nếu có, nếu không dùng price
-        const displayPrice = product.discountedPrice || product.price;
-        const displaySubtotal = displayPrice * product.quantity;
-        total += displaySubtotal;
+        selectedProducts.forEach((product, index) => {
+            const originalPrice = product.price;
+            const discountedPrice = product.discountedPrice || originalPrice;
+            const discountAmount = originalPrice - discountedPrice;
+            const displaySubtotal = discountedPrice * product.quantity;
+            total += displaySubtotal;
 
-        $tbody.append(`
-            <tr data-base-price="${product.price}">
-                <td>${product.productName}</td>
-                <td>${product.variantName}</td>
-                <td>${displayPrice.toLocaleString()} đ</td>
-                <td>${product.quantity}</td>
-                <td>${displaySubtotal.toLocaleString()} đ</td>
-                <td class="text-center">
-                    <button type="button" class="btn btn-sm btn-danger remove-product" data-index="${index}">
-                        <i class="fas fa-trash"></i>
-                    </button>
-                </td>
-            </tr>
-        `);
-    });
+            $tbody.append(`
+                <tr data-base-price="${originalPrice}">
+                    <td>${product.productName}</td>
+                    <td>${product.variantName}</td>
+                    <td>${originalPrice.toLocaleString()} đ</td>
+                    <td>${product.quantity}</td>
+                    <td>${discountedPrice.toLocaleString()} đ</td>
+                    <td>${discountAmount > 0 ? discountAmount.toLocaleString() + ' đ' : '0 đ'}</td> <!- Thêm dòng này -->
+                    <td>${displaySubtotal.toLocaleString()} đ</td>
+                    <td class="text-center">
+                        <button type="button" class="btn btn-sm btn-danger remove-product" data-index="${index}">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </td>
+                </tr>
+            `);
+        });
 
-    $('#totalAmount').text(total.toLocaleString() + ' đ');
-    updateHiddenInputs();
-}
+        const formattedTotal = parseInt(total).toLocaleString('vi-VN') + ' đ';
+        $('#totalAmount').text(formattedTotal);
+        updateHiddenInputs();
+    }
 
     // Remove product from table
     $(document).on('click', '.remove-product', function() {
