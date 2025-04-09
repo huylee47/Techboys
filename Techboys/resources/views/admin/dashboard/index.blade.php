@@ -56,7 +56,7 @@
         </header>
 
         <div class="page-heading">
-            <h3>Tổng quan trang web</h3>
+            <h3>Trang tổng quan </h3>
         </div>
         <div class="page-content">
             <section class="row">
