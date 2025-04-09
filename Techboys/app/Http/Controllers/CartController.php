@@ -74,7 +74,7 @@ class CartController extends Controller
             if ($cart->variant_id) {
                 $soldQuantity = BillDetails::where('variant_id', $cart->variant_id)
                     ->whereHas('bill', function ($query) {
-                        $query->where('status_id', 1); // Chỉ lấy hóa đơn đã hoàn thành
+                        $query->where('status_id', 1);
                     })
                     ->sum('quantity');
                 $cart->stock = $cart->product->variant()->where('id', $cart->variant_id)->value('stock') - $soldQuantity;
@@ -103,7 +103,7 @@ class CartController extends Controller
             'total' => $totals['total'],
             'discountAmount' => $totals['discountAmount'],
             'voucher' => $totals['voucher'],
-            'soldQuantity'=>(int)$soldQuantity,
+            'soldQuantity'=>(int)$soldQuantity ?? null,
         ]);
     }
     
