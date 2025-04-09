@@ -260,6 +260,7 @@ $(document).ready(function() {
     // Array to store selected products
     let selectedProducts = [];
     let currentProduct = null;
+    let voucherApplied = false;
 
     // Handle customer selection
     $('#userPhone').on('changed.bs.select', function() {
@@ -404,51 +405,99 @@ $(document).ready(function() {
         calculateSubtotal();
     });
 
-    // Voucher Application
-    $('#applyVoucherBtn').on('click', function() {
-        const voucherCode = $('#voucher_code').val();
-        const subtotal = calculateCurrentSubtotal();
+        // ============================== START VOUCHER ==============================
 
-        if (voucherCode) {
-            $.ajax({
-                url: "{{ route('admin.bill.applyVoucher') }}",
-                method: 'POST',
-                data: {
-                    _token: "{{ csrf_token() }}",
-                    voucher_code: voucherCode,
-                    subtotal: subtotal
-                },
-                dataType: 'json',
-                success: function(response) {
-                    $('#voucher_message').removeClass('text-danger text-success');
-                    if (response.success) {
-                        $('#voucher_message').addClass('text-success').text(response.message);
-                        $('#discount_amount_hidden').val(response.discount_amount);
-                        updateTotalAmountWithDiscount(response.total_after_discount);
-                        updateProductPricesWithDiscount(response.discount_amount / calculateTotalQuantity());
-                    } else {
-                        $('#voucher_message').addClass('text-danger').text(response.message);
-                        $('#discount_amount_hidden').val(0);
-                        updateTotalAmountWithDiscount(subtotal);
-                        resetProductPrices();
-                    }
-                },
-                error: function(xhr, status, error) {
-                    console.error('Lỗi áp dụng voucher:', error);
-                    $('#voucher_message').removeClass('text-success').addClass('text-danger')
-                        .text('Có lỗi xảy ra khi áp dụng mã giảm giá.');
+    $('#applyVoucherBtn').on('click', function() {
+    const voucherCode = $('#voucher_code').val();
+    const subtotal = calculateCurrentSubtotal();
+    let voucherApplied = false;
+    let appliedVoucherCode = null;
+    let currentProduct = null;
+    if (voucherApplied) {
+        alert('Mã giảm giá đã được áp dụng cho đơn hàng này.');
+        return; // Ngăn chặn việc thực hiện AJAX call lần nữa
+    }
+
+    if (voucherCode) {
+        $.ajax({
+            url: "{{ route('admin.bill.applyVoucher') }}",
+            method: 'POST',
+            data: {
+                _token: "{{ csrf_token() }}",
+                voucher_code: voucherCode,
+                subtotal: subtotal
+            },
+            dataType: 'json',
+            success: function(response) {
+                $('#voucher_message').removeClass('text-danger text-success');
+                let currentPriceValue = parseFloat($('#priceValue').val());
+        let discountedPriceValue = currentPriceValue;
+                
+                if (response.success) {
+                    $('#voucher_message').addClass('text-success').text(response.message);
+                    $('#discount_amount_hidden').val(response.discount_amount);
+                    
+                    // Cập nhật giá và tổng tiền sau giảm giá
+                    updatePricesAfterDiscount(response.discount_amount, response.total_after_discount);
+                     voucherApplied = true;
+                     $('#applyVoucherBtn').prop('disabled', true);
+                    $('#voucher_code').prop('readonly', true);
+                } else {
+                    $('#voucher_message').addClass('text-danger').text(response.message);
                     $('#discount_amount_hidden').val(0);
-                    updateTotalAmountWithDiscount(subtotal);
-                    resetProductPrices();
+                    voucherApplied = false;
+                    resetPricesToOriginal();
                 }
-            });
-        } else {
-            $('#voucher_message').removeClass('text-success text-danger').text('');
-            $('#discount_amount_hidden').val(0);
-            updateTotalAmountWithDiscount(subtotal);
-            resetProductPrices();
-        }
+            },
+            error: function(xhr, status, error) {
+                console.error('Lỗi áp dụng voucher:', error);
+                $('#voucher_message').removeClass('text-success').addClass('text-danger')
+                    .text('Có lỗi xảy ra khi áp dụng mã giảm giá.');
+                $('#discount_amount_hidden').val(0);
+                voucherApplied = false;
+                resetPricesToOriginal();
+            }
+        });
+    } else {
+        $('#voucher_message').removeClass('text-success text-danger').text('');
+        $('#discount_amount_hidden').val(0);
+        voucherApplied = false;
+        resetPricesToOriginal();
+    }
+});
+
+function updatePricesAfterDiscount(discountAmount, totalAfterDiscount) {
+    const currentSubtotal = calculateCurrentSubtotal();
+    const discountRatio = discountAmount / currentSubtotal;
+    
+    // Cập nhật giá cho từng sản phẩm trong bảng
+    $('#productsTable tbody tr').each(function() {
+        const originalPrice = parseFloat($(this).data('base-price'));
+        const quantity = parseInt($(this).find('td:eq(3)').text()) || 0;
+        const discountedPrice = originalPrice * (1 - discountRatio);
+        
+        $(this).find('td:eq(2)').text(discountedPrice.toLocaleString() + ' đ');
+        $(this).find('td:eq(4)').text((discountedPrice * quantity).toLocaleString() + ' đ');
     });
+    
+    // Cập nhật tổng tiền
+    $('#totalAmount').text(totalAfterDiscount.toLocaleString() + ' đ');
+}
+
+function resetPricesToOriginal() {
+    // Cập nhật lại giá gốc cho từng sản phẩm
+    $('#productsTable tbody tr').each(function() {
+        const originalPrice = parseFloat($(this).data('base-price'));
+        const quantity = parseInt($(this).find('td:eq(3)').text()) || 0;
+        
+        $(this).find('td:eq(2)').text(originalPrice.toLocaleString() + ' đ');
+        $(this).find('td:eq(4)').text((originalPrice * quantity).toLocaleString() + ' đ');
+    });
+    
+    // Tính lại tổng tiền
+    const newTotal = calculateCurrentSubtotal();
+    $('#totalAmount').text(newTotal.toLocaleString() + ' đ');
+}
 
     // Helper Functions
     function calculateCurrentSubtotal() {
@@ -495,9 +544,32 @@ $(document).ready(function() {
         recalculateTotalAmount();
     }
 
-    function updateTotalAmountWithDiscount(newTotal) {
-        $('#totalAmount').text(newTotal.toLocaleString() + ' đ');
+    function updateTotalAmountWithDiscount(newTotalAfterDiscount) {
+    const currentSubtotal = calculateCurrentSubtotal(); // Lấy tổng tiền sản phẩm hiện tại
+    const totalDiscount = currentSubtotal - newTotalAfterDiscount; // Tính tổng số tiền giảm giá
+
+    if (totalDiscount > 0 && currentSubtotal > 0) {
+        const discountRatio = totalDiscount / currentSubtotal; // Tính tỷ lệ giảm giá trên tổng đơn hàng
+
+        $('#productsTable tbody tr').each(function() {
+            const originalPrice = parseFloat($(this).data('base-price'));
+            const quantity = parseInt($(this).find('td:eq(3)').text()) || 0;
+            const discountedPrice = originalPrice * (1 - discountRatio); // Tính giá đã giảm cho từng sản phẩm
+
+            if (!isNaN(discountedPrice)) {
+                $(this).find('td:eq(2)').text(discountedPrice.toLocaleString() + ' đ'); // Cập nhật giá hiển thị
+                $(this).find('td:eq(4)').text((discountedPrice * quantity).toLocaleString() + ' đ'); // Cập nhật thành tiền hiển thị
+            } else {
+                console.error("Lỗi: Giá đã giảm không phải là số", originalPrice, discountRatio);
+            }
+        });
+    } else {
+        resetProductPrices(); // Nếu không có giảm giá hoặc tổng tiền là 0, reset giá về ban đầu
     }
+
+    // Cập nhật tổng tiền cuối cùng hiển thị ở footer của bảng
+    $('#totalAmount').text(newTotalAfterDiscount.toLocaleString() + ' đ');
+}
 
     function recalculateTotalAmount() {
         let total = 0;
@@ -516,6 +588,7 @@ $(document).ready(function() {
 
         $('#subtotal').val(subtotal.toLocaleString() + ' đ');
     }
+    // ============================== END VOUCHER ==============================
 
     // Handle quantity change
     $('#quantity').on('change', function() {
@@ -612,37 +685,35 @@ $(document).ready(function() {
 
     // Render products table
     function renderProductsTable() {
-        const $tbody = $('#productsTable tbody');
-        $tbody.empty();
+    const $tbody = $('#productsTable tbody');
+    $tbody.empty();
 
-        let total = 0;
+    let total = 0;
 
-        selectedProducts.forEach((product, index) => {
-            const subtotal = product.price * product.quantity;
-            total += subtotal;
+    selectedProducts.forEach((product, index) => {
+        const subtotal = product.price * product.quantity;
+        total += subtotal;
 
-            $tbody.append(`
-                <tr data-base-price="${product.price}">
-                    <td>${product.productName}</td>
-                    <td>${product.variantName}</td>
-                    <td>${product.price.toLocaleString()} đ</td>
-                    <td>${product.quantity}</td>
-                    <td>${subtotal.toLocaleString()} đ</td>
-                    <td class="text-center">
-                        <button type="button" class="btn btn-sm btn-danger remove-product" data-index="${index}">
-                            <i class="fas fa-trash"></i>
-                        </button>
-                    </td>
-                </tr>
-            `);
-        });
+        $tbody.append(`
+            <tr data-base-price="${product.price}">
+                <td>${product.productName}</td>
+                <td>${product.variantName}</td>
+                <td>${product.price.toLocaleString()} đ</td>
+                <td>${product.quantity}</td>
+                <td>${subtotal.toLocaleString()} đ</td>
+                <td class="text-center">
+                    <button type="button" class="btn btn-sm btn-danger remove-product" data-index="${index}">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </td>
+            </tr>
+        `);
+    });
 
-        // Update total amount (excluding shipping fee)
-        $('#totalAmount').text(total.toLocaleString() + ' đ');
-
-        // Add hidden inputs for form submission
-        updateHiddenInputs();
-    }
+    // Update total amount
+    $('#totalAmount').text(total.toLocaleString() + ' đ');
+    updateHiddenInputs();
+}
 
     // Remove product from table
     $(document).on('click', '.remove-product', function() {
