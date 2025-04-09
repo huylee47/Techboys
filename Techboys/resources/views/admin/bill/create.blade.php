@@ -262,6 +262,12 @@ $(document).ready(function() {
     let currentProduct = null;
     let voucherApplied = false;
 
+    let currentDiscount = {
+        applied: false,
+        amount: 0,
+        ratio: 0
+    };
+
     // Handle customer selection
     $('#userPhone').on('changed.bs.select', function() {
         const selectedOption = $(this).find('option:selected');
@@ -410,12 +416,10 @@ $(document).ready(function() {
     $('#applyVoucherBtn').on('click', function() {
     const voucherCode = $('#voucher_code').val();
     const subtotal = calculateCurrentSubtotal();
-    let voucherApplied = false;
-    let appliedVoucherCode = null;
-    let currentProduct = null;
+
     if (voucherApplied) {
         alert('Mã giảm giá đã được áp dụng cho đơn hàng này.');
-        return; // Ngăn chặn việc thực hiện AJAX call lần nữa
+        return;
     }
 
     if (voucherCode) {
@@ -430,41 +434,59 @@ $(document).ready(function() {
             dataType: 'json',
             success: function(response) {
                 $('#voucher_message').removeClass('text-danger text-success');
-                let currentPriceValue = parseFloat($('#priceValue').val());
-        let discountedPriceValue = currentPriceValue;
                 
                 if (response.success) {
                     $('#voucher_message').addClass('text-success').text(response.message);
                     $('#discount_amount_hidden').val(response.discount_amount);
                     
-                    // Cập nhật giá và tổng tiền sau giảm giá
-                    updatePricesAfterDiscount(response.discount_amount, response.total_after_discount);
-                     voucherApplied = true;
-                     $('#applyVoucherBtn').prop('disabled', true);
+                    // Lưu thông tin giảm giá
+                    currentDiscount = {
+                        applied: true,
+                        amount: response.discount_amount,
+                        ratio: response.discount_amount / subtotal
+                    };
+                    
+                    voucherApplied = true;
+                    $('#applyVoucherBtn').prop('disabled', true);
                     $('#voucher_code').prop('readonly', true);
+                    
+                    // Cập nhật lại toàn bộ bảng sản phẩm với giá đã giảm
+                    updateAllProductsWithDiscount();
                 } else {
                     $('#voucher_message').addClass('text-danger').text(response.message);
-                    $('#discount_amount_hidden').val(0);
-                    voucherApplied = false;
-                    resetPricesToOriginal();
+                    resetDiscount();
                 }
             },
-            error: function(xhr, status, error) {
-                console.error('Lỗi áp dụng voucher:', error);
-                $('#voucher_message').removeClass('text-success').addClass('text-danger')
-                    .text('Có lỗi xảy ra khi áp dụng mã giảm giá.');
-                $('#discount_amount_hidden').val(0);
-                voucherApplied = false;
-                resetPricesToOriginal();
+            error: function() {
+                $('#voucher_message').addClass('text-danger').text('Có lỗi xảy ra khi áp dụng mã giảm giá.');
+                resetDiscount();
             }
         });
     } else {
-        $('#voucher_message').removeClass('text-success text-danger').text('');
-        $('#discount_amount_hidden').val(0);
-        voucherApplied = false;
-        resetPricesToOriginal();
+        resetDiscount();
     }
 });
+
+function resetDiscount() {
+    currentDiscount = {
+        applied: false,
+        amount: 0,
+        ratio: 0
+    };
+    $('#discount_amount_hidden').val(0);
+    voucherApplied = false;
+    renderProductsTable();
+}
+
+function updateAllProductsWithDiscount() {
+    if (currentDiscount.applied) {
+        // Cập nhật giá giảm cho tất cả sản phẩm trong selectedProducts
+        selectedProducts.forEach(product => {
+            product.discountedPrice = product.price * (1 - currentDiscount.ratio);
+        });
+    }
+    renderProductsTable();
+}
 
 function updatePricesAfterDiscount(discountAmount, totalAfterDiscount) {
     const currentSubtotal = calculateCurrentSubtotal();
@@ -640,14 +662,19 @@ function resetPricesToOriginal() {
 
         // Create selected product object
         const selectedProduct = {
-            productId: currentProduct.id,
-            productName: currentProduct.name,
-            variantId: variantId || null,
-            variantName: variantName,
-            price: price,
-            quantity: quantity,
-            stock: stock
-        };
+        productId: currentProduct.id,
+        productName: currentProduct.name,
+        variantId: variantId || null,
+        variantName: variantName,
+        price: price,
+        discountedPrice: price, // Ban đầu bằng giá gốc
+        quantity: quantity,
+        stock: stock
+    };
+
+    if (currentDiscount.applied) {
+        selectedProduct.discountedPrice = price * (1 - currentDiscount.ratio);
+    }
 
         // Check if product already exists
         const existingIndex = selectedProducts.findIndex(item =>
@@ -666,8 +693,8 @@ function resetPricesToOriginal() {
         // Refresh products table
         renderProductsTable();
 
-        // Reset product selection form
-        resetProductSelectionForm();
+        // // Reset product selection form
+        // resetProductSelectionForm();
     });
 
     function resetProductSelectionForm() {
@@ -691,16 +718,18 @@ function resetPricesToOriginal() {
     let total = 0;
 
     selectedProducts.forEach((product, index) => {
-        const subtotal = product.price * product.quantity;
-        total += subtotal;
+        // Sử dụng discountedPrice nếu có, nếu không dùng price
+        const displayPrice = product.discountedPrice || product.price;
+        const displaySubtotal = displayPrice * product.quantity;
+        total += displaySubtotal;
 
         $tbody.append(`
             <tr data-base-price="${product.price}">
                 <td>${product.productName}</td>
                 <td>${product.variantName}</td>
-                <td>${product.price.toLocaleString()} đ</td>
+                <td>${displayPrice.toLocaleString()} đ</td>
                 <td>${product.quantity}</td>
-                <td>${subtotal.toLocaleString()} đ</td>
+                <td>${displaySubtotal.toLocaleString()} đ</td>
                 <td class="text-center">
                     <button type="button" class="btn btn-sm btn-danger remove-product" data-index="${index}">
                         <i class="fas fa-trash"></i>
@@ -710,7 +739,6 @@ function resetPricesToOriginal() {
         `);
     });
 
-    // Update total amount
     $('#totalAmount').text(total.toLocaleString() + ' đ');
     updateHiddenInputs();
 }
@@ -724,38 +752,39 @@ function resetPricesToOriginal() {
 
     // Update hidden inputs for form submission
     function updateHiddenInputs() {
-        // Remove old inputs
-        $('input[name^="products["]').remove();
+    $('input[name^="products["]').remove();
 
-        // Add new inputs
-        selectedProducts.forEach((product, index) => {
+    selectedProducts.forEach((product, index) => {
+        // Sử dụng discountedPrice nếu có, nếu không dùng price
+        const finalPrice = product.discountedPrice || product.price;
+
+        $('<input>').attr({
+            type: 'hidden',
+            name: `products[${index}][product_id]`,
+            value: product.productId
+        }).appendTo('form');
+
+        if (product.variantId) {
             $('<input>').attr({
                 type: 'hidden',
-                name: `products[${index}][product_id]`,
-                value: product.productId
+                name: `products[${index}][variant_id]`,
+                value: product.variantId
             }).appendTo('form');
+        }
 
-            if (product.variantId) {
-                $('<input>').attr({
-                    type: 'hidden',
-                    name: `products[${index}][variant_id]`,
-                    value: product.variantId
-                }).appendTo('form');
-            }
+        $('<input>').attr({
+            type: 'hidden',
+            name: `products[${index}][quantity]`,
+            value: product.quantity
+        }).appendTo('form');
 
-            $('<input>').attr({
-                type: 'hidden',
-                name: `products[${index}][quantity]`,
-                value: product.quantity
-            }).appendTo('form');
-
-            $('<input>').attr({
-                type: 'hidden',
-                name: `products[${index}][price]`,
-                value: product.price
-            }).appendTo('form');
-        });
-    }
+        $('<input>').attr({
+            type: 'hidden',
+            name: `products[${index}][price]`,
+            value: finalPrice // Gửi giá đã giảm
+        }).appendTo('form');
+    });
+}
 
     // Handle form submission
     $('form').on('submit', function(e) {
