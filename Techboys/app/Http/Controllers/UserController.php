@@ -143,7 +143,9 @@ class UserController extends Controller
         if ($account->status != 1) {
             return redirect()->back()->with('error', 'Tài khoản của bạn đã bị khóa.');
         }
-    
+        if ($account->role_id != 1 && $account->email_verified_at == null) {
+            return redirect()->back()->with('error', 'Vui lòng kiểm tra email và xác minh tài khoản');
+        }
         Auth::login($account);
     
         $cartId = session()->get('cart_id');
