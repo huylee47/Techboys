@@ -140,6 +140,46 @@ class BillController extends Controller
         }
     }
 
+    public function applyVoucher(Request $request)
+    {
+        $request->validate([
+            'voucher_code' => 'required|string|exists:vouchers,code',
+            'subtotal' => 'required|numeric|min:0',
+        ]);
+
+        $voucherCode = $request->voucher_code;
+        $subtotal = $request->subtotal;
+        $voucher = Voucher::where('code', $voucherCode)->first();
+
+        if ($voucher) {
+            if ($subtotal >= $voucher->min_price) {
+                $discountAmount = 0;
+                if ($voucher->discount_percent !== null) {
+                    $discountAmount = min(($subtotal * $voucher->discount_percent) / 100, $voucher->max_discount);
+                } elseif ($voucher->discount_amount !== null) {
+                    $discountAmount = min($voucher->discount_amount, $voucher->max_discount);
+                }
+
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Mã giảm giá đã được áp dụng!',
+                    'discount_amount' => $discountAmount,
+                    'total_after_discount' => $subtotal - $discountAmount,
+                ]);
+            } else {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Đơn hàng chưa đạt giá trị tối thiểu để áp dụng mã giảm giá này.',
+                ]);
+            }
+        } else {
+            return response()->json([
+                'success' => false,
+                'message' => 'Mã giảm giá không hợp lệ.',
+            ]);
+        }
+    }
+
     public function getVariants(Request $request)
     {
         $request->validate([
