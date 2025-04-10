@@ -202,7 +202,8 @@
                                                     </div>
                                                     <span class="review-count">(0)</span>
                                                 </div>
-                                                <a href="cart.html" class="button add_to_cart_button">Thêm vào giỏ
+                                                <a href="{{ route('client.cart.index') }}"
+                                                    class="button add_to_cart_button">Thêm vào giỏ
                                                     hàng</a>
                                             </div>
                                             <div class="product-featured product">
@@ -227,7 +228,8 @@
                                                     </div>
                                                     <span class="review-count">(0)</span>
                                                 </div>
-                                                <a href="cart.html" class="button add_to_cart_button">Thêm vào giỏ
+                                                <a href="{{ route('client.cart.index') }}"
+                                                    class="button add_to_cart_button">Thêm vào giỏ
                                                     hàng</a>
                                             </div>
                                             <div class="product-featured product">
@@ -252,7 +254,8 @@
                                                     </div>
                                                     <span class="review-count">(0)</span>
                                                 </div>
-                                                <a href="cart.html" class="button add_to_cart_button">Thêm vào giỏ
+                                                <a href="{{ route('client.cart.index') }}"
+                                                    class="button add_to_cart_button">Thêm vào giỏ
                                                     hàng</a>
                                             </div>
                                             <div class="product-featured product">
@@ -277,7 +280,8 @@
                                                     </div>
                                                     <span class="review-count">(0)</span>
                                                 </div>
-                                                <a href="cart.html" class="button add_to_cart_button">Thêm vào giỏ
+                                                <a href="{{ route('client.cart.index') }}"
+                                                    class="button add_to_cart_button">Thêm vào giỏ
                                                     hàng</a>
                                             </div>
                                             <div class="product-featured product">
@@ -302,7 +306,8 @@
                                                     </div>
                                                     <span class="review-count">(0)</span>
                                                 </div>
-                                                <a href="cart.html" class="button add_to_cart_button">Thêm vào giỏ
+                                                <a href="{{ route('client.cart.index') }}"
+                                                    class="button add_to_cart_button">Thêm vào giỏ
                                                     hàng</a>
                                             </div>
                                             <div class="product-featured product">
@@ -327,7 +332,8 @@
                                                     </div>
                                                     <span class="review-count">(0)</span>
                                                 </div>
-                                                <a href="cart.html" class="button add_to_cart_button">Thêm vào giỏ
+                                                <a href="{{ route('client.cart.index') }}"
+                                                    class="button add_to_cart_button">Thêm vào giỏ
                                                     hàng</a>
                                             </div>
                                             <div class="product-featured product">
@@ -352,7 +358,8 @@
                                                     </div>
                                                     <span class="review-count">(0)</span>
                                                 </div>
-                                                <a href="cart.html" class="button add_to_cart_button">Thêm vào giỏ
+                                                <a href="{{ route('client.cart.index') }}"
+                                                    class="button add_to_cart_button">Thêm vào giỏ
                                                     hàng</a>
                                             </div>
                                             <div class="product-featured product">
@@ -377,7 +384,8 @@
                                                     </div>
                                                     <span class="review-count">(0)</span>
                                                 </div>
-                                                <a href="cart.html" class="button add_to_cart_button">Thêm vào giỏ
+                                                <a href="{{ route('client.cart.index') }}"
+                                                    class="button add_to_cart_button">Thêm vào giỏ
                                                     hàng</a>
                                             </div>
                                         </div>

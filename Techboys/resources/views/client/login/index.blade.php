@@ -1,75 +1,71 @@
-@extends('client.layouts.master')
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Login</title>
+</head>
+<link rel="stylesheet" type="text/css" href="{{ url('') }}/home/assets/css/login.css" media="all" />
 
-<style>
-  <style>
-        .alert-success {
-            color: #155724;
-            background-color: #d4edda;
-            border-color: #c3e6cb;
-            padding: 15px;
-            margin-bottom: 20px;
-            border: 1px solid transparent;
-            border-radius: 4px;
-        }
-        .alert-danger {
-            color: #721c24;
-            background-color: #f8d7da;
-            border-color: #f5c6cb;
-            padding: 15px;
-            margin-bottom: 20px;
-            border: 1px solid transparent;
-            border-radius: 4px;
-        }
-    </style>
-</style>
-@section('main')
-<div class="container">
-  <h1 >Đăng nhập</h1>
-@if (session('success'))
-    <div class="alert alert-success">
-        {{ session('success') }}
+
+<body>
+    <div class="login-container">
+        <div class="login-wrapper">
+            <div class="login-image">
+                <h2>Chào mừng đến với TechBoys!</h2>
+                <p>Khám phá thế giới công nghệ với những sản phẩm chất lượng hàng đầu</p>
+                <img src="https://cdn-icons-png.flaticon.com/512/3659/3659898.png" 
+                     alt="Tech Store" 
+                     style="max-width: 250px; margin: 20px auto;">
+            </div>
+            <div class="login-box">
+                <h1 class="login-title">Đăng nhập</h1>
+                
+                @if (session('success'))
+                    <div class="alert alert-success">
+                        {{ session('success') }}
+                    </div>
+                @elseif (session('error'))
+                    <div class="alert alert-danger">
+                        {{ session('error') }}
+                    </div>
+                @endif
+    
+                <form action="{{ route('loginClient.auth') }}" method="POST">
+                    @csrf
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="username" placeholder="Tài khoản">
+                        <div class="form-control-icon">
+                            <i class="bi bi-person"></i>
+                        </div>
+                    </div>
+    
+                    <div class="form-group">
+                        <input type="password" class="form-control" name="password" placeholder="Mật khẩu">
+                        <div class="form-control-icon">
+                            <i class="bi bi-shield-lock"></i>
+                        </div>
+                    </div>
+    
+                    <button type="submit" class="btn btn-login">Đăng nhập</button>
+    
+                    <div class="auth-links">
+                        <p>Bạn chưa có tài khoản? 
+                            <a href="{{ route('client.log.create') }}">Đăng ký</a>
+                        </p>
+                        <p>
+                            <a href="{{ route('client.forgot-password') }}">Quên mật khẩu?</a>
+                        </p>
+                        <p>
+                            <a href="{{ route('home') }}" class="home-link">
+                                <i class="bi bi-house-door"></i> Về trang chủ
+                            </a>
+                        </p>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
-@elseif (session('error'))
-    <div class="alert alert-danger">
-        {{ session('error') }}
-    </div>
-@endif
-</div>
-
-
-
-<form action="{{ route('loginClient.auth') }}" method="POST">
-  @csrf
-<div class="container">
-
-  <div class="form-group position-relative has-icon-left mb-4">
-    <input type="text" class="form-control form-control-xl" name="username"
-        placeholder="nhập tài khoản">
-    <div class="form-control-icon">
-        <i class="bi bi-person"></i>
-    </div>
-</div>
-
-<div class="form-group position-relative has-icon-left mb-4">
-  <input type="password" class="form-control form-control-xl" name="password"
-      placeholder="Nhập mật khẩu">
-  <div class="form-control-icon">
-      <i class="bi bi-shield-lock"></i>
-  </div>
-</div>
-  <div class="col-md-6 mb-3 form-check">
-    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-    <label class="form-check-label" for="exampleCheck1">Ghi nhớ tôi</label>
-  </div>
-  <button type="submit" class="btn btn-primary">Đăng nhập</button>
-  <div>
-    <p class="text-gray-600">Bạn chưa có tài khoản? <a href="{{ route('client.log.create') }}"
-            class="font-bold" style="color: rgb(0, 64, 255)">Đăng ký</a>.</p>
-</div>
-<div >
-    <p class="text-gray-600"><a href="{{ route('client.forgot-password') }}"
-            class="font-bold" style="color: rgb(0, 64, 255)">Quên mật khẩu</a>.</p>
-</div>
-</div>
-</form>
-@endsection
+</body>
+</html>

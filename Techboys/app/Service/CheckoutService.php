@@ -32,7 +32,7 @@ class CheckoutService
     public function getCheckout()
     {
         $cartItems = $this->cartService->getCartItems();
-    
+        
         if ($cartItems instanceof \Illuminate\Http\JsonResponse) {
             return [
                 'cartItems' => collect([]),
@@ -40,40 +40,48 @@ class CheckoutService
                 'subtotal' => 0,
                 'discountAmount' => 0,
                 'voucher' => null,
+                'totalWeight' => 0,
             ];
         }
-    
-        // Lấy danh sách tất cả các giá trị thuộc tính để tránh truy vấn nhiều lần
+        
         $attributeValues = AttributesValue::all()->keyBy('id');
+        
+        $totalWeight = 0;
     
         foreach ($cartItems as $cart) {
-            // Nếu sản phẩm có biến thể, lấy thông tin thuộc tính
             if ($cart->variant_id) {
                 $attributeJson = ProductVariant::where('id', $cart->variant_id)->value('attribute_values');
                 $attributeArray = json_decode($attributeJson, true) ?? [];
-    
-                // Chỉ lấy giá trị thuộc tính, bỏ qua tên thuộc tính
+        
                 $attributeValuesList = collect($attributeArray)->map(function ($attrValueId) use ($attributeValues) {
                     return $attributeValues[$attrValueId]->value ?? 'Không xác định';
                 })->toArray();
-    
-                // Tạo chuỗi chỉ chứa giá trị thuộc tính
+        
                 $cart->attributes = implode(' ', $attributeValuesList);
+        
+                $productWeight = $cart->product->weight;
+                $totalWeight += $productWeight * $cart->quantity;
             } else {
                 $cart->attributes = '';
+                
+                $productWeight = $cart->product->weight;
+                $totalWeight += $productWeight * $cart->quantity;
             }
         }
-    
+        
         $totals = $this->cartPriceService->calculateCartTotals($cartItems);
-    
+        
         return [
             'cartItems' => $cartItems,
             'subtotal' => $totals['subtotal'],
             'total' => $totals['total'],
             'discountAmount' => $totals['discountAmount'],
             'voucher' => $totals['voucher'],
+            'totalWeight' => $totalWeight,
         ];
     }
+    
+    
     
 
     public function storeTemporaryBill($request)
@@ -85,8 +93,9 @@ class CheckoutService
 
         $cartItems = $this->cartService->getCartItems();
         $totals = $this->cartPriceService->calculateCartTotals($cartItems);
+        
+        $billData = [            
 
-        $billData = [
             'id' => $tempBillId,
             'user_id' => $userId ?? null,
             'full_name' => $request->full_name,
@@ -98,9 +107,10 @@ class CheckoutService
             'ward_code' => $request->ward_code,
             'payment_method' => $request->payment_method,
             'payment_status' => 0,
+            'fee_shipping' => (int)$request->fee_shipping,
             'status_id' => 1,
             'cart_items' => $cartItems,
-            'total' => $totals['total']
+            'total' => $totals['total'] + (int)$request->fee_shipping,
         ];
 
         $redisKey = $userId ? 'temp_bill_' . $userId : 'temp_bill_session_' . $sessionId;
@@ -226,20 +236,26 @@ class CheckoutService
     
     private function calculateShippingFee($total,$districtId, $wardId, $weight)
     {
-        $token = 'efbd95a6-0e9a-11f0-9f28-eacfdef119b3';
-        $shopId = 196270;
-        $endpoint = 'https://dev-online-gateway.ghn.vn/shiip/public-api/v2/shipping-order/fee';
+        $token = '7ee385d7-0e95-11f0-99a4-06e3101869e2';
+        $shopId = 5712055;
+        $endpoint = 'https://online-gateway.ghn.vn/shiip/public-api/v2/shipping-order/fee';
     
         $serviceId = $weight > 20000 ? 100039 : 53322;
     
         $data = [
-            'insurance_value'=> $total,
-            'from_district_id' => 1587,
             'service_id' => $serviceId,
+            'insurance_value'=> (int)$total,
+            'coupon' => null,
+            'from_district_id' => 1587,
             'to_district_id' => (int)$districtId,
             'to_ward_code' => (string) $wardId,
-            'weight' => $weight
+            'height'=> null,
+            'length'=> null,
+            'weight' =>(int)$weight,
+            'width'=> null
         ];
+        // return $data;
+        
     
         $response = Http::withHeaders([
             'Content-Type' => 'application/json',
@@ -265,7 +281,17 @@ class CheckoutService
     
         return $fee;
     }
-
+    public function calculateShippingFeeAJAX($request)
+    {
+        $total = $request->total;
+        $districtId = $request->district_id;
+        $wardId = $request->ward_id;
+        $weight = $request->weight;
+    
+        $shippingFee = $this->calculateShippingFee($total, $districtId, $wardId, $weight);
+    
+        return response()->json(['shippingFee' => $shippingFee]);
+    }
 
     public function handlePaymentSuccess($billId)
     {

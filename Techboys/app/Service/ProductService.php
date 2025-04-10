@@ -4,6 +4,7 @@ namespace App\Service;
 
 use App\Models\Attributes;
 use App\Models\AttributesValue;
+use App\Models\Bill;
 use App\Models\BillDetails;
 use App\Models\Brand;
 use App\Models\Color;
@@ -141,6 +142,10 @@ class ProductService{
     {
         $attributesList = Attributes::with('values')->get();
         $product = Product::findOrFail($id);
+        $billPending = Bill::with('billDetails')->where('status_id',1)->get();
+        $billDetails = $billPending->flatMap->billDetails;
+        $productIdPending = $billDetails->pluck('product_id')->unique()->values();
+        // return response()->json($productIds);
         $brands = Brand::all();
         $categories = ProductCategory::all();
         $variants = ProductVariant::where('product_id', $id)->get();
@@ -198,7 +203,7 @@ class ProductService{
         //     'variantAttributes' => $variantAttributes,
         //     'attributesList' => $attributesList,
         // ]);
-        return view('admin.product.edit', compact('product', 'variants', 'attributes', 'formattedVariants', 'variantAttributes', 'attributesList','brands','categories'));
+        return view('admin.product.edit', compact('product', 'variants', 'attributes', 'formattedVariants', 'variantAttributes', 'attributesList','brands','categories','productIdPending'));
     }
     public function updateProduct($request, $id)
     {

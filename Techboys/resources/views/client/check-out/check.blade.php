@@ -217,16 +217,23 @@
                                                                         class="woocommerce-Price-currencySymbol"></span>đ</span>
                                                             </td>
                                                         </tr>
+                                                        <tr class="cart-subtotal">
+                                                            <th>Phí vận chuyển </th>
+                                                            <td>
+                                                                <p id="shipping-fee">0</p>
+                                                                <input type="hidden"  name="fee_shipping">
+                                                            </td>
+                                                        </tr>
                                                         <tr class="order-total">
                                                             <th>Thành tiền</th>
                                                             <td>
-                                                                <strong>
-                                                                    <span class="woocommerce-Price-amount amount">
-                                                                        {{ number_format($checkout['total'], 0, ',', '.') }}<span
-                                                                            class="woocommerce-Price-currencySymbol">đ</span></span>
+                                                                <strong id="final-total-wrapper" style="display: none;">
+                                                                    <span id="final-total"></span>
                                                                 </strong>
-                                                                <input type="hidden" name="total"
+                                                                <input type="hidden" name="total" id="total"
                                                                     value="{{ $checkout['total'] }}">
+                                                                <input type="hidden" name="totalWeight" id="weight"
+                                                                    value="{{ $checkout['totalWeight'] }}">
                                                                 <input type="hidden" name="voucher"
                                                                     value="{{ $checkout['voucher']['code'] ?? null }}">
                                                             </td>
@@ -380,6 +387,47 @@
             $('#province, #district, #ward').change(function() {
                 $(this).siblings('.text-danger').remove();
             });
+
+            $('#province, #district, #ward').change(function() {
+                var total = parseInt($('#total').val()); // đảm bảo là số nguyên
+                var districtId = $('#district').val();
+                var wardId = $('#ward').val();
+                var weight = $('#weight').val();
+
+                if (total && districtId && wardId && weight) {
+                    $.ajax({
+                        url: "{{ route('client.checkout.ShippingFeeAjax') }}",
+                        type: 'POST',
+                        data: {
+                            _token: '{{ csrf_token() }}',
+                            total: total,
+                            district_id: districtId,
+                            ward_id: wardId,
+                            weight: weight
+                        },
+                        dataType: 'json',
+                        success: function(data) {
+                            if (data.shippingFee !== undefined) {
+                                $('#shipping-fee').text(
+                                    new Intl.NumberFormat('vi-VN').format(data
+                                    .shippingFee) + ' ₫'
+                                );
+
+                                var finalTotal = total + data.shippingFee;
+                                $('#final-total').text(
+                                    new Intl.NumberFormat('vi-VN').format(finalTotal) + ' ₫'
+                                );
+                                $('input[name="fee_shipping"]').val(data.shippingFee);
+                                $('#final-total-wrapper').fadeIn();
+                            }
+                        },
+                        error: function() {
+                            alert("Lỗi khi tính phí vận chuyển.");
+                        }
+                    });
+                }
+            });
+
         });
     </script>
 @endsection

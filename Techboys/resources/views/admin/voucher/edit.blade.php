@@ -67,7 +67,7 @@
                                                 name="min_price" placeholder="Nhập giá" value="{{ $show->min_price }}">
                                         </div>
                                         <div class="col-md-6 mb-3">
-                                            <label for="description">Giá tối đa để áp dụng voucher</label>
+                                            <label for="description">Giá giảm tối đa</label>
                                             <input type="number" class="form-control" id="max_discount" aria-describedby=""
                                                 name="max_discount" placeholder="Nhập giá"
                                                 value="{{ $show->max_discount }}">
@@ -136,6 +136,14 @@
                 const element = document.querySelector('.selectpicker');
                 const choices = new Choices(element, {
                     searchEnabled: true, // Bật tìm kiếm
+                });
+            });
+            document.addEventListener('DOMContentLoaded', function() {
+                const discountAmountField = document.getElementById('discount_amount');
+                const maxDiscountField = document.getElementById('max_discount');
+
+                discountAmountField.addEventListener('input', function() {
+                    maxDiscountField.value = discountAmountField.value;
                 });
             });
         </script>

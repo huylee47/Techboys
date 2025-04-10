@@ -3312,7 +3312,7 @@ button,
 input,
 textarea {
   color: #43454b;
-  font-family: "Rubik", "Source Sans Pro", "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+  /* font-family: "Rubik", "Source Sans Pro", "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; */
   line-height: 1.618;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;

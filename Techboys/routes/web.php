@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AIController;
 use App\Http\Controllers\AttributesController;
 use App\Http\Controllers\BannerController;
 use App\Http\Controllers\BlogController;
@@ -10,6 +11,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\ChatsController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\ConfigController;
 use App\Http\Controllers\VoucherController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProductController;
@@ -51,7 +53,7 @@ Route::get('/client/orders/search', [BillController::class, 'searchOrder'])->nam
 Route::post('/client/orders/cancel', [BillController::class, 'CancelOrder'])->name('client.orders.cancel');
 Route::post('/client/orders/cancel/{id}', [BillController::class, 'submitCancelOrder'])->name('client.orders.cancel.submit');
 Route::post('/client/orders/confirm/{id}', [BillController::class, 'confirmClient'])->name('client.orders.confirm');
-Route::get('/client/orders/detail', [BillController::class, 'detailClient'])->name('client.orders.detail');
+Route::post('/client/orders/detail', [BillController::class, 'detailClient'])->name('client.orders.detail');
 
 
 
@@ -84,7 +86,9 @@ Route::post('/login/Client', [UserController::class, 'loginClient'])->name('logi
 Route::get('/contact', function () {
     return view('client.contact.contact');
 })->name('contact');
-Route::post('/contact', [ContactController::class, 'saveContact']);
+Route::get('/contact', [ContactController::class, 'getMap'])->name('contact');
+
+Route::post('/contact/save', [ContactController::class, 'saveContact'])->name('contact.save');
 
 // Đăng ký
 Route::prefix('/register')->group(function () {
@@ -232,7 +236,14 @@ Route::post('/logout', [UserController::class, 'logout'])->name('admin.logout');
             Route::get('/', [RevenueController::class, 'index'])->name('admin.revenue.revenue');
             Route::get('/filter', [RevenueController::class, 'filterRevenue'])->name('admin.revenue.filter');
         });
-        Route::prefix('/chats')->group(function () {
+
+        Route::prefix('/contact')->group(function () {
+            Route::get('/', [ContactController::class, 'index'])->name('admin.contact.index');
+            // Route::delete('/admin/contact/{contact}', [ContactController::class, 'destroy'])->name('admin.contact.destroy');
+            Route::get('/{id}', [ContactController::class, 'detail'])->name('admin.contact.detail');
+
+        });
+        Route::prefix('/chats')->group(function (){
             Route::get('/', [ChatsController::class, 'index'])->name('admin.messages');
             Route::get('/{chatId}', [ChatsController::class, 'loadMessagesAdmin']);
             Route::post('/{chatId}/send', [ChatsController::class, 'sendMessageAdmin'])->name('admin.send.message');
@@ -246,6 +257,7 @@ Route::post('/logout', [UserController::class, 'logout'])->name('admin.logout');
         Route::post('/update/{id}', [AttributesController::class, 'update'])->name('admin.attributes.update');
         Route::get('/delete/{id}', [AttributesController::class, 'destroy'])->name('admin.attributes.delete');
         });
+
         Route::prefix('/promotion')->group(function () {
             Route::get('/', [PromotionController::class, 'index'])->name('admin.promotion.index');
             Route::get('/create', [PromotionController::class, 'create'])->name('admin.promotion.create');
@@ -255,7 +267,11 @@ Route::post('/logout', [UserController::class, 'logout'])->name('admin.logout');
             Route::delete('/destroy/{id}', [PromotionController::class, 'destroy'])->name('admin.promotion.destroy');
 
         });
-        
+        Route::prefix('/config')->group(function () {
+    Route::get('/', [ConfigController::class, 'index'])->name('admin.config.index');
+    Route::get('/edit', [ConfigController::class, 'edit'])->name('admin.config.edit');
+    Route::post('/update', [ConfigController::class, 'update'])->name('admin.config.update');
+});
     });
 });
 Route::prefix('message')->group(function () {
@@ -267,6 +283,7 @@ Route::prefix('products')->group(function () {
     Route::get('/', [ProductController::class, 'productList'])->name('client.product.index');
     Route::get('/search', [ProductController::class, 'search'])->name('client.product.search');
     Route::get('/filter', [ProductController::class, 'filter'])->name('client.product.filter');
+    Route::get('/filter/search',[ProductController::class, 'filterSearch'])->name('client.product.filter.search');
     Route::get('/{slug}', [ProductController::class, 'productDetails'])->name('client.product.show');
 });
 
@@ -279,6 +296,8 @@ Route::prefix('cart')->group(function () {
     Route::post('/applyVoucher', [CartController::class, 'applyVoucher'])->name('client.cart.applyVoucher');
     Route::post('/remove/{id}', [CartController::class, 'removeItem'])->name('client.cart.remove');
     // Route::get('/getCount', [CartController::class, 'getCartCount'])->name('client.cart.getCartCount');
+    // routes/web.php
+    Route::post('/calculate-shipping-fee', [CheckoutController::class, 'calculateShippingFeeAjax'])->name('client.checkout.ShippingFeeAjax');
     Route::get('/count', [CartController::class, 'countItems'])->name('client.cart.count');
 });
 
@@ -302,7 +321,10 @@ Route::get('/payment/cod/success', [CheckoutController::class, 'codSuccess'])->n
 
 Route::prefix('products')->group(function () {
     Route::get('/', [ProductController::class, 'productList'])->name('client.product.index');
+    Route::get('/category/{categoryId}', [ProductController::class, 'ListProductByCategoryId'])->name('client.category.products');
     Route::get('/search', [ProductController::class, 'search'])->name('client.product.search');
     Route::get('/filter', [ProductController::class, 'filter'])->name('client.product.filter');
     Route::get('/{slug}', [ProductController::class, 'productDetails'])->name('client.product.show');
 });
+Route::get('/chatbot', [AIController::class, 'askChatbot']);
+Route::post('/ask-gemini', [AIController::class, 'askGemini']);

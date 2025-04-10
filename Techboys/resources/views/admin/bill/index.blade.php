@@ -113,10 +113,6 @@
                         </tbody>
                     </table>
 
-                    <!-- Phân trang -->
-                    <div class="d-flex justify-content-center">
-                        {{ $bills->links() }}
-                    </div>
                 </div>
             </div>
         </section>

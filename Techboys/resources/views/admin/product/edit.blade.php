@@ -37,12 +37,24 @@
                                 </div>
                                 <div class="ms-auto">
                                     <a class="btn btn-primary" href="{{ route('admin.product.index') }}">Quay lại</a>
-                                    <button class="btn btn-danger">
-                                    <a href="#" class=" bi-trash-fill text-light  delete-btn"
-                                    data-id="{{ $product->id }}" 
-                                    data-name="{{ $product->name }}"
-                                    title="Nhấn để xoá sản phẩm"> Xoá </a>
-                                    </button>
+                                    @php
+                                        $isPending = $productIdPending->contains($product->id);
+                                    @endphp
+
+                                    @if ($isPending == 1)
+                                        <button class="btn btn-secondary" disabled
+                                            title="Sản phẩm đang được xử lý ở đơn hàng , không thể xoá">
+                                            <a class="bi-trash-fill text-light">Không thể xoá</a>
+                                        </button>
+                                    @else
+                                        <button class="btn btn-danger">
+                                            {{-- <h1>{{$isPending}}</h1> --}}
+                                            <a href="#" class=" bi-trash-fill text-light  delete-btn"
+                                                data-id="{{ $product->id }}" data-name="{{ $product->name }}"
+                                                title="Nhấn để xoá sản phẩm"> Xoá </a>
+                                        </button>
+                                    @endif
+
 
                                 </div>
                             </div>
@@ -65,7 +77,7 @@
                                     <div class="row">
                                         <div class="col-md-6 mb-3">
                                             <label for="category_id" class="form-label">Danh mục sản phẩm</label>
-                                            <select class="form-select" id="category_id" name="category_id">
+                                            <select class="form-control selectpicker" data-live-search="true" id="category_id" name="category_id">
                                                 <option value="{{ $product->category_id }}" selected>
                                                     {{ $product->category->name }}</option>
 
@@ -83,7 +95,7 @@
                                         </div>
                                         <div class="col-md-6 mb-3">
                                             <label for="brand" class="form-label">Hãng</label>
-                                            <select class="form-select" id="brand_id" name="brand_id">
+                                            <select class="form-control selectpicker" data-live-search="true" id="brand_id" name="brand_id">
                                                 <option value="{{ $product->brand->id }}" selected>
                                                     {{ $product->brand->name }}</option>
 
@@ -272,25 +284,25 @@
             });
         </script>
 
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        let deleteModal = new bootstrap.Modal(document.getElementById('deleteModal'));
-        let productName = document.getElementById('productName');
-        let deleteForm = document.getElementById('deleteForm');
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                let deleteModal = new bootstrap.Modal(document.getElementById('deleteModal'));
+                let productName = document.getElementById('productName');
+                let deleteForm = document.getElementById('deleteForm');
 
-        document.querySelectorAll('.delete-btn').forEach(button => {
-            button.addEventListener('click', function () {
-                let id = this.getAttribute('data-id');
-                let name = this.getAttribute('data-name');
+                document.querySelectorAll('.delete-btn').forEach(button => {
+                    button.addEventListener('click', function() {
+                        let id = this.getAttribute('data-id');
+                        let name = this.getAttribute('data-name');
 
-                productName.textContent = name;
-                deleteForm.setAttribute('action', `/admin/product/destroy/${id}`);
+                        productName.textContent = name;
+                        deleteForm.setAttribute('action', `/admin/product/destroy/${id}`);
 
-                deleteModal.show();
+                        deleteModal.show();
+                    });
+                });
             });
-        });
-    });
-</script>
+        </script>
 
         <script>
             document.getElementById('images').addEventListener('change', function(event) {
@@ -502,7 +514,17 @@
                     $('.selectpicker').selectpicker();
                     toggleRemoveButtons();
                 });
+                $('#attribute-select').on('change', function() {
+                    let selectedAttributes = $('#attribute-select').val() || [];
+                    console.log("Danh sách thuộc tính đã chọn:", selectedAttributes);
 
+                    let multiSelectCount = selectedAttributes.filter(attrName => {
+                        let attr = attributeData.find(a => a.name === attrName);
+                        return attr && attr.is_multiple == 1;
+                    }).length;
+
+                    console.log(`Số lượng thuộc tính multi select được chọn: ${multiSelectCount}`);
+                });
                 $('#add-variant').click(function() {
                     let index = $('.variant-item').length;
                     let selectedNewAttributes = [];
@@ -578,6 +600,14 @@
                     $('#variantsadd').prepend(variantHtml);
                     $('.selectpicker').selectpicker();
                     toggleRemoveButtons();
+                    let multiSelectCountAfterAdd = $('#attribute-select').val().filter(attrName => {
+                        let attr = attributeData.find(a => a.name === attrName);
+                        return attr && attr.is_multiple == 1;
+                    }).length;
+
+                    if (multiSelectCountAfterAdd >= 2) {
+                        $('#add-variant').hide();
+                    }
                 });
 
                 $(document).ready(function() {
@@ -634,7 +664,8 @@
                                         i])) {
                                     duplicateFound = true;
                                     alert(
-                                        "Có giá trị trùng lặp trong các biến thể, vui lòng chọn lại.");
+                                        "Có giá trị trùng lặp trong các biến thể, vui lòng chọn lại."
+                                    );
                                     e.preventDefault();
                                 }
                             });
@@ -648,7 +679,7 @@
                     });
                 });
 
- 
+
                 // Remove variant
                 $(document).on('click', '.remove-variant', function() {
                     let removedAttributes = $(this).closest('.variant-item').find('select').map(function() {
@@ -678,6 +709,8 @@
 
                     $('.selectpicker').selectpicker('refresh');
                     toggleRemoveButtons();
+                    $('#add-variant').show();
+
                 });
 
 

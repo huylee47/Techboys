@@ -132,7 +132,6 @@ class ProductController extends Controller
 
     public function productList(Request $request)
     {
-        // Lấy danh sách thương hiệu và model
         $brands = Brand::all();
 
 
@@ -142,39 +141,36 @@ class ProductController extends Controller
         if ($request->has('brand_id') && !empty($request->brand_id)) {
             $query->whereIn('brand_id', $request->brand_id);
         }
-
-        if ($request->has('model_id') && !empty($request->model_id)) {
-            $query->whereIn('model_id', $request->model_id);
-        }
-
+        $categoryId = $query->get('category_id')->value('category_id');
+        // dd($categoryId);
         // Phân trang sản phẩm
         $products = $query->paginate(21);
 
-        // Trả về view chính
-        return view('client.product.list', compact('products', 'brands', 'models'));
+        return view('client.product.list', compact('products', 'brands', 'categoryId'));
     }
 
 
     public function search(Request $request)
     {
         $keyword = trim($request->input('s'));
-
+        $query = Product::where('name', 'LIKE', "%{$keyword}%");
         if (!$keyword) {
             return redirect()->route('client.product.index')->with('error', 'Vui lòng nhập từ khóa tìm kiếm.');
         }
-
-        // Nếu là AJAX request (dropdown tìm kiếm)
+        if ($request->has('categoryId') && !empty($request->categoryId)) {
+            $query->where('category_id', $request->categoryId);
+        }
         if ($request->ajax()) {
             $products = Product::where('name', 'LIKE', "%{$keyword}%")->limit(5)->get();
             return response()->json($products);
         }
 
-        // Nếu là tìm kiếm bằng nút "Tìm kiếm", hiển thị trang search.blade.php
         $products = Product::where('name', 'LIKE', "%{$keyword}%")->paginate(12);
         $brands = Brand::all();
 
+        $categoryId = $request->get('categoryId');
 
-        return view('client.product.search', compact('products', 'keyword', 'brands', 'models'));
+        return view('client.product.search', compact('products', 'keyword', 'brands', 'categoryId', 'keyword'));
     }
 
     public function filter(Request $request)
@@ -182,20 +178,91 @@ class ProductController extends Controller
         $brands = Brand::all();
 
 
-        $query = Product::query();
+        $query = Product::query()->with(['promotion', 'variant']);
 
         if ($request->has('brand_id')) {
             $query->whereIn('brand_id', $request->brand_id);
         }
 
-        if ($request->has('model_id') && !empty($request->model_id)) {
-            $query->whereHas('variant', function ($q) use ($request) {
-                $q->whereIn('model_id', $request->model_id);
+        if ($request->has('price_range') && !empty($request->price_range)) {
+            $query->where(function ($q) use ($request) {
+                foreach ($request->price_range as $range) {
+                    list($minPrice, $maxPrice) = explode('-', $range);
+
+                    $q->orWhere(function ($subQuery) use ($minPrice, $maxPrice) {
+                        // Lọc sản phẩm có biến thể
+                        $subQuery->whereHas('variant', function ($q2) use ($minPrice, $maxPrice) {
+                            $q2->whereRaw('price * (1 - COALESCE((SELECT discount_percent FROM promotions WHERE promotions.product_id = product_variants.product_id AND promotions.end_date >= NOW() LIMIT 1) / 100, 0)) BETWEEN ? AND ?', [(int) $minPrice, (int) $maxPrice]);
+                        })
+                            // Lọc sản phẩm không có biến thể (dùng base_price)
+                            ->orWhereRaw('base_price * (1 - COALESCE((SELECT discount_percent FROM promotions WHERE promotions.product_id = products.id AND promotions.end_date >= NOW() LIMIT 1) / 100, 0)) BETWEEN ? AND ?', [(int) $minPrice, (int) $maxPrice]);
+                    });
+                }
             });
         }
 
         $products = $query->paginate(21)->appends($request->query());
 
-        return view('client.product.list', compact('products', 'brands', 'models'));
+        $categoryId = $request->get('categoryId');
+
+        // return response()->json([
+        //     'products' => $products,
+        //     'brands' => $brands,
+        //     'categoryId' => $categoryId,
+        // ]);
+        return view('client.product.list', compact('products', 'brands', 'categoryId'));
+    }
+
+    public function filterSearch(Request $request)
+    {
+        // dd($request->all());
+        $keyword = $request->keyword;
+        // dd($keyword);
+        if (!$keyword) {
+            return redirect()->route('client.product.index')->with('error', 'Vui lòng nhập từ khóa tìm kiếm.');
+        }
+
+        $brands = Brand::all();
+        $query = Product::query()->with(['promotion', 'variant'])
+            ->where('name', 'LIKE', "%{$keyword}%");
+
+        if ($request->has('categoryId') && !empty($request->categoryId)) {
+            $query->where('category_id', $request->categoryId);
+        }
+
+        if ($request->has('brand_id')) {
+            $query->whereIn('brand_id', $request->brand_id);
+        }
+
+        if ($request->has('price_range') && !empty($request->price_range)) {
+            $query->where(function ($q) use ($request) {
+                foreach ($request->price_range as $range) {
+                    list($minPrice, $maxPrice) = explode('-', $range);
+
+                    $q->orWhere(function ($subQuery) use ($minPrice, $maxPrice) {
+                        $subQuery->whereHas('variant', function ($q2) use ($minPrice, $maxPrice) {
+                            $q2->whereRaw('price * (1 - COALESCE((SELECT discount_percent FROM promotions WHERE promotions.product_id = product_variants.product_id AND promotions.end_date >= NOW() LIMIT 1) / 100, 0)) BETWEEN ? AND ?', [(int) $minPrice, (int) $maxPrice]);
+                        })
+                            ->orWhereRaw('base_price * (1 - COALESCE((SELECT discount_percent FROM promotions WHERE promotions.product_id = products.id AND promotions.end_date >= NOW() LIMIT 1) / 100, 0)) BETWEEN ? AND ?', [(int) $minPrice, (int) $maxPrice]);
+                    });
+                }
+            });
+        }
+
+        $products = $query->paginate(21)->appends($request->query());
+
+        return view('client.product.search', compact('products', 'brands', 'keyword'));
+    }
+
+
+
+
+    public function ListProductByCategoryId($categoryId)
+    {
+        $brands = Brand::all();
+        $categoryId = ProductCategory::where('id', $categoryId)->value('id');
+        // dd($categoryId);
+        $products = Product::where('category_id', $categoryId)->paginate(21);
+        return view('client.product.list', compact('products', 'brands', 'categoryId'));
     }
 }

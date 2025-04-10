@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\AttributesValue;
+use App\Models\BillDetails;
 use App\Models\Cart;
 use App\Models\ProductVariant;
 use App\Models\Promotion;
@@ -30,7 +31,7 @@ class CartController extends Controller
     public function showCart()
     {
         $cartItems = $this->cartService->getCartItems();
-    
+        // return response()->json($cartItems);
         if ($cartItems instanceof \Illuminate\Http\JsonResponse) {
             return view('client.cart.cart', [
                 'cartItems' => collect([]),
@@ -41,9 +42,8 @@ class CartController extends Controller
             ]);
         }
     
-        // Lấy danh sách tất cả các giá trị thuộc tính để tránh truy vấn nhiều lần
         $attributeValues = AttributesValue::all()->keyBy('id');
-    
+        $soldQuantity = 0;
         foreach ($cartItems as $cart) {
             $promotion = Promotion::where('product_id', $cart->product_id)->first();
             if ($promotion && now()->lt(Carbon::parse($promotion->end_date))) {
@@ -54,41 +54,55 @@ class CartController extends Controller
                 }
             }
     
-            // Nếu sản phẩm có biến thể, lấy thông tin thuộc tính
             if ($cart->variant_id) {
                 $attributeJson = ProductVariant::where('id', $cart->variant_id)->value('attribute_values');
                 $attributeArray = json_decode($attributeJson, true) ?? [];
     
-                // Chỉ lấy giá trị thuộc tính, bỏ qua tên thuộc tính
                 $attributeValuesList = collect($attributeArray)->map(function ($attrValueId) use ($attributeValues) {
                     return $attributeValues[$attrValueId]->value ?? 'Không xác định';
                 })->toArray();
     
-                // Tạo chuỗi chỉ chứa giá trị thuộc tính
                 $cart->attributes = implode(' ', $attributeValuesList);
             } else {
                 $cart->attributes = '';
             }
+            $soldQuantity = 0;
+            if ($cart->variant_id) {
+                $qty = BillDetails::where('variant_id', $cart->variant_id)
+                    ->whereHas('bill', function ($query) {
+                        $query->where('status_id', 1);
+                    })
+                    ->sum('quantity');
+                $soldQuantity += $qty;
+                $cart->stock = $cart->product->variant()->where('id', $cart->variant_id)->value('stock') - $qty;
+        
+            } else {
+                $qty = BillDetails::where('product_id', $cart->product_id)
+                    ->whereNull('variant_id')
+                    ->whereHas('bill', function ($query) {
+                        $query->where('status_id', 1);
+                    })
+                    ->sum('quantity');
+                $soldQuantity += $qty;
+                $cart->stock = $cart->product->base_stock - $qty;
+            }
         }
-    
         $totals = $this->cartPriceService->calculateCartTotals($cartItems);
-    
         // return response()->json([
-        //     'cartItems' => $cartItems,
-        //     'subtotal' => $totals['subtotal'],
-        //     'total' => $totals['total'],
-        //     'discountAmount' => $totals['discountAmount'],
-        //     'voucher' => $totals['voucher'],
-        // ]);
-        // dd($cartItems);
+        //     'cartItems'=>$cartItems,
+        //     'soldPending'=>$soldQuantity,
+            
+        //  ]);
         return view('client.cart.cart', [
             'cartItems' => $cartItems,
             'subtotal' => $totals['subtotal'],
             'total' => $totals['total'],
             'discountAmount' => $totals['discountAmount'],
             'voucher' => $totals['voucher'],
+            'soldQuantity'=>(int)$soldQuantity ?? 0,
         ]);
     }
+    
     
     
     

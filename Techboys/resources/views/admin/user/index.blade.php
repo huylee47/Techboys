@@ -81,9 +81,15 @@
                                           method="POST" style="display:inline;">
                                         @csrf                                    
                                         <input type="hidden" class="form-control" name="id" value="{{ $user->id }}">
-                                        <button type="submit" class="{{ $user->status == 1 ? 'bi-lock' : 'bi-unlock' }}">
-                                            {{ $user->status == 1 ? 'Khóa tài khoản' : 'Mở tài khoản' }}
-                                        </button>
+                                        <button 
+                                        type="submit" 
+                                        class="{{ $user->status == 1 ? 'bi-lock' : 'bi-unlock' }}" 
+                                        {{ $user->id == 1 || $user->id == auth()->id() ? 'disabled' : '' }}
+                                         title="{{ $user->id == 1 ? 'Không thể khoá tài khoản ADMIN gốc.' : ($user->id == auth()->id() ? 'Không thể khoá tài khoản của chính mình.' : '') }}"
+                                    >
+                                        {{ $user->status == 1 ? 'Khóa tài khoản' : 'Mở tài khoản' }}
+                                    </button>
+                                    
                                     </form>
                                 </td>
                             </tr>

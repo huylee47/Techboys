@@ -23,6 +23,8 @@
                                             <table class="shop_table shop_table_responsive cart">
                                                 @if ($cartItems->isEmpty())
                                                     <p class="text-center text-muted">Giỏ hàng trống</p>
+                                                    <a  class="button" href="{{route('home')}}">Tiếp tục mua hàng
+                                                </a>
                                                 @else
                                                     <thead>
                                                         <tr>
@@ -36,38 +38,46 @@
                                                     </thead>
                                                     <tbody>
                                                         @foreach ($cartItems as $cart)
+                                                       
                                                             <tr class="cart-item">
                                                                 <td class="product-remove">
                                                                 </td>
                                                                 <td class="product-thumbnail">
-                                                                    <a href="single-product-fullwidth.html">
+                                                                    <a href="{{ route('client.product.show', ['slug' =>  $cart->product->slug]) }}">
                                                                         <img width="180" height="180" alt=""
                                                                             class="wp-post-image"
-                                                                            src=" {{ asset('home/single-product-fullwidth.html') }}">
+                                                                            src=" ">
                                                                     </a>
                                                                 </td>
                                                                 <td data-title="Product" class="product-name">
                                                                     <div class="media cart-item-product-detail">
-                                                                        <a href="single-product-fullwidth.html">
-                                                                            <img width="180" height="180"
-                                                                                alt="" class="wp-post-image"
-                                                                                src="{{ url('') }}/admin/assets/images/product/{{ $cart->product->img }}">
-                                                                        </a>
+                                                                        <!-- Thẻ div chứa ảnh -->
+
+                                                                        <div class="product-image-wrapper d-flex justify-content-start align-items-center" style="max-width: 100px; max-height: 100px; margin-left: 15px;">
+                                                                            <a href="{{ route('client.product.show', ['slug' =>  $cart->product->slug]) }}">
+                                                                                <img width="100" alt="" class="img-fluid align-self-center" style="max-width: 100%; max-height: 100px; object-fit: contain; "
+                                                                                    src="{{ url('') }}/admin/assets/images/product/{{ $cart->product->img }}">
+                                                                            </a>
+                                                                        </div>
+                                                                        
+                                                                        
+                                                                    
+                                                                        <!-- Thẻ div chứa thông tin sản phẩm -->
                                                                         <div class="media-body align-self-center">
-                                                                            <a href="single-product-fullwidth.html">{{ $cart->product->name }}
+                                                                            <a href="{{ route('client.product.show', ['slug' =>  $cart->product->slug]) }}">{{ $cart->product->name }}
                                                                                 @if($cart->variant_id)
-                                                                                {{ $cart->attributes}}
+                                                                                    {{ $cart->attributes }}
                                                                                 @endif
                                                                             </a>
                                                                             <p data-title="Stock" class="product-stock">
                                                                                 <span>Tồn Kho :</span>
-                                                                                <span
-                                                                                    class="stock-quantity-{{ $cart->id }}">
-                                                                                    {{ $cart->stock }}
+                                                                                <span class="stock-quantity-{{ $cart->id }}">
+                                                                                    {{ $cart->stock - $soldQuantity}}
                                                                                 </span>
                                                                             </p>
                                                                         </div>
                                                                     </div>
+                                                                    
                                                                 </td>
                                                                 <td data-title="Price" class="product-price">
                                                                     <span class="woocommerce-Price-amount amount">
@@ -115,8 +125,8 @@
                                                             </div>
                                                             <p id="voucher-error" class="text-danger small"></p>
                                                             <p id="voucher-success" class="text-success small"></p>
-                                                            <input type="submit" value="Tiếp tục mua hàng"
-                                                                name="update_cart" class="button">
+                                                            <a  class="button" href="{{route('home')}}">Tiếp tục mua hàng
+                                                            </a>
                                                         </td>
                                                     </tr>
                                                 @endif
@@ -299,7 +309,7 @@
                 },
                 error: function () {
                     resetVoucher();
-                    $("#voucher-error").text("Có lỗi xảy ra, vui lòng thử lại!");
+                    $("#voucher-error").text("Voucher không hợp lệ hoặc giá trị đơn hàng chưa đạt mức tối thiểu");
                 }
             });
         }

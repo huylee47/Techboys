@@ -87,6 +87,11 @@
                                             value="{{ $bill->full_name }}" readonly>
                                     </div>
                                     <div class="col-md-3 mb-3">
+                                        <label for="email">Số điện thoại</label>
+                                        <input type="text" class="form-control" id="email"
+                                            value="{{ $bill->phone }}" readonly>
+                                    </div>
+                                    <div class="col-md-3 mb-3">
                                         <label for="email">E-mail</label>
                                         <input type="text" class="form-control" id="email"
                                             value="{{ $bill->email }}" readonly>
@@ -118,7 +123,7 @@
                                             value="{{ $bill->address }}" readonly>
                                     </div>
                                     <div class="col-md-3 mb-3">
-                                        <label for="address">Voucher sử dụng</label>
+                                        <label for="address">Voucher sử dụng ?</label>
                                         <input type="text" class="form-control" id="address"
                                             value="{{ $bill->voucher_code ?? "Không sử dụng"}}" readonly>
                                     </div>
@@ -133,7 +138,7 @@
                                             value="{{ number_format($bill->total, 0, ',', '.') }} đ" readonly>
                                     </div>
                                     @if ($bill->status_id==0)
-                                        <div class="col-md-4 mb-3">
+                                        <div class=" mb-3">
                                         <label for="total">Lý do huỷ đơn hàng</label>
                                         <input type="text" class="form-control" id="total"
                                             value="{{$bill->note}}" readonly>
@@ -148,9 +153,9 @@
                                         <tr>
                                             <th>Tên Sản Phẩm</th>
                                             <th>Số Lượng</th>
-                                            <th>Đơn giá</th>
+                                            <th>Giá gốc</th>
                                             <th>Khuyến mại</th>
-                                            <th>Tổng tiền sản phẩm</th>
+                                            <th>Tổng tiền của sản phẩm </th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -172,7 +177,12 @@
                                                 <td>{{ number_format($billDetail->price ) }} đ</td>
                                                 <td>{{ $isPromotionActive ? 'Có' : 'Không' }}</td>
 
-                                                <td>{{ $isPromotionActive ? number_format($billDetail->discounted_price * $billDetail->quantity) : number_format($billDetail->price * $billDetail->quantity)  }} đ</td>
+                                                <td>@if ($isPromotionActive)
+                                                    {{ number_format($billDetail->variant ? $billDetail->variant->discounted_price * $billDetail->quantity : $billDetail->product->discounted_price * $billDetail->quantity) }} đ
+                                                @else
+                                                    {{ number_format($billDetail->variant ? $billDetail->price * $billDetail->quantity : $billDetail->product->base_price * $billDetail->quantity) }} đ
+                                                @endif
+                                                </td>
                                             </tr>
                                         @endforeach
                                     </tbody>

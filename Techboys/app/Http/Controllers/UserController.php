@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\UserBlocked;
 use App\Mail\ForgotPassword;
 use App\Mail\verifyAccount;
 use App\Models\Cart;
@@ -12,8 +13,9 @@ use App\Models\UserResetToken;
 use App\Service\UserService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
-
+use Illuminate\Support\Facades\Log;
 
 use function Laravel\Prompts\alert;
 
@@ -53,7 +55,20 @@ class UserController extends Controller
     public function block(Request $request)
     {
         $user = User::find($request->id);
-        $user->update(['status' => 0]);
+    // dd($user->id);
+        if ($user) {
+            $user->update(['status' => 0]);
+    
+            if ($user->role_id == 2) {
+                DB::table('sessions')->where('user_id', $user->id)->delete();
+                
+                Log::info("Phát sự kiện UserBlocked cho userId: {$user->id}");
+                broadcast(new UserBlocked($user->id))->toOthers();
+
+                
+            }
+        }
+    
         return redirect()->route('admin.user.index')->with('success', 'Khóa tài khoản thành công.');
     }
 
@@ -146,6 +161,9 @@ class UserController extends Controller
             return redirect()->back()->with('error', 'Tài khoản của bạn đã bị khóa.');
         }
 
+        if ($account->role_id != 1 && $account->email_verified_at == null) {
+            return redirect()->back()->with('error', 'Vui lòng kiểm tra email và xác minh tài khoản');
+        }
         Auth::login($account);
 
         $cartId = session()->get('cart_id');
