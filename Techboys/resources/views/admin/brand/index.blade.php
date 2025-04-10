@@ -45,7 +45,7 @@
                                     <th class="col-2">STT</th>
                                     <th class="col-2">Tên Thương Hiệu</th>
                                     <th class="col-3">Ngày tạo</th>
-                                    <th class="col-3">Ngày cập nhập</th>
+                                    <th class="col-3">Ngày cập nhật</th>
                                     <th class="col-2">Chức năng</th>
                                 </tr>
                             </thead>
@@ -58,7 +58,7 @@
                                         <td class="col-3">{{ $brand->updated_at->format('d-m-Y H:i:s') }}</td>
                                         <td class=" col-2 text-center">
                                             <a class="bi-pencil-fill text-warning fs-4 mx-2" title="Nhấn để sửa danh mục"
-                                               href="{{ route('admin.brand.edit', ['id' => $brand->id]) }}"></a>
+                                                href="{{ route('admin.brand.edit', ['id' => $brand->id]) }}"></a>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -89,6 +89,4 @@
                 </div>
             </div>
         </div>
-
-
-@endsection
+    @endsection
