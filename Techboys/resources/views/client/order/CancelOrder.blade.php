@@ -59,7 +59,8 @@
     function validateCancelReason() {
         const reason = document.getElementById('cancel_reason').value.trim();
         const errorElement = document.getElementById('cancel_reason_error');
-        if (!reason) {
+        if (!reason || reason.length < 10) {
+            errorElement.textContent = 'Vui lòng nhập lý do hủy đơn ít nhất 10 ký tự.';
             errorElement.style.display = 'block';
             return false;
         }
