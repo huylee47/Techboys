@@ -35,7 +35,6 @@
                                                 data-slick="{&quot;infinite&quot;:false,&quot;slidesToShow&quot;:1,&quot;slidesToScroll&quot;:1,&quot;dots&quot;:false,&quot;arrows&quot;:false,&quot;asNavFor&quot;:&quot;#techmarket-single-product-gallery .techmarket-single-product-gallery-thumbnails__wrapper&quot;}">
                                                 <div class="woocommerce-product-gallery woocommerce-product-gallery--with-images woocommerce-product-gallery--columns-4 images"
                                                     data-columns="4">
-                                                    <a href="#" class="woocommerce-product-gallery__trigger">🔍</a>
                                                     <figure class="woocommerce-product-gallery__wrapper ">
                                                         @foreach ($images as $img)
                                                             <div data-thumb="{{ url('') }}/admin/assets/images/product/{{ $img->image }}"
