@@ -204,8 +204,8 @@
                                 <div class="form-group">
                                     <label for="payment_method" class="form-label">Phương thức thanh toán:</label>
                                     <select class="form-control" id="payment_method" name="payment_method" required>
-                                        <option value="cod">Thanh toán khi nhận hàng (COD)</option>
-                                        <option value="direct">Thanh toán trực tiếp</option>
+                                        {{-- <option value="cod">Thanh toán khi nhận hàng (COD)</option> --}}
+                                        <option value="direct" selected>Thanh toán trực tiếp</option>
                                     </select>
                                 </div>
                             </div>
