@@ -449,6 +449,7 @@
                                                                                                 @error('rep_content') 
                                                                                                     <span class="text-danger">{{ $message }}</span>
                                                                                                 @enderror
+                                                                                                <br>
                                                                                                 <input type="hidden"
                                                                                                     name="comment_id"
                                                                                                     value="{{ $comments->id }}">
