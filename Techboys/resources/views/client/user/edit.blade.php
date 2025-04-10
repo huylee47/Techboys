@@ -33,10 +33,20 @@
         border: 2px solid #ccc;
         transition: opacity 0.3s ease;
     }
+    .btn-update {
+        background-color: #28a745;
+        border-color: #28a745;
+        color: white;
+    }
+    .btn-update:hover {
+        background-color: #218838;
+        border-color: #1e7e34;
+        color: white;
+    }
 </style>
 @section('main')
     <div class="container">
-        <h4 class="card-title">Profile</h4>
+        <h4 class="card-title">Thông tin</h4>
         {{-- Hiển thị thông báo lỗi --}}
         @if (session('success'))
         <div class="alert alert-success">
@@ -55,7 +65,7 @@
 
             <div class="text-center mb-4">
                 <label for="profile_image" class="profile-image-label">
-                    <img src="{{ asset('home/assets/images/user.png') }}" alt="Profile Picture" class="profile-picture">
+                    <img src="https://cdn-icons-png.flaticon.com/512/4140/4140048.png" alt="Profile Picture" class="profile-picture">
                 </label>
             </div>
             <div class="row">
@@ -81,7 +91,7 @@
                         placeholder="Nhập sô điện thoại" value="{{ old('phone', $user->phone) }}">
                 </div>
             </div>
-            <button type="submit" class="btn btn-primary">Cập nhật</button>
+            <button type="submit" class="btn btn-update">Cập nhật</button>
             <a class="btn btn-primary" href="{{ route('home') }}">Quay lại</a>
     </div>
 

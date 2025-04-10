@@ -209,7 +209,7 @@
                         <button class="btn dropdown-toggle btn-block" type="button" data-toggle="dropdown"
                             aria-haspopup="true" aria-expanded="false">
                             <i class="tm tm-departments-thin"></i>
-                            <span>Tất cả sản phẩm</span>
+                            <span>Tất cả danh mục</span>
                         </button>
                         <ul id="menu-departments-menu" class="dropdown-menu yamm departments-menu-dropdown">
                             @foreach ($categories as $category)
