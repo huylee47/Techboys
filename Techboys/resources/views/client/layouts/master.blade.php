@@ -165,6 +165,16 @@
                                                     style="margin-left: 10px; margin-top: 5px"></i>
                                             </a>
                                             <ul class="dropdown-menu" id="userDropdownMenu">
+                                                @auth
+                                                @if (Auth::user()->role_id == 1)
+                                                    <li>
+                                                        <a href="{{ route('admin.index') }}">
+                                                            <img src="{{ asset('home/assets/images/profile.png') }}">
+                                                            <p style="margin-top: 3px">Admin</p>
+                                                        </a>
+                                                    </li>
+                                                @endif
+                                            @endauth
                                                 <li>
                                                     <a href="{{ route('client.edit') }}">
                                                         <img src="{{ asset('home/assets/images/profile.png') }}">
