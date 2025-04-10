@@ -35,9 +35,11 @@
                                         @endif
 
                                         @if ($bill->payment_method == 1)
-                                            <span class="badge bg-success">VNPAY</span>
-                                        @else
+                                            <span class="badge bg-success">VNPAY/Banking</span>
+                                        @elseif ($bill->payment_method == 2)
                                             <span class="badge bg-success">COD</span>
+                                        @else
+                                            <span class="badge bg-success">Thanh toán tại quầy</span>
                                         @endif
 
                                         @if ($bill->payment_status == 1)
@@ -54,11 +56,22 @@
                                         <a class="btn btn-primary" href="{{ route('admin.bill.index') }}">Quay lại</a>
 
                                         @if ($bill->status_id == 1)
-                                            <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exportModal">Xác nhận đơn</button>
-                                                <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#cancelModal">Huỷ đơn</button>
-                                        @elseif($bill->status_id == 2)
-                                            <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#orderModal">Xác nhận giao hàng</button>
+                                            @if ($bill->payment_method != 0)
+                                                <button class="btn btn-success" data-bs-toggle="modal"
+                                                    data-bs-target="#exportModal">Xác nhận đơn</button>
+                                            @else
+                                            <button class="btn btn-success" data-bs-toggle="modal"
+                                            data-bs-target="#comfirmModal">Xác nhận thanh toán</button>
+                                            @endif
+
+                                            <button class="btn btn-danger" data-bs-toggle="modal"
+                                                data-bs-target="#cancelModal">Huỷ đơn</button>
+                                        @elseif($bill->payment_method != 0 && $bill->status_id == 2)
+                                            <button class="btn btn-success" data-bs-toggle="modal"
+                                                data-bs-target="#orderModal">Xác nhận giao hàng</button>
                                         @endif
+                                        {{-- {{ $bill->payment_method }}{{$bill->status_id }} --}}
+
 
                                     </div>
                                 </div>
@@ -125,7 +138,7 @@
                                     <div class="col-md-3 mb-3">
                                         <label for="address">Voucher sử dụng ?</label>
                                         <input type="text" class="form-control" id="address"
-                                            value="{{ $bill->voucher_code ?? "Không sử dụng"}}" readonly>
+                                            value="{{ $bill->voucher_code ?? 'Không sử dụng' }}" readonly>
                                     </div>
                                     <div class="col-md-3 mb-3">
                                         <label for="address">Phí vận chuyển</label>
@@ -137,12 +150,12 @@
                                         <input type="text" class="form-control" id="total"
                                             value="{{ number_format($bill->total, 0, ',', '.') }} đ" readonly>
                                     </div>
-                                    @if ($bill->status_id==0)
+                                    @if ($bill->status_id == 0)
                                         <div class=" mb-3">
-                                        <label for="total">Lý do huỷ đơn hàng</label>
-                                        <input type="text" class="form-control" id="total"
-                                            value="{{$bill->note}}" readonly>
-                                    </div>
+                                            <label for="total">Lý do huỷ đơn hàng</label>
+                                            <input type="text" class="form-control" id="total"
+                                                value="{{ $bill->note }}" readonly>
+                                        </div>
                                     @endif
 
                                 </div>
@@ -161,7 +174,9 @@
                                     <tbody>
                                         @foreach ($billDetails as $billDetail)
                                             @php
-                                                $isPromotionActive = $productPromotions->contains(function ($promotion) use ($billDetail) {
+                                                $isPromotionActive = $productPromotions->contains(function (
+                                                    $promotion,
+                                                ) use ($billDetail) {
                                                     return $promotion->product_id == $billDetail->product->id &&
                                                         $billDetail->created_at <= $promotion->end_date;
                                                 });
@@ -174,14 +189,17 @@
                                                     {{ $billDetail->product->name }} {{ $billDetail->attributes }}
                                                 </td>
                                                 <td>{{ $billDetail->quantity }}</td>
-                                                <td>{{ number_format($billDetail->price ) }} đ</td>
+                                                <td>{{ number_format($billDetail->price) }} đ</td>
                                                 <td>{{ $isPromotionActive ? 'Có' : 'Không' }}</td>
 
-                                                <td>@if ($isPromotionActive)
-                                                    {{ number_format($billDetail->variant ? $billDetail->variant->discounted_price * $billDetail->quantity : $billDetail->product->discounted_price * $billDetail->quantity) }} đ
-                                                @else
-                                                    {{ number_format($billDetail->variant ? $billDetail->price * $billDetail->quantity : $billDetail->product->base_price * $billDetail->quantity) }} đ
-                                                @endif
+                                                <td>
+                                                    @if ($isPromotionActive)
+                                                        {{ number_format($billDetail->variant ? $billDetail->variant->discounted_price * $billDetail->quantity : $billDetail->product->discounted_price * $billDetail->quantity) }}
+                                                        đ
+                                                    @else
+                                                        {{ number_format($billDetail->variant ? $billDetail->price * $billDetail->quantity : $billDetail->product->base_price * $billDetail->quantity) }}
+                                                        đ
+                                                    @endif
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -207,8 +225,10 @@
                     <form id="cancelForm" action="{{ route('admin.bill.cancel', $bill->id) }}" method="POST">
                         @csrf
                         <div class="mb-3">
-                            <label for="cancelNote" class="form-label">Ghi chú huỷ đơn <span class="text-danger">*</span></label>
-                            <textarea class="form-control" id="cancelNote" name="note" rows="3" required minlength="15" placeholder="Nhập lý do huỷ đơn..."></textarea>
+                            <label for="cancelNote" class="form-label">Ghi chú huỷ đơn <span
+                                    class="text-danger">*</span></label>
+                            <textarea class="form-control" id="cancelNote" name="note" rows="3" required minlength="15"
+                                placeholder="Nhập lý do huỷ đơn..."></textarea>
                             <div class="invalid-feedback">Ghi chú phải có ít nhất 15 ký tự.</div>
                         </div>
                     </form>
@@ -239,40 +259,58 @@
             </div>
         </div>
     </div>
-        {{-- Modal Xác Nhận Giao hàng --}}
-        <div class="modal fade" id="orderModal" tabindex="-1" aria-labelledby="orderModalLabel" aria-hidden="true">
+        {{-- Modal Xác Nhận Thanh Toán Đơn --}}
+        <div class="modal fade" id="comfirmModal" tabindex="-1" aria-labelledby="exportModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="orderModalLabel">Xác nhận giao hàng</h5>
+                        <h5 class="modal-title" id="exportModalLabel">Xác Nhận Đơn</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                       Xác nhận giao hàng thành công ?
+                        Bạn có chắc chắn muốn xác nhận đơn hàng này không?
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                        <a href="{{ route('admin.bill.confirm', $bill->id) }}" class="btn btn-success">Xác nhận </a>
+                        <a href="{{ route('admin.bill.direct', $bill->id) }}" class="btn btn-success">Xác nhận đơn</a>
                     </div>
                 </div>
             </div>
         </div>
-        
+    {{-- Modal Xác Nhận Giao hàng --}}
+    <div class="modal fade" id="orderModal" tabindex="-1" aria-labelledby="orderModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="orderModalLabel">Xác nhận giao hàng</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Xác nhận giao hàng thành công ?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                    <a href="{{ route('admin.bill.confirm', $bill->id) }}" class="btn btn-success">Xác nhận </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
+        document.addEventListener("DOMContentLoaded", function() {
             const cancelNote = document.getElementById("cancelNote");
             const confirmCancel = document.getElementById("confirmCancel");
             const cancelForm = document.getElementById("cancelForm");
-    
-            cancelNote.addEventListener("input", function () {
+
+            cancelNote.addEventListener("input", function() {
                 if (cancelNote.value.trim().length >= 15) {
                     confirmCancel.removeAttribute("disabled");
                 } else {
                     confirmCancel.setAttribute("disabled", "true");
                 }
             });
-    
-            confirmCancel.addEventListener("click", function () {
+
+            confirmCancel.addEventListener("click", function() {
                 cancelForm.submit();
             });
         });
