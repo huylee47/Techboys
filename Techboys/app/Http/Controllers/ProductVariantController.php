@@ -13,9 +13,21 @@ class ProductVariantController extends Controller
         return view('admin.stock.index', compact('stocks'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+    public function searchVariants(Request $request)
+    {
+        $query = $request->input('query');
+
+        if (empty($query)) {
+            return response()->json([]);
+        }
+
+        $variants = ProductVariant::where('name', 'like', "%$query%")
+            ->orWhere('sku', 'like', "%$query%")
+            ->get();
+
+        return response()->json($variants);
+    }
+
     public function create()
     {
         //

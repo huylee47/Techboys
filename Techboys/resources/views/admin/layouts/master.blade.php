@@ -3,7 +3,8 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="csrf-token" content="{{ csrf_token() }}" />
+    {{-- <meta name="csrf-token" content="{{ csrf_token() }}" /> --}}
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Techboys | Trang quản trị</title>
 
@@ -193,6 +194,12 @@
                                 <span>Banner</span>
                             </a>
                         </li>
+                        <li class="sidebar-item {{ request()->routeIs('admin.createBillAdmin*') ? 'active' : '' }}">
+                            <a href="{{route('admin.bill.create')}}" class='sidebar-link'>
+                                <i class="bi bi-bookmarks-fill"></i>
+                                <span>Đặt hàng</span>
+                            </a> <!-- Thêm thẻ đóng </a> vào đây -->
+                        </li>
                         <li class="sidebar-item {{ request()->routeIs('admin.config*') ? 'active' : '' }}">
                             <a href="{{ route('admin.config.index') }}" class='sidebar-link'>
                                 <i class="bi bi-gear-fill"></i>
@@ -239,10 +246,12 @@
         </footer>
     </div>
     </div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    {{-- <script src="{{ url('') }}/admin/assets/vendors/jquery/jquery.min.js"></script> --}}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.14/js/bootstrap-select.min.js"></script>
     <script src="{{ url('') }}/admin/assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
-    <script src="{{ url('') }}/admin/assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+    {{-- <script src="{{ url('') }}/admin/assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script> --}}
     <script src="{{ url('') }}/admin/assets/vendors/apexcharts/apexcharts.js"></script>
-    <script src="{{ url('') }}/admin/assets/vendors/jquery/jquery.min.js"></script>
     <script src="{{ url('') }}/admin/assets/vendors/simple-datatables/simple-datatables.js"></script>
 
     <script src="{{ url('') }}/admin/assets/js/main.js"></script>
