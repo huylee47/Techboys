@@ -831,11 +831,11 @@
                     return false;
                 }
 
-                if (!$('#userId').val()) {
-                    e.preventDefault();
-                    alert('Vui lòng chọn khách hàng');
-                    return false;
-                }
+                // if (!$('#userId').val()) {
+                //     e.preventDefault();
+                //     alert('Vui lòng chọn khách hàng');
+                //     return false;
+                // }
 
                 if (selectedProducts.length === 0) {
                     e.preventDefault();
