@@ -8,6 +8,7 @@ use App\Models\Attributes;
 use App\Models\AttributesValue;
 use App\Models\Bill;
 use App\Models\BillDetails;
+use App\Models\DistrictGHN;
 use App\Models\Product;
 use App\Models\ProductVariant;
 use App\Models\Promotion;
@@ -15,6 +16,7 @@ use App\Models\ProvinceGHN;
 use App\Models\User;
 use App\Models\Status;
 use App\Models\Voucher;
+use App\Models\WardGHN;
 use App\Service\VoucherService as ServiceVoucherService;
 use Kjmtrue\VietnamZone\Models\Province;
 use Kjmtrue\VietnamZone\Models\District;
@@ -120,7 +122,7 @@ class BillController extends Controller
 
             dd($total);
 
-            $loggedInAdminId = auth()->id();
+            $loggedInAdminId = Auth::id();
             $userId = $validated['user_id'];
 
             $orderId = now()->format('Ymd') . ($userId ? "U" . $userId : "A" . $loggedInAdminId) . rand(10, 99);
@@ -652,9 +654,9 @@ class BillController extends Controller
             return redirect()->route('client.orders')->with('error', 'Không tìm thấy đơn hàng!');
         }
 
-        $provinces = Province::all();
-        $districts = District::where('province_id', $order->province_id)->get();
-        $wards = Ward::where('district_id', $order->district_id)->get();
+        $provinces = ProvinceGHN::all();
+        $districts = DistrictGHN::where('province_id', $order->province_id)->get();
+        $wards = WardGHN::where('district_id', $order->district_id)->get();
         $payment_method = $order->payment_method;
 
         return view('client.order.detail', compact('order', 'provinces', 'districts', 'wards', 'payment_method'));
