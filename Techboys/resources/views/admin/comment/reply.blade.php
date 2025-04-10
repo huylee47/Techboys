@@ -6,7 +6,15 @@
                 <i class="bi bi-justify fs-3"></i>
             </a>
         </header>
-
+        @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
         <div class="page-heading">
             <div class="page-title">
                 <div class="row">
@@ -36,7 +44,8 @@
                             <input type="hidden" name="content" value="{{ $comment->content }}">
                             <input type="hidden" name="rate" value="{{ $comment->rate }}">
                             <input type="hidden" name="file_id" value="{{ $comment->file_id }}">
-                            <textarea name="rep_content" class="form-control" placeholder="Nhập phản hồi"></textarea>
+                            <textarea name="rep_content" class="form-control " placeholder="Nhập phản hồi"></textarea>
+                           
                             <button type="submit" class="btn btn-primary mt-2">Gửi</button>
                             <a href="{{ route('admin.comment.index') }}" class="btn btn-secondary mt-2">Quay lại</a>
                         </form>

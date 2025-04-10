@@ -46,6 +46,14 @@ class CommentController extends Controller
     }
     public function replyAdmin(Request $request, CommentService $commentService)
     {
+        $request->validate([
+            'rep_content' => 'required|string|min:1|max:500',
+        ], [
+            'rep_content.required' => 'Vui lòng nhập nội dung phản hồi',
+            'rep_content.min' => 'Nội dung phản hồi phải có ít nhất 1 ký tự',
+            'rep_content.max' => 'Nội dung phản hồi không được vượt quá 500 ký tự'
+        ]);
+
         $data = [
             'user_id' => Auth::id(),
             'comment_id' => $request->comment_id,
@@ -113,6 +121,16 @@ class CommentController extends Controller
   
     public function reply(Request $request, CommentService $commentService)
     {
+        $request->validate([
+            'rep_content' => 'required|string|min:1|max:500',
+            'comment_id' => 'required|exists:comments,id',
+        ], [
+            'rep_content.required' => 'Vui lòng nhập nội dung phản hồi',
+            'rep_content.min' => 'Nội dung phản hồi phải có ít nhất 1 ký tự',
+            'rep_content.max' => 'Nội dung phản hồi không được vượt quá 500 ký tự',
+            'comment_id.exists' => 'Bình luận không tồn tại'
+        ]);
+
         $data = [
             'user_id' => Auth::id(),
             'comment_id' => $request->comment_id,
