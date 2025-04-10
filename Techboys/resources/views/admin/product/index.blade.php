@@ -57,8 +57,8 @@
                                         <td>{{ $index++ }}</td>
                                         <td>
                                             <img src="{{ url('') }}/admin/assets/images/product/{{ $product->img }}"
-                                                 alt="{{ $product->name }}" class="img-fluid"
-                                                 style="max-width: 100px; height: auto;">
+                                                alt="{{ $product->name }}" class="img-fluid"
+                                                style="max-width: 100px; height: auto;">
                                         </td>
                                         <td>{{ $product->name }}</td>
                                         <td>{{ $product->brand->name }}</td>
@@ -81,19 +81,19 @@
                                         <td>{{ $product->created_at->format('d/m/Y') }}</td>
                                         <td class="text-center">
                                             <a href="{{ $product->deleted_at ? route('admin.product.restore', $product->id) : route('admin.product.hide', $product->id) }}"
-                                               title="Nhấn để {{ $product->deleted_at ? 'HIỆN' : 'ẨN' }} sản phẩm"
-                                               class="{{ $product->deleted_at ? 'bi-eye-fill text-success' : 'bi-eye-slash text-danger' }} fs-4">
+                                                title="Nhấn để {{ $product->deleted_at ? 'HIỆN' : 'ẨN' }} sản phẩm"
+                                                class="{{ $product->deleted_at ? 'bi-eye-fill text-success' : 'bi-eye-slash text-danger' }} fs-4">
                                             </a>
                                             <a href="{{ route('admin.product.edit', ['id' => $product->id]) }}"
-                                               class="bi-pencil-fill text-warning fs-4"
-                                               title="Nhấn để sửa sản phẩm"></a>
+                                                class="bi-pencil-fill text-warning fs-4" title="Nhấn để sửa sản phẩm"></a>
                                             <a href="{{ route('admin.product.imageIndex', ['productId' => $product->id]) }}"
-                                               class="bi-images fs-4" title="Kho ảnh của sản phẩm {{ $product->name }}"></a>
+                                                class="bi-images fs-4"
+                                                title="Kho ảnh của sản phẩm {{ $product->name }}"></a>
 
 
                                             <a href="{{ route('admin.stock.index', ['id' => $product->id]) }}"
-                                               class="bi-box-seam text-success fs-4"
-                                               title="Nhấn để cập nhập số lượng sản phẩm {{ $product->name }}"></a>
+                                                class="bi-box-seam text-success fs-4"
+                                                title="Nhấn để cập nhật số lượng sản phẩm {{ $product->name }}"></a>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -103,4 +103,4 @@
                 </div>
             </section>
         </div>
-@endsection
+    @endsection
