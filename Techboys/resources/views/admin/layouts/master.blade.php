@@ -194,12 +194,12 @@
                                 <span>Banner</span>
                             </a>
                         </li>
-                        <li class="sidebar-item {{ request()->routeIs('admin.createBillAdmin*') ? 'active' : '' }}">
+                        {{-- <li class="sidebar-item {{ request()->routeIs('admin.createBillAdmin*') ? 'active' : '' }}">
                             <a href="{{route('admin.bill.create')}}" class='sidebar-link'>
                                 <i class="bi bi-bookmarks-fill"></i>
                                 <span>Đặt hàng</span>
                             </a> <!-- Thêm thẻ đóng </a> vào đây -->
-                        </li>
+                        </li> --}}
                         <li class="sidebar-item {{ request()->routeIs('admin.config*') ? 'active' : '' }}">
                             <a href="{{ route('admin.config.index') }}" class='sidebar-link'>
                                 <i class="bi bi-gear-fill"></i>
