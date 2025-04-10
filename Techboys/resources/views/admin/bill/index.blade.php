@@ -27,19 +27,24 @@
 
             <!-- Dropdown lọc trạng thái đơn hàng -->
             <div class="row mb-3">
-                <div class="col-md-4">
-                    <select id="filter-status" class="form-select">
-                        <option value="" selected disabled>-- Chọn trạng thái --</option>
-                        <option value="">Tất cả </option>
-                        <option value="1" {{ request('status') == '1' ? 'selected' : '' }}>Chờ xử lý</option>
-                        <option value="2" {{ request('status') == '2' ? 'selected' : '' }}>Đang giao</option>
-                        <option value="3" {{ request('status') == '3' ? 'selected' : '' }}>Đã giao</option>
-                        <option value="4" {{ request('status') == '4' ? 'selected' : '' }}>Đã nhận hàng</option>
-                        <option value="0" {{ request('status') == '0' ? 'selected' : '' }}>Đã huỷ</option>
-
-                    </select>
+                <div class="col d-flex justify-content-between align-items-center">
+                    <div class="col-md-4">
+                        <select id="filter-status" class="form-select">
+                            <option value="" selected disabled>-- Chọn trạng thái --</option>
+                            <option value="">Tất cả </option>
+                            <option value="1" {{ request('status') == '1' ? 'selected' : '' }}>Chờ xử lý</option>
+                            <option value="2" {{ request('status') == '2' ? 'selected' : '' }}>Đang giao</option>
+                            <option value="3" {{ request('status') == '3' ? 'selected' : '' }}>Đã giao</option>
+                            <option value="4" {{ request('status') == '4' ? 'selected' : '' }}>Đã nhận hàng</option>
+                            <option value="0" {{ request('status') == '0' ? 'selected' : '' }}>Đã huỷ</option>
+                        </select>
+                    </div>
+                    <div>
+                        <a class="btn btn-primary" href="{{ route('admin.bill.create') }}">Tạo hoá đơn</a>
+                    </div>
                 </div>
             </div>
+            
 
             <section class="section">
                 <div class="card">
