@@ -197,6 +197,7 @@ Route::post('/logout', [UserController::class, 'logout'])->name('admin.logout');
             Route::get('/download.invoice/{id}', [BillController::class, 'download'])->name('admin.bill.download');
             Route::get('/bill-detail/{id}/show', [BillDetailsController::class, 'show'])->name('admin.bill.show');
             Route::get('invoice/{id}', [BillController::class, 'invoiceBill'])->name('admin.bill.invoice');
+            Route::get('invoice-direct/{id}', [BillController::class, 'invoiceDirectBill'])->name('admin.bill.direct');
             Route::post('cancel/{id}', [BillController::class, 'cancelBill'])->name('admin.bill.cancel');
             Route::get('confirm/{id}', [BillController::class, 'confirm'])->name('admin.bill.confirm');
             // Route::post('complete/{id}',[BillController::class,'completeBill'])->name('admin.bill.complete');
