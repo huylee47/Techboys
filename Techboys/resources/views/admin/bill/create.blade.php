@@ -211,7 +211,7 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="voucher_code">Mã giảm giá (Voucher):</label>
+                                    <label for="voucher_code"  class="form-label">Mã giảm giá (Voucher):</label>
                                     <div class="input-group">
                                         <input type="text" class="form-control" id="voucher_code"
                                             name="voucher_code">
@@ -230,7 +230,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label for="note">Ghi chú đơn hàng:</label>
+                                    <label for="note"  class="form-label">Ghi chú đơn hàng:</label>
                                     <textarea class="form-control" id="note" name="note" rows="3"></textarea>
                                 </div>
                             </div>
