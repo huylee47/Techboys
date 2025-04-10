@@ -40,7 +40,7 @@
                         </select>
                     </div>
                     <div>
-                        <a class="btn btn-primary" href="{{ route('admin.bill.create') }}">Tạo hoá đơn</a>
+                        <a class="btn btn-primary" href="{{ route('admin.bill.create') }}">Tạo hoá đơn mới</a>
                     </div>
                 </div>
             </div>
