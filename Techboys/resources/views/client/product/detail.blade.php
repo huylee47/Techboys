@@ -68,7 +68,7 @@
                                             <div class="techmarket-single-product-gallery-thumbnails"
                                                 data-ride="tm-slick-carousel"
                                                 data-wrap=".techmarket-single-product-gallery-thumbnails__wrapper"
-                                                data-slick="{&quot;infinite&quot;:false,&quot;slidesToShow&quot;:4,&quot;slidesToScroll&quot;:1,&quot;dots&quot;:false,&quot;arrows&quot;:true,&quot;vertical&quot;:true,&quot;verticalSwiping&quot;:true,&quot;focusOnSelect&quot;:true,&quot;touchMove&quot;:true,&quot;prevArrow&quot;:&quot;&lt;a href=\&quot;#\&quot;&gt;&lt;i class=\&quot;tm tm-arrow-up\&quot;&gt;&lt;\/i&gt;&lt;\/a&gt;&quot;,&quot;nextArrow&quot;:&quot;&lt;a href=\&quot;#\&quot;&gt;&lt;i class=\&quot;tm tm-arrow-down\&quot;&gt;&lt;\/i&gt;&lt;\/a&gt;&quot;,&quot;asNavFor&quot;:&quot;#techmarket-single-product-gallery .woocommerce-product-gallery__wrapper&quot;,&quot;responsive&quot;:[{&quot;breakpoint&quot;:765,&quot;settings&quot;:{&quot;vertical&quot;:false,&quot;horizontal&quot;:true,&quot;verticalSwiping&quot;:false,&quot;slidesToShow&quot;:4}}]}">
+                                                data-slick="{&quot;infinite&quot;:false,&quot;slidesToShow&quot;:4,&quot;slidesToScroll&quot;:1,&quot;dots&quot;:false,&quot;arrows&quot;:true,&quot;vertical&quot;:true,&quot;verticalSwiping&quot;:true,&quot;focusOnSelect&quot;:true,&quot;touchMove&quot;:true,&quot;prevArrow&quot;:&quot;&lt;a href=\&quot;#\&quot;&gt;&lt;i class=\&quot;tm tm-arrow-up\&quot;&gt;&lt;\/i&gt;&quot;,&quot;nextArrow&quot;:&quot;&lt;a href=\&quot;#\&quot;&gt;&lt;i class=\&quot;tm tm-arrow-down\&quot;&gt;&lt;\/i&gt;&quot;,&quot;asNavFor&quot;:&quot;#techmarket-single-product-gallery .woocommerce-product-gallery__wrapper&quot;,&quot;responsive&quot;:[{&quot;breakpoint&quot;:765,&quot;settings&quot;:{&quot;vertical&quot;:false,&quot;horizontal&quot;:true,&quot;verticalSwiping&quot;:false,&quot;slidesToShow&quot;:4}}]}">
                                                 <figure class="techmarket-single-product-gallery-thumbnails__wrapper">
                                                     @foreach ($images as $img)
                                                         <figure
@@ -445,7 +445,10 @@
                                                                                             <form method="post"
                                                                                                 action="{{ route('client.comment.reply') }}">
                                                                                                 @csrf
-                                                                                                <textarea rows="3" name="rep_content" placeholder="Nhập phản hồi"></textarea>
+                                                                                                <textarea rows="3" name="rep_content" placeholder="Nhập phản hồi" required minlength="1" maxlength="500"></textarea>
+                                                                                                @error('rep_content') 
+                                                                                                    <span class="text-danger">{{ $message }}</span>
+                                                                                                @enderror
                                                                                                 <input type="hidden"
                                                                                                     name="comment_id"
                                                                                                     value="{{ $comments->id }}">
