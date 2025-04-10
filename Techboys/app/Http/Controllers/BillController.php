@@ -92,7 +92,7 @@ class BillController extends Controller
 
             $paymentMethodMap = [
                 'cod' => 1,
-                'direct' => 2,
+                'direct' => 0,
             ];
             $paymentMethodValue = $paymentMethodMap[$validated['payment_method']] ?? 1;
 
@@ -120,7 +120,7 @@ class BillController extends Controller
 
             $total = $subtotal + $shippingFee - $discountAmount;
 
-            dd($total);
+            // dd($total);
 
             $loggedInAdminId = Auth::id();
             $userId = $validated['user_id'];
@@ -137,7 +137,7 @@ class BillController extends Controller
                 'total' => $total,
                 'payment_method' => $paymentMethodValue,
                 'payment_status' => $paymentStatus,
-                'status_id' => ($validated['payment_method'] === 'cod') ? 3 : 4,
+                'status_id' => 1,
                 'voucher_code' => $voucherCode,
                 'discount_amount' => $discountAmount,
                 'fee_shipping' => $shippingFee,
@@ -450,6 +450,34 @@ class BillController extends Controller
         }
     }
 
+    public function invoiceDirectBill($id){
+        $bill = Bill::find($id);
+
+        if (!$bill) {
+            return redirect()->route('admin.bill.index')->with('error', 'Không tìm thấy hóa đơn!');
+        }
+
+        if ($bill->status_id != 1) {
+            return redirect()->route('admin.bill.index')->with('error', 'Hoá đơn không hợp lệ để xác nhận!');
+        }
+
+        $billDetails = BillDetails::where('bill_id', $id)->get();
+
+        try {
+            DB::beginTransaction();
+
+            $bill->update([
+                'status_id' => 4,
+                'payment_status' => 1,
+            ]);
+
+            DB::commit();
+            return redirect()->route('admin.bill.index')->with('success', 'Xác nhận thanh toán thành công!');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->route('admin.bill.index')->with('error', 'Đã xảy ra lỗi khi xác nhận hoá đơn!');
+        }
+    }
 
 
     public function cancelBill(Request $request, $id)
