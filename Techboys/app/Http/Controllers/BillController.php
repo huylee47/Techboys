@@ -182,8 +182,8 @@ class BillController extends Controller
         ]);
 
         $product = Product::find($request->product_id);
+        $promotion = Promotion::where('product_id', $request->product_id)->first();
         $variants = ProductVariant::where('product_id', $request->product_id)->get();
-        $promotions = Promotion::where('product_id', $request->product_id)->get();
         $attributeValues = AttributesValue::all()->keyBy('id');
         $attributes = Attributes::all()->keyBy('id');
 
@@ -234,6 +234,9 @@ class BillController extends Controller
                 })->values(),
                 'has_variants' => true
             ]);
+        }
+        if ($promotion && now()->lt(Carbon::parse($promotion->end_date))) {
+            $product->base_price = round($product->base_price * (1 - $promotion->discount_percent / 100), 2);
         }
         return response()->json([
             'product' => [
