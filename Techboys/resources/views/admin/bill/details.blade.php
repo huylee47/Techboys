@@ -48,7 +48,7 @@
                                             <span class="badge bg-warning">Chưa thanh toán</span>
                                         @endif
                                         @if ($bill->voucher)
-                                            <span class="badge bg-success">Áp dụng Voucher</span>
+                                            <span cldiv class="ms-auto">ass="badge bg-success">Áp dụng Voucher</span>
                                         @endif
                                     </div>
 
