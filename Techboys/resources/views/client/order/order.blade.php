@@ -53,7 +53,7 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    @foreach ($searchedOrders as $searchedOrder)
+                                                    @foreach ($searchedOrders->sortByDesc('created_at') as $searchedOrder)
                                                         <tr>
                                                             @auth
                                                             <td>{{ $searchedOrder->order_id }}</td>
@@ -143,7 +143,7 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody id="orderTableBody">
-                                                    @foreach ($loadAll as $bill)
+                                                    @foreach ($loadAll->sortByDesc('created_at') as $bill)
                                                         <tr>
                                                             <td>{{ $bill->order_id }}</td>
                                                             <td>
