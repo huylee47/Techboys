@@ -166,7 +166,7 @@
                                         <tr>
                                             <th>Tên Sản Phẩm</th>
                                             <th>Số Lượng</th>
-                                            <th>Giá gốc</th>
+                                            <th>Giá bán</th>
                                             <th>Khuyến mại</th>
                                             <th>Tổng tiền của sản phẩm </th>
                                         </tr>
