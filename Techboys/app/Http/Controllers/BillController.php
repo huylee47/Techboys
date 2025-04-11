@@ -96,7 +96,7 @@ class BillController extends Controller
             ];
             $paymentMethodValue = $paymentMethodMap[$validated['payment_method']] ?? 1;
 
-            $paymentStatus = ($validated['payment_method'] === 'direct') ? 1 : 0;
+            // $paymentStatus = ($validated['payment_method'] === 'direct') ? 1 : 0;
 
             $shippingFee = $validated['shipping_fee'] ?? 0;
 
@@ -136,7 +136,7 @@ class BillController extends Controller
                 'address' => $validated['address'],
                 'total' => $total,
                 'payment_method' => $paymentMethodValue,
-                'payment_status' => $paymentStatus,
+                'payment_status' => 0,
                 'status_id' => 1,
                 'voucher_code' => $voucherCode,
                 'discount_amount' => $discountAmount,
@@ -151,7 +151,7 @@ class BillController extends Controller
                 BillDetails::create([
                     'bill_id' => $bill->id,
                     'product_id' => $productData['product_id'],
-                    'variant_id' => $productData['variant_id'],
+                    'variant_id' => $productData['variant_id'] ?? null,
                     'quantity' => $productData['quantity'],
                     'price' => $productData['price'],
                 ]);
