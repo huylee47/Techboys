@@ -10,7 +10,7 @@
                         <a href="{{ route('home') }}">Trang chủ</a>
                         <span class="delimiter">
                             <i class="tm tm-breadcrumbs-arrow-right"></i>
-                        </span><a href="product-category.html">{{ $product->category->name }}</a>
+                        </span><a href="{{route('client.category.products',['categoryId'=>$product->category_id])}}">{{ $product->category->name }}</a>
                         <span class="delimiter">
                             <i class="tm tm-breadcrumbs-arrow-right"></i>
                         </span>{{ $product->name }}
