@@ -67,9 +67,10 @@ class RevenueController extends Controller
     public function filterRevenue(Request $request)
     {
         $startDate = Carbon::parse($request->start_date)->startOfDay();
-        $endDate = Carbon::parse($request->end_date)->endOfDay();
+        $endDate = Carbon::parse($request->end_date)->addDay()->startOfDay();
     
-        $filteredRevenue = Bill::whereBetween('created_at', [$startDate, $endDate])
+        $filteredRevenue = Bill::where('created_at', '>=', $startDate)
+            ->where('created_at', '<', $endDate)
             ->where('payment_status', 1)
             ->where('status_id', 4)
             ->selectRaw('DATE(created_at) as date, SUM(total) as revenue')
@@ -81,11 +82,33 @@ class RevenueController extends Controller
         $maxRevenueDay = $filteredRevenue->isEmpty() ? null : $filteredRevenue->keys()->last();
         $maxRevenueValue = $filteredRevenue->isEmpty() ? 0 : $filteredRevenue->max();
     
-        $daysCount = $startDate->diffInDays($endDate);
-        $averageRevenuePerDay = $daysCount > 0 ? $totalRevenue / $daysCount : 0;
+        $successfulOrders = Bill::where('created_at', '>=', $startDate)
+            ->where('created_at', '<', $endDate)
+            ->where('payment_status', 1)
+            ->where('status_id', 4)
+            ->count();
     
-        $bestSellingProducts = BillDetails::whereHas('bill', function($query) use ($startDate, $endDate) {
-            $query->whereBetween('created_at', [$startDate, $endDate])
+        $cancelledOrders = Bill::where('created_at', '>=', $startDate)
+            ->where('created_at', '<', $endDate)
+            ->where('status_id', 0)
+            ->count();
+    
+        $billShipping = Bill::where('created_at', '>=', $startDate)
+            ->where('created_at', '<', $endDate)
+            ->where('status_id', 2)
+            ->count();
+    
+        $billPending = Bill::where('created_at', '>=', $startDate)
+            ->where('created_at', '<', $endDate)
+            ->where('status_id', 1)
+            ->count();
+    
+        $daysCount = $startDate->diffInDays($endDate) ?: 1;
+        $averageRevenuePerDay = $totalRevenue / $daysCount;
+    
+        $bestSellingProducts = BillDetails::whereHas('bill', function ($query) use ($startDate, $endDate) {
+            $query->where('created_at', '>=', $startDate)
+                ->where('created_at', '<', $endDate)
                 ->where('payment_status', 1)
                 ->where('status_id', 4);
         })
@@ -106,8 +129,15 @@ class RevenueController extends Controller
             'max_revenue_value' => $maxRevenueValue,
             'average_revenue_per_day' => $averageRevenuePerDay,
             'best_selling_products' => $bestSellingProducts,
-            'products' => $products
+            'products' => $products,
+            'successful_orders' => $successfulOrders,
+            'cancelled_orders' => $cancelledOrders,
+            'bill_shipping' => $billShipping,
+            'bill_pending' => $billPending,
+            'start_date' => $startDate->format('Y-m-d'),
+            'end_date' => $endDate->format('Y-m-d'),
         ]);
     }
+    
     
 }
