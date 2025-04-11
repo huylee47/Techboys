@@ -454,6 +454,7 @@
                                                                                 @endif
                                                                             </span>
                                                                             <!-- .price -->
+                                                                        <a href="{{ route('client.product.show', ['slug' => $HeadPhoneProduct->slug]) }}">
                                                                             <h2 class="woocommerce-loop-product__title">
                                                                                 {{ $HeadPhoneProduct->name }}
                                                                             </h2>
@@ -466,8 +467,9 @@
                                                                         </a>
                                                                         <div class="hover-area">
                                                                             <a class="button add_to_cart_button"
-                                                                                href="{{ route('client.cart.index') }}">Xem
+                                                                                href="{{ route('client.product.show', ['slug' => $HeadPhoneProduct->slug]) }}">Xem
                                                                                 chi tiết</a>
+                                                                            </a>
                                                                         </div>
                                                                         <!-- .hover-area -->
                                                                     </div>
