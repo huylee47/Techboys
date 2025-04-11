@@ -336,8 +336,12 @@
                         document.getElementById('revenueMonthTitle').innerText =
                             "Doanh thu trung bình sau khi lọc";
                         document.getElementById('averageRevenueValue').innerText =
-                            new Intl.NumberFormat('vi-VN').format(data.average_revenue_per_day) +
+                            new Intl.NumberFormat('vi-VN', {
+                                minimumFractionDigits: 0,
+                                maximumFractionDigits: 2
+                            }).format(data.average_revenue_per_day) +
                             " VNĐ";
+
 
                         document.getElementById('billSuccess').innerText =
                             "";
