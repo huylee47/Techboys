@@ -585,23 +585,22 @@ class BillController extends Controller
         $query = Bill::with(['billDetails.product', 'billDetails.variant']);
 
         if (Auth::check()) {
-            // Search by order ID for logged-in users
             $orderId = $request->input('order_id');
             $query->where('order_id', $orderId)->where('user_id', Auth::id());
+            $searchedOrders = $query->get();
         } else {
-            // Search by phone for guests
             $phone = $request->input('phone');
-            $query->where('phone', $phone);
+            $searchedOrders = $query->where('phone', $phone)->get();
         }
 
-        $searchedOrder = $query->first();
-
-        if ($searchedOrder) {
-            foreach ($searchedOrder->billDetails as $detail) {
-                if ($detail->variant_id) {
-                    $attributeJson = ProductVariant::where('id', $detail->variant_id)->value('attribute_values');
-                    $attributeArray = json_decode($attributeJson, true) ?? [];
-                    $detail->attributes = implode(', ', AttributesValue::whereIn('id', $attributeArray)->pluck('value')->toArray());
+        if ($searchedOrders->isNotEmpty()) {
+            foreach ($searchedOrders as $searchedOrder) {
+                foreach ($searchedOrder->billDetails as $detail) {
+                    if ($detail->variant_id) {
+                        $attributeJson = ProductVariant::where('id', $detail->variant_id)->value('attribute_values');
+                        $attributeArray = json_decode($attributeJson, true) ?? [];
+                        $detail->attributes = implode(', ', AttributesValue::whereIn('id', $attributeArray)->pluck('value')->toArray());
+                    }
                 }
             }
         } else {
@@ -612,9 +611,8 @@ class BillController extends Controller
             ->where('user_id', Auth::id())
             ->get() : [];
 
-        return view('client.order.order', compact('searchedOrder', 'loadAll'));
+        return view('client.order.order', compact('searchedOrders', 'loadAll'));
     }
-
 
     public function CancelOrder(Request $request)
     {
