@@ -50,7 +50,7 @@ class BillController extends Controller
             $query->where('status_id', $request->status);
         }
 
-        $bills = $query->orderByDesc('created_at')->paginate(10);
+        $bills = $query->orderByDesc('created_at')->get();
         return view('admin.bill.index', compact('bills'));
     }
 
