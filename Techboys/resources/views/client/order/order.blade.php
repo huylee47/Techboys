@@ -1,5 +1,5 @@
 @extends('client.layouts.master')
-
+<link rel="stylesheet" href="{{ url('') }}/admin/assets/vendors/simple-datatables/style.css">
 @section('main')
     <div id="content" class="site-content" tabindex="-1">
         <div class="col-full">
@@ -16,10 +16,10 @@
                                             <form action="{{ route('client.orders.search') }}" method="GET">
                                                 @guest
                                                     <input type="text" name="phone" placeholder="Nhập số điện thoại" required>
-                                                @else
-                                                    <input type="text" name="order_id" placeholder="Nhập mã đơn hàng" required>
+                                              
+                                                 <button type="submit" class="btn btn-primary">Tìm kiếm</button>
                                                 @endguest
-                                                <button type="submit" class="btn btn-primary">Tìm kiếm</button>
+                                               
                                             </form>
                                         </div>
                                         <br>
@@ -36,7 +36,7 @@
                         @endif
                                         @if(isset($searchedOrders) && $searchedOrders->isNotEmpty())
                                             <!-- Display search results -->
-                                            <table class="table table-bordered">
+                                            <table class="table table-bordered" id="table1">
                                                 @if(!Auth::check())
                                                     <h5>Nếu bạn muốn hủy đơn hàng vui lòng liên hệ với chúng tôi: 0901234567</h5>
                                                 @endif
@@ -127,7 +127,7 @@
                                             </table>
                                         @elseif(Auth::check() && isset($loadAll))
                                             <!-- Display all orders -->
-                                            <table class="table table-bordered">
+                                            <table class="table table-bordered" id="table1">
                                                 <thead>
                                                     <tr>
                                                         <th>Mã đơn hàng</th>
@@ -230,4 +230,13 @@
         </div>
         <!-- .col-full -->
     </div>
+
+<script src="{{ url('') }}/admin/assets/vendors/simple-datatables/simple-datatables.js"></script>
+<script>
+    let table1 = document.querySelector('#table1');
+    if (table1) {
+        let dataTable = new simpleDatatables.DataTable(table1);
+    }
+</script>
+<script src="{{ url('') }}/admin/assets/vendors/simple-datatables/simple-datatables.js"></script>
 @endsection
