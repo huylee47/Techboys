@@ -7,6 +7,7 @@ use App\Models\BillDetails;
 use App\Models\Cart;
 use App\Models\ProductVariant;
 use App\Models\Promotion;
+use App\Models\Voucher;
 use App\Service\CartService;
 use App\Service\CartPriceService;
 use Carbon\Carbon;
@@ -31,6 +32,7 @@ class CartController extends Controller
     public function showCart()
     {
         $cartItems = $this->cartService->getCartItems();
+        $voucher = Voucher::get();
         // return response()->json($cartItems);
         if ($cartItems instanceof \Illuminate\Http\JsonResponse) {
             return view('client.cart.cart', [
@@ -100,6 +102,7 @@ class CartController extends Controller
             'discountAmount' => $totals['discountAmount'],
             'voucher' => $totals['voucher'],
             'soldQuantity'=>(int)$soldQuantity ?? 0,
+            'voucherList'=>$voucher,
         ]);
     }
     
