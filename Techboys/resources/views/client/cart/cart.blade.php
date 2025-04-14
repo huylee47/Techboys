@@ -117,7 +117,7 @@
                                                             <div class="voucher">
                                                                 <label for="voucher_code">Voucher:</label>
                                                                 <select name="voucher_code" id="voucher_code" class="input-text selectpicker" data-live-search="true">
-                                                                    <option value="" disabled selected> Chọn voucherㅤㅤ  </option>
+                                                                    <option value="" disabled selected> Chọn voucher hiện cóㅤㅤ  </option>
                                                                     @foreach($voucherList as $v)
                                                                     <option value="{{$v->code}}">{{$v->code}}</option>
                                                                     @endforeach
