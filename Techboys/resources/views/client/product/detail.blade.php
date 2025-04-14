@@ -188,6 +188,15 @@
                                                                 đ
                                                             </span>
                                                         </p>
+                                                        <div class="quantity d-flex">
+                                                            <label for="quantity-input-1">Số lượng</label>
+                                                            <input
+                                                                value="1"
+                                                                type="number" name="quantity"
+                                                                class="input-text qty text update-cart"
+                                                                min="1"
+                                                                >
+                                                        </div>
                                                     @else
                                                         {{-- <div class="choice storage-choice active" data-value="default"
                                                             data-price="{{ $defaultVariant['discounted_price'] }}"
@@ -204,14 +213,23 @@
                                                                 đ
                                                             </span>
                                                         </p>
+                                                        <div class="quantity d-flex">
+                                                            <label for="quantity-input-1">Số lượng</label>
+                                                            <input
+                                                                value="1"
+                                                                type="number" name="quantity"
+                                                                class="input-text qty text update-cart"
+                                                                min="1"
 
+                                                                >
+                                                        </div>
                                                         <br>
                                                     @endif
                                                     <!-- .single-product-header -->
 
                                                     <!-- .quantity -->
                                                     <div class="cart-button-container">
-                                                        <input type="hidden" name="quantity" value="1">
+                                                        {{-- <input type="hidden" name="quantity" value="1"> --}}
                                                         <input type="hidden" name="product_id"
                                                             value="{{ $product->id }}">
                                                         @if (!empty($variants) && isset($defaultVariant['id']))
