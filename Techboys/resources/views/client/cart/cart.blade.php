@@ -118,16 +118,20 @@
                                                                 <label for="voucher_code">Voucher:</label>
                                                                 <select name="voucher_code" id="voucher_code" class="input-text selectpicker" data-live-search="true">
                                                                     <option value="" disabled selected> Chọn voucher hiện cóㅤㅤ  </option>
-                                                                    @foreach($voucherList as $v)
-                                                                    <option value="{{$v->code}}">{{$v->code}}</option>
-                                                                    @endforeach
+                                                                    @foreach ($voucherList as $item)
+                                                                    <option value="{{ $item->code }}"
+                                                                        {{ (isset($voucherused) && $voucherused->code === $item->code) ? 'selected' : '' }}>
+                                                                        {{ $item->code }}
+                                                                    </option>
+                                                                @endforeach
+                                                            
                                                                 </select>
                                                                 <button type="submit" id="apply-voucher" class="button">Sử dụng</button>
                                                             </div>
                                                             
                                                             <p id="voucher-error" class="text-danger small"></p>
                                                             <p id="voucher-success" class="text-success small"></p>
-                                                            <a  class="button" href="{{route('home')}}">Tiếp tục mua hàng
+                                                            <a  class="button" href="{{route('client.product.index')}}">Tiếp tục mua hàng
                                                             </a>
                                                         </td>
                                                     </tr>

@@ -102,6 +102,7 @@ class CartController extends Controller
             'voucher' => $totals['voucher'],
             'soldQuantity'=>(int)$soldQuantity ?? 0,
             'voucherList'=>$voucher,
+            'voucherused'=>$totals['voucher'] ?? null
         ]);
     }
     
