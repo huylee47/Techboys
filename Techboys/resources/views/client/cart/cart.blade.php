@@ -116,13 +116,15 @@
                                                         <td class="actions" colspan="6">
                                                             <div class="voucher">
                                                                 <label for="voucher_code">Voucher:</label>
-                                                                <input type="text" placeholder="Nhập voucher"
-                                                                    value=""
-                                                                    id="voucher_code" class="input-text"
-                                                                    name="voucher_code">
-                                                                <button type="submit" id="apply-voucher" class="button">Sử
-                                                                    dụng</button>
+                                                                <select name="voucher_code" id="voucher_code" class="input-text selectpicker" data-live-search="true">
+                                                                    <option value="" disabled selected> Chọn voucherㅤㅤ  </option>
+                                                                    @foreach($voucherList as $v)
+                                                                    <option value="{{$v->code}}">{{$v->code}}</option>
+                                                                    @endforeach
+                                                                </select>
+                                                                <button type="submit" id="apply-voucher" class="button">Sử dụng</button>
                                                             </div>
+                                                            
                                                             <p id="voucher-error" class="text-danger small"></p>
                                                             <p id="voucher-success" class="text-success small"></p>
                                                             <a  class="button" href="{{route('home')}}">Tiếp tục mua hàng
