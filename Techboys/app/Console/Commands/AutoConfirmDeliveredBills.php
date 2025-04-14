@@ -69,7 +69,7 @@ class AutoConfirmDeliveredBills extends Command
 
                 // Cập nhật trạng thái thanh toán thành "Đã thanh toán" (payment_status = 1)
                 // Giống như logic khi khách hàng tự bấm xác nhận
-                $bill->payment_status = 1;
+                // $bill->payment_status = 1;
 
                 // Lưu thay đổi vào cơ sở dữ liệu
                 $bill->save();
