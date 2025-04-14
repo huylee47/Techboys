@@ -68,7 +68,6 @@ class CartController extends Controller
             } else {
                 $cart->attributes = '';
             }
-            $soldQuantity = 0;
             if ($cart->variant_id) {
                 $qty = BillDetails::where('variant_id', $cart->variant_id)
                     ->whereHas('bill', function ($query) {
