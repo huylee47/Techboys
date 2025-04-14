@@ -28,7 +28,7 @@ class Kernel extends ConsoleKernel
         // $schedule->command('inspire')->hourly();
 
         // Thêm dòng này: Chạy command 'bills:autoconfirm' hàng ngày
-        $schedule->command('bills:autoconfirm')->daily();
+        // $schedule->command('bills:autoconfirm')->daily();
 
         // Đổi thành (để chạy mỗi phút):
         $schedule->command('bills:autoconfirm')->everyMinute();
