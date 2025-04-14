@@ -110,7 +110,7 @@
                                                                         @if($searchedOrder->status_id == 3)
                                                                             <form action="{{ route('client.orders.confirm', $searchedOrder->id) }}" method="POST">
                                                                                 @csrf
-                                                                                <button class="btn btn-success" type="submit">Xác nhận</button>
+                                                                                <button class="btn btn-success"  onclick="return confirm('Bạn có chắc chắn muốn xác nhận đơn hàng này?')" type="submit">Xác nhận</button>
                                                                             </form>
                                                                         @endif
                                                                     @endauth

@@ -302,69 +302,78 @@
                                                             @endif
                                                             @if (Auth::check())
                                                                 @php
-                                                                    $existingComment = $comment
-                                                                        ->where('user_id', Auth::id())
-                                                                        ->first();
+                                                                    $hasPurchased = DB::table('bills')
+                                                                        ->join('bill_details', 'bills.id', '=', 'bill_details.bill_id')
+                                                                        ->where('bills.user_id', Auth::id())
+                                                                        ->where('bill_details.product_id', $product->id)
+                                                                        ->exists();
                                                                 @endphp
-                                                                @if ($existingComment)
-                                                                    <p>Bạn đã bình luận cho sản phẩm này, mỗi người chỉ được
-                                                                        bình luận một lần cho một sản phẩm.</p>
+
+                                                                @if ($hasPurchased)
+                                                                    @php
+                                                                        $existingComment = $comment
+                                                                            ->where('user_id', Auth::id())
+                                                                            ->first();
+                                                                    @endphp
+                                                                    @if ($existingComment)
+                                                                        <p>Bạn đã bình luận cho sản phẩm này, mỗi người chỉ được bình luận một lần cho một sản phẩm.</p>
+                                                                    @else
+                                                                        <form novalidate="" class="comment-form" id="commentform" method="post"
+                                                                            action="{{ route('client.comment.store') }}" enctype="multipart/form-data">
+                                                                            @csrf
+                                                                            <div class="comment-form-rating">
+                                                                                <label>Đánh giá của bạn</label>
+                                                                                <div class="stars">
+                                                                                    <a href="#" class="star-1">★</a>
+                                                                                    <a href="#" class="star-2">★</a>
+                                                                                    <a href="#" class="star-3">★</a>
+                                                                                    <a href="#" class="star-4">★</a>
+                                                                                    <a href="#" class="star-5">★</a>
+                                                                                </div>
+                                                                                <input type="hidden" name="rate"
+                                                                                    id="rating-value" value="0">
+                                                                                @error('rate')
+                                                                                    @php $message = $message ?? ''; @endphp
+                                                                                    <span
+                                                                                        class="text-danger">{{ $message }}</span>
+                                                                                @enderror
+                                                                            </div>
+                                                                            <p class="comment-form-comment">
+                                                                                <label for="comment">Bình luận của bạn</label>
+                                                                                <textarea aria-required="true" rows="8" cols="45" name="comment" id="comment"></textarea>
+                                                                                @error('comment')
+                                                                                    @php $message = $message ?? ''; @endphp
+                                                                                    <span
+                                                                                        class="text-danger">{{ $message }}</span>
+                                                                                @enderror
+                                                                            </p>
+                                                                            <div class="col-md-6 mb-3">
+                                                                                <label for="media"
+                                                                                    class="form-label">Ảnh/Video</label>
+                                                                                <input class="form-control" type="file"
+                                                                                    id="media" name="media"
+                                                                                    accept="image/*,video/*">
+                                                                                <div id="media-preview-container"
+                                                                                    class="mt-3"
+                                                                                    style="display: flex; gap: 10px; flex-wrap: wrap;">
+                                                                                </div>
+                                                                            </div>
+                                                                            <p class="form-submit">
+                                                                                <input type="submit" value="Bình luận"
+                                                                                    class="submit" id="submit"
+                                                                                    name="submit">
+                                                                                <input type="hidden" id="comment_post_ID"
+                                                                                    value="{{ $product->id }}"
+                                                                                    name="product_id">
+                                                                                <input type="hidden" value="0"
+                                                                                    id="comment_parent" name="comment_parent">
+                                                                                <input type="hidden" name="file_id"
+                                                                                    id="file_id" value="">
+                                                                            </p>
+                                                                        </form>
+                                                                    @endif
                                                                 @else
-                                                                    <form novalidate="" class="comment-form"
-                                                                        id="commentform" method="post"
-                                                                        action="{{ route('client.comment.store') }}"
-                                                                        enctype="multipart/form-data">
-                                                                        @csrf
-                                                                        <div class="comment-form-rating">
-                                                                            <label>Đánh giá của bạn</label>
-                                                                            <div class="stars">
-                                                                                <a href="#" class="star-1">★</a>
-                                                                                <a href="#" class="star-2">★</a>
-                                                                                <a href="#" class="star-3">★</a>
-                                                                                <a href="#" class="star-4">★</a>
-                                                                                <a href="#" class="star-5">★</a>
-                                                                            </div>
-                                                                            <input type="hidden" name="rate"
-                                                                                id="rating-value" value="0">
-                                                                            @error('rate')
-                                                                                @php $message = $message ?? ''; @endphp
-                                                                                <span
-                                                                                    class="text-danger">{{ $message }}</span>
-                                                                            @enderror
-                                                                        </div>
-                                                                        <p class="comment-form-comment">
-                                                                            <label for="comment">Bình luận của bạn</label>
-                                                                            <textarea aria-required="true" rows="8" cols="45" name="comment" id="comment"></textarea>
-                                                                            @error('comment')
-                                                                                @php $message = $message ?? ''; @endphp
-                                                                                <span
-                                                                                    class="text-danger">{{ $message }}</span>
-                                                                            @enderror
-                                                                        </p>
-                                                                        <div class="col-md-6 mb-3">
-                                                                            <label for="media"
-                                                                                class="form-label">Ảnh/Video</label>
-                                                                            <input class="form-control" type="file"
-                                                                                id="media" name="media"
-                                                                                accept="image/*,video/*">
-                                                                            <div id="media-preview-container"
-                                                                                class="mt-3"
-                                                                                style="display: flex; gap: 10px; flex-wrap: wrap;">
-                                                                            </div>
-                                                                        </div>
-                                                                        <p class="form-submit">
-                                                                            <input type="submit" value="Bình luận"
-                                                                                class="submit" id="submit"
-                                                                                name="submit">
-                                                                            <input type="hidden" id="comment_post_ID"
-                                                                                value="{{ $product->id }}"
-                                                                                name="product_id">
-                                                                            <input type="hidden" value="0"
-                                                                                id="comment_parent" name="comment_parent">
-                                                                            <input type="hidden" name="file_id"
-                                                                                id="file_id" value="">
-                                                                        </p>
-                                                                    </form>
+                                                                    <p>Bạn phải mua sản phẩm này để được bình luận</p>
                                                                 @endif
                                                             @else
                                                                 <p>Bạn phải <a href="{{ route('login.client') }}">đăng
