@@ -31,7 +31,10 @@ class AutoConfirmDeliveredBills extends Command
         $this->info('Bắt đầu quá trình tự động xác nhận hóa đơn...'); // Thông báo ra console khi chạy thủ công
 
         // 1. Xác định mốc thời gian cắt (cutoff): Hiện tại trừ đi 3 ngày
-        $cutoffDate = Carbon::now()->subDays(3);
+        // $cutoffDate = Carbon::now()->subDays(3);
+        // $cutoffDate = Carbon::now()->subHours(1);
+        // $cutoffDate = Carbon::now()->subMinutes(15);
+        $cutoffDate = Carbon::now()->subSeconds(20);
         $this->line("Mốc thời gian cắt (3 ngày trước): " . $cutoffDate->toDateTimeString()); // Hiển thị mốc thời gian
 
         // 2. Truy vấn các hóa đơn đủ điều kiện:
@@ -72,7 +75,7 @@ class AutoConfirmDeliveredBills extends Command
                 $bill->save();
 
                 $updatedCount++;
-                $this->info("-> Đã cập nhật hóa đơn ID: {$bill->id} thành trạng thái 4.");
+                $this->info("-> Đã cập nhật hóa đơn ID = {$bill->id} thành trạng thái = 4.");
                 Log::info("AutoConfirmDeliveredBills: Đã tự động cập nhật hóa đơn ID {$bill->id} (Order ID: {$bill->order_id}) sang trạng thái 4.");
             } catch (\Exception $e) {
                 // Nếu có lỗi xảy ra khi cập nhật (ví dụ: lỗi CSDL)
