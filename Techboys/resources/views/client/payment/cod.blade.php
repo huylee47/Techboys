@@ -58,17 +58,13 @@
             text-decoration: none;
         }
     </style>
-    <script>
-        setTimeout(function() {
-            window.location.href = "{{ route('home') }}";
-        }, 3000);
-    </script>
 </head>
 <body>
     <div class="success-container">
         <div class="checkmark"></div>
-        <p class="message">Đặt hàng thành công! Bạn sẽ được chuyển hướng về trang chủ sau 3 giây.</p>
-        <p>Nếu không, hãy nhấp vào <a href="{{ route('home') }}" class="redirect">đây</a>.</p>
+        <p class="message">Đặt hàng thành công!</p>
+        <p>Quay về trang chủ tại <a href="{{ route('home') }}" class="redirect">đây</a>.</p>
+        <p>Hoặc theo dõi đơn hàng tại <a href="{{ route('client.orders') }}" class="redirect">đây</a>. </p>
     </div>
 </body>
 </html>
