@@ -43,7 +43,7 @@
                 <div class="flex-row">
                     <p>
                         <label for="billing_first_name">Họ và Tên Người nhận</label>
-                        <input type="text" value="{{ $order->user->name }}" id="billing_first_name" name="full_name" disabled>
+                        <input type="text" value="{{ $order->full_name }}" id="billing_first_name" name="full_name" disabled>
                     </p>              
                     <p>
                         <label for="billing_phone">Số điện thoại

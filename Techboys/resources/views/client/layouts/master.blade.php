@@ -402,7 +402,7 @@
         <div id="bot-chat-icon" class="bot-real-time-icon">
             <img src="{{ url('') }}/admin/assets/images/config/{{ $config->favicon }}" alt="" width="40px">
             <div id="chat-title" class="chat-title">
-                Cần trợ giúp, chat cùng Techboys AI ngay
+                Chat cùng Techboys AI
             </div>
         </div>
 

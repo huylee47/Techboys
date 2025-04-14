@@ -123,45 +123,63 @@ class UserController extends Controller
         return redirect()->route('admin.user.index')->with('success', 'tạo tài khoản thành công.');
     }
 
+    public function checkPhone(Request $request)
+    {
+        $user = User::where('phone', $request->phone)->first();
+
+        if ($user) {
+            return response()->json([
+                'status' => 'exists',
+                'user' => [
+                    'name' => $user->name,
+                    'email' => $user->email,
+                    'address' => $user->address,
+                ]
+            ]);
+        } else {
+            return response()->json(['status' => 'not_found']);
+        }
+    }
 
     //client
     public function loginClient(Request $request)
     {
         $username = $request->input('username');
         $password = $request->input('password');
-    
+
         $account = User::where('username', $username)->first();
-    
+
         if (!$account) {
             return redirect()->back()->with('error', 'Không tìm thấy tài khoản.');
         }
-    
+
         if (!Hash::check($password, $account->password)) {
             return redirect()->back()->with('error', 'Mật khẩu không đúng.');
         }
-    
+
         if ($account->status != 1) {
             return redirect()->back()->with('error', 'Tài khoản của bạn đã bị khóa.');
         }
+
         if ($account->role_id != 1 && $account->email_verified_at == null) {
             return redirect()->back()->with('error', 'Vui lòng kiểm tra email và xác minh tài khoản');
         }
         Auth::login($account);
-    
+
         $cartId = session()->get('cart_id');
         $hasSessionCart = false;
-    
+
         if ($cartId) {
             $sessionCartItems = Cart::where('cart_id', $cartId)->get();
-    
+
             if ($sessionCartItems->count() > 0) {
                 $hasSessionCart = true;
-    
+
                 foreach ($sessionCartItems as $item) {
                     $existingItem = Cart::where('user_id', $account->id)
                         ->where('variant_id', $item->variant_id)
                         ->first();
-    
+
                     if ($existingItem) {
                         $existingItem->quantity += $item->quantity;
                         $existingItem->save();
@@ -171,15 +189,15 @@ class UserController extends Controller
                         $item->save();
                     }
                 }
-    
+
                 session()->forget('cart_id');
             }
         }
-    
+
         if ($hasSessionCart) {
             return redirect()->route('client.cart.index')->with('success', 'Đăng nhập thành công, vui lòng kiểm tra giỏ hàng của bạn.');
         }
-    
+
         return redirect()->route('home')->with('success', 'Đăng nhập thành công.');
     }
     public function create()
