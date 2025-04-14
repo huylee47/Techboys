@@ -79,7 +79,7 @@ class CartService{
                 'cart_id' => $cartId,
                 'product_id' => (int) $request->product_id,
                 'variant_id' => $request->variant_id,
-                'quantity' => 1,
+                'quantity' => $request->quantity,
             ]);
         }
         session()->put('cart_id', $cartId);
