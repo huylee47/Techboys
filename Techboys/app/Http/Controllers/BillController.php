@@ -180,45 +180,52 @@ class BillController extends Controller
         $request->validate([
             'product_id' => 'required|exists:products,id'
         ]);
-
+    
         $product = Product::find($request->product_id);
         $promotion = Promotion::where('product_id', $request->product_id)->first();
         $variants = ProductVariant::where('product_id', $request->product_id)->get();
         $attributeValues = AttributesValue::all()->keyBy('id');
         $attributes = Attributes::all()->keyBy('id');
-
+    
         $groupedAttributes = [];
-
+    
         if ($variants->isNotEmpty()) {
             $formattedVariants = $variants->map(function ($variant) use ($attributeValues, $attributes, &$groupedAttributes) {
                 $attributesData = json_decode($variant->attribute_values, true);
-
+    
                 $formattedAttributes = collect($attributesData)->mapWithKeys(function ($attrValueId, $attrName) use ($attributeValues, $attributes, &$groupedAttributes) {
                     $attributeValue = $attributeValues[$attrValueId]->value ?? 'Không xác định';
                     $attributeId = $attributeValues[$attrValueId]->attribute_id ?? null;
                     $attributeName = $attributes[$attributeId]->name ?? $attrName;
-
+    
                     $groupedAttributes[$attributeName]['id'] = $attributeId;
                     $groupedAttributes[$attributeName]['values'][] = [
                         'id' => $attrValueId,
                         'value' => $attributeValue
                     ];
-
+    
                     return [$attributeName => [
                         'id' => $attrValueId,
                         'value' => $attributeValue
                     ]];
                 });
-
+    
+                // Tính số lượng đã bán (đang chờ xử lý)
+                $pendingQty = BillDetails::where('variant_id', $variant->id)
+                    ->whereHas('bill', function ($query) {
+                        $query->where('status_id', 1);
+                    })
+                    ->sum('quantity');
+    
                 return [
                     'id' => $variant->id,
                     'attributes' => $formattedAttributes,
                     'price' => $variant->price,
-                    'stock' => $variant->stock,
+                    'stock' => max(0, $variant->stock - $pendingQty),
                     'discounted_price' => $variant->discounted_price
                 ];
             });
-
+    
             return response()->json([
                 'product' => [
                     'base_price' => $product->base_price,
@@ -235,13 +242,24 @@ class BillController extends Controller
                 'has_variants' => true
             ]);
         }
+    
+        // Nếu không có variants
+        $pendingQty = BillDetails::where('product_id', $product->id)
+            ->whereNull('variant_id')
+            ->whereHas('bill', function ($query) {
+                $query->where('status_id', 1);
+            })
+            ->sum('quantity');
+    
+        // Áp dụng giảm giá nếu có
         if ($promotion && now()->lt(Carbon::parse($promotion->end_date))) {
             $product->base_price = round($product->base_price * (1 - $promotion->discount_percent / 100), 2);
         }
+    
         return response()->json([
             'product' => [
                 'base_price' => $product->base_price,
-                'base_stock' => $product->base_stock
+                'base_stock' => max(0, $product->base_stock - $pendingQty),
             ],
             'has_variants' => false
         ]);
