@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Storage;
 use Illuminate\Support\Facades\Auth;
 use App\Service\CommentService;
+use Illuminate\Support\Facades\DB;
 
 class CommentController extends Controller
 {
@@ -80,11 +81,22 @@ class CommentController extends Controller
             return redirect()->back()->with('error', 'Bạn phải đăng nhập để bình luận.');
         }
 
+        // Check if the user has purchased the product
+        $hasPurchased = DB::table('bills')
+            ->join('bill_details', 'bills.id', '=', 'bill_details.bill_id')
+            ->where('bills.user_id', Auth::id())
+            ->where('bill_details.product_id', $request->product_id)
+            ->exists();
+
+        if (!$hasPurchased) {
+            return redirect()->back()->with('error', 'Bạn phải mua sản phẩm này để được bình luận.');
+        }
+
         $request->validate([
             'comment' => 'required',
             'rate' => 'required|numeric|min:1|max:5',
             'media' => 'nullable|file|mimes:jpeg,png,jpg,gif,svg,mp4|max:20480', // 20MB max
-        ],[
+        ], [
             'comment.required' => 'Vui lòng nhập bình luận.',
             'rate.required' => 'Vui lòng chọn đánh giá.',
             'rate.numeric' => 'Đánh giá phải là một số.',
