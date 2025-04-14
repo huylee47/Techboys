@@ -211,7 +211,7 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="voucher_code"  class="form-label">Mã giảm giá (Voucher):</label>
+                                    <label for="voucher_code" class="form-label">Mã giảm giá (Voucher):</label>
                                     <div class="input-group">
                                         <input type="text" class="form-control" id="voucher_code"
                                             name="voucher_code">
@@ -230,7 +230,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label for="note"  class="form-label">Ghi chú đơn hàng:</label>
+                                    <label for="note" class="form-label">Ghi chú đơn hàng:</label>
                                     <textarea class="form-control" id="note" name="note" rows="3"></textarea>
                                 </div>
                             </div>
@@ -404,23 +404,40 @@
             // Handle variant selection
             $('#variant').on('changed.bs.select', function() {
                 const selectedOption = $(this).find('option:selected');
+
                 if (selectedOption.val()) {
-                    // Update price and stock from variant
-                    $('#price').val(selectedOption.data('price').toLocaleString() + ' đ');
-                    $('#priceValue').val(selectedOption.data('price'));
-                    $('#stock').val(selectedOption.data('stock'));
-                    $('#stockValue').val(selectedOption.data('stock'));
+                    const price = parseFloat(selectedOption.data('price'));
+                    const stock = parseInt(selectedOption.data('stock')) || 0;
+                    const variantId = selectedOption.val();
+
+                    // Trừ số lượng đã chọn trước đó nếu có
+                    const selectedQty = getSelectedQuantity(currentProduct.id, variantId);
+                    const adjustedStock = stock - selectedQty;
+
+                    // Cập nhật giao diện
+                    $('#price').val(price.toLocaleString() + ' đ');
+                    $('#priceValue').val(price);
+                    $('#stock').val(adjustedStock);
+                    $('#stockValue').val(adjustedStock);
                 } else {
-                    // Use base product price and stock if no variant selected
+                    // Không chọn biến thể -> dùng giá và tồn kho sản phẩm gốc
                     if (currentProduct) {
-                        $('#price').val(currentProduct.base_price.toLocaleString() + ' đ');
-                        $('#priceValue').val(currentProduct.base_price);
-                        $('#stock').val(currentProduct.base_stock);
-                        $('#stockValue').val(currentProduct.base_stock);
+                        const stock = parseInt(currentProduct.base_stock) || 0;
+                        const price = parseFloat(currentProduct.base_price);
+
+                        const selectedQty = getSelectedQuantity(currentProduct.id, null);
+                        const adjustedStock = stock - selectedQty;
+
+                        $('#price').val(price.toLocaleString() + ' đ');
+                        $('#priceValue').val(price);
+                        $('#stock').val(adjustedStock);
+                        $('#stockValue').val(adjustedStock);
                     }
                 }
+
                 calculateSubtotal();
             });
+
 
             // ============================== START VOUCHER ==============================
 
@@ -654,8 +671,17 @@
                 calculateSubtotal();
             });
 
+            function getSelectedQuantity(productId, variantId = null) {
+                const found = selectedProducts.find(item =>
+                    item.productId === productId &&
+                    item.variantId === (variantId || null)
+                );
+                return found ? found.quantity : 0;
+            }
+
             // Add product to table
             $('#addProductBtn').on('click', function() {
+
                 if (!currentProduct) {
                     alert('Vui lòng chọn sản phẩm');
                     return;
@@ -676,6 +702,7 @@
                     alert('Số lượng vượt quá tồn kho');
                     return;
                 }
+
 
                 // Determine variant name
                 let variantName = 'Không có biến thể';
@@ -717,6 +744,7 @@
                 } else {
                     recalculateTotalAmount();
                 }
+                resetProductSelectionForm();
             });
 
             function resetProductSelectionForm() {
@@ -769,12 +797,15 @@
                 $('#totalAmount').text(subtotal.toLocaleString() + ' đ');
 
                 updateHiddenInputs();
+                resetProductSelectionForm();
             }
+
             // Remove product from table
             $(document).on('click', '.remove-product', function() {
                 const index = $(this).data('index');
                 selectedProducts.splice(index, 1);
                 renderProductsTable();
+                resetProductSelectionForm();
             });
 
             // Update hidden inputs for form submission
