@@ -194,6 +194,7 @@
                                                                 value="1"
                                                                 type="number" name="quantity"
                                                                 class="input-text qty text update-cart"
+                                                                min="1"
                                                                 >
                                                         </div>
                                                     @else
@@ -218,6 +219,8 @@
                                                                 value="1"
                                                                 type="number" name="quantity"
                                                                 class="input-text qty text update-cart"
+                                                                min="1"
+
                                                                 >
                                                         </div>
                                                         <br>
