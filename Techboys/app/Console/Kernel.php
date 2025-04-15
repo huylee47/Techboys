@@ -37,18 +37,20 @@ class Kernel extends ConsoleKernel
         // **Lựa chọn 1: Lịch trình để TEST (chạy mỗi phút)**
         // -> Bỏ comment dòng này VÀ comment dòng ->daily() bên dưới nếu bạn muốn test thường xuyên.
         // -> Đồng thời, bạn cần chỉnh logic trong AutoConfirmDeliveredBills.php thành subSeconds() hoặc subMinutes().
-        // $schedule->command('bills:autoconfirm')->everyMinute()->withoutOverlapping();
+        $schedule->command('bills:autoconfirm')->everyMinute()->withoutOverlapping();
 
         // **Lựa chọn 2: Lịch trình chạy hàng ngày (cho hoạt động bình thường)**
         // -> Sử dụng lịch trình này khi logic trong AutoConfirmDeliveredBills.php là subDays(3).
         // -> withoutOverlapping() để đảm bảo lệnh không chạy chồng chéo nếu kéo dài hơn 1 ngày (hiếm khi xảy ra với daily).
-        $schedule->command('bills:autoconfirm')->daily()->withoutOverlapping();
+        // $schedule->command('bills:autoconfirm')->daily()->withoutOverlapping();
 
 
         // ----- TASK 2: Xóa giỏ hàng cũ (quá 7 ngày) của khách -----
 
         // Chạy command xóa giỏ hàng khách cũ vào một thời điểm ít tải trong ngày, ví dụ 3:00 sáng.
-        $schedule->command('carts:prune-guests')->dailyAt('03:00');
+        // $schedule->command('carts:prune-guests')->dailyAt('03:00');
+
+        $schedule->command('carts:prune-guests')->everyMinute();
 
         // Hoặc đơn giản là chạy hàng ngày vào nửa đêm (00:00)
         // $schedule->command('carts:prune-guests')->daily();
