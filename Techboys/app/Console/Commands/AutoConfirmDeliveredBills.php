@@ -3,9 +3,9 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
-use App\Models\Bill; // Đảm bảo import Model Bill của bạn
-use Carbon\Carbon;   // Import thư viện xử lý thời gian Carbon
-use Illuminate\Support\Facades\Log; // Import Facade Log để ghi log
+use App\Models\Bill; 
+use Carbon\Carbon;   
+use Illuminate\Support\Facades\Log; 
 
 class AutoConfirmDeliveredBills extends Command
 {
