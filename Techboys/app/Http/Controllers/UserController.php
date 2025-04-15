@@ -403,21 +403,56 @@ class UserController extends Controller
 public function updateUser(Request $request, $id)
 {
     $user = User::findOrFail($id);
+    
     if (auth()->user()->username !== 'admin' && $user->role_id == 1) {
         abort(403, 'Bạn không có quyền cập nhật admin khác');
     }
-    
+
     $request->validate([
-        'name' => 'required|string|max:255',
+        'name' => 'required|string|max:50',
         'email' => 'required|email|unique:users,email,'.$id,
-        'phone' => 'required|string|max:11',
-        'role_id' => 'required|in:0,1'
+        'phone' => 'required|string|min:10|max:10|regex:/^[0-9]+$/',
+        'dob' => 'required|date|before_or_equal:today|after:1950-01-01',
+        'address' => 'required|string|max:500'
+    ], [
+        'name.required' => 'Vui lòng nhập tên người dùng',
+        'name.max' => 'Tên không được vượt quá 50 ký tự',
+        
+        'email.required' => 'Vui lòng nhập email',
+        'email.email' => 'Email không hợp lệ',
+        'email.unique' => 'Email này đã được sử dụng',
+        
+        'phone.required' => 'Vui lòng nhập số điện thoại',
+        'phone.min' => 'Số điện thoại ít nhất 10 ký tự',
+        'phone.max' => 'Số điện thoại tối đa 10 ký tự',
+        'phone.regex' => 'Số điện thoại chỉ được chứa số',
+        
+        'dob.required' => 'Vui lòng nhập ngày sinh',
+        'dob.date' => 'Ngày sinh không hợp lệ',
+        'dob.before_or_equal' => 'Ngày sinh không thể ở tương lai',
+        'dob.after' => 'Ngày sinh phải sau năm 1950',
+        
+        'address.required' => 'Vui lòng nhập địa chỉ',
+        'address.max' => 'Địa chỉ không được vượt quá 250 ký tự'
     ]);
-    
-    $user->update($request->all());
-    
-    return redirect()->route('admin.user.index')
-                   ->with('success', 'Cập nhật thông tin thành công');
+
+    try {
+        $user->update([
+            'name' => $request->name,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'role_id' => $request->role_id,
+            'dob' => $request->dob,
+            'address' => $request->address
+        ]);
+        
+        return redirect()->route('admin.user.index')
+                       ->with('success', 'Cập nhật thông tin thành công');
+        
+    } catch (\Exception $e) {
+        Log::error('Lỗi cập nhật người dùng: '.$e->getMessage());
+        return back()->with('error', 'Cập nhật thất bại! Vui lòng thử lại');
+    }
 }
 
 public function destroy($id)
