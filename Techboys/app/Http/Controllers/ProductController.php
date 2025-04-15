@@ -71,6 +71,7 @@ class ProductController extends Controller
      */
     public function update(ProductRequest $request, $id)
     {
+        // dd($request->all());
         return $this->productService->updateProduct($request, $id);
     }
 
