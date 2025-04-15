@@ -8,7 +8,7 @@
     <meta name="user-role" content="{{ auth()->check() ? auth()->user()->role_id : 0 }}">
     <meta name="user-id" content="{{ auth()->check() ? auth()->user()->id : 0 }}">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
-    <title>@yield('title')</title>
+    <title>Techboys </title>
     <link rel="stylesheet" type="text/css" href="{{ url('') }}/home/assets/css/bootstrap.min.css" media="all" />
     <link rel="stylesheet" type="text/css" href="{{ url('') }}/home/assets/css/font-awesome.min.css" media="all" />
     <link rel="stylesheet" type="text/css" href="{{ url('') }}/home/assets/css/bootstrap-grid.min.css" media="all" />
