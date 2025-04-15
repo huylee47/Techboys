@@ -82,7 +82,6 @@ class CartService{
         
             $availableStock = $stock - $soldQuantity;
         
-            // Lấy item hiện tại trong giỏ
             $cartItem = Cart::where(function ($query) use ($userId, $cartId) {
                     if ($userId) {
                         $query->where('user_id', $userId);
@@ -90,11 +89,15 @@ class CartService{
                         $query->where('cart_id', $cartId);
                     }
                 })
-                ->where('variant_id', $request->variant_id)
+                ->where('product_id', $request->product_id)
+                ->when($request->variant_id, function ($q) use ($request) {
+                    return $q->where('variant_id', $request->variant_id);
+                }, function ($q) {
+                    return $q->whereNull('variant_id');
+                })
                 ->first();
         
             $currentQty = $cartItem?->quantity ?? 0;
-        
             $maxCanAdd = $availableStock - $currentQty;
             $qtyToAdd = min($request->quantity, $maxCanAdd);
         
@@ -124,10 +127,13 @@ class CartService{
             return response()->json([
                 'message' => 'Thêm vào giỏ hàng thành công',
                 'added_quantity' => $qtyToAdd,
+                'product_id' => (int) $request->product_id,
+                'variant_id' => $request->variant_id,
                 'current_quantity' => $currentQty + $qtyToAdd,
                 'max_stock' => $availableStock
             ]);
         }
+        
         
     public function updateCart($request)
     {
