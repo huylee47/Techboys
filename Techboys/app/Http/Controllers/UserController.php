@@ -420,4 +420,27 @@ public function updateUser(Request $request, $id)
                    ->with('success', 'Cập nhật thông tin thành công');
 }
 
+public function destroy($id)
+{
+    $userToDelete = User::findOrFail($id);
+    $currentUser = auth()->user();
+
+    if ($userToDelete->id === $currentUser->id) {
+        return redirect()->route('admin.user.index')->with('error', 'Bạn không thể xóa chính mình');
+    }
+
+    if ($currentUser->username === 'admin') {
+        if ($userToDelete->username === 'admin') {
+            return redirect()->route('admin.user.index')->with('error', 'Không thể xóa admin chính');
+        }
+        $userToDelete->delete();
+        return redirect()->route('admin.user.index')->with('success', 'Đã xóa tài khoản thành công');
+    }
+
+    if ($currentUser->role_id == 1 && $userToDelete->role_id == 0) {
+        $userToDelete->delete();
+        return redirect()->route('admin.user.index')->with('success', 'Đã xóa user thường thành công');
+    }
+
+}
 }
