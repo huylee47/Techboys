@@ -34,7 +34,7 @@ class PruneOldGuestCarts extends Command
         // $cutoffDate = Carbon::now()->subDays(7);
         // $cutoffDate = Carbon::now()->subHours(1);
         // $cutoffDate = Carbon::now()->subMinutes(15);
-        $cutoffDate = Carbon::now()->subSeconds(20);
+        $cutoffDate = Carbon::now()->subSeconds(5);
         $this->line("Xóa các mục giỏ hàng của khách được cập nhật lần cuối vào hoặc trước: " . $cutoffDate->toDateTimeString());
 
         // 2. Thực hiện xóa trực tiếp các bản ghi thỏa mãn điều kiện
