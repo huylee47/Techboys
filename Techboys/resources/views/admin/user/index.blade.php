@@ -76,7 +76,11 @@
                                     @endif
                                 </td>
                                 <td class="text-center">
-                                 
+                                    @if(auth()->user()->username === 'admin' || $user->role_id != 1)
+                                    <a href="{{ route('admin.user.edit', $user->id) }}" class="btn btn-sm btn-primary">
+                                        <i class="bi bi-pencil"></i>
+                                    </a>
+                                @endif
                                     <form action="{{ $user->status == 1 ? route('admin.user.block', ['id' => $user->id]) : route('admin.user.open', ['id' => $user->id]) }}"
                                           method="POST" style="display:inline;">
                                         @csrf                                    
