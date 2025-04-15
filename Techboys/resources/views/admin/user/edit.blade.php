@@ -53,9 +53,9 @@
                                     </h6>
                                     
                                     <div class="form-group mb-3">
-                                        <label class="form-label">Tên đầy đủ <span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control @error('name') is-invalid @enderror" 
-                                               name="name" value="{{ old('name', $user->name) }}" >
+                                        <label class="form-label">Tên đầy đủ</label>
+                                        <input type="text" class="form-control bg-light @error('name') is-invalid @enderror" 
+                                               name="name" value="{{ old('name', $user->name) }}" readonly>
                                         @error('name')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
@@ -64,23 +64,23 @@
                                     <div class="form-group mb-3">
                                         <label class="form-label">Tên đăng nhập</label>
                                         <input type="text" class="form-control bg-light" value="{{ $user->username }}" readonly>
-                                        <small class="text-muted">Không thể thay đổi tên đăng nhập</small>
+                                        {{-- <small class="text-muted">Không thể thay đổi tên đăng nhập</small> --}}
                                     </div>
     
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group mb-3">
                                                 <label class="form-label">Ngày sinh</label>
-                                                <input type="date" class="form-control" name="dob" 
-                                                       value="{{ old('dob', $user->dob) }}">
+                                                <input type="date" class="form-control bg-light" name="dob" 
+                                                       value="{{ old('dob', $user->dob) }}" readonly>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group mb-3">
                                                 <label class="form-label">Giới tính</label>
-                                                <select class="form-select" name="gender">
-                                                    <option value="1" {{ old('gender', $user->gender) == 1 ? 'selected' : '' }}>Nam</option>
-                                                    <option value="0" {{ old('gender', $user->gender) == 0 ? 'selected' : '' }}>Nữ</option>
+                                                <select class="form-select bg-light " name="gender" disabled>
+                                                    <option value="1" {{ old('gender', $user->gender) == 1 ? 'selected' : '' }} >Nam</option>
+                                                    <option value="0" {{ old('gender', $user->gender) == 0 ? 'selected' : '' }}>Nữ</option> 
                                                 </select>
                                             </div>
                                         </div>
@@ -95,9 +95,9 @@
                                     </h6>
                                     
                                     <div class="form-group mb-3">
-                                        <label class="form-label">Email <span class="text-danger">*</span></label>
-                                        <input type="email" class="form-control @error('email') is-invalid @enderror" 
-                                               name="email" value="{{ old('email', $user->email) }}" >
+                                        <label class="form-label">Email</label>
+                                        <input type="email" class="form-control bg-light @error('email') is-invalid @enderror" 
+                                               name="email" value="{{ old('email', $user->email) }}" readonly>
                                         @error('email')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
@@ -106,7 +106,7 @@
                                     <div class="form-group mb-3">
                                         <label>Xác thực email</label>
                                         <div class="input-group">
-                                            <input type="text" class="form-control" 
+                                            <input type="text" class="form-control bg-light" 
                                                    value="{{ $user->email_verified_at ? 'Đã xác thực' : 'Chưa xác thực' }}" disabled>
                                             @if(!$user->email_verified_at)
                                                 <button type="button" class="btn btn-outline-secondary" 
@@ -118,17 +118,17 @@
                                     </div>
 
                                     <div class="form-group mb-3">
-                                        <label class="form-label">Số điện thoại <span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control @error('phone') is-invalid @enderror" 
-                                               name="phone" value="{{ old('phone', $user->phone) }}">
+                                        <label class="form-label">Số điện thoại</label>
+                                        <input type="text" class="form-control bg-light @error('phone') is-invalid @enderror" 
+                                               name="phone" value="{{ old('phone', $user->phone) }}" readonly>
                                         @error('phone')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
                                     </div>
     
                                     <div class="form-group mb-3">
-                                        <label class="form-label">Địa chỉ</label>
-                                        <textarea class="form-control" name="address" rows="2">{{ old('address', $user->address) }}</textarea>
+                                        <label class="form-label ">Địa chỉ</label>
+                                        <textarea class="form-control bg-light" name="address" rows="2" readonly>{{ old('address', $user->address) }}</textarea>
                                     </div>
                                 </div>
                             </div>
@@ -142,7 +142,33 @@
                                     </h6>
                                     
                                     <div class="row">
-                                                                                                    
+                                        
+                                        <div class="col-md-6">
+                                            <div class="form-group mb-3">
+                                                <label class="form-label">Mật khẩu mới</label>
+                                                <input type="text" 
+                                                       class="form-control @error('password') is-invalid @enderror" 
+                                                       name="password" 
+                                                       placeholder="Để trống nếu không đổi mật khẩu"
+                                                       autocomplete="new-password">
+                                                @error('password')
+                                                    <div class="invalid-feedback">{{ $message }}</div>
+                                                @enderror
+                                                <small class="text-muted">Chỉ nhập nếu muốn thay đổi mật khẩu</small>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="col-md-6">
+                                            <div class="form-group mb-3">
+                                                <label class="form-label">Xác nhận mật khẩu</label>
+                                                <input type="text" 
+                                                       class="form-control" 
+                                                       name="password_confirmation"
+                                                       autocomplete="new-password">
+                                            </div>
+                                        </div>
+                                        
+
                                         <div class="col-md-4">
                                             <div class="form-group mb-3">
                                                 <label class="form-label">Vai trò</label>
