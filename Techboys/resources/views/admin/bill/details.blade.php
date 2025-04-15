@@ -229,7 +229,7 @@
                                     class="text-danger">*</span></label>
                             <textarea class="form-control" id="cancelNote" name="note" rows="3" required minlength="15"
                                 placeholder="Nhập lý do huỷ đơn..."></textarea>
-                            <div class="invalid-feedback">Ghi chú phải có ít nhất 15 ký tự.</div>
+                            <div class="invalid-feedback">Ghi chú phải có ít nhất 10 ký tự.</div>
                         </div>
                     </form>
                 </div>
@@ -303,7 +303,7 @@
             const cancelForm = document.getElementById("cancelForm");
 
             cancelNote.addEventListener("input", function() {
-                if (cancelNote.value.trim().length >= 15) {
+                if (cancelNote.value.trim().length >= 10) {
                     confirmCancel.removeAttribute("disabled");
                 } else {
                     confirmCancel.setAttribute("disabled", "true");
