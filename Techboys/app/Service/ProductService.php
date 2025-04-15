@@ -129,12 +129,12 @@ class ProductService{
     
         } catch (\Exception $e) {
             DB::rollBack();
-            return response()->json(
-                [
-                    'error' => 'Lỗi: ' . $e->getMessage(),
-                ]
-            );
-            // return redirect()->route('admin.product.create')->with('error', 'Lỗi: ' . $e->getMessage());
+            // return response()->json(
+            //     [
+            //         'error' => 'Lỗi: ' . $e->getMessage(),
+            //     ]
+            // );
+            return redirect()->route('admin.product.create')->with('error', 'Lỗi: ' . $e->getMessage());
         }
     }
     
@@ -232,16 +232,21 @@ class ProductService{
 
         $product->update([
             'name' => $request->name,
-            'brand_id' => $request->brand_id,
+            'brand_id' => (int)$request->brand_id,
             'is_featured' => $request->is_featured ?? 0,
             'base_price' => $base_price,
             'base_stock' => $base_stock,
             'weight'=> $request->weight,
             'img' => $imageName,
             'description' => $request->description,
-            'category_id' => $request->category_id,
+            'category_id' =>(int) $request->category_id,
             'slug' => Str::slug($request->name),
         ]);
+        // return response()->json([
+        //     'success' => 'Cập nhật sản phẩm thành công.',
+        //     'product' => $product,
+        // ]);
+        // dd($product);
         if ($isFeatured == 1) {
             $existingVariants = ProductVariant::where('product_id', $id)->get();
 
