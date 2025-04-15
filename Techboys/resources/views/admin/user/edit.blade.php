@@ -44,15 +44,6 @@
                 <div class="card-body">
                     <form action="{{ route('admin.user.update', $user->id) }}" method="POST">
                         @csrf @method('PUT')
-                        @if($errors->any())
-                            <div class="alert alert-danger">
-                                <ul class="mb-0">
-                                    @foreach($errors->all() as $error)
-                                        <li>{{ $error }}</li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        @endif
                         
                         <div class="row">
                             <div class="col-md-6">
@@ -64,7 +55,7 @@
                                     <div class="form-group mb-3">
                                         <label class="form-label">Tên đầy đủ <span class="text-danger">*</span></label>
                                         <input type="text" class="form-control @error('name') is-invalid @enderror" 
-                                               name="name" value="{{ old('name', $user->name) }}" required>
+                                               name="name" value="{{ old('name', $user->name) }}" >
                                         @error('name')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
@@ -106,7 +97,7 @@
                                     <div class="form-group mb-3">
                                         <label class="form-label">Email <span class="text-danger">*</span></label>
                                         <input type="email" class="form-control @error('email') is-invalid @enderror" 
-                                               name="email" value="{{ old('email', $user->email) }}" required>
+                                               name="email" value="{{ old('email', $user->email) }}" >
                                         @error('email')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
@@ -151,27 +142,18 @@
                                     </h6>
                                     
                                     <div class="row">
-                                        <div class="col-md-4">
-                                            <div class="form-group mb-3">
-                                                <label class="form-label">Số dư ví</label>
-                                                <div class="input-group">
-                                                    <span class="input-group-text">VND</span>
-                                                    <input type="text" class="form-control bg-light" 
-                                                           value="{{ number_format($user->wallet) }}" readonly>
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                                                 
+                                                                                                    
                                         <div class="col-md-4">
                                             <div class="form-group mb-3">
                                                 <label class="form-label">Vai trò</label>
-                                                <select class="form-select" name="role_id" {{ $user->username === 'admin' ? 'disabled' : '' }}>
+                                                <select class="form-select" name="role_id" 
+                                                    {{ auth()->user()->username !== 'admin' ? 'disabled' : '' }}>
                                                     <option value="0" {{ old('role_id', $user->role_id) == 0 ? 'selected' : '' }}>Người dùng</option>
                                                     <option value="1" {{ old('role_id', $user->role_id) == 1 ? 'selected' : '' }}>Quản trị viên</option>
                                                 </select>
-                                                @if($user->username === 'admin')
-                                                    <small class="text-muted">Không thể thay đổi vai trò Super Admin</small>
+                                                
+                                                @if(auth()->user()->username !== 'admin')
+                                                    <small class="text-muted">Chỉ Super Admin mới được thay đổi vai trò</small>
                                                 @endif
                                             </div>
                                         </div>
