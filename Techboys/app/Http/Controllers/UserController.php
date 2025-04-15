@@ -389,4 +389,35 @@ class UserController extends Controller
 
         return redirect('/');
     }
+    //edit phía admin
+    public function editUser($id)
+{
+    $user = User::findOrFail($id);
+    if (auth()->user()->username !== 'admin' && $user->role_id == 1) {
+        abort(403, 'Bạn không có quyền chỉnh sửa admin khác');
+    }
+    
+    return view('admin.user.edit', compact('user'));
+}
+
+public function updateUser(Request $request, $id)
+{
+    $user = User::findOrFail($id);
+    if (auth()->user()->username !== 'admin' && $user->role_id == 1) {
+        abort(403, 'Bạn không có quyền cập nhật admin khác');
+    }
+    
+    $request->validate([
+        'name' => 'required|string|max:255',
+        'email' => 'required|email|unique:users,email,'.$id,
+        'phone' => 'required|string|max:11',
+        'role_id' => 'required|in:0,1'
+    ]);
+    
+    $user->update($request->all());
+    
+    return redirect()->route('admin.user.index')
+                   ->with('success', 'Cập nhật thông tin thành công');
+}
+
 }
