@@ -189,7 +189,7 @@ Route::post('/logout', [UserController::class, 'logout'])->name('admin.logout');
             Route::post('/check', [UserController::class, 'checkPhone'])->name('admin.user.check');
             Route::get('/edit/{id}', [UserController::class, 'editUser'])->name('admin.user.edit');
             Route::put('/update/{id}', [UserController::class, 'updateUser'])->name('admin.user.update');
-            Route::delete('/delete/{id}', [UserController::class, 'destroy'])->name('admin.user.destroy');
+            Route::delete('/user/{id}', [UserController::class, 'destroy'])->name('admin.user.destroy');
         });
 
         Route::prefix('/bill')->group(function () {
