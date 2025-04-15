@@ -118,7 +118,7 @@
                                     </div>
 
                                     <div class="form-group mb-3">
-                                        <label class="form-label">Số điện thoại</label>
+                                        <label class="form-label">Số điện thoại <span class="text-danger">*</span></label>
                                         <input type="text" class="form-control @error('phone') is-invalid @enderror" 
                                                name="phone" value="{{ old('phone', $user->phone) }}">
                                         @error('phone')
