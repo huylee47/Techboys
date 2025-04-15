@@ -24,7 +24,7 @@ class AutoConfirmDeliveredBills extends Command
         // $cutoffDate = Carbon::now()->subDays(3);
         // $cutoffDate = Carbon::now()->subHours(1);
         // $cutoffDate = Carbon::now()->subMinutes(15);
-        $cutoffDate = Carbon::now()->subSeconds(20);
+        $cutoffDate = Carbon::now()->subSeconds(5);
         $this->line("Mốc thời gian cắt (3 ngày trước): " . $cutoffDate->toDateTimeString()); // Hiển thị mốc thời gian
 
         $billsToUpdate = Bill::where('status_id', 3)
