@@ -103,7 +103,7 @@
                                                 </button>
                                             </form>
                                           
-                                            <a href="{{ route('admin.comment.replyForm', ['id' => $cmt->id]) }}" class="bi-reply-fill" title="Nhấn để trả lời bình luận"></a>
+                                            <a href="{{ route('admin.comment.replyForm', ['id' => $cmt->id]) }}" class="bi-reply-fill fs-4" title="Nhấn để trả lời bình luận"></a>
                                         </td>
                                        
                                     </tr>
