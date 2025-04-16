@@ -68,7 +68,7 @@
                                                 </div>
                                             </div>
                                             <div class="col-md-8">
-                                                <h6 class="text-muted font-semibold">Đơn hàng bị huỷ bỏ</h6>
+                                                <h6 class="text-muted font-semibold">Đơn hàng đã bị huỷ bỏ</h6>
                                                 <h6 class="font-extrabold mb-0" id="billCancel">{{ $cancelledOrders }}
                                                 </h6>
                                             </div>
