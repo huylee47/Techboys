@@ -170,7 +170,7 @@
                                         <div class="col-md-6 mb-3">
                                             <label for="base_price" class="form-label">Giá </label>
                                             <input type="text" class="form-control" id="base_price" name="base_price"
-                                                value="{{ number_format($product->base_price, 2, '.', '') }}">
+                                                value="{{ number_format($product->base_price, 0, '.', '') }}">
 
                                             @if ($errors->has('base_price'))
                                                 <p class="text-danger small ">
@@ -357,7 +357,6 @@
             document.querySelector("form").addEventListener("submit", function() {
             priceInputs.forEach(input => {
                 input.value = input.value.replace(/,/g, '');
-            });
             });
             });
         </script>
@@ -692,7 +691,7 @@
                         $('#is_featured').prop('checked', false).trigger('change');
                         $('#attribute-selection').hide();
 
-                        $('.single-select, .selectpicker').each(function() {
+                        $('.single-select,.variant-item .selectpicker').each(function() {
                             $(this).val('');
                             $(this).find('option').prop('disabled', false);
                         });
