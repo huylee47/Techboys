@@ -46,7 +46,7 @@
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $variant->attribute_values }}</td>
                                 <td class="{{ $variant->stock > 0 ? 'text-success' : 'text-danger' }}">
-                                    {{ $variant->stock > 0 ? $variant->stock : 'Hết hàng' }}
+                                    {{ $variant->stock > 0 ? $variant->stock : 'Chưa có hàng' }}
                                 </td>
                                 <td>{{ $variant->created_at->format('Y-m-d') }}</td>
                                 <td class="text-center">
