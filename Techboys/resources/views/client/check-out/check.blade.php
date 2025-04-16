@@ -19,19 +19,24 @@
                                 <div class="woocommerce">
 
                                     <!-- .collapse -->
-                                    {{-- <div class="woocommerce-info">Have a coupon? <a data-toggle="collapse" href="#checkoutCouponForm" aria-expanded="false" aria-controls="checkoutCouponForm" class="showlogin">Click here to enter your code</a>
-                                </div>
-                                <div class="collapse" id="checkoutCouponForm">
-                                    <form method="post" class="checkout_coupon">
-                                        <p class="form-row form-row-first">
-                                            <input type="text" value="" id="coupon_code" placeholder="Coupon code" class="input-text" name="coupon_code">
-                                        </p>
-                                        <p class="form-row form-row-last">
-                                            <input type="submit" value="Apply coupon" name="apply_coupon" class="button">
-                                        </p>
-                                        <div class="clear"></div>
-                                    </form>
-                                </div> --}}
+                                    {{-- <div class="woocommerce-info">Have a coupon? <a data-toggle="collapse"
+                                            href="#checkoutCouponForm" aria-expanded="false"
+                                            aria-controls="checkoutCouponForm" class="showlogin">Click here to enter your
+                                            code</a>
+                                    </div>
+                                    <div class="collapse" id="checkoutCouponForm">
+                                        <form method="post" class="checkout_coupon">
+                                            <p class="form-row form-row-first">
+                                                <input type="text" value="" id="coupon_code" placeholder="Coupon code"
+                                                    class="input-text" name="coupon_code">
+                                            </p>
+                                            <p class="form-row form-row-last">
+                                                <input type="submit" value="Apply coupon" name="apply_coupon"
+                                                    class="button">
+                                            </p>
+                                            <div class="clear"></div>
+                                        </form>
+                                    </div> --}}
                                     <!-- .collapse -->
 
                                     <form action="{{ route('client.checkout.store') }}"
@@ -72,7 +77,8 @@
                                                                         phố</option>
                                                                     @foreach ($provinces as $province)
                                                                         <option value="{{ $province->province_id }}">
-                                                                            {{ $province->name }}</option>
+                                                                            {{ $province->name }}
+                                                                        </option>
                                                                     @endforeach
                                                                 </select>
 
@@ -153,8 +159,10 @@
                                                                     <span class="text-danger">{{ $message }}</span>
                                                                 @enderror
                                                             </label>
-                                                            <textarea cols="5" rows="2" placeholder="Viết địa chỉ chi tiết của quý khách" id="order_comments"
-                                                                class="input-text " name="address">{{ auth()->check() ? auth()->user()->address : '' }}</textarea>
+                                                            <textarea cols="5" rows="2"
+                                                                placeholder="Viết địa chỉ chi tiết của quý khách"
+                                                                id="order_comments" class="input-text "
+                                                                name="address">{{ auth()->check() ? auth()->user()->address : '' }}</textarea>
                                                         </p>
                                                     </div>
                                                     <!-- .woocommerce-additional-fields__field-wrapper-->
@@ -221,7 +229,7 @@
                                                             <th>Phí vận chuyển </th>
                                                             <td>
                                                                 <p id="shipping-fee">0</p>
-                                                                <input type="hidden"  name="fee_shipping">
+                                                                <input type="hidden" name="fee_shipping">
                                                             </td>
                                                         </tr>
                                                         <tr class="order-total">
@@ -245,14 +253,14 @@
                                                     <ul class="wc_payment_methods payment_methods methods">
                                                         <h3 id="order_review_heading">Phương thức thanh toán</h3>
                                                         <li class="wc_payment_method payment_method_bacs">
-                                                            <input type="radio" data-order_button_text=""
-                                                                checked="checked" value="1" name="payment_method"
-                                                                class="input-radio" id="payment_method_bacs">
+                                                            <input type="radio" data-order_button_text="" checked="checked"
+                                                                value="1" name="payment_method" class="input-radio"
+                                                                id="payment_method_bacs">
                                                             <label for="payment_method_bacs">VNPAY</label>
                                                         </li>
                                                         <li class="wc_payment_method payment_method_cod">
-                                                            <input type="radio" data-order_button_text=""
-                                                                value="2" name="payment_method" class="input-radio"
+                                                            <input type="radio" data-order_button_text="" value="2"
+                                                                name="payment_method" class="input-radio"
                                                                 id="payment_method_cod">
                                                             <label for="payment_method_cod">Ship COD</label>
 
@@ -304,12 +312,31 @@
             </div>
         </div>
     </div>
+    <!-- Modal cảnh báo tổng quá 1 tỷ -->
+    <div class="modal fade" id="limitWarningModal" tabindex="-1" role="dialog" aria-labelledby="limitWarningModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content border-info">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="limitWarningModalLabel">Cảnh báo</h5>
+                </div>
+                <div class="modal-body text-danger">
+                    Tổng giá trị đơn hàng đã vượt quá giới hạn cho phép (1 tỷ VNĐ). Vui lòng điều chỉnh lại để tiếp tục đặt
+                    hàng.
+                </div>
+                <div class="modal-footer">
+                    <a href="{{ route('client.cart.index') }}" class="btn btn-info">Quay lại trang giỏ hàng</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script>
-        $(document).ready(function() {
-            $('#province').change(function() {
+        $(document).ready(function () {
+            $('#province').change(function () {
                 var province_id = $(this).val();
                 console.log("Province ID: ", province_id);
 
@@ -322,9 +349,9 @@
                         url: 'checkout/get-districts/' + province_id,
                         type: 'GET',
                         dataType: 'json',
-                        success: function(data) {
+                        success: function (data) {
                             if (data.length > 0) {
-                                $.each(data, function(key, value) {
+                                $.each(data, function (key, value) {
                                     $('#district').append('<option value="' + value
                                         .district_id +
                                         '">' + value.name + '</option>');
@@ -333,14 +360,14 @@
                                 alert("Không tìm thấy quận/huyện cho tỉnh đã chọn!");
                             }
                         },
-                        error: function() {
+                        error: function () {
                             alert("Lỗi khi tải danh sách quận/huyện.");
                         }
                     });
                 }
             });
 
-            $('#district').change(function() {
+            $('#district').change(function () {
                 var district_id = $(this).val();
                 console.log("District ID: ", district_id);
 
@@ -351,9 +378,9 @@
                         url: 'checkout/get-wards/' + district_id,
                         type: 'GET',
                         dataType: 'json',
-                        success: function(data) {
+                        success: function (data) {
                             if (data.length > 0) {
-                                $.each(data, function(key, value) {
+                                $.each(data, function (key, value) {
                                     $('#ward').append('<option value="' + value.code +
                                         '">' + value.name + '</option>');
                                 });
@@ -361,14 +388,14 @@
                                 alert("Không tìm thấy phường/xã cho quận/huyện đã chọn!");
                             }
                         },
-                        error: function() {
+                        error: function () {
                             alert("Lỗi khi tải danh sách phường/xã.");
                         }
                     });
                 }
             });
 
-            $('#ward').change(function() {
+            $('#ward').change(function () {
                 console.log("Ward ID: ", $(this).val());
             });
 
@@ -377,18 +404,18 @@
                 $('#emptyCartModal').modal('show');
             }
 
-            $('form.checkout').on('submit', function(e) {
+            $('form.checkout').on('submit', function (e) {
                 if (cartItems.length === 0) {
                     e.preventDefault();
                     $('#emptyCartModal').modal('show');
                 }
             });
 
-            $('#province, #district, #ward').change(function() {
+            $('#province, #district, #ward').change(function () {
                 $(this).siblings('.text-danger').remove();
             });
 
-            $('#province, #district, #ward').change(function() {
+            $('#province, #district, #ward').change(function () {
                 var total = parseInt($('#total').val()); // đảm bảo là số nguyên
                 var districtId = $('#district').val();
                 var wardId = $('#ward').val();
@@ -406,11 +433,11 @@
                             weight: weight
                         },
                         dataType: 'json',
-                        success: function(data) {
+                        success: function (data) {
                             if (data.shippingFee !== undefined) {
                                 $('#shipping-fee').text(
                                     new Intl.NumberFormat('vi-VN').format(data
-                                    .shippingFee) + ' ₫'
+                                        .shippingFee) + ' ₫'
                                 );
 
                                 var finalTotal = total + data.shippingFee;
@@ -419,9 +446,17 @@
                                 );
                                 $('input[name="fee_shipping"]').val(data.shippingFee);
                                 $('#final-total-wrapper').fadeIn();
+                                if (finalTotal > 1000000000) {
+                                    $('.place-order button[type="submit"]').prop('disabled',
+                                        true);
+                                    $('#limitWarningModal').modal('show');
+                                } else {
+                                    $('.place-order button[type="submit"]').prop('disabled',
+                                        false);
+                                }
                             }
                         },
-                        error: function() {
+                        error: function () {
                             alert("Lỗi khi tính phí vận chuyển.");
                         }
                     });
