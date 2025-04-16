@@ -73,7 +73,7 @@
                         <tr>
                             <td>1</td>
                             <td class="{{ $base_stock > 0 ? 'text-success' : 'text-danger' }}">
-                                {{ $base_stock > 0 ? $base_stock : 'Hết hàng' }}
+                                {{ $base_stock > 0 ? $base_stock : 'Chưa có hàng' }}
                             </td>
                             <td>{{ $product->created_at->format('Y-m-d') }}</td>
                             <td class="text-center">
