@@ -42,7 +42,7 @@
                 </div>
                 
                 <div class="card-body">
-                    <form action="{{ route('admin.user.update', $user->id) }}" method="POST">
+                    <form action="{{ route('admin.user.update', $user->id) }}" method="POST" id="editForm">
                         @csrf @method('PUT')
                         
                         <div class="row">
@@ -198,7 +198,7 @@
                                     <i class="bi bi-arrow-counterclockwise me-1"></i> Đặt lại
                                 </button>
                                 
-                                <button type="submit" class="btn btn-primary">
+                                <button type="button" class="btn btn-primary" onclick="confirmEdit()" >
                                     <i class="bi bi-save me-1"></i> Lưu thay đổi
                                 </button>
                                 
@@ -222,13 +222,46 @@
     
     
     <script>
-        function openDeleteModal(actionUrl) {
-    document.getElementById('deleteForm').action = actionUrl;
+    function openDeleteModal(actionUrl) {
+        document.getElementById('deleteForm').action = actionUrl;
     
-    new bootstrap.Modal(document.getElementById('deleteConfirmationModal')).show();
-}
+        new bootstrap.Modal(document.getElementById('deleteConfirmationModal')).show();
+    }
+    function confirmEdit() {
+        const password = document.querySelector('input[name="password"]').value;
+        const passwordConfirm = document.querySelector('input[name="password_confirmation"]').value;
+        
+        if (password !== '' || passwordConfirm !== '') {
+            new bootstrap.Modal(document.getElementById('editConfirmationModal')).show();
+        } else {
+            document.getElementById('editForm').submit();
+        }
+    }
+
+    function submitEditForm() {
+        document.getElementById('editForm').submit();
+    }
     </script>
 </div>
+{{-- modal xác nhận sửa --}}
+<div class="modal fade" id="editConfirmationModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Xác nhận thay đổi</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Bạn đang thay đổi mật khẩu của người dùng. Bạn có chắc chắn muốn tiếp tục?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                <button type="button" class="btn btn-primary" onclick="submitEditForm()">Xác nhận</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 {{-- modal xóa  --}}
 <div class="modal fade" id="deleteConfirmationModal" tabindex="-1">
     <div class="modal-dialog">
