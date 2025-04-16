@@ -42,7 +42,7 @@
                                         @endphp
 
                                         @if ($canDelete)
-                                            <a href="#" class="bi-trash-fill text-danger fs-4 delete-btn" data-id="{{ $attribute->id }}"></a>
+                                            <a href="#" class="bi-trash-fill text-danger fs-4 delete-btn" data-id="{{ $attribute->id }}" data-name="{{$attribute->name}}"></a>
                                         @else
                                             <a class="bi-trash-fill text-secondary fs-4" disabled title="Thuộc tính đang được sử dụng , khônng thể xoá"></a>
                                         @endif
@@ -61,11 +61,13 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="deleteModalLabel">Xác nhận xóa</h5>
+                    <h5 class="modal-title" id="deleteModalLabel">
+                        <span class="bi-exclamation-triangle-fill text-danger"> Xác nhận xóa</span>
+                    </h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    Bạn có chắc chắn muốn xóa thuộc tính này không?
+                    Bạn có chắc chắn muốn <span class="text-danger">xóa</span> thuộc tính <strong id="attributeName"></strong> không?
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
@@ -78,10 +80,13 @@
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             let deleteUrl = "";
+            let attributeName = document.getElementById("attributeName");
             document.querySelectorAll(".delete-btn").forEach(button => {
                 button.addEventListener("click", function() {
+                    let name = this.getAttribute('data-name');
                     deleteUrl = "{{ route('admin.attributes.delete', '') }}/" + this.getAttribute("data-id");
                     document.getElementById("confirmDelete").setAttribute("href", deleteUrl);
+                    attributeName.textContent = name;
                     let deleteModal = new bootstrap.Modal(document.getElementById("deleteModal"));
                     deleteModal.show();
                 });
