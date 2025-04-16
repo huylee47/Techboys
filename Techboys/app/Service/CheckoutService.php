@@ -240,7 +240,7 @@ class CheckoutService
         $shopId = 5712055;
         $endpoint = 'https://online-gateway.ghn.vn/shiip/public-api/v2/shipping-order/fee';
     
-        $serviceId = $weight > 20000 ? 100039 : 53322;
+        $serviceId = 53322;
     
         $data = [
             'service_id' => $serviceId,
