@@ -267,7 +267,7 @@ class CheckoutService
         $fee = $result['data']['total'] ?? null;
         if ($fee === null) {
             if ($total > 50000000) {
-                $fee = 300000;
+                $fee = $total * 0.01;
             } elseif ($total > 20000000) {
                 $fee = 200000;
             } elseif ($total > 10000000) {
