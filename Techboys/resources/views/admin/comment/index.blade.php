@@ -98,7 +98,7 @@
                                                 @csrf
                                                 <input type="hidden" class="form-control" name="id" value="{{ $cmt->id }}">
                                                 <button type="submit"
-                                                    class="{{ $cmt->status == 1 ? 'bi-eye-slash text-success' : 'bi-eye-fill text-danger' }}fs-4 mx-2" title="Nhấn để {{$cmt->status ==1 ? "hiện" : "ẩn "}} bình luận"
+                                                    class="btn {{ $cmt->status == 1 ? ' bi-eye-slash ' : ' bi-eye-fill ' }}fs-4 mx-2" title="Nhấn để {{$cmt->status ==1 ? "hiện" : "ẩn "}} bình luận"
                                                     >
                                                 </button>
                                             </form>
