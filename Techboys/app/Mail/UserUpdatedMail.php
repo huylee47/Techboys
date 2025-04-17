@@ -10,25 +10,25 @@ class UserUpdatedMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $name;
+    public $user;
     public $username;
     public $changes;
 
-    public function __construct($name, $username, $changes)
+    public function __construct($user, $username, $changes)
     {
-        $this->name = $name;
+        $this->user = $user;
         $this->username = $username;
         $this->changes = $changes;
     }
 
     public function build()
-{
-    return $this->subject('Thông báo cập nhật tài khoản tại TechBoys')
-               ->view('emails.user-updated') 
-               ->with([
-                   'name' => $this->name,
-                   'username' => $this->username,
-                   'changes' => $this->changes
-               ]);
-}
-}
+    {
+        return $this->subject('Thông báo cập nhật tài khoản tại TechBoys')
+                   ->view('emails.user-updated')
+                   ->with([
+                       'user' => $this->user,
+                       'username' => $this->username,
+                       'changes' => $this->changes
+                   ]);
+    }
+}   
