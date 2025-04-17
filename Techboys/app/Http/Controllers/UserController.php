@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Events\UserBlocked;
 use App\Mail\ForgotPassword;
 use App\Mail\verifyAccount;
+use App\Mail\UserUpdatedMail;
 use App\Models\Cart;
 use Illuminate\Auth\Notifications\VerifyEmail;
 use Mail;
@@ -481,10 +482,24 @@ public function updateUser(Request $request, $id)
 
             if ($request->filled('password')) {
                 $data['password'] = Hash::make($request->password);
+                $changes['password'] = 'Đã thay đổi mật khẩu';
             }
 
             $user->update($data);
 
+            if (!empty($changes)) {
+                $mailData = [
+                    'user' => $user,
+                    'changes' => $changes,
+                    'username' => $user->username 
+                ];
+                Mail::to($user->email)->send(new UserUpdatedMail(
+                    $user,           
+                    $user->username, 
+                    $changes         
+                ));
+            }
+            
             return redirect()->route('admin.user.index')->with('success', 'Cập nhật thành công!');
 
         } catch (\Exception $e) {
