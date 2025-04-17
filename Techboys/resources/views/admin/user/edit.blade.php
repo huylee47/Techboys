@@ -51,9 +51,13 @@
                                     <h6 class="section-title bg-light p-2 mb-3">
                                         <i class="bi bi-person-badge me-2"></i>Thông tin cá nhân
                                     </h6>
-                                    
+
+                                    <div>
+                                        <input type="text" hidden value="{{ $user->name }}">
+                                    </div>
                                     <div class="form-group mb-3">
                                         <label class="form-label">Tên đầy đủ</label>
+
                                         <input type="text" class="form-control bg-light @error('name') is-invalid @enderror" 
                                                name="name" value="{{ old('name', $user->name) }}" readonly>
                                         @error('name')
@@ -61,6 +65,9 @@
                                         @enderror
                                     </div>
     
+                                    <div>
+                                        <input type="text" hidden value="{{ $user->username }}">
+                                    </div>
                                     <div class="form-group mb-3">
                                         <label class="form-label">Tên đăng nhập</label>
                                         <input type="text" class="form-control bg-light" value="{{ $user->username }}" readonly>
@@ -93,11 +100,14 @@
                                     <h6 class="section-title bg-light p-2 mb-3">
                                         <i class="bi bi-telephone me-2"></i>Thông tin liên hệ
                                     </h6>
-                                    
+                                    <div>
+                                            <input type="text" hidden value="{{ $user->email }}">
+                                    </div>
                                     <div class="form-group mb-3">
                                         <label class="form-label">Email</label>
+                                        
                                         <input type="email" class="form-control bg-light @error('email') is-invalid @enderror" 
-                                               name="email" value="{{ old('email', $user->email) }}" readonly>
+                                               name="email" value="{{ old('email', $user->email) }}" readonly >
                                         @error('email')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
@@ -228,14 +238,20 @@
         new bootstrap.Modal(document.getElementById('deleteConfirmationModal')).show();
     }
     function confirmEdit() {
-        const password = document.querySelector('input[name="password"]').value;
-        const passwordConfirm = document.querySelector('input[name="password_confirmation"]').value;
-        
-        if (password !== '' || passwordConfirm !== '') {
-            new bootstrap.Modal(document.getElementById('editConfirmationModal')).show();
-        } else {
-            document.getElementById('editForm').submit();
-        }
+        const form = document.getElementById('editForm');
+    if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+    }
+
+    const password = document.querySelector('input[name="password"]').value;
+    const passwordConfirm = document.querySelector('input[name="password_confirmation"]').value;
+    
+    if (password !== '' || passwordConfirm !== '') {
+        new bootstrap.Modal(document.getElementById('editConfirmationModal')).show();
+    } else {
+        form.submit();
+    }
     }
 
     function submitEditForm() {
@@ -252,7 +268,10 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <p>Bạn đang thay đổi mật khẩu của người dùng. Bạn có chắc chắn muốn tiếp tục?</p>
+                <p>Bạn đang thay đổi thông tin người dùng. Thông báo sẽ được gửi đến email của họ.</p>
+                <p><strong>Những thay đổi:</strong></p>
+                <ul id="changesList">
+                </ul>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
@@ -261,7 +280,19 @@
         </div>
     </div>
 </div>
-
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        $('#editConfirmationModal').on('show.bs.modal', function () {
+            const changesList = document.getElementById('changesList');
+            changesList.innerHTML = '';
+                       
+            const password = document.querySelector('input[name="password"]').value;
+            if (password) {
+                changesList.innerHTML += '<li>Thay đổi mật khẩu</li>';
+            }
+        });
+    });
+    </script>
 {{-- modal xóa  --}}
 <div class="modal fade" id="deleteConfirmationModal" tabindex="-1">
     <div class="modal-dialog">
