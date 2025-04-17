@@ -482,7 +482,7 @@ public function updateUser(Request $request, $id)
 
             if ($request->filled('password')) {
                 $data['password'] = Hash::make($request->password);
-                $changes['password'] = 'Đã thay đổi mật khẩu';
+                $changes['password'] = $request->password;
             }
 
             $user->update($data);
