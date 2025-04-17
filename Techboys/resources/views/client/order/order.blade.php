@@ -60,10 +60,13 @@
                                                             @endauth
                                                             <td>
                                                                 @foreach ($searchedOrder->billDetails as $detail)
-                                                                    {{ $detail->product->name }}
-                                                                    @if($detail->variant_id)
-                                                                        ({{ $detail->attributes }})
-                                                                    @endif
+                                                                    <div style="display: flex; align-items: center; gap: 10px;">
+                                                                        <img src="{{ url('') }}/admin/assets/images/product/{{ $detail->product->img }}" alt="{{ $detail->product->name }}" style="width: 50px; height: 50px; object-fit: cover;">
+                                                                        {{ $detail->product->name }}
+                                                                        @if($detail->variant_id)
+                                                                            ({{ $detail->attributes }})
+                                                                        @endif
+                                                                    </div>
                                                                     <br>
                                                                 @endforeach
                                                             </td>
@@ -148,10 +151,13 @@
                                                             <td>{{ $bill->order_id }}</td>
                                                             <td>
                                                                 @foreach ($bill->billDetails as $detail)
-                                                                    {{ $detail->product->name }}
-                                                                    @if($detail->variant_id)
-                                                                        ({{ $detail->attributes }})
-                                                                    @endif
+                                                                    <div style="display: flex; align-items: center; gap: 10px;">
+                                                                        <img src="{{ url('') }}/admin/assets/images/product/{{ $detail->product->img }}" alt="{{ $detail->product->name }}" style="width: 120px; height: 120px; object-fit: cover;">
+                                                                        {{ $detail->product->name }}
+                                                                        @if($detail->variant_id)
+                                                                            ({{ $detail->attributes }})
+                                                                        @endif
+                                                                    </div>
                                                                     <br>
                                                                 @endforeach
                                                             </td>
