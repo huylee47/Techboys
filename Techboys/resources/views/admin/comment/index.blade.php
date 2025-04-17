@@ -102,8 +102,9 @@
                                                     >
                                                 </button>
                                             </form>
-                                          
-                                            <a href="{{ route('admin.comment.replyForm', ['id' => $cmt->id]) }}" class="bi-reply-fill fs-4" title="Nhấn để trả lời bình luận"></a>
+                                            @if ($cmt->replies->isEmpty())
+                                                <a href="{{ route('admin.comment.replyForm', ['id' => $cmt->id]) }}" class="bi-reply-fill fs-4" title="Nhấn để trả lời bình luận"></a>
+                                            @endif
                                         </td>
                                        
                                     </tr>
