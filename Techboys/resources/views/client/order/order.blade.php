@@ -65,16 +65,12 @@
                                                                         @if($detail->variant_id)
                                                                             ({{ $detail->attributes }})
                                                                         @endif
+                                                                        <span style="margin-left: auto;">x{{ $detail->quantity }}</span>
                                                                     </div>
                                                                     <br>
                                                                 @endforeach
                                                             </td>
-                                                            <td>
-                                                                @foreach ($searchedOrder->billDetails as $detail)
-                                                                <span style="margin-left: auto;">x{{ $detail->quantity }}</span>
-                                                                <br>
-                                                                @endforeach
-                                                            </td>
+                                                         
                                                             <td>
                                                                 @switch($searchedOrder->status_id)
                                                                     @case(0)
