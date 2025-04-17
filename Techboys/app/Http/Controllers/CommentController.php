@@ -55,6 +55,12 @@ class CommentController extends Controller
             'rep_content.max' => 'Nội dung phản hồi không được vượt quá 500 ký tự'
         ]);
 
+        // Check if the comment already has a reply
+        $existingReply = DB::table('replies')->where('comment_id', $request->comment_id)->exists();
+        if ($existingReply) {
+            return redirect()->route('admin.comment.index')->with('error', 'Bình luận này đã được phản hồi.');
+        }
+
         $data = [
             'user_id' => Auth::id(),
             'comment_id' => $request->comment_id,

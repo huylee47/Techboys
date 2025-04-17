@@ -46,7 +46,6 @@
                                                         <th>Mã đơn hàng</th>
                                                         @endauth
                                                         <th>Sản phẩm</th>
-                                                        <th>Số lượng</th>
                                                         <th>Trạng thái</th>
                                                         <th>Tổng cộng</th>
                                                         <th>Hành động</th>
@@ -60,16 +59,20 @@
                                                             @endauth
                                                             <td>
                                                                 @foreach ($searchedOrder->billDetails as $detail)
-                                                                    {{ $detail->product->name }}
-                                                                    @if($detail->variant_id)
-                                                                        ({{ $detail->attributes }})
-                                                                    @endif
+                                                                    <div style="display: flex; align-items: center; gap: 10px;">
+                                                                        <img src="{{ url('') }}/admin/assets/images/product/{{ $detail->product->img }}" alt="{{ $detail->product->name }}" style="width: 120px; height: 120px; object-fit: cover;">
+                                                                        {{ $detail->product->name }}
+                                                                        @if($detail->variant_id)
+                                                                            ({{ $detail->attributes }})
+                                                                        @endif
+                                                                    </div>
                                                                     <br>
                                                                 @endforeach
                                                             </td>
                                                             <td>
                                                                 @foreach ($searchedOrder->billDetails as $detail)
-                                                                    {{ $detail->quantity }}<br>
+                                                                <span style="margin-left: auto;">x{{ $detail->quantity }}</span>
+                                                                <br>
                                                                 @endforeach
                                                             </td>
                                                             <td>
@@ -132,7 +135,7 @@
                                                     <tr>
                                                         <th>Mã đơn hàng</th>
                                                         <th>Sản phẩm</th>
-                                                        <th>Số lượng</th>
+                                                 
                                                         {{-- <th>PT thanh toán</th>
                                                         <th>TT thanh toán</th> --}}
                                                         <th>Trạng thái</th>
@@ -148,18 +151,18 @@
                                                             <td>{{ $bill->order_id }}</td>
                                                             <td>
                                                                 @foreach ($bill->billDetails as $detail)
-                                                                    {{ $detail->product->name }}
-                                                                    @if($detail->variant_id)
-                                                                        ({{ $detail->attributes }})
-                                                                    @endif
+                                                                    <div style="display: flex; align-items: center; gap: 10px;">
+                                                                        <img src="{{ url('') }}/admin/assets/images/product/{{ $detail->product->img }}" alt="{{ $detail->product->name }}" style="width: 120px; height: 120px; object-fit: cover;">
+                                                                        {{ $detail->product->name }}
+                                                                        @if($detail->variant_id)
+                                                                            ({{ $detail->attributes }})
+                                                                        @endif
+                                                                        <span style="margin-left: auto;">x{{ $detail->quantity }}</span>
+                                                                    </div>
                                                                     <br>
                                                                 @endforeach
                                                             </td>
-                                                            <td>
-                                                                @foreach ($bill->billDetails as $detail)
-                                                                    {{ $detail->quantity }}<br>
-                                                                @endforeach
-                                                            </td>
+                                                          
 
                                                             <td>
                                                                 @switch($bill->status_id)

@@ -82,7 +82,7 @@ Giao hàng thành công
 Giao hàng thất bại
                                                                         @break
                                                                     @default
- Không xác định
+Không xác định
                                                                 @endswitch"
                                id="order_status" 
                                name="order_status" 
@@ -140,7 +140,14 @@ Giao hàng thất bại
                     <tbody>
                         @foreach ($order->billDetails as $detail)
                         <tr>
-                            <td>{{ $detail->product->name }}{{ $detail->attributes ? ' (' . $detail->attributes . ')' : '' }}</td>
+                            <td>
+                                <div style="display: flex; align-items: center; gap: 10px;">
+                                    <img src="{{ url('') }}/admin/assets/images/product/{{ $detail->product->img }}" 
+                                         alt="{{ $detail->product->name }}" 
+                                         style="width: 120px; height: 120px; object-fit: cover;">
+                                    <span>{{ $detail->product->name }}{{ $detail->attributes ? ' (' . $detail->attributes . ')' : '' }}</span>
+                                </div>
+                            </td>
                             <td>{{ $detail->quantity }}</td>
                             <td>
                                 @if (isset($detail->discounted_price) && $detail->discounted_price < $detail->price)
