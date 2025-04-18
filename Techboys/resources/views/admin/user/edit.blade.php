@@ -35,7 +35,7 @@
                         </span>
                     </div>
                     @if($user->username === 'admin')
-                        <span class="badge bg-primary mt-2">Super Admin</span>
+                        <span class="badge bg-primary mt-2">Admin gốc</span>
                     @elseif($user->role_id == 1)
                         <span class="badge bg-info mt-2">Quản trị viên</span>
                     @endif
@@ -189,7 +189,7 @@
                                                 </select>
                                                 
                                                 @if(auth()->user()->username !== 'admin')
-                                                    <small class="text-muted">Chỉ Super Admin mới được thay đổi vai trò</small>
+                                                    <small class="text-muted">Chỉ Admin gốc mới được thay đổi vai trò</small>
                                                 @endif
                                             </div>
                                         </div>
