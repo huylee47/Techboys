@@ -212,14 +212,14 @@
                                     <i class="bi bi-save me-1"></i> Lưu thay đổi
                                 </button>
                                 
-                                @if(
+                                {{-- @if(
                                     (auth()->user()->username === 'admin' && $user->username !== 'admin') || 
                                     (auth()->user()->role_id == 1 && $user->role_id == 0)
                                 )
                                     <a href="#" class="bi-trash-fill text-danger fs-4" title="Xóa người dùng"
                                     onclick="event.preventDefault(); openDeleteModal('{{ route('admin.user.destroy', $user->id) }}');">
                                  </a>
-                                @endif
+                                @endif --}}
                             </div>
                         </div>
                     </form>
