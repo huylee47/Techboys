@@ -581,9 +581,17 @@ class BillController extends Controller
     //client
     public function indexClient()
     {
-        $loadAll = Bill::with(['billDetails.product', 'billDetails.variant'])
-            ->where('user_id', Auth::id())
-            ->get();
+        $loadAll = Bill::with([
+            'billDetails.product' => function ($query) {
+                $query->withTrashed();
+            },
+            'billDetails.variant' => function ($query) {
+                $query->withTrashed();
+            }
+        ])
+        ->where('user_id', Auth::id())
+        ->get();
+        
 
         foreach ($loadAll as $bill) {
             foreach ($bill->billDetails as $detail) {
@@ -699,7 +707,16 @@ class BillController extends Controller
     public function detailClient(Request $request)
     {
         $orderId = $request->input('order_id'); // Lấy từ POST request
-        $order = Bill::with(['user', 'billDetails.product', 'billDetails.variant'])->find($orderId);
+        $order = Bill::with([
+            'user',
+            'billDetails.product' => function ($query) {
+                $query->withTrashed();
+            },
+            'billDetails.variant' => function ($query) {
+                $query->withTrashed();
+            }
+        ])->find($orderId);
+        
 
         if (!$order) {
             return redirect()->route('client.orders')->with('error', 'Không tìm thấy đơn hàng!');
