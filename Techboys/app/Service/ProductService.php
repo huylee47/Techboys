@@ -220,16 +220,21 @@ class ProductService{
         }
         $product = Product::where('id',$id)->first();
         if ($request->hasFile('img')) {
+            $oldImagePath = public_path('admin/assets/images/product/' . $product->img);
+            if (file_exists($oldImagePath) && is_file($oldImagePath)) {
+                unlink($oldImagePath);
+            }
+        
             $imageName = time() . '_' . uniqid() . '.' . $request->img->getClientOriginalExtension();
             $request->img->move(public_path('admin/assets/images/product'), $imageName);
-        }else{
+        } else {
             $imageName = $product->img;
         }
-
-        $image = Images::firstOrNew(['image' => $product->img]);
-        $image->product_id = $product->id;
+        
+        $image = Images::firstOrNew(['product_id' => $product->id]);
         $image->image = $imageName;
         $image->save();
+        
 
         $product->update([
             'name' => $request->name,
