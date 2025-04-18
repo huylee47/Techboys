@@ -76,19 +76,25 @@
                                     @endif
                                 </td>
                                 <td class="text-center">
-                                 
+                                    @if(auth()->user()->username === 'admin' || $user->role_id != 1)
+                                    <a href="{{ route('admin.user.edit', $user->id) }}" class="btn btn-sm btn-primary">
+                                        <i class="bi bi-pencil"></i>
+                                    </a>
+                                @endif
                                     <form action="{{ $user->status == 1 ? route('admin.user.block', ['id' => $user->id]) : route('admin.user.open', ['id' => $user->id]) }}"
                                           method="POST" style="display:inline;">
                                         @csrf                                    
                                         <input type="hidden" class="form-control" name="id" value="{{ $user->id }}">
-                                        <button 
-                                        type="submit" 
-                                        class="{{ $user->status == 1 ? 'bi-lock' : 'bi-unlock' }}" 
-                                        {{ $user->id == 1 || $user->id == auth()->id() ? 'disabled' : '' }}
-                                         title="{{ $user->id == 1 ? 'Không thể khoá tài khoản ADMIN gốc.' : ($user->id == auth()->id() ? 'Không thể khoá tài khoản của chính mình.' : '') }}"
-                                    >
+                                        <button type="submit" 
+                                        class="{{ $user->status == 1 ? 'bi-lock' : 'bi-unlock' }}"
+                                        @if($user->id == 1 || $user->id == auth()->id() || ($user->role_id == 1 && auth()->user()->id != 1))
+                                            disabled
+                                            title="{{ $user->id == 1 ? 'Không thể khoá tài khoản ADMIN gốc.' 
+                                                    : ($user->id == auth()->id() ? 'Không thể khoá tài khoản của chính mình.' 
+                                                    : 'Chỉ ADMIN gốc có quyền khóa/mở ADMIN phụ.') }}"
+                                        @endif>
                                         {{ $user->status == 1 ? 'Khóa tài khoản' : 'Mở tài khoản' }}
-                                    </button>
+                                        </button>
                                     
                                     </form>
                                 </td>

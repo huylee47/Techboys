@@ -63,7 +63,7 @@
             <strong>Email:</strong> techboyspoly@gmail.com<br>
             <strong>Hotline:</strong> 1900 9999
         </p>
-        <a href="https://techboys.com" style="display: inline-block; padding: 10px 20px; background-color: #007BFF; color: #fff; text-decoration: none; border-radius: 5px; margin-top: 20px;">
+        <a href="http://127.0.0.1:8000/" style="display: inline-block; padding: 10px 20px; background-color: #007BFF; color: #fff; text-decoration: none; border-radius: 5px; margin-top: 20px;">
             Truy cập Website của Chúng Tôi
         </a>
         <div class="footer">

@@ -187,6 +187,9 @@ Route::post('/logout', [UserController::class, 'logout'])->name('admin.logout');
             Route::post('/block/{id}', [UserController::class, 'block'])->name('admin.user.block');
             Route::post('/open/{id}', [UserController::class, 'open'])->name('admin.user.open');
             Route::post('/check', [UserController::class, 'checkPhone'])->name('admin.user.check');
+            Route::get('/edit/{id}', [UserController::class, 'editUser'])->name('admin.user.edit');
+            Route::put('/update/{id}', [UserController::class, 'updateUser'])->name('admin.user.update');
+            Route::delete('/user/{id}', [UserController::class, 'destroy'])->name('admin.user.destroy');
         });
 
         Route::prefix('/bill')->group(function () {
