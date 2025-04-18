@@ -14,6 +14,7 @@ use App\Models\Product;
 use App\Models\ProductCategory;
 use App\Models\ProductModel;
 use App\Models\ProductVariant;
+use App\Models\RepComment;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 class ProductService{
@@ -142,7 +143,7 @@ class ProductService{
     {
         $attributesList = Attributes::with('values')->get();
         $product = Product::findOrFail($id);
-        $billPending = Bill::with('billDetails')->where('status_id',1)->get();
+        $billPending = Bill::with('billDetails')->get();
         $billDetails = $billPending->flatMap->billDetails;
         $productIdPending = $billDetails->pluck('product_id')->unique()->values();
         // return response()->json($productIds);
@@ -318,13 +319,15 @@ class ProductService{
         return redirect()->route('admin.product.index')->with('success', 'Sửa sản phẩm thành công');
     }
     public function destroyProduct($request) {
-        $ids = is_array($request->id) ? $request->id : [$request->id];
+       
     
         $product = Product::find($request->id);
     
         if ($product) {
-            ProductVariant::whereIn('id', $ids)->forceDelete();
-            Images::whereIn('id', $ids)->forceDelete();
+            ProductVariant::whereIn('product_id', $request->id)->forceDelete();
+            Images::whereIn('product_id', $request->id)->forceDelete();
+            Comment::whereIn('product_id', $request->id)->forceDelete();
+            RepComment::whereIn('product_id', $request->id)->forceDelete();
             $product->forceDelete();
             
             return redirect()->route('admin.product.index')->with('success', 'Xóa sản phẩm: ' . $product->name . ' thành công');
