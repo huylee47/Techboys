@@ -327,12 +327,11 @@ class ProductService{
        
     
         $product = Product::find($request->id);
-    
         if ($product) {
-            ProductVariant::whereIn('product_id', $request->id)->forceDelete();
-            Images::whereIn('product_id', $request->id)->forceDelete();
-            Comment::whereIn('product_id', $request->id)->forceDelete();
-            RepComment::whereIn('product_id', $request->id)->forceDelete();
+            ProductVariant::where('product_id', $request->id)->forceDelete();
+            Images::where('product_id', $request->id)->forceDelete();
+            Comment::where('product_id', $request->id)->forceDelete();
+            RepComment::where('product_id', $request->id)->forceDelete();
             $product->forceDelete();
             
             return redirect()->route('admin.product.index')->with('success', 'Xóa sản phẩm: ' . $product->name . ' thành công');
