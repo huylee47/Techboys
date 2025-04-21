@@ -36,20 +36,24 @@
                     <div class="card-body">
                         <h5>Sản phẩm: {{ $comment->product->name }}</h5>
                         <h5>Nội dung: {{ $comment->content }}</h5>
-                        @if ($comment->replies->isEmpty())
-                            <form action="{{ route('admin.comment.reply') }}" method="POST">
-                                @csrf
-                                <input type="hidden" name="comment_id" value="{{ $comment->id }}">
-                                <input type="hidden" name="product_id" value="{{ $comment->product_id }}">
-                                <input type="hidden" name="content" value="{{ $comment->content }}">
-                                <input type="hidden" name="rate" value="{{ $comment->rate }}">
-                                <input type="hidden" name="file_id" value="{{ $comment->file_id }}">
-                                <textarea name="rep_content" class="form-control" placeholder="Nhập phản hồi"></textarea>
-                                <button type="submit" class="btn btn-primary mt-2">Gửi</button>
-                                <a href="{{ route('admin.comment.index') }}" class="btn btn-secondary mt-2">Quay lại</a>
-                            </form>
+                        @if ($comment->status_id == 1)
+                            @if ($comment->replies->isEmpty())
+                                <form action="{{ route('admin.comment.reply') }}" method="POST">
+                                    @csrf
+                                    <input type="hidden" name="comment_id" value="{{ $comment->id }}">
+                                    <input type="hidden" name="product_id" value="{{ $comment->product_id }}">
+                                    <input type="hidden" name="content" value="{{ $comment->content }}">
+                                    <input type="hidden" name="rate" value="{{ $comment->rate }}">
+                                    <input type="hidden" name="file_id" value="{{ $comment->file_id }}">
+                                    <textarea name="rep_content" class="form-control" placeholder="Nhập phản hồi"></textarea>
+                                    <button type="submit" class="btn btn-primary mt-2">Gửi</button>
+                                    <a href="{{ route('admin.comment.index') }}" class="btn btn-secondary mt-2">Quay lại</a>
+                                </form>
+                            @else
+                                <div class="alert alert-info mt-2">Bình luận này đã được phản hồi.</div>
+                            @endif
                         @else
-                            <div class="alert alert-info mt-2">Bình luận này đã được phản hồi.</div>
+                            <div class="alert alert-warning mt-2">Bình luận này không khả dụng để phản hồi.</div>
                         @endif
                     </div>
                 </div>
