@@ -56,7 +56,7 @@ class CommentController extends Controller
         ]);
 
         // Check if the comment already has a reply
-        $existingReply = DB::table('replies')->where('comment_id', $request->comment_id)->exists();
+        $existingReply = DB::table('rep_comment')->where('comment_id', $request->comment_id)->exists();
         if ($existingReply) {
             return redirect()->route('admin.comment.index')->with('error', 'Bình luận này đã được phản hồi.');
         }
