@@ -89,7 +89,7 @@ class UserController extends Controller
             'name' => 'required|string|max:255',
             'username' => 'required|string|max:255|unique:users,username',
             'email' => 'required|string|email|max:255|unique:users,email',
-            'phone' => 'required|string|max:11',
+            'phone' => 'required|string|max:11|unique:users,phone',
             'password' => 'required|string|min:8',
             'confirm_Password' => 'required|string|same:password'
         ], [
@@ -104,6 +104,7 @@ class UserController extends Controller
             'email.unique' => 'Email đã tồn tại.',
             'phone.required' => 'Vui lòng nhập số điện thoại.',
             'phone.max' => 'Số điện thoại không được vượt quá 11 ký tự.',
+            'phone.unique' => 'Số điện thoại đã tồn tại.',
             'password.required' => 'Vui lòng nhập mật khẩu.',
             'password.min' => 'Mật khẩu phải có ít nhất 8 ký tự.',
             'confirm_Password.required' => 'Vui lòng nhập mật khẩu xác nhận.',
