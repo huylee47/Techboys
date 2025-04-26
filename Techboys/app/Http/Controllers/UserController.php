@@ -56,20 +56,18 @@ class UserController extends Controller
     public function block(Request $request)
     {
         $user = User::find($request->id);
-    // dd($user->id);
+        // dd($user->id);
         if ($user) {
             $user->update(['status' => 0]);
-    
+
             if ($user->role_id == 2) {
                 DB::table('sessions')->where('user_id', $user->id)->delete();
-                
+
                 Log::info("Phát sự kiện UserBlocked cho userId: {$user->id}");
                 broadcast(new UserBlocked($user->id))->toOthers();
-
-                
             }
         }
-    
+
         return redirect()->route('admin.user.index')->with('success', 'Khóa tài khoản thành công.');
     }
 
@@ -213,7 +211,7 @@ class UserController extends Controller
             'name' => 'required|string|max:255',
             'username' => 'required|string|max:255|unique:users,username',
             'email' => 'required|string|email|max:255|unique:users,email',
-            'phone' => 'required|string|max:11',
+            'phone' => 'required|string|max:11|unique:users,phone',
             'password' => 'required|string|min:8',
             'password-confirm' => 'required|string|same:password'
         ], [
@@ -228,6 +226,7 @@ class UserController extends Controller
             'email.unique' => 'Email đã tồn tại.',
             'phone.required' => 'Vui lòng nhập số điện thoại.',
             'phone.max' => 'Số điện thoại không được vượt quá 11 ký tự.',
+            'phone.unique' => 'Số điện thoại đã tồn tại.',
             'password.required' => 'Vui lòng nhập mật khẩu.',
             'password.min' => 'Mật khẩu phải có ít nhất 8 ký tự.',
             'password-confirm.required' => 'Vui lòng nhập mật khẩu xác nhận.',
@@ -393,72 +392,72 @@ class UserController extends Controller
     }
     //edit phía admin
     public function editUser($id)
-{
-    $user = User::findOrFail($id);
-    if (auth()->user()->username !== 'admin' && $user->role_id == 1) {
-        abort(403, 'Bạn không có quyền chỉnh sửa admin khác');
+    {
+        $user = User::findOrFail($id);
+        if (auth()->user()->username !== 'admin' && $user->role_id == 1) {
+            abort(403, 'Bạn không có quyền chỉnh sửa admin khác');
+        }
+
+        return view('admin.user.edit', compact('user'));
     }
-    
-    return view('admin.user.edit', compact('user'));
-}
 
-// public function updateUser(Request $request, $id)
-// {
-//     $user = User::findOrFail($id);
-    
-//     if (auth()->user()->username !== 'admin' && $user->role_id == 1) {
-//         abort(403, 'Bạn không có quyền cập nhật admin khác');
-//     }
+    // public function updateUser(Request $request, $id)
+    // {
+    //     $user = User::findOrFail($id);
 
-//     $request->validate([
-//         'name' => 'required|string|max:50',
-//         'email' => 'required|email|unique:users,email,'.$id,
-//         'phone' => 'required|string|min:10|max:10|regex:/^[0-9]+$/',
-//         'dob' => 'required|date|before_or_equal:today|after:1950-01-01',
-//         'address' => 'required|string|max:500',
-//         'password' => 'nullable|min:8|confirmed'
+    //     if (auth()->user()->username !== 'admin' && $user->role_id == 1) {
+    //         abort(403, 'Bạn không có quyền cập nhật admin khác');
+    //     }
 
-//     ], [
-//         'name.required' => 'Vui lòng nhập tên người dùng',
-//         'name.max' => 'Tên không được vượt quá 50 ký tự',
-        
-//         'email.required' => 'Vui lòng nhập email',
-//         'email.email' => 'Email không hợp lệ',
-//         'email.unique' => 'Email này đã được sử dụng',
-        
-//         'phone.required' => 'Vui lòng nhập số điện thoại',
-//         'phone.min' => 'Số điện thoại ít nhất 10 ký tự',
-//         'phone.max' => 'Số điện thoại tối đa 10 ký tự',
-//         'phone.regex' => 'Số điện thoại chỉ được chứa số',
-        
-//         'dob.required' => 'Vui lòng nhập ngày sinh',
-//         'dob.date' => 'Ngày sinh không hợp lệ',
-//         'dob.before_or_equal' => 'Ngày sinh không thể ở tương lai',
-//         'dob.after' => 'Ngày sinh phải sau năm 1950',
-        
-//         'address.required' => 'Vui lòng nhập địa chỉ',
-//         'address.max' => 'Địa chỉ không được vượt quá 250 ký tự'
-//     ]);
+    //     $request->validate([
+    //         'name' => 'required|string|max:50',
+    //         'email' => 'required|email|unique:users,email,'.$id,
+    //         'phone' => 'required|string|min:10|max:10|regex:/^[0-9]+$/',
+    //         'dob' => 'required|date|before_or_equal:today|after:1950-01-01',
+    //         'address' => 'required|string|max:500',
+    //         'password' => 'nullable|min:8|confirmed'
 
-//     try {
-//         $user->update([
-//             'name' => $request->name,
-//             'email' => $request->email,
-//             'phone' => $request->phone,
-//             'role_id' => $request->role_id,
-//             'dob' => $request->dob,
-//             'address' => $request->address
-//         ]);
-        
-//         return redirect()->route('admin.user.index')
-//                        ->with('success', 'Cập nhật thông tin thành công');
-        
-//     } catch (\Exception $e) {
-//         Log::error('Lỗi cập nhật người dùng: '.$e->getMessage());
-//         return back()->with('error', 'Cập nhật thất bại! Vui lòng thử lại');
-//     }
-// }
-public function updateUser(Request $request, $id)
+    //     ], [
+    //         'name.required' => 'Vui lòng nhập tên người dùng',
+    //         'name.max' => 'Tên không được vượt quá 50 ký tự',
+
+    //         'email.required' => 'Vui lòng nhập email',
+    //         'email.email' => 'Email không hợp lệ',
+    //         'email.unique' => 'Email này đã được sử dụng',
+
+    //         'phone.required' => 'Vui lòng nhập số điện thoại',
+    //         'phone.min' => 'Số điện thoại ít nhất 10 ký tự',
+    //         'phone.max' => 'Số điện thoại tối đa 10 ký tự',
+    //         'phone.regex' => 'Số điện thoại chỉ được chứa số',
+
+    //         'dob.required' => 'Vui lòng nhập ngày sinh',
+    //         'dob.date' => 'Ngày sinh không hợp lệ',
+    //         'dob.before_or_equal' => 'Ngày sinh không thể ở tương lai',
+    //         'dob.after' => 'Ngày sinh phải sau năm 1950',
+
+    //         'address.required' => 'Vui lòng nhập địa chỉ',
+    //         'address.max' => 'Địa chỉ không được vượt quá 250 ký tự'
+    //     ]);
+
+    //     try {
+    //         $user->update([
+    //             'name' => $request->name,
+    //             'email' => $request->email,
+    //             'phone' => $request->phone,
+    //             'role_id' => $request->role_id,
+    //             'dob' => $request->dob,
+    //             'address' => $request->address
+    //         ]);
+
+    //         return redirect()->route('admin.user.index')
+    //                        ->with('success', 'Cập nhật thông tin thành công');
+
+    //     } catch (\Exception $e) {
+    //         Log::error('Lỗi cập nhật người dùng: '.$e->getMessage());
+    //         return back()->with('error', 'Cập nhật thất bại! Vui lòng thử lại');
+    //     }
+    // }
+    public function updateUser(Request $request, $id)
     {
 
         $user = User::findOrFail($id);
@@ -466,7 +465,7 @@ public function updateUser(Request $request, $id)
             abort(403, 'Bạn không có quyền sửa admin khác');
         }
         $rules = [
-            'password' => 'nullable|min:8|confirmed', 
+            'password' => 'nullable|min:8|confirmed',
         ];
 
         $messages = [
@@ -492,43 +491,41 @@ public function updateUser(Request $request, $id)
                 $mailData = [
                     'user' => $user,
                     'changes' => $changes,
-                    'username' => $user->username 
+                    'username' => $user->username
                 ];
                 Mail::to($user->email)->send(new UserUpdatedMail(
-                    $user,           
-                    $user->username, 
-                    $changes         
+                    $user,
+                    $user->username,
+                    $changes
                 ));
             }
-            
-            return redirect()->route('admin.user.index')->with('success', 'Cập nhật thành công!');
 
+            return redirect()->route('admin.user.index')->with('success', 'Cập nhật thành công!');
         } catch (\Exception $e) {
             Log::error('Lỗi cập nhật user: ' . $e->getMessage());
             return back()->with('error', 'Cập nhật thất bại! Vui lòng thử lại.');
         }
     }
-public function destroy($id)
-{
-    $userToDelete = User::findOrFail($id);
-    $currentUser = auth()->user();
+    public function destroy($id)
+    {
+        $userToDelete = User::findOrFail($id);
+        $currentUser = auth()->user();
 
-    if ($userToDelete->id === $currentUser->id) {
-        return redirect()->route('admin.user.index')->with('error', 'Bạn không thể xóa chính mình');
-    }
-
-    if ($currentUser->username === 'admin') {
-        if ($userToDelete->username === 'admin') {
-            return redirect()->route('admin.user.index')->with('error', 'Không thể xóa admin chính');
+        if ($userToDelete->id === $currentUser->id) {
+            return redirect()->route('admin.user.index')->with('error', 'Bạn không thể xóa chính mình');
         }
-        $userToDelete->delete();
-        return redirect()->route('admin.user.index')->with('success', 'Đã xóa tài khoản thành công');
-    }
 
-    if ($currentUser->role_id == 1 && $userToDelete->role_id == 0) {
-        $userToDelete->delete();
-        return redirect()->route('admin.user.index')->with('success', 'Đã xóa user thường thành công');
-    }
+        if ($currentUser->username === 'admin') {
+            if ($userToDelete->username === 'admin') {
+                return redirect()->route('admin.user.index')->with('error', 'Không thể xóa admin chính');
+            }
+            $userToDelete->delete();
+            return redirect()->route('admin.user.index')->with('success', 'Đã xóa tài khoản thành công');
+        }
 
-}
+        if ($currentUser->role_id == 1 && $userToDelete->role_id == 0) {
+            $userToDelete->delete();
+            return redirect()->route('admin.user.index')->with('success', 'Đã xóa user thường thành công');
+        }
+    }
 }
