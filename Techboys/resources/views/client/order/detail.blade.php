@@ -81,6 +81,13 @@ Giao hàng thành công
                                                                     @case(5)
 Giao hàng thất bại
                                                                         @break
+                                                                         @case(6)
+Đang xét duyệt hoàn hàng
+                                                                        @break
+                                                                         @case(6)
+ Hoàn hàng thành công
+                                                                        @break
+                                                                        
                                                                     @default
 Không xác định
                                                                 @endswitch"
