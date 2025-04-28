@@ -750,4 +750,31 @@ class BillController extends Controller
 
         return view('client.order.detail', compact('order'));
     }
+
+    public function returnOrder($id)
+    {
+        $bill = Bill::find($id);
+
+        if (!$bill) {
+            return redirect()->route('client.orders')->with('error', 'Không tìm thấy đơn hàng!');
+        }
+
+        if ($bill->status_id != 3) {
+            return redirect()->route('client.orders')->with('error', 'Đơn hàng không hợp lệ để yêu cầu hoàn hàng!');
+        }
+
+        try {
+            DB::beginTransaction();
+
+            $bill->update([
+                'status_id' => 6,
+            ]);
+
+            DB::commit();
+            return redirect()->route('client.orders')->with('success', 'Yêu cầu hoàn hàng đã được gửi thành công!');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->route('client.orders')->with('error', 'Đã xảy ra lỗi khi yêu cầu hoàn hàng!');
+        }
+    }
 }
