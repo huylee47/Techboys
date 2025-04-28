@@ -38,7 +38,7 @@
                                             <!-- Display search results -->
                                             <table class="table table-bordered" id="table1">
                                                 @if(!Auth::check())
-                                                    <h5>Nếu bạn muốn hủy đơn hàng vui lòng liên hệ với chúng tôi: 0901234567</h5>
+                                                    <h5>Nếu bạn muốn hủy đơn hàng hoặc hoàn hàng vui lòng liên hệ với chúng tôi: 0901234567</h5>
                                                 @endif
                                                 <thead>
                                                     <tr>
@@ -90,6 +90,11 @@
                                                                         @break
                                                                     @case(5)
                                                                         Giao hàng thất bại
+                                                                        @case(6)
+                                                                        Đang xét duyệt hoàn hàng
+                                                                        @break
+                                                                        @case(7)
+                                                                        Đang hoàn thành công
                                                                         @break
                                                                     @default
                                                                         Không xác định
@@ -110,6 +115,10 @@
                                                                             <form action="{{ route('client.orders.confirm', $searchedOrder->id) }}" method="POST">
                                                                                 @csrf
                                                                                 <button class="btn btn-success"  onclick="return confirm('Bạn có chắc chắn muốn xác nhận đơn hàng này?')" type="submit">Xác nhận</button>
+                                                                            </form>
+                                                                            <form action="{{ route('client.orders.return', $searchedOrder->id) }}" method="POST">
+                                                                                @csrf
+                                                                                <button class="btn btn-secondary" onclick="return confirm('Bạn có chắc chắn muốn yêu cầu hoàn hàng?')" type="submit">Hoàn hàng</button>
                                                                             </form>
                                                                         @endif
                                                                     @endauth
@@ -180,6 +189,12 @@
                                                                     @case(5)
                                                                         Giao hàng thất bại
                                                                         @break
+                                                                        @case(6)
+                                                                        Đang xét duyệt hoàn hàng
+                                                                        @break
+                                                                        @case(7)
+                                                                       Hoàn hàng thành công
+                                                                        @break
                                                                     @default
                                                                         Không xác định
                                                                 @endswitch
@@ -197,6 +212,10 @@
                                                                         <form action="{{ route('client.orders.confirm', $bill->id) }}" method="POST">
                                                                             @csrf
                                                                             <button class="btn btn-success" onclick="return confirm('Bạn có chắc chắn muốn xác nhận đơn hàng này?')" type="submit">Xác nhận</button>
+                                                                        </form>
+                                                                        <form action="{{ route('client.orders.return', $bill->id) }}" method="POST">
+                                                                            @csrf
+                                                                            <button class="btn btn-secondary" onclick="return confirm('Bạn có chắc chắn muốn yêu cầu hoàn hàng?')" type="submit">Hoàn hàng</button>
                                                                         </form>
                                                                     @endif   
                                                                     <form action="{{ route('client.orders.detail') }}" method="POST">
