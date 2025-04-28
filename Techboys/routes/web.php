@@ -54,6 +54,7 @@ Route::post('/client/orders/cancel', [BillController::class, 'CancelOrder'])->na
 Route::post('/client/orders/cancel/{id}', [BillController::class, 'submitCancelOrder'])->name('client.orders.cancel.submit');
 Route::post('/client/orders/confirm/{id}', [BillController::class, 'confirmClient'])->name('client.orders.confirm');
 Route::post('/client/orders/detail', [BillController::class, 'detailClient'])->name('client.orders.detail');
+Route::post('/client/orders/return/{id}', [BillController::class, 'returnOrder'])->name('client.orders.return');
 
 
 
