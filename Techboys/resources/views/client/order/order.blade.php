@@ -94,7 +94,10 @@
                                                                         Đang xét duyệt hoàn hàng
                                                                         @break
                                                                         @case(7)
-                                                                        Đang hoàn thành công
+                                                                        Đang hoàn hàng
+                                                                        @break
+                                                                        @case(8)
+                                                                        Hoàn hàng thành công
                                                                         @break
                                                                     @default
                                                                         Không xác định
@@ -193,7 +196,10 @@
                                                                         Đang xét duyệt hoàn hàng
                                                                         @break
                                                                         @case(7)
-                                                                       Hoàn hàng thành công
+                                                                        Đang hoàn hàng
+                                                                        @break
+                                                                        @case(8)
+                                                                        Hoàn hàng thành công
                                                                         @break
                                                                     @default
                                                                         Không xác định
