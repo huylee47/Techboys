@@ -35,7 +35,7 @@ class UserController extends Controller
         }
 
         if (!Hash::check($password, $account->password)) {
-            return redirect()->back()->with('error', 'Mật khẩu không đúng.');
+            return redirect()->back()->with('error', 'Sai thông tin đăng nhập');
         }
 
         if ($account->role_id != 1 && $account->role_id != 2) {
@@ -156,7 +156,7 @@ class UserController extends Controller
         }
 
         if (!Hash::check($password, $account->password)) {
-            return redirect()->back()->with('error', 'Mật khẩu không đúng.');
+            return redirect()->back()->with('error', 'Sai thông tin đăng nhập.');
         }
 
         if ($account->status != 1) {

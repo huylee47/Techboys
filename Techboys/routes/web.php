@@ -54,6 +54,7 @@ Route::post('/client/orders/cancel', [BillController::class, 'CancelOrder'])->na
 Route::post('/client/orders/cancel/{id}', [BillController::class, 'submitCancelOrder'])->name('client.orders.cancel.submit');
 Route::post('/client/orders/confirm/{id}', [BillController::class, 'confirmClient'])->name('client.orders.confirm');
 Route::post('/client/orders/detail', [BillController::class, 'detailClient'])->name('client.orders.detail');
+Route::post('/client/orders/return/{id}', [BillController::class, 'returnOrder'])->name('client.orders.return');
 
 
 
@@ -124,7 +125,7 @@ Route::post('/login/auth', [UserController::class, 'login'])->name('login.auth')
 
 Route::middleware(['auth', 'auth.admin'])->group(function () {
     Route::prefix('admin')->group(function () {
-Route::post('/logout', [UserController::class, 'logout'])->name('admin.logout');
+        Route::post('/logout', [UserController::class, 'logout'])->name('admin.logout');
 
         Route::get('/home', [DashboardController::class, 'index'])->name('admin.index');
         Route::get('/blog', function () {
@@ -155,12 +156,12 @@ Route::post('/logout', [UserController::class, 'logout'])->name('admin.logout');
             Route::post('/image/{productId}/store', [ProductController::class, 'imageStore'])->name('admin.product.imageStore');
             Route::get('/image/{productId}/destroy/{imageId}', [ProductController::class, 'imageDestroy'])->name('admin.product.imageDestroy');
             Route::get('product/search', [ProductController::class, 'adminSearch'])->name('admin.product.search');
-            Route::prefix('stock-variant')->group(function (){
-                Route::get('{id}',[ProductController::class, 'stock'])->name('admin.stock.index');
-                Route::post('update/{ProductId}', [ProductController::class,'updateStock'])->name('admin.stock.update');
+            Route::prefix('stock-variant')->group(function () {
+                Route::get('{id}', [ProductController::class, 'stock'])->name('admin.stock.index');
+                Route::post('update/{ProductId}', [ProductController::class, 'updateStock'])->name('admin.stock.update');
             });
             // Route::get('/variants', [ProductController::class, 'getVariants'])->name('admin.product.getVariants');
-            
+
         });
 
         Route::prefix('/category')->group(function () {
@@ -174,7 +175,7 @@ Route::post('/logout', [UserController::class, 'logout'])->name('admin.logout');
         Route::prefix('/brand')->group(function () {
             Route::get('/', [BrandController::class, 'index'])->name('admin.brand.index');
             Route::get('/create', [BrandController::class, 'create'])->name('admin.brand.create');
-            Route::post('/store', [BrandController::class,'store'])->name('admin.brand.store');
+            Route::post('/store', [BrandController::class, 'store'])->name('admin.brand.store');
             Route::get('/edit/{id}', [BrandController::class, 'edit'])->name('admin.brand.edit');
             Route::post('/update/{id}', [BrandController::class, 'update'])->name('admin.brand.update');
             Route::get('/destroy/{id}', [BrandController::class, 'destroy'])->name('admin.brand.destroy');
@@ -203,6 +204,10 @@ Route::post('/logout', [UserController::class, 'logout'])->name('admin.logout');
             Route::get('invoice-direct/{id}', [BillController::class, 'invoiceDirectBill'])->name('admin.bill.direct');
             Route::post('cancel/{id}', [BillController::class, 'cancelBill'])->name('admin.bill.cancel');
             Route::get('confirm/{id}', [BillController::class, 'confirm'])->name('admin.bill.confirm');
+            Route::post('/admin/bill/{id}/confirm-return', [BillController::class, 'confirmReturnRequest'])->name('admin.bill.confirmReturnRequest');
+            Route::post('/admin/bill/{id}/complete-return', [BillController::class, 'completeReturn'])->name('admin.bill.completeReturn');
+            Route::post('/admin/bill/{id}/fail-return', [BillController::class, 'failReturn'])->name('admin.bill.failReturn');
+
             // Route::post('complete/{id}',[BillController::class,'completeBill'])->name('admin.bill.complete');
 
             Route::get('/create', [BillController::class, 'create'])->name('admin.bill.create');
@@ -245,21 +250,20 @@ Route::post('/logout', [UserController::class, 'logout'])->name('admin.logout');
             Route::get('/', [ContactController::class, 'index'])->name('admin.contact.index');
             // Route::delete('/admin/contact/{contact}', [ContactController::class, 'destroy'])->name('admin.contact.destroy');
             Route::get('/{id}', [ContactController::class, 'detail'])->name('admin.contact.detail');
-
         });
-        Route::prefix('/chats')->group(function (){
+        Route::prefix('/chats')->group(function () {
             Route::get('/', [ChatsController::class, 'index'])->name('admin.messages');
             Route::get('/{chatId}', [ChatsController::class, 'loadMessagesAdmin']);
             Route::post('/{chatId}/send', [ChatsController::class, 'sendMessageAdmin'])->name('admin.send.message');
             // Route::post('/send', [ChatsController::class, 'sendMessageAdmin']);
         });
-        Route::prefix('attributes')->group( function(){
+        Route::prefix('attributes')->group(function () {
             Route::get('/', [AttributesController::class, 'index'])->name('admin.attributes.index');
             Route::get('/create', [AttributesController::class, 'create'])->name('admin.attributes.create');
             Route::post('/data', [AttributesController::class, 'store'])->name('admin.attributes.store');
             Route::get('/edit/{id}', [AttributesController::class, 'edit'])->name('admin.attributes.edit');
-        Route::post('/update/{id}', [AttributesController::class, 'update'])->name('admin.attributes.update');
-        Route::get('/delete/{id}', [AttributesController::class, 'destroy'])->name('admin.attributes.delete');
+            Route::post('/update/{id}', [AttributesController::class, 'update'])->name('admin.attributes.update');
+            Route::get('/delete/{id}', [AttributesController::class, 'destroy'])->name('admin.attributes.delete');
         });
 
         Route::prefix('/promotion')->group(function () {
@@ -269,13 +273,12 @@ Route::post('/logout', [UserController::class, 'logout'])->name('admin.logout');
             Route::get('/edit/{id}', [PromotionController::class, 'edit'])->name('admin.promotion.edit');
             Route::post('/update/{id}', [PromotionController::class, 'update'])->name('admin.promotion.update');
             Route::delete('/destroy/{id}', [PromotionController::class, 'destroy'])->name('admin.promotion.destroy');
-
         });
         Route::prefix('/config')->group(function () {
-    Route::get('/', [ConfigController::class, 'index'])->name('admin.config.index');
-    Route::get('/edit', [ConfigController::class, 'edit'])->name('admin.config.edit');
-    Route::post('/update', [ConfigController::class, 'update'])->name('admin.config.update');
-});
+            Route::get('/', [ConfigController::class, 'index'])->name('admin.config.index');
+            Route::get('/edit', [ConfigController::class, 'edit'])->name('admin.config.edit');
+            Route::post('/update', [ConfigController::class, 'update'])->name('admin.config.update');
+        });
     });
 });
 Route::prefix('message')->group(function () {
@@ -287,7 +290,7 @@ Route::prefix('products')->group(function () {
     Route::get('/', [ProductController::class, 'productList'])->name('client.product.index');
     Route::get('/search', [ProductController::class, 'search'])->name('client.product.search');
     Route::get('/filter', [ProductController::class, 'filter'])->name('client.product.filter');
-    Route::get('/filter/search',[ProductController::class, 'filterSearch'])->name('client.product.filter.search');
+    Route::get('/filter/search', [ProductController::class, 'filterSearch'])->name('client.product.filter.search');
     Route::get('/{slug}', [ProductController::class, 'productDetails'])->name('client.product.show');
 });
 

@@ -54,7 +54,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($loadAll as $key => $cmt)
+                                @foreach ($loadAll->sortByDesc('created_at') as $key => $cmt)
                                     <tr>
                                         <td>{{ ++$key }}</td>
                                         <td>{{ $cmt->user->name }}</td>

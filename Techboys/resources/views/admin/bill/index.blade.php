@@ -29,13 +29,17 @@
             <div class="row mb-3">
                 <div class="col d-flex justify-content-between align-items-center">
                     <div class="col-md-4">
-                        <select id="filter-status" class="form-select">
+                        <select id="filter-status" class="form-select selectpicker" data-live-search="true">
                             <option value="" selected disabled>-- Chọn trạng thái --</option>
                             <option value="">Tất cả </option>
                             <option value="1" {{ request('status') == '1' ? 'selected' : '' }}>Chờ xử lý</option>
                             <option value="2" {{ request('status') == '2' ? 'selected' : '' }}>Đang giao</option>
                             <option value="3" {{ request('status') == '3' ? 'selected' : '' }}>Đã giao</option>
                             <option value="4" {{ request('status') == '4' ? 'selected' : '' }}>Đã nhận hàng</option>
+                            <option value="5" {{ request('status') == '5' ? 'selected' : '' }}>Y/c Hoàn đơn</option>
+                            <option value="6" {{ request('status') == '6' ? 'selected' : '' }}>Xác nhận Hoàn đơn</option>
+                            <option value="7" {{ request('status') == '7' ? 'selected' : '' }}>Hoàn đơn thành công</option>
+                            <option value="8" {{ request('status') == '8' ? 'selected' : '' }}>Hoàn đơn thất bại</option>
                             <option value="0" {{ request('status') == '0' ? 'selected' : '' }}>Đã huỷ</option>
                         </select>
                     </div>
@@ -92,7 +96,9 @@
                                             @endif
                                         </td>
                                         <td>
-                                            @if ($bill->status_id == 1)
+                                            @if ($bill->status_id == 0)
+                                            <span class="badge bg-danger">Đã huỷ đơn</span>
+                                            @elseif ($bill->status_id == 1)
                                                 <span class="badge bg-warning">Chờ xử lý</span>
                                             @elseif ($bill->status_id == 2)
                                                 <span class="badge bg-info">Đang giao</span>
@@ -100,8 +106,14 @@
                                                 <span class="badge bg-success">Đã giao</span>
                                             @elseif ($bill->status_id == 4)
                                                 <span class="badge bg-success">Đã nhận hàng</span>
+                                            @elseif ($bill->status_id == 5)
+                                                <span class="badge bg-secondary">Y/c Hoàn đơn</span>
+                                            @elseif ($bill->status_id == 6)
+                                                <span class="badge bg-secondary">Xác nhận Hoàn đơn</span>
+                                            @elseif ($bill->status_id == 7)
+                                                <span class="badge bg-secondary">Hoàn đơn thành công</span>
                                             @else
-                                                <span class="badge bg-danger">Đã huỷ</span>
+                                                <span class="badge bg-secondary">Hoàn đơn thất bại</span>
                                             @endif
                                         </td>
                                         <td>

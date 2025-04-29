@@ -69,10 +69,12 @@
                                     @endif
                                 </td>
                                 <td>
-                                    @if ($user->role_id == 1)
-                                        <span class="badge bg-success">Admin</span>
+                                    @if ($user->role_id == 1 && $user->username === 'admin')
+                                        <span class="badge bg-success">Quản lý</span>
+                                    @elseif ($user->role_id == 1)
+                                        <span class="badge bg-primary">Nhân viên</span>
                                     @else
-                                        <span class="badge bg-secondary">User</span>
+                                        <span class="badge bg-secondary">Người dùng</span>
                                     @endif
                                 </td>
                                 <td class="text-center">
