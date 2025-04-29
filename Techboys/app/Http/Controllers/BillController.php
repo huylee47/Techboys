@@ -672,7 +672,6 @@ class BillController extends Controller
         $loadAll = Auth::check() ? Bill::with(['billDetails.product', 'billDetails.variant'])
             ->where('user_id', Auth::id())
             ->get() : [];
-
         return view('client.order.order', compact('searchedOrders', 'loadAll'));
     }
 
@@ -742,7 +741,9 @@ class BillController extends Controller
     }
     public function detailClient(Request $request)
     {
-        $orderId = $request->input('order_id'); // Lấy từ POST request
+        $productPromotions = Promotion::get();
+        $orderId = $request->input('order_id');
+    
         $order = Bill::with([
             'user',
             'billDetails.product' => function ($query) {
@@ -752,15 +753,13 @@ class BillController extends Controller
                 $query->withTrashed();
             }
         ])->find($orderId);
-        
-
+    
         if (!$order) {
             return redirect()->route('client.orders')->with('error', 'Không tìm thấy đơn hàng!');
         }
-
-
+    
         $attributeValues = AttributesValue::all()->keyBy('id');
-
+    
         foreach ($order->billDetails as $detail) {
             if ($detail->variant_id) {
                 $attributeJson = ProductVariant::where('id', $detail->variant_id)->value('attribute_values');
@@ -769,23 +768,16 @@ class BillController extends Controller
             } else {
                 $detail->attributes = '';
             }
-
-            // Calculate discounted price if a promotion exists
-            $promotion = Promotion::where('product_id', $detail->product_id)->first();
-            if ($promotion && now()->lt(Carbon::parse($promotion->end_date))) {
-                $detail->discounted_price = $detail->price * (1 - $promotion->discount_percent / 100);
-            } else {
-                $detail->discounted_price = $detail->price;
-            }
+    
+            $detail->has_promotion = $productPromotions->contains(function ($promotion) use ($detail) {
+                return $promotion->product_id == $detail->product->id &&
+                       $detail->created_at <= $promotion->end_date;
+            });
         }
-
-        // Calculate total amount considering discounted prices
-        $order->total_amount = $order->billDetails->sum(function ($detail) {
-            return $detail->discounted_price * $detail->quantity;
-        }) + $order->fee_shipping;
-
+    
         return view('client.order.detail', compact('order'));
     }
+    
 
     public function returnOrder($id)
     {
