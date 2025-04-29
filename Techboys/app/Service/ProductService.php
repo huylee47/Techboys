@@ -14,6 +14,7 @@ use App\Models\Product;
 use App\Models\ProductCategory;
 use App\Models\ProductModel;
 use App\Models\ProductVariant;
+use App\Models\Promotion;
 use App\Models\RepComment;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
@@ -330,6 +331,7 @@ class ProductService{
         if ($product) {
             ProductVariant::where('product_id', $request->id)->forceDelete();
             Images::where('product_id', $request->id)->forceDelete();
+            Promotion::where('product_id', $request->id)->forceDelete();
             Comment::where('product_id', $request->id)->forceDelete();
             RepComment::where('product_id', $request->id)->forceDelete();
             $product->forceDelete();
