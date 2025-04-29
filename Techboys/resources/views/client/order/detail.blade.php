@@ -138,7 +138,7 @@
                                         </div>
                                     </td>
                                     <td>{{ $detail->quantity }}</td>
-                                    <td>{{ $detail->has_promotion ? 'Có khuyến mại' : 'Không khyến mại' }}</td>
+                                    <td>{{ $detail->has_promotion ? 'Có khuyến mãi' : 'Không khyến mãi' }}</td>
                                     <td>{{ number_format($detail->price * $detail->quantity, 0, ',', '.') }} VNĐ
                                     </td>
                                 </tr>
