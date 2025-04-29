@@ -416,53 +416,55 @@ class BillController extends Controller
     public function invoiceBill($id)
     {
         $bill = Bill::find($id);
-
+    
         if (!$bill) {
             return redirect()->route('admin.bill.index')->with('error', 'Không tìm thấy hóa đơn!');
         }
-
+    
         if ($bill->status_id != 1) {
             return redirect()->route('admin.bill.index')->with('error', 'Hoá đơn không hợp lệ để xuất!');
         }
-
+    
         $billDetails = BillDetails::where('bill_id', $id)->get();
-
+    
         try {
             DB::beginTransaction();
-
-            $bill->update([
-                'status_id' => 2,
-            ]);
-
+    
             foreach ($billDetails as $billDetail) {
                 if ($billDetail->variant_id) {
-                    // Trừ stock cho biến thể sản phẩm
-                    $updated = ProductVariant::where('id', $billDetail->variant_id)
-                        ->where('stock', '>=', $billDetail->quantity)
-                        ->decrement('stock', $billDetail->quantity);
-
-                    if (!$updated) {
+                    $variant = ProductVariant::find($billDetail->variant_id);
+                    if (!$variant || $variant->stock < $billDetail->quantity) {
                         DB::rollBack();
-                        return redirect()->route('admin.bill.index')->with('error', 'Sản phẩm biến thể không đủ hàng!');
+                        return redirect()->route('admin.bill.index')->with('error', 'Biến thể sản phẩm không đủ hàng!');
                     }
                 } else {
-                    // Trừ stock cho sản phẩm gốc
-                    $updated = Product::where('id', $billDetail->product_id)
-                        ->where('base_stock', '>=', $billDetail->quantity)
-                        ->decrement('base_stock', $billDetail->quantity);
-
-                    if (!$updated) {
+                    $product = Product::find($billDetail->product_id);
+                    if (!$product || $product->base_stock < $billDetail->quantity) {
                         DB::rollBack();
                         return redirect()->route('admin.bill.index')->with('error', 'Sản phẩm không đủ hàng!');
                     }
                 }
-
+            }
+    
+            $bill->update([
+                'status_id' => 2,
+            ]);
+    
+            foreach ($billDetails as $billDetail) {
+                if ($billDetail->variant_id) {
+                    ProductVariant::where('id', $billDetail->variant_id)
+                        ->decrement('stock', $billDetail->quantity);
+                } else {
+                    Product::where('id', $billDetail->product_id)
+                        ->decrement('base_stock', $billDetail->quantity);
+                }
+    
                 $product = Product::find($billDetail->product_id);
                 if ($product) {
                     $product->increment('purchases', $billDetail->quantity);
                 }
             }
-
+    
             DB::commit();
             return redirect()->route('admin.bill.index')->with('success', 'Hoá đơn đã được xuất!');
         } catch (\Exception $e) {
@@ -470,28 +472,61 @@ class BillController extends Controller
             return redirect()->route('admin.bill.index')->with('error', 'Đã xảy ra lỗi khi xuất hoá đơn!');
         }
     }
+    
 
-    public function invoiceDirectBill($id){
+    public function invoiceDirectBill($id)
+    {
         $bill = Bill::find($id);
-
+    
         if (!$bill) {
             return redirect()->route('admin.bill.index')->with('error', 'Không tìm thấy hóa đơn!');
         }
-
+    
         if ($bill->status_id != 1) {
             return redirect()->route('admin.bill.index')->with('error', 'Hoá đơn không hợp lệ để xác nhận!');
         }
-
+    
         $billDetails = BillDetails::where('bill_id', $id)->get();
-
+    
         try {
             DB::beginTransaction();
-
+    
+            foreach ($billDetails as $billDetail) {
+                if ($billDetail->variant_id) {
+                    $variant = ProductVariant::find($billDetail->variant_id);
+                    if (!$variant || $variant->stock < $billDetail->quantity) {
+                        DB::rollBack();
+                        return redirect()->route('admin.bill.index')->with('error', 'Biến thể sản phẩm không đủ hàng!');
+                    }
+                } else {
+                    $product = Product::find($billDetail->product_id);
+                    if (!$product || $product->base_stock < $billDetail->quantity) {
+                        DB::rollBack();
+                        return redirect()->route('admin.bill.index')->with('error', 'Sản phẩm không đủ hàng!');
+                    }
+                }
+            }
+    
+            foreach ($billDetails as $billDetail) {
+                if ($billDetail->variant_id) {
+                    ProductVariant::where('id', $billDetail->variant_id)
+                        ->decrement('stock', $billDetail->quantity);
+                } else {
+                    Product::where('id', $billDetail->product_id)
+                        ->decrement('base_stock', $billDetail->quantity);
+                }
+    
+                $product = Product::find($billDetail->product_id);
+                if ($product) {
+                    $product->increment('purchases', $billDetail->quantity);
+                }
+            }
+    
             $bill->update([
                 'status_id' => 4,
                 'payment_status' => 1,
             ]);
-
+    
             DB::commit();
             return redirect()->route('admin.bill.index')->with('success', 'Xác nhận thanh toán thành công!');
         } catch (\Exception $e) {
@@ -499,6 +534,7 @@ class BillController extends Controller
             return redirect()->route('admin.bill.index')->with('error', 'Đã xảy ra lỗi khi xác nhận hoá đơn!');
         }
     }
+    
 
 
     public function cancelBill(Request $request, $id)
@@ -767,7 +803,7 @@ class BillController extends Controller
             DB::beginTransaction();
 
             $bill->update([
-                'status_id' => 6,
+                'status_id' => 5,
             ]);
 
             DB::commit();
@@ -777,4 +813,87 @@ class BillController extends Controller
             return redirect()->route('client.orders')->with('error', 'Đã xảy ra lỗi khi yêu cầu hoàn hàng!');
         }
     }
+    public function confirmReturnRequest($id)
+{
+    $bill = Bill::find($id);
+
+    if (!$bill) {
+        return redirect()->route('admin.bill.index')->with('error', 'Không tìm thấy hóa đơn!');
+    }
+
+    if ($bill->status_id != 5) {
+        return redirect()->route('admin.bill.index')->with('error', 'Đơn này không ở trạng thái yêu cầu hoàn đơn!');
+    }
+
+    $bill->update([
+        'status_id' => 6,
+    ]);
+
+    return redirect()->route('admin.bill.index')->with('success', 'Đã xác nhận yêu cầu hoàn đơn!');
+}
+
+public function completeReturn($id)
+{
+    $bill = Bill::find($id);
+
+    if (!$bill) {
+        return redirect()->route('admin.bill.index')->with('error', 'Không tìm thấy hóa đơn!');
+    }
+
+    if ($bill->status_id != 6) {
+        return redirect()->route('admin.bill.index')->with('error', 'Đơn này chưa xác nhận yêu cầu hoàn đơn!');
+    }
+
+    $billDetails = BillDetails::where('bill_id', $id)->get();
+
+    try {
+        DB::beginTransaction();
+
+        foreach ($billDetails as $billDetail) {
+            if ($billDetail->variant_id) {
+                ProductVariant::where('id', $billDetail->variant_id)
+                    ->increment('stock', $billDetail->quantity);
+            } else {
+                Product::where('id', $billDetail->product_id)
+                    ->increment('base_stock', $billDetail->quantity);
+            }
+
+            $product = Product::find($billDetail->product_id);
+            if ($product && $product->purchases > 0) {
+                $product->decrement('purchases', $billDetail->quantity);
+            }
+        }
+
+        $bill->update([
+            'status_id' => 7,
+        ]);
+
+        DB::commit();
+        return redirect()->route('admin.bill.index')->with('success', 'Đã hoàn đơn thành công!');
+    } catch (\Exception $e) {
+        DB::rollBack();
+        return redirect()->route('admin.bill.index')->with('error', 'Đã xảy ra lỗi khi hoàn đơn!');
+    }
+}
+
+
+public function failReturn($id)
+{
+    $bill = Bill::find($id);
+
+    if (!$bill) {
+        return redirect()->route('admin.bill.index')->with('error', 'Không tìm thấy hóa đơn!');
+    }
+
+    if ($bill->status_id != 6) {
+        return redirect()->route('admin.bill.index')->with('error', 'Đơn này chưa xác nhận yêu cầu hoàn đơn!');
+    }
+
+    $bill->update([
+        'status_id' => 8,
+    ]);
+
+    return redirect()->route('admin.bill.index')->with('success', 'Đã xác nhận hoàn đơn thất bại!');
+}
+
 }
