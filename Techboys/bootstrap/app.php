@@ -19,6 +19,7 @@ return Application::configure(basePath: dirname(__DIR__))
             'auth.admin'=> CheckRole::class,
             'track.online'=> \App\Http\Middleware\TrackUserOnline::class,
             'track.visitors' => CountVisitors::class,
+            'superadmin' => \App\Http\Middleware\IsSuperAdmin::class,
         ]);
         $middleware->append(CountVisitors::class);
     })
