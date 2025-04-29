@@ -30,12 +30,24 @@
                 <div class="col-12 col-lg-9">
                     <div class="row">
                         <div class="d-flex gap-2 mb-3">
-                            <input type="date" id="startDate" class="form-control" value="{{ date('Y-m-01') }}"
-                                max="{{ date('Y-m-d') }}">
-                            <input type="date" id="endDate" class="form-control" value="{{ date('Y-m-d') }}"
-                                max="{{ date('Y-m-d') }}">
-                            <button id="filterButton" class="btn btn-primary">Lọc</button>
+                            <div class="w-50">
+                                <label for="startDate" class="form-label">Ngày bắt đầu</label>
+                                <input type="date" id="startDate" class="form-control" 
+                                    value="{{ date('Y-m-01') }}" max="{{ date('Y-m-d') }}">
+                            </div>
+                        
+                            <div class="w-50">
+                                <label for="endDate" class="form-label">Ngày kết thúc</label>
+                                <input type="date" id="endDate" class="form-control" 
+                                    value="{{ date('Y-m-d') }}" max="{{ date('Y-m-d') }}">
+                            </div>
+                        
+                            <div>
+                                <label class="form-label d-block" style="visibility: hidden;">Lọc</label>
+                                <button id="filterButton" class="btn btn-primary w-100">Lọc</button>
+                            </div>
                         </div>
+                        
                         <div id="error-message" class="alert alert-danger d-none" role="alert"></div>
                         <div class="card-body">
                         </div>
