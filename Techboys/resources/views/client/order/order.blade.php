@@ -89,12 +89,12 @@
                                                                         Giao hàng thành công
                                                                         @break
                                                                     @case(5)
-                                                                        Giao hàng thất bại
+                                                                        Yêu cầu hoàn hàng đang được xử lý
                                                                         @case(6)
-                                                                        Đang xét duyệt hoàn hàng
+                                                                        Đã xét duyệt hoàn hàng
                                                                         @break
                                                                         @case(7)
-                                                                        Đang hoàn hàng
+                                                                        Hoàn hàng thành công
                                                                         @break
                                                                         @case(8)
                                                                         Hoàn hàng thành công
@@ -190,16 +190,16 @@
                                                                         Giao hàng thành công
                                                                         @break
                                                                     @case(5)
-                                                                        Giao hàng thất bại
+                                                                        Yêu cầu hoàn hàng
                                                                         @break
                                                                         @case(6)
-                                                                        Đang xét duyệt hoàn hàng
+                                                                        Đã xét duyệt hoàn hàng
                                                                         @break
                                                                         @case(7)
-                                                                        Đang hoàn hàng
+                                                                        Hoàn hàng thành công
                                                                         @break
                                                                         @case(8)
-                                                                        Hoàn hàng thành công
+                                                                        Hoàn hàng thất bại
                                                                         @break
                                                                     @default
                                                                         Không xác định
