@@ -22,16 +22,24 @@
                                     <div>
                                         <h4 class="card-title">Chi Tiết Hóa Đơn</h4>
                                         <span>Trạng thái đơn hàng:</span>
-                                        @if ($bill->status_id == 1)
-                                            <span class="badge bg-warning">Chờ xử lý đơn hàng</span>
+                                        @if ($bill->status_id == 0)
+                                            <span class="badge bg-dangẻ">Đã huỷ đơn</span>
+                                        @elseif ($bill->status_id == 1)
+                                            <span class="badge bg-warning">Chờ xử lý</span>
                                         @elseif ($bill->status_id == 2)
-                                            <span class="badge bg-info">Đang giao hàng</span>
+                                            <span class="badge bg-info">Đang giao</span>
                                         @elseif ($bill->status_id == 3)
-                                            <span class="badge bg-success">Đã giao hàng</span>
+                                            <span class="badge bg-success">Đã giao</span>
                                         @elseif ($bill->status_id == 4)
                                             <span class="badge bg-success">Đã nhận hàng</span>
+                                        @elseif ($bill->status_id == 5)
+                                            <span class="badge bg-secondary">Yêu cầu Hoàn đơn</span>
+                                        @elseif ($bill->status_id == 6)
+                                            <span class="badge bg-secondary">Xác nhận Hoàn đơn</span>
+                                        @elseif ($bill->status_id == 7)
+                                            <span class="badge bg-secondary">Hoàn đơn thành công</span>
                                         @else
-                                            <span class="badge bg-danger">Đã huỷ</span>
+                                            <span class="badge bg-secondary">Hoàn đơn thất bại</span>
                                         @endif
 
                                         @if ($bill->payment_method == 1)
@@ -60,8 +68,8 @@
                                                 <button class="btn btn-success" data-bs-toggle="modal"
                                                     data-bs-target="#exportModal">Xác nhận đơn</button>
                                             @else
-                                            <button class="btn btn-success" data-bs-toggle="modal"
-                                            data-bs-target="#comfirmModal">Xác nhận thanh toán</button>
+                                                <button class="btn btn-success" data-bs-toggle="modal"
+                                                    data-bs-target="#comfirmModal">Xác nhận thanh toán</button>
                                             @endif
 
                                             <button class="btn btn-danger" data-bs-toggle="modal"
@@ -69,6 +77,14 @@
                                         @elseif($bill->payment_method != 0 && $bill->status_id == 2)
                                             <button class="btn btn-success" data-bs-toggle="modal"
                                                 data-bs-target="#orderModal">Xác nhận giao hàng</button>
+                                        @elseif($bill->status_id == 5)
+                                            <button class="btn btn-warning" data-bs-toggle="modal"
+                                                data-bs-target="#confirmRefundModal">Xác nhận hoàn đơn</button>
+                                        @elseif($bill->status_id == 6)
+                                            <button class="btn btn-success" data-bs-toggle="modal"
+                                                data-bs-target="#sucessRefundModal">Hoàn đơn thành công</button>
+                                            <button class="btn btn-danger" data-bs-toggle="modal"
+                                                data-bs-target="#declineRefundModal">Hoàn đơn thất bại</button>
                                         @endif
                                         {{-- {{ $bill->payment_method }}{{$bill->status_id }} --}}
 
@@ -259,24 +275,24 @@
             </div>
         </div>
     </div>
-        {{-- Modal Xác Nhận Thanh Toán Đơn --}}
-        <div class="modal fade" id="comfirmModal" tabindex="-1" aria-labelledby="exportModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exportModalLabel">Xác Nhận Đơn</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        Bạn có chắc chắn muốn xác nhận đơn hàng này không?
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                        <a href="{{ route('admin.bill.direct', $bill->id) }}" class="btn btn-success">Xác nhận đơn</a>
-                    </div>
+    {{-- Modal Xác Nhận Thanh Toán Đơn --}}
+    <div class="modal fade" id="comfirmModal" tabindex="-1" aria-labelledby="exportModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exportModalLabel">Xác Nhận Đơn</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Bạn có chắc chắn muốn xác nhận đơn hàng này không?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                    <a href="{{ route('admin.bill.direct', $bill->id) }}" class="btn btn-success">Xác nhận đơn</a>
                 </div>
             </div>
         </div>
+    </div>
     {{-- Modal Xác Nhận Giao hàng --}}
     <div class="modal fade" id="orderModal" tabindex="-1" aria-labelledby="orderModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -295,6 +311,71 @@
             </div>
         </div>
     </div>
+<!-- Modal Xác nhận hoàn đơn -->
+<div class="modal fade" id="confirmRefundModal" tabindex="-1" aria-labelledby="confirmRefundModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <form action="{{ route('admin.bill.confirmReturnRequest', $bill->id) }}" method="POST">
+            @csrf
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="confirmRefundModalLabel">Xác nhận yêu cầu hoàn đơn</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Đóng"></button>
+                </div>
+                <div class="modal-body">
+                    Bạn có chắc chắn muốn xác nhận yêu cầu hoàn đơn này không?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Huỷ</button>
+                    <button type="submit" class="btn btn-warning">Xác nhận</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Modal Hoàn đơn thành công -->
+<div class="modal fade" id="sucessRefundModal" tabindex="-1" aria-labelledby="sucessRefundModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <form action="{{ route('admin.bill.completeReturn', $bill->id) }}" method="POST">
+            @csrf
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="sucessRefundModalLabel">Xác nhận hoàn đơn thành công</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Đóng"></button>
+                </div>
+                <div class="modal-body">
+                    Bạn có chắc chắn muốn xác nhận hoàn đơn thành công không?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Huỷ</button>
+                    <button type="submit" class="btn btn-success">Xác nhận thành công</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Modal Hoàn đơn thất bại -->
+<div class="modal fade" id="declineRefundModal" tabindex="-1" aria-labelledby="declineRefundModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <form action="{{ route('admin.bill.failReturn', $bill->id) }}" method="POST">
+            @csrf
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="declineRefundModalLabel">Xác nhận hoàn đơn thất bại</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Đóng"></button>
+                </div>
+                <div class="modal-body">
+                    Bạn có chắc chắn muốn xác nhận hoàn đơn thất bại không?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Huỷ</button>
+                    <button type="submit" class="btn btn-danger">Xác nhận thất bại</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
