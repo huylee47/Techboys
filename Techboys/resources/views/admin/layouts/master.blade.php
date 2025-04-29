@@ -53,15 +53,7 @@
                                 <span>Tổng quan</span>
                             </a>
                         </li>
-                        <li class="sidebar-item  {{ request()->routeIs('admin.product.index') ? 'active' : '' }}">
-                            <a href="{{ route('admin.product.index') }}" class='sidebar-link'>
-
-                                <i class="bi bi-box-seam"></i>
-                                <span>Danh sách sản phẩm</span>
-                            </a>
-                        </li>
                         @php $isAdmin = auth()->check() && auth()->id() === 1; @endphp
-
                         @if ($isAdmin)
                             <li class="sidebar-item {{ request()->routeIs('admin.revenue*') ? 'active' : '' }}">
                                 <a href="{{ route('admin.revenue.revenue') }}" class='sidebar-link'>
@@ -69,50 +61,50 @@
                                     <span>Doanh thu</span>
                                 </a>
                             </li>
-                            <li
-                                class="sidebar-item has-sub 
-                        {{ request()->routeIs('admin.category*') || request()->routeIs('admin.brand*') || request()->routeIs('admin.product*') || request()->routeIs('admin.stock*') || request()->routeIs('admin.attributes*') ? 'active' : '' }}">
 
-                                <a href="#" class='sidebar-link'>
-                                    <i class="bi bi-box-seam"></i>
-                                    <span>Quản lý sản phẩm</span>
-                                </a>
-
-                                <ul
-                                    class="submenu 
-                            {{ request()->routeIs('admin.category*') || request()->routeIs('admin.brand*') || request()->routeIs('admin.product*') || request()->routeIs('admin.stock*') || request()->routeIs('admin.attributes*') ? 'd-block' : '' }}">
-
-                                    <li
-                                        class="submenu-item {{ request()->routeIs('admin.category*') ? 'active' : '' }}">
-                                        <a href="{{ route('admin.category.index') }}">
-                                            <i class="bi bi-grid"></i> <span>Danh mục</span>
-                                        </a>
-                                    </li>
-
-                                    <li class="submenu-item {{ request()->routeIs('admin.brand*') ? 'active' : '' }}">
-                                        <a href="{{ route('admin.brand.index') }}">
-                                            <i class="bi bi-house-fill"></i> <span>Thương hiệu</span>
-                                        </a>
-                                    </li>
-
-                                    <li
-                                        class="submenu-item {{ request()->routeIs('admin.product*') || request()->routeIs('admin.stock*') ? 'active' : '' }}">
-                                        <a href="{{ route('admin.product.index') }}">
-                                            <i class="bi bi-shop"></i> <span>Sản phẩm</span>
-                                        </a>
-                                    </li>
-
-                                    <li
-                                        class="submenu-item {{ request()->routeIs('admin.attributes*') ? 'active' : '' }}">
-                                        <a href="{{ route('admin.attributes.index') }}">
-                                            <i class="bi bi-palette-fill"></i> <span>Thuộc tính</span>
-                                        </a>
-                                    </li>
-
-                                </ul>
-                            </li>
                         @endif
+                        <li
+                        class="sidebar-item has-sub 
+                {{ request()->routeIs('admin.category*') || request()->routeIs('admin.brand*') || request()->routeIs('admin.product*') || request()->routeIs('admin.stock*') || request()->routeIs('admin.attributes*') ? 'active' : '' }}">
 
+                        <a href="#" class='sidebar-link'>
+                            <i class="bi bi-box-seam"></i>
+                            <span>Quản lý sản phẩm</span>
+                        </a>
+
+                        <ul
+                            class="submenu 
+                    {{ request()->routeIs('admin.category*') || request()->routeIs('admin.brand*') || request()->routeIs('admin.product*') || request()->routeIs('admin.stock*') || request()->routeIs('admin.attributes*') ? 'd-block' : '' }}">
+
+                            <li
+                                class="submenu-item {{ request()->routeIs('admin.category*') ? 'active' : '' }}">
+                                <a href="{{ route('admin.category.index') }}">
+                                    <i class="bi bi-grid"></i> <span>Danh mục</span>
+                                </a>
+                            </li>
+
+                            <li class="submenu-item {{ request()->routeIs('admin.brand*') ? 'active' : '' }}">
+                                <a href="{{ route('admin.brand.index') }}">
+                                    <i class="bi bi-house-fill"></i> <span>Thương hiệu</span>
+                                </a>
+                            </li>
+
+                            <li
+                                class="submenu-item {{ request()->routeIs('admin.product*') || request()->routeIs('admin.stock*') ? 'active' : '' }}">
+                                <a href="{{ route('admin.product.index') }}">
+                                    <i class="bi bi-shop"></i> <span>Sản phẩm</span>
+                                </a>
+                            </li>
+
+                            <li
+                                class="submenu-item {{ request()->routeIs('admin.attributes*') ? 'active' : '' }}">
+                                <a href="{{ route('admin.attributes.index') }}">
+                                    <i class="bi bi-palette-fill"></i> <span>Thuộc tính</span>
+                                </a>
+                            </li>
+
+                        </ul>
+                    </li>
 
 
 
