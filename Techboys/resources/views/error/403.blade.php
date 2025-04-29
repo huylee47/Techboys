@@ -1,53 +1,142 @@
-{{-- resources/views/errors/403.blade.php --}}
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <title>403 - Truy cập bị từ chối</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
     <style>
-        body {
-            background-color: #f3f4f6;
-            font-family: 'Inter', sans-serif;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
+        @import url("https://fonts.googleapis.com/css?family=Share+Tech+Mono|Montserrat:700");
+
+        * {
             margin: 0;
+            padding: 0;
+            border: 0;
+            font-size: 100%;
+            font: inherit;
+            vertical-align: baseline;
+            box-sizing: border-box;
+            color: inherit;
         }
-        .container {
+
+        body {
+            background-image: linear-gradient(120deg, #2d3bfe 0%, #000000 100%);
+            height: 100vh;
+        }
+
+        h1 {
+            font-size: 45vw;
             text-align: center;
+            position: fixed;
+            width: 100vw;
+            z-index: 1;
+            color: #ffffff26;
+            text-shadow: 0 0 50px rgba(0, 0, 0, 0.07);
+            top: 50%;
+            transform: translateY(-50%);
+            font-family: "Montserrat", monospace;
         }
-        .error-code {
-            font-size: 120px;
-            font-weight: 700;
-            color: #ef4444;
+
+        div {
+            background: rgba(0, 0, 0, 0);
+            width: 70vw;
+            position: relative;
+            top: 50%;
+            transform: translateY(-50%);
+            margin: 0 auto;
+            padding: 30px 30px 10px;
+            box-shadow: 0 0 150px -20px rgba(0, 0, 0, 0.5);
+            z-index: 3;
         }
-        .message {
-            font-size: 24px;
-            margin-bottom: 30px;
-            color: #374151;
+
+        P {
+            font-family: "Inter", "Roboto", "Helvetica Neue", Arial, sans-serif;
+            color: #f5f5f5;
+            margin: 0 0 20px;
+            font-size: 17px;
+            line-height: 1.2;
         }
-        .btn {
-            display: inline-block;
-            padding: 12px 24px;
-            background-color: #2563eb;
-            color: #fff;
+
+        span {
+            color: #f0c674;
+        }
+
+        i {
+            color: #8abeb7;
+        }
+
+        div a {
             text-decoration: none;
-            border-radius: 8px;
-            font-weight: 600;
-            transition: background-color 0.3s ease;
         }
-        .btn:hover {
-            background-color: #1d4ed8;
+
+        b {
+            color: #81a2be;
+        }
+
+        a.avatar {
+            position: fixed;
+            bottom: 15px;
+            right: -100px;
+            animation: slide 0.5s 4.5s forwards;
+            display: block;
+            z-index: 4;
+            
+        }
+
+        a.avatar img {
+            border-radius: 100%;
+            width: 44px;
+            border: 2px solid white;
+        }
+
+        @keyframes slide {
+            from {
+                right: -100px;
+                transform: rotate(360deg);
+                opacity: 0;
+            }
+
+            to {
+                right: 15px;
+                transform: rotate(0deg);
+                opacity: 1;
+            }
         }
     </style>
 </head>
+
 <body>
-    <div class="container">
-        <div class="error-code">403</div>
-        <div class="message">Bạn không có quyền truy cập vào trang này.</div>
-        <a href="{{ route('admin.index') }}" class="btn">Quay lại trang quản trị</a>
+    <h1>403</h1>
+    <div>
+        <p>> <span>MÃ LỖI</span>: "<i>HTTP 403 : Truy cập  bị Từ Chối</i>"</p>
+        <p>> <span>MÔ TẢ LỖI</span>: "<i>Truy cập bị từ chối. Bạn không có quyền truy cập trang này trên máy chủ</i>"</p>
+        <p>> <span>Những trang bạn được phép truy cập</span>: [<a href="/">Tổng quan</a>, <a href="/">Danh sách sản phẩm</a>, <a href="/">Liên hệ</a>, <a href="/">Blog</a>, <a href="/">Banner</a>, <a href="/">Blog</a>, , <a href="/">Quản lý đơn hàng</a>]</p>
+        <p>> <span>Quay lại trang chủ <a href="{{ route('admin.index') }}" style="text-decoration: underline;"> Tại đây</a> </span></p>
+        <p>
+            ><span>Quay lại trang trước đó
+                <a href="{{ url()->previous() }}" style="text-decoration: underline;">tại đây</a>
+            </span>
+        </p>
+        
     </div>
+    
 </body>
+<script>
+    var str = document.getElementsByTagName('div')[0].innerHTML.toString();
+    var i = 0;
+    document.getElementsByTagName('div')[0].innerHTML = "";
+
+    setTimeout(function() {
+        var se = setInterval(function() {
+            i++;
+            document.getElementsByTagName('div')[0].innerHTML = str.slice(0, i) + "|";
+            if (i == str.length) {
+                clearInterval(se);
+                document.getElementsByTagName('div')[0].innerHTML = str;
+            }
+        }, 3);
+    }, 0);
+</script>
+
 </html>

@@ -143,15 +143,13 @@ Route::middleware(['auth', 'auth.admin'])->group(function () {
         });
 
         Route::prefix('/product')->group(function () {
-            Route::get('/', [ProductController::class, 'index'])->name('admin.product.index');
+
             Route::get('/create', [ProductController::class, 'create'])->name('admin.product.create');
             Route::post('/store', [ProductController::class, 'store'])->name('admin.product.store');
             Route::get('/show', [ProductController::class, 'show'])->name('admin.product.show');
-            Route::get('/edit/{id}', [ProductController::class, 'edit'])->name('admin.product.edit');
-            Route::post('/update/{id}', [ProductController::class, 'update'])->name('admin.product.update');
-            Route::get('/destroy/{id}', [ProductController::class, 'destroy'])->name('admin.product.destroy');
             Route::get('/hide/{id}', [ProductController::class, 'hide'])->name('admin.product.hide');
             Route::get('/restore/{id}', [ProductController::class, 'restore'])->name('admin.product.restore');
+            Route::get('/destroy/{id}', [ProductController::class, 'destroy'])->name('admin.product.destroy');
             Route::get('/image/{productId}', [ProductController::class, 'imageIndex'])->name('admin.product.imageIndex');
             Route::post('/image/{productId}/store', [ProductController::class, 'imageStore'])->name('admin.product.imageStore');
             Route::get('/image/{productId}/destroy/{imageId}', [ProductController::class, 'imageDestroy'])->name('admin.product.imageDestroy');
@@ -213,7 +211,11 @@ Route::middleware(['auth', 'auth.admin'])->group(function () {
             Route::post('/update/{id}', [PromotionController::class, 'update'])->name('admin.promotion.update');
             Route::delete('/destroy/{id}', [PromotionController::class, 'destroy'])->name('admin.promotion.destroy');
         });
-    });
+        });
+        Route::get('/product', [ProductController::class, 'index'])->name('admin.product.index');
+        Route::get('product/edit/{id}', [ProductController::class, 'edit'])->name('admin.product.edit');
+
+        Route::post('/product/update/{id}', [ProductController::class, 'update'])->name('admin.product.update');
 
         Route::prefix('/bill')->group(function () {
             Route::get('/', [BillController::class, 'index'])->name('admin.bill.index');
