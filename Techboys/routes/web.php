@@ -131,7 +131,7 @@ Route::middleware(['auth', 'auth.admin'])->group(function () {
         Route::get('/blog', function () {
             return view('admin.tag.edit');
         });
-
+        Route::middleware('superadmin')->group(function () {
         Route::prefix('/voucher')->group(function () {
             Route::get('/', [VoucherController::class, 'index'])->name('admin.voucher.index');
             Route::get('/create', [VoucherController::class, 'create'])->name('admin.voucher.create');
@@ -192,6 +192,28 @@ Route::middleware(['auth', 'auth.admin'])->group(function () {
             Route::put('/update/{id}', [UserController::class, 'updateUser'])->name('admin.user.update');
             Route::delete('/user/{id}', [UserController::class, 'destroy'])->name('admin.user.destroy');
         });
+        Route::prefix('/revenue')->group(function () {
+            Route::get('/', [RevenueController::class, 'index'])->name('admin.revenue.revenue');
+            Route::get('/filter', [RevenueController::class, 'filterRevenue'])->name('admin.revenue.filter');
+        });
+        Route::prefix('attributes')->group(function () {
+            Route::get('/', [AttributesController::class, 'index'])->name('admin.attributes.index');
+            Route::get('/create', [AttributesController::class, 'create'])->name('admin.attributes.create');
+            Route::post('/data', [AttributesController::class, 'store'])->name('admin.attributes.store');
+            Route::get('/edit/{id}', [AttributesController::class, 'edit'])->name('admin.attributes.edit');
+            Route::post('/update/{id}', [AttributesController::class, 'update'])->name('admin.attributes.update');
+            Route::get('/delete/{id}', [AttributesController::class, 'destroy'])->name('admin.attributes.delete');
+        });
+
+        Route::prefix('/promotion')->group(function () {
+            Route::get('/', [PromotionController::class, 'index'])->name('admin.promotion.index');
+            Route::get('/create', [PromotionController::class, 'create'])->name('admin.promotion.create');
+            Route::post('/store', [PromotionController::class, 'store'])->name('admin.promotion.store');
+            Route::get('/edit/{id}', [PromotionController::class, 'edit'])->name('admin.promotion.edit');
+            Route::post('/update/{id}', [PromotionController::class, 'update'])->name('admin.promotion.update');
+            Route::delete('/destroy/{id}', [PromotionController::class, 'destroy'])->name('admin.promotion.destroy');
+        });
+    });
 
         Route::prefix('/bill')->group(function () {
             Route::get('/', [BillController::class, 'index'])->name('admin.bill.index');
@@ -241,10 +263,6 @@ Route::middleware(['auth', 'auth.admin'])->group(function () {
             Route::get('/reply/{id}', [CommentController::class, 'replyForm'])->name('admin.comment.replyForm');
             Route::post('/reply', [CommentController::class, 'replyAdmin'])->name('admin.comment.reply');
         });
-        Route::prefix('/revenue')->group(function () {
-            Route::get('/', [RevenueController::class, 'index'])->name('admin.revenue.revenue');
-            Route::get('/filter', [RevenueController::class, 'filterRevenue'])->name('admin.revenue.filter');
-        });
 
         Route::prefix('/contact')->group(function () {
             Route::get('/', [ContactController::class, 'index'])->name('admin.contact.index');
@@ -257,28 +275,15 @@ Route::middleware(['auth', 'auth.admin'])->group(function () {
             Route::post('/{chatId}/send', [ChatsController::class, 'sendMessageAdmin'])->name('admin.send.message');
             // Route::post('/send', [ChatsController::class, 'sendMessageAdmin']);
         });
-        Route::prefix('attributes')->group(function () {
-            Route::get('/', [AttributesController::class, 'index'])->name('admin.attributes.index');
-            Route::get('/create', [AttributesController::class, 'create'])->name('admin.attributes.create');
-            Route::post('/data', [AttributesController::class, 'store'])->name('admin.attributes.store');
-            Route::get('/edit/{id}', [AttributesController::class, 'edit'])->name('admin.attributes.edit');
-            Route::post('/update/{id}', [AttributesController::class, 'update'])->name('admin.attributes.update');
-            Route::get('/delete/{id}', [AttributesController::class, 'destroy'])->name('admin.attributes.delete');
-        });
 
-        Route::prefix('/promotion')->group(function () {
-            Route::get('/', [PromotionController::class, 'index'])->name('admin.promotion.index');
-            Route::get('/create', [PromotionController::class, 'create'])->name('admin.promotion.create');
-            Route::post('/store', [PromotionController::class, 'store'])->name('admin.promotion.store');
-            Route::get('/edit/{id}', [PromotionController::class, 'edit'])->name('admin.promotion.edit');
-            Route::post('/update/{id}', [PromotionController::class, 'update'])->name('admin.promotion.update');
-            Route::delete('/destroy/{id}', [PromotionController::class, 'destroy'])->name('admin.promotion.destroy');
-        });
         Route::prefix('/config')->group(function () {
             Route::get('/', [ConfigController::class, 'index'])->name('admin.config.index');
             Route::get('/edit', [ConfigController::class, 'edit'])->name('admin.config.edit');
             Route::post('/update', [ConfigController::class, 'update'])->name('admin.config.update');
         });
+        Route::get('403', function () {
+            return view('error.403');
+        })->name('error.403');
     });
 });
 Route::prefix('message')->group(function () {
