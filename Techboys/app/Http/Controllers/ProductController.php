@@ -168,8 +168,8 @@ class ProductController extends Controller
 
         $products = Product::where('name', 'LIKE', "%{$keyword}%")->paginate(12);
         $brands = Brand::all();
-
         $categoryId = $request->get('categoryId');
+        // return response()->json($products);
 
         return view('client.product.search', compact('products', 'keyword', 'brands', 'categoryId', 'keyword'));
     }
