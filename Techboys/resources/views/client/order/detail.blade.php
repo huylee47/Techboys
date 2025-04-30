@@ -52,15 +52,15 @@
                 3 => 'Đã giao',
                 4 => 'Giao hàng thành công',
                 5 => 'Yêu cầu hoàn hàng đang được',
-                6 => 'Đang xét duyệt hoàn hàng',
-                7 => 'Đang hoàn hàng',
-                8 => 'Hoàn hàng thành công',
+                6 => 'Đã xét duyệt hoàn hàng',
+                7 => 'Hoàn hàng thành công',
+                8 => 'Hoàn hàng thất bại',
                 default => 'Không xác định',
             };
 
             $paymentText = match ($order->payment_method) {
-                1 => 'Chuyển khoản',
-                2 => 'Tiền mặt',
+                1 => 'VNPAY',
+                2 => 'Ship COD',
                 default => 'Không xác định',
             };
         @endphp
