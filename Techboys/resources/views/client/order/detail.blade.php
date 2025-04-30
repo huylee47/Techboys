@@ -52,7 +52,7 @@
                 3 => 'Đã giao',
                 4 => 'Giao hàng thành công',
                 5 => 'Yêu cầu hoàn hàng đang được',
-                6 => 'Đang xét duyệt hoàn hàng',
+                6 => 'Đã xét duyệt hoàn hàng',
                 7 => 'Đang hoàn hàng',
                 8 => 'Hoàn hàng thành công',
                 default => 'Không xác định',
