@@ -77,6 +77,9 @@
                                         @elseif($bill->payment_method != 0 && $bill->status_id == 2)
                                             <button class="btn btn-success" data-bs-toggle="modal"
                                                 data-bs-target="#orderModal">Xác nhận giao hàng</button>
+                                                @elseif($bill->status_id == 3 && $bill->user_id == null)
+                                                <button class="btn btn-warning" data-bs-toggle="modal"
+                                                    data-bs-target="#confirmGuestRefundModal">Xác nhận hoàn đơn</button>
                                         @elseif($bill->status_id == 5)
                                             <button class="btn btn-warning" data-bs-toggle="modal"
                                                 data-bs-target="#confirmRefundModal">Xác nhận hoàn đơn</button>
@@ -166,9 +169,9 @@
                                         <input type="text" class="form-control" id="total"
                                             value="{{ number_format($bill->total, 0, ',', '.') }} đ" readonly>
                                     </div>
-                                    @if ($bill->status_id == 0)
+                                    @if ($bill->status_id == 0 || $bill->status_id > 4 )
                                         <div class=" mb-3">
-                                            <label for="total">Lý do huỷ đơn hàng</label>
+                                            <label for="total">Ghi chú đơn hàng</label>
                                             <input type="text" class="form-control" id="total"
                                                 value="{{ $bill->note }}" readonly>
                                         </div>
@@ -243,7 +246,7 @@
                         <div class="mb-3">
                             <label for="cancelNote" class="form-label">Ghi chú huỷ đơn <span
                                     class="text-danger">*</span></label>
-                            <textarea class="form-control" id="cancelNote" name="note" rows="3" required minlength="15"
+                            <textarea class="form-control" id="cancelNote" name="note" rows="3" required minlength="10"
                                 placeholder="Nhập lý do huỷ đơn..."></textarea>
                             <div class="invalid-feedback">Ghi chú phải có ít nhất 10 ký tự.</div>
                         </div>
@@ -311,6 +314,39 @@
             </div>
         </div>
     </div>
+    <!-- Modal Xác nhận hoàn đơn khách vãng lai -->
+    <div class="modal fade" id="confirmGuestRefundModal" tabindex="-1" aria-labelledby="confirmGuestRefundModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <form id="refundForm" action="{{ route('admin.bill.confirmGuestReturnRequest', $bill->id) }}" method="POST">
+                @csrf
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="confirmGuestRefundModalLabel">Xác nhận yêu cầu hoàn đơn</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Đóng"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Bạn có chắc chắn muốn xác nhận yêu cầu hoàn đơn này không?</p>
+                        <strong class="text-danger">
+                            Lưu ý: Đây là yêu cầu hoàn đơn cho khách vãng lai, hãy chắc chắn rằng khách đã liên lạc trước đó.
+                        </strong>
+                        <div class="mb-3 mt-3">
+                            <label for="refundNote" class="form-label">Ghi chú hoàn đơn <span class="text-danger">*</span></label>
+                            <textarea class="form-control" id="refundNote" name="note" rows="3" required minlength="10"
+                                      placeholder="Nhập lý do hoàn đơn..."></textarea>
+                            <div class="invalid-feedback">Ghi chú phải có ít nhất 10 ký tự.</div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Huỷ</button>
+                        <button type="submit" class="btn btn-warning" id="confirmRefund" disabled>Xác nhận</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    
+    
 <!-- Modal Xác nhận hoàn đơn -->
 <div class="modal fade" id="confirmRefundModal" tabindex="-1" aria-labelledby="confirmRefundModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -395,5 +431,18 @@
                 cancelForm.submit();
             });
         });
+        document.addEventListener("DOMContentLoaded", function () {
+            const refundNote = document.getElementById("refundNote");
+            const confirmRefund = document.getElementById("confirmRefund");
+    
+            refundNote.addEventListener("input", function () {
+                if (refundNote.value.trim().length >= 10) {
+                    confirmRefund.removeAttribute("disabled");
+                } else {
+                    confirmRefund.setAttribute("disabled", "true");
+                }
+            });
+        });
     </script>
+    
 @endsection
