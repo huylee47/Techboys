@@ -805,18 +805,25 @@ class BillController extends Controller
             return redirect()->route('client.orders')->with('error', 'Đã xảy ra lỗi khi yêu cầu hoàn hàng!');
         }
     }
-    public function confirmReturnRequest($id)
+    public function confirmReturnRequest(Request $request ,$id)
 {
-    $bill = Bill::find($id);
+    $bill = Bill::find( $id);
 
     if (!$bill) {
         return redirect()->route('admin.bill.index')->with('error', 'Không tìm thấy hóa đơn!');
     }
 
-    if ($bill->status_id != 5) {
+    if ($bill->status_id != 5 && $bill->status_id != 3) {
         return redirect()->route('admin.bill.index')->with('error', 'Đơn này không ở trạng thái yêu cầu hoàn đơn!');
     }
-
+    if($bill->status_id == 3 && $bill->user_id == null){
+        $bill->update([
+            'note' => $request->note,
+            'status_id' => 6,
+        ]);
+        return redirect()->route('admin.bill.index')->with('success', 'Đã xác nhận yêu cầu hoàn đơn!');
+        
+    }
     $bill->update([
         'status_id' => 6,
     ]);
