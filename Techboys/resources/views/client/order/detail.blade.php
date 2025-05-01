@@ -51,7 +51,7 @@
                 2 => 'Đang giao',
                 3 => 'Đã giao',
                 4 => 'Giao hàng thành công',
-                5 => 'Yêu cầu hoàn hàng đang được',
+                5 => 'Yêu cầu hoàn hàng đang xét duyệt',
                 6 => 'Đã xét duyệt hoàn hàng',
                 7 => 'Hoàn hàng thành công',
                 8 => 'Hoàn hàng thất bại',

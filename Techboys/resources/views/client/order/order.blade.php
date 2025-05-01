@@ -190,7 +190,7 @@
                                                                         Giao hàng thành công
                                                                         @break
                                                                     @case(5)
-                                                                        Yêu cầu hoàn hàng
+                                                                        Yêu cầu hoàn hàng đang xét duyệt
                                                                         @break
                                                                         @case(6)
                                                                         Đã xét duyệt hoàn hàng
