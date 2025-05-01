@@ -190,7 +190,7 @@
                                                                         Giao hàng thành công
                                                                         @break
                                                                     @case(5)
-                                                                        Yêu cầu hoàn hàng
+                                                                        Yêu cầu hoàn hàng đang xét duyệt
                                                                         @break
                                                                         @case(6)
                                                                         Đã xét duyệt hoàn hàng
@@ -219,9 +219,10 @@
                                                                             @csrf
                                                                             <button class="btn btn-success" onclick="return confirm('Bạn có chắc chắn muốn xác nhận đơn hàng này?')" type="submit">Xác nhận</button>
                                                                         </form>
-                                                                        <form action="{{ route('client.orders.return', $bill->id) }}" method="POST">
+                                                                        <form action="{{ route('client.orders.return') }}" method="POST">
                                                                             @csrf
-                                                                            <button class="btn btn-secondary" onclick="return confirm('Bạn có chắc chắn muốn yêu cầu hoàn hàng?')" type="submit">Hoàn hàng</button>
+                                                                            <input type="hidden" name="order_id" value="{{ $bill->id }}">
+                                                                            <button class="btn btn-danger" type="submit">Hoàn Đơn</button>
                                                                         </form>
                                                                     @endif   
                                                                     <form action="{{ route('client.orders.detail') }}" method="POST">
