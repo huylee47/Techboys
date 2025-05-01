@@ -246,6 +246,7 @@ Route::middleware(['auth', 'auth.admin'])->group(function () {
             Route::post('cancel/{id}', [BillController::class, 'cancelBill'])->name('admin.bill.cancel');
             Route::get('confirm/{id}', [BillController::class, 'confirm'])->name('admin.bill.confirm');
             Route::post('/admin/bill/{id}/confirm-return', [BillController::class, 'confirmReturnRequest'])->name('admin.bill.confirmReturnRequest');
+            Route::post('/admin/bill/{id}/confirm-guest-return', [BillController::class, 'confirmReturnRequest'])->name('admin.bill.confirmGuestReturnRequest');
             Route::post('/admin/bill/{id}/complete-return', [BillController::class, 'completeReturn'])->name('admin.bill.completeReturn');
             Route::post('/admin/bill/{id}/fail-return', [BillController::class, 'failReturn'])->name('admin.bill.failReturn');
 
