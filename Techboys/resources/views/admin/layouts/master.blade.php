@@ -210,13 +210,15 @@
                                 <span>Đặt hàng</span>
                             </a> <!-- Thêm thẻ đóng </a> vào đây -->
                         </li> --}}
+                        @if ($isAdmin)
+
                         <li class="sidebar-item {{ request()->routeIs('admin.config*') ? 'active' : '' }}">
                             <a href="{{ route('admin.config.index') }}" class='sidebar-link'>
                                 <i class="bi bi-gear-fill"></i>
                                 <span>Hệ thống</span>
                             </a>
                         </li>
-
+                        @endif
 
                     </ul>
                 </div>
