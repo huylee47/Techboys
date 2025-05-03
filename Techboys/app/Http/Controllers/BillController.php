@@ -779,44 +779,57 @@ class BillController extends Controller
     }
     
 
-    public function returnOrder($id)
+    public function returnOrder(Request $request)
     {
+        $order = Bill::with('billDetails.product')->where('id', $request->input('order_id'))->first();
+        return view('client.order.returnOrder', compact('order'));
+    }
+    public function submitReturnOrder(Request $request, $id)
+    {
+        $request->validate([
+            'cancel_reason' => 'required|string|max:255|min:10', // Changed 'mix:10' to 'min:10'
+        ], [
+            'cancel_reason.required' => 'Lý do hủy đơn không được để trống.',
+            'cancel_reason.max' => 'Lý do hủy đơn không được vượt quá 255 ký tự.',
+            'cancel_reason.min' => 'Lý do hủy đơn không được ít hơn 10 ký tự.', // Updated error message
+        ]);
+
         $bill = Bill::find($id);
-
-        if (!$bill) {
-            return redirect()->route('client.orders')->with('error', 'Không tìm thấy đơn hàng!');
-        }
-
         if ($bill->status_id != 3) {
-            return redirect()->route('client.orders')->with('error', 'Đơn hàng không hợp lệ để yêu cầu hoàn hàng!');
+            return redirect()->route('client.orders')->with('error', 'Hoá đơn không hợp lệ để xác nhận!');
         }
-
         try {
             DB::beginTransaction();
-
             $bill->update([
                 'status_id' => 5,
+                'note' => $request->cancel_reason,
             ]);
-
             DB::commit();
-            return redirect()->route('client.orders')->with('success', 'Yêu cầu hoàn hàng đã được gửi thành công!');
+            return redirect()->route('client.orders')->with('success', 'Đơn hàng gửi yêu cầu hoàn trả thành công!');
         } catch (\Exception $e) {
             DB::rollBack();
-            return redirect()->route('client.orders')->with('error', 'Đã xảy ra lỗi khi yêu cầu hoàn hàng!');
+            return redirect()->route('client.orders')->with('error', 'Đã xảy ra lỗi khi hoàn trả đơn hàng!');
         }
     }
-    public function confirmReturnRequest($id)
+    public function confirmReturnRequest(Request $request ,$id)
 {
-    $bill = Bill::find($id);
+    $bill = Bill::find( $id);
 
     if (!$bill) {
         return redirect()->route('admin.bill.index')->with('error', 'Không tìm thấy hóa đơn!');
     }
 
-    if ($bill->status_id != 5) {
+    if ($bill->status_id != 5 && $bill->status_id != 3) {
         return redirect()->route('admin.bill.index')->with('error', 'Đơn này không ở trạng thái yêu cầu hoàn đơn!');
     }
-
+    if($bill->status_id == 3 && $bill->user_id == null){
+        $bill->update([
+            'note' => $request->note,
+            'status_id' => 6,
+        ]);
+        return redirect()->route('admin.bill.index')->with('success', 'Đã xác nhận yêu cầu hoàn đơn!');
+        
+    }
     $bill->update([
         'status_id' => 6,
     ]);

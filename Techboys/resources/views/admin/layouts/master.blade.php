@@ -21,7 +21,8 @@
     <link rel="stylesheet" href="{{ url('') }}/admin/assets/vendors/summernote/summernote-lite.min.css">
     <link rel="stylesheet" type="text/css" href="{{ url('') }}/home/assets/css/chat-bot.css" media="all" />
     {{-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"> --}}
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta2/dist/css/bootstrap-select.min.css">
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta2/dist/css/bootstrap-select.min.css">
     <link rel="shortcut icon" href="{{ url('') }}/admin/assets/images/config/{{ $config->favicon }}">
 
     @yield('styles')
@@ -52,53 +53,58 @@
                                 <span>Tổng quan</span>
                             </a>
                         </li>
+                        @php $isAdmin = auth()->check() && auth()->id() === 1; @endphp
+                        @if ($isAdmin)
+                            <li class="sidebar-item {{ request()->routeIs('admin.revenue*') ? 'active' : '' }}">
+                                <a href="{{ route('admin.revenue.revenue') }}" class='sidebar-link'>
+                                    <i class="bi bi-kanban-fill"></i>
+                                    <span>Doanh thu</span>
+                                </a>
+                            </li>
 
-                        <li class="sidebar-item  {{ request()->routeIs('admin.revenue*') ? 'active' : '' }}">
-                            <a href="{{ route('admin.revenue.revenue') }}" class='sidebar-link'>
-                                <i class="bi bi-kanban-fill"></i>
-                                <span>Doanh thu</span>
-                            </a>
-                        </li>
+                        @endif
                         <li
-                            class="sidebar-item has-sub 
-                        {{ request()->routeIs('admin.category*') || request()->routeIs('admin.brand*') || request()->routeIs('admin.product*') || request()->routeIs('admin.stock*') || request()->routeIs('admin.attributes*') ? 'active' : '' }}">
+                        class="sidebar-item has-sub 
+                {{ request()->routeIs('admin.category*') || request()->routeIs('admin.brand*') || request()->routeIs('admin.product*') || request()->routeIs('admin.stock*') || request()->routeIs('admin.attributes*') ? 'active' : '' }}">
 
-                            <a href="#" class='sidebar-link'>
-                                <i class="bi bi-box-seam"></i>
-                                <span>Quản lý sản phẩm</span>
-                            </a>
+                        <a href="#" class='sidebar-link'>
+                            <i class="bi bi-box-seam"></i>
+                            <span>Quản lý sản phẩm</span>
+                        </a>
 
-                            <ul
-                                class="submenu 
-                            {{ request()->routeIs('admin.category*') || request()->routeIs('admin.brand*') || request()->routeIs('admin.product*') || request()->routeIs('admin.stock*') || request()->routeIs('admin.attributes*') ? 'd-block' : '' }}">
+                        <ul
+                            class="submenu 
+                    {{ request()->routeIs('admin.category*') || request()->routeIs('admin.brand*') || request()->routeIs('admin.product*') || request()->routeIs('admin.stock*') || request()->routeIs('admin.attributes*') ? 'd-block' : '' }}">
 
-                                <li class="submenu-item {{ request()->routeIs('admin.category*') ? 'active' : '' }}">
-                                    <a href="{{ route('admin.category.index') }}">
-                                        <i class="bi bi-grid"></i> <span>Danh mục</span>
-                                    </a>
-                                </li>
+                            <li
+                                class="submenu-item {{ request()->routeIs('admin.category*') ? 'active' : '' }}">
+                                <a href="{{ route('admin.category.index') }}">
+                                    <i class="bi bi-grid"></i> <span>Danh mục</span>
+                                </a>
+                            </li>
 
-                                <li class="submenu-item {{ request()->routeIs('admin.brand*') ? 'active' : '' }}">
-                                    <a href="{{ route('admin.brand.index') }}">
-                                        <i class="bi bi-house-fill"></i> <span>Thương hiệu</span>
-                                    </a>
-                                </li>
+                            <li class="submenu-item {{ request()->routeIs('admin.brand*') ? 'active' : '' }}">
+                                <a href="{{ route('admin.brand.index') }}">
+                                    <i class="bi bi-house-fill"></i> <span>Thương hiệu</span>
+                                </a>
+                            </li>
 
-                                <li
-                                    class="submenu-item {{ request()->routeIs('admin.product*') || request()->routeIs('admin.stock*') ? 'active' : '' }}">
-                                    <a href="{{ route('admin.product.index') }}">
-                                        <i class="bi bi-shop"></i> <span>Sản phẩm</span>
-                                    </a>
-                                </li>
+                            <li
+                                class="submenu-item {{ request()->routeIs('admin.product*') || request()->routeIs('admin.stock*') ? 'active' : '' }}">
+                                <a href="{{ route('admin.product.index') }}">
+                                    <i class="bi bi-shop"></i> <span>Sản phẩm</span>
+                                </a>
+                            </li>
 
-                                <li class="submenu-item {{ request()->routeIs('admin.attributes*') ? 'active' : '' }}">
-                                    <a href="{{ route('admin.attributes.index') }}">
-                                        <i class="bi bi-palette-fill"></i> <span>Thuộc tính</span>
-                                    </a>
-                                </li>
+                            <li
+                                class="submenu-item {{ request()->routeIs('admin.attributes*') ? 'active' : '' }}">
+                                <a href="{{ route('admin.attributes.index') }}">
+                                    <i class="bi bi-palette-fill"></i> <span>Thuộc tính</span>
+                                </a>
+                            </li>
 
-                            </ul>
-                        </li>
+                        </ul>
+                    </li>
 
 
 
@@ -142,43 +148,48 @@
 
                             </ul>
                         </li>
-
-                        <li
-                            class="sidebar-item has-sub
+                        @if ($isAdmin)
+                            <li
+                                class="sidebar-item has-sub
                     {{ request()->routeIs('admin.voucher*') || request()->routeIs('admin.promotion*') ? 'active' : '' }}">
 
-                            <a href="#" class='sidebar-link'>
-                                <i class="bi bi-gift"></i>
-                                <span>Khuyến mãi</span>
-                            </a>
+                                <a href="#" class='sidebar-link'>
+                                    <i class="bi bi-gift"></i>
+                                    <span>Khuyến mãi</span>
+                                </a>
 
-                            <ul
-                                class="submenu
+                                <ul
+                                    class="submenu
                         {{ request()->routeIs('admin.voucher*') || request()->routeIs('admin.promotion*') ? 'd-block' : '' }}">
 
-                                <li class="submenu-item {{ request()->routeIs('admin.voucher*') ? 'active' : '' }}">
-                                    <a href="{{ route('admin.voucher.index') }}">
-                                        <i><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-ticket" viewBox="0 0 16 16">
-                                            <path d="M0 4.5A1.5 1.5 0 0 1 1.5 3h13A1.5 1.5 0 0 1 16 4.5V6a.5.5 0 0 1-.5.5 1.5 1.5 0 0 0 0 3 .5.5 0 0 1 .5.5v1.5a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 0 11.5V10a.5.5 0 0 1 .5-.5 1.5 1.5 0 1 0 0-3A.5.5 0 0 1 0 6zM1.5 4a.5.5 0 0 0-.5.5v1.05a2.5 2.5 0 0 1 0 4.9v1.05a.5.5 0 0 0 .5.5h13a.5.5 0 0 0 .5-.5v-1.05a2.5 2.5 0 0 1 0-4.9V4.5a.5.5 0 0 0-.5-.5z"/>
-                                          </svg></i> <span>Voucher</span>
-                                    </a>
-                                </li>
+                                    <li
+                                        class="submenu-item {{ request()->routeIs('admin.voucher*') ? 'active' : '' }}">
+                                        <a href="{{ route('admin.voucher.index') }}">
+                                            <i><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                    fill="currentColor" class="bi bi-ticket" viewBox="0 0 16 16">
+                                                    <path
+                                                        d="M0 4.5A1.5 1.5 0 0 1 1.5 3h13A1.5 1.5 0 0 1 16 4.5V6a.5.5 0 0 1-.5.5 1.5 1.5 0 0 0 0 3 .5.5 0 0 1 .5.5v1.5a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 0 11.5V10a.5.5 0 0 1 .5-.5 1.5 1.5 0 1 0 0-3A.5.5 0 0 1 0 6zM1.5 4a.5.5 0 0 0-.5.5v1.05a2.5 2.5 0 0 1 0 4.9v1.05a.5.5 0 0 0 .5.5h13a.5.5 0 0 0 .5-.5v-1.05a2.5 2.5 0 0 1 0-4.9V4.5a.5.5 0 0 0-.5-.5z" />
+                                                </svg></i> <span>Voucher</span>
+                                        </a>
+                                    </li>
 
-                                <li class="submenu-item {{ request()->routeIs('admin.promotion*') ? 'active' : '' }}">
-                                    <a href="{{ route('admin.promotion.index') }}">
-                                        <i class="bi bi-calendar-event"></i> <span>Sự kiện giảm giá</span>
-                                    </a>
-                                </li>
+                                    <li
+                                        class="submenu-item {{ request()->routeIs('admin.promotion*') ? 'active' : '' }}">
+                                        <a href="{{ route('admin.promotion.index') }}">
+                                            <i class="bi bi-calendar-event"></i> <span>Sự kiện giảm giá</span>
+                                        </a>
+                                    </li>
 
-                            </ul>
-                        </li>
+                                </ul>
+                            </li>
+                            <li class="sidebar-item {{ request()->routeIs('admin.user*') ? 'active' : '' }}">
+                                <a href="{{ route('admin.user.index') }}" class='sidebar-link'>
+                                    <i class="bi bi-person"></i>
+                                    <span>Tài khoản người dùng</span>
+                                </a>
+                            </li>
+                        @endif
 
-                        <li class="sidebar-item {{ request()->routeIs('admin.user*') ? 'active' : '' }}">
-                            <a href="{{ route('admin.user.index') }}" class='sidebar-link'>
-                                <i class="bi bi-person"></i>
-                                <span>Tài khoản người dùng</span>
-                            </a>
-                        </li>
 
 
                         <li class="sidebar-item {{ request()->routeIs('admin.blogs*') ? 'active' : '' }} ">
@@ -199,13 +210,15 @@
                                 <span>Đặt hàng</span>
                             </a> <!-- Thêm thẻ đóng </a> vào đây -->
                         </li> --}}
+                        @if ($isAdmin)
+
                         <li class="sidebar-item {{ request()->routeIs('admin.config*') ? 'active' : '' }}">
                             <a href="{{ route('admin.config.index') }}" class='sidebar-link'>
                                 <i class="bi bi-gear-fill"></i>
                                 <span>Hệ thống</span>
                             </a>
                         </li>
-
+                        @endif
 
                     </ul>
                 </div>
@@ -213,26 +226,28 @@
             </div>
         </div>
         @yield('main')
-                {{-- Modal ChatBot --}}
-                <div id="bot-chat-icon" class="bot-real-time-icon">
-                    <img src="{{ url('') }}/admin/assets/images/config/{{ $config->favicon }}" alt="" width="40px">
-                    <div id="chat-title" class="chat-title">
-                        Chat cùng Techboys AI
-                    </div>
-                </div>
-            
-                <div id="bot-chat-modal" class="bot-real-time-box">
-                    <div class="bot-real-time-title">
-                        <span>Chat với Techboys AI</span>
-                        <span id="bot-close-chat" class="bot-real-time-close">&times;</span>
-                    </div>
-                    <div id="bot-chat-messages" class="bot-real-time-content">
-                    </div>
-                    <div class="bot-real-time-sent-content">
-                        <input type="text" id="bot-chat-input" placeholder="Nhập tin nhắn..." onkeydown="if(event.key === 'Enter') sendMessage()" />
-                        <button id="bot-send-message" onclick="sendMessage()">Gửi</button>
-                    </div>
-                </div>
+        {{-- Modal ChatBot --}}
+        <div id="bot-chat-icon" class="bot-real-time-icon">
+            <img src="{{ url('') }}/admin/assets/images/config/{{ $config->favicon }}" alt=""
+                width="40px">
+            <div id="chat-title" class="chat-title">
+                Chat cùng Techboys AI
+            </div>
+        </div>
+
+        <div id="bot-chat-modal" class="bot-real-time-box">
+            <div class="bot-real-time-title">
+                <span>Chat với Techboys AI</span>
+                <span id="bot-close-chat" class="bot-real-time-close">&times;</span>
+            </div>
+            <div id="bot-chat-messages" class="bot-real-time-content">
+            </div>
+            <div class="bot-real-time-sent-content">
+                <input type="text" id="bot-chat-input" placeholder="Nhập tin nhắn..."
+                    onkeydown="if(event.key === 'Enter') sendMessage()" />
+                <button id="bot-send-message" onclick="sendMessage()">Gửi</button>
+            </div>
+        </div>
         <footer>
             <div class="footer clearfix mb-0 text-muted">
                 <div class="float-start">
@@ -245,9 +260,9 @@
         </footer>
     </div>
     </div>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     {{-- <script src="{{ url('') }}/admin/assets/vendors/jquery/jquery.min.js"></script> --}}
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.14/js/bootstrap-select.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.14/js/bootstrap-select.min.js"></script>
     <script src="{{ url('') }}/admin/assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
     {{-- <script src="{{ url('') }}/admin/assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script> --}}
     <script src="{{ url('') }}/admin/assets/vendors/apexcharts/apexcharts.js"></script>
@@ -264,38 +279,41 @@
             let dataTable = new simpleDatatables.DataTable(table1);
         }
     </script>
-        <script>
-            $('#bot-chat-icon').click(function() {
-                $('#bot-chat-modal').toggle();
-                $(this).hide();
+    <script>
+        $('#bot-chat-icon').click(function() {
+            $('#bot-chat-modal').toggle();
+            $(this).hide();
+        });
+
+        $('#bot-close-chat').click(function() {
+            $('#bot-chat-modal').hide();
+            $('#bot-chat-icon').show();
+        });
+
+        function sendMessage() {
+            var prompt = $('#bot-chat-input').val();
+            var chatMessages = $('#bot-chat-messages');
+            var sendButton = $('#bot-send-message');
+
+            if (prompt.trim() === '') return;
+
+            sendButton.prop('disabled', true);
+
+            chatMessages.append('<div class="bot-user-message">' + prompt + '</div>');
+
+            $.post('/ask-gemini', {
+                _token: '{{ csrf_token() }}',
+                prompt: prompt
+            }, function(data) {
+                chatMessages.append('<div class="bot-bot-message">' + data.response + '</div>');
+                chatMessages.scrollTop(chatMessages[0].scrollHeight);
+                console.log(data.response);
+                sendButton.prop('disabled', false);
             });
-    
-            $('#bot-close-chat').click(function() {
-                $('#bot-chat-modal').hide();
-                $('#bot-chat-icon').show();
-            });
-    
-            function sendMessage() {
-                var prompt = $('#bot-chat-input').val();
-                var chatMessages = $('#bot-chat-messages');
-                var sendButton = $('#bot-send-message');
-    
-                if (prompt.trim() === '') return;
-    
-                sendButton.prop('disabled', true);
-    
-                chatMessages.append('<div class="bot-user-message">' + prompt + '</div>');
-    
-                $.post('/ask-gemini', { _token: '{{ csrf_token() }}', prompt: prompt }, function(data) {
-                    chatMessages.append('<div class="bot-bot-message">' + data.response + '</div>');
-                    chatMessages.scrollTop(chatMessages[0].scrollHeight);
-                    console.log(data.response);
-                    sendButton.prop('disabled', false);
-                });
-    
-                $('#bot-chat-input').val('');
-            }
-        </script>
+
+            $('#bot-chat-input').val('');
+        }
+    </script>
     @yield('scripts')
 </body>
 
