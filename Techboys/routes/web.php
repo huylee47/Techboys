@@ -145,7 +145,11 @@ Route::middleware(['auth', 'auth.admin'])->group(function () {
                 Route::get('/destroy/{id}', [VoucherController::class, 'destroy'])->name('admin.voucher.destroy');
             });
 
-
+            Route::prefix('/config')->group(function () {
+                Route::get('/', [ConfigController::class, 'index'])->name('admin.config.index');
+                Route::get('/edit', [ConfigController::class, 'edit'])->name('admin.config.edit');
+                Route::post('/update', [ConfigController::class, 'update'])->name('admin.config.update');
+            });
 
             Route::prefix('/category')->group(function () {
                 Route::get('/', [ProductCategoryController::class, 'index'])->name('admin.category.index');
@@ -299,11 +303,7 @@ Route::middleware(['auth', 'auth.admin'])->group(function () {
             // Route::post('/send', [ChatsController::class, 'sendMessageAdmin']);
         });
 
-        Route::prefix('/config')->group(function () {
-            Route::get('/', [ConfigController::class, 'index'])->name('admin.config.index');
-            Route::get('/edit', [ConfigController::class, 'edit'])->name('admin.config.edit');
-            Route::post('/update', [ConfigController::class, 'update'])->name('admin.config.update');
-        });
+
         Route::get('403', function () {
             return view('error.403');
         })->name('error.403');
