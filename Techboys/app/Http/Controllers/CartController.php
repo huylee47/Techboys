@@ -75,7 +75,7 @@ class CartController extends Controller
                     })
                     ->sum('quantity');
                 $soldQuantity += $qty;
-                $cart->stock = $cart->product->variant()->where('id', $cart->variant_id)->value('stock') - $qty;
+                $cart->final_stock = $cart->product->variant()->where('id', $cart->variant_id)->value('stock') - $qty;
         
             } else {
                 $qty = BillDetails::where('product_id', $cart->product_id)
@@ -85,14 +85,25 @@ class CartController extends Controller
                     })
                     ->sum('quantity');
                 $soldQuantity += $qty;
-                $cart->stock = $cart->product->base_stock - $qty;
+                $cart->final_stock = $cart->product->base_stock - $qty;
+
             }
         }
         $totals = $this->cartPriceService->calculateCartTotals($cartItems);
+        // $data = $cartItems->map(function ($cart) {
+        //     return [
+        //         'product_id' => $cart->product_id,
+        //         'variant_id' => $cart->variant_id,
+        //         'quantity' => $cart->quantity,
+        //         'stock' => $cart->final_stock,
+        //         'discounted_price' => $cart->discounted_price,
+        //         'attributes' => $cart->attributes,
+        //     ];
+        // });
+        
         // return response()->json([
         //     'cartItems'=>$cartItems,
-        //     'soldPending'=>$soldQuantity,
-            
+        //     'data' => $data,
         //  ]);
         return view('client.cart.cart', [
             'cartItems' => $cartItems,
@@ -100,7 +111,6 @@ class CartController extends Controller
             'total' => $totals['total'],
             'discountAmount' => $totals['discountAmount'],
             'voucher' => $totals['voucher'],
-            'soldQuantity'=>(int)$soldQuantity ?? 0,
             'voucherList'=>$voucher,
             'voucherused'=>$totals['voucher'] ?? null
         ]);

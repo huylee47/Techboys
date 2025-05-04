@@ -77,7 +77,7 @@
                                                                                 <span>Tồn Kho :</span>
                                                                                 <span
                                                                                     class="stock-quantity-{{ $cart->id }}">
-                                                                                    {{ $cart->stock - $soldQuantity }}
+                                                                                    {{ $cart->final_stock }}
                                                                                 </span>
                                                                             </p>
                                                                         </div>
