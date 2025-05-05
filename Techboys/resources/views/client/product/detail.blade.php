@@ -424,8 +424,8 @@
                                                                                 </p>
                                                                                 <p>
                                                                                     @if ($comments->storage && strtolower(pathinfo($comments->storage->file, PATHINFO_EXTENSION)) === 'mp4')
-                                                                                        <video width="auto"
-                                                                                            height="100" controls>
+                                                                                        <video width="300px"
+                                                                                            height="300px" controls>
                                                                                             <source
                                                                                                 src="{{ asset('admin/assets/images/comment/' . $comments->storage->file) }}"
                                                                                                 type="video/mp4">
@@ -435,7 +435,7 @@
                                                                                     @elseif($comments->storage)
                                                                                         <img src="{{ asset('admin/assets/images/comment/' . $comments->storage->file) }}"
                                                                                             alt=""
-                                                                                            style="width: auto; max-height: 150px;">
+                                                                                            style="width: 200px; max-height: 150px;">
                                                                                     @endif
                                                                                     @if ($comments->replies->isNotEmpty() && $comments->replies->first()->rep_content)
                                                                                         <br>
